@@ -1,0 +1,27 @@
+# Variáveis de ambiente (API keys, tokens — NUNCA commitar)
+.env
+.env.local
+.env.*
+
+# Arquivo gerado pelo /setup com MCPs específicos do usuário
+_configurar-mcps.md
+
+# Outputs de renderização (binários pesados)
+*.png
+
+# Pastas de trabalho do usuário (geradas pelo /setup, conteúdo pessoal)
+clientes/
+propostas/
+conteudo/
+projetos/
+briefings/
+trabalho/
+estudos/
+publicacoes/
+anotacoes/
+curriculo/
+tarefas.md
+
+# Sistema
+.DS_Store
+node_modules/
