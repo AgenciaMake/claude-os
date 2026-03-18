@@ -12,8 +12,8 @@ description: >
 ## Dependências
 
 - **Identidade visual:** `marca/design-guide.md`
-- **Contexto do negócio:** `_memoria/empresa.md`
-- **Tom de voz:** `_memoria/preferencias.md`
+- **Contexto do negócio:** `_contexto/empresa.md`
+- **Tom de voz:** `_contexto/preferencias.md`
 
 ---
 
@@ -34,8 +34,8 @@ Se o usuário já forneceu as informações de forma livre, extrai o que der e p
 ### Passo 2 — Ler os arquivos de contexto
 
 - Ler `marca/design-guide.md` pra aplicar cores e fontes
-- Ler `_memoria/empresa.md` pra dados do prestador (nome, serviços, contato)
-- Ler `_memoria/preferencias.md` pra tom da proposta
+- Ler `_contexto/empresa.md` pra dados do prestador (nome, serviços, contato)
+- Ler `_contexto/preferencias.md` pra tom da proposta
 
 ### Passo 3 — Gerar o HTML
 
@@ -70,7 +70,7 @@ Perguntar: "Quer que eu publique essa proposta com um link compartilhável? É s
 
 ## Regras
 
-- Tom da proposta segue `_memoria/preferencias.md`
+- Tom da proposta segue `_contexto/preferencias.md`
 - Nunca inventar valor, prazo ou escopo — se não foi fornecido, deixar placeholder claro pra preencher
 - A proposta deve soar como veio de uma pessoa, não de um template corporativo
 - Sem jargão desnecessário ("soluções inovadoras", "entregamos valor", etc)

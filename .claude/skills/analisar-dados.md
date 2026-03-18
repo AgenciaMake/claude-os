@@ -11,8 +11,8 @@ description: >
 
 ## Dependências
 
-- **Contexto do negócio:** `_memoria/empresa.md` (pra entender o que os dados representam)
-- **Tom de voz:** `_memoria/preferencias.md`
+- **Contexto do negócio:** `_contexto/empresa.md` (pra entender o que os dados representam)
+- **Tom de voz:** `_contexto/preferencias.md`
 
 ---
 
@@ -92,4 +92,4 @@ Perguntar se quer exportar o resumo em HTML pra compartilhar ou apresentar.
 - Análise em prosa, não só listas — o usuário deve poder ler e entender sem abrir o arquivo original
 - Nunca inventar dados que não estão no arquivo
 - Se os dados estiverem incompletos ou com problemas, mencionar antes de analisar
-- Tom conforme `_memoria/preferencias.md`
+- Tom conforme `_contexto/preferencias.md`

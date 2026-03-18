@@ -13,8 +13,8 @@ description: >
 ## Dependências
 
 - **Identidade visual:** `marca/design-guide.md` — LER ANTES de criar qualquer HTML
-- **Contexto do negócio:** `_memoria/empresa.md`
-- **Tom de voz:** `_memoria/preferencias.md`
+- **Contexto do negócio:** `_contexto/empresa.md`
+- **Tom de voz:** `_contexto/preferencias.md`
 - **Playwright MCP:** necessário pra renderizar PNGs (verifica disponibilidade na Fase 2)
 
 ## Input
@@ -30,8 +30,8 @@ O usuário fornece:
 
 ### Fase 1 — Texto
 
-1. Ler `_memoria/preferencias.md` pra calibrar o tom de voz
-2. Ler `_memoria/empresa.md` pra entender o contexto e o público
+1. Ler `_contexto/preferencias.md` pra calibrar o tom de voz
+2. Ler `_contexto/empresa.md` pra entender o contexto e o público
 3. Se o input for um link, usar WebFetch pra buscar o conteúdo
 4. Definir o ângulo do carrossel: educacional, oportunidade, contrário, provocativo ou inspiracional
 5. Escrever 8-10 slides seguindo o fluxo:
@@ -45,7 +45,7 @@ O usuário fornece:
 - Frases longas e naturais (2-4 frases por slide), não bullet points disfarçados
 - Frases curtas e picotadas ficam com cara de IA — evitar
 - Manter o curiosity gap entre slides, mas dentro de cada slide o texto deve fluir
-- Seguir as regras de `_memoria/preferencias.md` (sem travessões se indicado, etc)
+- Seguir as regras de `_contexto/preferencias.md` (sem travessões se indicado, etc)
 
 6. Salvar o texto em `conteudo/carrosseis/[tema]/carousel-text.md`
 

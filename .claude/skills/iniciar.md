@@ -9,8 +9,8 @@ Use essa skill no começo de cada sessão de trabalho.
 
 ## O que fazer
 
-1. Verificar se `_memoria/empresa.md` existe e está configurado (sem `<!-- NOT CONFIGURED -->`)
-2. Verificar se `_memoria/preferencias.md` existe e está configurado
+1. Verificar se `_contexto/empresa.md` existe e está configurado (sem `<!-- NOT CONFIGURED -->`)
+2. Verificar se `_contexto/preferencias.md` existe e está configurado
 3. Ler CLAUDE.md se existir
 4. Apresentar um resumo de contexto e perguntar o que o usuário quer fazer
 
@@ -18,7 +18,7 @@ Use essa skill no começo de cada sessão de trabalho.
 
 ### Se os arquivos de memória existem e estão configurados
 
-Leia `_memoria/empresa.md` e `_memoria/preferencias.md`.
+Leia `_contexto/empresa.md` e `_contexto/preferencias.md`.
 
 Apresente um resumo curto e direto no formato:
 

@@ -16,5 +16,5 @@ Quando o usuário pedir pra criar uma nova skill:
 1. Perguntar: "Essa skill é específica pra esse projeto ou vai ser útil em qualquer projeto?"
    - Específica desse negócio → salvar em `.claude/skills/` (local)
    - Útil em qualquer projeto → salvar em `~/.claude/skills/` (global)
-2. Ler `_memoria/empresa.md` e `_memoria/preferencias.md` pra calibrar o conteúdo da skill ao contexto do negócio
+2. Ler `_contexto/empresa.md` e `_contexto/preferencias.md` pra calibrar o conteúdo da skill ao contexto do negócio
 3. Seguir o fluxo da skill-creator nativa do Claude Code

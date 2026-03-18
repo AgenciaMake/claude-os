@@ -11,8 +11,8 @@ description: >
 
 ## Dependências
 
-- **Contexto do negócio:** `_memoria/empresa.md`
-- **Tom de voz:** `_memoria/preferencias.md`
+- **Contexto do negócio:** `_contexto/empresa.md`
+- **Tom de voz:** `_contexto/preferencias.md`
 
 ---
 
@@ -48,7 +48,7 @@ Assunto: [linha de assunto direta, sem clicbait]
 [Parágrafo 3 — próximo passo, se houver]
 
 [Assinatura]
-[Nome do usuário, de _memoria/empresa.md]
+[Nome do usuário, de _contexto/empresa.md]
 ```
 
 ### Passo 3 — Apresentar opções de tom (quando fizer sentido)
@@ -63,7 +63,7 @@ Deixar o usuário escolher.
 
 ## Regras
 
-- Tom segue `_memoria/preferencias.md`
+- Tom segue `_contexto/preferencias.md`
 - Nunca usar linguagem corporativa genérica sem necessidade
 - Assunto do email deve ser específico e descritivo, não vago ("Seguimento", "Proposta")
 - Se for um email de cobrança, ser direto mas sem agressividade

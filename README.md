@@ -45,7 +45,7 @@ O Claude vai te fazer algumas perguntas e configurar o sistema pro seu negócio.
 - `/email-profissional` — rascunha email profissional a partir de contexto livre
 
 **Pastas geradas pelo `/setup`:**
-- `_memoria/` — contexto do seu negócio e preferências
+- `_contexto/` — contexto do seu negócio e preferências
 - `marca/` — guia de identidade visual da sua marca
 - `_configurar-mcps.md` — MCPs recomendados pro seu perfil com comandos prontos
 

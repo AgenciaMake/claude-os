@@ -4,7 +4,7 @@ description: >
   Configura o Claude Code OS pro seu negócio. Faz perguntas sobre quem você é,
   o que faz e como trabalha, e gera CLAUDE.md, memória, estrutura de pastas e
   lista de MCPs personalizados pro seu perfil.
-  Use quando o usuário chamar /setup, quando _memoria/empresa.md estiver vazio
+  Use quando o usuário chamar /setup, quando _contexto/empresa.md estiver vazio
   ou ausente, ou quando disser "configurar o sistema", "primeira vez", "setup".
 ---
 
@@ -12,7 +12,7 @@ description: >
 
 ## Verificação inicial
 
-Antes de qualquer coisa, verifique se `_memoria/empresa.md` existe e tem conteúdo real (não apenas o template).
+Antes de qualquer coisa, verifique se `_contexto/empresa.md` existe e tem conteúdo real (não apenas o template).
 
 - Se **não existe ou está vazio**: inicia o fluxo de onboarding abaixo.
 - Se **já tem conteúdo**: informa ao usuário que o setup já foi feito e pergunta se quer refazer ou apenas atualizar alguma parte.
@@ -113,7 +113,7 @@ Substitua o conteúdo placeholder pelo CLAUDE.md real do usuário:
 [descrição da estrutura criada, pra o Claude saber onde salvar cada coisa]
 ```
 
-### 2. Criar `_memoria/empresa.md`
+### 2. Criar `_contexto/empresa.md`
 
 ```markdown
 # Contexto da Empresa — [Nome]
@@ -131,7 +131,7 @@ Substitua o conteúdo placeholder pelo CLAUDE.md real do usuário:
 [qualquer informação relevante que surgiu nas respostas]
 ```
 
-### 3. Criar `_memoria/preferencias.md`
+### 3. Criar `_contexto/preferencias.md`
 
 ```markdown
 # Preferências de Comunicação
@@ -232,7 +232,7 @@ Após gerar todos os arquivos, envie uma mensagem de encerramento:
 >
 > Aqui está o que foi criado:
 > - CLAUDE.md — o Claude agora sabe quem você é e como trabalha
-> - _memoria/ — contexto e preferências salvos
+> - _contexto/ — contexto e preferências salvos
 > - marca/design-guide.md — identidade visual [preenchida / pronta pra preencher]
 > - Estrutura de pastas pro seu perfil de [perfil detectado]
 > - _configurar-mcps.md — [N] MCPs recomendados pro que você faz
