@@ -30,10 +30,48 @@ Faça as perguntas em sequência, uma por vez, em conversa natural. Não liste t
 ### Pergunta 1
 "Qual é o seu nome e o nome do seu negócio?"
 
-### Pergunta 2
-"Em uma frase: o que você faz e pra quem?"
+### Pergunta 2 — Verificação de histórico
 
-*(Exemplo: "Sou designer freelancer, faço identidades visuais pra pequenas empresas" ou "Tenho uma agência de marketing digital com foco em e-commerce")*
+"Você já usa o Claude Code há algum tempo, ou é a primeira vez?"
+
+**Se for a primeira vez:** continua normalmente pra Pergunta 3.
+
+**Se já usa há algum tempo:** perguntar:
+
+> "Quer que eu tente carregar o que você já tem configurado em outros projetos, ou prefere configurar do zero aqui?"
+
+- **Se quiser carregar:** executar o bloco **"Carregamento de contexto existente"** abaixo antes de continuar.
+- **Se preferir do zero:** continua normalmente pra Pergunta 3.
+
+---
+
+#### Bloco: Carregamento de contexto existente
+
+Tentar ler, nessa ordem:
+1. `~/.claude/CLAUDE.md` — CLAUDE.md global (se existir)
+2. Arquivos de memória em `~/.claude/projects/` — procurar por arquivos relevantes (empresa, preferências, contexto)
+
+Com o que encontrar, montar um resumo e apresentar ao usuário:
+
+> "Encontrei isso no que você já tem configurado:
+>
+> - **Nome / negócio:** [extraído]
+> - **O que faz:** [extraído]
+> - **Tom de voz:** [extraído]
+> - **Ferramentas:** [extraído]
+> - *(... outras informações encontradas)*
+>
+> Está correto? Quer ajustar alguma coisa ou completar o que faltou?"
+
+Aguardar confirmação ou correções do usuário. Após confirmar, **pular as perguntas já respondidas** e continuar apenas com o que ficou em aberto (identidade visual, equipe, etc.).
+
+Se não encontrar nada relevante, informar:
+
+> "Não encontrei contexto salvo de outros projetos. Vamos configurar do zero — leva poucos minutos."
+
+E continuar normalmente pra Pergunta 3.
+
+---
 
 ### Pergunta 3
 "O que você mais produz no dia a dia? Pode ser mais de uma coisa."
@@ -50,10 +88,33 @@ Faça as perguntas em sequência, uma por vez, em conversa natural. Não liste t
 
 *(Exemplos: Notion, Google Drive, Canva, Gmail, Meta Ads, Google Ads, Figma, Slack, WhatsApp Business — qualquer uma que use com frequência)*
 
-### Pergunta 6
-"Sua marca tem identidade visual definida? Se sim, descreve brevemente as cores e o estilo."
+### Pergunta 6 — Identidade visual
 
-*(Exemplos: "fundo preto, amarelo de destaque, estilo bold" / "tons terrosos, fonte serifada, visual mais suave" / "ainda não tenho definido")*
+"Sua marca tem identidade visual? Se sim, como prefere compartilhar?"
+
+Apresentar as opções de forma natural, não como lista formal:
+
+> "Pode me mandar o link do seu site, jogar alguns prints na pasta `dados/` e me dizer o nome dos arquivos, descrever em texto mesmo (cores, estilo, fontes), ou dizer que ainda não tem definido. Qualquer uma dessas funciona."
+
+**Se compartilhar URL:**
+- Buscar o conteúdo do site com WebFetch
+- Analisar: cores dominantes, tipografia aparente, estilo geral (clean/bold/editorial/etc), tom visual
+- Apresentar o que foi detectado antes de preencher o design-guide:
+  > "Vi no seu site: fundo [cor], destaque em [cor], tipografia sem serifa, estilo [adjetivo]. Bate com a sua marca?"
+- Ajustar conforme feedback e preencher `marca/design-guide.md`
+
+**Se compartilhar imagens (prints de Instagram, logo, etc.):**
+- Pedir pro usuário colocar os arquivos na pasta `dados/` e informar os nomes
+- Ler os arquivos como imagem
+- Analisar cores, estilo, padrões visuais
+- Apresentar o que foi detectado antes de preencher, igual ao fluxo de URL
+
+**Se descrever em texto:**
+- Usar a descrição diretamente pra preencher `marca/design-guide.md`
+
+**Se ainda não tiver definido:**
+- Preencher o `marca/design-guide.md` com campos em branco e orientações pra preencher depois
+- Mencionar brevemente: "Sem problema — você preenche quando tiver. O Claude vai usar um visual neutro até lá."
 
 ### Pergunta 7
 "Como você prefere que o Claude escreva? O que mais incomoda em textos gerados por IA?"
