@@ -110,7 +110,7 @@ Antes de criar qualquer coisa, mostrar o plano:
 > "Pra esse processo, vou fazer o seguinte:
 >
 > - [Criar pasta `conteudo/newsletters/` pra guardar os resultados] (se aplicável)
-> - [Instalar a skill `/newsletter` em .claude/commands/] (se aplicável)
+> - [Instalar a skill `/newsletter` em .claude/skills/newsletter/SKILL.md] (se aplicável)
 > - [A skill vai salvar os arquivos em `conteudo/newsletters/`] (se aplicável)
 >
 > Bora?"
@@ -140,7 +140,16 @@ Ao criar a skill (seja a partir de template ou do zero), garantir:
 5. O tom e formato seguem as preferências do usuário
 6. Se usa ferramenta do catálogo, inclui as instruções de uso dentro da skill
 
-Salvar em `.claude/commands/` (local do projeto).
+Salvar em `.claude/skills/nome-da-skill/SKILL.md` (local do projeto).
+
+Se a skill precisar de arquivos de apoio (templates HTML, referências de design, exemplos de output), criar dentro da mesma pasta:
+
+```
+.claude/skills/nome-da-skill/
+  SKILL.md              ← instruções principais
+  template.html         ← template de output (se aplicável)
+  referencia.md         ← material de referência (se aplicável)
+```
 
 Depois de criar, confirmar:
 

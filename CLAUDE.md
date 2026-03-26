@@ -28,7 +28,7 @@ Não é necessário listar o que foi lido nem confirmar a leitura. Apenas usar o
 
 ## Fluxo de trabalho
 
-Antes de executar qualquer tarefa, verificar se existe uma skill relevante em `.claude/commands/`.
+Antes de executar qualquer tarefa, verificar se existe uma skill relevante em `.claude/skills/` ou `.claude/commands/`.
 Se encontrar, seguir as instruções da skill.
 Se não encontrar, executar a tarefa normalmente.
 
@@ -65,7 +65,8 @@ Quando o usuário pedir pra criar uma nova skill:
 
 1. Verificar se existe um template relevante em `templates/skills/`. Se existir, usar como base e adaptar pro contexto do usuário
 2. Perguntar: "Essa skill é específica pra esse projeto ou vai ser útil em qualquer projeto?"
-   - Específica desse negócio → salvar em `.claude/commands/` (local)
-   - Útil em qualquer projeto → salvar em `~/.claude/skills/` (global)
+   - Específica desse negócio → salvar em `.claude/skills/nome-da-skill/SKILL.md` (local)
+   - Útil em qualquer projeto → salvar em `~/.claude/skills/nome-da-skill/SKILL.md` (global)
 3. Ler `_contexto/empresa.md` e `_contexto/preferencias.md` pra calibrar o conteúdo da skill ao contexto do negócio
-4. Seguir o fluxo da skill-creator nativa do Claude Code
+4. Se a skill precisar de arquivos de apoio (templates, referências, exemplos), criar dentro da pasta da skill
+5. Seguir o fluxo da skill-creator nativa do Claude Code
