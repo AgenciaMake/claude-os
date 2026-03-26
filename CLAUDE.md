@@ -1,13 +1,53 @@
-# Claude Code OS — Kit Ratos de IA
+# DobraLabs — Claude Code OS
 
-Este repositório é o kit de boas-vindas do curso Claude Code OS.
+## O que é esse workspace
+Workspace principal da DobraLabs. Aqui ficam propostas, conteúdos, projetos de clientes, protótipos e tudo que o Eduardo toca no dia a dia do laboratório.
 
-Se você acabou de clonar esse repositório, rode `/setup` agora.
-O setup vai te fazer algumas perguntas e configurar tudo pro seu negócio em poucos minutos.
+**Estrutura de pastas:**
+- `_contexto/` — contexto do negócio, preferências e foco atual
+- `marca/` — identidade visual e design guide
+- `clientes/` — pastas por cliente com briefing e entregas
+- `briefings/` — briefings recebidos
+- `propostas/` — propostas comerciais geradas
+- `conteudo/` — carrosséis, roteiros, newsletters, posts
+- `projetos/` — projetos internos e experimentos
+- `dados/` — arquivos de dados e assets pra análise
+- `templates/` — templates reutilizáveis
+
+## Sobre o negócio
+DobraLabs é um laboratório que experimenta ideias e cria produtos com IA pra resolver problemas reais de negócios. Combina design, tecnologia e automação. Eduardo também é cofundador da Dobra (marca de produtos) e da Ótica Rönnau.
+
+## O que mais fazemos aqui
+- Soluções com IA sob medida (apps, automações, agentes, sistemas)
+- Protótipos rápidos (Lovable, IA)
+- Palestras e workshops sobre IA pra empresas e líderes
+- Conteúdo (roteiros, frameworks, exemplos práticos)
+- Propostas comerciais e PRDs
+- Branding, comunicação e posicionamento
+- Estratégia pra negócios próprios (Dobra, Rönnau)
+
+## Clientes e contexto
+Atende clientes externos (empresas que contratam a DobraLabs) e usa internamente pros próprios negócios. Equipe com Murilo, Duda, Helena. Eduardo lidera como estrategista + mão na massa.
+
+## Tom de voz
+- Informal, direto, conversa como gente
+- Storytelling e analogias
+- Clareza + profundidade, sem enrolação
+- Textos autorais com virada/reflexão no final
+- Nunca corporativo engessado
+- Nunca genérico ou superficial
+
+## Ferramentas conectadas
+- ChatGPT, Claude
+- Lovable (prototipagem)
+- n8n (automação)
+- Supabase (backend/data)
+- WordPress, Elementor, WooCommerce
+- Bento (event tracking)
+- WhatsApp
+- OpenRouter, ElevenLabs
 
 ---
-
-<!-- Este arquivo será atualizado pelo /setup com o contexto do seu negócio. -->
 
 ## Contexto do negócio
 

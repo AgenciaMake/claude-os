@@ -1,66 +1,62 @@
-# Guia de Design — [Nome da Marca]
-
-> Este arquivo é preenchido pelo /setup com base na sua descrição.
-> Você pode editar manualmente a qualquer momento.
-> As skills de carrossel, proposta e slide leem este arquivo antes de criar qualquer visual.
+# Guia de Design — DobraLabs
 
 ---
 
 ## Cores
 
-- **Fundo principal:** #[hex]
-  *(ex: #0D0D0D para dark, #FFFFFF para light)*
+- **Fundo principal:** #000000
+  *(preto sólido)*
 
-- **Cor de destaque / CTA:** #[hex]
-  *(ex: #FFD600 amarelo, #FF6B35 laranja, #3B82F6 azul)*
+- **Cor de destaque / CTA:** #FFD700
+  *(amarelo/dourado)*
 
-- **Texto principal:** #[hex]
-  *(ex: #FFFFFF sobre fundo escuro, #1A1A1A sobre fundo claro)*
+- **Texto principal:** #FFFFFF
+  *(branco sobre fundo escuro)*
 
-- **Fundo alternativo / cards:** #[hex]
-  *(cor secundária pra seções ou cards)*
+- **Fundo alternativo / cards:** #111111
+  *(cinza muito escuro pra cards e seções)*
 
-- **Cor proibida:** [cor que não combina com a marca]
+- **Cor proibida:** degradês coloridos, cores pastel, tons de rosa
 
 ---
 
 ## Tipografia
 
-- **Títulos e destaques:** [nome da fonte]
-  *(ex: Instrument Serif, Playfair Display, Syne)*
+- **Títulos e destaques:** Monospace (ou fonte bold sem serifa)
 
-- **Corpo, subtítulos e botões:** [nome da fonte]
-  *(ex: Bricolage Grotesque, Inter, DM Sans)*
+- **Corpo, subtítulos e botões:** Monospace / Inter / DM Sans
 
-- **Peso do título:** [bold / extrabold / regular italic]
+- **Peso do título:** Bold / Extrabold
 
 ---
 
 ## Estilo geral
 
-[Descreve em uma frase o estilo da marca]
-*(ex: "Dark, minimalista e bold, com toques de amarelo como acento" ou
-"Clean e arejado, fundo branco, tipografia pesada, contraste forte")*
+Dark, minimalista e bold, com toques de amarelo/dourado como acento. Tech com personalidade, sem ser genérico.
 
 ---
 
 ## Elementos-chave
 
-- Bordas: [dashed / solid / sem borda]
-- Border-radius dos cards: [px]
-- Botões: [pill com border-radius: 50px / quadrado / com borda]
-- Sombras: [sim / não / sutil]
+- Bordas: solid ou sem borda
+- Border-radius dos cards: 8px
+- Botões: com borda, cantos levemente arredondados
+- Sombras: não (visual flat)
 
 ---
 
 ## O que NUNCA fazer
 
-- [cor ou combinação de cor proibida]
-- [estilo que não combina com a marca]
-- [elemento visual que destoa]
+- Degradês coloridos ou "arco-íris"
+- Visual de startup genérica (azul + branco + ilustrações flat)
+- Fontes serifadas clássicas (Times, Georgia)
+- Excesso de cores
+- Qualquer coisa "bagaceira"
 
 ---
 
 ## Observações adicionais
 
-[qualquer outra coisa relevante pra manter a consistência visual]
+- A Dobra (marca de produtos) tem estilo mais ousado e provocador
+- Pra projetos premium (tipo Pregio): elegância, sofisticação, sobriedade
+- O logo da DobraLabs é uma esfera/bolinha branca sobre fundo escuro
