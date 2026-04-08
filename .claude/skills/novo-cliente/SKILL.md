@@ -188,7 +188,30 @@ Criar em `clientes/{slug-do-cliente}/` com os arquivos:
 
 ---
 
-## Passo 5 — Resumo final
+## Passo 5 — Gerar código de briefing e registrar na Sheet
+
+Gerar um código único no formato `MK-XXXXX` (5 caracteres aleatórios maiúsculos/números, ex: `MK-8F3K2`).
+
+Adicionar uma linha na Sheet `MAKE_BRIEFING_REGISTRO` (ID: `177tCA1GgrC9WyFiwi2PQmiqWg_69dDe6DSKxruVePt0`):
+
+| Campo | Valor |
+|---|---|
+| CÓDIGO | `MK-XXXXX` gerado |
+| CLIENTE | Nome do cliente |
+| NÚMERO | Número do cliente |
+| SERVIÇOS CONTRATADOS | Lista dos serviços (separados por vírgula) |
+| STATUS | `pendente` |
+| DATA DE CRIAÇÃO | Data atual no formato `DD.MM.AA` |
+| DATA DO BRIEFING | (vazio — preenchido quando o cliente concluir) |
+| RESPONSÁVEL INTERNO | Nome do responsável informado no Passo 1 |
+| EMAIL CLIENTE | (vazio — preenchido após receber o briefing) |
+| OBSERVAÇÕES | (vazio) |
+
+Usar `mcp__google-drive__appendSpreadsheetRows` para inserir a linha.
+
+---
+
+## Passo 6 — Resumo final
 
 Ao concluir, exibir:
 
@@ -203,8 +226,11 @@ Pastas criadas:
 ✓ Drive criação: 02. MAKE - CRIAÇÃO > {número}. {Nome}
 ✓ Workspace local: clientes/{slug}/
 
+Código de briefing: MK-XXXXX
+→ Enviar esse código ao cliente para iniciar o briefing em: [URL do app]
+
 Próximos passos:
-→ Enviar Google Forms de briefing
+→ Enviar código de briefing ao cliente
 → Criar card no Trello
 → Agendar kickoff
 ```
