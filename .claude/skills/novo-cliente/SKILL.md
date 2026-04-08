@@ -33,13 +33,20 @@ Exemplo: `33. Empresa ABC`
 
 **Destino**: `02. CLIENTES` (ID: `1R6NWb_YjeiMryxSS_a4U-ye5a0F2Wh4q`) dentro do Shared Drive `00. MAKELEMONAD` (ID: `0ANDNjpfQd7ZmUk9PVA`)
 
-Usando o MCP `google-drive`, criar a pasta principal e as subpastas abaixo:
+Usando o MCP `google-drive`, criar a pasta principal e toda a estrutura abaixo:
 
 ```
 {número}. {Nome do Cliente}/
-  ├── 01. Criativos
+  ├── 00. OLD
+  ├── 01. Criativos/
+  │   ├── 00. OLD
+  │   ├── 01. Imagens
+  │   ├── 02. Fonts
+  │   ├── 03. AFs
+  │   └── V1
   ├── 02. Materiais de Apoio
-  ├── 03. Materiais do Cliente
+  ├── 03. Materiais do Cliente/
+  │   └── {NOME DO CLIENTE EM CAIXA ALTA} - USER   ← pasta com permissão especial
   ├── 04. Apresentação
   ├── 05. Documentos
   ├── 06. Planilhas
@@ -50,7 +57,16 @@ Usando o MCP `google-drive`, criar a pasta principal e as subpastas abaixo:
   └── 11. Logos
 ```
 
-Para criar cada pasta usar `mcp__google-drive__createFolder` com o `driveId: "0ANDNjpfQd7ZmUk9PVA"` nas subpastas.
+Para criar cada pasta usar `mcp__google-drive__createFolder` com o `driveId: "0ANDNjpfQd7ZmUk9PVA"`.
+
+### Pasta USER — permissões
+
+Após o briefing, quando o cliente informar o(s) email(s), configurar a pasta `{NOME} - USER`:
+
+- **Cliente com Gmail**: permissão `writer` (pode adicionar e editar)
+- **Cliente sem Gmail**: permissão `commenter` (só pode adicionar — limitação do Google)
+
+Usar `mcp__google-drive__addPermission` na pasta USER com o email fornecido no briefing.
 
 ---
 
@@ -58,15 +74,29 @@ Para criar cada pasta usar `mcp__google-drive__createFolder` com o `driveId: "0A
 
 **Destino**: Shared Drive `02. MAKE - CRIAÇÃO` (ID: `0AE-_ZuS1PIchUk9PVA`)
 
-Criar a pasta principal e as subpastas:
+Criar a pasta principal e toda a estrutura abaixo:
 
 ```
 {número}. {Nome do Cliente}/
+  ├── 00. Old
   ├── 01. Fonts
   ├── 02. Materiais de Apoio
   ├── 03. Materiais do Cliente
   ├── 04. Video
-  └── 05. Arte
+  └── 05. Arte/
+      └── 00. SOCIAL MEDIA/
+          ├── 01. Janeiro
+          ├── 02. Fevereiro
+          ├── 03. Março
+          ├── 04. Abril
+          ├── 05. Maio
+          ├── 06. Junho
+          ├── 07. Julho
+          ├── 08. Agosto
+          ├── 09. Setembro
+          ├── 10. Outubro
+          ├── 11. Novembro
+          └── 12. Dezembro
 ```
 
 Para criar cada pasta usar `mcp__google-drive__createFolder` com o `driveId: "0AE-_ZuS1PIchUk9PVA"`.
