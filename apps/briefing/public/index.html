@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MakeLemonAd — Briefing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="app">
+    <div id="screen-code" class="screen active">
+      <div class="container">
+        <div class="logo">MakeLemonAd</div>
+        <h1>Vamos começar seu briefing</h1>
+        <p class="subtitle">Insira o código que recebeu da nossa equipe pra iniciar.</p>
+        <form id="code-form">
+          <input
+            type="text"
+            id="code-input"
+            placeholder="MK-XXXXX"
+            maxlength="9"
+            autocomplete="off"
+            required
+          >
+          <button type="submit" id="code-submit">Começar</button>
+        </form>
+        <p id="code-error" class="error"></p>
+      </div>
+    </div>
+
+    <div id="screen-chat" class="screen">
+      <div class="chat-container">
+        <div id="messages"></div>
+        <form id="chat-form">
+          <textarea
+            id="chat-input"
+            placeholder="Digite sua resposta..."
+            rows="2"
+            required
+          ></textarea>
+          <button type="submit" id="chat-submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="screen-done" class="screen">
+      <div class="container">
+        <div class="logo">MakeLemonAd</div>
+        <div class="check">✓</div>
+        <h1>Briefing concluído!</h1>
+        <p class="subtitle">Recebemos todas as suas respostas. Nossa equipe já vai começar a trabalhar no seu projeto.</p>
+      </div>
+    </div>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>

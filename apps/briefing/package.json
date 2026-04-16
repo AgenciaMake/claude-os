@@ -1,0 +1,13 @@
+{
+  "name": "makelemonad-briefing",
+  "version": "1.0.0",
+  "description": "App conversacional de briefing de clientes da MakeLemonAd",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev public --compatibility-date=2024-09-01",
+    "deploy": "wrangler pages deploy public --project-name=makelemonad-briefing"
+  },
+  "devDependencies": {
+    "wrangler": "^3.80.0"
+  }
+}
