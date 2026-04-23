@@ -1,6 +1,6 @@
 // Compose MakeLemonAd carousel slides → PNGs 1080x1350
-// Uso: node compose-slides.js <config.json>
-// config.json = { outDir, slides: [ { filename, bg, isCover, isCta, number, content, footerSlogan } ] }
+// Uso: node compose-slides.js <config.json> [slideFilename]
+// Se passar slideFilename, renderiza só aquele slide (útil pra iterar)
 
 const fs = require("fs");
 const path = require("path");
@@ -14,12 +14,12 @@ async function renderSlide(browser, template, slide, outPath) {
   // Background
   html = html.replace("{{BG_CLASS}}", `bg-${slide.bg || "black"}`);
 
-  // Top-left (hashtag nas capas, numeração nos internos)
+  // Top-left (hashtag nas capas, numeração nos internos, nada no CTA)
   let topLeft = "";
   if (slide.isCover) {
-    topLeft = `<div class="top-left"><span class="hashtag">#performance<strong>estratégica</strong>360</span></div>`;
+    topLeft = `<div class="hashtag">#performance<strong>estratégica</strong>360</div>`;
   } else if (slide.number && !slide.isCta) {
-    topLeft = `<div class="top-left"><span class="slide-num">${String(slide.number).padStart(2, "0")}</span></div>`;
+    topLeft = `<div class="slide-num">${String(slide.number).padStart(2, "0")}</div>`;
   }
   html = html.replace("{{TOP_LEFT}}", topLeft);
 
@@ -27,21 +27,17 @@ async function renderSlide(browser, template, slide, outPath) {
   let topRight = "";
   if (slide.isCover) {
     const logoData = fs.readFileSync(LOGO_PATH).toString("base64");
-    topRight = `<div class="top-right"><img src="data:image/png;base64,${logoData}" alt=""></div>`;
+    topRight = `<div class="logo-top"><img src="data:image/png;base64,${logoData}" alt=""></div>`;
   }
   html = html.replace("{{TOP_RIGHT}}", topRight);
 
-  // Content (substitui LOGO_PLACEHOLDER pelo logo base64)
+  // Content (substitui LOGO_PLACEHOLDER pelo logo base64 se houver)
   let content = slide.content || "";
   if (content.includes("LOGO_PLACEHOLDER")) {
     const logoData = fs.readFileSync(LOGO_PATH).toString("base64");
     content = content.replace(/LOGO_PLACEHOLDER/g, `data:image/png;base64,${logoData}`);
   }
   html = html.replace("{{CONTENT}}", content);
-
-  // Next arrow (internos, não CTA)
-  const nextArrow = slide.isCta ? "" : `<div class="next-arrow"></div>`;
-  html = html.replace("{{NEXT_ARROW}}", nextArrow);
 
   // Footer (não no CTA)
   let footer = "";
@@ -54,17 +50,25 @@ async function renderSlide(browser, template, slide, outPath) {
   }
   html = html.replace("{{FOOTER}}", footer);
 
+  // Side strip (cor = próximo slide); CTA não tem
+  let sideStrip = "";
+  if (!slide.isCta && slide.nextBg) {
+    sideStrip = `<div class="side-strip ${slide.nextBg}"><div class="arrow"></div></div>`;
+  }
+  html = html.replace("{{SIDE_STRIP}}", sideStrip);
+
   // Render
   const page = await browser.newPage({ viewport: { width: 1080, height: 1350 } });
   await page.setContent(html, { waitUntil: "networkidle" });
-  await page.waitForTimeout(500); // fonts
-  await page.screenshot({ path: outPath, type: "png", omitBackground: false, clip: { x: 0, y: 0, width: 1080, height: 1350 } });
+  await page.waitForTimeout(700); // fonts
+  await page.screenshot({ path: outPath, type: "png", clip: { x: 0, y: 0, width: 1080, height: 1350 } });
   await page.close();
 }
 
 async function main() {
   const configPath = process.argv[2];
-  if (!configPath) { console.error("Uso: node compose-slides.js <config.json>"); process.exit(1); }
+  const filterFilename = process.argv[3];
+  if (!configPath) { console.error("Uso: node compose-slides.js <config.json> [slideFilename]"); process.exit(1); }
 
   const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
   const outDir = path.resolve(path.dirname(configPath), config.outDir);
@@ -72,14 +76,19 @@ async function main() {
 
   const template = fs.readFileSync(path.resolve(__dirname, "templates/slide.html"), "utf8");
 
+  const slides = filterFilename
+    ? config.slides.filter(s => s.filename === filterFilename)
+    : config.slides;
+
+  if (!slides.length) { console.error(`Nenhum slide casa com ${filterFilename}`); process.exit(1); }
+
   const browser = await chromium.launch();
-  for (const slide of config.slides) {
+  for (const slide of slides) {
     const outPath = path.join(outDir, slide.filename);
     await renderSlide(browser, template, slide, outPath);
     console.log(`  OK: ${slide.filename}`);
   }
   await browser.close();
-  console.log(`\nSalvou ${config.slides.length} slides em ${outDir}`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
