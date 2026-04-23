@@ -63,6 +63,14 @@ Referência: estilo que mistura agência de performance com identidade de marca 
 
 ---
 
+## Geração de imagens por IA
+
+Para qualquer geração de imagem **fotorrealista** (pessoas, cenas, objetos em contexto real), seguir integralmente as regras de [direcao-de-arte.md](direcao-de-arte.md) — realismo absoluto + contexto brasileiro + São Paulo como referência estética.
+
+Para mockups 3D ilustrativos (objetos flutuantes, ícones, cenas caricatas), usar estética apropriada ao contexto — ver Estilo A em [make/social/identidade-visual.md](../make/social/identidade-visual.md).
+
+---
+
 ## Observações adicionais
 
 Site: www.makelemonad.com.br — referência visual principal.

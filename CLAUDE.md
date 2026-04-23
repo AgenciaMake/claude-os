@@ -69,7 +69,12 @@ No início de toda conversa, ler os seguintes arquivos (se existirem e estiverem
 
 Usar essas informações como base pra qualquer resposta ou decisão. Ao sugerir prioridades, formatos ou abordagens, considerar o foco atual descrito em `estrategia.md`.
 
-Para qualquer tarefa visual (carrossel, proposta, slide, landing page), consultar `marca/design-guide.md` como referência de estilo.
+Para qualquer tarefa visual (carrossel, proposta, slide, landing page), consultar [marca/design-guide.md](marca/design-guide.md) como referência de estilo.
+
+Para qualquer **geração de imagem por IA** (Nano Banana/Gemini ou outro modelo):
+- Se a imagem é fotorrealista (pessoas, cenas, objetos em contexto real) → ler e aplicar integralmente [marca/direcao-de-arte.md](marca/direcao-de-arte.md) — realismo absoluto + contexto brasileiro/SP.
+- Se é mockup 3D ilustrativo/caricato → usar estética apropriada (Estilo A do identidade-visual das redes).
+- **Textos nunca são gerados dentro da imagem** — sempre compostos depois por Claude como camada separada.
 
 Não é necessário listar o que foi lido nem confirmar a leitura. Apenas usar o contexto naturalmente.
 

@@ -99,10 +99,11 @@ Dentro do mesmo sistema, temos 3 linguagens visuais. A escolha vem do **pilar do
 ### Estilo A — Ilustrativo 3D
 **Uso:** pilar **Updates da Make** e **Apresentação da agência** (serviços, cases, time)
 
-- Fundo: verde limão `#C8D82D` cheio
+- Fundo: verde limão `#D6DE23` cheio
 - Elementos 3D renderizados (megafone, laptop, ícones, objetos contextuais)
 - Tipografia: Rubik Bold + ênfases em itálico
 - Tom: institucional, explicativo, "showroom"
+- **Geração de imagem:** este estilo **não** aplica o script de realismo — é caricato/ilustrativo propositalmente. Gerar com prompt tipo "3D product render, clean studio lighting, floating object, no text".
 
 ### Estilo B — Tipográfico puro
 **Uso:** pilar **Provocações, hooks e curiosidades**
@@ -123,6 +124,14 @@ Dentro do mesmo sistema, temos 3 linguagens visuais. A escolha vem do **pilar do
 ### Quando misturar
 - Capa pode usar um estilo, slides internos outro
 - Respeitar: CTA final sempre fechado no **template padrão** (próxima seção)
+
+### Imagens fotorrealistas (pessoas, cenas, ambientes)
+
+Quando um post precisar de **foto real** — alguém mexendo no celular, um escritório vivido, uma cena de rua em SP — **aplicar integralmente** o script de [marca/direcao-de-arte.md](../../marca/direcao-de-arte.md): realismo absoluto, contexto brasileiro, São Paulo como referência, imperfeições naturais, comportamento humano real.
+
+**Regra simples:**
+- Pediu mockup 3D / objeto ilustrado → Estilo A (não aplica realismo)
+- Pediu foto / cena / pessoa → aplica `direcao-de-arte.md`
 
 ---
 
