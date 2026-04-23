@@ -4,15 +4,23 @@
 
 Esse é o escritório digital da MakeLemonAd — agência de marketing digital focada em performance estratégica 360º. Aqui ficam os arquivos que o Claude usa pra trabalhar contextualizado com o negócio, os clientes e a equipe.
 
+**Separação MAKE vs CLIENTES:**
+Esse workspace tem dois tipos de trabalho convivendo:
+- **Trabalho interno da Make** (redes, site, processos, operação da agência) → mora em `make/`
+- **Trabalho pra clientes** (briefings, campanhas, entregas, cada cliente com sua pasta) → mora em `clientes/`
+
+Skills em `.claude/skills/` podem ser específicas da Make, específicas de um cliente, ou compartilhadas. Antes de aplicar uma skill, checar o escopo — não usar skill de cliente pra trabalho da Make, nem o contrário.
+
 **Estrutura de pastas:**
 - `_contexto/` — quem é o negócio, preferências de comunicação e foco atual
 - `marca/` — identidade visual e guia de design
+- `make/` — trabalho interno da MakeLemonAd (ex: `make/social/` = redes sociais da agência)
 - `clientes/` — uma pasta por cliente com briefing e histórico
 - `propostas/` — propostas geradas (modelos Starter, Power, Hyper, 360)
-- `conteudo/` — pautas, roteiros e carrosséis por canal (instagram/, linkedin/)
 - `operacoes/` — processos internos, checklists, onboarding de clientes, scripts
 - `dados/` — arquivos de referência, relatórios, prints
 - `templates/` — templates de skills e ferramentas prontos pra usar
+- `apps/` — apps web hospedados (Cloudflare Pages, etc.)
 - `tarefas.md` — lista de pendências atualizada conforme o trabalho avança
 
 ## Sobre o negócio
@@ -114,6 +122,23 @@ Toda página/app web criado dentro de `apps/` deve seguir essas regras de identi
 4. **Deploy no Cloudflare Pages:** nomear o projeto sempre como `makelemonad-{slug}` (ex: `makelemonad-briefing`, `makelemonad-proposta`).
 
 Ao criar um novo app, aplicar essas 4 regras automaticamente sem precisar perguntar.
+
+---
+
+## Redes sociais da MakeLemonAd
+
+Em qualquer sessão que envolva Instagram, LinkedIn ou TikTok **da própria Make** (pauta, copy, peça visual, publicação, análise de métricas), ler [make/social/MAKESOCIAL.md](make/social/MAKESOCIAL.md) como briefing mestre — objetivo, público, pilares, tom de voz, estrutura de copy, fluxo operacional e métricas.
+
+**Organização dos artefatos:**
+- Referências estéticas e tendências → `make/social/referencias/`
+- Pautas aprovadas da semana → `make/social/pautas/` (nomear por data: `2026-04-27_semana.md`)
+- Posts prontos (copy + peça + link publicado) → `make/social/posts/` (subpasta por data)
+- Relatórios de análise de performance → `make/social/metricas/`
+
+**Fluxo operacional (resumido, detalhes no MAKESOCIAL.md):**
+Claude sugere pautas → Bruno aprova/afina → Bruno libera criação → Claude cria copy e peça → Bruno aprova arte → Claude publica via skill `publicar-instagram` (Post for Me Pro) → +2 dias → análise juntos.
+
+Esse fluxo é exclusivo das redes da Make. Não aplicar a clientes.
 
 ---
 
