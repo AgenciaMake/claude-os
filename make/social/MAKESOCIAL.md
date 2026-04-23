@@ -75,9 +75,13 @@ Mesmo copy, mesmo visual, mesmo CTA. O TikTok via Post for Me sai como **rascunh
 
 ## 8. Identidade visual
 
-Ver [marca/design-guide.md](../../marca/design-guide.md) como referência de estilo da agência.
+Guia visual completo das redes: [identidade-visual.md](identidade-visual.md) — paleta, tipografia (Rubik), anatomia do slide, 3 estilos mapeados aos pilares, template do CTA final, checklist de publicação.
 
-Banco de inspirações e referências estéticas específicas das redes: [make/social/referencias/](referencias/). Bruno alimenta essa pasta sempre que surge uma tendência, estética nova ou ajuste.
+Referência global da marca: [marca/design-guide.md](../../marca/design-guide.md).
+
+Banco de inspirações e posts-referência: [referencias/](referencias/). Bruno alimenta essa pasta sempre que surge uma tendência, estética nova ou ajuste.
+
+Assets reutilizáveis (logos, mockups 3D, texturas): [identidade-visual/](identidade-visual/).
 
 ---
 
