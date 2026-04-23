@@ -117,7 +117,7 @@ Toda página/app web criado dentro de `apps/` deve seguir essas regras de identi
    <link rel="icon" type="image/png" href="/logo.png">
    <link rel="apple-touch-icon" href="/logo.png">
    ```
-2. **Cor de destaque:** usar `#D6DE24` como cor principal (verde limão da Make). Paleta completa em [marca/design-guide.md](marca/design-guide.md).
+2. **Cor de destaque:** usar `#D6DE23` como cor principal (verde limão da Make). Paleta completa em [marca/design-guide.md](marca/design-guide.md).
 3. **Título da aba:** começar com "MakeLemonAd — {nome da feature}".
 4. **Deploy no Cloudflare Pages:** nomear o projeto sempre como `makelemonad-{slug}` (ex: `makelemonad-briefing`, `makelemonad-proposta`).
 

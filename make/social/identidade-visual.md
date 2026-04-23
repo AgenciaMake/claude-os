@@ -12,7 +12,7 @@ Paleta oficial da MakeLemonAd (fonte de verdade: [marca/design-guide.md](../../m
 
 | Cor | Hex | Uso nas redes |
 |---|---|---|
-| **Verde limão Make** | `#D6DE24` | Cor principal. Fundos de impacto, CTAs, selo/logo, assinatura. |
+| **Verde limão Make** | `#D6DE23` | Cor principal. Fundos de impacto, CTAs, selo/logo, assinatura. |
 | **Verde 02** | `#00A652` | Fundos cheios alternativos, contraste com verde limão. |
 | **Verde escuro** | `#006838` | Camadas, profundidade, detalhes internos. |
 | **Preto de fundo** | `#000000` | Fundo preto das capas e peças de impacto. |
