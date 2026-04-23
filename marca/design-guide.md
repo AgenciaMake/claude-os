@@ -5,17 +5,21 @@
 
 ---
 
-## Cores
+## Cores oficiais
 
-- **Fundo principal:** Preto (#000000 ou similar escuro)
+Paleta institucional da MakeLemonAd — usar em todo material visual da marca (redes, site, propostas, apresentações, apps).
 
-- **Cor de destaque / CTA:** Verde limão (#61a229 ou variação mais vibrante — confirmar código exato)
+| Cor | Hex | Uso |
+|---|---|---|
+| **Verde limão Make** | `#D6DE24` | Cor principal da marca. CTAs, destaques, fundos de impacto, assinatura. |
+| **Verde 02** | `#00A652` | Verde vibrante secundário. Fundos cheios, contraste com o verde limão. |
+| **Verde escuro** | `#006838` | Verde escuro de apoio. Profundidade, camadas, detalhes. |
+| **Preto de fundo** | `#000000` | Fundo principal (capas, peças de impacto). |
+| **Preto texto** | `#434244` | Tipografia principal sobre fundos claros. Não é preto puro. |
+| **Branco 100%** | `#FFFFFF` | Tipografia sobre fundos escuros, máximo contraste. |
+| **Branco bg** | `#DEDEDE` | Fundo alternativo claro (suaviza vs. branco puro). |
 
-- **Texto principal:** Branco (#FFFFFF)
-
-- **Fundo alternativo / cards:** Branco (#FFFFFF) — usado pra quebrar o preto e facilitar leitura
-
-- **Cor proibida:** Tons pastéis, beige, cinza claro — fogem completamente do estilo da marca
+**Cores proibidas:** tons pastéis, beige, cinza claro fora do `#DEDEDE` — fogem da identidade de performance.
 
 ---
 

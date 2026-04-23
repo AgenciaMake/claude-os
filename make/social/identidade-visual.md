@@ -8,13 +8,17 @@ Ler esse arquivo antes de criar qualquer peça pras redes da Make.
 
 ## 1. Paleta
 
-| Cor | Hex | Uso |
+Paleta oficial da MakeLemonAd (fonte de verdade: [marca/design-guide.md](../../marca/design-guide.md)).
+
+| Cor | Hex | Uso nas redes |
 |---|---|---|
-| **Verde limão Make** | `#C8D82D` | Cor principal da marca. Fundos de impacto, CTAs, destaques, assinatura. |
-| **Preto** | `#000000` | Fundo principal, tipografia sobre fundo claro, peso visual. |
-| **Branco** | `#FFFFFF` | Tipografia sobre fundos escuros, contraste. |
-| **Cinza escuro** | `#2B2B2B` — `#333333` | Neutro complementar, fundos alternativos ao preto puro. |
-| **Verde vibrante saturado** | `#1FB54A` *(aprox. — confirmar hex exato com arte)* | Quando quer "fundo verde cheio" mais saturado que o `#C8D82D`. |
+| **Verde limão Make** | `#D6DE24` | Cor principal. Fundos de impacto, CTAs, selo/logo, assinatura. |
+| **Verde 02** | `#00A652` | Fundos cheios alternativos, contraste com verde limão. |
+| **Verde escuro** | `#006838` | Camadas, profundidade, detalhes internos. |
+| **Preto de fundo** | `#000000` | Fundo preto das capas e peças de impacto. |
+| **Preto texto** | `#434244` | Tipografia sobre fundo claro (não usar preto puro no texto). |
+| **Branco 100%** | `#FFFFFF` | Tipografia sobre fundo escuro. |
+| **Branco bg** | `#DEDEDE` | Fundo claro alternativo (suaviza o contraste vs. branco puro). |
 
 Regra: **preto + verde limão é o par institucional**. Todo post tem pelo menos um dos dois como base.
 
