@@ -50,10 +50,11 @@ async function renderSlide(browser, template, slide, outPath) {
   }
   html = html.replace("{{FOOTER}}", footer);
 
-  // Side strip (cor = próximo slide); CTA não tem
+  // Side strip = cor do próximo slide. Seta = cor do slide atual invadindo a faixa.
   let sideStrip = "";
   if (!slide.isCta && slide.nextBg) {
-    sideStrip = `<div class="side-strip ${slide.nextBg}"><div class="arrow"></div></div>`;
+    sideStrip = `<div class="side-strip ${slide.nextBg}"></div>
+      <div class="slide-arrow from-${slide.bg || "black"}"></div>`;
   }
   html = html.replace("{{SIDE_STRIP}}", sideStrip);
 
