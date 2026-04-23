@@ -74,7 +74,7 @@ Todo slide respeita essa grade. Elementos posicionados sempre nos mesmos cantos.
 - Nos slides internos: numeração em caixa retangular — `[02]`, `[03]`, `[04]`...
 
 **Canto superior direito (só nas capas):**
-- Selo circular `MAKE LEMON AD` em verde limão sobre preto, ou preto sobre verde
+- Selo circular `MAKE LEMON AD` — usar a versão **oficial** ([logo_make_oficial.png](identidade-visual/logos/logo_make_oficial.png)) como padrão. Usar a versão **vazada** ([logo_make.svg](identidade-visual/logos/logo_make.svg)) quando precisar ajustar cor pro contraste do fundo.
 
 **Canto inferior esquerdo:**
 - `@make.lemonad` em itálico
@@ -159,7 +159,17 @@ Min 5 slides, max 10 (limite do Instagram).
 ## 7. Assets disponíveis
 
 ### [identidade-visual/logos/](identidade-visual/logos/)
-Variações do logo MakeLemon/Ad — versões em verde limão, branca, preta, positiva, negativa. Formatos: PNG transparente, SVG, e outras variações conforme necessidade.
+
+Selo circular `MAKE LEMON AD` em tipografia rústica/stamp (não é Rubik — é a fonte identitária do logo). Hoje existem dois arquivos com propósitos diferentes:
+
+| Arquivo | Característica | Quando usar |
+|---|---|---|
+| [logo_make_oficial.png](identidade-visual/logos/logo_make_oficial.png) | **Preenchido.** Texto `MAKE LEMON AD` em preto sólido sobre círculo verde limão — igual ao logo do site. | **Comunicação oficial/institucional** — capas de carrossel, apresentações, rodapés, cases, anúncios. Quando o logo precisa aparecer exatamente como a marca se apresenta publicamente. |
+| [logo_make.svg](identidade-visual/logos/logo_make.svg) | **Vazado.** Só o círculo verde é preenchido — o nome é espaço negativo (transparente), deixando o fundo atrás aparecer. Cor do círculo editável via `fill` no SVG. | **Arte customizada** — quando quer trocar cor (preto, branco, verde escuro), integrar o logo a um background colorido, sobrepor a fotos, ou criar variações pro post. |
+
+**Como mudar a cor do SVG:** editar a classe `.st0` no topo do arquivo (`fill: #d6de23` → trocar pro hex desejado). Ou aplicar via CSS/Figma.
+
+**A medida que novas variações forem criadas** (ex: logo só texto, logo sem círculo, versão horizontal), adicionar aqui e atualizar a tabela acima com o nome do arquivo + quando usar.
 
 ### [identidade-visual/mockups/](identidade-visual/mockups/)
 Elementos 3D reutilizáveis (megafone, laptop, saco de moedas, palitos de fósforo, etc.) pra uso no **Estilo A**. PNGs com fundo transparente.
