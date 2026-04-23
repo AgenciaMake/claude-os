@@ -54,41 +54,78 @@ Todo slide respeita essa grade. Elementos posicionados sempre nos mesmos cantos.
 
 ```
 ┌─────────────────────────────────────┐
-│ [01]                       ⭕ LOGO   │ ← topo
-│ #performanceestratégica360          │
-│                                     │
-│                                     │
-│        CONTEÚDO CENTRAL             │ ← miolo livre
-│        (texto, mockup, etc)         │
-│                                     │
-│                                     │
-│                                  ▶  │ ← seta "próximo slide"
-│ @make.lemonad    Strategy + ...     │ ← rodapé
+│ #performance...          ⭕ LOGO   ┃ ← topo (margem 50px)
+│                                    ┃
+│                                    ┃
+│        CONTEÚDO CENTRAL            ┃ ← miolo livre
+│        (texto, mockup, etc)        ┃   (faixa lateral
+│                                    ┃    direita = cor
+│                                 ▶  ┃    do próximo slide)
+│                                    ┃
+│ @make.lemonad  Strategy + ...      ┃ ← rodapé (margem 50px)
 └─────────────────────────────────────┘
+  ^                             ^   ^
+  50px                       110px  faixa 40px
 ```
+
+### Grade e margens (canvas 1080x1350 — IG carrossel 4:5)
+
+- **Margem superior:** 50px (topo do logo, topo da hashtag/numeração)
+- **Margem inferior:** 50px (linha de base do rodapé)
+- **Margem esquerda:** 50px (alinha hashtag, numeração e `@make.lemonad`)
+- **Margem direita:** 110px (alinha logo e fim do slogan — recuo da faixa lateral)
+- **Faixa lateral direita:** 40px de largura, do topo ao bottom
 
 ### Elementos fixos
 
-**Canto superior esquerdo:**
-- Nas capas: hashtag `#performanceestratégica360` (bold + italic combinado)
-- Nos slides internos: numeração em caixa retangular — `[02]`, `[03]`, `[04]`...
+**Canto superior esquerdo (top: 50px, left: 50px)**
 
-**Canto superior direito (só nas capas):**
-- Selo circular `MAKE LEMON AD` — usar a versão **oficial** ([logo_make_oficial.png](identidade-visual/logos/logo_make_oficial.png)) como padrão. Usar a versão **vazada** ([logo_make.svg](identidade-visual/logos/logo_make.svg)) quando precisar ajustar cor pro contraste do fundo.
+*Nas capas* → hashtag `#performanceestratégica360`:
+- Tamanho: **16px** (mesmo do rodapé)
+- `#performance` → Rubik **Light italic (300)**
+- `estratégica` → Rubik **Medium italic (500)**
+- `360` → Rubik **Light italic (300)**
 
-**Canto inferior esquerdo:**
-- `@make.lemonad` em itálico
+*Nos slides internos* → numeração em caixa retangular:
+- Ex: `[ 02 ]`, `[ 03 ]`
+- Tamanho: **16px**, Rubik Regular italic (400)
+- Border: 1.2px da cor do texto
+- Padding: 4px 14px
 
-**Canto inferior direito (rodapé):**
-- Assinatura institucional. Variantes em uso:
-  - `Strategy + Branding + Performance = Growth and scale forever`
-  - `Strategy + Branding + Performance = Conexão que Gera Conversão`
-- A parte depois do `=` fica em itálico + bold como slogan temático
+**Canto superior direito (top: 50px, right: 110px) — SÓ NAS CAPAS**
 
-**Seta "play" verde limão:**
-- Canto inferior direito, acima do rodapé
-- Indica "há mais conteúdo no próximo slide"
-- Não aparece no slide final de CTA
+Selo circular `MAKE LEMON AD`:
+- Diâmetro: **90px**
+- A borda direita do logo alinha exatamente com o fim do texto do rodapé (`Conversão` / `forever`)
+- Versão a usar conforme o fundo:
+  - Fundo escuro (preto, cinza escuro) → [logo_make_oficial.png](identidade-visual/logos/logo_make_oficial.png) (selo verde limão)
+  - Fundo verde limão → [logo_make.svg](identidade-visual/logos/logo_make.svg) com `fill: #000000` (selo preto vazado)
+  - Outros fundos → escolher variação com melhor contraste
+
+**Rodapé (bottom: 50px, left: 50px, right: 110px)**
+
+Tamanho **16px**, todos os elementos:
+
+*Esquerda:* `@make.lemonad`
+- Rubik **Medium italic (500)**
+
+*Direita:* `Strategy + Branding + Performance = <slogan>`
+- Prefixo "Strategy + Branding + Performance =" em Rubik **Regular (400)**, não-italic
+- Slogan final em Rubik **Semibold italic (600)**
+- Variantes do slogan em uso:
+  - `Conexão que Gera Conversão` (padrão atual)
+  - `Growth and scale forever` (alternativa histórica)
+
+**Faixa lateral direita (cor = próximo slide)**
+- Largura: **40px**, do topo ao bottom
+- Cor: igual ao fundo do slide seguinte — cria continuidade visual no feed
+
+**Seta de transição (cor = slide atual)**
+- Triângulo apontando pra direita, posicionado na linha `bottom: 180px`
+- Sai do slide atual invadindo a faixa lateral
+- Cor preenchida = cor do fundo do slide atual (contrasta com a faixa)
+- Proporção: 58px de largura × 84px de altura
+- Não aparece no slide de CTA final
 
 ---
 
