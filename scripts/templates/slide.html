@@ -78,16 +78,17 @@
   .slide-arrow.from-lime        { border-left-color: var(--lime); }
   .slide-arrow.from-green2      { border-left-color: var(--green2); }
 
-  /* Hashtag topo-esquerdo (capas) — mesmo tamanho do rodapé, alinhada ao centro do logo */
+  /* Hashtag topo-esquerdo (capas) — alinhada ao topo do logo, mesma margem do rodapé (50px) */
   .hashtag {
     position: absolute;
-    top: 92px;
+    top: 50px;
     left: 50px;
     font-size: 16px;
     font-weight: 300;
     font-style: italic;
     z-index: 5;
     letter-spacing: 0;
+    line-height: 1;
   }
   .hashtag strong { font-weight: 500; font-style: italic; }
 
@@ -106,10 +107,10 @@
     z-index: 5;
   }
 
-  /* Selo Make topo-direito (capas) — 90px de diâmetro, próximo à borda */
+  /* Selo Make topo-direito (capas) — 90px de diâmetro, margem 50px igual ao rodapé */
   .logo-top {
     position: absolute;
-    top: 55px;
+    top: 50px;
     right: 50px;
     width: 90px;
     height: 90px;
