@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lime: #D6DE23;
+    --green2: #00A652;
+    --dark-green: #006838;
+    --black: #000000;
+    --text-dark: #434244;
+    --white: #FFFFFF;
+    --bg-white: #DEDEDE;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 1080px;
+    height: 1350px;
+    font-family: 'Rubik', sans-serif;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: relative;
+    width: 1080px;
+    height: 1350px;
+    padding: 70px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Backgrounds */
+  .bg-black   { background: var(--black); color: var(--white); }
+  .bg-lime    { background: var(--lime);  color: var(--black); }
+  .bg-white   { background: var(--bg-white); color: var(--text-dark); }
+  .bg-split-hv { /* metade verde em cima, preta embaixo */
+    background: linear-gradient(to bottom, var(--lime) 50%, var(--black) 50%);
+  }
+  .bg-split-vl { /* metade verde à esquerda, preta à direita */
+    background: linear-gradient(to right, var(--lime) 50%, var(--black) 50%);
+  }
+
+  /* Canto superior esquerdo */
+  .top-left {
+    position: absolute;
+    top: 55px;
+    left: 70px;
+    font-size: 22px;
+    font-weight: 500;
+    z-index: 5;
+  }
+  .top-left .hashtag { font-style: italic; }
+  .top-left .hashtag strong { font-weight: 700; font-style: normal; }
+  .top-left .slide-num {
+    display: inline-block;
+    border: 2px solid currentColor;
+    padding: 4px 12px;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  /* Canto superior direito — selo Make nas capas */
+  .top-right {
+    position: absolute;
+    top: 50px;
+    right: 70px;
+    width: 130px;
+    height: 130px;
+    z-index: 5;
+  }
+  .top-right img { width: 100%; height: 100%; object-fit: contain; }
+
+  /* Rodapé */
+  .footer {
+    position: absolute;
+    bottom: 55px;
+    left: 70px;
+    right: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 19px;
+    z-index: 5;
+  }
+  .footer .handle { font-style: italic; font-weight: 500; }
+  .footer .signature { font-weight: 500; }
+  .footer .signature em { font-weight: 700; font-style: italic; }
+
+  /* Seta "próximo slide" */
+  .next-arrow {
+    position: absolute;
+    bottom: 110px;
+    right: 70px;
+    width: 0; height: 0;
+    border-top: 22px solid transparent;
+    border-bottom: 22px solid transparent;
+    border-left: 30px solid var(--lime);
+    z-index: 5;
+  }
+  .bg-lime .next-arrow { border-left-color: var(--black); }
+
+  /* Conteúdo central */
+  .content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  /* Helpers tipográficos */
+  .h-capa {
+    font-size: 130px;
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -3px;
+    text-transform: uppercase;
+  }
+  .h-big {
+    font-size: 96px;
+    font-weight: 900;
+    line-height: 0.98;
+    letter-spacing: -2px;
+  }
+  .h-mid {
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -1px;
+  }
+  .h-small {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .body-text {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.35;
+    margin-top: 30px;
+  }
+  .italic { font-style: italic; }
+  .lime { color: var(--lime); }
+  .black { color: var(--black); }
+  .outline {
+    -webkit-text-stroke: 2px currentColor;
+    color: transparent;
+  }
+
+  /* Slide CTA especial */
+  .cta-title {
+    font-size: 52px;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.15;
+    margin-bottom: 40px;
+  }
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  .cta-pill {
+    background: var(--black);
+    color: var(--white);
+    padding: 22px 48px;
+    border-radius: 0;
+    font-size: 34px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 760px;
+  }
+  .cta-logo {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .cta-logo img { width: 200px; height: 200px; }
+</style>
+</head>
+<body>
+  <div class="slide {{BG_CLASS}}">
+    {{TOP_LEFT}}
+    {{TOP_RIGHT}}
+    <div class="content">
+      {{CONTENT}}
+    </div>
+    {{NEXT_ARROW}}
+    {{FOOTER}}
+  </div>
+</body>
+</html>

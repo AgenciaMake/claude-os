@@ -1,0 +1,9 @@
+{
+  "name": "makelemonad-scripts",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Scripts utilitários do workspace Make (composição de slides, etc)",
+  "dependencies": {
+    "playwright": "^1.48.0"
+  }
+}

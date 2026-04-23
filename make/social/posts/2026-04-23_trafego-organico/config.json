@@ -1,0 +1,47 @@
+{
+  "outDir": ".",
+  "slides": [
+    {
+      "filename": "slide01-capa.png",
+      "bg": "black",
+      "isCover": true,
+      "content": "<div class='h-capa'>Seu tráfego<br>orgânico <span class='lime italic'>caiu.</span></div><div class='body-text' style='font-size:42px;font-weight:500;margin-top:50px;max-width:800px;'>E a culpa <em>não é sua</em>.</div>"
+    },
+    {
+      "filename": "slide02-dado.png",
+      "bg": "black",
+      "number": 2,
+      "content": "<div class='h-mid'>Em 2025, o tráfego<br>orgânico caiu entre</div><div class='h-capa lime' style='margin:30px 0;'>15% e 64%</div><div class='h-mid'>em diferentes categorias.</div><div class='body-text' style='font-size:28px;margin-top:50px;opacity:0.75;'>E a maioria dos empresários ainda<br>não sabe o que mudou.</div>"
+    },
+    {
+      "filename": "slide03-nao-e.png",
+      "bg": "black",
+      "number": 3,
+      "content": "<div class='h-small' style='opacity:0.5;margin-bottom:40px;'>Antes de culpar quem não deve:</div><div class='h-mid'><span class='italic lime'>Não é</span> penalidade do Google.</div><div class='h-mid' style='margin-top:30px;'><span class='italic lime'>Não é</span> sua estratégia errada.</div><div class='h-mid' style='margin-top:30px;'><span class='italic lime'>Não é</span> seu site lento.</div>"
+    },
+    {
+      "filename": "slide04-e-isto.png",
+      "bg": "split-hv",
+      "number": 4,
+      "content": "<div class='h-big black' style='margin-top:-100px;'>É o usuário</div><div class='h-big black italic'>parando de clicar.</div><div class='body-text' style='color:var(--white);font-size:34px;font-weight:500;margin-top:160px;max-width:900px;'>ChatGPT, Perplexity, Gemini e o próprio Google estão entregando a resposta antes do seu site aparecer.</div>"
+    },
+    {
+      "filename": "slide05-mudanca.png",
+      "bg": "black",
+      "number": 5,
+      "content": "<div class='h-small' style='opacity:0.6;margin-bottom:30px;'>A mudança de jogo:</div><div class='h-mid'><span style='opacity:0.55;'>Antes:</span><br>ranquear em 1º =<br><span class='lime italic'>visita no seu site.</span></div><div class='h-mid' style='margin-top:50px;'><span style='opacity:0.55;'>Agora:</span><br>ranquear em 1º =<br><span class='lime italic'>sua marca virou resposta<br>dentro de uma IA.</span></div>"
+    },
+    {
+      "filename": "slide06-acoes.png",
+      "bg": "lime",
+      "number": 6,
+      "content": "<div class='h-mid black' style='margin-bottom:60px;'>3 ações que valem <em class='italic'>agora</em>:</div><div style='display:flex;flex-direction:column;gap:40px;max-width:880px;'><div><div class='h-small black' style='font-size:44px;'><span class='outline' style='-webkit-text-stroke:2px var(--black);color:transparent;margin-right:18px;'>01</span>Conteúdo <em class='italic'>citável</em>.</div><div class='body-text' style='color:var(--black);font-size:26px;font-weight:400;margin-top:8px;'>Dados, fontes, autoridade — não só palavras-chave.</div></div><div><div class='h-small black' style='font-size:44px;'><span class='outline' style='-webkit-text-stroke:2px var(--black);color:transparent;margin-right:18px;'>02</span>Pensa em <em class='italic'>AEO</em>, não só SEO.</div><div class='body-text' style='color:var(--black);font-size:26px;font-weight:400;margin-top:8px;'>Answer Engine Optimization — ser a resposta da IA.</div></div><div><div class='h-small black' style='font-size:44px;'><span class='outline' style='-webkit-text-stroke:2px var(--black);color:transparent;margin-right:18px;'>03</span>Diversifica canais.</div><div class='body-text' style='color:var(--black);font-size:26px;font-weight:400;margin-top:8px;'>Vídeo, social, newsletter — quem depende só do Google já perdeu.</div></div></div>"
+    },
+    {
+      "filename": "slide07-cta.png",
+      "bg": "lime",
+      "isCta": true,
+      "content": "<div class='cta-title'>Se esse post fez sentido<br>pra você...</div><div class='cta-actions'><div class='cta-pill'>♡ &nbsp;&nbsp;DÁ UM LIKE</div><div class='cta-pill'>✈ &nbsp;&nbsp;COMPARTILHA COM QUEM<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRECISA SABER DISSO!</div><div class='cta-pill'>🔖 &nbsp;&nbsp;SALVA PRA NÃO PERDER</div></div><div class='cta-logo'><img src='LOGO_PLACEHOLDER' alt=''></div>"
+    }
+  ]
+}
