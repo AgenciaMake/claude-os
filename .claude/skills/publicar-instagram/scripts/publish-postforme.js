@@ -17,7 +17,13 @@ function parseArgs() {
 }
 
 const API_KEY = process.env.POSTFORME_API_KEY;
-const BASE = "https://app.postforme.dev/api";
+const BASE = "https://api.postforme.dev";
+
+const ACCOUNT_ID_BY_PLATFORM = {
+  instagram: process.env.POSTFORME_INSTAGRAM_ACCOUNT_ID,
+  linkedin: process.env.POSTFORME_LINKEDIN_ACCOUNT_ID,
+  tiktok: process.env.POSTFORME_TIKTOK_ACCOUNT_ID,
+};
 
 async function apiFetch(endpoint, options = {}) {
   const res = await fetch(`${BASE}${endpoint}`, {
@@ -68,8 +74,13 @@ async function main() {
   // Buscar conta
   const accounts = await listAccounts(opts.platform);
   if (!accounts.length) { console.error(`Nenhuma conta ${opts.platform} conectada no Post for Me`); process.exit(1); }
-  const accountId = opts.accountId || accounts[0].id;
-  console.log(`Conta: ${accounts[0].username || accountId} (${opts.platform})`);
+  const accountId = opts.accountId || ACCOUNT_ID_BY_PLATFORM[opts.platform] || accounts[0].id;
+  const account = accounts.find(a => a.id === accountId) || accounts[0];
+  if (!accounts.find(a => a.id === accountId)) {
+    console.error(`Conta ${accountId} nao encontrada ou desconectada para ${opts.platform}`);
+    process.exit(1);
+  }
+  console.log(`Conta: ${account.username || accountId} (${opts.platform})`);
 
   if (opts.dryRun) {
     console.log(`\nDRY RUN — nao vai publicar`);

@@ -53,9 +53,17 @@ Se escolheu Post for Me:
 3. **Testar conexão:**
    ```bash
    curl -s -H "Authorization: Bearer $(grep POSTFORME_API_KEY .env | cut -d= -f2)" \
-     "https://app.postforme.dev/api/v1/social-accounts?platform=instagram" | head -c 200
+     "https://api.postforme.dev/v1/social-accounts?platform=instagram" | head -c 200
    ```
    Se retornar conta conectada, tá pronto. Se não, guiar o usuário pra conectar a conta no dashboard.
+
+   **Opcional — travar contas padrão:** se o usuário tiver múltiplas contas conectadas por plataforma (ex: 2 páginas de LinkedIn), adicionar no `.env`:
+   ```
+   POSTFORME_INSTAGRAM_ACCOUNT_ID=spc_xxx
+   POSTFORME_LINKEDIN_ACCOUNT_ID=spc_xxx
+   POSTFORME_TIKTOK_ACCOUNT_ID=spc_xxx
+   ```
+   O script usa essas IDs automaticamente. Sem elas, pega a primeira conta retornada pela API.
 
 4. **Instalar o script de publicação:**
    Copiar `scripts/publish-postforme.js` (que vem com esta skill) pra pasta `scripts/` do projeto do usuário.
