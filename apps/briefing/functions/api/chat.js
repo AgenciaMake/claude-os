@@ -1,6 +1,7 @@
 import { getGoogleAccessToken } from '../_lib/google-auth.js';
 import { buildSystemPrompt } from '../_lib/prompt.js';
 import { saveBriefingDoc } from '../_lib/save-doc.js';
+import { analyzeUrls } from '../_lib/site-fetch.js';
 
 const DONE_MARKER = '<<BRIEFING_CONCLUIDO>>';
 
@@ -21,6 +22,21 @@ export async function onRequestPost({ request, env }) {
     // Monta o system prompt contextualizado
     const systemPrompt = buildSystemPrompt(client);
 
+    // Se a última mensagem do usuário tem URLs, busca e injeta contexto real
+    let enrichedMessages = messages;
+    if (messages.length > 0) {
+      const last = messages[messages.length - 1];
+      if (last.role === 'user') {
+        const siteContext = await analyzeUrls(last.content);
+        if (siteContext) {
+          enrichedMessages = [
+            ...messages.slice(0, -1),
+            { ...last, content: last.content + '\n\n' + siteContext },
+          ];
+        }
+      }
+    }
+
     // Chama a Claude API
     const apiRes = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -33,9 +49,9 @@ export async function onRequestPost({ request, env }) {
         model: 'claude-sonnet-4-6',
         max_tokens: 1024,
         system: systemPrompt,
-        messages: messages.length === 0
+        messages: enrichedMessages.length === 0
           ? [{ role: 'user', content: 'Início da conversa. Se apresente e comece a entrevista.' }]
-          : messages,
+          : enrichedMessages,
       }),
     });
 

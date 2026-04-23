@@ -2,8 +2,11 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#000000">
   <title>MakeLemonAd — Briefing</title>
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,7 +16,7 @@
   <div id="app">
     <div id="screen-code" class="screen active">
       <div class="container">
-        <div class="logo">MakeLemonAd</div>
+        <img src="/logo.png" alt="MakeLemonAd" class="logo-img">
         <h1>Vamos começar seu briefing</h1>
         <p class="subtitle">Insira o código que recebeu da nossa equipe pra iniciar.</p>
         <form id="code-form">
@@ -33,22 +36,33 @@
 
     <div id="screen-chat" class="screen">
       <div class="chat-container">
+        <header class="chat-header">
+          <img src="/alfred.png" alt="Alfred" class="chat-header-avatar">
+          <div class="chat-header-info">
+            <div class="chat-header-name">Alfred</div>
+            <div class="chat-header-status">MakeLemonAd · online</div>
+          </div>
+        </header>
         <div id="messages"></div>
         <form id="chat-form">
           <textarea
             id="chat-input"
             placeholder="Digite sua resposta..."
-            rows="2"
+            rows="1"
             required
           ></textarea>
-          <button type="submit" id="chat-submit">Enviar</button>
+          <button type="submit" id="chat-submit" aria-label="Enviar">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+              <path d="M3 20 L21 12 L3 4 L3 10.5 L15 12 L3 13.5 Z"/>
+            </svg>
+          </button>
         </form>
       </div>
     </div>
 
     <div id="screen-done" class="screen">
       <div class="container">
-        <div class="logo">MakeLemonAd</div>
+        <img src="/logo.png" alt="MakeLemonAd" class="logo-img">
         <div class="check">✓</div>
         <h1>Briefing concluído!</h1>
         <p class="subtitle">Recebemos todas as suas respostas. Nossa equipe já vai começar a trabalhar no seu projeto.</p>

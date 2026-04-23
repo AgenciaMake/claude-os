@@ -23,6 +23,7 @@ Perguntar ao usuário:
 - **Número do cliente** (ver último número em `02. CLIENTES` no Drive e sugerir o próximo)
 - **Tipo de serviço**: 360 / Social Media / Performance (Tráfego Pago) / Desenvolvimento / Outro
 - **Responsável interno** (Amanda, Thayná, Gustavo, Tiago, etc.)
+- **Nome do contato principal do cliente** (pessoa pra quem a mensagem do briefing vai ser enviada — só o primeiro nome basta)
 
 Formatar o nome da pasta como: `{número}. {Nome do Cliente}`
 Exemplo: `33. Empresa ABC`
@@ -213,7 +214,9 @@ Usar `mcp__google-drive__appendSpreadsheetRows` para inserir a linha.
 
 ## Passo 6 — Resumo final
 
-Ao concluir, exibir:
+Ao concluir, exibir **dois blocos**:
+
+### Bloco 1 — Status interno (pra Amanda conferir)
 
 ```
 Cliente: {Nome do Cliente}
@@ -227,10 +230,34 @@ Pastas criadas:
 ✓ Workspace local: clientes/{slug}/
 
 Código de briefing: MK-XXXXX
-→ Enviar esse código ao cliente para iniciar o briefing em: [URL do app]
+Link do app: https://makelemonad-briefing.pages.dev
+```
 
-Próximos passos:
-→ Enviar código de briefing ao cliente
+### Bloco 2 — Mensagem pronta pra mandar ao cliente
+
+Exibir exatamente essa mensagem, já formatada e pronta pra copiar e colar no WhatsApp:
+
+```
+Oi, {primeiroNomeDoCliente}! Tudo bem?
+
+Aqui é da MakeLemonAd 🍋
+
+Pra dar o start no seu projeto, preciso que você responda um briefing
+rápido com nosso assistente virtual, o Alfred. Leva uns 20 minutos
+e ajuda muito a equipe a entender seu negócio antes de começar.
+
+🔗 https://makelemonad-briefing.pages.dev
+🔑 Código: MK-XXXXX
+
+Qualquer dúvida, é só me chamar aqui!
+```
+
+Obs: {primeiroNomeDoCliente} é só o primeiro nome (ex: se o cliente é "Empresa ABC", use o nome do responsável pelo contato se já conhecido; senão, coloca "pessoal" ou similar — perguntar no Passo 1 se faz sentido capturar esse nome também).
+
+### Próximos passos a lembrar a Amanda
+
+```
+→ Copiar a mensagem acima e enviar ao contato do cliente
 → Criar card no Trello
 → Agendar kickoff
 ```

@@ -100,6 +100,23 @@ Não perguntar se a correção for óbvia de contexto imediato (ex: "na verdade 
 
 ---
 
+## Apps web hospedados (Cloudflare Pages, etc.)
+
+Toda página/app web criado dentro de `apps/` deve seguir essas regras de identidade:
+
+1. **Favicon obrigatório:** copiar `marca/logo.png` pra `public/logo.png` (ou `assets/logo.png` conforme a estrutura do app) e adicionar no `<head>`:
+   ```html
+   <link rel="icon" type="image/png" href="/logo.png">
+   <link rel="apple-touch-icon" href="/logo.png">
+   ```
+2. **Cor de destaque:** usar `#C8D82D` como cor principal (verde limão da logo) — está em `marca/design-guide.md`.
+3. **Título da aba:** começar com "MakeLemonAd — {nome da feature}".
+4. **Deploy no Cloudflare Pages:** nomear o projeto sempre como `makelemonad-{slug}` (ex: `makelemonad-briefing`, `makelemonad-proposta`).
+
+Ao criar um novo app, aplicar essas 4 regras automaticamente sem precisar perguntar.
+
+---
+
 ## Criação de skills
 
 Quando o usuário pedir pra criar uma nova skill:

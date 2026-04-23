@@ -94,7 +94,7 @@ async function findClientMaterialsFolder(token, client) {
 
 async function generateBriefingContent(apiKey, client, messages) {
   const conversationText = messages
-    .map(m => `${m.role === 'user' ? client.name : 'Make'}: ${m.content}`)
+    .map(m => `${m.role === 'user' ? client.name : 'Alfred'}: ${m.content}`)
     .join('\n\n');
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -112,14 +112,17 @@ async function generateBriefingContent(apiKey, client, messages) {
 Estrutura do documento:
 1. Cabeçalho com nome do cliente, serviços contratados, responsável, data
 2. Resumo executivo (3-4 linhas, o essencial)
-3. Sobre o negócio (bullet points ou parágrafos curtos)
-4. Objetivos e metas
-5. Concorrência
-6. Histórico de marketing
-7. Detalhes por serviço contratado
-8. Materiais e acessos disponíveis
-9. Observações importantes
-10. Próximos passos recomendados
+3. Pessoas e contatos (listar cada pessoa envolvida com nome, cargo, email, WhatsApp — inclua contato financeiro separadamente)
+4. Sobre o negócio (bullet points ou parágrafos curtos)
+5. Objetivos e metas
+6. Concorrência
+7. Histórico de marketing
+8. **Estrutura digital detectada** — quando a transcrição tiver trechos marcados como "[Análise automática...]", consolide aqui: URL do site, status (no ar / fora do ar / com erro), stack detectada (CMS, plataforma de e-commerce, framework), pixels e tracking (GA, GTM, Meta Pixel, TikTok Pixel, Hotjar, Clarity), título e proposta de valor percebida na home. Liste só o que foi detectado de verdade — não invente.
+9. Redes sociais (uma linha por rede: @, nº de seguidores, frequência, quem cuida hoje)
+10. Detalhes por serviço contratado
+11. Materiais e acessos disponíveis
+12. Observações importantes
+13. Próximos passos recomendados
 
 Regras:
 - Seja direto, sem enrolação
