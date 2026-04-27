@@ -4,31 +4,57 @@
 
 ## O que é
 
-CitraDesk é um **sistema de gestão integrado pra agências de marketing digital**. Centraliza clientes recorrentes, projetos pontuais, colaboradores, freelancers, ferramentas SaaS, métricas financeiras, gestão de senhas e insights de AI num só lugar — substituindo a colcha de retalhos de planilhas, Trello, Notion, LastPass e ferramentas avulsas que a maioria das agências usa.
+**CitraDesk é uma suíte SaaS modular pra gestão de agências de marketing digital.** Cada agência cliente contrata os módulos que usa — modelo estilo RD Station onde você paga por produto.
+
+A suíte centraliza clientes recorrentes, projetos pontuais, equipe, freelancers, ferramentas SaaS, métricas financeiras, gestão de senhas, tarefas e (futuramente) CRM. O CitraChat (produto irmão) pode ser plugado como módulo pra agências que também querem chat IA.
 
 **Origem:** começou como `make-gestorpro` no Google AI Studio, criado pra resolver a dor de gestão da própria MakeLemonAd. A partir da v5.0.0 ganhou o rebrand pra **CitraDesk** (repo agora é `AgenciaMake/citradesk`), com plano de virar SaaS comercial modular.
 
-**Versão atual:** v5.0.0 (CitraDesk Rebrand) — versão constante em [App.tsx:35](codigo/App.tsx#L35)
-**Ambiente atual:** uso interno da MakeLemonAd, instância única do Firebase (projeto `gen-lang-client-0548502624`, banco `bdmakegestorpro`).
-**Ambiente de desenvolvimento:** clone local em [codigo/](codigo/) (a partir desta sessão)
+**Versão atual:** v5.1.0 — em uso interno da MakeLemonAd, instância única do Firebase. Multi-tenancy planejado pra Fase 1 do roadmap.
+
+**Make é a primeira agência cliente** — quando o multi-tenant for implementado, os dados atuais migram pra `tenants/makelemonad/...`.
+
+## Posicionamento
+
+**Suíte modular vendida em `citradesk.com`.** Cada agência tem sua URL: `citradesk.com/{slug}` (ex: `citradesk.com/makelemonad`).
+
+| Módulo | Status atual | Preço sugerido |
+|---|---|---|
+| **Gestão** (core) | ✅ Implementado | R$ 149/mês |
+| **Financeiro** | ✅ Implementado | R$ 199/mês |
+| **AI Insights** (addon) | ✅ Implementado | R$ 79/mês |
+| **Tarefas** (Kanban + automações) | 🟡 Roadmap | R$ 99/mês |
+| **CRM** (pipeline + propostas) | 🟡 Roadmap | R$ 149/mês |
+| **Chat** (CitraChat plugado) | 🟡 Produto irmão | preço do CitraChat |
+| **Suite Completa** | combo | R$ 599/mês (com 30% desc) |
+
+> Preços indicativos pra discussão. Calibrar antes do lançamento comercial.
+
+## Domínios
+
+| Domínio | Uso |
+|---|---|
+| `citradesk.com` | App principal e site comercial |
+| `citradesk.com.br` | Redirect 301 |
+| `citradesk.io` | Staging/dev |
 
 ## Problema que resolve
 
-Agências de marketing pequenas e médias geralmente têm:
+Agências de marketing pequenas/médias geralmente têm:
 - Clientes em planilha (sem histórico de preço, churn, LTV)
 - Projetos no Trello/Asana (sem visão financeira)
 - Custos de SaaS perdidos em emails e cartões
-- Equipe e freelancers gerenciados em planilhas separadas
+- Equipe e freelancers em planilhas separadas
 - Senhas em LastPass/Bitwarden ou pior, em arquivo de texto
 - Zero visão consolidada de MRR, churn, LTV, custo por cliente
 
-**CitraDesk junta tudo isso em um lugar com AI por cima pra dar leitura estratégica.**
+**CitraDesk junta tudo num lugar com AI por cima pra leitura estratégica.**
 
 ## Público-alvo
 
 **Inicial (uso interno):** MakeLemonAd
-**SaaS — Tier 1:** Agências boutique de 3 a 15 pessoas, com operação digital (mídia paga, social, dev), gerenciando 5 a 50 clientes recorrentes.
-**SaaS — Tier 2 (futuro):** Equipes internas de marketing em empresas, freelancers seniores que gerenciam carteira própria.
+**Tier 1 SaaS:** Agências boutique de 3-15 pessoas, gerenciando 5-50 clientes recorrentes
+**Tier 2 (futuro):** Equipes internas de marketing em empresas; freelancers seniores com carteira própria
 
 ---
 
@@ -36,204 +62,210 @@ Agências de marketing pequenas e médias geralmente têm:
 
 | Camada | Tecnologia | Versão | Observação |
 |---|---|---|---|
-| Frontend | React | 19.2.0 | Última versão estável |
+| Frontend | React | 19.2.0 | |
 | Linguagem | TypeScript | ~5.8.2 | |
 | Build | Vite | ^6.2.0 | |
-| UI | **Tailwind via CDN** | — | ⚠️ `cdn.tailwindcss.com` no [index.html:8](codigo/index.html#L8) — não usar em produção |
-| Tipografia | Inter (Google Fonts) | — | |
-| Ícones | lucide-react | ^0.554.0 | |
+| UI | Tailwind (instalado) + lucide-react | 3.4.17 | Sem CDN |
 | Charts | recharts | ^3.5.0 | |
 | Markdown | react-markdown | ^10.1.0 | |
-| Backend | Firebase | ^12.6.0 | Auth + Firestore + Storage |
-| AI | @google/genai | ^1.30.0 | Gemini com modelo `gemini-3-pro-preview` ⚠️ preview |
-| Cotação | AwesomeAPI | — | `economia.awesomeapi.com.br` (USD-BRL, EUR-BRL) |
+| Backend | Firebase | ^12.6.0 | Auth + Firestore + Storage + (Functions futuro) |
+| AI | @google/genai (Gemini) | ^1.30.0 | Modelo: `gemini-2.5-pro` |
+| Cotação | AwesomeAPI | — | USD-BRL, EUR-BRL |
 
-**Variáveis de ambiente:**
-- `GEMINI_API_KEY` — usado em `.env.local` segundo [README.md:18](codigo/README.md#L18)
-- ⚠️ Mas o código em [services/geminiService.ts:9](codigo/services/geminiService.ts#L9) lê `process.env.API_KEY` (inconsistência)
-- Firebase config está **hardcoded** em [services/firebase.ts:8-15](codigo/services/firebase.ts#L8-L15) — chaves visíveis no GitHub público
+**Firebase:** projeto `gen-lang-client-0548502624` (Display Name: "CitraDesk").
+**Banco Firestore:** `bdmakegestorpro` em `nam5` (US). 🚨 Idealmente migrar pra `southamerica-east1` antes do SaaS lançar.
+**Storage Rules + Firestore Rules:** deployadas (v1, focadas em RBAC do tenant único atual).
 
-**Firebase config atual:**
-- Projeto: `gen-lang-client-0548502624`
-- Banco Firestore: `bdmakegestorpro` (nome próprio, não default)
-- Storage: `gen-lang-client-0548502624.firebasestorage.app`
+**Variáveis de ambiente** (em `.env.local`, não commitado):
+- `VITE_FIREBASE_*` — config do Firebase
+- `VITE_GEMINI_API_KEY` — Gemini (TODO: migrar pra Cloud Function antes do SaaS público)
 
 ---
 
-## Módulos / Features (estado real)
+## Módulos / Features (estado real do código)
 
-### 1. Autenticação ([auth/LoginScreen.tsx](codigo/components/auth/LoginScreen.tsx))
-- Login e cadastro com email + senha (Firebase Auth)
-- Cadastro **aberto** (qualquer um pode criar conta) ⚠️ inadequado pra SaaS
-- "God User Logic" em [App.tsx:83-100](codigo/App.tsx#L83-L100) — email `bruno@makelemonad.com.br` é forçado a virar owner ⚠️ hardcoded
-- Primeiro usuário cadastrado vira owner automaticamente
+### MÓDULO GESTÃO (core — implementado)
 
-### 2. Dashboard ([Dashboard.tsx](codigo/components/Dashboard.tsx) — 722 linhas)
-KPIs principais:
-- Faturamento total do mês (MRR + projetos pagos)
-- Meta mensal editável inline
-- Receita de projetos (cashflow do mês)
-- Clientes ativos (com trend vs mês anterior)
-- 3 cards de churn: mensal, anual, geral (com seletor de ano)
+#### 1. Autenticação ([auth/LoginScreen.tsx](codigo/components/auth/LoginScreen.tsx))
+- Login email + senha (Firebase Auth)
+- Cadastro fechado (acesso só por convite via Configurações > Equipe)
+- Bootstrap do owner: documentado no README, criação manual no Firebase Console (primeira vez)
 
-Gráficos:
-- Evolução de faturamento (3M / 1Y / ALL) com forecast linear de 6 meses
-- Projeção pra meta com gráfico Composed (Area + Line + ReferenceLine)
-- Crescimento da base de clientes por mês com filtro de anos
-- Performance anual (3 cards): Faturamento, Crescimento %, Ticket médio
-- Receita de Projetos (Realizado vs A Receber) com seletor de ano
-- **Radar de Reajustes** — clientes com aniversário nos próximos 60 dias
-
-Conversão de moeda em tempo real via AwesomeAPI ([Dashboard.tsx:111-120](codigo/components/Dashboard.tsx#L111-L120)).
-
-### 3. Gestão de Clientes ([ClientList.tsx](codigo/components/ClientList.tsx) + ClientModal)
-- Cadastro completo: CNPJ/NIF, endereço, país, contatos múltiplos, logo
-- **Histórico de preços** (price history): cada reajuste tem data, valor, moeda
-- Reajustes podem ser % ou valor fixo
-- Status: Ativo / Churn (computado também como "NOTICE" se está em aviso prévio — endDate futura)
+#### 2. Gestão de Clientes ([ClientList.tsx](codigo/components/ClientList.tsx) + ClientModal)
+- Cadastro completo: CNPJ/NIF, endereço, país (com bandeirinha), contatos múltiplos, logo
+- Histórico de preços (price history) com data, valor, moeda
+- Reajustes em % ou valor fixo
+- Status: Ativo / Churn / NOTICE (em aviso prévio)
 - Contratos com PDF/URL, lista de serviços
 - KPIs por serviço: top receita, maior churn
-- **LTV calculado mês-a-mês** com price history real ([ClientList.tsx:370-406](codigo/components/ClientList.tsx#L370-L406))
-- Tabela com sort por share/MRR/LTV
-- Filtro padrão: ativos
+- LTV calculado mês-a-mês com price history real
 
-### 4. Projetos ([Projects.tsx](codigo/components/Projects.tsx))
+#### 3. Estrutura Digital ([DigitalStructure.tsx](codigo/components/DigitalStructure.tsx))
+Gestão de SaaS/ferramentas da agência:
+- Categorias: SaaS, Plugin, Software, Infra, Banco de Imagem, IA, Outro
+- Ciclos: mensal, anual, lifetime
+- Multi-moeda com cotação ao vivo (AwesomeAPI)
+- Métodos de pagamento configuráveis (em Configurações > Empresa)
+- Seats, próxima cobrança calculada
+- KPIs: despesa mês atual, próximo mês, total contratos anuais
+
+#### 4. Gestão de Acessos
+3 sub-módulos:
+- **Emails da empresa** ([CompanyEmails.tsx](codigo/components/access/CompanyEmails.tsx))
+- **Plataformas** ([PlatformsAccess.tsx](codigo/components/access/PlatformsAccess.tsx)) — Meta Ads, Google Ads, etc.
+- **Acessos de cliente** ([ClientAccess.tsx](codigo/components/access/ClientAccess.tsx))
+- ⚠️⚠️ **Senhas em texto puro no Firestore** — TODO crítico antes de SaaS público: criptografar client-side
+
+#### 5. Configurações & RBAC ([AgencySettings.tsx](codigo/components/AgencySettings.tsx))
+- Identidade da agência: nome, logo (upload pro Firebase Storage), países, serviços, métodos de pagamento
+- Meta de receita
+- **Roles atuais (5):** owner, admin, editor (Colaborador), viewer (Visualizador), freelancer
+- **Permissões (4 flags hoje, vão virar 20 granulares na Fase 1):**
+  - `canViewFinancial`, `canManageClients`, `canManageStructure`, `canManageUsers`
+- Convite de membro com criação de auth secundária
+- Hourly rate por usuário (relevante pra freelancer)
+
+### MÓDULO FINANCEIRO (implementado)
+
+#### 6. Dashboard ([Dashboard.tsx](codigo/components/Dashboard.tsx))
+KPIs principais: faturamento total, meta mensal, receita de projetos, clientes ativos. 3 cards de churn (mensal/anual/geral).
+Gráficos: evolução com forecast linear, projeção pra meta, crescimento da base, performance anual (faturamento + crescimento % + ticket médio), receita de projetos (realizado vs previsto), radar de reajustes (clientes com aniversário próximo).
+
+#### 7. Projetos ([Projects.tsx](codigo/components/Projects.tsx))
 - Status: lead, ativo, concluído, cancelado
 - Multi-moeda (BRL/USD/EUR)
-- **Parcelas com data prevista vs data real de pagamento** (`paidDate`) — fundamental pro cashflow
-- Geração automática de parcelas: à vista, 50/50, 2x, 3x, 4x, 5x
-- Custos de equipe alocada por projeto
+- Parcelas com data prevista vs paga (cashflow real)
+- Geração automática: à vista, 50/50, 2x-5x
+- Custos de equipe alocada
 - KPIs: ativos, a receber bruto, custo equipe, recebível líquido
-- Cards com indicador de prazo (atrasado, próximo entrega)
 
-### 5. Colaboradores ([Collaborators.tsx](codigo/components/Collaborators.tsx))
-- Equipe interna CLT ou PJ
+#### 8. Colaboradores ([Collaborators.tsx](codigo/components/Collaborators.tsx))
+- CLT ou PJ
 - Histórico de reajustes de salário (% ou fixo)
 - Histórico de bonificações
 - Status ativo / desligado
-- Dados completos: CPF, CNPJ, LinkedIn, endereço, telefone
+- Dados completos: CPF, CNPJ, LinkedIn, endereço
 
-### 6. Freelancer Space ([FreelancerSpace.tsx](codigo/components/FreelancerSpace.tsx))
-- **Portal de freelancer com layout próprio** (não tem sidebar — é uma página dedicada)
-- Login com role `freelancer` redireciona pra cá automaticamente
-- Registro de horas: descrição, cliente (lista ou avulso), data, horas
-- Hourly rate **mockado em R$ 70** ([FreelancerSpace.tsx:33](codigo/components/FreelancerSpace.tsx#L33)) ⚠️ deveria ser por usuário
+#### 9. Freelancer Space ([FreelancerSpace.tsx](codigo/components/FreelancerSpace.tsx))
+Portal próprio com layout dedicado (login com role `freelancer` redireciona pra cá):
+- Registro de horas: descrição, cliente, data, horas
+- Hourly rate vem do perfil do user (configurável em Configurações > Equipe)
 - Status: aberto / parcial / pago
-- Métricas: total recebido vs total pendente
+- Métricas: total recebido vs pendente
 
-### 7. Freelancers Manager ([admin/FreelancersManager.tsx](codigo/components/admin/FreelancersManager.tsx))
-- Visão admin: lista todos freelancers (com badge de pendência)
-- Mostra extrato individual de cada freelancer
-- Toggle pago/aberto direto do extrato
-- Marca `paymentDate` automaticamente
+#### 10. Freelancers Manager ([admin/FreelancersManager.tsx](codigo/components/admin/FreelancersManager.tsx))
+Visão admin: lista todos freelancers com pendência. Toggle pago/aberto.
 
-### 8. Estrutura Digital ([DigitalStructure.tsx](codigo/components/DigitalStructure.tsx) — 732 linhas)
-Gestão de SaaS/ferramentas:
-- Categorias: SaaS, Plugin, Software, Infra, Banco de Imagem, IA, Outro
-- Ciclos: mensal, anual, lifetime
-- Multi-moeda com cotação ao vivo
-- **Forma de pagamento hardcoded** ([DigitalStructure.tsx:19-28](codigo/components/DigitalStructure.tsx#L19-L28)) — lista de cartões da Make, inclui nomes pessoais ("Cartão de Crédito Mari", "Cartão de Crédito Nubank Elaine") ⚠️ tem que virar configurável por agência
-- Seats (licenças)
-- Próxima cobrança calculada dinamicamente
-- KPIs: despesa mês atual, próximo mês, total contratos anuais
-- Gráfico horizontal de quantidade por categoria
+### MÓDULO AI INSIGHTS (implementado)
 
-### 9. Financeiro / Growth Simulator ([GrowthSimulator.tsx](codigo/components/GrowthSimulator.tsx))
-- Chamado "Financeiro" no menu mas o componente é GrowthSimulator
-- 3 sliders: ticket médio, novos clientes/mês, churn mensal %
-- Gráfico anual: real (preto) + simulado (amarelo)
-- Card flutuante de chat com Gemini contextualizado nos dados ([geminiService.ts:79-142](codigo/services/geminiService.ts#L79-L142))
+#### 11. Growth Simulator ([GrowthSimulator.tsx](codigo/components/GrowthSimulator.tsx))
+Sliders: ticket médio, novos clientes/mês, churn mensal. Gráfico anual real (preto) + simulado (amarelo). Chat com Gemini contextualizado nos dados.
 
-### 10. AI Insights ([AIInsights.tsx](codigo/components/AIInsights.tsx))
-- Análise via Gemini ([geminiService.ts:25-77](codigo/services/geminiService.ts#L25-L77))
-- Prompt: "atue como CFO sênior", analisa MRR, gap pra meta, churn
-- ⚠️ Header diz "**GestorPro** AI Analyst" — rebrand não foi pro componente
+#### 12. AI Insights ([AIInsights.tsx](codigo/components/AIInsights.tsx))
+Análise via Gemini com prompt "atue como CFO sênior" — gap pra meta, churn, sugestões de aceleração.
 
-### 11. Gestão de Acessos
-3 sub-módulos:
-- **Emails da empresa** ([CompanyEmails.tsx](codigo/components/access/CompanyEmails.tsx)) — login, senha, 2FA, última atualização
-- **Plataformas** ([PlatformsAccess.tsx](codigo/components/access/PlatformsAccess.tsx)) — credenciais de Meta Ads, Google Ads, etc.
-- **Acessos de cliente** ([ClientAccess.tsx](codigo/components/access/ClientAccess.tsx)) — credenciais que o cliente forneceu pra agência operar
-- ⚠️⚠️ **Senhas em texto puro no Firestore** — gravíssimo. Qualquer um com permissão de leitura no Firestore lê todas as senhas. Tem que migrar pra criptografia client-side (master key) ou serviço dedicado tipo 1Password/Bitwarden API.
+### MÓDULO TAREFAS (planejado)
 
-### 12. Configurações & RBAC ([AgencySettings.tsx](codigo/components/AgencySettings.tsx) — 957 linhas, maior arquivo)
-**Identidade da agência:**
-- Nome, logo (upload pro Firebase Storage)
-- Países de atuação (tags livres)
-- Catálogo de serviços (tags livres)
-- Meta de receita
+Kanban estilo Trello:
+- Boards (geral + por cliente + por área + pessoais)
+- Listas customizáveis
+- Cards com responsável, prazo, anexos, comentários
+- Drag-and-drop
+- Notificações por email quando @user é mencionado
+- Filtros por responsável, cliente, prazo
+- (Fase 2) Automações tipo Butler — quando card move pra X, fazer Y
 
-**Roles (5):** owner, admin, editor, viewer, freelancer
-**Permissões (4 flags granulares):**
-- `canViewFinancial` — Dashboard, Projetos, Financeiro
-- `canManageClients` — CRUD de clientes
-- `canManageStructure` — CRUD de ferramentas + acessos
-- `canManageUsers` — gestão de equipe
+Stack: o que você usa é Trello hoje, com boards por cliente, por área, e pessoais com colunas-cliente.
 
-**Defaults por role:** definidos em [AgencySettings.tsx:29-34](codigo/components/AgencySettings.tsx#L29-L34)
+### MÓDULO CRM (planejado)
 
-**Convite de usuário:** cria conta secundária com `initializeApp` paralelo, cria UserCredential, salva no Firestore. Se email já existe, tenta login com a senha pra recuperar UID. ⚠️ Reset de senha de outros usuários requer Cloud Functions (não implementado, AgencySettings.tsx avisa o admin).
+Pipeline de leads (~RD Station simplificado):
+- Estágios: Lead → Qualificado → Proposta → Fechado/Perdido
+- Cards com nome, contato, origem, valor estimado, notas
+- Tarefas atreladas (integra com módulo Tarefas)
+- Conversão automática: lead que fecha vira cliente no módulo Gestão
+- Captação de lead via formulário público (link curto)
+- (Futuro) Integração com CitraChat pra leads do chat caírem aqui
 
-### 13. Profile do usuário ([user/UserProfileModal.tsx](codigo/components/user/UserProfileModal.tsx))
-- Atualizar nome, foto
-- Trocar própria senha (com reauth via senha atual)
-- Upload pro Firebase Storage em `avatars/{uid}_{timestamp}_{name}`
+> Bruno hoje usa RD Station — futuro CRM do CitraDesk vai espelhar a dinâmica.
+
+### MÓDULO CHAT (CitraChat plugado — produto irmão)
+
+Quando agência tem o CitraChat ativo, o módulo aparece no menu do CitraDesk e:
+- Leads capturados pelo chat caem direto no CRM
+- Conversas linkam ao perfil do cliente
+- Dashboard do Financeiro soma receita gerada por leads de chat
+
+Briefing detalhado em [../citrachat/CITRACHAT.md](../citrachat/CITRACHAT.md).
 
 ---
 
-## Modelo de dados (Firestore)
+## Modelo de dados (atual e futuro)
 
-Todas as collections são **flat** (nível raiz, sem isolamento por tenant):
+### Atual (single-tenant — banco da Make)
 
-| Collection | Conteúdo | Tipo TS |
+Collections flat na raiz:
+| Collection | Tipo |
+|---|---|
+| `users` | `AppUser` |
+| `clients` | `Client` |
+| `tools` | `DigitalTool` |
+| `projects` | `Project` |
+| `collaborators` | `Collaborator` |
+| `freelancer_logs` | `FreelancerLog` |
+| `access_emails` | `AccessEmail` |
+| `access_platforms` | `AccessPlatform` |
+| `access_clients_credentials` | `ClientCredential` |
+| `config` (doc `general`) | `AgencyConfig` |
+
+### Futuro (multi-tenant — Fase 1)
+
+```
+tenants/{tenantId}/
+├── _meta: { type: 'agency' | 'workspace', name, slug, plan, trialEnd }
+├── modules: {
+│     gestao: { active, plan }
+│     financeiro: { active, plan }
+│     tarefas: { active, plan }
+│     crm: { active, plan }
+│     chat: { active, plan }
+│   }
+├── clients/
+├── tools/
+├── projects/
+├── collaborators/
+├── freelancer_logs/
+├── access_emails/
+├── access_platforms/
+├── access_clients_credentials/
+├── tasks/         (módulo Tarefas)
+├── leads/         (módulo CRM)
+├── proposals/     (módulo CRM)
+├── chat_agents/   (módulo Chat)
+└── config/
+
+users/{uid}: { ..., tenantId, role, permissions: { 20 flags } }
+```
+
+---
+
+## Roadmap (visão de SaaS)
+
+| Fase | Semanas | Resultado |
 |---|---|---|
-| `users` | Usuários do sistema | `AppUser` |
-| `clients` | Clientes recorrentes | `Client` |
-| `tools` | Ferramentas / SaaS | `DigitalTool` |
-| `projects` | Projetos pontuais | `Project` |
-| `collaborators` | Equipe interna | `Collaborator` |
-| `freelancer_logs` | Horas de freelancer | `FreelancerLog` |
-| `access_emails` | Emails corporativos | `AccessEmail` |
-| `access_platforms` | Plataformas de mídia | `AccessPlatform` |
-| `access_clients_credentials` | Credenciais de cliente | `ClientCredential` |
-| `config` (doc `general`) | Config da agência | `AgencyConfig` |
+| **0. Higienização** | 3-5 dias | ✅ Concluída — env vars, rules, rebrand, Tailwind, toasts, modais |
+| **0.5. Migrar banco pro BR** | 1 dia | Latência caindo de 150ms pra 30ms |
+| **1. Multi-tenant + Permissões granulares** | 4-6 | `tenants/{id}/...`, 20 flags, migração da Make |
+| **2. Sistema de Módulos + Onboarding** | 3-4 | Cada agência ativa módulos. Signup público com trial 14d. |
+| **3. Billing (Stripe + Asaas)** | 3-4 | Cobra. Plano Free Forever pra dar a alguém manualmente. |
+| **4. Painel super-admin** | 1-2 | Bruno vê todas agências, MRR, churn. |
+| **5. Landing comercial em citradesk.com** | 1-2 | Pitch + preços + signup. |
+| **6. Módulo Tarefas (Kanban)** | 6-8 | Vendável como módulo novo. |
+| **7. Módulo CRM** | 4-6 | Vendável como módulo novo. |
+| **8. CitraChat (produto irmão)** | 8-10 | Lançamento em citrachat.com, plugável no CitraDesk. |
 
-Tipos definidos em [types.ts](codigo/types.ts).
-
-**Storage paths:**
-- `branding/logo_{timestamp}_{filename}` — logo da agência
-- `avatars/{uid ou user_timestamp}_{filename}` — fotos de perfil
-
----
-
-## Multi-tenancy e arquitetura SaaS
-
-**Status atual:** ⚠️ **single-tenant duro**. Todos os dados em collections flat. Pra virar SaaS precisa:
-- Refatorar pra `agencies/{agencyId}/clients/{...}`, `agencies/{agencyId}/tools/{...}`, etc.
-- Adicionar `agencyId` em todo `users` doc
-- Onboarding/signup que cria agência + primeiro owner
-- Subdomínio ou path por agência (ex: `makelemonad.citradesk.com`)
-- Limites por plano (cap de clientes, seats, projetos)
-- Firestore Rules robustas (não existe `firestore.rules` no repo)
-- Billing (Stripe ou Asaas pro BR)
-
----
-
-## Monetização (rascunho — calibrar com Bruno)
-
-Possíveis tiers:
-- **Free** — até 3 clientes, 1 usuário, sem AI
-- **Starter** — até 15 clientes, 3 usuários, AI básico
-- **Pro** — clientes ilimitados, 10 usuários, AI completo, freelancers
-- **Agency** — multi-marca, 25+ usuários, white-label, suporte prioritário
-
-Preço-âncora a definir com base em concorrentes diretos (ContaAzul Agência, Operand, Studio, Bonsai) e indiretos (Trello + Asana + planilhas).
-
----
-
-## ROADMAP — ver [briefings/01_diagnostico_e_roadmap.md](briefings/01_diagnostico_e_roadmap.md)
-
-Diagnóstico técnico completo, gaps críticos pra virar SaaS e plano de ação faseado pra fechar o produto.
+**Total até primeira venda real:** ~14 semanas (Gestão + Financeiro vendáveis, MVP Suite).
+**Total tudo lançado:** ~36 semanas (~9 meses).
 
 ---
 
@@ -241,13 +273,13 @@ Diagnóstico técnico completo, gaps críticos pra virar SaaS e plano de ação 
 
 Quando trabalhar no código:
 1. Ler esse briefing primeiro
-2. Trabalhar em [codigo/](codigo/) (é o repo clonado, dá `git push` direto pro GitHub)
+2. Trabalhar em [codigo/](codigo/) (clone do `AgenciaMake/citradesk` no GitHub)
 3. Antes de mudanças grandes, registrar a decisão em [briefings/](briefings/)
 4. Feedback de uso da MakeLemonAd vai pra [feedback/](feedback/)
 
 ## Repositório
 
-- **GitHub:** https://github.com/AgenciaMake/make-gestorpro (a renomear pra `citradesk` — instruções no diagnóstico)
+- **GitHub:** https://github.com/AgenciaMake/citradesk
 - **Local:** [codigo/](codigo/)
 - **Branch principal:** `main`
-- **Deploy atual:** Google AI Studio — https://ai.studio/apps/drive/1p5CnPVAz2pZCQy3VD4BjfCSyYcjMKRsM (a aposentar)
+- **Deploy:** ainda manual; CI/CD vem na Fase 5

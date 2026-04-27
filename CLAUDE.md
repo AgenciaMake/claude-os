@@ -150,11 +150,15 @@ Esse fluxo é exclusivo das redes da Make. Não aplicar a clientes.
 
 ## Produtos SaaS da Make (linha Citra)
 
-A Make desenvolve produtos SaaS usados primeiro internamente, com plano de virar comercial. Vivem em `produtos/` e seguem a estrutura definida em [produtos/PRODUTOS.md](produtos/PRODUTOS.md).
+A Make desenvolve produtos SaaS usados primeiro internamente, com plano de virar comerciais. Vivem em `produtos/` e seguem a estrutura definida em [produtos/PRODUTOS.md](produtos/PRODUTOS.md).
 
-**Produtos atuais:**
-- **CitraDesk** — sistema de gestão de agência. Briefing: [produtos/citradesk/CITRADESK.md](produtos/citradesk/CITRADESK.md). Código clonado em [produtos/citradesk/codigo/](produtos/citradesk/codigo/) (repo `AgenciaMake/citradesk` no GitHub).
-- **CitraChat** — produto de comunicação/atendimento. Briefing em construção: [produtos/citrachat/CITRACHAT.md](produtos/citrachat/CITRACHAT.md).
+**Visão geral (sempre que trabalhar com produtos Citra, ler também `produtos/PRODUTOS.md`):**
+- **CitraDesk** — suíte SaaS modular pra gestão de agências. Vendido em `citradesk.com`. Modular tipo RD Station (cliente compra os módulos que usa). Briefing: [produtos/citradesk/CITRADESK.md](produtos/citradesk/CITRADESK.md). Código: `AgenciaMake/citradesk` no GitHub, clonado em [produtos/citradesk/codigo/](produtos/citradesk/codigo/).
+- **CitraChat** — produto irmão (não submódulo): SaaS de agentes conversacionais com IA, vendável sozinho em `citrachat.com`. Pode ser plugado no CitraDesk como módulo pra agências que querem os dois. Briefing: [produtos/citrachat/CITRACHAT.md](produtos/citrachat/CITRACHAT.md).
+
+**Infraestrutura compartilhada:** mesmo Firebase (`gen-lang-client-0548502624`, display name "CitraDesk"), mesmo auth, mesma cobrança (Stripe + Asaas). Tenants são isolados na coleção `tenants/{tenantId}` (a partir da Fase 1 do roadmap, hoje ainda single-tenant).
+
+**Make é a primeira agência cliente** — quando o multi-tenant for implementado, os dados atuais migram pra `tenants/makelemonad/...`.
 
 **Regras quando trabalhar nos produtos Citra:**
 
