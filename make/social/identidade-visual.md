@@ -76,6 +76,17 @@ Todo slide respeita essa grade. Elementos posicionados sempre nos mesmos cantos.
 - **Margem direita:** 110px (alinha logo e fim do slogan — recuo da faixa lateral)
 - **Faixa lateral direita:** 40px de largura, do topo ao bottom
 
+### Área útil pro conteúdo central
+
+- **Largura útil:** 920px (1080 − 50 esquerda − 110 direita)
+- **Altura útil aproximada:** 1000px (entre topo do logo/hashtag e topo do rodapé)
+
+### Auto-fit (proteção automática contra overflow)
+
+O script `compose-slides.js` mede o tamanho **natural** do conteúdo central (clonando num test zone sem constraint de largura) e aplica `transform: scale` automaticamente se algum elemento ultrapassar 920×1000px.
+
+Isso significa que pode-se especificar `font-size` agressivos no `config.json` sem se preocupar com palavras estourando margem — o script reduz proporcionalmente até caber. Origem do scale: `left top` (mantém alinhamento à grade).
+
 ### Elementos fixos
 
 **Canto superior esquerdo (top: 50px, left: 50px)**
@@ -97,10 +108,21 @@ Todo slide respeita essa grade. Elementos posicionados sempre nos mesmos cantos.
 Selo circular `MAKE LEMON AD`:
 - Diâmetro: **90px**
 - A borda direita do logo alinha exatamente com o fim do texto do rodapé (`Conversão` / `forever`)
-- Versão a usar conforme o fundo:
-  - Fundo escuro (preto, cinza escuro) → [logo_make_oficial.png](identidade-visual/logos/logo_make_oficial.png) (selo verde limão)
-  - Fundo verde limão → [logo_make.svg](identidade-visual/logos/logo_make.svg) com `fill: #000000` (selo preto vazado)
-  - Outros fundos → escolher variação com melhor contraste
+- O logo só aparece na **capa**. Slides internos não levam logo.
+
+**Versão a usar conforme o fundo do slide:**
+
+| Fundo da capa | Versão do logo | Cor |
+|---|---|---|
+| Preto `#000000` | PNG oficial | Selo verde limão com texto preto cheio |
+| Cinza escuro `#434244` | PNG oficial | Selo verde limão com texto preto cheio |
+| **Verde limão `#D6DE23`** | **SVG vazado** | `fill: #000000` (círculo preto, texto vazado mostra verde limão atrás) |
+| **Cinza claro `#DEDEDE`** | **SVG vazado** | `fill: #434244` (círculo cinza escuro, mesmo tom da tipografia) |
+| Verde 02 `#00A652` | SVG vazado | `fill: #000000` |
+
+**Regra de leitura:** quando o fundo é claro (verde limão, cinza claro), o logo PNG oficial fica camuflado porque o círculo verde se mistura com o fundo. Por isso usar o SVG vazado com a mesma cor da tipografia principal — fica discreto e harmônico, sem competir com o título.
+
+**Como o script aplica:** no `config.json` de cada slide, definir `"logoStyle": "png-oficial"` (default) ou `"svg-#XXXXXX"` (com hex desejado pro fill).
 
 **Rodapé (bottom: 50px, left: 50px, right: 110px)**
 
