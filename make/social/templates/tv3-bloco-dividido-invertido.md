@@ -1,10 +1,10 @@
-# TV2 — Bloco Dividido Invertido (preto em cima / verde embaixo)
+# TV3 — Bloco Dividido Invertido (preto em cima / verde embaixo)
 
 Versão espelhada do TV1: 50% preto em cima, 50% verde limão embaixo. Tipografia segue mesma estrutura mas com cores invertidas. Tom geral fica mais "afirmação institucional" — começa sério no preto e desce na cor da marca.
 
 ## Preview
 
-![TV2](preview-tv2.png)
+![TV3](preview-tv3.png)
 
 ## Quando usar
 
@@ -46,4 +46,4 @@ Mesmos do TV1 — `{{LINHA_1}}`, `{{LINHA_2}}`, `{{PUNCHLINE}}`, `{{SUBTITULO_PR
 
 ## Regra de leitura
 
-Inversão cromática do TV1 — começa no peso institucional preto e aterriza no verde da marca. Útil quando o tom é mais sério ou quando o feed precisa de variação rítmica entre TV1 e TV2.
+Inversão cromática do TV1 — começa no peso institucional preto e aterriza no verde da marca. Útil quando o tom é mais sério ou quando o feed precisa de variação rítmica entre TV1 e TV3.

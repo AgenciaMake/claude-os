@@ -9,7 +9,8 @@ Templates aprovados pra capas de carrossel. Cada arquivo `.md` contém o spec vi
 | Template | Estilo | Quando usar | Preview |
 |---|---|---|---|
 | [TV1](tv1-bloco-dividido.md) | Bloco dividido — verde limão em cima, preto embaixo | Provocação/hook em cima e palavra-chave de impacto embaixo. Tom mais "alarme leve". | [preview-tv1.png](preview-tv1.png) |
-| [TV2](tv2-bloco-dividido-invertido.md) | Bloco dividido invertido — preto em cima, verde limão embaixo | Mesmo conceito do TV1 com inversão de pesos. Tom mais "afirmação institucional" — começa sério (preto) e desce na cor da marca. | [preview-tv2.png](preview-tv2.png) |
+| [TV2](tv2-preto-puro.md) | Fundo preto puro, tipografia em 3 pesos (bold + italic + outline) com acento em verde limão | Posts conceituais/provocativos onde a tipografia carrega tudo. Pausa visual no feed entre posts coloridos. | [preview-tv2.png](preview-tv2.png) |
+| [TV3](tv3-bloco-dividido-invertido.md) | Bloco dividido invertido — preto em cima, verde limão embaixo | Mesmo conceito do TV1 com inversão. Tom mais "afirmação institucional". | [preview-tv3.png](preview-tv3.png) |
 
 ## Como aplicar
 
