@@ -11,7 +11,7 @@ const LOGO_SVG_PATH = path.resolve(__dirname, "../make/social/identidade-visual/
 
 // Espaço útil pro conteúdo central (entre margens, sem invadir hashtag/logo no topo,
 // rodapé no rodapé, ou faixa lateral à direita). Usado pelo auto-fit.
-const SAFE_AREA = { width: 920, height: 1000 };
+const SAFE_AREA = { width: 920, height: 1140 };
 
 // Carrega o SVG do logo e troca a cor do círculo (fill da classe .st0) pela cor pedida.
 function getLogoSvg(fillColor) {
@@ -19,46 +19,34 @@ function getLogoSvg(fillColor) {
   return raw.replace(/\.st0\s*{\s*fill:\s*#[0-9a-fA-F]{3,6};?\s*}/, `.st0 { fill: ${fillColor}; }`);
 }
 
-// Auto-fit: clona o conteúdo num test zone sem constraint pra medir o tamanho NATURAL
-// do texto (sem ser limitado pela largura do flex). Depois aplica transform: scale se necessário.
+// Auto-fit: força a largura útil da SAFE_AREA, mede a altura natural com essa largura,
+// e aplica transform: scale APENAS se a altura ultrapassar o disponível. Largura fica
+// SEMPRE 100% do safe-area (preserva o "fit horizontal" de texto/imagem).
 async function fitContent(page) {
   await page.evaluate(({ width, height }) => {
     const content = document.querySelector(".content");
     if (!content) return;
     content.style.transform = "";
     content.style.transformOrigin = "left top";
+    content.style.width = "";
 
-    // Test zone: clone do conteúdo com largura/altura livres pra medir natural size
+    // Mede altura natural do conteúdo com largura FIXA = safe-area.width (clone no DOM).
     const test = document.createElement("div");
-    test.style.cssText = "position:absolute;top:-99999px;left:-99999px;width:auto;height:auto;max-width:none;white-space:nowrap;";
+    test.style.cssText = `position:absolute;top:-99999px;left:-99999px;width:${width}px;`;
     test.innerHTML = content.innerHTML;
     document.body.appendChild(test);
-
-    let maxW = 0;
-    let totalH = 0;
-
-    // Cada filho direto do content vira uma "linha" cuja largura natural medimos sem quebra
-    [...test.children].forEach(line => {
-      // remove white-space:nowrap só se a linha for explicitamente multilinha
-      const lineRect = line.getBoundingClientRect();
-      if (lineRect.width > maxW) maxW = lineRect.width;
-      totalH += lineRect.height;
-    });
-
-    // Também considera descendentes profundos (caso tenha spans/inline-blocks que extrapolam)
-    test.querySelectorAll("*").forEach(el => {
-      const r = el.getBoundingClientRect();
-      if (r.width > maxW) maxW = r.width;
-    });
-
+    const naturalH = test.scrollHeight;
     document.body.removeChild(test);
 
-    let scale = 1;
-    if (maxW   > width)  scale = Math.min(scale, width  / maxW);
-    if (totalH > height) scale = Math.min(scale, height / totalH);
-
-    if (scale < 1) {
+    if (naturalH > height) {
+      // Passa do alto disponível: aplica scale e compensa a largura pra que
+      // visualmente o conteúdo continue ocupando os `width`px (fit horizontal).
+      const scale = height / naturalH;
+      content.style.width = (width / scale) + "px";
       content.style.transform = `scale(${scale})`;
+    } else {
+      // Cabe sem scale — só fixa a largura no safe-area pra usar 100% da largura útil.
+      content.style.width = width + "px";
     }
   }, SAFE_AREA);
 }
