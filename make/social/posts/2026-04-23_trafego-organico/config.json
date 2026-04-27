@@ -2,24 +2,7 @@
   "outDir": ".",
   "slides": [
     {
-      "filename": "slide01-capa-tv1.png",
-      "bg": "split-hv",
-      "isCover": true,
-      "nextBg": "light-gray",
-      "logoStyle": "svg-#000000",
-      "hashtagColor": "#434244",
-      "arrowColor": "#000000",
-      "content": "<div style='line-height:0.92;'><div style='font-size:160px;font-weight:700;color:var(--black);letter-spacing:-4px;text-transform:uppercase;font-style:italic;'>Seu tráfego</div><div style='font-size:200px;font-weight:700;-webkit-text-stroke:3px var(--black);color:transparent;letter-spacing:-4px;text-transform:uppercase;line-height:0.95;margin-top:6px;'>orgânico</div><div style='font-size:240px;font-weight:800;color:var(--lime);letter-spacing:-6px;text-transform:uppercase;font-style:italic;line-height:0.95;margin-top:6px;'>caiu.</div></div><div style='font-size:42px;font-weight:500;color:var(--white);margin-top:50px;line-height:1.2;'>E a culpa <span style='font-style:italic;font-weight:700;color:var(--lime);'>não é sua</span>.</div>"
-    },
-    {
-      "filename": "slide01-capa-tv2.png",
-      "bg": "black",
-      "isCover": true,
-      "nextBg": "light-gray",
-      "content": "<div style='line-height:0.92;'><div style='font-size:150px;font-weight:700;color:var(--white);letter-spacing:-3px;'>Seu tráfego</div><div style='font-size:150px;font-weight:400;font-style:italic;color:var(--white);letter-spacing:-3px;margin-top:6px;'>orgânico</div><div style='display:flex;align-items:baseline;gap:18px;margin-top:6px;'><span style='font-size:240px;font-weight:700;-webkit-text-stroke:4px var(--white);color:transparent;letter-spacing:-6px;text-transform:uppercase;line-height:0.9;font-style:italic;'>CAIU</span><span style='font-size:240px;font-weight:700;color:var(--lime);line-height:0.9;font-style:italic;'>.</span></div></div><div style='font-size:44px;font-weight:500;color:var(--white);margin-top:70px;line-height:1.2;'>E a culpa <span style='font-style:italic;font-weight:700;color:var(--lime);'>não é sua</span>.</div>"
-    },
-    {
-      "filename": "slide01-capa-tv4.png",
+      "filename": "slide01-capa.png",
       "bg": "black",
       "isCover": true,
       "nextBg": "light-gray",
@@ -28,15 +11,53 @@
       "content": "<div style='line-height:0.95;'><div style='font-size:128px;font-weight:700;color:var(--lime);letter-spacing:-3px;text-transform:uppercase;font-style:italic;line-height:0.96;'>Seu tráfego<br>orgânico caiu.</div><div style='font-size:96px;font-weight:700;color:var(--white);letter-spacing:-2px;text-transform:uppercase;font-style:italic;line-height:1.0;margin-top:22px;'>E a culpa não é sua.</div><div style='font-size:30px;font-weight:500;color:var(--white);margin-top:30px;line-height:1.3;text-transform:uppercase;letter-spacing:0.5px;'>O usuário parou de clicar — e ninguém te avisou.</div></div>"
     },
     {
-      "filename": "slide01-capa-tv3.png",
-      "bg": "split-hv-inv",
-      "isCover": true,
-      "nextBg": "light-gray",
-      "logoStyle": "png-oficial",
-      "hashtagColor": "#FFFFFF",
-      "arrowColor": "#D6DE23",
+      "filename": "slide02-dado.png",
+      "bg": "light-gray",
+      "nextBg": "black",
+      "number": 2,
+      "numColor": "#434244",
+      "footerColor": "#434244",
+      "content": "<div style='line-height:1.0;'><div style='font-size:46px;font-weight:500;color:var(--text-dark);line-height:1.2;'>Em <strong style='font-weight:700;'>2025</strong>, o tráfego orgânico<br>caiu entre</div><div style='font-size:280px;font-weight:800;color:var(--green2);letter-spacing:-10px;font-style:italic;line-height:0.92;margin:18px 0;'>15% e 64%</div><div style='font-size:46px;font-weight:500;color:var(--text-dark);line-height:1.2;'>em diferentes categorias.</div><div style='font-size:28px;font-weight:400;color:var(--text-dark);line-height:1.4;margin-top:50px;opacity:0.7;font-style:italic;'>E a maioria dos empresários ainda não sabe o que mudou.</div></div>"
+    },
+    {
+      "filename": "slide03-nao-e.png",
+      "bg": "black",
+      "nextBg": "lime",
+      "number": 3,
+      "content": "<div style='line-height:1.0;'><div style='font-size:36px;font-weight:400;color:var(--white);opacity:0.55;margin-bottom:38px;'>Antes de culpar quem não deve:</div><div style='font-size:80px;font-weight:700;color:var(--white);line-height:1.05;'><span style='color:var(--lime);font-style:italic;font-weight:800;'>Não é</span> penalidade do Google.</div><div style='font-size:80px;font-weight:700;color:var(--white);line-height:1.05;margin-top:34px;'><span style='color:var(--lime);font-style:italic;font-weight:800;'>Não é</span> sua estratégia errada.</div><div style='font-size:80px;font-weight:700;color:var(--white);line-height:1.05;margin-top:34px;'><span style='color:var(--lime);font-style:italic;font-weight:800;'>Não é</span> seu site lento.</div></div>"
+    },
+    {
+      "filename": "slide04-e-isto.png",
+      "bg": "lime",
+      "nextBg": "dark-gray",
+      "number": 4,
+      "numColor": "#000000",
+      "arrowColor": "#000000",
       "footerColor": "#000000",
-      "content": "<div style='line-height:0.92;'><div style='font-size:160px;font-weight:700;color:var(--white);letter-spacing:-4px;text-transform:uppercase;font-style:italic;'>Seu tráfego</div><div style='font-size:200px;font-weight:700;-webkit-text-stroke:3px var(--white);color:transparent;letter-spacing:-4px;text-transform:uppercase;line-height:0.95;margin-top:6px;'>orgânico</div><div style='font-size:240px;font-weight:800;color:var(--black);letter-spacing:-6px;text-transform:uppercase;font-style:italic;line-height:0.95;margin-top:6px;'>caiu.</div></div><div style='font-size:42px;font-weight:500;color:var(--text-dark);margin-top:50px;line-height:1.2;'>E a culpa <span style='font-style:italic;font-weight:700;color:var(--black);'>não é sua</span>.</div>"
+      "content": "<div style='display:flex;align-items:center;gap:40px;'><div style='flex:1;'><div style='font-size:36px;font-weight:500;color:var(--black);margin-bottom:14px;'>É o usuário</div><div style='font-size:108px;font-weight:800;color:var(--black);letter-spacing:-3px;font-style:italic;text-transform:uppercase;line-height:0.95;'>parando<br>de clicar.</div><div style='font-size:30px;font-weight:500;color:var(--black);line-height:1.3;margin-top:36px;max-width:560px;'>ChatGPT, Perplexity, Gemini e o próprio Google estão entregando a <em style='font-weight:700;'>resposta antes</em> do seu site aparecer.</div></div><div style='flex:0 0 360px;'><img src='slide4-phone.png' style='width:100%;display:block;border-radius:24px;'/></div></div>"
+    },
+    {
+      "filename": "slide05-mudanca.png",
+      "bg": "dark-gray",
+      "nextBg": "lime",
+      "number": 5,
+      "content": "<div style='line-height:1.0;'><div style='font-size:34px;font-weight:500;color:var(--white);opacity:0.6;margin-bottom:50px;'>A mudança de jogo:</div><div style='display:grid;grid-template-columns:1fr 1fr;gap:60px;'><div style='border-left:3px solid var(--lime);padding-left:34px;'><div style='font-size:40px;font-weight:700;font-style:italic;color:var(--lime);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;'>Antes</div><div style='font-size:50px;font-weight:500;color:var(--white);line-height:1.1;'>Ranquear em 1º =</div><div style='font-size:60px;font-weight:700;color:var(--white);font-style:italic;line-height:1.05;margin-top:8px;'>visita no<br>seu site.</div></div><div style='border-left:3px solid var(--lime);padding-left:34px;'><div style='font-size:40px;font-weight:700;font-style:italic;color:var(--lime);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;'>Agora</div><div style='font-size:50px;font-weight:500;color:var(--white);line-height:1.1;'>Ranquear em 1º =</div><div style='font-size:60px;font-weight:700;color:var(--lime);font-style:italic;line-height:1.05;margin-top:8px;'>resposta dentro<br>de uma IA.</div></div></div></div>"
+    },
+    {
+      "filename": "slide06-acoes.png",
+      "bg": "lime",
+      "nextBg": "lime",
+      "number": 6,
+      "numColor": "#000000",
+      "arrowColor": "#000000",
+      "footerColor": "#000000",
+      "content": "<div style='line-height:1.0;'><div style='font-size:64px;font-weight:800;color:var(--black);text-transform:uppercase;font-style:italic;letter-spacing:-1px;line-height:0.95;margin-bottom:44px;'>3 ações que valem<br><em style='font-style:italic;'>agora</em>:</div><div style='display:flex;flex-direction:column;gap:32px;'><div style='display:flex;gap:24px;align-items:flex-start;'><div style='font-size:120px;font-weight:800;color:transparent;-webkit-text-stroke:3px var(--black);line-height:0.85;font-style:italic;flex:0 0 auto;'>01</div><div style='flex:1;padding-top:14px;'><div style='font-size:46px;font-weight:700;color:var(--black);line-height:1.0;'>Conteúdo <em style='font-style:italic;'>citável</em>.</div><div style='font-size:24px;font-weight:400;color:var(--black);line-height:1.3;margin-top:6px;opacity:0.8;'>Dados, fontes, autoridade — não só palavras-chave.</div></div></div><div style='display:flex;gap:24px;align-items:flex-start;'><div style='font-size:120px;font-weight:800;color:transparent;-webkit-text-stroke:3px var(--black);line-height:0.85;font-style:italic;flex:0 0 auto;'>02</div><div style='flex:1;padding-top:14px;'><div style='font-size:46px;font-weight:700;color:var(--black);line-height:1.0;'>Pensa em <em style='font-style:italic;'>AEO</em>, não só SEO.</div><div style='font-size:24px;font-weight:400;color:var(--black);line-height:1.3;margin-top:6px;opacity:0.8;'>Answer Engine Optimization — ser a resposta da IA.</div></div></div><div style='display:flex;gap:24px;align-items:flex-start;'><div style='font-size:120px;font-weight:800;color:transparent;-webkit-text-stroke:3px var(--black);line-height:0.85;font-style:italic;flex:0 0 auto;'>03</div><div style='flex:1;padding-top:14px;'><div style='font-size:46px;font-weight:700;color:var(--black);line-height:1.0;'>Diversifica canais.</div><div style='font-size:24px;font-weight:400;color:var(--black);line-height:1.3;margin-top:6px;opacity:0.8;'>Vídeo, social, newsletter — quem depende só do Google já perdeu.</div></div></div></div></div>"
+    },
+    {
+      "filename": "slide07-cta.png",
+      "bg": "lime",
+      "isCta": true,
+      "content": "<div class='cta-title'>Se esse post fez sentido<br>pra você...</div><div class='cta-actions'><div class='cta-pill'>♡ &nbsp;&nbsp;DÁ UM LIKE</div><div class='cta-pill'>✈ &nbsp;&nbsp;COMPARTILHA COM QUEM PRECISA</div><div class='cta-pill'>🔖 &nbsp;&nbsp;SALVA PRA NÃO PERDER</div></div><div class='cta-logo'><img src='LOGO_PLACEHOLDER' alt=''></div>"
     }
   ]
 }

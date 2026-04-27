@@ -114,6 +114,18 @@ async function renderSlide(browser, template, slide, outPath) {
     const logoData = fs.readFileSync(LOGO_PNG_PATH).toString("base64");
     content = content.replace(/LOGO_PLACEHOLDER/g, `data:image/png;base64,${logoData}`);
   }
+  // Auto-converte qualquer <img src='X.png|jpg'> pra base64 (caminho relativo ao config.json)
+  content = content.replace(/<img\s+([^>]*\s)?src=['"]([^'"]+\.(png|jpg|jpeg))['"]/gi, (match, before, imgSrc, ext) => {
+    if (imgSrc.startsWith("data:") || imgSrc.startsWith("http")) return match;
+    const imgPath = path.resolve(path.dirname(process.argv[2]), imgSrc);
+    if (!fs.existsSync(imgPath)) {
+      console.warn(`  WARN: imagem não encontrada: ${imgPath}`);
+      return match;
+    }
+    const imgB64 = fs.readFileSync(imgPath).toString("base64");
+    const mime = ext.toLowerCase() === "jpg" || ext.toLowerCase() === "jpeg" ? "image/jpeg" : "image/png";
+    return `<img ${before || ""}src="data:${mime};base64,${imgB64}"`;
+  });
   html = html.replace("{{CONTENT}}", content);
   html = html.replace("{{COVER_IMAGE}}", coverImageBlock);
 
