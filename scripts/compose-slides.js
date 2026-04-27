@@ -106,11 +106,12 @@ async function renderSlide(browser, template, slide, outPath) {
   }
   html = html.replace("{{CONTENT}}", content);
 
-  // Footer (não no CTA)
+  // Footer (não no CTA). Override de cor: slide.footerColor
   let footer = "";
   if (!slide.isCta) {
     const slogan = slide.footerSlogan || "Conexão que Gera Conversão";
-    footer = `<div class="footer">
+    const colorStyle = slide.footerColor ? ` style="color:${slide.footerColor};"` : "";
+    footer = `<div class="footer"${colorStyle}>
       <span class="handle">@make.lemonad</span>
       <span class="signature">Strategy + Branding + Performance = <em>${slogan}</em></span>
     </div>`;
