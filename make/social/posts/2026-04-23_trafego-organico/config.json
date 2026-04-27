@@ -25,7 +25,7 @@
       "nextBg": "light-gray",
       "logoStyle": "png-oficial",
       "coverImage": "cover-tv4.png",
-      "content": "<div style='line-height:0.95;padding-top:25px;'><div style='font-size:88px;font-weight:700;color:var(--lime);letter-spacing:-2px;text-transform:uppercase;font-style:italic;line-height:0.96;'>Seu tráfego<br>orgânico caiu.</div><div style='font-size:54px;font-weight:700;color:var(--white);letter-spacing:-1px;text-transform:uppercase;font-style:italic;line-height:1.0;margin-top:18px;'>E a culpa<br>não é sua.</div><div style='font-size:24px;font-weight:500;color:var(--white);margin-top:30px;line-height:1.3;text-transform:uppercase;letter-spacing:0.5px;'>O usuário parou de clicar — e ninguém te avisou.</div></div>"
+      "content": "<div style='line-height:0.95;'><div style='font-size:128px;font-weight:700;color:var(--lime);letter-spacing:-3px;text-transform:uppercase;font-style:italic;line-height:0.96;'>Seu tráfego<br>orgânico caiu.</div><div style='font-size:78px;font-weight:700;color:var(--white);letter-spacing:-2px;text-transform:uppercase;font-style:italic;line-height:1.0;margin-top:24px;'>E a culpa<br>não é sua.</div><div style='font-size:30px;font-weight:500;color:var(--white);margin-top:36px;line-height:1.3;text-transform:uppercase;letter-spacing:0.5px;'>O usuário parou de clicar — e ninguém te avisou.</div></div>"
     },
     {
       "filename": "slide01-capa-tv3.png",

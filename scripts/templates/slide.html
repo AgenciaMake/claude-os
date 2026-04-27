@@ -145,47 +145,57 @@
     width: 100%;
   }
 
-  /* Capa com imagem: imagem na metade superior + bloco preto na inferior */
+  /* Capa com imagem: imagem ocupa 60% do topo + bloco preto na inferior com fade */
   .cover-image-area {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 55%;
+    height: 60%;
     background-size: cover;
     background-position: center;
     z-index: 1;
   }
-  .cover-image-area::after {
-    /* fade gradient pra garantir contraste do logo/hashtag no topo */
+  /* Fade superior pra contraste do logo/hashtag */
+  .cover-image-area::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 180px;
+    height: 160px;
     background: linear-gradient(to bottom, rgba(0,0,0,0.45), transparent);
     pointer-events: none;
+    z-index: 2;
+  }
+  /* Fade inferior — transição suave pro preto (degrade longo, não corte seco) */
+  .cover-image-area::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 280px;
+    background: linear-gradient(to bottom, transparent, var(--black));
+    pointer-events: none;
+    z-index: 2;
   }
   .cover-text-area {
     position: absolute;
-    top: 55%;
+    top: 60%;
     left: 0;
     right: 0;
     bottom: 0;
     background: var(--black);
     z-index: 1;
   }
-  /* Quando o slide tem .has-cover-image, conteúdo central vai na metade inferior preta */
+  /* Conteúdo central na metade inferior — respeita margens padrão (50/110) */
   .has-cover-image .content {
     position: absolute;
-    top: 55%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 60px 95px 110px 95px;
+    top: 62%;
+    left: 50px;
+    right: 110px;
+    bottom: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    z-index: 2;
+    z-index: 3;
   }
 
   /* Helpers tipográficos — pesos MEDIUM/BOLD, NUNCA Black */
