@@ -70,11 +70,14 @@ async function renderSlide(browser, template, slide, outPath) {
   html = html.replace("{{BG_CLASS}}", `bg-${slide.bg || "black"}`);
 
   // Top-left (hashtag nas capas, numeração nos internos, nada no CTA)
+  // Suporta override explícito de cor: slide.hashtagColor / slide.numColor (hex ou var())
   let topLeft = "";
   if (slide.isCover) {
-    topLeft = `<div class="hashtag">#performance<strong>estratégica</strong>360</div>`;
+    const colorStyle = slide.hashtagColor ? ` style="color:${slide.hashtagColor};"` : "";
+    topLeft = `<div class="hashtag"${colorStyle}>#performance<strong>estratégica</strong>360</div>`;
   } else if (slide.number && !slide.isCta) {
-    topLeft = `<div class="slide-num">${String(slide.number).padStart(2, "0")}</div>`;
+    const colorStyle = slide.numColor ? ` style="color:${slide.numColor};"` : "";
+    topLeft = `<div class="slide-num"${colorStyle}>${String(slide.number).padStart(2, "0")}</div>`;
   }
   html = html.replace("{{TOP_LEFT}}", topLeft);
 
@@ -115,10 +118,13 @@ async function renderSlide(browser, template, slide, outPath) {
   html = html.replace("{{FOOTER}}", footer);
 
   // Side strip = cor do próximo slide. Seta = cor do slide atual invadindo a faixa.
+  // Override explícito: slide.arrowColor (necessário em fundos split, onde a cor do bg
+  // do slide atual depende da posição vertical da seta).
   let sideStrip = "";
   if (!slide.isCta && slide.nextBg) {
+    const arrowStyle = slide.arrowColor ? ` style="border-left-color:${slide.arrowColor};"` : "";
     sideStrip = `<div class="side-strip ${slide.nextBg}"></div>
-      <div class="slide-arrow from-${slide.bg || "black"}"></div>`;
+      <div class="slide-arrow from-${slide.bg || "black"}"${arrowStyle}></div>`;
   }
   html = html.replace("{{SIDE_STRIP}}", sideStrip);
 
