@@ -28,15 +28,10 @@
     },
     {
       "filename": "slide04-e-isto.png",
-      "bg": "lime",
+      "bg": "black",
       "nextBg": "dark-gray",
       "number": 4,
-      "numColor": "#000000",
-      "arrowColor": "#000000",
-      "footerColor": "#000000",
-      "sideImage": "slide4-fullbleed.png",
-      "sideFadeColor": "#D6DE23",
-      "content": "<div><div style='font-size:32px;font-weight:500;font-style:italic;color:var(--black);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;'>É o usuário</div><div style='font-size:96px;font-weight:800;color:var(--black);letter-spacing:-3px;font-style:italic;text-transform:uppercase;line-height:0.92;'>parando<br>de<br><span style='color:transparent;-webkit-text-stroke:3px var(--black);'>clicar.</span></div><div style='font-size:22px;font-weight:400;color:var(--black);line-height:1.4;margin-top:28px;'>ChatGPT, Perplexity, Gemini e o próprio Google estão entregando a <em style='font-weight:700;font-style:italic;'>resposta antes</em> do seu site aparecer.</div></div>"
+      "content": "<div style='display:flex;flex-direction:column;height:100%;justify-content:center;gap:32px;'><div><div style='font-size:38px;font-weight:500;color:var(--white);opacity:0.65;margin-bottom:14px;'>A virada que ninguém te contou:</div><div style='font-size:72px;font-weight:700;color:var(--white);line-height:1.05;letter-spacing:-1.5px;'>É o usuário <span style='color:var(--lime);font-style:italic;font-weight:800;'>parando de clicar</span>.</div></div><div style='width:100%;height:380px;border-radius:4px;overflow:hidden;background:#111;'><img src='slide4-fullbleed.png' style='width:100%;height:100%;object-fit:cover;display:block;' alt=''/></div><div style='font-size:28px;font-weight:400;color:var(--white);line-height:1.4;'><strong style='font-weight:700;color:var(--lime);'>ChatGPT</strong>, <strong style='font-weight:700;color:var(--lime);'>Perplexity</strong>, <strong style='font-weight:700;color:var(--lime);'>Gemini</strong> e o próprio Google estão entregando a resposta antes do seu site aparecer.</div></div>"
     },
     {
       "filename": "slide05-mudanca.png",
