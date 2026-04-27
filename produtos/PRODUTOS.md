@@ -35,7 +35,7 @@ produtos/{nome}/
 
 Os repos estão na organização **AgenciaMake** no GitHub.
 
-- CitraDesk → `AgenciaMake/make-gestorpro` (nome legado, será renomeado pra `citradesk`)
+- CitraDesk → `AgenciaMake/citradesk`
 - CitraChat → (a criar)
 
 ## Quando trabalhar nesses produtos

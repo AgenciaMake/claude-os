@@ -6,7 +6,7 @@
 
 CitraDesk é um **sistema de gestão integrado pra agências de marketing digital**. Centraliza clientes recorrentes, projetos pontuais, colaboradores, freelancers, ferramentas SaaS, métricas financeiras, gestão de senhas e insights de AI num só lugar — substituindo a colcha de retalhos de planilhas, Trello, Notion, LastPass e ferramentas avulsas que a maioria das agências usa.
 
-**Origem:** começou como `make-gestorpro` no Google AI Studio, criado pra resolver a dor de gestão da própria MakeLemonAd. A partir da v5.0.0 ganhou o rebrand pra **CitraDesk**, com plano de virar SaaS comercial.
+**Origem:** começou como `make-gestorpro` no Google AI Studio, criado pra resolver a dor de gestão da própria MakeLemonAd. A partir da v5.0.0 ganhou o rebrand pra **CitraDesk** (repo agora é `AgenciaMake/citradesk`), com plano de virar SaaS comercial modular.
 
 **Versão atual:** v5.0.0 (CitraDesk Rebrand) — versão constante em [App.tsx:35](codigo/App.tsx#L35)
 **Ambiente atual:** uso interno da MakeLemonAd, instância única do Firebase (projeto `gen-lang-client-0548502624`, banco `bdmakegestorpro`).

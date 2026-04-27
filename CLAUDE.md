@@ -153,7 +153,7 @@ Esse fluxo é exclusivo das redes da Make. Não aplicar a clientes.
 A Make desenvolve produtos SaaS usados primeiro internamente, com plano de virar comercial. Vivem em `produtos/` e seguem a estrutura definida em [produtos/PRODUTOS.md](produtos/PRODUTOS.md).
 
 **Produtos atuais:**
-- **CitraDesk** — sistema de gestão de agência. Briefing: [produtos/citradesk/CITRADESK.md](produtos/citradesk/CITRADESK.md). Código clonado em [produtos/citradesk/codigo/](produtos/citradesk/codigo/) (repo `AgenciaMake/make-gestorpro` no GitHub).
+- **CitraDesk** — sistema de gestão de agência. Briefing: [produtos/citradesk/CITRADESK.md](produtos/citradesk/CITRADESK.md). Código clonado em [produtos/citradesk/codigo/](produtos/citradesk/codigo/) (repo `AgenciaMake/citradesk` no GitHub).
 - **CitraChat** — produto de comunicação/atendimento. Briefing em construção: [produtos/citrachat/CITRACHAT.md](produtos/citrachat/CITRACHAT.md).
 
 **Regras quando trabalhar nos produtos Citra:**
