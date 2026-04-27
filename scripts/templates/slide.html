@@ -233,6 +233,39 @@
     z-index: 3;
   }
 
+  /* Imagem em side-bleed: ocupa lateral direita do slide, texto à esquerda em cor sólida */
+  .side-image-area {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 52%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+  }
+  .side-image-area::before {
+    /* Fade horizontal: borda esquerda da imagem fadeia pra preto pra criar transição suave com o fundo do slide */
+    content: "";
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 220px;
+    background: linear-gradient(to right, var(--side-fade-color, var(--black)), transparent);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .has-side-image .content {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    right: 56%;
+    bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+  }
+
   /* Helpers tipográficos — pesos MEDIUM/BOLD, NUNCA Black */
   .h1 {
     font-size: 120px;

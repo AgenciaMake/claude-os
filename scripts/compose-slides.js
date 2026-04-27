@@ -82,6 +82,13 @@ async function renderSlide(browser, template, slide, outPath) {
     const imgB64 = fs.readFileSync(imgPath).toString("base64");
     const imgMime = slide.fullBleedImage.endsWith(".jpg") ? "image/jpeg" : "image/png";
     coverImageBlock = `<div class="fullbleed-image-area" style="background-image:url('data:${imgMime};base64,${imgB64}');"></div>`;
+  } else if (slide.sideImage) {
+    bgClass += " has-side-image";
+    const imgPath = path.resolve(path.dirname(process.argv[2]), slide.sideImage);
+    const imgB64 = fs.readFileSync(imgPath).toString("base64");
+    const imgMime = slide.sideImage.endsWith(".jpg") ? "image/jpeg" : "image/png";
+    const fadeColor = slide.sideFadeColor || "#000000";
+    coverImageBlock = `<div class="side-image-area" style="background-image:url('data:${imgMime};base64,${imgB64}');--side-fade-color:${fadeColor};"></div>`;
   }
   html = html.replace("{{BG_CLASS}}", bgClass);
 
