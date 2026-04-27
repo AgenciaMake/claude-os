@@ -66,8 +66,18 @@ async function fitContent(page) {
 async function renderSlide(browser, template, slide, outPath) {
   let html = template;
 
-  // Background
-  html = html.replace("{{BG_CLASS}}", `bg-${slide.bg || "black"}`);
+  // Background. Se tem coverImage, adiciona a div da imagem + ajusta classes.
+  let bgClass = `bg-${slide.bg || "black"}`;
+  let coverImageBlock = "";
+  if (slide.coverImage) {
+    bgClass += " has-cover-image";
+    const imgPath = path.resolve(path.dirname(process.argv[2]), slide.coverImage);
+    const imgB64 = fs.readFileSync(imgPath).toString("base64");
+    const imgMime = slide.coverImage.endsWith(".jpg") ? "image/jpeg" : "image/png";
+    coverImageBlock = `<div class="cover-image-area" style="background-image:url('data:${imgMime};base64,${imgB64}');"></div>
+      <div class="cover-text-area"></div>`;
+  }
+  html = html.replace("{{BG_CLASS}}", bgClass);
 
   // Top-left (hashtag nas capas, numeração nos internos, nada no CTA)
   // Suporta override explícito de cor: slide.hashtagColor / slide.numColor (hex ou var())
@@ -105,6 +115,7 @@ async function renderSlide(browser, template, slide, outPath) {
     content = content.replace(/LOGO_PLACEHOLDER/g, `data:image/png;base64,${logoData}`);
   }
   html = html.replace("{{CONTENT}}", content);
+  html = html.replace("{{COVER_IMAGE}}", coverImageBlock);
 
   // Footer (não no CTA). Override de cor: slide.footerColor
   let footer = "";

@@ -145,6 +145,49 @@
     width: 100%;
   }
 
+  /* Capa com imagem: imagem na metade superior + bloco preto na inferior */
+  .cover-image-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 55%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+  }
+  .cover-image-area::after {
+    /* fade gradient pra garantir contraste do logo/hashtag no topo */
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 180px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.45), transparent);
+    pointer-events: none;
+  }
+  .cover-text-area {
+    position: absolute;
+    top: 55%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--black);
+    z-index: 1;
+  }
+  /* Quando o slide tem .has-cover-image, conteúdo central vai na metade inferior preta */
+  .has-cover-image .content {
+    position: absolute;
+    top: 55%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 60px 95px 110px 95px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+  }
+
   /* Helpers tipográficos — pesos MEDIUM/BOLD, NUNCA Black */
   .h1 {
     font-size: 120px;
@@ -230,6 +273,7 @@
 </head>
 <body>
   <div class="slide {{BG_CLASS}}">
+    {{COVER_IMAGE}}
     {{TOP_LEFT}}
     {{TOP_RIGHT}}
     <div class="content">
