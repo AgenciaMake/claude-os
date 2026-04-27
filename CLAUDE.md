@@ -21,6 +21,7 @@ Skills em `.claude/skills/` podem ser específicas da Make, específicas de um c
 - `dados/` — arquivos de referência, relatórios, prints
 - `templates/` — templates de skills e ferramentas prontos pra usar
 - `apps/` — apps web hospedados (Cloudflare Pages, etc.)
+- `produtos/` — produtos SaaS desenvolvidos pela Make (linha Citra: CitraDesk, CitraChat). Cada produto tem código clonado do GitHub, briefing mestre e feedback de uso interno
 - `tarefas.md` — lista de pendências atualizada conforme o trabalho avança
 
 ## Sobre o negócio
@@ -144,6 +145,25 @@ Em qualquer sessão que envolva Instagram, LinkedIn ou TikTok **da própria Make
 Claude sugere pautas → Bruno aprova/afina → Bruno libera criação → Claude cria copy e peça → Bruno aprova arte → Claude publica via skill `publicar-instagram` (Post for Me Pro) → +2 dias → análise juntos.
 
 Esse fluxo é exclusivo das redes da Make. Não aplicar a clientes.
+
+---
+
+## Produtos SaaS da Make (linha Citra)
+
+A Make desenvolve produtos SaaS usados primeiro internamente, com plano de virar comercial. Vivem em `produtos/` e seguem a estrutura definida em [produtos/PRODUTOS.md](produtos/PRODUTOS.md).
+
+**Produtos atuais:**
+- **CitraDesk** — sistema de gestão de agência. Briefing: [produtos/citradesk/CITRADESK.md](produtos/citradesk/CITRADESK.md). Código clonado em [produtos/citradesk/codigo/](produtos/citradesk/codigo/) (repo `AgenciaMake/make-gestorpro` no GitHub).
+- **CitraChat** — produto de comunicação/atendimento. Briefing em construção: [produtos/citrachat/CITRACHAT.md](produtos/citrachat/CITRACHAT.md).
+
+**Regras quando trabalhar nos produtos Citra:**
+
+1. Sempre **ler o briefing mestre do produto antes** de qualquer trabalho de código, feature, bug, roadmap ou estratégia. Não confiar só no código — o briefing tem o porquê.
+2. Trabalho de código vai em `produtos/{nome}/codigo/`. É um repo git real clonado do GitHub — qualquer commit/push vai pro repositório oficial.
+3. Decisões de produto importantes (mudança de stack, novo módulo, definição de tier de preço) → registrar em `produtos/{nome}/briefings/` antes de implementar.
+4. Feedback de uso interno da Make → `produtos/{nome}/feedback/`.
+5. Manter consistência da linha Citra: paleta MakeLemonAd (#D6DE23), multi-moeda BRL/USD/EUR desde o dia 1, RBAC, AI nativa.
+6. **Não confundir `produtos/` com `apps/`** — `apps/` é app web simples hospedado (ex: app de briefing); `produtos/` é produto comercial com roadmap de SaaS.
 
 ---
 
