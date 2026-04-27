@@ -28,13 +28,13 @@
     },
     {
       "filename": "slide04-e-isto.png",
-      "bg": "lime",
+      "bg": "black",
       "nextBg": "dark-gray",
       "number": 4,
-      "numColor": "#000000",
+      "numColor": "#FFFFFF",
       "arrowColor": "#000000",
-      "footerColor": "#000000",
-      "content": "<div style='display:flex;align-items:center;gap:40px;'><div style='flex:1;'><div style='font-size:36px;font-weight:500;color:var(--black);margin-bottom:14px;'>É o usuário</div><div style='font-size:108px;font-weight:800;color:var(--black);letter-spacing:-3px;font-style:italic;text-transform:uppercase;line-height:0.95;'>parando<br>de clicar.</div><div style='font-size:30px;font-weight:500;color:var(--black);line-height:1.3;margin-top:36px;max-width:560px;'>ChatGPT, Perplexity, Gemini e o próprio Google estão entregando a <em style='font-weight:700;'>resposta antes</em> do seu site aparecer.</div></div><div style='flex:0 0 360px;'><img src='slide4-phone.png' style='width:100%;display:block;border-radius:24px;'/></div></div>"
+      "fullBleedImage": "slide4-fullbleed.png",
+      "content": "<div><div style='font-size:38px;font-weight:500;font-style:italic;color:var(--lime);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;'>É o usuário</div><div style='font-size:178px;font-weight:800;color:transparent;-webkit-text-stroke:3px var(--white);letter-spacing:-5px;font-style:italic;text-transform:uppercase;line-height:0.92;'>parando</div><div style='font-size:178px;font-weight:800;color:var(--white);letter-spacing:-5px;font-style:italic;text-transform:uppercase;line-height:0.92;margin-top:-8px;'>de clicar.</div><div style='font-size:26px;font-weight:400;color:var(--white);line-height:1.4;margin-top:28px;max-width:760px;'>ChatGPT, Perplexity, Gemini e o próprio Google estão entregando a <em style='font-weight:700;color:var(--lime);font-style:italic;'>resposta antes</em> do seu site aparecer.</div></div>"
     },
     {
       "filename": "slide05-mudanca.png",

@@ -198,6 +198,41 @@
     z-index: 3;
   }
 
+  /* Imagem ocupando 100% do slide (full-bleed). Texto sobreposto. */
+  .fullbleed-image-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+  }
+  .fullbleed-image-area::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      linear-gradient(to bottom,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.15) 18%,
+        rgba(0,0,0,0.10) 55%,
+        rgba(0,0,0,0.85) 100%);
+    pointer-events: none;
+  }
+  .has-fullbleed .content {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    right: 110px;
+    bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    z-index: 3;
+  }
+
   /* Helpers tipográficos — pesos MEDIUM/BOLD, NUNCA Black */
   .h1 {
     font-size: 120px;

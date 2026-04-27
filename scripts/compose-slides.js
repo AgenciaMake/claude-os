@@ -66,7 +66,7 @@ async function fitContent(page) {
 async function renderSlide(browser, template, slide, outPath) {
   let html = template;
 
-  // Background. Se tem coverImage, adiciona a div da imagem + ajusta classes.
+  // Background. Se tem coverImage (TV4) ou fullBleedImage, adiciona a div da imagem + ajusta classes.
   let bgClass = `bg-${slide.bg || "black"}`;
   let coverImageBlock = "";
   if (slide.coverImage) {
@@ -76,6 +76,12 @@ async function renderSlide(browser, template, slide, outPath) {
     const imgMime = slide.coverImage.endsWith(".jpg") ? "image/jpeg" : "image/png";
     coverImageBlock = `<div class="cover-image-area" style="background-image:url('data:${imgMime};base64,${imgB64}');"></div>
       <div class="cover-text-area"></div>`;
+  } else if (slide.fullBleedImage) {
+    bgClass += " has-fullbleed";
+    const imgPath = path.resolve(path.dirname(process.argv[2]), slide.fullBleedImage);
+    const imgB64 = fs.readFileSync(imgPath).toString("base64");
+    const imgMime = slide.fullBleedImage.endsWith(".jpg") ? "image/jpeg" : "image/png";
+    coverImageBlock = `<div class="fullbleed-image-area" style="background-image:url('data:${imgMime};base64,${imgB64}');"></div>`;
   }
   html = html.replace("{{BG_CLASS}}", bgClass);
 
