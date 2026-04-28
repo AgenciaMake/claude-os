@@ -5,6 +5,16 @@ Feedbacks do Bruno após testar o agente piloto Limonete na Fase 1 do CitraChat.
 ## Bugs identificados (corrigidos)
 
 - **Texto do input invisível** — textarea sem `text-gray-900` explícito, ficava com cor padrão branca em alguns navegadores. Corrigido em `ChatInterface.tsx`.
+- **Mobile: chat fullscreen subia quando abria o teclado** — em iOS Safari, `position: fixed` + `100dvh` não dava conta sozinho. Solução: travar `body` com `position: fixed` quando overlay aberto + ler `visualViewport.height` e `visualViewport.offsetTop` via JS pra ajustar overlay em tempo real.
+- **Mobile: teclado fechava ao enviar mensagem** — textarea tinha `disabled={isStreaming}` e em iOS isso tira o foco. Removido — só o botão de enviar continua disabled durante streaming.
+
+## Princípios de captação de leads (regra absoluta pro CitraChat)
+
+Ajustes feitos no system prompt da Limonete em 2026-04-28 que viram base pra qualquer agente do CitraChat:
+
+1. **Não oferecer humano como atalho** — quando o lead disser "não falo com robô" / "não gosto de chatbot" / "quero falar direto com alguém", o agente NÃO encaminha pra humano. Reconhece a objeção, se posiciona ("sou IA conversacional, não árvore de decisão"), mostra valor (organiza o cenário pro time chegar adiantado) e devolve a condução.
+2. **JAMAIS citar nome de pessoa do time** (regra absoluta, sem exceção). Nem na introdução, nem na hora de encaminhar, nem se o lead perguntar diretamente "com quem vou falar?". Sempre genérico: "o time", "a pessoa responsável pela área", "quem cuida dessa frente". Citar nome individualiza demais, desvaloriza a estrutura, e quem não é cliente não precisa saber quem é quem internamente.
+3. **Lead PRECISA validar pelo chat** — se o agente entrega humano antes da qualificação, quebra o processo e desvaloriza a ferramenta. O caminho pelo chat é parte do produto. Só sugere encaminhar depois de coletar situação + problema + budget/timeline + nome + contato.
 
 ## Padrões absolutos pra QUALQUER agente do CitraChat
 
