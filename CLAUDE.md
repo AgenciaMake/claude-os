@@ -23,6 +23,21 @@ Skills em `.claude/skills/` podem ser específicas da Make, específicas de um c
 - `apps/` — apps web hospedados (Cloudflare Pages, etc.)
 - `produtos/` — produtos SaaS desenvolvidos pela Make (linha Citra: CitraDesk, CitraChat). Cada produto tem código clonado do GitHub, briefing mestre e feedback de uso interno
 - `tarefas.md` — lista de pendências atualizada conforme o trabalho avança
+- `_memoria_pendente/` — snapshots diários gerados por routine remota (descritos abaixo)
+
+## Memória pendente (sistema de continuidade)
+
+Toda noite às 23h Lisboa, uma routine remota analisa as últimas 24h de commits no repo e gera arquivos em `_memoria_pendente/<area>_<YYYY-MM-DD>.md` com o que foi feito, agrupado por área (citrachat, citradesk, social_make, cliente_<slug>, apps_<nome>, etc).
+
+**Antes de começar trabalho em qualquer área**, conferir se há arquivo correspondente em `_memoria_pendente/`. Se houver:
+1. Ler o arquivo
+2. Aplicar as informações relevantes na memória local correspondente (`~/.claude/projects/.../memory/<area>_estado_atual.md`)
+3. Apagar o arquivo de `_memoria_pendente/` (já foi consumido)
+4. Commit local com mensagem "chore: aplicar memória pendente <area> <data>"
+
+Se não houver arquivo pendente pra área, prosseguir normal — significa que nada mudou desde o último snapshot.
+
+Esse fluxo garante que continuidade entre sessões não dependa da memória vivida na conversa anterior — tudo que importa fica registrado em snapshot estruturado.
 
 ## Sobre o negócio
 
