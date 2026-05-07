@@ -59,6 +59,18 @@ Esses pilares evoluem conforme as análises semanais.
 
 Legenda: reforça o hook, contextualiza, e termina com CTA.
 
+### Regras absolutas (proibido em QUALQUER copy)
+
+Aplicam a posts da Make, posts de cliente, anúncios, legendas, emails — qualquer texto público.
+
+- PROIBIDO travessão longo (`—`) ligando frases. Usar ponto, vírgula, ou duas frases.
+- PROIBIDO markdown: asteriscos pra negrito (`**`), bullets (`-`/`*`), numeração `1. 2. 3.`, headers `#`.
+- PROIBIDO clichês de IA: "Vamos explorar", "É importante notar", "Vale ressaltar", "Em suma", "Por outro lado", "Além disso, é fundamental".
+- PROIBIDO frases muletas: "Você sabia que...?", "A verdade é que...", "Imagine só...".
+- PROIBIDO CTAs genéricos tipo "Não perca essa oportunidade!", "Aproveite agora!".
+
+Texto humano tem ritmo irregular, frase curta seguida de longa, opinião direta, gíria pontual quando faz sentido. Bruno identifica IA de longe, o público também. Copy que parece IA mata credibilidade da marca.
+
 ---
 
 ## 7. Distribuição por rede
