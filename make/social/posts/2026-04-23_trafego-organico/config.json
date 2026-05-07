@@ -54,7 +54,7 @@
       "filename": "slide07-cta.png",
       "bg": "lime",
       "isCta": true,
-      "content": "<div class='cta-title'>Se esse post fez sentido<br>pra você...</div><div class='cta-actions'><div class='cta-pill'>♡ &nbsp;&nbsp;DÁ UM LIKE</div><div class='cta-pill'>✈ &nbsp;&nbsp;COMPARTILHA COM QUEM PRECISA</div><div class='cta-pill'>🔖 &nbsp;&nbsp;SALVA PRA NÃO PERDER</div></div><div class='cta-logo'><img src='LOGO_PLACEHOLDER' alt=''></div>"
+      "content": "<div class='cta-title'>Se esse post fez sentido<br>pra você...</div><div class='cta-actions'><div class='cta-pill'><svg viewBox='0 0 400 100' preserveAspectRatio='none'><path d='M6,10 L394,3 L398,93 L3,98 Z' fill='#000'/></svg>♡ &nbsp;DÁ UM LIKE</div><div class='cta-pill'><svg viewBox='0 0 800 100' preserveAspectRatio='none'><path d='M3,4 L796,8 L795,96 L8,93 Z' fill='#000'/></svg>✈ &nbsp;COMPARTILHA COM QUEM PRECISA</div><div class='cta-pill'><svg viewBox='0 0 500 100' preserveAspectRatio='none'><path d='M8,7 L495,2 L497,95 L4,98 Z' fill='#000'/></svg>🔖 &nbsp;SALVA PRA NÃO PERDER</div></div><div class='cta-logo'><img src='LOGO_PLACEHOLDER' alt=''></div>"
     }
   ]
 }
