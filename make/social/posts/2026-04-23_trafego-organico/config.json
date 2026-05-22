@@ -22,14 +22,14 @@
     {
       "filename": "slide03-nao-e.png",
       "bg": "black",
-      "nextBg": "lime",
+      "nextBg": "dark-gray",
       "number": 3,
       "content": "<div style='line-height:1.0;'><div style='font-size:36px;font-weight:400;color:var(--white);opacity:0.55;margin-bottom:38px;'>Antes de culpar quem não deve:</div><div style='font-size:80px;font-weight:700;color:var(--white);line-height:1.05;'><span style='color:var(--lime);font-style:italic;font-weight:800;'>Não é</span> penalidade do Google.</div><div style='font-size:80px;font-weight:700;color:var(--white);line-height:1.05;margin-top:34px;'><span style='color:var(--lime);font-style:italic;font-weight:800;'>Não é</span> sua estratégia errada.</div><div style='font-size:80px;font-weight:700;color:var(--white);line-height:1.05;margin-top:34px;'><span style='color:var(--lime);font-style:italic;font-weight:800;'>Não é</span> seu site lento.</div></div>"
     },
     {
       "filename": "slide04-e-isto.png",
-      "bg": "black",
-      "nextBg": "dark-gray",
+      "bg": "dark-gray",
+      "nextBg": "black",
       "number": 4,
       "content": "<div style='display:flex;flex-direction:column;width:100%;gap:32px;'><div style='width:100%;'><div style='font-size:32px;font-weight:500;color:var(--white);opacity:0.6;margin-bottom:18px;text-transform:uppercase;letter-spacing:1.5px;'>A virada que ninguém te contou</div><div style='font-size:108px;font-weight:700;color:var(--white);line-height:1.0;letter-spacing:-3px;'>É o usuário <span style='color:var(--lime);font-style:italic;font-weight:800;'>parando<br>de clicar</span>.</div></div><div style='width:100%;height:520px;border-radius:6px;overflow:hidden;background:#111;'><img src='slide4-img.png' style='width:100%;height:100%;object-fit:cover;display:block;' alt=''/></div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.35;width:100%;'><strong style='font-weight:700;color:var(--lime);'>ChatGPT</strong>, <strong style='font-weight:700;color:var(--lime);'>Perplexity</strong>, <strong style='font-weight:700;color:var(--lime);'>Gemini</strong> e o próprio Google estão entregando a resposta antes do seu site aparecer.</div></div>"
     },
@@ -52,9 +52,9 @@
     },
     {
       "filename": "slide07-cta.png",
-      "bg": "lime",
+      "bg": "black",
       "isCta": true,
-      "content": "<div class='cta-title'>Se esse post fez sentido<br>pra você...</div><div class='cta-actions'><div class='cta-pill'><svg class='cta-pill-bg' viewBox='0 0 400 100' preserveAspectRatio='none'><path d='M6,10 L394,3 L398,93 L3,98 Z' fill='#000'/></svg><svg class='cta-icon' viewBox='0 0 24 24'><path d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/></svg>DÁ UM LIKE</div><div class='cta-pill'><svg class='cta-pill-bg' viewBox='0 0 800 100' preserveAspectRatio='none'><path d='M3,4 L796,8 L795,96 L8,93 Z' fill='#000'/></svg><svg class='cta-icon' viewBox='0 0 24 24'><line x1='22' y1='2' x2='11' y2='13'/><polygon points='22 2 15 22 11 13 2 9 22 2'/></svg>COMPARTILHA COM QUEM PRECISA</div><div class='cta-pill'><svg class='cta-pill-bg' viewBox='0 0 500 100' preserveAspectRatio='none'><path d='M8,7 L495,2 L497,95 L4,98 Z' fill='#000'/></svg><svg class='cta-icon' viewBox='0 0 24 24'><path d='M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'/></svg>SALVA PRA NÃO PERDER</div></div><div class='cta-logo'><img src='LOGO_PLACEHOLDER' alt=''></div>"
+      "content": "<div class='cta-title' style='color:var(--white);'>Se esse post fez sentido<br>pra você...</div><div class='cta-actions'><div class='cta-pill' style='color:#000;'><svg class='cta-pill-bg' viewBox='0 0 400 100' preserveAspectRatio='none'><path d='M6,10 L394,3 L398,93 L3,98 Z' fill='#D6DE23'/></svg><svg class='cta-icon' viewBox='0 0 24 24' style='stroke:#000;'><path d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/></svg>DÁ UM LIKE</div><div class='cta-pill' style='color:#000;'><svg class='cta-pill-bg' viewBox='0 0 800 100' preserveAspectRatio='none'><path d='M3,4 L796,8 L795,96 L8,93 Z' fill='#D6DE23'/></svg><svg class='cta-icon' viewBox='0 0 24 24' style='stroke:#000;'><line x1='22' y1='2' x2='11' y2='13'/><polygon points='22 2 15 22 11 13 2 9 22 2'/></svg>COMPARTILHA COM QUEM PRECISA</div><div class='cta-pill' style='color:#000;'><svg class='cta-pill-bg' viewBox='0 0 500 100' preserveAspectRatio='none'><path d='M8,7 L495,2 L497,95 L4,98 Z' fill='#D6DE23'/></svg><svg class='cta-icon' viewBox='0 0 24 24' style='stroke:#000;'><path d='M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'/></svg>SALVA PRA NÃO PERDER</div></div><div class='cta-logo'><img src='LOGO_PLACEHOLDER' alt=''></div>"
     }
   ]
 }
