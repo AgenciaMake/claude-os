@@ -1,0 +1,22 @@
+[debug] [2026-05-22T10:18:39.346Z] ----------------------------------------------------------------------
+[debug] [2026-05-22T10:18:39.348Z] Command:       /Users/brunomartins/.nvm/versions/node/v24.14.1/bin/node /Users/brunomartins/.nvm/versions/node/v24.14.1/bin/firebase --json
+[debug] [2026-05-22T10:18:39.348Z] CLI Version:   15.15.0
+[debug] [2026-05-22T10:18:39.348Z] Platform:      darwin
+[debug] [2026-05-22T10:18:39.348Z] Node Version:  v24.14.1
+[debug] [2026-05-22T10:18:39.348Z] Time:          Fri May 22 2026 11:18:39 GMT+0100 (Western European Summer Time)
+[debug] [2026-05-22T10:18:39.348Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-05-22T10:18:39.349Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-05-22T10:18:39.357Z] TypeError: Cannot read properties of undefined (reading '0')
+    at Command.<anonymous> (/Users/brunomartins/.nvm/versions/node/v24.14.1/lib/node_modules/firebase-tools/lib/index.js:78:21)
+    at Command.listener [as _actionHandler] (/Users/brunomartins/.nvm/versions/node/v24.14.1/lib/node_modules/firebase-tools/node_modules/commander/index.js:413:31)
+    at Command._parseCommand (/Users/brunomartins/.nvm/versions/node/v24.14.1/lib/node_modules/firebase-tools/node_modules/commander/index.js:914:14)
+    at Command.parse (/Users/brunomartins/.nvm/versions/node/v24.14.1/lib/node_modules/firebase-tools/node_modules/commander/index.js:717:10)
+    at cli (/Users/brunomartins/.nvm/versions/node/v24.14.1/lib/node_modules/firebase-tools/lib/bin/cli.js:123:26)
+    at Object.<anonymous> (/Users/brunomartins/.nvm/versions/node/v24.14.1/lib/node_modules/firebase-tools/lib/bin/firebase.js:17:5)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Object..js (node:internal/modules/cjs/loader:1943:10)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+[error] 
+[error] Error: An unexpected error has occurred.
