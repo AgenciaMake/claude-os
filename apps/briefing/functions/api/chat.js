@@ -33,6 +33,7 @@ export async function onRequestPost({ request, env }) {
       responsible: client.contacts?.[0]?.name || '',
       firestoreId: client._id,
       contractSummary: client.contractSummary || null,
+      alfredNotes: client.alfredNotes || null,
     };
 
     const systemPrompt = buildSystemPrompt(clientData);
@@ -82,8 +83,9 @@ export async function onRequestPost({ request, env }) {
 
     if (done) {
       const finalMessages = [...messages, { role: 'assistant', content: cleanReply }];
-      await saveBriefingDoc(token, env, clientData, finalMessages);
-      await markBriefingComplete(token, env, client._id, env.FIREBASE_TENANT_ID);
+      const saved = await saveBriefingDoc(token, env, clientData, finalMessages);
+      const docUrl = saved?.docId ? `https://docs.google.com/document/d/${saved.docId}/edit` : null;
+      await markBriefingComplete(token, env, client._id, env.FIREBASE_TENANT_ID, docUrl, saved?.briefingText || null);
     }
 
     return json({ message: cleanReply, done });
@@ -93,10 +95,16 @@ export async function onRequestPost({ request, env }) {
   }
 }
 
-async function markBriefingComplete(token, env, clientId, tenantId) {
-  const url = `https://firestore.googleapis.com/v1/projects/${env.FIREBASE_PROJECT_ID}/databases/${env.FIREBASE_DB_NAME}/documents/tenants/${tenantId}/clients/${clientId}?updateMask.fieldPaths=briefingStatus&updateMask.fieldPaths=briefingCompletedAt`;
+async function markBriefingComplete(token, env, clientId, tenantId, docUrl, briefingSummary) {
+  const fields = {
+    briefingStatus: { stringValue: 'concluído' },
+    briefingCompletedAt: { stringValue: new Date().toISOString() },
+  };
+  if (docUrl) fields.briefingDocUrl = { stringValue: docUrl };
+  if (briefingSummary) fields.briefingSummary = { stringValue: briefingSummary };
 
-  const today = new Date().toISOString();
+  const masks = Object.keys(fields).map(f => `updateMask.fieldPaths=${f}`).join('&');
+  const url = `https://firestore.googleapis.com/v1/projects/${env.FIREBASE_PROJECT_ID}/databases/${env.FIREBASE_DB_NAME}/documents/tenants/${tenantId}/clients/${clientId}?${masks}`;
 
   await fetch(url, {
     method: 'PATCH',
@@ -104,12 +112,7 @@ async function markBriefingComplete(token, env, clientId, tenantId) {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      fields: {
-        briefingStatus: { stringValue: 'concluído' },
-        briefingCompletedAt: { stringValue: today },
-      },
-    }),
+    body: JSON.stringify({ fields }),
   });
 }
 

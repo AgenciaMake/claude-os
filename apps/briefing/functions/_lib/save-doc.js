@@ -60,7 +60,7 @@ export async function saveBriefingDoc(token, env, client, messages) {
     }
   );
 
-  return docId;
+  return { docId, briefingText };
 }
 
 async function findClientMaterialsFolder(token, client) {
