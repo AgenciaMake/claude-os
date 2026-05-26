@@ -1,4 +1,5 @@
 import { getGoogleAccessToken } from '../_lib/google-auth.js';
+import { getClientByBriefingCode } from '../_lib/firestore-client.js';
 
 export async function onRequestPost({ request, env }) {
   try {
@@ -9,36 +10,30 @@ export async function onRequestPost({ request, env }) {
     }
 
     const token = await getGoogleAccessToken(env.GOOGLE_SERVICE_ACCOUNT);
-
-    const sheetId = env.SHEET_ID;
-    const range = 'A2:J1000';
-
-    const res = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}`,
-      { headers: { Authorization: `Bearer ${token}` } }
+    const client = await getClientByBriefingCode(
+      token,
+      env.FIREBASE_PROJECT_ID,
+      env.FIREBASE_DB_NAME,
+      env.FIREBASE_TENANT_ID,
+      code
     );
 
-    const data = await res.json();
-    const rows = data.values || [];
-
-    const row = rows.find(r => r[0] === code);
-
-    if (!row) {
+    if (!client) {
       return json({ valid: false, error: 'Código não encontrado.' }, 404);
     }
 
-    if (row[4] === 'concluído') {
+    if (client.briefingStatus === 'concluído') {
       return json({ valid: false, error: 'Esse briefing já foi concluído.' }, 409);
     }
 
     return json({
       valid: true,
       client: {
-        code: row[0],
-        name: row[1],
-        number: row[2],
-        services: row[3],
-        responsible: row[7],
+        code: client.briefingCode,
+        name: client.name,
+        services: (client.services || []).join(', '),
+        responsible: client.contacts?.[0]?.name || '',
+        firestoreId: client._id,
       },
     });
   } catch (err) {

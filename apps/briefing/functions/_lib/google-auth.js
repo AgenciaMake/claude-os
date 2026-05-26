@@ -12,6 +12,7 @@ export async function getGoogleAccessToken(serviceAccountJson) {
       'https://www.googleapis.com/auth/spreadsheets',
       'https://www.googleapis.com/auth/drive',
       'https://www.googleapis.com/auth/documents',
+      'https://www.googleapis.com/auth/datastore',
     ].join(' '),
     aud: 'https://oauth2.googleapis.com/token',
     exp: now + 3600,

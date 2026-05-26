@@ -1,10 +1,12 @@
 # Skill: /novo-cliente
 
-Onboarding completo de um novo cliente da MakeLemonAd.
+Onboarding operacional de um novo cliente da MakeLemonAd.
+
+> O código de briefing (MK-XXXXX) e o cadastro do cliente agora são gerados automaticamente pelo CitraDesk ao criar o cliente lá. Essa skill cuida só da estrutura de pastas e workspace.
 
 ## Quando usar
 
-Sempre que um contrato for assinado e for hora de montar a estrutura do cliente.
+Sempre que um contrato for assinado e o cliente já tiver sido cadastrado no CitraDesk.
 
 ## O que faz
 
@@ -20,10 +22,9 @@ Sempre que um contrato for assinado e for hora de montar a estrutura do cliente.
 Perguntar ao usuário:
 
 - **Nome do cliente** (como vai aparecer nas pastas)
-- **Número do cliente** (ver último número em `02. CLIENTES` no Drive e sugerir o próximo)
+- **Número do cliente** (já definido no CitraDesk — confirmar qual é)
 - **Tipo de serviço**: 360 / Social Media / Performance (Tráfego Pago) / Desenvolvimento / Outro
 - **Responsável interno** (Amanda, Thayná, Gustavo, Tiago, etc.)
-- **Nome do contato principal do cliente** (pessoa pra quem a mensagem do briefing vai ser enviada — só o primeiro nome basta)
 
 Formatar o nome da pasta como: `{número}. {Nome do Cliente}`
 Exemplo: `33. Empresa ABC`
@@ -62,12 +63,12 @@ Para criar cada pasta usar `mcp__google-drive__createFolder` com o `driveId: "0A
 
 ### Pasta USER — permissões
 
-Após o briefing, quando o cliente informar o(s) email(s), configurar a pasta `{NOME} - USER`:
+Após o briefing, quando o cliente informar o(s) email(s) (disponíveis no CitraDesk após o Alfred concluir), configurar a pasta `{NOME} - USER`:
 
 - **Cliente com Gmail**: permissão `writer` (pode adicionar e editar)
 - **Cliente sem Gmail**: permissão `commenter` (só pode adicionar — limitação do Google)
 
-Usar `mcp__google-drive__addPermission` na pasta USER com o email fornecido no briefing.
+Usar `mcp__google-drive__addPermission` na pasta USER com o email fornecido.
 
 ---
 
@@ -166,15 +167,20 @@ Criar em `clientes/{slug-do-cliente}/` com os arquivos:
 ```markdown
 # Checklist Onboarding — {Nome do Cliente}
 
+## CitraDesk
+- [ ] Cliente cadastrado no CitraDesk
+- [ ] Código de briefing gerado (MK-XXXXX) — visível no perfil do cliente
+- [ ] Contrato PDF enviado para upload no CitraDesk
+
 ## Drive
 - [ ] Pasta cliente criada em 02. CLIENTES
 - [ ] Pasta criação criada em 02. MAKE - CRIAÇÃO
 - [ ] Acesso do cliente configurado (após briefing)
 
 ## Briefing
-- [ ] Google Forms enviado ao cliente
-- [ ] Respostas recebidas
-- [ ] Briefing.md preenchido
+- [ ] Mensagem WhatsApp enviada (código + link do Alfred)
+- [ ] Briefing concluído pelo Alfred (aparece como "Concluído" no CitraDesk)
+- [ ] Briefing.md preenchido com as respostas do Doc gerado
 
 ## Trello
 - [ ] Card criado no board de clientes
@@ -189,34 +195,9 @@ Criar em `clientes/{slug-do-cliente}/` com os arquivos:
 
 ---
 
-## Passo 5 — Gerar código de briefing e registrar na Sheet
+## Passo 5 — Resumo final
 
-Gerar um código único no formato `MK-XXXXX` (5 caracteres aleatórios maiúsculos/números, ex: `MK-8F3K2`).
-
-Adicionar uma linha na Sheet `MAKE_BRIEFING_REGISTRO` (ID: `177tCA1GgrC9WyFiwi2PQmiqWg_69dDe6DSKxruVePt0`):
-
-| Campo | Valor |
-|---|---|
-| CÓDIGO | `MK-XXXXX` gerado |
-| CLIENTE | Nome do cliente |
-| NÚMERO | Número do cliente |
-| SERVIÇOS CONTRATADOS | Lista dos serviços (separados por vírgula) |
-| STATUS | `pendente` |
-| DATA DE CRIAÇÃO | Data atual no formato `DD.MM.AA` |
-| DATA DO BRIEFING | (vazio — preenchido quando o cliente concluir) |
-| RESPONSÁVEL INTERNO | Nome do responsável informado no Passo 1 |
-| EMAIL CLIENTE | (vazio — preenchido após receber o briefing) |
-| OBSERVAÇÕES | (vazio) |
-
-Usar `mcp__google-drive__appendSpreadsheetRows` para inserir a linha.
-
----
-
-## Passo 6 — Resumo final
-
-Ao concluir, exibir **dois blocos**:
-
-### Bloco 1 — Status interno (pra Amanda conferir)
+Ao concluir, exibir o status:
 
 ```
 Cliente: {Nome do Cliente}
@@ -229,35 +210,8 @@ Pastas criadas:
 ✓ Drive criação: 02. MAKE - CRIAÇÃO > {número}. {Nome}
 ✓ Workspace local: clientes/{slug}/
 
-Código de briefing: MK-XXXXX
-Link do app: https://makelemonad-briefing.pages.dev
-```
-
-### Bloco 2 — Mensagem pronta pra mandar ao cliente
-
-Exibir exatamente essa mensagem, já formatada e pronta pra copiar e colar no WhatsApp:
-
-```
-Oi, {primeiroNomeDoCliente}! Tudo bem?
-
-Aqui é da MakeLemonAd 🍋
-
-Pra dar o start no seu projeto, preciso que você responda um briefing
-rápido com nosso assistente virtual, o Alfred. Leva uns 20 minutos
-e ajuda muito a equipe a entender seu negócio antes de começar.
-
-🔗 https://makelemonad-briefing.pages.dev
-🔑 Código: MK-XXXXX
-
-Qualquer dúvida, é só me chamar aqui!
-```
-
-Obs: {primeiroNomeDoCliente} é só o primeiro nome (ex: se o cliente é "Empresa ABC", use o nome do responsável pelo contato se já conhecido; senão, coloca "pessoal" ou similar — perguntar no Passo 1 se faz sentido capturar esse nome também).
-
-### Próximos passos a lembrar a Amanda
-
-```
-→ Copiar a mensagem acima e enviar ao contato do cliente
+Próximos passos:
+→ Código de briefing: disponível no perfil do cliente no CitraDesk
 → Criar card no Trello
 → Agendar kickoff
 ```

@@ -1,4 +1,5 @@
 import { getGoogleAccessToken } from '../_lib/google-auth.js';
+import { getClientByBriefingCode } from '../_lib/firestore-client.js';
 import { buildSystemPrompt } from '../_lib/prompt.js';
 import { saveBriefingDoc } from '../_lib/save-doc.js';
 import { analyzeUrls } from '../_lib/site-fetch.js';
@@ -9,20 +10,33 @@ export async function onRequestPost({ request, env }) {
   try {
     const { code, messages } = await request.json();
 
-    // Busca os dados do cliente na Sheet
     const token = await getGoogleAccessToken(env.GOOGLE_SERVICE_ACCOUNT);
-    const client = await getClientByCode(token, env.SHEET_ID, code);
+    const client = await getClientByBriefingCode(
+      token,
+      env.FIREBASE_PROJECT_ID,
+      env.FIREBASE_DB_NAME,
+      env.FIREBASE_TENANT_ID,
+      code
+    );
+
     if (!client) {
       return json({ error: 'Código inválido.' }, 404);
     }
-    if (client.status === 'concluído') {
+    if (client.briefingStatus === 'concluído') {
       return json({ error: 'Briefing já concluído.' }, 409);
     }
 
-    // Monta o system prompt contextualizado
-    const systemPrompt = buildSystemPrompt(client);
+    // Normaliza client para o formato esperado pelo prompt
+    const clientData = {
+      name: client.name,
+      services: (client.services || []).join(', '),
+      responsible: client.contacts?.[0]?.name || '',
+      firestoreId: client._id,
+    };
 
-    // Se a última mensagem do usuário tem URLs, busca e injeta contexto real
+    const systemPrompt = buildSystemPrompt(clientData);
+
+    // Enriquece última mensagem do usuário com contexto de URLs se houver
     let enrichedMessages = messages;
     if (messages.length > 0) {
       const last = messages[messages.length - 1];
@@ -37,7 +51,6 @@ export async function onRequestPost({ request, env }) {
       }
     }
 
-    // Chama a Claude API
     const apiRes = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -66,67 +79,37 @@ export async function onRequestPost({ request, env }) {
     const done = reply.includes(DONE_MARKER);
     const cleanReply = reply.replace(DONE_MARKER, '').trim();
 
-    // Se o briefing terminou, gera o Doc e atualiza a Sheet
     if (done) {
-      const finalMessages = [
-        ...messages,
-        { role: 'assistant', content: cleanReply },
-      ];
-      await saveBriefingDoc(token, env, client, finalMessages);
-      await markBriefingComplete(token, env.SHEET_ID, code, client.rowIndex);
+      const finalMessages = [...messages, { role: 'assistant', content: cleanReply }];
+      await saveBriefingDoc(token, env, clientData, finalMessages);
+      await markBriefingComplete(token, env, client._id, env.FIREBASE_TENANT_ID);
     }
 
-    return json({
-      message: cleanReply,
-      done,
-    });
+    return json({ message: cleanReply, done });
   } catch (err) {
     console.error(err);
     return json({ error: 'Erro interno: ' + err.message }, 500);
   }
 }
 
-async function getClientByCode(token, sheetId, code) {
-  const res = await fetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/A2:J1000`,
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
-  const data = await res.json();
-  const rows = data.values || [];
-  const idx = rows.findIndex(r => r[0] === code);
-  if (idx === -1) return null;
-  const row = rows[idx];
-  return {
-    rowIndex: idx + 2, // 1-based + header
-    code: row[0],
-    name: row[1],
-    number: row[2],
-    services: row[3],
-    status: row[4],
-    responsible: row[7],
-  };
-}
+async function markBriefingComplete(token, env, clientId, tenantId) {
+  const url = `https://firestore.googleapis.com/v1/projects/${env.FIREBASE_PROJECT_ID}/databases/${env.FIREBASE_DB_NAME}/documents/tenants/${tenantId}/clients/${clientId}?updateMask.fieldPaths=briefingStatus&updateMask.fieldPaths=briefingCompletedAt`;
 
-async function markBriefingComplete(token, sheetId, code, rowIndex) {
-  const today = new Date();
-  const dd = String(today.getDate()).padStart(2, '0');
-  const mm = String(today.getMonth() + 1).padStart(2, '0');
-  const yy = String(today.getFullYear()).slice(-2);
-  const dateStr = `${dd}.${mm}.${yy}`;
+  const today = new Date().toISOString();
 
-  await fetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/E${rowIndex}:G${rowIndex}?valueInputOption=RAW`,
-    {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
+  await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      fields: {
+        briefingStatus: { stringValue: 'concluído' },
+        briefingCompletedAt: { stringValue: today },
       },
-      body: JSON.stringify({
-        values: [['concluído', '', dateStr]],
-      }),
-    }
-  );
+    }),
+  });
 }
 
 function json(body, status = 200) {
