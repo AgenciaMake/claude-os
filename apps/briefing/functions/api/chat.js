@@ -32,6 +32,7 @@ export async function onRequestPost({ request, env }) {
       services: (client.services || []).join(', '),
       responsible: client.contacts?.[0]?.name || '',
       firestoreId: client._id,
+      contractSummary: client.contractSummary || null,
     };
 
     const systemPrompt = buildSystemPrompt(clientData);
