@@ -26,7 +26,7 @@
       "bg": "black",
       "number": 4,
       "fullBleedImage": "photo2.jpg",
-      "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.55);padding:7px 16px;backdrop-filter:blur(4px);'>enquanto você agenda o próximo post</div><div style='font-size:84px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>tem gente<br>faturando mais<br>em 2 horas de<br>live do que em<br>1 mês de loja.</div></div>"
+      "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.55);padding:7px 16px;backdrop-filter:blur(4px);'>enquanto você agenda o próximo post</div><div style='font-size:84px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>tem gente<br>faturando mais<br>em <span style='color:var(--lime);'>2 horas</span> de<br>live do que em<br>1 mês de loja.</div></div>"
     },
     {
       "filename": "slide05-dado2.png",
