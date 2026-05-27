@@ -9,8 +9,8 @@ const { chromium } = require("playwright");
 const LOGO_PNG_PATH = path.resolve(__dirname, "../make/social/identidade-visual/logos/logo_make_oficial.png");
 const LOGO_SVG_PATH = path.resolve(__dirname, "../make/social/identidade-visual/logos/logo_make.svg");
 
-// Espaço útil pro conteúdo central. Grade Make: 50px em todos os lados.
-const SAFE_AREA = { width: 980, height: 1140 };
+// Espaço útil pro conteúdo central. Grade Make: 70px em todos os lados.
+const SAFE_AREA = { width: 940, height: 1100 };
 
 // Cor do duplo chevron de continuidade, contrastando com o fundo do slide.
 const ARROW_COLOR = {
