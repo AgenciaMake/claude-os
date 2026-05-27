@@ -66,7 +66,7 @@ async function fitContent(page, safeArea) {
   }, safeArea);
 }
 
-async function renderSlide(browser, template, slide, outPath, slideHeight, safeArea) {
+async function renderSlide(browser, template, slide, outPath, slideHeight, safeArea, configFlags) {
   let html = template;
 
   // Background. Se tem coverImage (TV4) ou fullBleedImage, adiciona a div da imagem + ajusta classes.
@@ -96,22 +96,27 @@ async function renderSlide(browser, template, slide, outPath, slideHeight, safeA
   }
   html = html.replace("{{BG_CLASS}}", bgClass);
 
+  const noTopElements = configFlags.noTopElements;
+  const noFooter = configFlags.noFooter;
+
   // Top-left (hashtag nas capas, numeração nos internos, nada no CTA)
   // Suporta override explícito de cor: slide.hashtagColor / slide.numColor (hex ou var())
   let topLeft = "";
-  if (slide.isCover) {
-    const colorStyle = slide.hashtagColor ? ` style="color:${slide.hashtagColor};"` : "";
-    topLeft = `<div class="hashtag"${colorStyle}>#performance<strong>estratégica</strong>360</div>`;
-  } else if (slide.number && !slide.isCta) {
-    const colorStyle = slide.numColor ? ` style="color:${slide.numColor};"` : "";
-    topLeft = `<div class="slide-num"${colorStyle}>${String(slide.number).padStart(2, "0")}</div>`;
+  if (!noTopElements) {
+    if (slide.isCover) {
+      const colorStyle = slide.hashtagColor ? ` style="color:${slide.hashtagColor};"` : "";
+      topLeft = `<div class="hashtag"${colorStyle}>#performance<strong>estratégica</strong>360</div>`;
+    } else if (slide.number && !slide.isCta) {
+      const colorStyle = slide.numColor ? ` style="color:${slide.numColor};"` : "";
+      topLeft = `<div class="slide-num"${colorStyle}>${String(slide.number).padStart(2, "0")}</div>`;
+    }
   }
   html = html.replace("{{TOP_LEFT}}", topLeft);
 
   // Top-right (selo Make nas capas). slide.noLogo = true omite o logo.
   // logoStyle: "png-oficial" (default) | "svg-{cor}" — ex: "svg-#000000", "svg-#434244", "svg-#FFFFFF"
   let topRight = "";
-  if (slide.isCover && !slide.noLogo) {
+  if (!noTopElements && slide.isCover && !slide.noLogo) {
     const style = slide.logoStyle || "png-oficial";
     if (style === "png-oficial") {
       const logoData = fs.readFileSync(LOGO_PNG_PATH).toString("base64");
@@ -146,9 +151,9 @@ async function renderSlide(browser, template, slide, outPath, slideHeight, safeA
   html = html.replace("{{CONTENT}}", content);
   html = html.replace("{{COVER_IMAGE}}", coverImageBlock);
 
-  // Footer (não no CTA). Override de cor: slide.footerColor
+  // Footer (não no CTA, não quando noFooter). Override de cor: slide.footerColor
   let footer = "";
-  if (!slide.isCta) {
+  if (!slide.isCta && !noFooter) {
     const slogan = slide.footerSlogan || "Conexão que Gera Conversão";
     const colorStyle = slide.footerColor ? ` style="color:${slide.footerColor};"` : "";
     footer = `<div class="footer"${colorStyle}>
@@ -206,6 +211,10 @@ async function main() {
   const safeArea = slideHeight === 1920 ? SAFE_AREA_STORY : SAFE_AREA_FEED;
   const templateFile = config.templateFile || "slide.html";
   const template = fs.readFileSync(path.resolve(__dirname, "templates", templateFile), "utf8");
+  const configFlags = {
+    noTopElements: config.noTopElements || false,
+    noFooter: config.noFooter || false,
+  };
 
   const slides = filterFilename
     ? config.slides.filter(s => s.filename === filterFilename)
@@ -216,7 +225,7 @@ async function main() {
   const browser = await chromium.launch();
   for (const slide of slides) {
     const outPath = path.join(outDir, slide.filename);
-    await renderSlide(browser, template, slide, outPath, slideHeight, safeArea);
+    await renderSlide(browser, template, slide, outPath, slideHeight, safeArea, configFlags);
     console.log(`  OK: ${slide.filename}`);
   }
   await browser.close();

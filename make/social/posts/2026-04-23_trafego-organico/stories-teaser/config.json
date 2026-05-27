@@ -2,6 +2,8 @@
   "outDir": ".",
   "height": 1920,
   "templateFile": "story.html",
+  "noTopElements": true,
+  "noFooter": true,
   "slides": [
     {
       "filename": "story01-hook.png",
