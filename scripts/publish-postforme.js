@@ -4,7 +4,7 @@ const path = require("path");
 // --- Parse args ---
 function parseArgs() {
   const args = process.argv.slice(2);
-  const opts = { platform: "", images: [], caption: "", accountId: "", draft: false, dryRun: false };
+  const opts = { platform: "", images: [], caption: "", accountId: "", draft: false, dryRun: false, story: false };
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--platform") opts.platform = args[++i];
     else if (args[i] === "--images") opts.images = args[++i].split(",").map(s => s.trim());
@@ -12,6 +12,7 @@ function parseArgs() {
     else if (args[i] === "--account-id") opts.accountId = args[++i];
     else if (args[i] === "--draft") opts.draft = true;
     else if (args[i] === "--dry-run") opts.dryRun = true;
+    else if (args[i] === "--story") opts.story = true;
   }
   return opts;
 }
@@ -55,6 +56,7 @@ async function createPost(opts, accountId, mediaUrls) {
     social_accounts: [accountId],
     media: mediaUrls.map(url => ({ url })),
   };
+  if (opts.story) payload.post_type = "story";
   if (opts.platform === "tiktok") {
     payload.platform_configurations = {
       tiktok: { is_draft: opts.draft, privacy_status: "public", auto_add_music: !opts.draft },
