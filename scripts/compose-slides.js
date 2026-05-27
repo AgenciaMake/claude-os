@@ -104,10 +104,10 @@ async function renderSlide(browser, template, slide, outPath) {
   }
   html = html.replace("{{TOP_LEFT}}", topLeft);
 
-  // Top-right (selo Make nas capas)
+  // Top-right (selo Make nas capas). slide.noLogo = true omite o logo.
   // logoStyle: "png-oficial" (default) | "svg-{cor}" — ex: "svg-#000000", "svg-#434244", "svg-#FFFFFF"
   let topRight = "";
-  if (slide.isCover) {
+  if (slide.isCover && !slide.noLogo) {
     const style = slide.logoStyle || "png-oficial";
     if (style === "png-oficial") {
       const logoData = fs.readFileSync(LOGO_PNG_PATH).toString("base64");
