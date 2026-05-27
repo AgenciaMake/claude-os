@@ -17,11 +17,9 @@
     },
     {
       "filename": "slide03-dado.png",
-      "bg": "light-gray",
+      "bg": "black",
       "number": 3,
-      "numColor": "#434244",
-      "footerColor": "#434244",
-      "content": "<div style='line-height:1.0;'><div style='background:var(--green2);padding:14px 0 4px;'><div style='font-size:240px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-8px;line-height:0.85;'>96x</div></div><div style='margin-top:36px;'><div style='font-size:46px;font-weight:500;color:var(--text-dark);line-height:1.2;'>foi o crescimento de faturamento<br>por lives no TikTok Shop em 1 ano.</div><div style='font-size:28px;font-weight:700;color:var(--text-dark);margin-top:28px;opacity:0.7;'>Não é projeção. Já aconteceu.</div></div></div>"
+      "content": "<div style='line-height:1.0;'><div style='font-size:42px;font-weight:400;color:var(--white);opacity:0.45;text-transform:uppercase;letter-spacing:3px;margin-bottom:16px;'>crescimento em lives</div><div style='font-size:280px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-10px;line-height:0.82;'>96x</div><div style='margin-top:32px;border-top:2px solid rgba(255,255,255,0.15);padding-top:32px;'><div style='font-size:44px;font-weight:500;color:var(--white);line-height:1.2;'>de faturamento por lives<br>no TikTok Shop em 1 ano.</div><div style='font-size:28px;font-weight:700;color:var(--white);margin-top:24px;opacity:0.5;letter-spacing:1px;text-transform:uppercase;'>Não é projeção. Já aconteceu.</div></div></div>"
     },
     {
       "filename": "slide04-foto.png",
