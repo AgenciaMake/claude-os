@@ -47,7 +47,7 @@
       "filename": "slide07-cta.png",
       "bg": "black",
       "isCta": true,
-      "content": "<div style='font-size:88px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Você aparece quando alguém pergunta pro ChatGPT o que você vende?</div><div style='font-size:42px;font-weight:400;color:var(--white);line-height:1.5;opacity:0.6;'>Vai lá. Testa agora.<br>Se não aparecer, você já perdeu esse cliente.</div><div style='font-size:50px;font-weight:700;color:var(--lime);line-height:1.2;'>Comenta o resultado aqui embaixo.<br>A <em style='font-weight:800;font-style:italic;'>Make</em> te mostra o que fazer.</div><div style='text-align:center;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
+      "content": "<div style='font-size:88px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Você aparece quando alguém pergunta pro ChatGPT o que você vende?</div><div style='font-size:42px;font-weight:400;color:var(--white);line-height:1.5;opacity:0.6;'>Vai lá. Testa agora.<br>Se não aparecer, você já perdeu esse cliente.</div><div style='font-size:50px;font-weight:700;color:var(--white);line-height:1.2;'>Comenta o resultado aqui embaixo.<br>A <em style='font-weight:800;font-style:italic;color:var(--lime);'>Make</em> te mostra o que fazer.</div><div style='text-align:center;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
     }
   ]
 }
