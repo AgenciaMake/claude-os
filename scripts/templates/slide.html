@@ -122,6 +122,19 @@
     width: 100%;
   }
 
+  /* CTA: ocupa todo o espaço seguro, distribui itens de cima a baixo */
+  .has-cta .content {
+    position: absolute;
+    top: 50px;
+    bottom: 50px;
+    left: 50px;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 3;
+  }
+
   /* Capa com imagem: imagem ocupa 60% do topo + bloco preto na inferior com fade */
   .cover-image-area {
     position: absolute;

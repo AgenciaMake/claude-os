@@ -68,6 +68,7 @@ async function renderSlide(browser, template, slide, outPath) {
 
   // Background. Se tem coverImage (TV4) ou fullBleedImage, adiciona a div da imagem + ajusta classes.
   let bgClass = `bg-${slide.bg || "black"}`;
+  if (slide.isCta) bgClass += " has-cta";
   let coverImageBlock = "";
   if (slide.coverImage) {
     bgClass += " has-cover-image";
@@ -170,7 +171,7 @@ async function renderSlide(browser, template, slide, outPath) {
   const page = await browser.newPage({ viewport: { width: 1080, height: 1350 } });
   await page.setContent(html, { waitUntil: "networkidle" });
   await page.waitForTimeout(700); // fonts
-  await fitContent(page); // auto-fit caso o conteúdo central transborde a área útil
+  if (!slide.isCta) await fitContent(page); // CTA usa layout absoluto, não precisa de fit
   await page.waitForTimeout(100);
   await page.screenshot({ path: outPath, type: "png", clip: { x: 0, y: 0, width: 1080, height: 1350 } });
   await page.close();
