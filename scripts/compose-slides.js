@@ -1,6 +1,7 @@
-// Compose MakeLemonAd carousel slides → PNGs 1080x1350
+// Compose MakeLemonAd carousel slides → PNGs 1080x1350 (feed) ou 1080x1920 (story)
 // Uso: node compose-slides.js <config.json> [slideFilename]
 // Se passar slideFilename, renderiza só aquele slide (útil pra iterar)
+// config.json pode ter "height": 1920 e "templateFile": "story.html" pra stories
 
 const fs = require("fs");
 const path = require("path");
@@ -10,7 +11,9 @@ const LOGO_PNG_PATH = path.resolve(__dirname, "../make/social/identidade-visual/
 const LOGO_SVG_PATH = path.resolve(__dirname, "../make/social/identidade-visual/logos/logo_make.svg");
 
 // Espaço útil pro conteúdo central. Grade Make: 70px em todos os lados.
-const SAFE_AREA = { width: 940, height: 1100 };
+// Stories: altura menor porque UI do Instagram cobre topo (~200px) e rodapé (~300px).
+const SAFE_AREA_FEED  = { width: 940, height: 1100 };
+const SAFE_AREA_STORY = { width: 940, height: 1480 };
 
 // Cor do duplo chevron de continuidade, contrastando com o fundo do slide.
 const ARROW_COLOR = {
@@ -34,7 +37,7 @@ function getLogoSvg(fillColor) {
 // Auto-fit: força a largura útil da SAFE_AREA, mede a altura natural com essa largura,
 // e aplica transform: scale APENAS se a altura ultrapassar o disponível. Largura fica
 // SEMPRE 100% do safe-area (preserva o "fit horizontal" de texto/imagem).
-async function fitContent(page) {
+async function fitContent(page, safeArea) {
   await page.evaluate(({ width, height }) => {
     const content = document.querySelector(".content");
     if (!content) return;
@@ -60,10 +63,10 @@ async function fitContent(page) {
       // Cabe sem scale — só fixa a largura no safe-area pra usar 100% da largura útil.
       content.style.width = width + "px";
     }
-  }, SAFE_AREA);
+  }, safeArea);
 }
 
-async function renderSlide(browser, template, slide, outPath) {
+async function renderSlide(browser, template, slide, outPath, slideHeight, safeArea) {
   let html = template;
 
   // Background. Se tem coverImage (TV4) ou fullBleedImage, adiciona a div da imagem + ajusta classes.
@@ -155,25 +158,38 @@ async function renderSlide(browser, template, slide, outPath) {
   }
   html = html.replace("{{FOOTER}}", footer);
 
-  // Duplo chevron de continuidade — topo direito, alinhado com o número do slide.
-  // Cor automática contrastando com o fundo. Ausente no CTA (último slide).
+  // Swipe arrow (feed) ou swipe-up indicator (story). Ausente no CTA.
   let swipeArrow = "";
   if (!slide.isCta) {
     const color = ARROW_COLOR[slide.bg || 'black'] || '#ffffff';
-    swipeArrow = `<svg class="swipe-arrow" viewBox="0 0 54 28" width="54" height="28" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="4,4 18,14 4,24" opacity="0.3"/>
-      <polyline points="26,4 40,14 26,24"/>
-    </svg>`;
+    if (slideHeight === 1920) {
+      // Story: indicador de swipe-up no rodapé
+      const label = slide.swipeLabel || "Ver no feed";
+      swipeArrow = `<div class="swipe-up" style="color:${color};">
+        <svg viewBox="0 0 32 20" width="32" height="20" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="4,16 16,4 28,16"/>
+        </svg>
+        <span>${label}</span>
+      </div>`;
+    } else {
+      swipeArrow = `<svg class="swipe-arrow" viewBox="0 0 54 28" width="54" height="28" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="4,4 18,14 4,24" opacity="0.3"/>
+        <polyline points="26,4 40,14 26,24"/>
+      </svg>`;
+    }
   }
-  html = html.replace("{{SWIPE_ARROW}}", swipeArrow);
+  const swipeKey = slideHeight === 1920 ? "{{SWIPE_UP}}" : "{{SWIPE_ARROW}}";
+  html = html.replace(swipeKey, swipeArrow);
+  // Limpa placeholder não usado (story.html tem {{SWIPE_UP}}, feed tem {{SWIPE_ARROW}})
+  html = html.replace("{{SWIPE_UP}}", "").replace("{{SWIPE_ARROW}}", "");
 
   // Render
-  const page = await browser.newPage({ viewport: { width: 1080, height: 1350 } });
+  const page = await browser.newPage({ viewport: { width: 1080, height: slideHeight } });
   await page.setContent(html, { waitUntil: "networkidle" });
   await page.waitForTimeout(700); // fonts
-  if (!slide.isCta) await fitContent(page); // CTA usa layout absoluto, não precisa de fit
+  if (!slide.isCta) await fitContent(page, safeArea);
   await page.waitForTimeout(100);
-  await page.screenshot({ path: outPath, type: "png", clip: { x: 0, y: 0, width: 1080, height: 1350 } });
+  await page.screenshot({ path: outPath, type: "png", clip: { x: 0, y: 0, width: 1080, height: slideHeight } });
   await page.close();
 }
 
@@ -186,7 +202,10 @@ async function main() {
   const outDir = path.resolve(path.dirname(configPath), config.outDir);
   fs.mkdirSync(outDir, { recursive: true });
 
-  const template = fs.readFileSync(path.resolve(__dirname, "templates/slide.html"), "utf8");
+  const slideHeight = config.height || 1350;
+  const safeArea = slideHeight === 1920 ? SAFE_AREA_STORY : SAFE_AREA_FEED;
+  const templateFile = config.templateFile || "slide.html";
+  const template = fs.readFileSync(path.resolve(__dirname, "templates", templateFile), "utf8");
 
   const slides = filterFilename
     ? config.slides.filter(s => s.filename === filterFilename)
@@ -197,7 +216,7 @@ async function main() {
   const browser = await chromium.launch();
   for (const slide of slides) {
     const outPath = path.join(outDir, slide.filename);
-    await renderSlide(browser, template, slide, outPath);
+    await renderSlide(browser, template, slide, outPath, slideHeight, safeArea);
     console.log(`  OK: ${slide.filename}`);
   }
   await browser.close();
