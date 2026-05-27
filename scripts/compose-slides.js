@@ -9,9 +9,21 @@ const { chromium } = require("playwright");
 const LOGO_PNG_PATH = path.resolve(__dirname, "../make/social/identidade-visual/logos/logo_make_oficial.png");
 const LOGO_SVG_PATH = path.resolve(__dirname, "../make/social/identidade-visual/logos/logo_make.svg");
 
-// Espaço útil pro conteúdo central (entre margens, sem invadir hashtag/logo no topo,
-// rodapé no rodapé, ou faixa lateral à direita). Usado pelo auto-fit.
-const SAFE_AREA = { width: 920, height: 1140 };
+// Espaço útil pro conteúdo central. Grade Make: 50px em todos os lados.
+const SAFE_AREA = { width: 980, height: 1140 };
+
+// Cor do duplo chevron de continuidade, contrastando com o fundo do slide.
+const ARROW_COLOR = {
+  'black':        '#ffffff',
+  'dark-gray':    '#ffffff',
+  'light-gray':   '#434244',
+  'lime':         '#000000',
+  'green2':       '#ffffff',
+  'split-hv':     '#000000',
+  'split-hv-inv': '#ffffff',
+  'split-hv-gb':  '#434244',
+  'split-vl':     '#000000',
+};
 
 // Carrega o SVG do logo e troca a cor do círculo (fill da classe .st0) pela cor pedida.
 function getLogoSvg(fillColor) {
@@ -142,16 +154,17 @@ async function renderSlide(browser, template, slide, outPath) {
   }
   html = html.replace("{{FOOTER}}", footer);
 
-  // Side strip = cor do próximo slide. Seta = cor do slide atual invadindo a faixa.
-  // Override explícito: slide.arrowColor (necessário em fundos split, onde a cor do bg
-  // do slide atual depende da posição vertical da seta).
-  let sideStrip = "";
-  if (!slide.isCta && slide.nextBg) {
-    const arrowStyle = slide.arrowColor ? ` style="border-left-color:${slide.arrowColor};"` : "";
-    sideStrip = `<div class="side-strip ${slide.nextBg}"></div>
-      <div class="slide-arrow from-${slide.bg || "black"}"${arrowStyle}></div>`;
+  // Duplo chevron de continuidade — topo direito, alinhado com o número do slide.
+  // Cor automática contrastando com o fundo. Ausente no CTA (último slide).
+  let swipeArrow = "";
+  if (!slide.isCta) {
+    const color = ARROW_COLOR[slide.bg || 'black'] || '#ffffff';
+    swipeArrow = `<svg class="swipe-arrow" viewBox="0 0 54 28" width="54" height="28" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="4,4 18,14 4,24" opacity="0.3"/>
+      <polyline points="26,4 40,14 26,24"/>
+    </svg>`;
   }
-  html = html.replace("{{SIDE_STRIP}}", sideStrip);
+  html = html.replace("{{SWIPE_ARROW}}", swipeArrow);
 
   // Render
   const page = await browser.newPage({ viewport: { width: 1080, height: 1350 } });
