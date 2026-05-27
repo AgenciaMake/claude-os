@@ -9,45 +9,46 @@
       "content": "<div style='line-height:0.95;'><img src='tiktok-logo.png' style='width:200px;height:auto;display:block;margin-bottom:40px;' alt='TikTok'><div style='font-size:130px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-4px;text-transform:uppercase;line-height:0.92;'>3º maior<br>marketplace<br>do Brasil.</div><div style='font-size:36px;font-weight:400;color:var(--white);opacity:0.55;margin-top:32px;line-height:1.4;'>Em menos de 12 meses.<br>Atrás só do Mercado Livre.</div></div>"
     },
     {
-      "filename": "slide02-dado.png",
-      "bg": "light-gray",
+      "filename": "slide02-foto.png",
+      "bg": "black",
       "number": 2,
+      "fullBleedImage": "photo3.jpg",
+      "content": "<div style='line-height:1.05;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.6;text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;'>o que você está vendo</div><div style='font-size:88px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Isso não é<br>influencer.</div><div style='font-size:40px;font-weight:500;color:var(--lime);line-height:1.2;margin-top:20px;'>É loja. É vendedor. É vitrine.<br>Tudo no mesmo vídeo.</div></div>"
+    },
+    {
+      "filename": "slide03-dado.png",
+      "bg": "light-gray",
+      "number": 3,
       "numColor": "#434244",
       "footerColor": "#434244",
-      "content": "<div style='line-height:1.0;'><div style='background:var(--green2);padding:14px 0 4px;'><div style='font-size:240px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-8px;line-height:0.85;'>96x</div></div><div style='margin-top:36px;'><div style='font-size:46px;font-weight:500;color:var(--text-dark);line-height:1.2;'>foi o crescimento de faturamento<br>por lives no TikTok Shop<br>em 1 ano.</div><div style='font-size:28px;font-weight:700;color:var(--text-dark);margin-top:28px;opacity:0.7;'>Não é projeção. Já aconteceu.</div></div></div>"
+      "content": "<div style='line-height:1.0;'><div style='background:var(--green2);padding:14px 0 4px;'><div style='font-size:240px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-8px;line-height:0.85;'>96x</div></div><div style='margin-top:36px;'><div style='font-size:46px;font-weight:500;color:var(--text-dark);line-height:1.2;'>foi o crescimento de faturamento<br>por lives no TikTok Shop em 1 ano.</div><div style='font-size:28px;font-weight:700;color:var(--text-dark);margin-top:28px;opacity:0.7;'>Não é projeção. Já aconteceu.</div></div></div>"
     },
     {
-      "filename": "slide03-foto.png",
+      "filename": "slide04-foto.png",
       "bg": "black",
-      "number": 3,
-      "fullBleedImage": "tiktok-shop-img.jpg",
-      "content": "<div style='line-height:1.0;'><div style='font-size:28px;font-weight:400;color:var(--white);opacity:0.65;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;'>O novo comportamento</div><div style='font-size:96px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>O produto<br>te encontra<br>enquanto você<br>assiste algo.</div></div>"
+      "number": 4,
+      "fullBleedImage": "photo2.jpg",
+      "content": "<div style='line-height:1.05;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.6;text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;'>enquanto você agenda o próximo post</div><div style='font-size:84px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>tem gente<br>faturando mais<br>em 2 horas de<br>live do que em<br>1 mês de loja.</div></div>"
     },
     {
-      "filename": "slide04-dado2.png",
+      "filename": "slide05-dado2.png",
       "bg": "lime",
-      "number": 4,
+      "number": 5,
       "numColor": "#000000",
       "footerColor": "#000000",
-      "content": "<div style='line-height:1.0;'><div style='font-size:34px;font-weight:400;color:var(--black);opacity:0.5;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;'>Quem decide a compra</div><div style='font-size:220px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-6px;line-height:0.88;'>65%</div><div style='font-size:46px;font-weight:700;color:var(--black);line-height:1.1;margin-top:20px;'>dos usuários do TikTok já compraram por recomendação de creator.</div><div style='font-size:28px;font-weight:400;color:var(--black);line-height:1.4;margin-top:28px;opacity:0.7;'>Seu produto não precisa rankear no Google se um creator mostrar ele pra 2 milhões de pessoas.</div></div>"
+      "content": "<div style='line-height:1.0;'><div style='font-size:220px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-6px;line-height:0.88;'>65%</div><div style='font-size:44px;font-weight:700;color:var(--black);line-height:1.1;margin-top:20px;'>dos usuários do TikTok já compraram por recomendação de creator.</div><div style='font-size:30px;font-weight:400;color:var(--black);line-height:1.4;margin-top:28px;opacity:0.75;'>Não buscaram. Não compararam.<br>O produto apareceu. Eles compraram.</div></div>"
     },
     {
-      "filename": "slide05-provocacao.png",
+      "filename": "slide06-provocacao.png",
       "bg": "dark-gray",
-      "number": 5,
-      "content": "<div style='text-align:center;line-height:1.0;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:3px;margin-bottom:52px;'>pense nisso</div><div style='font-size:90px;font-weight:800;font-style:italic;color:var(--white);line-height:0.97;letter-spacing:-2px;'>Não é<br><span style='color:var(--lime);'>anúncio.</span><br>É conteúdo<br>que vende.</div><div style='width:80px;height:4px;background:var(--lime);margin:44px auto;'></div><div style='font-size:30px;font-weight:400;color:var(--white);line-height:1.5;opacity:0.6;'>A marca que ainda separa presença de marca de canal de venda está trabalhando com um mapa de 2018.</div></div>"
-    },
-    {
-      "filename": "slide06-acoes.png",
-      "bg": "black",
       "number": 6,
-      "content": "<div style='line-height:1.0;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.45;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>por onde começar</div><div style='display:flex;flex-direction:column;gap:3px;'><div style='background:var(--lime);padding:22px 28px;display:flex;align-items:center;gap:22px;'><span style='font-size:80px;font-weight:800;font-style:italic;color:var(--black);line-height:1;flex:0 0 auto;'>01</span><div><div style='font-size:36px;font-weight:700;color:var(--black);line-height:1.0;'>Entre como marca.</div><div style='font-size:20px;font-weight:400;color:var(--black);opacity:0.7;margin-top:6px;line-height:1.3;'>Catálogo ativo, perfil otimizado, produto cadastrado.</div></div></div><div style='background:rgba(255,255,255,0.07);padding:22px 28px;display:flex;align-items:center;gap:22px;'><span style='font-size:80px;font-weight:800;font-style:italic;color:var(--lime);line-height:1;flex:0 0 auto;'>02</span><div><div style='font-size:36px;font-weight:700;color:var(--white);line-height:1.0;'>Ative creators do nicho.</div><div style='font-size:20px;font-weight:400;color:var(--white);opacity:0.6;margin-top:6px;line-height:1.3;'>Micro e nano creators convertem mais que celebridade.</div></div></div><div style='background:rgba(255,255,255,0.03);padding:22px 28px;display:flex;align-items:center;gap:22px;'><span style='font-size:80px;font-weight:800;font-style:italic;color:var(--lime);line-height:1;flex:0 0 auto;'>03</span><div><div style='font-size:36px;font-weight:700;color:var(--white);line-height:1.0;'>Conteúdo que vende, não que impressiona.</div><div style='font-size:20px;font-weight:400;color:var(--white);opacity:0.6;margin-top:6px;line-height:1.3;'>Autenticidade converte. Produção pesada afasta.</div></div></div></div></div>"
+      "content": "<div style='line-height:1.05;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:48px;'>a pergunta que incomoda</div><div style='font-size:96px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Seu cliente já está comprando no TikTok Shop.</div><div style='font-size:72px;font-weight:700;font-style:italic;color:var(--lime);letter-spacing:-1px;line-height:1.0;margin-top:32px;'>A pergunta é:<br>de quem?</div></div>"
     },
     {
       "filename": "slide07-cta.png",
       "bg": "black",
       "isCta": true,
-      "content": "<div style='font-size:84px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Sua marca já está no TikTok Shop?</div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.5;opacity:0.6;margin-top:32px;'>Se não está, alguém do seu mercado já está.</div><div style='font-size:46px;font-weight:700;color:var(--white);line-height:1.2;margin-top:40px;'>Comenta aqui o seu segmento. A <em style='font-weight:800;font-style:italic;color:var(--lime);'>Make</em> te diz se vale entrar agora.</div><div style='text-align:center;margin-top:56px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
+      "content": "<div style='font-size:86px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Sua marca está visível no TikTok Shop?</div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.5;opacity:0.6;margin-top:32px;'>Comenta o nome da sua marca aqui.<br>A gente pesquisa ao vivo e conta o que encontrou.</div><div style='font-size:32px;font-weight:600;color:var(--lime);line-height:1.3;margin-top:36px;'>A <em style='font-weight:800;font-style:italic;'>Make</em> tá aqui nos comentários.</div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
     }
   ]
 }
