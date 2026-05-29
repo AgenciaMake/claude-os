@@ -113,7 +113,7 @@ function cutSilences(inputPath, segments, outPath) {
     "-i", inputPath,
     "-filter_complex", filter,
     "-map", "[outv]", "-map", "[outa]",
-    "-c:v", "libx264", "-preset", "fast", "-crf", "20",
+    "-c:v", "libx264", "-preset", "fast", "-crf", "20", "-pix_fmt", "yuv420p",
     "-c:a", "aac", "-b:a", "128k",
     "-y", outPath
   ], false);
@@ -145,7 +145,7 @@ function ensureVertical(inputPath, outPath) {
   ffmpeg([
     "-i", inputPath,
     "-vf", `crop=${Math.min(width, height * OUTPUT_WIDTH / OUTPUT_HEIGHT)}:${height},scale=${OUTPUT_WIDTH}:${OUTPUT_HEIGHT}`,
-    "-c:v", "libx264", "-preset", "fast", "-crf", "20",
+    "-c:v", "libx264", "-preset", "fast", "-crf", "20", "-pix_fmt", "yuv420p",
     "-c:a", "copy",
     "-y", outPath
   ], false);
@@ -219,7 +219,7 @@ function burnCaptions(inputPath, srtPath, outPath) {
   ffmpeg([
     "-i", inputPath,
     "-vf", `subtitles='${srtPath}':force_style='FontName=${CAPTION_FONT},FontSize=${CAPTION_FONT_SIZE},PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BackColour=&H40000000,Bold=1,Outline=2,Shadow=0,Alignment=2,MarginV=${Math.round(OUTPUT_HEIGHT * 0.18)}'`,
-    "-c:v", "libx264", "-preset", "fast", "-crf", "18",
+    "-c:v", "libx264", "-preset", "fast", "-crf", "18", "-pix_fmt", "yuv420p",
     "-c:a", "copy",
     "-y", outPath
   ], false);
@@ -285,7 +285,7 @@ async function main() {
   current = vertOut;
 
   // Passo 3: legendas
-  let finalOut = path.join(outDir, `${basename}_editado.mp4`);
+  let finalOut = path.join(outDir, `${basename}_editado.mov`);
   if (!noCaptions) {
     const segments = await transcribe(current);
     const srtPath  = path.join(outDir, `${basename}.srt`);
