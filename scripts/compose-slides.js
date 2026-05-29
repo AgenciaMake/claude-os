@@ -105,7 +105,7 @@ async function renderSlide(browser, template, slide, outPath, slideHeight, safeA
   if (!noTopElements) {
     if (slide.isCover) {
       const colorStyle = slide.hashtagColor ? ` style="color:${slide.hashtagColor};"` : "";
-      topLeft = `<div class="hashtag"${colorStyle}>#performance<strong>estratégica</strong>360</div>`;
+      topLeft = `<div class="hashtag"${colorStyle}>Agência Boutique 360</div>`;
     } else if (slide.number && !slide.isCta) {
       const colorStyle = slide.numColor ? ` style="color:${slide.numColor};"` : "";
       topLeft = `<div class="slide-num"${colorStyle}>${String(slide.number).padStart(2, "0")}</div>`;
@@ -154,11 +154,11 @@ async function renderSlide(browser, template, slide, outPath, slideHeight, safeA
   // Footer (não no CTA, não quando noFooter). Override de cor: slide.footerColor
   let footer = "";
   if (!slide.isCta && !noFooter) {
-    const slogan = slide.footerSlogan || "Conexão que Gera Conversão";
+    const slogan = slide.footerSlogan || "Menos Ruído. Mais Resultado.";
     const colorStyle = slide.footerColor ? ` style="color:${slide.footerColor};"` : "";
     footer = `<div class="footer"${colorStyle}>
       <span class="handle">@make.lemonad</span>
-      <span class="signature">Strategy + Branding + Performance = <em>${slogan}</em></span>
+      <span class="signature"><em>${slogan}</em></span>
     </div>`;
   }
   html = html.replace("{{FOOTER}}", footer);
