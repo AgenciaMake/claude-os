@@ -1,0 +1,52 @@
+{
+  "outDir": ".",
+  "slides": [
+    {
+      "filename": "slide01-capa.png",
+      "bg": "black",
+      "isCover": true,
+      "noLogo": true,
+      "fullBleedImage": "photo-capa.jpg",
+      "content": "<div style='line-height:1.0;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.6;text-transform:uppercase;letter-spacing:3px;margin-bottom:28px;'>uma pergunta honesta</div><div style='font-size:112px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:0.93;'>Você contratou uma agência.</div><div style='font-size:112px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-3px;line-height:0.93;margin-top:16px;'>Ou virou mais um número na carteira?</div></div>"
+    },
+    {
+      "filename": "slide02-problema.png",
+      "bg": "dark-gray",
+      "number": 2,
+      "content": "<div style='line-height:1.1;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.45;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>como funciona a maioria</div><div style='font-size:68px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>A reunião de venda é com o sênior.</div><div style='font-size:68px;font-weight:800;font-style:italic;color:rgba(255,255,255,0.35);letter-spacing:-2px;line-height:0.97;margin-top:12px;'>A execução é com o júnior.</div><div style='font-size:38px;font-weight:400;color:var(--white);line-height:1.5;margin-top:32px;opacity:0.8;'>No final do mês chega um relatório bonito. Cheio de números. Sem nenhuma resposta pra pergunta que realmente importa: <strong style='color:var(--lime);'>o meu negócio cresceu?</strong></div></div>"
+    },
+    {
+      "filename": "slide03-foto.png",
+      "bg": "black",
+      "number": 3,
+      "fullBleedImage": "photo-atencao.jpg",
+      "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.6);padding:7px 16px;backdrop-filter:blur(4px);'>o modelo boutique</div><div style='font-size:92px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Quem vende é quem entrega.</div><div style='font-size:42px;font-weight:500;color:var(--lime);line-height:1.3;margin-top:20px;'>Sem intermediário.<br>Sem repasse pra júnior.<br>Sem sumir depois do contrato.</div></div>"
+    },
+    {
+      "filename": "slide04-diferenca.png",
+      "bg": "black",
+      "number": 4,
+      "content": "<div style='line-height:1.0;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.45;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>não é sobre tamanho. é sobre profundidade.</div><div style='display:flex;flex-direction:column;gap:28px;'><div style='border-left:5px solid rgba(255,255,255,0.2);padding-left:24px;'><div style='font-size:28px;font-weight:600;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;'>Agência comum</div><div style='font-size:40px;font-weight:500;color:rgba(255,255,255,0.55);line-height:1.3;'>Muitos clientes. Pouca atenção. Estratégia de prateleira.</div></div><div style='border-left:5px solid var(--lime);padding-left:24px;'><div style='font-size:28px;font-weight:600;color:var(--lime);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;'>Agência boutique</div><div style='font-size:40px;font-weight:500;color:var(--white);line-height:1.3;'>Menos clientes. Atenção total. Estratégia construída pra você.</div></div></div><div style='font-size:30px;font-weight:400;color:var(--white);margin-top:32px;opacity:0.5;line-height:1.5;'>A diferença está em quem a agência está disposta a atender. E quantos.</div></div>"
+    },
+    {
+      "filename": "slide05-selecao.png",
+      "bg": "lime",
+      "number": 5,
+      "numColor": "#000000",
+      "footerColor": "#000000",
+      "content": "<div style='line-height:1.0;'><div style='font-size:36px;font-weight:400;color:var(--black);opacity:0.6;text-transform:uppercase;letter-spacing:2px;margin-bottom:28px;'>sobre a Make</div><div style='font-size:80px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-2px;line-height:0.95;'>A gente não atende qualquer negócio.</div><div style='font-size:44px;font-weight:500;color:var(--black);line-height:1.4;margin-top:28px;'>Não por arrogância. Porque ir fundo no negócio de alguém exige tempo, atenção e parceria real. E a gente só consegue fazer isso bem com quem está comprometido a crescer de verdade.</div><div style='font-size:34px;font-weight:700;color:var(--black);margin-top:28px;text-transform:uppercase;letter-spacing:1px;'>23 anos de mercado. Direto no seu negócio.</div></div>"
+    },
+    {
+      "filename": "slide06-pertencimento.png",
+      "bg": "dark-gray",
+      "number": 6,
+      "content": "<div style='line-height:1.05;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>o perfil que a gente procura</div><div style='font-size:72px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Você está cansado de investir em marketing e não saber o que funcionou.</div><div style='font-size:72px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:0.97;margin-top:16px;'>Se você se identificou, a gente precisa conversar.</div></div>"
+    },
+    {
+      "filename": "slide07-cta.png",
+      "bg": "black",
+      "isCta": true,
+      "content": "<div style='font-size:80px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Menos ruído. Mais resultado. É assim que a Make trabalha.</div><div style='font-size:34px;font-weight:400;color:var(--white);line-height:1.5;opacity:0.6;margin-top:32px;'>Comenta aqui ou manda uma mensagem.<br>A gente bate um papo sem compromisso<br>e vê se faz sentido pra você.</div><div style='font-size:32px;font-weight:600;color:var(--lime);line-height:1.3;margin-top:36px;'>Agência Boutique 360º.<br><em style='font-weight:800;font-style:italic;'>MakeLemonAd.</em></div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
+    }
+  ]
+}
