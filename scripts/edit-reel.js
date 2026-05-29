@@ -214,11 +214,14 @@ function generateSrt(segments, srtPath) {
 function burnCaptions(inputPath, srtPath, outPath) {
   console.log("  Queimando legendas...");
 
-  const escapedSrt = srtPath.replace(/'/g, "'\\''").replace(/:/g, "\\:");
+  // Escapa o caminho do SRT pro filtro do ffmpeg (colons e aspas simples)
+  const escapedSrt = srtPath.replace(/\\/g, "/").replace(/:/g, "\\:").replace(/'/g, "\\'");
+  const marginV = Math.round(OUTPUT_HEIGHT * 0.15);
+  const style = `FontSize=${CAPTION_FONT_SIZE},PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BackColour=&H80000000,Bold=1,Outline=3,Shadow=0,Alignment=2,MarginV=${marginV}`;
 
   ffmpeg([
     "-i", inputPath,
-    "-vf", `subtitles='${srtPath}':force_style='FontName=${CAPTION_FONT},FontSize=${CAPTION_FONT_SIZE},PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BackColour=&H40000000,Bold=1,Outline=2,Shadow=0,Alignment=2,MarginV=${Math.round(OUTPUT_HEIGHT * 0.18)}'`,
+    "-vf", `subtitles='${escapedSrt}':force_style='${style}'`,
     "-c:v", "libx264", "-preset", "fast", "-crf", "18", "-pix_fmt", "yuv420p",
     "-c:a", "copy",
     "-y", outPath
