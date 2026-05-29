@@ -17,7 +17,7 @@
       "bg": "black",
       "swipeLabel": "Ver no feed",
       "fullBleedImage": "../photo1.jpg",
-      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='font-size:28px;font-weight:400;color:var(--white);opacity:0.55;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>o dado que ninguém esperava</div><div style='font-size:210px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-6px;line-height:0.85;'>+124%</div><div style='font-size:52px;font-weight:600;color:var(--white);line-height:1.2;margin-top:28px;'>whey protein em 2025.<br>Em plena crise.</div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='font-size:28px;font-weight:400;color:var(--white);opacity:0.55;text-transform:uppercase;letter-spacing:2px;margin-bottom:44px;'>novo post no feed</div><div style='font-size:60px;font-weight:700;color:var(--white);line-height:1.15;'>Vendas de whey protein cresceram</div><div style='font-size:200px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-6px;line-height:0.85;'>+124%</div><div style='font-size:52px;font-weight:600;color:var(--white);line-height:1.2;margin-top:20px;'>no ano que todo mundo disse que o consumidor parou de comprar.</div></div>"
     },
     {
       "filename": "story03-hook.png",
