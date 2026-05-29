@@ -2,11 +2,20 @@
   "outDir": ".",
   "slides": [
     {
-      "filename": "slide01-capa.png",
+      "filename": "slide01-capa-a.png",
       "bg": "black",
       "isCover": true,
       "noLogo": true,
-      "content": "<div style='line-height:0.95;'><div style='font-size:36px;font-weight:400;color:var(--white);opacity:0.5;text-transform:uppercase;letter-spacing:3px;margin-bottom:32px;'>o mercado que ninguém leu direito</div><div style='font-size:118px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-4px;text-transform:uppercase;line-height:0.92;'>Creatina<br>+89%.</div><div style='font-size:118px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;text-transform:uppercase;line-height:0.92;'>Em plena<br>&ldquo;crise&rdquo;.</div></div>"
+      "fullBleedImage": "photo0a.jpg",
+      "content": "<div style='line-height:1.0;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.6;text-transform:uppercase;letter-spacing:3px;margin-bottom:28px;'>o que os dados revelaram</div><div style='font-size:108px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:0.93;'>Seu cliente disse que ia cortar gastos.</div><div style='font-size:108px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-3px;line-height:0.93;margin-top:16px;'>E não cumpriu.</div></div>"
+    },
+    {
+      "filename": "slide01-capa-b.png",
+      "bg": "black",
+      "isCover": true,
+      "noLogo": true,
+      "fullBleedImage": "photo0b.jpg",
+      "content": "<div style='line-height:1.0;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.6;text-transform:uppercase;letter-spacing:3px;margin-bottom:28px;'>o que os dados revelaram</div><div style='font-size:108px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:0.93;'>Seu cliente disse que ia cortar gastos.</div><div style='font-size:108px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-3px;line-height:0.93;margin-top:16px;'>E não cumpriu.</div></div>"
     },
     {
       "filename": "slide02-foto.png",
