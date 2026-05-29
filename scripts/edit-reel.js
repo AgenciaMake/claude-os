@@ -129,19 +129,10 @@ function ensureVertical(inputPath, outPath) {
   ], { encoding: "utf8", stdio: "pipe" });
 
   // probe via ffprobe-like via ffmpeg
-  const probe = spawnSync(
-    FFMPEG.replace("ffmpeg", "ffprobe") ,
-    ["-v", "quiet", "-print_format", "json", "-show_streams", inputPath],
-    { encoding: "utf8", stdio: "pipe" }
-  );
-
+  const probe = spawnSync(FFMPEG, ["-i", inputPath], { encoding: "utf8", stdio: "pipe" });
   let width = 0, height = 0;
-  try {
-    const info = JSON.parse(probe.stdout);
-    const video = info.streams.find(s => s.codec_type === "video");
-    width  = video?.width  || 0;
-    height = video?.height || 0;
-  } catch (_) {}
+  const dimMatch = (probe.stderr || "").match(/(\d{3,5})x(\d{3,5})/);
+  if (dimMatch) { width = parseInt(dimMatch[1]); height = parseInt(dimMatch[2]); }
 
   const isVertical = height >= width;
   if (isVertical) {
@@ -267,17 +258,13 @@ async function main() {
   console.log("");
 
   // Detectar duração
-  const probeOut = spawnSync(
-    path.join(path.dirname(FFMPEG), "ffprobe"),
-    ["-v", "quiet", "-print_format", "json", "-show_format", inputPath],
-    { encoding: "utf8", stdio: "pipe" }
-  );
-
+  // Detecta duração via ffmpeg -i (ffprobe não está incluído no ffmpeg-static)
+  const probeOut = spawnSync(FFMPEG, ["-i", inputPath], { encoding: "utf8", stdio: "pipe" });
   let duration = 60;
-  try {
-    const fmt = JSON.parse(probeOut.stdout);
-    duration = parseFloat(fmt.format?.duration || "60");
-  } catch (_) {}
+  const durMatch = (probeOut.stderr || "").match(/Duration:\s*(\d+):(\d+):([\d.]+)/);
+  if (durMatch) {
+    duration = parseInt(durMatch[1]) * 3600 + parseInt(durMatch[2]) * 60 + parseFloat(durMatch[3]);
+  }
 
   let current = inputPath;
   const temps  = [];
