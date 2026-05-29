@@ -1,0 +1,52 @@
+{
+  "outDir": ".",
+  "slides": [
+    {
+      "filename": "slide01-capa.png",
+      "bg": "black",
+      "isCover": true,
+      "noLogo": true,
+      "content": "<div style='line-height:0.95;'><div style='font-size:36px;font-weight:400;color:var(--white);opacity:0.5;text-transform:uppercase;letter-spacing:3px;margin-bottom:32px;'>o mercado que ninguém leu direito</div><div style='font-size:118px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-4px;text-transform:uppercase;line-height:0.92;'>Creatina<br>+89%.</div><div style='font-size:118px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;text-transform:uppercase;line-height:0.92;'>Em plena<br>"crise".</div></div>"
+    },
+    {
+      "filename": "slide02-foto.png",
+      "bg": "black",
+      "number": 2,
+      "fullBleedImage": "photo1.jpg",
+      "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.55);padding:7px 16px;backdrop-filter:blur(4px);'>o que os dados mostram</div><div style='font-size:92px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Ninguém<br>parou de<br>gastar.</div><div style='font-size:44px;font-weight:500;color:var(--lime);line-height:1.2;margin-top:20px;'>Pararam de gastar<br>com o que não vale.</div></div>"
+    },
+    {
+      "filename": "slide03-dados.png",
+      "bg": "black",
+      "number": 3,
+      "content": "<div style='line-height:1.0;'><div style='font-size:36px;font-weight:400;color:var(--white);opacity:0.45;text-transform:uppercase;letter-spacing:3px;margin-bottom:28px;'>NielsenIQ · Scanntech · 13,5 bi de cupons fiscais</div><div style='display:flex;flex-direction:column;gap:20px;'><div style='border-left:5px solid var(--lime);padding-left:28px;'><div style='font-size:110px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-4px;line-height:0.88;'>+89%</div><div style='font-size:36px;font-weight:500;color:var(--white);margin-top:4px;'>creatina em volume</div></div><div style='border-left:5px solid var(--white);padding-left:28px;'><div style='font-size:110px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;line-height:0.88;'>+124%</div><div style='font-size:36px;font-weight:500;color:var(--white);margin-top:4px;'>whey protein</div></div><div style='border-left:5px solid rgba(255,255,255,0.35);padding-left:28px;'><div style='font-size:110px;font-weight:800;font-style:italic;color:rgba(255,255,255,0.5);letter-spacing:-4px;line-height:0.88;'>+134%</div><div style='font-size:36px;font-weight:500;color:rgba(255,255,255,0.5);margin-top:4px;'>bronzers e contour</div></div></div><div style='font-size:26px;font-weight:600;color:var(--white);margin-top:32px;opacity:0.5;text-transform:uppercase;letter-spacing:1px;'>Tudo isso em 2025.</div></div>"
+    },
+    {
+      "filename": "slide04-foto.png",
+      "bg": "black",
+      "number": 4,
+      "fullBleedImage": "photo2.jpg",
+      "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.55);padding:7px 16px;backdrop-filter:blur(4px);'>enquanto você pausou a campanha</div><div style='font-size:80px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>seu cliente<br>comprou<br>cerveja<br>premium.</div><div style='font-size:38px;font-weight:500;color:var(--lime);line-height:1.3;margin-top:20px;'>Sem culpa. Sem hesitar.</div></div>"
+    },
+    {
+      "filename": "slide05-dado2.png",
+      "bg": "lime",
+      "number": 5,
+      "numColor": "#000000",
+      "footerColor": "#000000",
+      "content": "<div style='line-height:1.0;'><div style='font-size:200px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-6px;line-height:0.88;'>54%</div><div style='font-size:44px;font-weight:700;color:var(--black);line-height:1.1;margin-top:16px;'>dos brasileiros começaram<br>2026 endividados.</div><div style='font-size:32px;font-weight:400;color:var(--black);line-height:1.4;margin-top:24px;opacity:0.75;'>E <span style='font-weight:800;'>30% planejam se presentear</span> mesmo assim.<br>O consumidor não está em crise.<br>Está recalibrando.</div></div>"
+    },
+    {
+      "filename": "slide06-provocacao.png",
+      "bg": "dark-gray",
+      "number": 6,
+      "content": "<div style='line-height:1.05;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:48px;'>a pergunta que define tudo</div><div style='font-size:80px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Seu produto está na lista do que ele <span style='color:var(--lime);'>prioriza</span></div><div style='font-size:80px;font-weight:800;font-style:italic;color:rgba(255,255,255,0.35);letter-spacing:-2px;line-height:0.97;margin-top:8px;'>ou na lista do que ele corta?</div></div>"
+    },
+    {
+      "filename": "slide07-cta.png",
+      "bg": "black",
+      "isCta": true,
+      "content": "<div style='font-size:80px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>O que você vende está crescendo ou encolhendo em 2026?</div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.5;opacity:0.6;margin-top:32px;'>Comenta aqui o seu produto ou segmento.<br>A gente fala se tá na categoria que cresce<br>ou na que cai.</div><div style='font-size:32px;font-weight:600;color:var(--lime);line-height:1.3;margin-top:36px;'>A <em style='font-weight:800;font-style:italic;'>Make</em> tá aqui nos comentários.</div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
+    }
+  ]
+}
