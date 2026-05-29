@@ -10,21 +10,21 @@
       "bg": "black",
       "swipeLabel": "Ver no feed",
       "fullBleedImage": "../photo0b.jpg",
-      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='font-size:28px;font-weight:400;color:var(--white);opacity:0.55;text-transform:uppercase;letter-spacing:2px;margin-bottom:52px;'>Novo post no feed</div><div style='font-size:136px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;line-height:0.92;'>Seu cliente disse que ia cortar gastos.</div><div style='font-size:136px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-4px;line-height:0.92;margin-top:24px;'>E não cumpriu.</div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='display:inline-block;font-size:24px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:52px;background:rgba(0,0,0,0.6);padding:8px 18px;backdrop-filter:blur(4px);'>Novo post no feed</div><div style='font-size:136px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;line-height:0.92;'>Seu cliente disse que ia cortar gastos.</div><div style='font-size:136px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-4px;line-height:0.92;margin-top:24px;'>E não cumpriu.</div></div>"
     },
     {
       "filename": "story02-hook.png",
       "bg": "black",
       "swipeLabel": "Ver no feed",
       "fullBleedImage": "../photo1.jpg",
-      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='font-size:28px;font-weight:400;color:var(--white);opacity:0.55;text-transform:uppercase;letter-spacing:2px;margin-bottom:44px;'>novo post no feed</div><div style='font-size:60px;font-weight:700;color:var(--white);line-height:1.15;'>Vendas de whey protein cresceram</div><div style='font-size:200px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-6px;line-height:0.85;'>+124%</div><div style='font-size:52px;font-weight:600;color:var(--white);line-height:1.2;margin-top:20px;'>no ano que todo mundo disse que o consumidor parou de comprar.</div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='display:inline-block;font-size:24px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:44px;background:rgba(0,0,0,0.6);padding:8px 18px;backdrop-filter:blur(4px);'>Novo post no feed</div><div style='font-size:60px;font-weight:700;color:var(--white);line-height:1.15;'>Vendas de whey protein cresceram</div><div style='font-size:200px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-6px;line-height:0.85;'>+124%</div><div style='font-size:52px;font-weight:600;color:var(--white);line-height:1.2;margin-top:20px;'>no ano que todo mundo disse que o consumidor parou de comprar.</div></div>"
     },
     {
       "filename": "story03-hook.png",
       "bg": "black",
       "swipeLabel": "Ver no feed",
       "fullBleedImage": "../photo2.jpg",
-      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='font-size:28px;font-weight:400;color:var(--white);opacity:0.55;text-transform:uppercase;letter-spacing:2px;margin-bottom:52px;'>pergunta pra você</div><div style='font-size:100px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.96;'>Seu produto está na lista do que ele <span style='color:var(--lime);'>prioriza</span> ou do que ele <span style='color:rgba(255,255,255,0.35);'>corta?</span></div><div style='font-size:38px;font-weight:500;color:var(--white);line-height:1.3;margin-top:48px;opacity:0.65;'>A resposta está no feed.</div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='display:inline-block;font-size:24px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:52px;background:rgba(0,0,0,0.6);padding:8px 18px;backdrop-filter:blur(4px);'>pergunta pra você</div><div style='font-size:100px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.96;'>Seu produto está na lista do que ele <span style='color:var(--lime);'>prioriza</span> ou do que ele <span style='color:rgba(255,255,255,0.35);'>corta?</span></div><div style='font-size:38px;font-weight:500;color:var(--white);line-height:1.3;margin-top:48px;opacity:0.65;'>A resposta está no feed.</div></div>"
     }
   ]
 }
