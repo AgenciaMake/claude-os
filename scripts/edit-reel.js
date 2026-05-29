@@ -135,9 +135,24 @@ function ensureVertical(inputPath, outPath) {
   if (dimMatch) { width = parseInt(dimMatch[1]); height = parseInt(dimMatch[2]); }
 
   const isVertical = height >= width;
-  if (isVertical) {
-    console.log(`  Vídeo já é vertical (${width}x${height}) — sem recorte`);
+  const alreadyTargetSize = width === OUTPUT_WIDTH && height === OUTPUT_HEIGHT;
+
+  if (alreadyTargetSize) {
+    console.log(`  Vídeo já é ${OUTPUT_WIDTH}x${OUTPUT_HEIGHT} — sem processamento`);
     fs.copyFileSync(inputPath, outPath);
+    return;
+  }
+
+  if (isVertical) {
+    // Vertical mas não no tamanho certo (ex: 4K vertical) — só escala
+    console.log(`  Redimensionando ${width}x${height} → ${OUTPUT_WIDTH}x${OUTPUT_HEIGHT}...`);
+    ffmpeg([
+      "-i", inputPath,
+      "-vf", `scale=${OUTPUT_WIDTH}:${OUTPUT_HEIGHT}`,
+      "-c:v", "libx264", "-preset", "fast", "-crf", "20", "-pix_fmt", "yuv420p",
+      "-c:a", "copy",
+      "-y", outPath
+    ], false);
     return;
   }
 
