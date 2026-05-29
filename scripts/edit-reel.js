@@ -156,7 +156,7 @@ async function transcribe(inputPath) {
   console.log("  Transcrevendo com Gemini...");
 
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
   // Extrai áudio em mp3 pra enviar pro Gemini
   const audioTmp = tmpFile("mp3");
