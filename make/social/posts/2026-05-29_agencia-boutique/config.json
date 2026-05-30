@@ -7,7 +7,7 @@
       "isCover": true,
       "noLogo": true,
       "fullBleedImage": "photo-capa.jpg",
-      "content": "<div style='line-height:1.0;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.6;text-transform:uppercase;letter-spacing:3px;margin-bottom:28px;'>uma pergunta honesta</div><div style='font-size:112px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:0.93;'>Você contratou uma agência.</div><div style='font-size:112px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-3px;line-height:0.93;margin-top:16px;'>Ou virou mais<br>um número<br>na carteira?</div></div>"
+      "content": "<div style='line-height:1.0;'><div style='display:inline-block;font-size:28px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:3px;margin-bottom:28px;background:rgba(0,0,0,0.6);padding:8px 18px;backdrop-filter:blur(4px);'>uma pergunta honesta</div><div style='font-size:112px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:0.93;'>Você contratou uma agência.</div><div style='font-size:112px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-3px;line-height:0.93;margin-top:16px;'>Ou virou mais<br>um número<br>na carteira?</div></div>"
     },
     {
       "filename": "slide02-problema.png",
