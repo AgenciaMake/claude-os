@@ -47,7 +47,7 @@
       "filename": "slide07-cta.png",
       "bg": "black",
       "isCta": true,
-      "content": "<div style='font-size:80px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Menos ruído.<br>Mais resultado.<br>É assim que a<br><span style='color:var(--lime);'>Make</span> trabalha.</div><div style='font-size:34px;font-weight:400;color:var(--white);line-height:1.55;opacity:0.65;margin-top:36px;'>Se esse dado chegou até você antes do mercado falar sobre ele, é porque a gente monitora o que move o jogo.<br><br>Segue a Make pra não chegar atrasado nos próximos.</div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
+      "content": "<div style='font-size:80px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Menos ruído.<br>Mais resultado.<br>É assim que a<br><span style='color:var(--lime);'>Make</span> trabalha.</div><div style='font-size:34px;font-weight:400;color:var(--white);line-height:1.55;opacity:0.65;margin-top:36px;'>Se esse dado chegou até você antes do mercado falar sobre ele, é porque a gente monitora o que move o jogo.<br><br>Segue a <span style='color:var(--lime);font-weight:700;'>Make</span> pra não chegar atrasado nos próximos.</div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
     }
   ]
 }
