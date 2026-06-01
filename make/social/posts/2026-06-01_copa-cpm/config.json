@@ -41,7 +41,7 @@
       "filename": "slide06-provocacao.png",
       "bg": "dark-gray",
       "number": 6,
-      "content": "<div style='line-height:1.05;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>a pergunta que importa</div><div style='font-size:82px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Sua concorrente já está se preparando para o segundo semestre.</div><div style='font-size:82px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:0.97;margin-top:16px;'>Você está<br>esperando o quê?</div></div>"
+      "content": "<div style='line-height:1.05;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>a pergunta que importa</div><div style='font-size:82px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Seu concorrente já está se preparando para o segundo semestre.</div><div style='font-size:82px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:0.97;margin-top:16px;'>Você está<br>esperando o quê?</div></div>"
     },
     {
       "filename": "slide07-cta.png",
