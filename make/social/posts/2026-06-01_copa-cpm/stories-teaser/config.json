@@ -1,0 +1,29 @@
+{
+  "outDir": ".",
+  "height": 1920,
+  "templateFile": "story.html",
+  "noTopElements": true,
+  "noFooter": true,
+  "slides": [
+    {
+      "filename": "story01-hook.png",
+      "bg": "black",
+      "swipeLabel": "Ver no feed",
+      "fullBleedImage": "../photo-capa.jpg",
+      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='display:inline-block;font-size:24px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:44px;background:rgba(0,0,0,0.6);padding:8px 18px;backdrop-filter:blur(4px);'>Novo post no feed</div><div style='font-size:128px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;line-height:0.92;'>Em julho o seu anúncio vai custar mais.</div><div style='font-size:128px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-4px;line-height:0.92;margin-top:20px;'>Muito mais.</div></div>"
+    },
+    {
+      "filename": "story02-hook.png",
+      "bg": "black",
+      "swipeLabel": "Ver no feed",
+      "fullBleedImage": "../photo-eleicoes.jpg",
+      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='display:inline-block;font-size:24px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:44px;background:rgba(0,0,0,0.6);padding:8px 18px;backdrop-filter:blur(4px);'>Copa + eleições</div><div style='font-size:80px;font-weight:700;color:var(--white);line-height:1.1;'>O mercado publicitário brasileiro cresce</div><div style='font-size:190px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-6px;line-height:0.85;'>10%</div><div style='font-size:52px;font-weight:600;color:var(--white);line-height:1.2;margin-top:20px;'>em 2026. Todo esse dinheiro vai disputar o mesmo espaço que o seu anúncio.</div></div>"
+    },
+    {
+      "filename": "story03-hook.png",
+      "bg": "dark-gray",
+      "swipeLabel": "Ver no feed",
+      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='display:inline-block;font-size:24px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:52px;background:rgba(0,0,0,0.6);padding:8px 18px;backdrop-filter:blur(4px);'>de 4 em 4 anos</div><div style='font-size:104px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.96;'>Seu concorrente já está se preparando para o segundo semestre.</div><div style='font-size:104px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:0.96;margin-top:16px;'>Você está esperando o quê?</div></div>"
+    }
+  ]
+}
