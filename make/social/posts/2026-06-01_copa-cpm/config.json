@@ -27,7 +27,7 @@
       "filename": "slide04-quem.png",
       "bg": "dark-gray",
       "number": 4,
-      "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>quem vai pagar a conta</div><div style='font-size:76px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Quem anuncia sem estratégia de sazonalidade.</div><div style='font-size:38px;font-weight:400;color:var(--white);line-height:1.55;margin-top:32px;opacity:0.85;'>Quem depende de um único canal de mídia. Quem não diversificou. Quem está esperando o segundo semestre chegar pra começar a planejar. <span style='color:var(--lime);font-weight:700;'>Enquanto isso, quem se preparou vai<br>pagar menos e aparecer mais.</span></div></div>"
+      "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>quem vai pagar a conta</div><div style='font-size:76px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Quem anuncia sem estratégia de sazonalidade.</div><div style='font-size:38px;font-weight:400;color:var(--white);line-height:1.55;margin-top:32px;opacity:0.85;'>Quem depende de um único canal de mídia. Quem não diversificou. Quem está esperando o segundo semestre chegar pra começar a planejar.<br><span style='color:var(--lime);font-weight:700;'>Enquanto isso, quem se preparou vai<br>pagar menos e aparecer mais.</span></div></div>"
     },
     {
       "filename": "slide05-janela.png",
