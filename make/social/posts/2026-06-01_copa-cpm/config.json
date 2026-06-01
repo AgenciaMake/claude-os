@@ -21,13 +21,13 @@
       "bg": "black",
       "number": 3,
       "fullBleedImage": "photo-numeros.jpg",
-      "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.6);padding:7px 16px;backdrop-filter:blur(4px);'>Fonte: WARC Media · Meio e Mensagem</div><div style='font-size:220px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-8px;line-height:0.85;'>+20%</div><div style='font-size:44px;font-weight:600;color:var(--white);line-height:1.2;margin-top:16px;'>no custo de mídia estimado<br>para o segundo semestre de 2026.</div><div style='font-size:30px;font-weight:400;color:var(--white);line-height:1.4;margin-top:20px;opacity:0.7;'>Não é projeção alarmista.<br>É o padrão histórico de anos eleitorais com Copa.</div></div>"
+      "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.6);padding:7px 16px;backdrop-filter:blur(4px);'>Fonte: WARC Media · Meio e Mensagem</div><div style='font-size:220px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-8px;line-height:0.85;'>+20%</div><div style='font-size:44px;font-weight:600;color:var(--white);line-height:1.2;margin-top:16px;'>no custo de mídia estimado<br>para o segundo semestre de 2026.</div><div style='font-size:30px;font-weight:400;color:var(--white);line-height:1.4;margin-top:20px;opacity:0.7;'>Já aconteceu em 2014, última vez que Copa e eleições coincidiram no Brasil.<br>A lógica é simples: mais anunciantes, mesmo inventário, preço sobe.</div></div>"
     },
     {
       "filename": "slide04-quem.png",
       "bg": "dark-gray",
       "number": 4,
-      "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>quem vai pagar a conta</div><div style='font-size:76px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Quem anuncia sem estratégia de sazonalidade.</div><div style='font-size:38px;font-weight:400;color:var(--white);line-height:1.55;margin-top:32px;opacity:0.85;'>Quem depende de um único canal de mídia. Quem não diversificou. Quem está esperando o segundo semestre chegar pra começar a planejar. <span style='color:var(--lime);font-weight:700;'>O premium vai ser cobrado de quem não se preparou.</span></div></div>"
+      "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>quem vai pagar a conta</div><div style='font-size:76px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Quem anuncia sem estratégia de sazonalidade.</div><div style='font-size:38px;font-weight:400;color:var(--white);line-height:1.55;margin-top:32px;opacity:0.85;'>Quem depende de um único canal de mídia. Quem não diversificou. Quem está esperando o segundo semestre chegar pra começar a planejar. <span style='color:var(--lime);font-weight:700;'>Enquanto isso, quem se preparou vai pagar menos e aparecer mais.</span></div></div>"
     },
     {
       "filename": "slide05-janela.png",
@@ -35,13 +35,13 @@
       "number": 5,
       "numColor": "#000000",
       "footerColor": "#000000",
-      "content": "<div style='line-height:1.0;'><div style='font-size:36px;font-weight:400;color:var(--black);opacity:0.6;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;'>a janela ainda está aberta</div><div style='font-size:180px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-6px;line-height:0.85;'>Junho.</div><div style='font-size:42px;font-weight:700;color:var(--black);line-height:1.2;margin-top:20px;'>Ainda está fora do pico.</div><div style='font-size:34px;font-weight:400;color:var(--black);line-height:1.5;margin-top:24px;'>Quem revisar a estratégia agora, diversificar canais e travar contratos antes de julho compra no preço de hoje. Quem esperar paga o preço de quem se preparou.</div></div>"
+      "content": "<div style='line-height:1.0;'><div style='font-size:36px;font-weight:400;color:var(--black);opacity:0.6;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;'>a janela ainda está aberta</div><div style='font-size:180px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-6px;line-height:0.85;'>Junho.</div><div style='font-size:42px;font-weight:700;color:var(--black);line-height:1.2;margin-top:20px;'>Ainda está fora do pico.</div><div style='font-size:34px;font-weight:400;color:var(--black);line-height:1.5;margin-top:24px;'>Quem revisar a estratégia agora, diversificar canais e travar contratos antes de julho compra no preço de hoje.<br>Quem esperar paga o preço de quem se preparou.</div></div>"
     },
     {
       "filename": "slide06-provocacao.png",
       "bg": "dark-gray",
       "number": 6,
-      "content": "<div style='line-height:1.05;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>a pergunta que importa</div><div style='font-size:82px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Sua concorrente já está se preparando para o segundo semestre.</div><div style='font-size:82px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:0.97;margin-top:16px;'>Você está esperando o quê?</div></div>"
+      "content": "<div style='line-height:1.05;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>a pergunta que importa</div><div style='font-size:82px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Sua concorrente já está se preparando para o segundo semestre.</div><div style='font-size:82px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:0.97;margin-top:16px;'>Você está<br>esperando o quê?</div></div>"
     },
     {
       "filename": "slide07-cta.png",
