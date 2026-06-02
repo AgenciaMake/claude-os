@@ -42,13 +42,13 @@
       "number": 5,
       "numColor": "#000000",
       "footerColor": "#000000",
-      "content": "<div style='line-height:1.0;'><div style='font-size:36px;font-weight:400;color:var(--black);opacity:0.6;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;'>o problema</div><div style='font-size:80px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-2px;line-height:0.95;'>A maioria distribui o orçamento hoje como distribuía em 2020.</div><div style='font-size:36px;font-weight:400;color:var(--black);line-height:1.5;margin-top:28px;'>Antes do vídeo explodir. Antes do streaming dominar. Antes da internet superar a TV. O mercado foi embora. O budget ficou parado.</div></div>"
+      "content": "<div style='line-height:1.0;'><div style='font-size:36px;font-weight:400;color:var(--black);opacity:0.6;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;'>o problema</div><div style='font-size:80px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-2px;line-height:0.95;'>A maioria distribui o orçamento hoje como distribuía em 2020.</div><div style='font-size:36px;font-weight:400;color:var(--black);line-height:1.5;margin-top:28px;'>Antes do vídeo explodir. Antes do streaming dominar. Antes da internet superar a TV. O mercado foi embora.<br>O budget ficou parado.</div></div>"
     },
     {
       "filename": "slide06-virada.png",
       "bg": "black",
       "number": 6,
-      "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>o que está acontecendo agora</div><div style='font-size:76px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Quem migrou para vídeo digital antes da curva está pagando CPM mais barato<br>e alcançando mais.</div><div style='font-size:38px;font-weight:500;color:var(--lime);line-height:1.3;margin-top:28px;'>Quem não migrou está bancando<br>o leilão de quem migrou.</div></div>"
+      "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>o que está acontecendo agora</div><div style='font-size:76px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Quem migrou para vídeo digital antes da curva está pagando CPM<br>mais barato e<br>alcançando mais.</div><div style='font-size:38px;font-weight:500;color:var(--lime);line-height:1.3;margin-top:28px;'>Quem não migrou está bancando<br>o leilão de quem migrou.</div></div>"
     },
     {
       "filename": "slide07-provocacao.png",
@@ -60,7 +60,7 @@
       "filename": "slide08-cta.png",
       "bg": "black",
       "isCta": true,
-      "content": "<div style='font-size:80px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Menos ruído.<br>Mais resultado.<br>É assim que a<br><span style='color:var(--lime);'>Make</span> trabalha.</div><div style='font-size:34px;font-weight:400;color:var(--white);line-height:1.55;opacity:0.65;margin-top:36px;'>Esse é o tipo de conteúdo que a gente publica toda semana.<br><br>Segue a <span style='color:var(--lime);font-weight:700;'>Make</span> pra não chegar atrasado nos próximos.</div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
+      "content": "<div style='font-size:80px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Menos ruído.<br>Mais resultado.<br>É assim que a<br><span style='color:var(--lime);'>Make</span> trabalha.</div><div style='font-size:34px;font-weight:400;color:var(--white);line-height:1.55;opacity:0.65;margin-top:36px;'>Esse é o tipo de conteúdo que<br>a gente publica toda semana.<br><br>Segue a <span style='color:var(--lime);font-weight:700;'>Make</span> pra não chegar atrasado nos próximos.</div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
     }
   ]
 }
