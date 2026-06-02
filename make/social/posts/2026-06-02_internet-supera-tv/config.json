@@ -9,26 +9,33 @@
       "content": "<div style='line-height:0.95;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.5;text-transform:uppercase;letter-spacing:3px;margin-bottom:36px;'>uma virada histórica</div><div style='font-size:130px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;text-transform:uppercase;line-height:0.92;'>Pela primeira<br>vez,</div><div style='font-size:130px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-4px;text-transform:uppercase;line-height:0.92;'>a internet<br>superou<br>a TV.</div><div style='font-size:36px;font-weight:400;color:var(--white);opacity:0.55;margin-top:32px;line-height:1.4;'>Na publicidade brasileira.<br>Em 2025.</div></div>"
     },
     {
-      "filename": "slide02-dado.png",
+      "filename": "slide02-foto.png",
       "bg": "black",
       "number": 2,
+      "fullBleedImage": "photo-capa.jpg",
+      "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.6);padding:7px 16px;backdrop-filter:blur(4px);'>o hábito já mudou</div><div style='font-size:92px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>A TV ainda está ligada.</div><div style='font-size:92px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:0.97;margin-top:12px;'>Mas ninguém<br>está assistindo.</div></div>"
+    },
+    {
+      "filename": "slide03-dado.png",
+      "bg": "black",
+      "number": 3,
       "content": "<div style='line-height:1.0;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.45;text-transform:uppercase;letter-spacing:2px;margin-bottom:28px;'>Fonte: IAB Brasil + Ibope · Digital AdSpend 2026</div><div style='font-size:160px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-5px;line-height:0.85;'>R$42,7 bi</div><div style='font-size:42px;font-weight:600;color:var(--white);line-height:1.2;margin-top:20px;'>em publicidade digital no Brasil em 2025.</div><div style='font-size:34px;font-weight:400;color:var(--white);line-height:1.5;margin-top:24px;opacity:0.75;'>Internet ultrapassou TV aberta e TV paga<br>somadas. O mercado não está<br>a caminho de virar.</div><div style='font-size:72px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:1.0;margin-top:16px;'>Já virou.</div></div>"
     },
     {
-      "filename": "slide03-video.png",
+      "filename": "slide04-video.png",
       "bg": "black",
-      "number": 3,
+      "number": 4,
       "fullBleedImage": "photo-video.jpg",
       "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.6);padding:7px 16px;backdrop-filter:blur(4px);'>o detalhe que muda tudo</div><div style='font-size:88px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>49% de todo o investimento<br>digital é em vídeo.</div><div style='font-size:38px;font-weight:500;color:var(--lime);line-height:1.3;margin-top:22px;'>Não é banner.<br>Não é post estático.<br><span style='font-size:72px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;'>É vídeo.</span></div></div>"
     },
     {
-      "filename": "slide04-audiencia.png",
+      "filename": "slide05-audiencia.png",
       "bg": "dark-gray",
       "number": 4,
       "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.45;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>onde o brasileiro está</div><div style='font-size:72px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>9 horas por dia conectado em 2025.</div><div style='font-size:38px;font-weight:400;color:var(--white);line-height:1.55;margin-top:28px;opacity:0.85;'>Redes sociais concentram <strong style='color:var(--lime);'>55%</strong> de toda a verba digital. Search, <strong style='color:var(--lime);'>26%</strong>. A atenção do consumidor brasileiro já foi embora da TV.<br><br>O budget de muitas empresas ainda não percebeu.</div></div>"
     },
     {
-      "filename": "slide05-problema.png",
+      "filename": "slide06-problema.png",
       "bg": "lime",
       "number": 5,
       "numColor": "#000000",
@@ -36,19 +43,19 @@
       "content": "<div style='line-height:1.0;'><div style='font-size:36px;font-weight:400;color:var(--black);opacity:0.6;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;'>o problema</div><div style='font-size:80px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-2px;line-height:0.95;'>A maioria distribui o orçamento hoje como distribuía em 2020.</div><div style='font-size:36px;font-weight:400;color:var(--black);line-height:1.5;margin-top:28px;'>Antes do vídeo explodir. Antes do streaming dominar. Antes da internet superar a TV. O mercado foi embora.<br>O budget ficou parado.</div></div>"
     },
     {
-      "filename": "slide06-virada.png",
+      "filename": "slide07-virada.png",
       "bg": "black",
       "number": 6,
       "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>o que está acontecendo agora</div><div style='font-size:76px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Quem migrou para vídeo digital antes da curva está pagando CPM<br>mais barato e<br>alcançando mais.</div><div style='font-size:38px;font-weight:500;color:var(--lime);line-height:1.3;margin-top:28px;'>Quem não migrou está bancando<br>o leilão de quem migrou.</div></div>"
     },
     {
-      "filename": "slide07-provocacao.png",
+      "filename": "slide08-provocacao.png",
       "bg": "dark-gray",
       "number": 7,
       "content": "<div style='line-height:1.05;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>pergunta direta</div><div style='font-size:90px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Quanto do seu orçamento<br>está em vídeo<br>digital hoje?</div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.5;margin-top:32px;opacity:0.75;'>Se você não sabe responder de cabeça, a resposta provavelmente é: menos do que deveria.</div></div>"
     },
     {
-      "filename": "slide08-cta.png",
+      "filename": "slide09-cta.png",
       "bg": "black",
       "isCta": true,
       "content": "<div style='font-size:80px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Menos ruído.<br>Mais resultado.<br>É assim que a<br><span style='color:var(--lime);'>Make</span> trabalha.</div><div style='font-size:34px;font-weight:400;color:var(--white);line-height:1.55;opacity:0.65;margin-top:36px;'>Esse é o tipo de conteúdo que<br>a gente publica toda semana.<br><br>Segue a <span style='color:var(--lime);font-weight:700;'>Make</span> pra não chegar atrasado nos próximos.</div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
