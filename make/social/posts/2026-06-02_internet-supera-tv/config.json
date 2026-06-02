@@ -20,7 +20,7 @@
       "bg": "black",
       "number": 3,
       "fullBleedImage": "photo-video.jpg",
-      "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.6);padding:7px 16px;backdrop-filter:blur(4px);'>o detalhe que muda tudo</div><div style='font-size:88px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>49% de todo o investimento<br>digital é em vídeo.</div><div style='font-size:38px;font-weight:500;color:var(--lime);line-height:1.3;margin-top:22px;'>Não é banner.<br>Não é post estático.<br>É vídeo.</div></div>"
+      "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.6);padding:7px 16px;backdrop-filter:blur(4px);'>o detalhe que muda tudo</div><div style='font-size:88px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>49% de todo o investimento<br>digital é em vídeo.</div><div style='font-size:38px;font-weight:500;color:var(--lime);line-height:1.3;margin-top:22px;'>Não é banner.<br>Não é post estático.<br><span style='font-size:72px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;'>É vídeo.</span></div></div>"
     },
     {
       "filename": "slide04-audiencia.png",
