@@ -40,7 +40,7 @@
       "number": 5,
       "numColor": "#000000",
       "footerColor": "#000000",
-      "content": "<div style='line-height:1.0;'><div style='font-size:36px;font-weight:400;color:var(--black);opacity:0.6;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;'>o problema</div><div style='font-size:80px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-2px;line-height:0.95;'>A maioria distribui o orçamento hoje como distribuía em 2020.</div><div style='font-size:36px;font-weight:400;color:var(--black);line-height:1.5;margin-top:28px;'>Antes do vídeo explodir. Antes do streaming dominar. Antes da internet superar a TV. O mercado foi embora.<br>O budget ficou parado.</div></div>"
+      "content": "<div style='line-height:1.0;'><div style='font-size:36px;font-weight:400;color:var(--black);opacity:0.6;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;'>o problema</div><div style='font-size:80px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-2px;line-height:0.95;'>A maioria distribui o orçamento hoje como distribuía em 2020.</div><div style='font-size:36px;font-weight:400;color:var(--black);line-height:1.5;margin-top:28px;'>Antes do vídeo explodir. Antes do streaming dominar. Antes da internet superar a TV. O mercado foi embora.</div><div style='font-size:60px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-1px;line-height:0.95;margin-top:24px;'>O budget ficou parado.</div></div>"
     },
     {
       "filename": "slide07-virada.png",
