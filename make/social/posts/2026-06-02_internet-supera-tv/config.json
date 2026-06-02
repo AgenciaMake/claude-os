@@ -6,14 +6,6 @@
       "bg": "black",
       "isCover": true,
       "noLogo": true,
-      "fullBleedImage": "photo-capa.jpg",
-      "content": "<div style='line-height:1.0;'><div style='display:inline-block;font-size:28px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:3px;margin-bottom:28px;background:rgba(0,0,0,0.6);padding:8px 18px;backdrop-filter:blur(4px);'>uma virada histórica</div><div style='font-size:108px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:0.93;'>Pela primeira vez,<br>a internet superou<br>a TV na publicidade<br>brasileira.</div></div>"
-    },
-    {
-      "filename": "slide01-capa-texto.png",
-      "bg": "black",
-      "isCover": true,
-      "noLogo": true,
       "content": "<div style='line-height:0.95;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.5;text-transform:uppercase;letter-spacing:3px;margin-bottom:36px;'>uma virada histórica</div><div style='font-size:130px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;text-transform:uppercase;line-height:0.92;'>Pela primeira<br>vez,</div><div style='font-size:130px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-4px;text-transform:uppercase;line-height:0.92;'>a internet<br>superou<br>a TV.</div><div style='font-size:36px;font-weight:400;color:var(--white);opacity:0.55;margin-top:32px;line-height:1.4;'>Na publicidade brasileira.<br>Em 2025.</div></div>"
     },
     {
