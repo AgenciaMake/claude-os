@@ -13,7 +13,7 @@
       "bg": "black",
       "number": 2,
       "fullBleedImage": "photo-capa.jpg",
-      "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.6);padding:7px 16px;backdrop-filter:blur(4px);'>o hábito já mudou</div><div style='font-size:92px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>A TV ainda está ligada.</div><div style='font-size:92px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:0.97;margin-top:12px;'>Mas ninguém<br>está assistindo.</div></div>"
+      "content": "<div style='line-height:1.05;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.6);padding:7px 16px;backdrop-filter:blur(4px);'>o hábito já mudou</div><div style='font-size:92px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>A TV ainda<br>está ligada.</div><div style='font-size:92px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:0.97;margin-top:12px;'>Mas ninguém<br>está assistindo.</div></div>"
     },
     {
       "filename": "slide03-dado.png",
