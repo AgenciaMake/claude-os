@@ -2,11 +2,19 @@
   "outDir": ".",
   "slides": [
     {
-      "filename": "slide01-capa.png",
+      "filename": "slide01-capa-a.png",
       "bg": "black",
       "isCover": true,
       "noLogo": true,
       "fullBleedImage": "photo-capa.jpg",
+      "content": "<div style='line-height:1.0;'><div style='display:inline-block;font-size:28px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:3px;margin-bottom:28px;background:rgba(0,0,0,0.6);padding:8px 18px;backdrop-filter:blur(4px);'>uma virada histórica</div><div style='font-size:108px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:0.93;'>Pela primeira vez,<br>a internet superou<br>a TV na publicidade<br>brasileira.</div></div>"
+    },
+    {
+      "filename": "slide01-capa-b.png",
+      "bg": "black",
+      "isCover": true,
+      "noLogo": true,
+      "fullBleedImage": "photo-capa-b.jpg",
       "content": "<div style='line-height:1.0;'><div style='display:inline-block;font-size:28px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:3px;margin-bottom:28px;background:rgba(0,0,0,0.6);padding:8px 18px;backdrop-filter:blur(4px);'>uma virada histórica</div><div style='font-size:108px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:0.93;'>Pela primeira vez,<br>a internet superou<br>a TV na publicidade<br>brasileira.</div></div>"
     },
     {
