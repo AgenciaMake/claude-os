@@ -31,13 +31,13 @@
     {
       "filename": "slide05-audiencia.png",
       "bg": "dark-gray",
-      "number": 4,
+      "number": 5,
       "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.45;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>onde o brasileiro está</div><div style='font-size:72px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>9 horas por dia conectado em 2025.</div><div style='font-size:38px;font-weight:400;color:var(--white);line-height:1.55;margin-top:28px;opacity:0.85;'>Redes sociais concentram <strong style='color:var(--lime);'>55%</strong> de toda a verba digital. Search, <strong style='color:var(--lime);'>26%</strong>. A atenção do consumidor brasileiro já foi embora da TV.<br><br>O budget de muitas empresas ainda não percebeu.</div></div>"
     },
     {
       "filename": "slide06-problema.png",
       "bg": "lime",
-      "number": 5,
+      "number": 6,
       "numColor": "#000000",
       "footerColor": "#000000",
       "content": "<div style='line-height:1.0;'><div style='font-size:36px;font-weight:400;color:var(--black);opacity:0.6;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;'>o problema</div><div style='font-size:80px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-2px;line-height:0.95;'>A maioria distribui o orçamento hoje como distribuía em 2020.</div><div style='font-size:36px;font-weight:400;color:var(--black);line-height:1.5;margin-top:28px;'>Antes do vídeo explodir. Antes do streaming dominar. Antes da internet superar a TV. O mercado foi embora.</div><div style='font-size:60px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-1px;line-height:0.95;margin-top:24px;'>O budget ficou parado.</div></div>"
@@ -45,13 +45,13 @@
     {
       "filename": "slide07-virada.png",
       "bg": "black",
-      "number": 6,
+      "number": 7,
       "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>o que está acontecendo agora</div><div style='font-size:76px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Quem migrou para vídeo digital antes da curva está pagando CPM<br>mais barato e<br>alcançando mais.</div><div style='font-size:38px;font-weight:500;color:var(--lime);line-height:1.3;margin-top:28px;'>Quem não migrou está bancando<br>o leilão de quem migrou.</div></div>"
     },
     {
       "filename": "slide08-provocacao.png",
       "bg": "dark-gray",
-      "number": 7,
+      "number": 8,
       "content": "<div style='line-height:1.05;'><div style='font-size:26px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>pergunta direta</div><div style='font-size:90px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.97;'>Quanto do seu orçamento<br>está em vídeo<br>digital hoje?</div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.5;margin-top:32px;opacity:0.75;'>Se você não sabe responder de cabeça, a resposta provavelmente é: menos do que deveria.</div></div>"
     },
     {
