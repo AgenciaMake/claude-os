@@ -192,8 +192,9 @@ Total: **8 semanas** pra MVP utilizável.
 | API Claude (Sonnet) — ~10 clientes | R$ 300-600 | R$ 3.600-7.200 |
 | Hosting (Cloudflare Pages ou Vercel) | R$ 0-100 | R$ 0-1.200 |
 | Domínio | R$ 5/mês | R$ 60 |
+| Resend (email de leads qualificados) | ~R$ 115/mês (US$ 20) | ~R$ 1.380 |
 | Stripe (2.9% + R$0.60 por trx) | variável | variável |
-| **Total estimado** | **R$ 405-905** | **R$ 4.860-10.860** |
+| **Total estimado** | **R$ 520-1.020** | **R$ 6.240-12.240** |
 
 ## Diferenciais competitivos
 
