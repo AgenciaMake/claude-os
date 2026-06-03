@@ -184,17 +184,39 @@ Total: **8 semanas** pra MVP utilizável.
 - Cliente Growth (500 conv): custo IA = R$ 75-150 | receita = R$ 597 | margem > 75%
 - 10 clientes Growth = R$ 5.970/mês receita | ~R$ 800 custo infra | ~R$ 5.000 lucro
 
-## Custos de infra (estimativa MVP com 10 clientes)
+## Custos reais de produção (atualizado 2026-06-03)
 
-| Item | Mensal | Anual |
+### Infraestrutura fixa (confirmada)
+
+| Serviço | Uso | Custo/mês |
 |---|---|---|
-| Firebase (Firestore + Auth + Storage + Functions) | R$ 100-200 | R$ 1.200-2.400 |
-| API Claude (Sonnet) — ~10 clientes | R$ 300-600 | R$ 3.600-7.200 |
-| Hosting (Cloudflare Pages ou Vercel) | R$ 0-100 | R$ 0-1.200 |
-| Domínio | R$ 5/mês | R$ 60 |
-| Resend (email de leads qualificados) | ~R$ 115/mês (US$ 20) | ~R$ 1.380 |
-| Stripe (2.9% + R$0.60 por trx) | variável | variável |
-| **Total estimado** | **R$ 520-1.020** | **R$ 6.240-12.240** |
+| Supabase Pro | BD, auth, storage | US$ 25 (~R$ 145) |
+| Vercel Pro | Hosting | US$ 20 (~R$ 115) |
+| Resend | Email de leads qualificados | US$ 20 (~R$ 115) |
+| **Subtotal infra** | | **US$ 65/mês (~R$ 375)** |
+
+### Variável por uso
+
+| Serviço | Uso | Custo |
+|---|---|---|
+| Anthropic API | Claude Haiku (chat) + Sonnet (treino/resumo) | Por token — ~US$ 0 agora (testes) |
+| Domínios | `citra.chat`, `citrachat.com`, `citrachat.com.br` | ~US$ 70/ano total |
+
+### Desenvolvimento
+
+| Serviço | Uso | Custo/mês |
+|---|---|---|
+| Claude MAX | Desenvolvimento do produto | US$ 100 (~R$ 575) |
+
+### **Total atual: ~US$ 165/mês (~R$ 950)**
+> Anthropic API e domínios não incluídos (variáveis/anuais).
+
+### Quando houver faturamento (a ativar)
+
+| Serviço | Custo |
+|---|---|
+| Stripe | 2,9% + US$ 0,30 por transação |
+| Asaas (clientes BR) | Similar ao Stripe |
 
 ## Diferenciais competitivos
 
