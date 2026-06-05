@@ -9,6 +9,14 @@ _configurar-mcps.md
 # Outputs de renderização (binários pesados)
 *.png
 
+# Vídeos
+*.mp4
+*.mov
+*.MOV
+*.avi
+*.mkv
+*.srt
+
 # Arquivos de dados do usuário (CSVs, planilhas, etc)
 dados/*.csv
 dados/*.xlsx
