@@ -98,13 +98,24 @@ Bruno identificou o consumo elevado ao verificar o saldo da conta Anthropic e no
 
 ---
 
-## Vulnerabilidade pendente (não resolvida)
+## Correção definitiva implementada (06/06/2026)
 
-O CitraDesk ainda chama a API da Anthropic diretamente do browser com `dangerouslyAllowBrowser: true`. A nova chave foi rotacionada, mas continua igualmente exposta no bundle público enquanto essa arquitetura não for corrigida.
+Foi criado um Cloudflare Worker (`citradesk-ai-proxy`) que funciona como proxy server-side para todas as chamadas de IA do CitraDesk.
 
-**Solução definitiva:** mover as chamadas de IA do CitraDesk para uma função server-side (Cloudflare Worker ou Firebase Function) que funcione como proxy. O browser chama o proxy, o proxy chama a Anthropic com a chave guardada server-side. A chave nunca chega ao browser.
+**Nova arquitetura:**
+```
+Browser CitraDesk → Cloudflare Worker (citradesk-ai-proxy) → Anthropic API
+                    (chave guardada como Worker secret — nunca chega ao browser)
+```
 
-Essa correção deve ser priorizada antes do CitraDesk ser expandido ou compartilhado com outros usuários.
+**O que foi feito:**
+- Worker criado em `produtos/citradesk/worker/` e deployed em `https://citradesk-ai-proxy.bruno-897.workers.dev`
+- Chave Anthropic adicionada como secret do Worker via `wrangler secret put ANTHROPIC_API_KEY`
+- `claudeService.ts` atualizado para chamar o Worker em vez da Anthropic diretamente
+- `VITE_ANTHROPIC_API_KEY` removido do workflow de build — nunca mais vai para o bundle público
+- `VITE_GEMINI_API_KEY` também removido (serviço não está em uso)
+- Novo secret `VITE_AI_PROXY_URL` adicionado ao GitHub (apenas a URL do Worker — não é segredo)
+- Modelos permitidos pelo Worker: apenas `claude-sonnet-4-6` e `claude-haiku-4-5-20251001`
 
 ---
 
