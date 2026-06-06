@@ -1,5 +1,5 @@
 # Incidente de Segurança — Vazamento de Chaves de API
-**Data:** 06 de junho de 2026
+**Datas:** 05 e 06 de junho de 2026
 **Severidade:** Alta
 **Status:** Resolvido
 
@@ -7,9 +7,33 @@
 
 ## O que aconteceu
 
-Na madrugada de 05 para 06 de junho de 2026, entre 01h e 03h UTC (02h–04h horário de Lisboa), foram detectados consumos anômalos na conta Anthropic da MakeLemonAd. O consumo chegou a aproximadamente 1,2 milhão de tokens em uma única hora, utilizando modelos Opus (claude-opus-4-6, claude-opus-4-7, claude-opus-4-8) — modelos que nunca foram usados em nenhum código da empresa.
+Foram identificados dois incidentes consecutivos de consumo abusivo da API Anthropic, ambos na madrugada (horário UTC), utilizando modelos Opus que nunca foram usados em nenhum código da empresa.
 
-O custo estimado desse consumo foi de aproximadamente **$8 USD** em uma única madrugada. Padrão similar havia ocorrido em noites anteriores.
+### Incidente 1 — 05 de junho de 2026, 05h UTC (06h Lisboa)
+
+| Modelo | Tokens |
+|---|---|
+| claude-opus-4-6 | 303.473 |
+| claude-opus-4-8 | 216.485 |
+| claude-opus-4-7 | 48.906 |
+| claude-sonnet-4-6 | 112.774 |
+| claude-sonnet-4-5 | 29.125 |
+| claude-haiku-4-5 | 4.160 |
+| **Total** | **714.923 tokens** |
+
+### Incidente 2 — 06 de junho de 2026, 02h UTC (03h Lisboa)
+
+| Modelo | Tokens |
+|---|---|
+| claude-opus-4-6 | 418.804 |
+| claude-opus-4-8 | 250.822 |
+| claude-opus-4-7 | 237.028 |
+| claude-sonnet-4-6 | 301.517 |
+| claude-opus-4-5 | 16.081 |
+| claude-haiku-4-5 | 8.090 |
+| **Total** | **1.232.342 tokens** |
+
+O custo estimado dos dois incidentes somados foi de aproximadamente **$8–10 USD**. O padrão idêntico nas duas madrugadas confirma uso automatizado e sistemático da chave comprometida.
 
 ---
 
