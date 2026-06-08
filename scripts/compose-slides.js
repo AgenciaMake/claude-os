@@ -19,6 +19,7 @@ const SAFE_AREA_STORY = { width: 940, height: 1480 };
 const ARROW_COLOR = {
   'black':        '#ffffff',
   'dark-gray':    '#ffffff',
+  'white':        '#000000',
   'light-gray':   '#434244',
   'lime':         '#000000',
   'green2':       '#ffffff',
