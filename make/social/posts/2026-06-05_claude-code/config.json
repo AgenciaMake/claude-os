@@ -48,23 +48,29 @@
       "content": "<div style='line-height:1.0;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:36px;'>ponto de atenção</div><div style='font-size:82px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.95;'>A API pode escolher o modelo mais caro sem te avisar.</div><div style='font-size:38px;font-weight:400;color:var(--white);opacity:0.8;line-height:1.5;margin-top:32px;'>O Opus pode ser acionado automaticamente dependendo da configuração da integração. Se ninguém definiu qual modelo usar, a conta já está mais cara do que deveria.</div><div style='border-left:4px solid var(--lime);padding-left:20px;margin-top:32px;'><div style='font-size:34px;font-weight:600;color:var(--white);line-height:1.4;'>Solução: definir o modelo explicitamente na integração <strong style='color:var(--lime);'>+</strong> configurar limite mensal de gasto. As duas coisas juntas.</div></div></div>"
     },
     {
-      "filename": "slide08-conta.png",
-      "bg": "white",
+      "filename": "slide08-keys.png",
+      "bg": "black",
       "number": 8,
+      "content": "<div style='line-height:1.0;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:36px;'>ponto de atenção</div><div style='font-size:86px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.93;'>A key da API é a senha da sua conta.</div><div style='font-size:86px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:0.93;margin-top:14px;'>Se vazar, quem usa não é você.</div><div style='font-size:34px;font-weight:400;color:var(--white);opacity:0.75;line-height:1.55;margin-top:36px;'>Quando você conecta a API, gera uma chave de acesso. Ela precisa ficar guardada como senha de banco. Se essa chave aparecer num código compartilhado, num e-mail ou numa integração mal configurada, qualquer pessoa pode usar seus créditos.<br><br>A gente passou por isso. Foi uma lição cara o suficiente pra nunca mais esquecer.</div></div>"
+    },
+    {
+      "filename": "slide09-conta.png",
+      "bg": "white",
+      "number": 9,
       "numColor": "#000000",
       "footerColor": "#000000",
       "content": "<div style='line-height:1.0;'><div style='font-size:30px;font-weight:400;color:var(--black);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:36px;'>o erro mais comum</div><div style='font-size:84px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-2px;line-height:0.95;'>A empresa testa. Fica impressionada. Libera pro time inteiro.</div><div style='font-size:84px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-2px;line-height:0.95;margin-top:16px;'>Aí chega a fatura.</div><div style='font-size:36px;font-weight:400;color:var(--black);opacity:0.6;line-height:1.5;margin-top:36px;'>Antes de escalar o uso, defina limites de gasto, monitore o consumo por projeto e entenda o que está sendo processado em cada chamada.</div></div>"
     },
     {
-      "filename": "slide09-vale.png",
+      "filename": "slide10-vale.png",
       "bg": "light-gray",
-      "number": 9,
+      "number": 10,
       "numColor": "#000000",
       "footerColor": "#000000",
       "content": "<div style='line-height:1.0;'><div style='font-size:30px;font-weight:400;color:var(--black);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:36px;'>quando vale e quando não vale</div><div style='display:flex;flex-direction:column;gap:28px;'><div style='border-left:5px solid var(--black);padding-left:24px;'><div style='font-size:26px;font-weight:700;color:var(--black);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;'>Vale muito</div><div style='font-size:38px;font-weight:500;color:var(--black);line-height:1.3;'>Tarefas repetitivas. Alto volume. Processos que não mudam. Velocidade de execução.</div></div><div style='border-left:5px solid #9aaa00;padding-left:24px;background:rgba(214,222,35,0.12);padding-top:16px;padding-bottom:16px;border-radius:0 8px 8px 0;'><div style='font-size:26px;font-weight:800;color:#7a8800;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;'>Humano ainda lidera</div><div style='font-size:38px;font-weight:500;color:var(--black);line-height:1.3;'>Decisão estratégica. Relacionamento com cliente. Criatividade central. Contexto que só quem vive o negócio tem.</div></div></div><div style='margin-top:40px;'><div style='font-size:30px;font-weight:400;color:rgba(0,0,0,0.5);line-height:1.3;'>IA potencializa. Não substitui</div><div style='font-size:52px;font-weight:800;font-style:italic;color:var(--black);letter-spacing:-1px;line-height:1.0;'>quem pensa.</div></div></div>"
     },
     {
-      "filename": "slide10-cta.png",
+      "filename": "slide11-cta.png",
       "bg": "black",
       "isCta": true,
       "content": "<div style='font-size:76px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Menos ruído.<br>Mais resultado.<br>É assim que a<br><span style='color:var(--lime);'>Make</span> trabalha.</div><div style='font-size:34px;font-weight:400;color:var(--white);line-height:1.55;opacity:0.65;margin-top:36px;'>A gente usa Claude Code no dia a dia.<br>E orienta clientes a implementar sem susto.<br><br>Segue a <span style='color:var(--lime);font-weight:700;'>Make</span>. Toda semana tem conteúdo assim.</div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
