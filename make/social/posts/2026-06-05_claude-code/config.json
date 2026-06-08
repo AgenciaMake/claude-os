@@ -19,7 +19,7 @@
       "filename": "slide03-o-que-e.png",
       "bg": "black",
       "number": 3,
-      "content": "<div style='line-height:1.0;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:36px;'>o que é Claude Code de verdade</div><div style='font-size:88px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.95;'>Não é um assistente que responde.</div><div style='font-size:88px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:0.95;margin-top:16px;'>É um colaborador que executa.</div><div style='font-size:38px;font-weight:400;color:var(--white);opacity:0.8;line-height:1.5;margin-top:36px;'>A diferença? Você dá uma tarefa pra um assistente e ele <em>te explica como fazer</em>. Você dá a mesma tarefa pro Claude Code e ele <strong style='color:var(--lime);'>faz</strong> — e te mostra o resultado.</div></div>"
+      "content": "<div style='line-height:1.0;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:36px;'>o que é Claude Code de verdade</div><div style='font-size:88px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:0.95;'>Não é um assistente que responde.</div><div style='font-size:88px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-2px;line-height:0.95;margin-top:16px;'>É um colaborador que executa.</div><div style='font-size:38px;font-weight:400;color:var(--white);opacity:0.8;line-height:1.5;margin-top:36px;'>A diferença? Você dá uma tarefa pra um assistente e ele <em>te explica como fazer</em>. Você dá a mesma tarefa pro Claude Code e ele <strong style='color:var(--lime);'>faz</strong>. E te mostra o resultado.</div></div>"
     },
     {
       "filename": "slide04-processo.png",
@@ -63,7 +63,7 @@
       "filename": "slide10-cta.png",
       "bg": "black",
       "isCta": true,
-      "content": "<div style='font-size:76px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Menos ruído.<br>Mais resultado.<br>É assim que a<br><span style='color:var(--lime);'>Make</span> trabalha.</div><div style='font-size:34px;font-weight:400;color:var(--white);line-height:1.55;opacity:0.65;margin-top:36px;'>A gente usa Claude Code no dia a dia.<br>E orienta clientes a implementar sem susto.<br><br>Segue a <span style='color:var(--lime);font-weight:700;'>Make</span> — toda semana tem conteúdo assim.</div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
+      "content": "<div style='font-size:76px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Menos ruído.<br>Mais resultado.<br>É assim que a<br><span style='color:var(--lime);'>Make</span> trabalha.</div><div style='font-size:34px;font-weight:400;color:var(--white);line-height:1.55;opacity:0.65;margin-top:36px;'>A gente usa Claude Code no dia a dia.<br>E orienta clientes a implementar sem susto.<br><br>Segue a <span style='color:var(--lime);font-weight:700;'>Make</span>. Toda semana tem conteúdo assim.</div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
     }
   ]
 }
