@@ -22,7 +22,7 @@
       "filename": "story03-hook.png",
       "bg": "dark-gray",
       "swipeLabel": "Ver no feed",
-      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='display:inline-block;font-size:24px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:52px;background:rgba(0,0,0,0.6);padding:8px 18px;backdrop-filter:blur(4px);'>pergunta direta</div><div style='font-size:108px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:0.94;'>Você acha que está só usando o plano. A API pode estar rodando por baixo sem você perceber.</div><div style='font-size:108px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-3px;line-height:0.94;margin-top:16px;'>Essa é a parte que ninguém leu antes de implementar.</div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:0;line-height:0.95;'><div style='display:inline-block;font-size:24px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:52px;background:rgba(0,0,0,0.6);padding:8px 18px;backdrop-filter:blur(4px);'>pergunta direta</div><div style='font-size:108px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:0.94;'>Não é o Claude que vai te custar caro. É o que você não configurou antes de usar.</div><div style='font-size:108px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-3px;line-height:0.94;margin-top:16px;'>Ver no feed.</div></div>"
     }
   ]
 }
