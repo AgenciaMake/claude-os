@@ -7,3 +7,10 @@ Existem três versões do Claude, modelos com preços muito diferentes e uma con
 Aqui na Make, aprendemos isso da forma cara. Esse carrossel reúne o que não vem no manual.
 
 #claudecode #ia #inteligenciaartificial #performanceestrategica360 #agenciaboutique360 #makelemonad
+
+---
+
+## Publicação
+
+- **Instagram** — publicado em 2026-06-09 (ID: sp_xaALEgmB7bSOBaOU7DDw)
+- **LinkedIn** — publicado em 2026-06-09 (ID: sp_tvuQpozJYcZlijn1VJv7o)
