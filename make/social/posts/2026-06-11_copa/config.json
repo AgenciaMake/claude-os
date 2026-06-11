@@ -8,7 +8,7 @@
       "noLogo": true,
       "hashtagColor": "#000000",
       "footerColor": "#000000",
-      "content": "<div style='display:flex;flex-direction:column;gap:16px;'><div style='font-size:46px;font-weight:500;line-height:1.1;color:#000;'>Durante a Copa,</div><div style='font-size:128px;font-weight:800;font-style:italic;line-height:0.88;letter-spacing:-3px;color:#000;'>200 milhões de pessoas estão com o celular na mão.</div><div style='margin-top:24px;'><span style='background:#000;color:#D6DE23;font-size:54px;font-weight:600;font-style:italic;line-height:1.5;padding:6px 14px;-webkit-box-decoration-break:clone;box-decoration-break:clone;'>Sua marca sabe o que fazer com isso?</span></div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:16px;'><div style='font-size:46px;font-weight:500;line-height:1.1;color:#000;'>Durante a Copa,</div><div style='font-size:128px;font-weight:800;font-style:italic;line-height:0.88;letter-spacing:-3px;color:#000;'>200 milhões de pessoas estão com o celular na mão.</div><div style='margin-top:24px;display:flex;flex-direction:column;gap:8px;'><div><span style='background:#000;color:#D6DE23;font-size:54px;font-weight:600;font-style:italic;line-height:1.5;padding:6px 14px;'>Sua marca sabe?</span></div><div><span style='background:#000;color:#D6DE23;font-size:54px;font-weight:600;font-style:italic;line-height:1.5;padding:6px 14px;'>o que fazer com isso?</span></div></div></div>"
     }
   ]
 }
