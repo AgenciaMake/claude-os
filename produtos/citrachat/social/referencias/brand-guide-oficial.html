@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citra Chat — Instagram Brand Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --lime:       oklch(88% 0.22 130);
+      --lime-mid:   oklch(60% 0.22 130);
+      --lime-dark:  oklch(38% 0.20 130);
+      --lime-bg:    oklch(95% 0.07 130);
+      --lime-ring:  oklch(80% 0.14 130);
+      --coral:      oklch(65% 0.18 28);
+      --coral-bg:   oklch(97% 0.04 28);
+      --sky:        oklch(62% 0.17 242);
+      --sky-bg:     oklch(96% 0.04 242);
+      --ember:      oklch(76% 0.15 52);
+      --cream:      oklch(97.5% 0.010 85);
+      --cream-2:    oklch(94% 0.012 85);
+      --white:      oklch(100% 0 0);
+      --ink:        oklch(12% 0.018 260);
+      --ink-2:      oklch(40% 0.018 260);
+      --ink-3:      oklch(60% 0.016 260);
+      --border:     oklch(87% 0.010 85);
+      --d-bg:       oklch(9% 0.015 260);
+      --d-surf:     oklch(13.5% 0.018 260);
+      --d-fog:      oklch(97% 0.006 95);
+      --d-fog2:     oklch(65% 0.014 260);
+      --d-fog3:     oklch(40% 0.015 260);
+      --d-border:   oklch(23% 0.018 260);
+      --ff-d: 'Bricolage Grotesque', system-ui, sans-serif;
+      --ff-b: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--ink); font-family: var(--ff-b); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 56px; }
+    @media (max-width: 768px) { .wrap { padding: 0 24px; } }
+    .section { padding: 88px 0; border-bottom: 1px solid var(--border); }
+    .dark-sec { background: var(--d-bg); border-bottom-color: oklch(17% 0.015 260); }
+    .sec-lbl {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 52px;
+    }
+    .sec-lbl::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .dark-sec .sec-lbl { color: var(--d-fog3); }
+    .dark-sec .sec-lbl::after { background: oklch(17% 0.015 260); }
+    .rule-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--d-bg); border-radius: 6px; padding: 3px 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      color: var(--lime); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .section-title { font-family: var(--ff-d); font-size: clamp(28px, 3.5vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; color: var(--ink); margin-bottom: 14px; }
+    .section-sub { font-size: 17px; color: var(--ink-2); max-width: 560px; line-height: 1.65; }
+    .dark-sec .section-title { color: var(--d-fog); }
+    .dark-sec .section-sub { color: var(--d-fog2); }
+
+    .hero { background: var(--d-bg); min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; border-bottom: 1px solid oklch(17% 0.015 260); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 700px 500px at 80% 30%, oklch(88% 0.22 130 / 0.10), transparent), radial-gradient(ellipse 400px 400px at 20% 70%, oklch(65% 0.18 28 / 0.07), transparent); pointer-events: none; }
+    .hero-nav { display: flex; align-items: center; justify-content: space-between; padding: 32px 56px; position: relative; z-index: 1; }
+    .hero-wm { font-family: var(--ff-d); font-size: 17px; font-weight: 700; letter-spacing: -0.025em; color: var(--d-fog); display: flex; align-items: center; gap: 10px; }
+    .hero-wm em { color: var(--lime); font-style: normal; }
+    .hero-badge { display: flex; align-items: center; gap: 8px; background: var(--lime-bg); border: 1px solid var(--lime-ring); border-radius: 20px; padding: 5px 14px; font-size: 11px; font-weight: 600; color: var(--lime-dark); }
+    .hero-body { display: flex; flex-direction: column; justify-content: center; padding: 0 56px; position: relative; z-index: 1; }
+    .hero-eye { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lime); margin-bottom: 28px; display: flex; align-items: center; gap: 10px; }
+    .hero-eye::before { content: ''; display: block; width: 28px; height: 1px; background: var(--lime-mid); }
+    .hero-h1 { font-family: var(--ff-d); font-size: clamp(60px, 8.5vw, 112px); font-weight: 800; letter-spacing: -0.045em; line-height: 0.95; color: var(--d-fog); }
+    .hero-h1 .hl { color: var(--lime); }
+    .hero-sub-p { margin-top: 28px; font-size: 18px; color: var(--d-fog2); max-width: 520px; line-height: 1.65; }
+    .hero-footer { padding: 32px 56px; display: flex; gap: 0; border-top: 1px solid oklch(17% 0.015 260); position: relative; z-index: 1; }
+    .hp { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; color: var(--d-fog3); padding: 0 24px; border-right: 1px solid oklch(17% 0.015 260); }
+    .hp:first-child { padding-left: 0; }
+    .hp:last-child { border-right: none; }
+    .hp-d { width: 6px; height: 6px; border-radius: 50%; }
+
+    .grid-diagram-wrap { display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: start; }
+    @media (max-width: 768px) { .grid-diagram-wrap { grid-template-columns: 1fr; } }
+    .grid-rules-list { display: flex; flex-direction: column; gap: 0; }
+    .grid-rule { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; }
+    .grid-rule:first-child { border-top: 1px solid var(--border); }
+    .grid-rule-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .grid-rule-val { font-family: 'SFMono-Regular', 'Consolas', monospace; font-size: 14px; font-weight: 600; color: var(--ink); }
+    .grid-rule-note { font-size: 13px; color: var(--ink-3); }
+
+    .color-rules-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 32px; }
+    .cr-card { background: var(--white); padding: 32px 28px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: start; }
+    .cr-when { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .cr-title { font-family: var(--ff-d); font-size: 18px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 10px; }
+    .cr-uses { display: flex; flex-direction: column; gap: 6px; }
+    .cr-use { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
+    .cr-use::before { content: '→'; color: var(--ink-3); font-size: 12px; }
+    .cr-mini { width: 80px; flex-shrink: 0; }
+    .cr-mini-post { width: 80px; height: 100px; border-radius: 6px; overflow: hidden; position: relative; }
+    .cr-mini-inner { width: 1080px; height: 1350px; transform: scale(0.0741); transform-origin: top left; position: absolute; }
+
+    .placement-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 36px; }
+    @media (max-width: 860px) { .placement-grid { grid-template-columns: repeat(2, 1fr); } }
+    .placement-card { display: flex; flex-direction: column; gap: 14px; }
+    .placement-frame { width: 100%; aspect-ratio: 1080 / 1350; border-radius: 10px; overflow: hidden; position: relative; background: var(--d-surf); border: 1px solid var(--d-border); }
+    .placement-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .placement-when { font-size: 12px; color: var(--ink-3); line-height: 1.5; }
+    .placement-badge { display: inline-flex; align-items: center; gap: 5px; border-radius: 5px; padding: 2px 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; }
+
+    .type-rules-table { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .trt-head { display: grid; grid-template-columns: 1.2fr 1fr 0.8fr 0.8fr 1.2fr; padding: 12px 24px; background: var(--cream-2); border-bottom: 1px solid var(--border); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); gap: 12px; }
+    .trt-row { display: grid; grid-template-columns: 1.2fr 1fr 0.8fr 0.8fr 1.2fr; padding: 16px 24px; border-bottom: 1px solid var(--border); gap: 12px; align-items: baseline; }
+    .trt-row:last-child { border-bottom: none; }
+    .trt-n { font-size: 12px; font-weight: 600; color: var(--ink-2); }
+    .trt-m { font-family: monospace; font-size: 11px; color: var(--ink-3); }
+    .trt-rule { font-size: 12px; color: var(--ink-3); }
+
+    .data-rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+    @media (max-width: 768px) { .data-rules { grid-template-columns: 1fr; } }
+    .data-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+    .data-card-icon { width: 40px; height: 40px; border-radius: 9px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-family: var(--ff-d); font-size: 16px; font-weight: 800; }
+    .data-card-title { font-family: var(--ff-d); font-size: 16px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 8px; }
+    .data-card-body { font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+
+    .dd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 860px) { .dd-grid { grid-template-columns: 1fr; } }
+    .dd-wrap { display: flex; flex-direction: column; gap: 10px; }
+    .dd-frame { width: 100%; aspect-ratio: 1080 / 1350; border-radius: 10px; overflow: hidden; position: relative; }
+    .dd-label { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
+    .dd-ok { color: var(--lime-dark); }
+    .dd-no { color: var(--coral); }
+    .dd-ok-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); }
+    .dd-no-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); }
+    .dd-desc { font-size: 12px; color: var(--ink-3); line-height: 1.5; }
+    .dd-inner { width: 1080px; height: 1350px; transform-origin: top left; position: absolute; top: 0; left: 0; }
+
+    .foot { padding: 44px 56px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+    .foot-wm { font-family: var(--ff-d); font-size: 15px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); display: flex; align-items: center; gap: 10px; }
+    .foot-wm em { color: var(--lime); font-style: normal; }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <nav class="hero-nav">
+    <div class="hero-wm">
+      <svg viewBox="0 0 64 64" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="oklch(88% 0.22 130)"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="oklch(12% 0.018 260)" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="oklch(12% 0.018 260)"/></svg>
+      citra<em>.</em>chat
+    </div>
+    <div class="hero-badge">Instagram Brand Guide · Oficial</div>
+  </nav>
+  <div class="hero-body">
+    <div class="hero-eye">Diretrizes de marca para Instagram</div>
+    <h1 class="hero-h1">Social<br><span class="hl">Guidelines</span></h1>
+    <p class="hero-sub-p">Tudo que o time criativo precisa para produzir conteúdo consistente, reconhecível e alinhado com a identidade Citra Chat no Instagram.</p>
+  </div>
+  <div class="hero-footer">
+    <div class="hp"><div class="hp-d" style="background:var(--lime-mid)"></div>Formato & Grid</div>
+    <div class="hp"><div class="hp-d" style="background:var(--coral)"></div>Sistema de cores</div>
+    <div class="hp"><div class="hp-d" style="background:var(--sky)"></div>Tipografia</div>
+    <div class="hp"><div class="hp-d" style="background:var(--lime-mid)"></div>Assinatura & Logo</div>
+    <div class="hp"><div class="hp-d" style="background:var(--coral)"></div>Sistema de dados</div>
+    <div class="hp"><div class="hp-d" style="background:var(--sky)"></div>Do's & Don'ts</div>
+  </div>
+</section>
+
+<section class="section" id="grid">
+  <div class="wrap">
+    <div class="sec-lbl">01 — Formato & Grid</div>
+    <div class="grid-diagram-wrap">
+      <div style="flex-shrink:0;">
+        <svg viewBox="0 0 252 315" width="252" height="315" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+          <rect x="1" y="1" width="250" height="313" rx="8" fill="#F8F4EB" stroke="#CCBBA0" stroke-width="1.5"/>
+          <rect x="1" y="1" width="250" height="313" rx="8" fill="oklch(65% 0.18 28 / 0.06)"/>
+          <rect x="21" y="21" width="210" height="273" rx="4" fill="oklch(97.5% 0.010 85)" stroke="oklch(88% 0.22 130)" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="126" y="158" text-anchor="middle" font-family="monospace" font-size="9" fill="oklch(38% 0.20 130)" font-weight="700">900 × 1170px</text>
+          <text x="126" y="170" text-anchor="middle" font-family="sans-serif" font-size="7" fill="oklch(60% 0.016 260)">Área de conteúdo segura</text>
+          <line x1="1" y1="158" x2="21" y2="158" stroke="oklch(65% 0.18 28)" stroke-width="1"/>
+          <line x1="1" y1="154" x2="1" y2="162" stroke="oklch(65% 0.18 28)" stroke-width="1"/>
+          <line x1="21" y1="154" x2="21" y2="162" stroke="oklch(65% 0.18 28)" stroke-width="1"/>
+          <text x="9" y="149" text-anchor="middle" font-family="monospace" font-size="7" fill="oklch(65% 0.18 28)" font-weight="700">90px</text>
+          <line x1="126" y1="1" x2="126" y2="21" stroke="oklch(65% 0.18 28)" stroke-width="1"/>
+          <line x1="122" y1="1" x2="130" y2="1" stroke="oklch(65% 0.18 28)" stroke-width="1"/>
+          <line x1="122" y1="21" x2="130" y2="21" stroke="oklch(65% 0.18 28)" stroke-width="1"/>
+          <text x="140" y="10" font-family="monospace" font-size="7" fill="oklch(65% 0.18 28)" font-weight="700">90px</text>
+          <text x="126" y="308" text-anchor="middle" font-family="monospace" font-size="8" fill="oklch(40% 0.018 260)" font-weight="600">1080 px</text>
+          <text x="6" y="160" text-anchor="middle" font-family="monospace" font-size="7" fill="oklch(40% 0.018 260)" font-weight="600" transform="rotate(-90 6 160)">1350 px</text>
+          <rect x="2" y="2" width="6" height="6" rx="1" fill="oklch(88% 0.22 130)" opacity="0.7"/>
+          <rect x="244" y="2" width="6" height="6" rx="1" fill="oklch(88% 0.22 130)" opacity="0.7"/>
+          <rect x="2" y="307" width="6" height="6" rx="1" fill="oklch(88% 0.22 130)" opacity="0.7"/>
+          <rect x="244" y="307" width="6" height="6" rx="1" fill="oklch(88% 0.22 130)" opacity="0.7"/>
+        </svg>
+      </div>
+      <div>
+        <div style="margin-bottom:28px;">
+          <div class="rule-badge">Regra base</div>
+          <div class="section-title">Formato padrão do feed</div>
+          <p class="section-sub">Todo conteúdo de feed usa o formato 4:5. É o formato que o Instagram prioriza em distribuição orgânica.</p>
+        </div>
+        <div class="grid-rules-list">
+          <div class="grid-rule"><div class="grid-rule-label" style="color:var(--lime-dark);">Dimensão do post</div><div class="grid-rule-val">1080 × 1350 px</div><div class="grid-rule-note">Formato 4:5 — padrão do feed Instagram</div></div>
+          <div class="grid-rule"><div class="grid-rule-label" style="color:var(--lime-dark);">Resolução</div><div class="grid-rule-val">72 dpi mínimo · 300 dpi ideal</div><div class="grid-rule-note">Exportar como PNG ou JPG de alta qualidade</div></div>
+          <div class="grid-rule"><div class="grid-rule-label" style="color:var(--coral);">Margem de segurança</div><div class="grid-rule-val">90 px em todos os lados</div><div class="grid-rule-note">Nenhum elemento essencial fora dessa zona</div></div>
+          <div class="grid-rule"><div class="grid-rule-label" style="color:var(--coral);">Área de conteúdo</div><div class="grid-rule-val">900 × 1170 px</div><div class="grid-rule-note">Todo texto, dado e elemento visual deve caber aqui</div></div>
+          <div class="grid-rule"><div class="grid-rule-label" style="color:var(--sky);">Assinatura</div><div class="grid-rule-val">Sempre dentro da margem de 90 px</div><div class="grid-rule-note">Logo mínimo de 32px; wordmark mínimo de 28px</div></div>
+          <div class="grid-rule" style="border-bottom:none;"><div class="grid-rule-label" style="color:var(--sky);">Formato Stories / Reels Cover</div><div class="grid-rule-val">1080 × 1920 px</div><div class="grid-rule-note">Margem 80px · Zona central segura: 920 × 1060px</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="colors">
+  <div class="wrap">
+    <div class="sec-lbl">02 — Sistema de Cores · Regras de Uso</div>
+    <div style="margin-bottom:40px;">
+      <div class="rule-badge">Princípio</div>
+      <div class="section-title">Um acento dominante<br>por post.</div>
+      <p class="section-sub">Nunca use dois acentos (lime + coral, por ex.) com o mesmo peso visual. Um domina, o outro aparece como detalhe ou não aparece.</p>
+    </div>
+    <div class="color-rules-grid">
+      <div class="cr-card">
+        <div class="cr-info">
+          <div class="cr-when"><div style="width:10px;height:10px;border-radius:50%;background:var(--lime);flex-shrink:0;"></div>Use LIME quando:</div>
+          <div class="cr-title">Destaque primário,<br>dado ao vivo, CTA</div>
+          <div class="cr-uses">
+            <div class="cr-use">É o primeiro slide de uma série</div>
+            <div class="cr-use">Há um dado crítico para destacar</div>
+            <div class="cr-use">O post é um CTA (criar conta, acessar)</div>
+            <div class="cr-use">Lançamento de feature ou produto</div>
+          </div>
+        </div>
+        <div class="cr-mini">
+          <div class="cr-mini-post">
+            <div class="cr-mini-inner" style="background:#13111E;font-family:'Bricolage Grotesque',sans-serif;">
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:16px;"><svg viewBox="0 0 64 64" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg></div>
+                <div><div style="font-size:220px;font-weight:800;letter-spacing:-0.07em;line-height:0.85;color:#C8FF2E;">3×</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:54px;color:rgba(248,244,235,0.7);font-weight:500;margin-top:24px;">mais performance</div></div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:36px;font-weight:700;color:rgba(248,244,235,0.62);">citra.chat</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cr-card">
+        <div class="cr-info">
+          <div class="cr-when"><div style="width:10px;height:10px;border-radius:50%;background:var(--coral);flex-shrink:0;"></div>Use CORAL quando:</div>
+          <div class="cr-title">Performance, conversão,<br>urgência, depoimento</div>
+          <div class="cr-uses">
+            <div class="cr-use">O post fala sobre resultados de conversão</div>
+            <div class="cr-use">É um depoimento ou caso de uso real</div>
+            <div class="cr-use">Há urgência (prazo, promoção)</div>
+            <div class="cr-use">Conteúdo sobre o time/empresa (humano)</div>
+          </div>
+        </div>
+        <div class="cr-mini">
+          <div class="cr-mini-post">
+            <div class="cr-mini-inner" style="background:#F8F4EB;font-family:'Bricolage Grotesque',sans-serif;">
+              <div style="position:absolute;top:0;left:0;right:0;height:16px;background:#E05C3E;"></div>
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(19,17,30,0.65);">Resultado</div>
+                <div><div style="font-size:140px;font-weight:800;letter-spacing:-0.05em;line-height:0.9;color:#E05C3E;">+38%</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:54px;font-weight:600;color:#13111E;margin-top:20px;line-height:1.2;">em conversões<br>via chat</div></div>
+                <div style="display:flex;align-items:center;gap:14px;"><svg viewBox="0 0 64 64" width="36" height="36" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg><span style="font-size:30px;font-weight:700;color:#13111E;">citra<span style="color:#2F6B10;">.</span>chat</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cr-card">
+        <div class="cr-info">
+          <div class="cr-when"><div style="width:10px;height:10px;border-radius:50%;background:var(--sky);flex-shrink:0;"></div>Use SKY quando:</div>
+          <div class="cr-title">Precisão, white-label,<br>features técnicas</div>
+          <div class="cr-uses">
+            <div class="cr-use">Conteúdo sobre white-label ou agências</div>
+            <div class="cr-use">Features técnicas (RAG, API, integrações)</div>
+            <div class="cr-use">Conteúdo educativo sobre tecnologia IA</div>
+          </div>
+        </div>
+        <div class="cr-mini">
+          <div class="cr-mini-post">
+            <div class="cr-mini-inner" style="background:#13111E;font-family:'Bricolage Grotesque',sans-serif;">
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;color:rgba(248,244,235,0.65);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">White-label</div>
+                <div><div style="font-size:96px;font-weight:800;letter-spacing:-0.04em;line-height:0.92;color:#3E88D4;">Seu produto.<br>Sua marca.</div></div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:30px;font-weight:700;color:rgba(248,244,235,0.62);">citra.chat</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cr-card">
+        <div class="cr-info">
+          <div class="cr-when"><div style="width:10px;height:10px;border-radius:50%;background:var(--ember);flex-shrink:0;"></div>Use EMBER quando:</div>
+          <div class="cr-title">Alertas em dados,<br>métricas negativas</div>
+          <div class="cr-uses">
+            <div class="cr-use">Dado mostra queda ou problema</div>
+            <div class="cr-use">Alerta sobre o que acontece sem medir</div>
+            <div class="cr-use">Nunca como cor dominante de um post</div>
+          </div>
+        </div>
+        <div class="cr-mini">
+          <div class="cr-mini-post">
+            <div class="cr-mini-inner" style="background:#13111E;font-family:'Bricolage Grotesque',sans-serif;">
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;color:rgba(248,244,235,0.65);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Sem medição</div>
+                <div style="text-align:center;"><div style="font-size:180px;font-weight:800;letter-spacing:-0.06em;color:#E8A040;line-height:0.9;">↓67%</div></div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:30px;font-weight:700;color:rgba(248,244,235,0.65);">citra.chat</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="foot-wm">
+    <svg viewBox="0 0 64 64" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="oklch(88% 0.22 130)"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="oklch(12% 0.018 260)" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="oklch(12% 0.018 260)"/></svg>
+    citra<em>.</em>chat
+  </div>
+  <span style="font-size:12px;color:var(--ink-3);">Instagram Brand Guide · Oficial · Junho 2026</span>
+</footer>
+
+</body>
+</html>
