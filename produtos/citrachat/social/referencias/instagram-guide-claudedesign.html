@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citra Chat — Instagram Brand Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --lime:       oklch(88% 0.22 130);
+      --lime-mid:   oklch(60% 0.22 130);
+      --lime-dark:  oklch(38% 0.20 130);
+      --lime-bg:    oklch(95% 0.07 130);
+      --lime-ring:  oklch(80% 0.14 130);
+      --coral:      oklch(65% 0.18 28);
+      --coral-bg:   oklch(97% 0.04 28);
+      --sky:        oklch(62% 0.17 242);
+      --sky-bg:     oklch(96% 0.04 242);
+      --ember:      oklch(76% 0.15 52);
+      --cream:      oklch(97.5% 0.010 85);
+      --cream-2:    oklch(94% 0.012 85);
+      --white:      oklch(100% 0 0);
+      --ink:        oklch(12% 0.018 260);
+      --ink-2:      oklch(40% 0.018 260);
+      --ink-3:      oklch(60% 0.016 260);
+      --border:     oklch(87% 0.010 85);
+      --d-bg:       oklch(9% 0.015 260);
+      --d-surf:     oklch(13.5% 0.018 260);
+      --d-fog:      oklch(97% 0.006 95);
+      --d-fog2:     oklch(65% 0.014 260);
+      --d-fog3:     oklch(40% 0.015 260);
+      --d-border:   oklch(23% 0.018 260);
+      --ff-d: 'Bricolage Grotesque', system-ui, sans-serif;
+      --ff-b: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--ink); font-family: var(--ff-b); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 56px; }
+    @media (max-width: 768px) { .wrap { padding: 0 24px; } }
+    .section { padding: 88px 0; border-bottom: 1px solid var(--border); }
+    .dark-sec { background: var(--d-bg); border-bottom-color: oklch(17% 0.015 260); }
+    .sec-lbl {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 52px;
+    }
+    .sec-lbl::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .dark-sec .sec-lbl { color: var(--d-fog3); }
+    .dark-sec .sec-lbl::after { background: oklch(17% 0.015 260); }
+    .rule-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--d-bg); border-radius: 6px; padding: 3px 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      color: var(--lime); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .section-title { font-family: var(--ff-d); font-size: clamp(28px, 3.5vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; color: var(--ink); margin-bottom: 14px; }
+    .section-sub { font-size: 17px; color: var(--ink-2); max-width: 560px; line-height: 1.65; }
+    .dark-sec .section-title { color: var(--d-fog); }
+    .dark-sec .section-sub { color: var(--d-fog2); }
+
+    /* ── HERO ── */
+    .hero { background: var(--d-bg); min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; border-bottom: 1px solid oklch(17% 0.015 260); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 700px 500px at 80% 30%, oklch(88% 0.22 130 / 0.10), transparent), radial-gradient(ellipse 400px 400px at 20% 70%, oklch(65% 0.18 28 / 0.07), transparent); pointer-events: none; }
+    .hero-nav { display: flex; align-items: center; justify-content: space-between; padding: 32px 56px; position: relative; z-index: 1; }
+    .hero-wm { font-family: var(--ff-d); font-size: 17px; font-weight: 700; letter-spacing: -0.025em; color: var(--d-fog); display: flex; align-items: center; gap: 10px; }
+    .hero-wm em { color: var(--lime); font-style: normal; }
+    .hero-badge { display: flex; align-items: center; gap: 8px; background: var(--lime-bg); border: 1px solid var(--lime-ring); border-radius: 20px; padding: 5px 14px; font-size: 11px; font-weight: 600; color: var(--lime-dark); }
+    .hero-body { display: flex; flex-direction: column; justify-content: center; padding: 0 56px; position: relative; z-index: 1; }
+    .hero-eye { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lime); margin-bottom: 28px; display: flex; align-items: center; gap: 10px; }
+    .hero-eye::before { content: ''; display: block; width: 28px; height: 1px; background: var(--lime-mid); }
+    .hero-h1 { font-family: var(--ff-d); font-size: clamp(60px, 8.5vw, 112px); font-weight: 800; letter-spacing: -0.045em; line-height: 0.95; color: var(--d-fog); }
+    .hero-h1 .hl { color: var(--lime); }
+    .hero-sub-p { margin-top: 28px; font-size: 18px; color: var(--d-fog2); max-width: 520px; line-height: 1.65; }
+    .hero-footer { padding: 32px 56px; display: flex; gap: 0; border-top: 1px solid oklch(17% 0.015 260); position: relative; z-index: 1; }
+    .hp { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; color: var(--d-fog3); padding: 0 24px; border-right: 1px solid oklch(17% 0.015 260); }
+    .hp:first-child { padding-left: 0; }
+    .hp:last-child { border-right: none; }
+    .hp-d { width: 6px; height: 6px; border-radius: 50%; }
+
+    /* ── GRID DIAGRAM ── */
+    .grid-diagram-wrap { display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: start; }
+    @media (max-width: 768px) { .grid-diagram-wrap { grid-template-columns: 1fr; } }
+    .grid-rules-list { display: flex; flex-direction: column; gap: 0; }
+    .grid-rule {
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .grid-rule:first-child { border-top: 1px solid var(--border); }
+    .grid-rule-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .grid-rule-val { font-family: 'SFMono-Regular', 'Consolas', monospace; font-size: 14px; font-weight: 600; color: var(--ink); }
+    .grid-rule-note { font-size: 13px; color: var(--ink-3); }
+
+    /* ── COLOR RULES ── */
+    .color-rules-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 32px; }
+    .cr-card { background: var(--white); padding: 32px 28px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: start; }
+    .cr-info {}
+    .cr-color-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+    .cr-when { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .cr-title { font-family: var(--ff-d); font-size: 18px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 10px; }
+    .cr-uses { display: flex; flex-direction: column; gap: 6px; }
+    .cr-use { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
+    .cr-use::before { content: '→'; color: var(--ink-3); font-size: 12px; }
+    .cr-mini { width: 80px; flex-shrink: 0; }
+    .cr-mini-post { width: 80px; height: 100px; border-radius: 6px; overflow: hidden; position: relative; }
+    .cr-mini-inner { width: 1080px; height: 1350px; transform: scale(0.0741); transform-origin: top left; position: absolute; }
+
+    /* ── LOGO PLACEMENT ── */
+    .placement-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 36px; }
+    @media (max-width: 860px) { .placement-grid { grid-template-columns: repeat(2, 1fr); } }
+    .placement-card { display: flex; flex-direction: column; gap: 14px; }
+    .placement-frame { width: 100%; aspect-ratio: 1080 / 1350; border-radius: 10px; overflow: hidden; position: relative; background: var(--d-surf); border: 1px solid var(--d-border); }
+    .placement-zone { position: absolute; background: oklch(88% 0.22 130 / 0.18); border: 1.5px solid var(--lime); border-radius: 4px; }
+    .placement-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .placement-when { font-size: 12px; color: var(--ink-3); line-height: 1.5; }
+    .placement-badge { display: inline-flex; align-items: center; gap: 5px; border-radius: 5px; padding: 2px 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; }
+
+    /* ── TYPOGRAPHY RULES ── */
+    .type-rules-table { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .trt-head { display: grid; grid-template-columns: 1.2fr 1fr 0.8fr 0.8fr 1.2fr; padding: 12px 24px; background: var(--cream-2); border-bottom: 1px solid var(--border); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); gap: 12px; }
+    .trt-row { display: grid; grid-template-columns: 1.2fr 1fr 0.8fr 0.8fr 1.2fr; padding: 16px 24px; border-bottom: 1px solid var(--border); gap: 12px; align-items: baseline; }
+    .trt-row:last-child { border-bottom: none; }
+    .trt-n { font-size: 12px; font-weight: 600; color: var(--ink-2); }
+    .trt-m { font-family: monospace; font-size: 11px; color: var(--ink-3); }
+    .trt-rule { font-size: 12px; color: var(--ink-3); }
+
+    /* ── DATA SYSTEM ── */
+    .data-rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+    @media (max-width: 768px) { .data-rules { grid-template-columns: 1fr; } }
+    .data-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+    .data-card-icon { width: 40px; height: 40px; border-radius: 9px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-family: var(--ff-d); font-size: 16px; font-weight: 800; }
+    .data-card-title { font-family: var(--ff-d); font-size: 16px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 8px; }
+    .data-card-body { font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+
+    /* ── DO/DON'T ── */
+    .dd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 860px) { .dd-grid { grid-template-columns: 1fr; } }
+    .dd-wrap { display: flex; flex-direction: column; gap: 10px; }
+    .dd-frame { width: 100%; aspect-ratio: 1080 / 1350; border-radius: 10px; overflow: hidden; position: relative; }
+    .dd-label { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
+    .dd-ok { color: var(--lime-dark); }
+    .dd-no { color: var(--coral); }
+    .dd-ok-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); }
+    .dd-no-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); }
+    .dd-desc { font-size: 12px; color: var(--ink-3); line-height: 1.5; }
+    .dd-inner { width: 1080px; height: 1350px; transform-origin: top left; position: absolute; top: 0; left: 0; }
+
+    /* Shared mini post */
+    .ig-sm-frame { border-radius: 8px; overflow: hidden; position: relative; flex-shrink: 0; }
+    .ig-sm-inner { width: 1080px; height: 1350px; transform-origin: top left; position: absolute; top: 0; left: 0; }
+
+    /* ── FOOTER ── */
+    .foot { padding: 44px 56px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+    .foot-wm { font-family: var(--ff-d); font-size: 15px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); display: flex; align-items: center; gap: 10px; }
+    .foot-wm em { color: var(--lime); font-style: normal; }
+  </style>
+
+  <template id="__bundler_thumbnail" data-bg-color="#13111E">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#13111E"/>
+      <!-- Nav -->
+      <rect width="1200" height="64" fill="oklch(13.5% 0.018 260)" opacity="0.9"/>
+      <rect x="48" y="20" width="24" height="24" rx="6" fill="#C8FF2E"/>
+      <rect x="82" y="26" width="80" height="12" rx="3" fill="#F8F4EC" opacity="0.6"/>
+      <!-- Hero text blocks -->
+      <rect x="48" y="120" width="320" height="52" rx="4" fill="#F8F4EC" opacity="0.8"/>
+      <rect x="48" y="184" width="240" height="52" rx="4" fill="#C8FF2E" opacity="0.9"/>
+      <!-- Section pillars -->
+      <rect x="48" y="300" width="160" height="80" rx="8" fill="oklch(13.5% 0.018 260)" stroke="#C8FF2E" stroke-width="1.5"/>
+      <rect x="228" y="300" width="160" height="80" rx="8" fill="oklch(13.5% 0.018 260)" stroke="oklch(65% 0.18 28)" stroke-width="1.5"/>
+      <rect x="408" y="300" width="160" height="80" rx="8" fill="oklch(13.5% 0.018 260)" stroke="oklch(62% 0.17 242)" stroke-width="1.5"/>
+      <!-- Instagram post previews -->
+      <rect x="48"  y="440" width="180" height="225" rx="10" fill="oklch(13.5% 0.018 260)" stroke="oklch(23% 0.018 260)" stroke-width="1"/>
+      <rect x="248" y="440" width="180" height="225" rx="10" fill="#F8F4EB" stroke="oklch(87% 0.010 85)" stroke-width="1"/>
+      <rect x="448" y="440" width="180" height="225" rx="10" fill="#C8FF2E"/>
+      <!-- Post content hints -->
+      <rect x="72" y="520" width="80" height="56" rx="3" fill="#C8FF2E" opacity="0.8"/>
+      <rect x="272" y="490" width="100" height="40" rx="3" fill="#13111E" opacity="0.6"/>
+      <rect x="480" y="490" width="80" height="40" rx="3" fill="#13111E" opacity="0.7"/>
+    </svg>
+  </template>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+  <nav class="hero-nav">
+    <div class="hero-wm">
+      <svg viewBox="0 0 64 64" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="oklch(88% 0.22 130)"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="oklch(12% 0.018 260)" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="oklch(12% 0.018 260)"/></svg>
+      citra<em>.</em>chat
+    </div>
+    <div class="hero-badge">Instagram Brand Guide · Oficial</div>
+  </nav>
+  <div class="hero-body">
+    <div class="hero-eye">Diretrizes de marca para Instagram</div>
+    <h1 class="hero-h1">Social<br><span class="hl">Guidelines</span></h1>
+    <p class="hero-sub-p">Tudo que o time criativo precisa para produzir conteúdo consistente, reconhecível e alinhado com a identidade Citra Chat no Instagram.</p>
+  </div>
+  <div class="hero-footer">
+    <div class="hp"><div class="hp-d" style="background:var(--lime-mid)"></div>Formato & Grid</div>
+    <div class="hp"><div class="hp-d" style="background:var(--coral)"></div>Sistema de cores</div>
+    <div class="hp"><div class="hp-d" style="background:var(--sky)"></div>Tipografia</div>
+    <div class="hp"><div class="hp-d" style="background:var(--lime-mid)"></div>Assinatura & Logo</div>
+    <div class="hp"><div class="hp-d" style="background:var(--coral)"></div>Sistema de dados</div>
+    <div class="hp"><div class="hp-d" style="background:var(--sky)"></div>Do's & Don'ts</div>
+  </div>
+</section>
+
+<!-- ══════════════ 01 FORMATO & GRID ══════════════ -->
+<section class="section" id="grid">
+  <div class="wrap">
+    <div class="sec-lbl">01 — Formato &amp; Grid</div>
+    <div class="grid-diagram-wrap">
+
+      <!-- Diagram SVG -->
+      <div style="flex-shrink:0;">
+        <svg viewBox="0 0 252 315" width="252" height="315" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+          <!-- Outer frame -->
+          <rect x="1" y="1" width="250" height="313" rx="8" fill="#F8F4EB" stroke="#CCBBA0" stroke-width="1.5"/>
+          <!-- Unsafe zone tint -->
+          <rect x="1" y="1" width="250" height="313" rx="8" fill="oklch(65% 0.18 28 / 0.06)"/>
+          <!-- Safe zone -->
+          <rect x="21" y="21" width="210" height="273" rx="4" fill="oklch(97.5% 0.010 85)" stroke="oklch(88% 0.22 130)" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <!-- Content area label -->
+          <text x="126" y="158" text-anchor="middle" font-family="monospace" font-size="9" fill="oklch(38% 0.20 130)" font-weight="700">900 × 1170px</text>
+          <text x="126" y="170" text-anchor="middle" font-family="sans-serif" font-size="7" fill="oklch(60% 0.016 260)">Área de conteúdo segura</text>
+          <!-- Left margin annotation -->
+          <line x1="1" y1="158" x2="21" y2="158" stroke="oklch(65% 0.18 28)" stroke-width="1"/>
+          <line x1="1" y1="154" x2="1" y2="162" stroke="oklch(65% 0.18 28)" stroke-width="1"/>
+          <line x1="21" y1="154" x2="21" y2="162" stroke="oklch(65% 0.18 28)" stroke-width="1"/>
+          <text x="9" y="149" text-anchor="middle" font-family="monospace" font-size="7" fill="oklch(65% 0.18 28)" font-weight="700">90px</text>
+          <!-- Top margin annotation -->
+          <line x1="126" y1="1" x2="126" y2="21" stroke="oklch(65% 0.18 28)" stroke-width="1"/>
+          <line x1="122" y1="1" x2="130" y2="1" stroke="oklch(65% 0.18 28)" stroke-width="1"/>
+          <line x1="122" y1="21" x2="130" y2="21" stroke="oklch(65% 0.18 28)" stroke-width="1"/>
+          <text x="140" y="10" font-family="monospace" font-size="7" fill="oklch(65% 0.18 28)" font-weight="700">90px</text>
+          <!-- Outer dimensions -->
+          <text x="126" y="308" text-anchor="middle" font-family="monospace" font-size="8" fill="oklch(40% 0.018 260)" font-weight="600">1080 px</text>
+          <text x="6" y="160" text-anchor="middle" font-family="monospace" font-size="7" fill="oklch(40% 0.018 260)" font-weight="600" transform="rotate(-90 6 160)">1350 px</text>
+          <!-- Corner marks -->
+          <rect x="2" y="2" width="6" height="6" rx="1" fill="oklch(88% 0.22 130)" opacity="0.7"/>
+          <rect x="244" y="2" width="6" height="6" rx="1" fill="oklch(88% 0.22 130)" opacity="0.7"/>
+          <rect x="2" y="307" width="6" height="6" rx="1" fill="oklch(88% 0.22 130)" opacity="0.7"/>
+          <rect x="244" y="307" width="6" height="6" rx="1" fill="oklch(88% 0.22 130)" opacity="0.7"/>
+        </svg>
+        <div style="margin-top:10px;font-size:11px;color:var(--ink-3);text-align:center;line-height:1.5;">
+          <span style="color:var(--lime-dark);font-weight:600;">— — —</span> Zona segura<br>
+          <span style="color:var(--coral);font-weight:600;">████</span> Zona de risco
+        </div>
+      </div>
+
+      <!-- Rules list -->
+      <div>
+        <div style="margin-bottom:28px;">
+          <div class="rule-badge">Regra base</div>
+          <div class="section-title">Formato padrão do feed</div>
+          <p class="section-sub">Todo conteúdo de feed usa o formato 4:5. É o formato que o Instagram prioriza em distribuição orgânica.</p>
+        </div>
+        <div class="grid-rules-list">
+          <div class="grid-rule">
+            <div class="grid-rule-label" style="color:var(--lime-dark);">Dimensão do post</div>
+            <div class="grid-rule-val">1080 × 1350 px</div>
+            <div class="grid-rule-note">Formato 4:5 — padrão do feed Instagram</div>
+          </div>
+          <div class="grid-rule">
+            <div class="grid-rule-label" style="color:var(--lime-dark);">Resolução</div>
+            <div class="grid-rule-val">72 dpi mínimo · 300 dpi ideal</div>
+            <div class="grid-rule-note">Exportar como PNG ou JPG de alta qualidade</div>
+          </div>
+          <div class="grid-rule">
+            <div class="grid-rule-label" style="color:var(--coral);">Margem de segurança</div>
+            <div class="grid-rule-val">90 px em todos os lados</div>
+            <div class="grid-rule-note">Nenhum elemento essencial fora dessa zona</div>
+          </div>
+          <div class="grid-rule">
+            <div class="grid-rule-label" style="color:var(--coral);">Área de conteúdo</div>
+            <div class="grid-rule-val">900 × 1170 px</div>
+            <div class="grid-rule-note">Todo texto, dado e elemento visual deve caber aqui</div>
+          </div>
+          <div class="grid-rule">
+            <div class="grid-rule-label" style="color:var(--sky);">Assinatura</div>
+            <div class="grid-rule-val">Sempre dentro da margem de 90 px</div>
+            <div class="grid-rule-note">Logo mínimo de 32px; wordmark mínimo de 28px</div>
+          </div>
+          <div class="grid-rule" style="border-bottom:none;">
+            <div class="grid-rule-label" style="color:var(--sky);">Formato Stories / Reels Cover</div>
+            <div class="grid-rule-val">1080 × 1920 px</div>
+            <div class="grid-rule-note">Margem 80px · Zona central segura: 920 × 1060px</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 02 SISTEMA DE CORES ══════════════ -->
+<section class="section" id="colors">
+  <div class="wrap">
+    <div class="sec-lbl">02 — Sistema de Cores · Regras de Uso</div>
+    <div style="margin-bottom:40px;">
+      <div class="rule-badge">Princípio</div>
+      <div class="section-title">Um acento dominante<br>por post.</div>
+      <p class="section-sub">Nunca use dois acentos (lime + coral, por ex.) com o mesmo peso visual. Um domina, o outro aparece como detalhe ou não aparece.</p>
+    </div>
+
+    <div class="color-rules-grid">
+
+      <!-- Lime -->
+      <div class="cr-card">
+        <div class="cr-info">
+          <div class="cr-when"><div style="width:10px;height:10px;border-radius:50%;background:var(--lime);flex-shrink:0;"></div>Use LIME quando:</div>
+          <div class="cr-title">Destaque primário,<br>dado ao vivo, CTA</div>
+          <div class="cr-uses">
+            <div class="cr-use">É o primeiro slide de uma série</div>
+            <div class="cr-use">Há um dado crítico para destacar</div>
+            <div class="cr-use">O post é um CTA (criar conta, acessar)</div>
+            <div class="cr-use">Lançamento de feature ou produto</div>
+            <div class="cr-use">Fundo lime para máximo impacto</div>
+          </div>
+        </div>
+        <div class="cr-mini">
+          <div class="cr-mini-post">
+            <div class="cr-mini-inner" style="background:#13111E;font-family:'Bricolage Grotesque',sans-serif;">
+              <div style="position:absolute;width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-60%);background:radial-gradient(circle,rgba(200,255,46,0.15) 0%,transparent 70%);border-radius:50%;"></div>
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:16px;"><svg viewBox="0 0 64 64" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg></div>
+                <div><div style="font-size:220px;font-weight:800;letter-spacing:-0.07em;line-height:0.85;color:#C8FF2E;">3×</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:54px;color:rgba(248,244,235,0.7);font-weight:500;margin-top:24px;">mais performance</div></div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:36px;font-weight:700;color:rgba(248,244,235,0.62);">citra.chat</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coral -->
+      <div class="cr-card">
+        <div class="cr-info">
+          <div class="cr-when"><div style="width:10px;height:10px;border-radius:50%;background:var(--coral);flex-shrink:0;"></div>Use CORAL quando:</div>
+          <div class="cr-title">Performance, conversão,<br>urgência, depoimento</div>
+          <div class="cr-uses">
+            <div class="cr-use">O post fala sobre resultados de conversão</div>
+            <div class="cr-use">É um depoimento ou caso de uso real</div>
+            <div class="cr-use">Há urgência (prazo, promoção)</div>
+            <div class="cr-use">Destaque para tracking (GTM, Meta, Ads)</div>
+            <div class="cr-use">Conteúdo sobre o time/empresa (humano)</div>
+          </div>
+        </div>
+        <div class="cr-mini">
+          <div class="cr-mini-post">
+            <div class="cr-mini-inner" style="background:#F8F4EB;font-family:'Bricolage Grotesque',sans-serif;">
+              <div style="position:absolute;top:0;left:0;right:0;height:16px;background:#E05C3E;"></div>
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(19,17,30,0.65);">Resultado</div>
+                <div>
+                  <div style="font-size:140px;font-weight:800;letter-spacing:-0.05em;line-height:0.9;color:#E05C3E;">+38%</div>
+                  <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:54px;font-weight:600;color:#13111E;margin-top:20px;line-height:1.2;">em conversões<br>via chat</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:14px;"><svg viewBox="0 0 64 64" width="36" height="36" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg><span style="font-size:30px;font-weight:700;color:#13111E;">citra<span style="color:#2F6B10;">.</span>chat</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sky -->
+      <div class="cr-card">
+        <div class="cr-info">
+          <div class="cr-when"><div style="width:10px;height:10px;border-radius:50%;background:var(--sky);flex-shrink:0;"></div>Use SKY quando:</div>
+          <div class="cr-title">Precisão, white-label,<br>features técnicas</div>
+          <div class="cr-uses">
+            <div class="cr-use">Conteúdo sobre white-label ou agências</div>
+            <div class="cr-use">Features técnicas (RAG, API, integrações)</div>
+            <div class="cr-use">Conteúdo educativo sobre tecnologia IA</div>
+            <div class="cr-use">Terceiro slide de série técnica</div>
+          </div>
+        </div>
+        <div class="cr-mini">
+          <div class="cr-mini-post">
+            <div class="cr-mini-inner" style="background:#13111E;font-family:'Bricolage Grotesque',sans-serif;">
+              <div style="position:absolute;width:600px;height:600px;center;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(62,136,212,0.15) 0%,transparent 70%);border-radius:50%;"></div>
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;color:rgba(248,244,235,0.65);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">White-label</div>
+                <div>
+                  <div style="font-size:96px;font-weight:800;letter-spacing:-0.04em;line-height:0.92;color:#3E88D4;">Seu produto.<br>Sua marca.</div>
+                  <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:44px;font-weight:400;color:rgba(248,244,235,0.72);margin-top:24px;">Para agências que<br>querem escalar.</div>
+                </div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:30px;font-weight:700;color:rgba(248,244,235,0.62);">citra.chat</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ember -->
+      <div class="cr-card">
+        <div class="cr-info">
+          <div class="cr-when"><div style="width:10px;height:10px;border-radius:50%;background:var(--ember);flex-shrink:0;"></div>Use EMBER quando:</div>
+          <div class="cr-title">Alertas em dados,<br>métricas negativas</div>
+          <div class="cr-uses">
+            <div class="cr-use">Dado mostra queda ou problema</div>
+            <div class="cr-use">Alerta sobre o que acontece sem medir</div>
+            <div class="cr-use">Contraste em slide com dados negativos</div>
+            <div class="cr-use">Nunca como cor dominante de um post</div>
+          </div>
+        </div>
+        <div class="cr-mini">
+          <div class="cr-mini-post">
+            <div class="cr-mini-inner" style="background:#13111E;font-family:'Bricolage Grotesque',sans-serif;">
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;color:rgba(248,244,235,0.65);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Sem medição</div>
+                <div style="text-align:center;">
+                  <div style="font-size:180px;font-weight:800;letter-spacing:-0.06em;color:#E8A040;line-height:0.9;">↓67%</div>
+                  <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:46px;font-weight:600;color:rgba(248,244,235,0.8);margin-top:24px;line-height:1.2;">de leads<br>perdidos</div>
+                </div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:30px;font-weight:700;color:rgba(248,244,235,0.65);">citra.chat</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Regras adicionais -->
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:28px 32px;">
+      <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:16px;">Regras de combinação de cores</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--border);">
+        <div style="padding:14px 0;border-bottom:1px solid var(--border);border-right:1px solid var(--border);padding-right:24px;display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:20px;height:20px;border-radius:50%;background:var(--lime);flex-shrink:0;margin-top:2px;"></div>
+          <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Lime + Void</div><div style="font-size:12px;color:var(--ink-3);margin-top:2px;">Combinação primária. Alto contraste, máximo impacto. Usar em lançamentos, dados principais.</div></div>
+        </div>
+        <div style="padding:14px 0 14px 24px;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:20px;height:20px;border-radius:50%;background:var(--lime-dark);flex-shrink:0;margin-top:2px;"></div>
+          <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Lime Dark + Cream</div><div style="font-size:12px;color:var(--ink-3);margin-top:2px;">Para posts editoriais, séries, conteúdo educativo. Mais respirável, menos agressivo.</div></div>
+        </div>
+        <div style="padding:14px 0;border-bottom:1px solid var(--border);border-right:1px solid var(--border);padding-right:24px;display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:20px;height:20px;border-radius:50%;background:var(--coral);flex-shrink:0;margin-top:2px;"></div>
+          <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Coral + Cream</div><div style="font-size:12px;color:var(--ink-3);margin-top:2px;">Para resultados, depoimentos, warmth. Cream fundo, coral apenas como acento top ou número.</div></div>
+        </div>
+        <div style="padding:14px 0 14px 24px;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:20px;height:20px;border-radius:50%;background:var(--sky);flex-shrink:0;margin-top:2px;"></div>
+          <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Sky + Void</div><div style="font-size:12px;color:var(--ink-3);margin-top:2px;">Para conteúdo técnico/B2B. Void fundo com sky como cor do número ou headline principal.</div></div>
+        </div>
+        <div style="padding:14px 0;border-right:1px solid var(--border);padding-right:24px;display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:20px;height:20px;border-radius:50%;background:var(--lime);flex-shrink:0;margin-top:2px;"></div>
+          <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Lime como fundo</div><div style="font-size:12px;color:var(--ink-3);margin-top:2px;">Posts de alto impacto. Logo e texto sempre em Void (#13111E). Nunca branco sobre lime.</div></div>
+        </div>
+        <div style="padding:14px 0 14px 24px;display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:20px;height:20px;border-radius:50%;background:var(--ember);flex-shrink:0;margin-top:2px;"></div>
+          <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Ember — apenas detalhe</div><div style="font-size:12px;color:var(--ink-3);margin-top:2px;">Nunca como fundo ou cor dominante. Sempre em um post de base void ou cream.</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ 03 TIPOGRAFIA ══════════════ -->
+<section class="section" id="type">
+  <div class="wrap">
+    <div class="sec-lbl">03 — Tipografia · Regras para Posts</div>
+    <div style="margin-bottom:36px;">
+      <div class="rule-badge">Regra</div>
+      <div class="section-title">Nunca abaixo dos<br>tamanhos mínimos.</div>
+      <p class="section-sub">Os tamanhos listados são para arquivos de 1080×1350px. Em tela menor o texto fica ilegível — respeite os mínimos.</p>
+    </div>
+
+    <div class="type-rules-table">
+      <div class="trt-head">
+        <span>Estilo</span><span>Fonte</span><span>Mín. px</span><span>Ideal px</span><span>Quando usar</span>
+      </div>
+      <div class="trt-row">
+        <div>
+          <div class="trt-n">Número Hero</div>
+          <div style="font-family:var(--ff-d);font-size:36px;font-weight:800;letter-spacing:-0.05em;color:var(--lime-dark);line-height:1;">94%</div>
+        </div>
+        <div class="trt-m">Bricolage<br>800</div>
+        <div class="trt-m">180px</div>
+        <div class="trt-m">220–280px</div>
+        <div class="trt-rule">Dado único como herói do post. Um por slide, máximo.</div>
+      </div>
+      <div class="trt-row">
+        <div>
+          <div class="trt-n">Headline</div>
+          <div style="font-family:var(--ff-d);font-size:26px;font-weight:800;letter-spacing:-0.04em;color:var(--ink);line-height:1.05;">Cada conversa<br>vira dado.</div>
+        </div>
+        <div class="trt-m">Bricolage<br>800</div>
+        <div class="trt-m">72px</div>
+        <div class="trt-m">88–120px</div>
+        <div class="trt-rule">Frase principal do post. Máximo 2–4 linhas. Limpar, direta.</div>
+      </div>
+      <div class="trt-row">
+        <div>
+          <div class="trt-n">Sub-headline</div>
+          <div style="font-family:var(--ff-d);font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);">Configure e meça<br>em minutos.</div>
+        </div>
+        <div class="trt-m">Bricolage<br>600</div>
+        <div class="trt-m">52px</div>
+        <div class="trt-m">60–72px</div>
+        <div class="trt-rule">Apoio à headline. Sempre menor que a headline.</div>
+      </div>
+      <div class="trt-row">
+        <div>
+          <div class="trt-n">Body</div>
+          <div style="font-family:var(--ff-b);font-size:14px;font-weight:400;color:var(--ink-2);">Tracking nativo de cada<br>mensagem, em tempo real.</div>
+        </div>
+        <div class="trt-m">Jakarta<br>400–500</div>
+        <div class="trt-m">34px</div>
+        <div class="trt-m">38–44px</div>
+        <div class="trt-rule">Texto explicativo. Máximo 3 linhas por bloco.</div>
+      </div>
+      <div class="trt-row">
+        <div>
+          <div class="trt-n">Label / Tag</div>
+          <div style="font-family:var(--ff-b);font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);">ANALYTICS · Q2</div>
+        </div>
+        <div class="trt-m">Jakarta<br>600–700</div>
+        <div class="trt-m">26px</div>
+        <div class="trt-m">28–32px</div>
+        <div class="trt-rule">Série, categoria, data. Uppercase + tracking. Sempre discreto.</div>
+      </div>
+      <div class="trt-row" style="border-bottom:none;">
+        <div>
+          <div class="trt-n">Assinatura</div>
+          <div style="font-family:var(--ff-d);font-size:13px;font-weight:700;color:var(--ink-3);">citra<span style="color:var(--lime-dark);">.</span>chat</div>
+        </div>
+        <div class="trt-m">Bricolage<br>700</div>
+        <div class="trt-m">28px</div>
+        <div class="trt-m">30–36px</div>
+        <div class="trt-rule">Sempre com ícone. Posicionada fora da área de conteúdo principal.</div>
+      </div>
+    </div>
+
+    <!-- Contrast rules -->
+    <div style="background:var(--ink);border-radius:12px;padding:28px 32px;margin-top:24px;margin-bottom:24px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--lime);margin-bottom:20px;">Contraste mínimo — legibilidade garantida</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:oklch(17% 0.015 260);border-radius:8px;overflow:hidden;">
+        <!-- Void bg -->
+        <div style="background:var(--d-surf);padding:20px;">
+          <div style="width:32px;height:32px;border-radius:6px;background:oklch(9% 0.015 260);border:1px solid oklch(23% 0.018 260);margin-bottom:14px;"></div>
+          <div style="font-size:12px;font-weight:700;color:var(--d-fog);margin-bottom:12px;">Sobre Void</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:var(--d-fog2);">Primário</span><span style="font-family:monospace;font-size:11px;color:var(--lime);">oklch(97% …)</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:var(--d-fog2);">Secundário mín.</span><span style="font-family:monospace;font-size:11px;color:var(--lime);">oklch(72% …)</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:var(--d-fog2);">Muted mín.</span><span style="font-family:monospace;font-size:11px;color:var(--lime);">oklch(62% …)</span></div>
+            <div style="margin-top:4px;font-size:11px;color:var(--coral);font-weight:600;">✕ Nunca abaixo de oklch(55%)</div>
+          </div>
+        </div>
+        <!-- Cream bg -->
+        <div style="background:var(--d-surf);padding:20px;">
+          <div style="width:32px;height:32px;border-radius:6px;background:#F8F4EB;border:1px solid oklch(23% 0.018 260);margin-bottom:14px;"></div>
+          <div style="font-size:12px;font-weight:700;color:var(--d-fog);margin-bottom:12px;">Sobre Cream</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:var(--d-fog2);">Primário</span><span style="font-family:monospace;font-size:11px;color:var(--lime);">oklch(12% …) ink</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:var(--d-fog2);">Secundário mín.</span><span style="font-family:monospace;font-size:11px;color:var(--lime);">oklch(40% …)</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:var(--d-fog2);">Muted mín.</span><span style="font-family:monospace;font-size:11px;color:var(--lime);">oklch(50% …)</span></div>
+            <div style="margin-top:4px;font-size:11px;color:var(--coral);font-weight:600;">✕ Nunca abaixo de oklch(45%)</div>
+          </div>
+        </div>
+        <!-- Lime bg -->
+        <div style="background:var(--d-surf);padding:20px;">
+          <div style="width:32px;height:32px;border-radius:6px;background:#C8FF2E;margin-bottom:14px;"></div>
+          <div style="font-size:12px;font-weight:700;color:var(--d-fog);margin-bottom:12px;">Sobre Lime</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:var(--d-fog2);">Todo texto</span><span style="font-family:monospace;font-size:11px;color:var(--lime);">oklch(12% …) ink</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:var(--d-fog2);">Muted mín.</span><span style="font-family:monospace;font-size:11px;color:var(--lime);">oklch(22% …)</span></div>
+            <div style="margin-top:4px;font-size:11px;color:var(--coral);font-weight:600;">✕ Nunca branco sobre lime</div>
+            <div style="font-size:11px;color:var(--coral);font-weight:600;">✕ Nunca cinza claro sobre lime</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tracking rules -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:24px;">
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--lime-dark);">Letter-spacing</div>
+        <div style="font-size:14px;font-weight:600;color:var(--ink);">Headlines: −4% a −5%</div>
+        <div style="font-size:12px;color:var(--ink-3);">Nunca positivo em headlines grandes. Abrir tracking apenas em labels uppercase.</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);">Line-height</div>
+        <div style="font-size:14px;font-weight:600;color:var(--ink);">Headline: 0.90–1.0</div>
+        <div style="font-size:12px;color:var(--ink-3);">Body: 1.4–1.55. Headlines grandes ficam compactas, body precisa de respiro.</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sky);">Máx. linhas</div>
+        <div style="font-size:14px;font-weight:600;color:var(--ink);">Headline: 2–4 linhas</div>
+        <div style="font-size:12px;color:var(--ink-3);">Body: máx. 3 linhas por bloco. Slides com muito texto ficam desbalanceados.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 04 ASSINATURA & LOGO ══════════════ -->
+<section class="section" id="logo">
+  <div class="wrap">
+    <div class="sec-lbl">04 — Assinatura &amp; Posicionamento do Logo</div>
+    <div style="margin-bottom:48px;">
+      <div class="rule-badge">Regra</div>
+      <div class="section-title">A assinatura é obrigatória<br>em todo post.</div>
+      <p class="section-sub">Sempre usar o lockup horizontal (ícone + wordmark). O ícone sozinho só é permitido em padrões/texturas, nunca como única assinatura de um post.</p>
+    </div>
+
+    <!-- 4 posições -->
+    <div class="placement-grid">
+
+      <!-- Posição 1: Topo esquerda -->
+      <div class="placement-card">
+        <div class="placement-frame">
+          <!-- Grid lines (subtle) -->
+          <svg width="100%" height="100%" viewBox="0 0 108 135" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;">
+            <rect width="108" height="135" fill="oklch(13.5% 0.018 260)"/>
+            <!-- Safe zone -->
+            <rect x="7" y="7" width="94" height="121" rx="2" fill="none" stroke="oklch(23% 0.018 260)" stroke-width="0.5" stroke-dasharray="3 2"/>
+            <!-- Logo placement highlight -->
+            <rect x="7" y="7" width="45" height="14" rx="2" fill="oklch(88% 0.22 130 / 0.2)" stroke="oklch(88% 0.22 130)" stroke-width="1"/>
+            <!-- Mock logo -->
+            <rect x="9" y="9" width="10" height="10" rx="2" fill="oklch(88% 0.22 130)"/>
+            <rect x="21" y="11" width="24" height="6" rx="1.5" fill="oklch(97% 0.006 95)" opacity="0.6"/>
+            <!-- Mock content area -->
+            <rect x="7" y="30" width="70" height="18" rx="2" fill="oklch(97% 0.006 95)" opacity="0.2"/>
+            <rect x="7" y="52" width="55" height="14" rx="2" fill="oklch(97% 0.006 95)" opacity="0.15"/>
+            <rect x="7" y="70" width="85" height="10" rx="2" fill="oklch(97% 0.006 95)" opacity="0.1"/>
+            <rect x="7" y="82" width="75" height="10" rx="2" fill="oklch(97% 0.006 95)" opacity="0.1"/>
+          </svg>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <div class="placement-badge" style="background:var(--lime-bg);color:var(--lime-dark);">Padrão</div>
+            <div class="placement-name">Topo esquerda</div>
+          </div>
+          <div class="placement-when">Posição padrão. Conteúdo informativo, educativo e séries. O logo não concorre com o conteúdo principal.</div>
+        </div>
+      </div>
+
+      <!-- Posição 2: Base esquerda -->
+      <div class="placement-card">
+        <div class="placement-frame">
+          <svg width="100%" height="100%" viewBox="0 0 108 135" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;">
+            <rect width="108" height="135" fill="#F8F4EB"/>
+            <rect x="7" y="7" width="94" height="121" rx="2" fill="none" stroke="oklch(87% 0.010 85)" stroke-width="0.5" stroke-dasharray="3 2"/>
+            <!-- Mock content -->
+            <rect x="7" y="12" width="28" height="7" rx="1.5" fill="oklch(12% 0.018 260)" opacity="0.15"/>
+            <rect x="7" y="28" width="80" height="18" rx="2" fill="oklch(12% 0.018 260)" opacity="0.7"/>
+            <rect x="7" y="50" width="65" height="14" rx="2" fill="oklch(12% 0.018 260)" opacity="0.55"/>
+            <rect x="7" y="70" width="85" height="8" rx="2" fill="oklch(12% 0.018 260)" opacity="0.15"/>
+            <rect x="7" y="80" width="70" height="8" rx="2" fill="oklch(12% 0.018 260)" opacity="0.15"/>
+            <!-- Logo highlight bottom -->
+            <rect x="7" y="114" width="50" height="14" rx="2" fill="oklch(88% 0.22 130 / 0.2)" stroke="oklch(38% 0.20 130)" stroke-width="1"/>
+            <rect x="9" y="116" width="10" height="10" rx="2" fill="oklch(88% 0.22 130)"/>
+            <rect x="21" y="118" width="28" height="6" rx="1.5" fill="oklch(12% 0.018 260)" opacity="0.5"/>
+          </svg>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <div class="placement-badge" style="background:var(--coral-bg);color:var(--coral);">Editorial</div>
+            <div class="placement-name">Base esquerda</div>
+          </div>
+          <div class="placement-when">Para posts cream e editoriais. O logo fica como rodapé discreto, o conteúdo domina verticalmente.</div>
+        </div>
+      </div>
+
+      <!-- Posição 3: Topo direita -->
+      <div class="placement-card">
+        <div class="placement-frame">
+          <svg width="100%" height="100%" viewBox="0 0 108 135" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;">
+            <rect width="108" height="135" fill="#C8FF2E"/>
+            <rect x="7" y="7" width="94" height="121" rx="2" fill="none" stroke="rgba(19,17,30,0.2)" stroke-width="0.5" stroke-dasharray="3 2"/>
+            <!-- Logo highlight top right -->
+            <rect x="56" y="7" width="45" height="14" rx="2" fill="rgba(19,17,30,0.12)" stroke="rgba(19,17,30,0.4)" stroke-width="1"/>
+            <rect x="58" y="9" width="10" height="10" rx="2" fill="rgba(19,17,30,0.7)"/>
+            <rect x="70" y="11" width="24" height="6" rx="1.5" fill="rgba(19,17,30,0.5)"/>
+            <!-- Mock content -->
+            <rect x="7" y="30" width="85" height="24" rx="3" fill="rgba(19,17,30,0.7)"/>
+            <rect x="7" y="58" width="70" height="18" rx="3" fill="rgba(19,17,30,0.55)"/>
+            <rect x="7" y="90" width="85" height="8" rx="2" fill="rgba(19,17,30,0.2)"/>
+            <rect x="7" y="100" width="60" height="8" rx="2" fill="rgba(19,17,30,0.2)"/>
+          </svg>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <div class="placement-badge" style="background:var(--lime-bg);color:var(--lime-dark);">Lime Pop</div>
+            <div class="placement-name">Topo direita</div>
+          </div>
+          <div class="placement-when">Para posts com fundo lime. O logo vai para o canto oposto ao ícone grande, equilibrando o peso.</div>
+        </div>
+      </div>
+
+      <!-- Posição 4: Base centralizada -->
+      <div class="placement-card">
+        <div class="placement-frame">
+          <svg width="100%" height="100%" viewBox="0 0 108 135" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;">
+            <rect width="108" height="135" fill="oklch(13.5% 0.018 260)"/>
+            <rect x="7" y="7" width="94" height="121" rx="2" fill="none" stroke="oklch(23% 0.018 260)" stroke-width="0.5" stroke-dasharray="3 2"/>
+            <!-- Mock CTA content -->
+            <rect x="18" y="20" width="72" height="20" rx="3" fill="oklch(97% 0.006 95)" opacity="0.7"/>
+            <rect x="24" y="46" width="60" height="14" rx="2" fill="oklch(97% 0.006 95)" opacity="0.3"/>
+            <!-- CTA Button -->
+            <rect x="14" y="72" width="80" height="20" rx="8" fill="oklch(88% 0.22 130)"/>
+            <rect x="24" y="77" width="60" height="10" rx="2" fill="rgba(19,17,30,0.5)"/>
+            <!-- Logo center bottom -->
+            <rect x="29" y="114" width="50" height="14" rx="2" fill="oklch(88% 0.22 130 / 0.15)" stroke="oklch(88% 0.22 130 / 0.4)" stroke-width="1"/>
+            <rect x="31" y="116" width="10" height="10" rx="2" fill="oklch(88% 0.22 130)"/>
+            <rect x="43" y="118" width="28" height="6" rx="1.5" fill="oklch(97% 0.006 95)" opacity="0.4"/>
+          </svg>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <div class="placement-badge" style="background:var(--sky-bg);color:var(--sky);">CTA</div>
+            <div class="placement-name">Base centralizada</div>
+          </div>
+          <div class="placement-when">Para slides de encerramento e CTA. O logo ancora o post e sinaliza que é uma comunicação de marca.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Logo rules box -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border-radius:12px;overflow:hidden;">
+      <div style="background:var(--lime-bg);padding:28px 32px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:16px;">✓ Uso correto</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);"><span style="color:var(--lime-dark);font-weight:700;flex-shrink:0;">→</span>Ícone + wordmark "citra.chat" juntos</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);"><span style="color:var(--lime-dark);font-weight:700;flex-shrink:0;">→</span>Tamanho mínimo: ícone 32px + wordmark 28px</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);"><span style="color:var(--lime-dark);font-weight:700;flex-shrink:0;">→</span>Sempre dentro da margem de segurança de 90px</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);"><span style="color:var(--lime-dark);font-weight:700;flex-shrink:0;">→</span>Ponto do wordmark em Lime (dark bg) ou Lime Dark (light bg)</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);"><span style="color:var(--lime-dark);font-weight:700;flex-shrink:0;">→</span>Opacidade mínima: 100% (nunca transparente)</div>
+        </div>
+      </div>
+      <div style="background:oklch(97% 0.04 28);padding:28px 32px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);margin-bottom:16px;">✕ Nunca fazer</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);"><span style="color:var(--coral);font-weight:700;flex-shrink:0;">✕</span>Usar só o ícone sem o wordmark como assinatura</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);"><span style="color:var(--coral);font-weight:700;flex-shrink:0;">✕</span>Recolorizar o ícone (sempre lime em dark, lime em light)</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);"><span style="color:var(--coral);font-weight:700;flex-shrink:0;">✕</span>Aplicar sombra ou efeito no logo</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);"><span style="color:var(--coral);font-weight:700;flex-shrink:0;">✕</span>Logo cortado pela borda do post</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);"><span style="color:var(--coral);font-weight:700;flex-shrink:0;">✕</span>Usar fonte diferente no wordmark</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ 05 SISTEMA DE DADOS ══════════════ -->
+<section class="section" id="data">
+  <div class="wrap">
+    <div class="sec-lbl">05 — Sistema de Dados &amp; Métricas</div>
+    <div style="margin-bottom:40px;">
+      <div class="rule-badge">Regra</div>
+      <div class="section-title">Todo dado precisa<br>de contexto.</div>
+      <p class="section-sub">Um número sozinho não comunica. Sempre par: dado principal + texto de contexto + fonte ou período. Máximo 2 dados por slide.</p>
+    </div>
+
+    <div class="data-rules">
+      <div class="data-card">
+        <div class="data-card-icon" style="background:var(--lime-bg);color:var(--lime-dark);">#</div>
+        <div class="data-card-title">Dado principal (hero)</div>
+        <div class="data-card-body">Bricolage 800 · mín. 180px · Cor: Lime em dark bg, Lime Dark em light bg. Ocupa pelo menos 40% da altura do post. Um por slide.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card-icon" style="background:var(--coral-bg);color:var(--coral);">↑↓</div>
+        <div class="data-card-title">Indicadores de variação</div>
+        <div class="data-card-body">Seta ↑ + Lime para crescimento. Seta ↓ + Ember para queda. Nunca usar verde/vermelho genéricos — usar as cores da paleta Citra.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card-icon" style="background:var(--sky-bg);color:var(--sky);">" "</div>
+        <div class="data-card-title">Contexto do dado</div>
+        <div class="data-card-body">Jakarta 400–500 · mín. 38px · Cor: secundária (fog dim ou ink-2). Sempre imediatamente abaixo ou ao lado do dado. Máx. 2 linhas.</div>
+      </div>
+    </div>
+
+    <!-- Data anatomy diagram -->
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:36px;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;">
+      <!-- Mini post with annotations -->
+      <div style="position:relative;width:200px;flex-shrink:0;">
+        <div style="width:200px;height:250px;border-radius:10px;overflow:hidden;position:relative;">
+          <div style="width:1080px;height:1350px;transform:scale(0.1852);transform-origin:top left;position:absolute;background:#13111E;font-family:'Bricolage Grotesque',sans-serif;">
+            <div style="position:absolute;width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-60%);background:radial-gradient(circle,rgba(200,255,46,0.1) 0%,transparent 70%);border-radius:50%;"></div>
+            <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+              <!-- Label -->
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(248,244,235,0.65);">Q2 · 2026</div>
+              <!-- Data -->
+              <div>
+                <div style="font-size:280px;font-weight:800;letter-spacing:-0.07em;line-height:0.85;color:#C8FF2E;">94%</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:50px;font-weight:500;color:rgba(248,244,235,0.7);margin-top:20px;line-height:1.3;">taxa de resolução<br>no primeiro contato</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:34px;font-weight:400;color:rgba(248,244,235,0.65);margin-top:16px;">Média dos clientes · Jun 2026</div>
+              </div>
+              <!-- Signature -->
+              <div style="display:flex;align-items:center;gap:16px;"><svg viewBox="0 0 64 64" width="40" height="40" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg><span style="font-size:30px;font-weight:700;color:rgba(248,244,235,0.72);">citra<span style="color:#C8FF2E;">.</span>chat</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- Annotations -->
+        <div style="position:absolute;top:28px;right:-110px;font-size:11px;color:var(--ink-3);background:var(--white);border:1px solid var(--border);border-radius:6px;padding:4px 8px;white-space:nowrap;">Label · Jakarta 600</div>
+        <div style="position:absolute;top:80px;right:-110px;font-size:11px;color:var(--lime-dark);background:var(--lime-bg);border:1px solid var(--lime-ring);border-radius:6px;padding:4px 8px;white-space:nowrap;font-weight:600;">Dado hero · Bricolage 800</div>
+        <div style="position:absolute;top:148px;right:-110px;font-size:11px;color:var(--ink-3);background:var(--white);border:1px solid var(--border);border-radius:6px;padding:4px 8px;white-space:nowrap;">Contexto · Jakarta 400</div>
+        <div style="position:absolute;bottom:28px;right:-110px;font-size:11px;color:var(--ink-3);background:var(--white);border:1px solid var(--border);border-radius:6px;padding:4px 8px;white-space:nowrap;">Fonte · Jakarta 400</div>
+        <div style="position:absolute;bottom:8px;left:-10px;font-size:11px;color:var(--sky);background:var(--sky-bg);border:1px solid oklch(82% 0.09 242);border-radius:6px;padding:4px 8px;white-space:nowrap;font-weight:600;">Assinatura</div>
+      </div>
+      <!-- Rules text -->
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div style="font-size:16px;font-weight:700;color:var(--ink);">Anatomia de um slide de dados</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:4px;background:var(--lime-bg);border:1px solid var(--lime-ring);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--lime-dark);">1</div>
+            <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Label / Série</div><div style="font-size:12px;color:var(--ink-3);">Categoria, período ou contexto do dado. Uppercase, tracking positivo, cor muted.</div></div>
+          </div>
+          <div style="display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:4px;background:var(--lime-bg);border:1px solid var(--lime-ring);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--lime-dark);">2</div>
+            <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Dado Hero</div><div style="font-size:12px;color:var(--ink-3);">O número principal. Mín. 180px. Bricolage 800. Lime em dark, Lime Dark em cream. Um único dado por post.</div></div>
+          </div>
+          <div style="display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:4px;background:var(--lime-bg);border:1px solid var(--lime-ring);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--lime-dark);">3</div>
+            <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Contexto</div><div style="font-size:12px;color:var(--ink-3);">O que esse número significa. Máx. 2 linhas. Nunca deixar um número sem explicação.</div></div>
+          </div>
+          <div style="display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:4px;background:var(--lime-bg);border:1px solid var(--lime-ring);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--lime-dark);">4</div>
+            <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Fonte / Período</div><div style="font-size:12px;color:var(--ink-3);">De onde vem o dado e quando foi coletado. Cor muted. Credibilidade é fundamental para marca B2B.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ 06 DO'S & DON'TS ══════════════ -->
+<section class="section dark-sec" id="dd">
+  <div class="wrap">
+    <div class="sec-lbl">06 — Do's &amp; Don'ts</div>
+    <div style="margin-bottom:44px;">
+      <div class="section-title">Exemplos práticos<br>de certo e errado.</div>
+      <p class="section-sub">Cada caso com a regra que está sendo aplicada ou violada.</p>
+    </div>
+
+    <!-- Row 1: Do's -->
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--lime);margin-bottom:20px;display:flex;align-items:center;gap:10px;">✓ Exemplos corretos <div style="flex:1;height:1px;background:oklch(17% 0.015 260);"></div></div>
+    <div class="dd-grid" style="margin-bottom:44px;">
+
+      <!-- DO 1: Dado com contexto -->
+      <div class="dd-wrap">
+        <div class="dd-frame">
+          <div class="dd-inner" style="transform:scale(0.2963);">
+            <div style="width:1080px;height:1350px;background:#13111E;font-family:'Bricolage Grotesque',sans-serif;position:relative;overflow:hidden;">
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(248,244,235,0.65);">Resultado · Q2 2026</div>
+                <div>
+                  <div style="font-size:240px;font-weight:800;letter-spacing:-0.07em;line-height:0.85;color:#C8FF2E;">3.1×</div>
+                  <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:52px;font-weight:500;color:rgba(248,244,235,0.75);margin-top:24px;line-height:1.3;">ROAS médio dos<br>clientes Citra Chat</div>
+                  <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:34px;font-weight:400;color:rgba(248,244,235,0.65);margin-top:16px;">Média mensurada · Jun 2026</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:16px;"><svg viewBox="0 0 64 64" width="38" height="38" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg><span style="font-size:32px;font-weight:700;color:rgba(248,244,235,0.72);">citra<span style="color:#C8FF2E;">.</span>chat</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="dd-ok-dot"></div><div class="dd-label dd-ok">Dado + contexto + fonte</div></div>
+        <div class="dd-desc">Número grande em lime, contexto explicativo, fonte do dado, assinatura na base esquerda.</div>
+      </div>
+
+      <!-- DO 2: Um acento dominante -->
+      <div class="dd-wrap">
+        <div class="dd-frame">
+          <div class="dd-inner" style="transform:scale(0.2963);">
+            <div style="width:1080px;height:1350px;background:#F8F4EB;font-family:'Bricolage Grotesque',sans-serif;position:relative;overflow:hidden;">
+              <div style="position:absolute;top:0;left:0;right:0;height:14px;background:#C8FF2E;"></div>
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:26px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(19,17,30,0.3);">Série · Como medir</div>
+                <div>
+                  <div style="font-size:96px;font-weight:800;letter-spacing:-0.04em;line-height:0.92;color:#13111E;margin-bottom:32px;">Tracking nativo<br>do início ao<br><span style="color:#2F6B10;">fim.</span></div>
+                  <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:40px;font-weight:400;color:rgba(19,17,30,0.55);line-height:1.5;">Configure uma vez. Meça para sempre. Sem código extra.</div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <div style="display:flex;align-items:center;gap:14px;"><svg viewBox="0 0 64 64" width="36" height="36" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg><span style="font-size:30px;font-weight:700;color:#13111E;">citra<span style="color:#2F6B10;">.</span>chat</span></div>
+                  <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:26px;color:rgba(19,17,30,0.25);">03 / 07</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="dd-ok-dot"></div><div class="dd-label dd-ok">Um acento, fundo cream</div></div>
+        <div class="dd-desc">Só lime dark como acento. Cream de fundo, hierarquia clara, logo na base com contador de slides.</div>
+      </div>
+
+      <!-- DO 3: Lime pop com logo -->
+      <div class="dd-wrap">
+        <div class="dd-frame">
+          <div class="dd-inner" style="transform:scale(0.2963);">
+            <div style="width:1080px;height:1350px;background:#C8FF2E;font-family:'Bricolage Grotesque',sans-serif;position:relative;overflow:hidden;">
+              <div style="position:absolute;bottom:-80px;right:-80px;opacity:0.1;"><svg viewBox="0 0 64 64" width="500" height="500" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#13111E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#C8FF2E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#C8FF2E"/></svg></div>
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="display:flex;justify-content:flex-end;"><div style="display:flex;align-items:center;gap:14px;"><svg viewBox="0 0 64 64" width="38" height="38" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#13111E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#C8FF2E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#C8FF2E"/></svg><span style="font-size:32px;font-weight:700;color:#13111E;">citra<span style="color:rgba(19,17,30,0.65);">.</span>chat</span></div></div>
+                <div>
+                  <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:30px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(19,17,30,0.7);margin-bottom:28px;">Novo recurso</div>
+                  <div style="font-size:110px;font-weight:800;letter-spacing:-0.05em;line-height:0.92;color:#13111E;">Analytics<br>em tempo<br>real.</div>
+                </div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:38px;font-weight:500;color:rgba(19,17,30,0.5);">Meça o que as outras<br>ferramentas ignoram.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="dd-ok-dot"></div><div class="dd-label dd-ok">Lime pop, logo topo direita</div></div>
+        <div class="dd-desc">Fundo lime, texto e logo em dark. Logo no topo direita. Sem outros acentos coloridos.</div>
+      </div>
+
+    </div>
+
+    <!-- Row 2: Don'ts -->
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);margin-bottom:20px;display:flex;align-items:center;gap:10px;">✕ Nunca fazer <div style="flex:1;height:1px;background:oklch(17% 0.015 260);"></div></div>
+    <div class="dd-grid">
+
+      <!-- DON'T 1: Dois acentos pesados -->
+      <div class="dd-wrap">
+        <div class="dd-frame">
+          <div class="dd-inner" style="transform:scale(0.2963);">
+            <div style="width:1080px;height:1350px;background:#13111E;font-family:'Bricolage Grotesque',sans-serif;position:relative;overflow:hidden;">
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;color:#3E88D4;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">RESULTADO</div>
+                <div>
+                  <div style="font-size:200px;font-weight:800;letter-spacing:-0.07em;line-height:0.85;color:#C8FF2E;">3×</div>
+                  <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:60px;font-weight:600;color:#E05C3E;margin-top:20px;">mais conversão</div>
+                  <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:44px;color:#E8A040;margin-top:16px;">↑ 38% nos últimos 30 dias</div>
+                </div>
+                <div style="font-size:40px;color:#C8FF2E;font-weight:700;">citra.chat</div>
+              </div>
+              <!-- X overlay -->
+              <div style="position:absolute;inset:0;background:rgba(224,92,62,0.12);border:4px solid rgba(224,92,62,0.6);border-radius:0;pointer-events:none;"></div>
+              <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 1080 1350"><line x1="0" y1="0" x2="1080" y2="1350" stroke="rgba(224,92,62,0.3)" stroke-width="6"/><line x1="1080" y1="0" x2="0" y2="1350" stroke="rgba(224,92,62,0.3)" stroke-width="6"/></svg>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="dd-no-dot"></div><div class="dd-label dd-no">4 cores = caos visual</div></div>
+        <div class="dd-desc">Lime, coral, sky e ember ao mesmo tempo. Nenhuma cor tem peso, tudo briga. Um acento por post.</div>
+      </div>
+
+      <!-- DON'T 2: Dado sem contexto -->
+      <div class="dd-wrap">
+        <div class="dd-frame">
+          <div class="dd-inner" style="transform:scale(0.2963);">
+            <div style="width:1080px;height:1350px;background:#13111E;font-family:'Bricolage Grotesque',sans-serif;position:relative;overflow:hidden;">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+                <div style="font-size:300px;font-weight:800;letter-spacing:-0.08em;line-height:0.85;color:#C8FF2E;">94%</div>
+              </div>
+              <!-- X overlay -->
+              <div style="position:absolute;inset:0;background:rgba(224,92,62,0.12);border:4px solid rgba(224,92,62,0.6);pointer-events:none;"></div>
+              <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 1080 1350"><line x1="0" y1="0" x2="1080" y2="1350" stroke="rgba(224,92,62,0.3)" stroke-width="6"/><line x1="1080" y1="0" x2="0" y2="1350" stroke="rgba(224,92,62,0.3)" stroke-width="6"/></svg>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="dd-no-dot"></div><div class="dd-label dd-no">Dado sem contexto</div></div>
+        <div class="dd-desc">94% do quê? Sem contexto, sem fonte, sem assinatura. O dado não comunica e não gera credibilidade.</div>
+      </div>
+
+      <!-- DON'T 3: Logo fora da margem -->
+      <div class="dd-wrap">
+        <div class="dd-frame">
+          <div class="dd-inner" style="transform:scale(0.2963);">
+            <div style="width:1080px;height:1350px;background:#F8F4EB;font-family:'Bricolage Grotesque',sans-serif;position:relative;overflow:hidden;">
+              <div style="position:absolute;top:90px;left:90px;right:90px;bottom:90px;">
+                <div style="font-size:96px;font-weight:800;letter-spacing:-0.04em;line-height:0.92;color:#13111E;margin-bottom:32px;">Conversas que<br>convertem.</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:44px;font-weight:400;color:rgba(19,17,30,0.55);">Tracking nativo em<br>cada mensagem.</div>
+              </div>
+              <!-- Logo OUTSIDE margin -->
+              <div style="position:absolute;bottom:0;left:0;display:flex;align-items:center;gap:16px;padding:12px 20px;background:rgba(200,255,46,0.9);">
+                <svg viewBox="0 0 64 64" width="36" height="36" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg>
+                <span style="font-size:32px;font-weight:700;color:#13111E;">citra.chat</span>
+              </div>
+              <!-- X overlay -->
+              <div style="position:absolute;inset:0;background:rgba(224,92,62,0.08);border:4px solid rgba(224,92,62,0.6);pointer-events:none;"></div>
+              <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 1080 1350"><line x1="0" y1="0" x2="1080" y2="1350" stroke="rgba(224,92,62,0.25)" stroke-width="6"/><line x1="1080" y1="0" x2="0" y2="1350" stroke="rgba(224,92,62,0.25)" stroke-width="6"/></svg>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="dd-no-dot"></div><div class="dd-label dd-no">Logo cortado na borda</div></div>
+        <div class="dd-desc">Logo fora da margem de 90px, parcialmente cortado. O Instagram pode cortar em diferentes tamanhos de tela.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="foot">
+  <div class="foot-wm">
+    <svg viewBox="0 0 64 64" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="60" height="60" rx="14" fill="oklch(88% 0.22 130)"/>
+      <path d="M 46 20 A 18 18 0 1 0 46 44" stroke="oklch(12% 0.018 260)" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <circle cx="46" cy="44" r="5" fill="oklch(12% 0.018 260)"/>
+    </svg>
+    citra<em>.</em>chat
+  </div>
+  <span style="font-size:12px;color:var(--ink-3);">Instagram Brand Guide · Oficial · Junho 2026</span>
+</footer>
+
+</body>
+</html>

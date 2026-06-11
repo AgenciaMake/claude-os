@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CitraChat — Decisão de Logo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --lime: #C8FF2E;
+      --lime-dark: #2F6B10;
+      --coral: #E05C3E;
+      --ink: #13111E;
+      --cream: #F8F4EB;
+      --border: #E5DFD3;
+      --ff-d: 'Bricolage Grotesque', sans-serif;
+      --ff-b: 'Plus Jakarta Sans', sans-serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--cream); color: var(--ink); font-family: var(--ff-b); -webkit-font-smoothing: antialiased; }
+
+    .page { max-width: 1040px; margin: 0 auto; padding: 72px 48px; }
+    .header { text-align: center; margin-bottom: 64px; }
+    .header h1 { font-family: var(--ff-d); font-size: 42px; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 12px; }
+    .header p { font-size: 17px; color: #5A5760; max-width: 480px; margin: 0 auto; line-height: 1.6; }
+
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; border-radius: 16px; overflow: hidden; background: var(--border); margin-bottom: 48px; }
+    .col { background: white; padding: 48px; display: flex; flex-direction: column; gap: 40px; }
+
+    .option-tag { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .tag-a { background: var(--ink); color: var(--lime); }
+    .tag-b { background: #F0F0F8; color: #3A3A5C; }
+
+    .option-title { font-family: var(--ff-d); font-size: 24px; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 6px; }
+    .option-sub { font-size: 14px; color: #5A5760; line-height: 1.55; }
+
+    /* ── Logo preview area ── */
+    .logo-stage { display: flex; flex-direction: column; gap: 20px; }
+    .stage-dark {
+      background: var(--ink); border-radius: 12px; padding: 40px;
+      display: flex; flex-direction: column; align-items: center; gap: 24px;
+    }
+    .stage-light {
+      background: var(--cream); border: 1.5px solid var(--border); border-radius: 12px; padding: 40px;
+      display: flex; flex-direction: column; align-items: center; gap: 24px;
+    }
+    .stage-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    .stage-label-light { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(0,0,0,0.3); }
+    .lockup { display: flex; align-items: center; gap: 14px; }
+    .wm-dark { font-family: var(--ff-d); font-size: 22px; font-weight: 800; letter-spacing: -0.04em; color: #F8F4EB; }
+    .wm-dark em { color: var(--lime); font-style: normal; }
+    .wm-light { font-family: var(--ff-d); font-size: 22px; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); }
+    .wm-light em { color: var(--lime-dark); font-style: normal; }
+    .sizes { display: flex; align-items: flex-end; gap: 20px; }
+    .size-lbl { font-size: 10px; color: rgba(255,255,255,0.3); text-align: center; margin-top: 6px; }
+
+    /* ── C-arc SVG (Option A) ── */
+
+    /* ── Agent Face SVG (Option B) ── */
+
+    /* ── Post previews ── */
+    .posts { display: flex; gap: 12px; }
+    .post-frame { flex: 1; border-radius: 8px; overflow: hidden; position: relative; }
+    .post-frame::after { content: ''; display: block; padding-top: 125%; }
+    .post-inner { position: absolute; inset: 0; }
+
+    /* ── Feature list ── */
+    .features { display: flex; flex-direction: column; gap: 10px; padding-top: 8px; border-top: 1px solid var(--border); }
+    .feat { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.55; color: #444250; }
+    .feat-icon { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; margin-top: 1px; }
+    .feat-yes { background: #E8FFCC; color: var(--lime-dark); }
+    .feat-no { background: #FFE8E2; color: var(--coral); }
+    .feat-neu { background: #F0F0F8; color: #5A5870; }
+
+    .verdict-row { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-radius: 10px; }
+    .vr-a { background: var(--ink); }
+    .vr-b { background: #F0F0F8; border: 1px solid var(--border); }
+    .vr-label { font-family: var(--ff-d); font-size: 15px; font-weight: 800; letter-spacing: -0.02em; }
+    .vr-label-a { color: var(--lime); }
+    .vr-label-b { color: var(--ink); }
+    .vr-text { font-size: 13px; line-height: 1.5; }
+    .vr-text-a { color: rgba(255,255,255,0.7); }
+    .vr-text-b { color: #5A5760; }
+
+    .footnote { text-align: center; font-size: 13px; color: #8A8790; margin-top: 40px; line-height: 1.7; }
+    .footnote strong { color: var(--ink); }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <h1>Qual logo para o CitraChat?</h1>
+    <p>O Claude Design propôs o C-arc. Nossa exploração foi o Agent Face. Ambos funcionam — a decisão é de posicionamento.</p>
+  </div>
+
+  <div class="cols">
+
+    <!-- OPTION A: C-arc (Claude Design) -->
+    <div class="col">
+      <div>
+        <div class="option-tag tag-a">Opção A · Claude Design</div>
+        <div class="option-title">C-arc Lettermark</div>
+        <p class="option-sub">Logo abstrato baseado na letra C. Simples, escalável, funciona em qualquer tamanho — de 16px favicon a outdoor.</p>
+      </div>
+
+      <div class="logo-stage">
+        <!-- Dark -->
+        <div class="stage-dark">
+          <div class="stage-label">Sobre escuro</div>
+          <div class="lockup">
+            <!-- C-arc 52px -->
+            <svg viewBox="0 0 64 64" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/>
+              <path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/>
+              <circle cx="46" cy="44" r="5" fill="#13111E"/>
+            </svg>
+            <div class="wm-dark">citra<em>.</em>chat</div>
+          </div>
+          <!-- Sizes -->
+          <div class="sizes">
+            <div style="text-align:center;">
+              <svg viewBox="0 0 64 64" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg>
+              <div class="size-lbl">16px</div>
+            </div>
+            <div style="text-align:center;">
+              <svg viewBox="0 0 64 64" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg>
+              <div class="size-lbl">24px</div>
+            </div>
+            <div style="text-align:center;">
+              <svg viewBox="0 0 64 64" width="40" height="40" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg>
+              <div class="size-lbl">40px</div>
+            </div>
+            <div style="text-align:center;">
+              <svg viewBox="0 0 64 64" width="64" height="64" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg>
+              <div class="size-lbl">64px</div>
+            </div>
+          </div>
+        </div>
+        <!-- Light -->
+        <div class="stage-light">
+          <div class="stage-label-light">Sobre claro</div>
+          <div class="lockup">
+            <svg viewBox="0 0 64 64" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/>
+              <path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/>
+              <circle cx="46" cy="44" r="5" fill="#13111E"/>
+            </svg>
+            <div class="wm-light">citra<em>.</em>chat</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post previews A -->
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#8A8790;margin-bottom:12px;">Em post de feed (preview)</div>
+        <div class="posts">
+          <!-- Post A1: dark -->
+          <div class="post-frame">
+            <div class="post-inner" style="background:#13111E;display:flex;flex-direction:column;padding:14%;justify-content:space-between;">
+              <svg viewBox="0 0 64 64" width="28" height="28" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;line-height:1;letter-spacing:-0.05em;color:#C8FF2E;margin-bottom:8px;">3×</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.4;font-family:'Plus Jakarta Sans',sans-serif;">mais conversões<br>via agente</div>
+              </div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;color:rgba(255,255,255,0.4);">citra.chat</div>
+            </div>
+          </div>
+          <!-- Post A2: light -->
+          <div class="post-frame">
+            <div class="post-inner" style="background:#F8F4EB;display:flex;flex-direction:column;padding:14%;justify-content:space-between;">
+              <svg viewBox="0 0 64 64" width="28" height="28" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;line-height:1.1;letter-spacing:-0.04em;color:#E05C3E;margin-bottom:6px;">+38%</div>
+                <div style="font-size:10px;color:rgba(0,0,0,0.55);line-height:1.4;font-family:'Plus Jakarta Sans',sans-serif;">em conversões<br>via chat</div>
+              </div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;color:rgba(0,0,0,0.35);">citra.chat</div>
+            </div>
+          </div>
+          <!-- Post A3: lime bg -->
+          <div class="post-frame">
+            <div class="post-inner" style="background:#C8FF2E;display:flex;flex-direction:column;padding:14%;justify-content:space-between;">
+              <svg viewBox="0 0 64 64" width="28" height="28" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#13111E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#C8FF2E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#C8FF2E"/></svg>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;line-height:1.05;letter-spacing:-0.04em;color:#13111E;margin-bottom:6px;">Agentes que<br>vendem.</div>
+              </div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;color:rgba(0,0,0,0.45);">citra.chat</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feat"><div class="feat-icon feat-yes">✓</div>Funciona em qualquer tamanho — de 16px a outdoor</div>
+        <div class="feat"><div class="feat-icon feat-yes">✓</div>Abstrato → não "data" como o produto, mas também não limita</div>
+        <div class="feat"><div class="feat-icon feat-yes">✓</div>Sistema de marca coeso com Brand Guide v3 (Claude Design)</div>
+        <div class="feat"><div class="feat-icon feat-yes">✓</div>Combina naturalmente com `citra.chat` no wordmark</div>
+        <div class="feat"><div class="feat-icon feat-neu">→</div>Menos reconhecível como "produto de conversas"</div>
+        <div class="feat"><div class="feat-icon feat-neu">→</div>Mais premium/SaaS — menos agente/humano</div>
+      </div>
+
+      <div class="verdict-row vr-a">
+        <svg viewBox="0 0 64 64" width="32" height="32" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="60" height="60" rx="14" fill="#C8FF2E"/><path d="M 46 20 A 18 18 0 1 0 46 44" stroke="#13111E" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="46" cy="44" r="5" fill="#13111E"/></svg>
+        <div>
+          <div class="vr-label vr-label-a">Escolha premium</div>
+          <div class="vr-text vr-text-a">Posiciona como SaaS sério. Mais parecido com Notion, Linear, Intercom. Funciona em app store, site e material de vendas.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION B: Agent Face (nossa exploração) -->
+    <div class="col">
+      <div>
+        <div class="option-tag tag-b">Opção B · Exploração própria</div>
+        <div class="option-title">Agent Face</div>
+        <p class="option-sub">Bolha de chat com olhos e sorriso. Comunica diretamente "produto de conversas" e humaniza o agente.</p>
+      </div>
+
+      <div class="logo-stage">
+        <!-- Dark -->
+        <div class="stage-dark">
+          <div class="stage-label">Sobre escuro</div>
+          <div class="lockup">
+            <!-- Agent Face 52px -->
+            <svg viewBox="0 0 88 88" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#C8FF2E"/>
+              <circle cx="30" cy="30" r="6" fill="#13111E"/>
+              <circle cx="58" cy="30" r="6" fill="#13111E"/>
+              <path d="M24 46 Q44 60 64 46" stroke="#13111E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            </svg>
+            <div class="wm-dark">citra<em>.</em>chat</div>
+          </div>
+          <!-- Sizes -->
+          <div class="sizes">
+            <div style="text-align:center;">
+              <svg viewBox="0 0 88 88" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#C8FF2E"/><circle cx="30" cy="30" r="6" fill="#13111E"/><circle cx="58" cy="30" r="6" fill="#13111E"/><path d="M24 46 Q44 60 64 46" stroke="#13111E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+              <div class="size-lbl">16px</div>
+            </div>
+            <div style="text-align:center;">
+              <svg viewBox="0 0 88 88" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#C8FF2E"/><circle cx="30" cy="30" r="6" fill="#13111E"/><circle cx="58" cy="30" r="6" fill="#13111E"/><path d="M24 46 Q44 60 64 46" stroke="#13111E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+              <div class="size-lbl">24px</div>
+            </div>
+            <div style="text-align:center;">
+              <svg viewBox="0 0 88 88" width="40" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#C8FF2E"/><circle cx="30" cy="30" r="6" fill="#13111E"/><circle cx="58" cy="30" r="6" fill="#13111E"/><path d="M24 46 Q44 60 64 46" stroke="#13111E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+              <div class="size-lbl">40px</div>
+            </div>
+            <div style="text-align:center;">
+              <svg viewBox="0 0 88 88" width="64" height="64" xmlns="http://www.w3.org/2000/svg"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#C8FF2E"/><circle cx="30" cy="30" r="6" fill="#13111E"/><circle cx="58" cy="30" r="6" fill="#13111E"/><path d="M24 46 Q44 60 64 46" stroke="#13111E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+              <div class="size-lbl">64px</div>
+            </div>
+          </div>
+        </div>
+        <!-- Light -->
+        <div class="stage-light">
+          <div class="stage-label-light">Sobre claro</div>
+          <div class="lockup">
+            <svg viewBox="0 0 88 88" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#13111E"/>
+              <circle cx="30" cy="30" r="6" fill="#C8FF2E"/>
+              <circle cx="58" cy="30" r="6" fill="#C8FF2E"/>
+              <path d="M24 46 Q44 60 64 46" stroke="#C8FF2E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            </svg>
+            <div class="wm-light">citra<em>.</em>chat</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post previews B -->
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#8A8790;margin-bottom:12px;">Em post de feed (preview)</div>
+        <div class="posts">
+          <!-- Post B1: dark -->
+          <div class="post-frame">
+            <div class="post-inner" style="background:#13111E;display:flex;flex-direction:column;padding:14%;justify-content:space-between;">
+              <svg viewBox="0 0 88 88" width="28" height="28" xmlns="http://www.w3.org/2000/svg"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#C8FF2E"/><circle cx="30" cy="30" r="6" fill="#13111E"/><circle cx="58" cy="30" r="6" fill="#13111E"/><path d="M24 46 Q44 60 64 46" stroke="#13111E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;line-height:1;letter-spacing:-0.05em;color:#C8FF2E;margin-bottom:8px;">3×</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.4;font-family:'Plus Jakarta Sans',sans-serif;">mais conversões<br>via agente</div>
+              </div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;color:rgba(255,255,255,0.4);">citra.chat</div>
+            </div>
+          </div>
+          <!-- Post B2: light -->
+          <div class="post-frame">
+            <div class="post-inner" style="background:#F8F4EB;display:flex;flex-direction:column;padding:14%;justify-content:space-between;">
+              <svg viewBox="0 0 88 88" width="28" height="28" xmlns="http://www.w3.org/2000/svg"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#13111E"/><circle cx="30" cy="30" r="6" fill="#C8FF2E"/><circle cx="58" cy="30" r="6" fill="#C8FF2E"/><path d="M24 46 Q44 60 64 46" stroke="#C8FF2E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;line-height:1.1;letter-spacing:-0.04em;color:#E05C3E;margin-bottom:6px;">+38%</div>
+                <div style="font-size:10px;color:rgba(0,0,0,0.55);line-height:1.4;font-family:'Plus Jakarta Sans',sans-serif;">em conversões<br>via chat</div>
+              </div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;color:rgba(0,0,0,0.35);">citra.chat</div>
+            </div>
+          </div>
+          <!-- Post B3: lime bg -->
+          <div class="post-frame">
+            <div class="post-inner" style="background:#C8FF2E;display:flex;flex-direction:column;padding:14%;justify-content:space-between;">
+              <svg viewBox="0 0 88 88" width="28" height="28" xmlns="http://www.w3.org/2000/svg"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#13111E"/><circle cx="30" cy="30" r="6" fill="#C8FF2E"/><circle cx="58" cy="30" r="6" fill="#C8FF2E"/><path d="M24 46 Q44 60 64 46" stroke="#C8FF2E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+              <div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;line-height:1.05;letter-spacing:-0.04em;color:#13111E;margin-bottom:6px;">Agentes que<br>vendem.</div>
+              </div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;color:rgba(0,0,0,0.45);">citra.chat</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feat"><div class="feat-icon feat-yes">✓</div>Comunicação imediata — "é um produto de chat"</div>
+        <div class="feat"><div class="feat-icon feat-yes">✓</div>Humaniza o agente — transmite a proposta de "conversa natural"</div>
+        <div class="feat"><div class="feat-icon feat-yes">✓</div>Mais reconhecível no feed — difícil confundir com SaaS genérico</div>
+        <div class="feat"><div class="feat-icon feat-neu">→</div>Fica menor em tamanhos muito reduzidos (16px perde detalhe)</div>
+        <div class="feat"><div class="feat-icon feat-neu">→</div>Vai precisar de polimento profissional no Figma para uso real</div>
+        <div class="feat"><div class="feat-icon feat-no">✗</div>Mais perto do universo "chatbot" visualmente (risco de associação)</div>
+      </div>
+
+      <div class="verdict-row vr-b">
+        <svg viewBox="0 0 88 88" width="32" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#C8FF2E"/><circle cx="30" cy="30" r="6" fill="#13111E"/><circle cx="58" cy="30" r="6" fill="#13111E"/><path d="M24 46 Q44 60 64 46" stroke="#13111E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+        <div>
+          <div class="vr-label vr-label-b">Escolha expressiva</div>
+          <div class="vr-text vr-text-b">Posiciona como produto com personalidade. Diferencia no feed. Mas precisa de execução cuidadosa pra não parecer "chatbot fun".</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="footnote">
+    Tudo mais está decidido: <strong>cores Pulse/Warmth/Clarity/Ember</strong> · <strong>Bricolage + Jakarta Sans</strong> · <strong>90px de margem</strong> · <strong>wordmark citra.chat</strong><br>
+    A única decisão pendente é o ícone. Qual comunica melhor o que o CitraChat é?
+  </p>
+
+</div>
+</body>
+</html>
