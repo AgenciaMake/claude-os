@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CitraChat — Paletas de Cor</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;0,800;1,700;1,800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f5f4f0;
+    color: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+    padding: 48px 36px;
+  }
+
+  .page-label { font-size: 11px; font-weight: 600; color: #aaa; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+  .page-title { font-size: 28px; font-weight: 800; color: #111; margin-bottom: 6px; }
+  .page-sub { font-size: 14px; color: #888; margin-bottom: 56px; max-width: 560px; line-height: 1.6; }
+
+  .palette-section { margin-bottom: 72px; }
+
+  .palette-header { margin-bottom: 28px; }
+  .palette-num {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #fff; background: #1a1a1a;
+    padding: 4px 10px; border-radius: 4px;
+    display: inline-block; margin-bottom: 10px;
+  }
+  .palette-name { font-size: 20px; font-weight: 800; color: #111; margin-bottom: 6px; }
+  .palette-mood { font-size: 13px; color: #888; max-width: 480px; line-height: 1.6; }
+
+  .palette-body { display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-start; }
+
+  /* Swatches */
+  .swatches { display: flex; gap: 0; border-radius: 12px; overflow: hidden; flex-shrink: 0; }
+  .swatch { width: 72px; height: 200px; display: flex; flex-direction: column; justify-content: flex-end; padding: 10px 8px; }
+  .swatch-hex { font-size: 10px; font-weight: 600; letter-spacing: 0.06em; writing-mode: horizontal-tb; }
+
+  /* Slide preview — 1080×1350 → 200×250 */
+  .slide-preview { width: 200px; height: 250px; position: relative; overflow: hidden; border-radius: 10px; flex-shrink: 0; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+  .slide-inner {
+    width: 1080px; height: 1350px;
+    transform-origin: top left;
+    transform: scale(0.1852);
+    position: absolute; top: 0; left: 0;
+  }
+
+  /* Slide base */
+  .slide-base { width: 1080px; height: 1350px; padding: 70px; display: flex; flex-direction: column; justify-content: space-between; }
+
+  .slide-wordmark { font-family: 'DM Sans', sans-serif; font-size: 28px; font-weight: 600; }
+  .slide-eyebrow { font-size: 26px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; }
+  .slide-headline { font-family: 'DM Sans', sans-serif; font-size: 104px; font-weight: 800; font-style: italic; line-height: 1.0; margin-bottom: 36px; }
+  .slide-sub { font-size: 38px; font-weight: 400; line-height: 1.5; max-width: 860px; }
+  .slide-footer { display: flex; justify-content: space-between; align-items: center; }
+  .slide-footer span { font-size: 26px; font-weight: 500; }
+
+  .desc-block { max-width: 340px; }
+  .desc-title { font-size: 14px; font-weight: 700; color: #111; margin-bottom: 8px; }
+  .desc-text { font-size: 13px; color: #777; line-height: 1.65; }
+  .desc-text strong { color: #333; }
+
+  .color-names { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .color-row { display: flex; align-items: center; gap: 10px; }
+  .color-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.08); }
+  .color-info { font-size: 12px; color: #555; }
+  .color-info strong { color: #222; font-weight: 600; }
+
+  .divider { height: 1px; background: #e8e7e3; margin: 16px 0 64px; }
+</style>
+</head>
+<body>
+
+<div class="page-label">CitraChat Social</div>
+<div class="page-title">Paletas de cor</div>
+<div class="page-sub">Todas partem do lime #DFFF00 como cor âncora da marca. Cada paleta adiciona um conjunto diferente de cores de suporte. O mini-slide mostra como a paleta se comporta num post real.</div>
+
+<!-- ══════════════ PALETA 1 — LIME + CORAL ══════════════ -->
+<div class="palette-section">
+  <div class="palette-header">
+    <div class="palette-num">Paleta 01</div>
+    <div class="palette-name">Lime + Coral</div>
+    <div class="palette-mood">Quente, vibrante, humana. O coral cria calor e proximidade. O lime dá energia e tech. Fundo creme suave. Sensação: marca que conversa, não que vende.</div>
+  </div>
+  <div class="palette-body">
+
+    <div class="swatches">
+      <div class="swatch" style="background:#DFFF00"><span class="swatch-hex" style="color:#555">#DFFF00</span></div>
+      <div class="swatch" style="background:#FF5533"><span class="swatch-hex" style="color:#fff">#FF5533</span></div>
+      <div class="swatch" style="background:#FAF9F5"><span class="swatch-hex" style="color:#ccc">#FAF9F5</span></div>
+      <div class="swatch" style="background:#F0EFE9"><span class="swatch-hex" style="color:#ccc">#F0EFE9</span></div>
+      <div class="swatch" style="background:#1C1C1E"><span class="swatch-hex" style="color:#555">#1C1C1E</span></div>
+    </div>
+
+    <div class="slide-preview">
+      <div class="slide-inner">
+        <div class="slide-base" style="background:#FAF9F5">
+          <div class="slide-wordmark" style="color:#1C1C1E">citrachat</div>
+          <div>
+            <div class="slide-eyebrow" style="color:#FF5533">Para de perder lead</div>
+            <div class="slide-headline" style="color:#1C1C1E">
+              Seu agente<br>já está<br>
+              <span style="background:#DFFF00; padding:0 8px">trabalhando.</span>
+            </div>
+            <div class="slide-sub" style="color:#888">Qualifica, responde e dispara o evento. Enquanto você dorme.</div>
+          </div>
+          <div class="slide-footer">
+            <span style="color:#bbb">@citrachat</span>
+            <span style="background:#FF5533; color:#fff; padding:14px 32px; border-radius:100px; font-size:26px">Agentes que convertem</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="desc-block">
+      <div class="desc-title">Como usar</div>
+      <div class="desc-text">
+        <strong>Lime</strong> — destaques de texto, highlight em palavras-chave, badges.<br><br>
+        <strong>Coral</strong> — eyebrow text, CTAs, botões, elementos de ação. Traz calor humano.<br><br>
+        <strong>Creme</strong> — fundo principal. Mais acolhedor que branco puro.<br><br>
+        <strong>Carvão</strong> — tipografia principal. Não é preto puro — mais suave.
+      </div>
+      <div class="color-names">
+        <div class="color-row"><div class="color-dot" style="background:#DFFF00"></div><div class="color-info"><strong>Lime elétrico</strong> — âncora da marca</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#FF5533"></div><div class="color-info"><strong>Coral ativo</strong> — calor, ação</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#FAF9F5"></div><div class="color-info"><strong>Creme claro</strong> — fundo primário</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#F0EFE9"></div><div class="color-info"><strong>Creme médio</strong> — cards, divisores</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#1C1C1E"></div><div class="color-info"><strong>Carvão</strong> — texto principal</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- ══════════════ PALETA 2 — LIME + AZUL PROFUNDO ══════════════ -->
+<div class="palette-section">
+  <div class="palette-header">
+    <div class="palette-num">Paleta 02</div>
+    <div class="palette-name">Lime + Azul Profundo</div>
+    <div class="palette-mood">Confiança com energia. O azul-marinho transmite autoridade e clareza, o lime corta com eletricidade. Fundo branco limpo. Sensação: produto sério que realmente funciona.</div>
+  </div>
+  <div class="palette-body">
+
+    <div class="swatches">
+      <div class="swatch" style="background:#DFFF00"><span class="swatch-hex" style="color:#555">#DFFF00</span></div>
+      <div class="swatch" style="background:#1A3A6B"><span class="swatch-hex" style="color:#fff">#1A3A6B</span></div>
+      <div class="swatch" style="background:#2E5CE6"><span class="swatch-hex" style="color:#fff">#2E5CE6</span></div>
+      <div class="swatch" style="background:#F8F9FC"><span class="swatch-hex" style="color:#ccc">#F8F9FC</span></div>
+      <div class="swatch" style="background:#111827"><span class="swatch-hex" style="color:#555">#111827</span></div>
+    </div>
+
+    <div class="slide-preview">
+      <div class="slide-inner">
+        <div class="slide-base" style="background:#F8F9FC">
+          <div class="slide-wordmark" style="color:#1A3A6B">citrachat</div>
+          <div>
+            <div class="slide-eyebrow" style="color:#2E5CE6">73% dos leads somem</div>
+            <div class="slide-headline" style="color:#111827">
+              em menos<br>de
+              <span style="color:#DFFF00; -webkit-text-stroke:2px #1a1a1a">5 min.</span>
+            </div>
+            <div class="slide-sub" style="color:#6b7280">O agente responde em segundos. Qualifica. Converte. Sem você precisar estar online.</div>
+          </div>
+          <div class="slide-footer">
+            <span style="color:#bbb">@citrachat</span>
+            <span style="background:#1A3A6B; color:#DFFF00; padding:14px 32px; border-radius:8px; font-size:26px; font-weight:700">citra.chat</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="desc-block">
+      <div class="desc-title">Como usar</div>
+      <div class="desc-text">
+        <strong>Lime</strong> — números, estatísticas, palavras-chave de impacto. O detalhe que para o scroll.<br><br>
+        <strong>Azul marinho</strong> — logo, CTAs, fundos de botão. Dá autoridade.<br><br>
+        <strong>Azul médio</strong> — eyebrows, labels, links. Hierarquia visual.<br><br>
+        <strong>Fundo azulado</strong> — suavemente frio. Diferente do creme, mais tech.
+      </div>
+      <div class="color-names">
+        <div class="color-row"><div class="color-dot" style="background:#DFFF00"></div><div class="color-info"><strong>Lime elétrico</strong> — âncora da marca</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#1A3A6B"></div><div class="color-info"><strong>Azul marinho</strong> — autoridade, confiança</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#2E5CE6"></div><div class="color-info"><strong>Azul médio</strong> — ação, hierarquia</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#F8F9FC"></div><div class="color-info"><strong>Off-white frio</strong> — fundo principal</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#111827"></div><div class="color-info"><strong>Grafite</strong> — texto principal</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- ══════════════ PALETA 3 — LIME + VERDE FLORESTA ══════════════ -->
+<div class="palette-section">
+  <div class="palette-header">
+    <div class="palette-num">Paleta 03</div>
+    <div class="palette-name">Lime + Verde Floresta</div>
+    <div class="palette-mood">Família do lime, mas com profundidade. Verde escuro ancora o lime elétrico sem disputar com ele. Fundo creme quente. Sensação: crescimento, resultado, tudo conectado.</div>
+  </div>
+  <div class="palette-body">
+
+    <div class="swatches">
+      <div class="swatch" style="background:#DFFF00"><span class="swatch-hex" style="color:#555">#DFFF00</span></div>
+      <div class="swatch" style="background:#166534"><span class="swatch-hex" style="color:#fff">#166534</span></div>
+      <div class="swatch" style="background:#16A34A"><span class="swatch-hex" style="color:#fff">#16A34A</span></div>
+      <div class="swatch" style="background:#F5F7F0"><span class="swatch-hex" style="color:#bbb">#F5F7F0</span></div>
+      <div class="swatch" style="background:#14271A"><span class="swatch-hex" style="color:#555">#14271A</span></div>
+    </div>
+
+    <div class="slide-preview">
+      <div class="slide-inner">
+        <div class="slide-base" style="background:#F5F7F0">
+          <div class="slide-wordmark" style="color:#166534">citrachat</div>
+          <div>
+            <div class="slide-eyebrow" style="color:#16A34A; border-left: 8px solid #DFFF00; padding-left:20px">Agente IA</div>
+            <div class="slide-headline" style="color:#14271A">
+              Cada lead<br>importa.<br>
+              <span style="color:#166534">O agente</span><br>sabe disso.
+            </div>
+            <div class="slide-sub" style="color:#6b7a6e">Qualifica em tempo real. Entende contexto. Nunca deixa o lead sem resposta.</div>
+          </div>
+          <div class="slide-footer">
+            <span style="color:#bbb">@citrachat</span>
+            <span style="border:2px solid #DFFF00; color:#14271A; padding:14px 32px; border-radius:100px; font-size:26px; font-weight:600">Saiba mais</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="desc-block">
+      <div class="desc-title">Como usar</div>
+      <div class="desc-text">
+        <strong>Lime</strong> — highlight, bordas de destaque, badges.<br><br>
+        <strong>Verde floresta</strong> — logo, fundos de capa, autoridade. Ancora o lime sem apagar.<br><br>
+        <strong>Verde médio</strong> — texto secundário, eyebrows, links.<br><br>
+        <strong>Creme esverdeado</strong> — fundo com personalidade. Não é branco genérico.
+      </div>
+      <div class="color-names">
+        <div class="color-row"><div class="color-dot" style="background:#DFFF00"></div><div class="color-info"><strong>Lime elétrico</strong> — âncora da marca</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#166534"></div><div class="color-info"><strong>Verde floresta</strong> — profundidade, autoridade</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#16A34A"></div><div class="color-info"><strong>Verde médio</strong> — hierarquia, suporte</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#F5F7F0"></div><div class="color-info"><strong>Creme esverdeado</strong> — fundo primário</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#14271A"></div><div class="color-info"><strong>Verde-preto</strong> — texto principal</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- ══════════════ PALETA 4 — LIME + VIOLETA ══════════════ -->
+<div class="palette-section">
+  <div class="palette-header">
+    <div class="palette-num">Paleta 04</div>
+    <div class="palette-name">Lime + Violeta</div>
+    <div class="palette-mood">O contraste mais inesperado — e o mais moderno. Violeta remete a AI, inovação, tech premium. O lime corta com eletricidade. Fundo branco limpo. Sensação: produto do futuro, disponível agora.</div>
+  </div>
+  <div class="palette-body">
+
+    <div class="swatches">
+      <div class="swatch" style="background:#DFFF00"><span class="swatch-hex" style="color:#555">#DFFF00</span></div>
+      <div class="swatch" style="background:#5B21B6"><span class="swatch-hex" style="color:#fff">#5B21B6</span></div>
+      <div class="swatch" style="background:#7C3AED"><span class="swatch-hex" style="color:#fff">#7C3AED</span></div>
+      <div class="swatch" style="background:#FAF9FF"><span class="swatch-hex" style="color:#ccc">#FAF9FF</span></div>
+      <div class="swatch" style="background:#1E1028"><span class="swatch-hex" style="color:#555">#1E1028</span></div>
+    </div>
+
+    <div class="slide-preview">
+      <div class="slide-inner">
+        <div class="slide-base" style="background:#FAF9FF">
+          <div class="slide-wordmark" style="color:#5B21B6">citrachat</div>
+          <div>
+            <div class="slide-eyebrow" style="color:#7C3AED">Não é chatbot.</div>
+            <div class="slide-headline" style="color:#1E1028">
+              É um agente<br>que pensa<br>
+              <span style="background:#DFFF00; padding:0 10px; color:#1E1028">de verdade.</span>
+            </div>
+            <div class="slide-sub" style="color:#7c6e8a">RAG, contexto, intenção. Treinado com seus documentos, integrado com seu pixel.</div>
+          </div>
+          <div class="slide-footer">
+            <span style="color:#ccc">@citrachat</span>
+            <span style="background:#7C3AED; color:#fff; padding:14px 32px; border-radius:8px; font-size:26px; font-weight:600">citra.chat</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="desc-block">
+      <div class="desc-title">Como usar</div>
+      <div class="desc-text">
+        <strong>Lime</strong> — highlight de palavras-chave, o único "grito" visual da peça.<br><br>
+        <strong>Violeta escuro</strong> — logo, botões, titulação de marca. Sério e tech.<br><br>
+        <strong>Violeta médio</strong> — eyebrows, labels, elementos de suporte.<br><br>
+        <strong>Off-white violetado</strong> — fundo com personalidade, diferente do branco comum.
+      </div>
+      <div class="color-names">
+        <div class="color-row"><div class="color-dot" style="background:#DFFF00"></div><div class="color-info"><strong>Lime elétrico</strong> — âncora da marca</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#5B21B6"></div><div class="color-info"><strong>Violeta profundo</strong> — autoridade tech, AI</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#7C3AED"></div><div class="color-info"><strong>Violeta médio</strong> — hierarquia, ação</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#FAF9FF"></div><div class="color-info"><strong>Off-white frio</strong> — fundo principal</div></div>
+        <div class="color-row"><div class="color-dot" style="background:#1E1028"></div><div class="color-info"><strong>Quase-preto violetado</strong> — texto principal</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
