@@ -163,6 +163,22 @@ Esse fluxo é exclusivo das redes da Make. Não aplicar a clientes.
 
 ---
 
+## Redes sociais do CitraChat
+
+Em qualquer sessão que envolva Instagram ou LinkedIn **do CitraChat** (pauta, copy, peça visual, publicação, análise de métricas), ler [produtos/citrachat/social/CITRACHATSOCIAL.md](produtos/citrachat/social/CITRACHATSOCIAL.md) como briefing mestre.
+
+O CitraChat tem identidade visual própria — **não misturar com a identidade da Make**. Cor principal: `#DFFF00`. Paleta e guia de slides em [produtos/citrachat/social/identidade-visual.md](produtos/citrachat/social/identidade-visual.md).
+
+**Organização dos artefatos:**
+- Referências estéticas → `produtos/citrachat/social/referencias/`
+- Pautas aprovadas → `produtos/citrachat/social/pautas/` (nomear por data)
+- Posts prontos → `produtos/citrachat/social/posts/` (subpasta por data)
+- Relatórios de performance → `produtos/citrachat/social/metricas/`
+
+**Fluxo operacional:** idêntico ao da Make — Claude sugere pautas → Bruno aprova → Claude cria → Bruno aprova artes → Claude publica via Post for Me → +2 dias → análise juntos.
+
+---
+
 ## Produtos SaaS da Make (linha Citra)
 
 A Make desenvolve produtos SaaS usados primeiro internamente, com plano de virar comerciais. Vivem em `produtos/` e seguem a estrutura definida em [produtos/PRODUTOS.md](produtos/PRODUTOS.md).
