@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CitraChat — Direções Visuais</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700;1,800;1,900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #111113;
+    color: #fff;
+    font-family: 'Rubik', sans-serif;
+    padding: 48px 32px;
+  }
+
+  h1 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #71717a;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .page-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .page-sub {
+    font-size: 14px;
+    color: #71717a;
+    margin-bottom: 64px;
+  }
+
+  .direction {
+    margin-bottom: 80px;
+  }
+
+  .direction-header {
+    margin-bottom: 28px;
+  }
+
+  .direction-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #09090b;
+    background: #DFFF00;
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+  }
+
+  .direction-name {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .direction-desc {
+    font-size: 14px;
+    color: #71717a;
+    max-width: 560px;
+    line-height: 1.6;
+  }
+
+  .slides-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .slide-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .slide-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: #52525b;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* SLIDE BASE — proporção 1080x1350 → display 270x338 (escala 1/4) */
+  .slide {
+    width: 270px;
+    height: 338px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .slide-inner {
+    width: 1080px;
+    height: 1350px;
+    transform-origin: top left;
+    transform: scale(0.25);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  /* ── DIVISOR ─────────────────── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: #27272a;
+    margin: 72px 0;
+  }
+
+  /* ════════════════════════════════
+     DIREÇÃO 1 — CHAT-NATIVE
+  ════════════════════════════════ */
+
+  /* Capa 1 */
+  .d1-capa {
+    background: #09090b;
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .d1-capa .top-logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #DFFF00;
+    letter-spacing: -0.5px;
+  }
+
+  .d1-capa .chat-area {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .bubble-row-left {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+  }
+
+  .bubble-row-right {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #27272a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+
+  .bubble {
+    max-width: 720px;
+    padding: 32px 44px;
+    border-radius: 48px;
+    font-size: 52px;
+    font-weight: 600;
+    line-height: 1.2;
+    position: relative;
+  }
+
+  .bubble-user {
+    background: #27272a;
+    color: #fff;
+    border-bottom-left-radius: 12px;
+  }
+
+  .bubble-agent {
+    background: #DFFF00;
+    color: #09090b;
+    border-bottom-right-radius: 12px;
+  }
+
+  .bubble-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+    font-size: 28px;
+    color: #52525b;
+  }
+
+  .ticks-blue { color: #3b82f6; }
+
+  .d1-capa .pre-title {
+    font-size: 30px;
+    font-weight: 500;
+    color: #52525b;
+    margin-bottom: 16px;
+  }
+
+  .d1-capa .main-title {
+    font-size: 80px;
+    font-weight: 900;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.0;
+    margin-bottom: 60px;
+  }
+
+  .d1-capa .main-title em {
+    color: #DFFF00;
+    font-style: italic;
+  }
+
+  .d1-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .d1-footer .handle {
+    font-size: 28px;
+    font-weight: 500;
+    color: #3f3f46;
+  }
+
+  .d1-footer .slogan {
+    font-size: 26px;
+    font-weight: 500;
+    color: #3f3f46;
+  }
+
+  /* Slide interno 1 */
+  .d1-interno {
+    background: #09090b;
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slide-num {
+    font-size: 28px;
+    font-weight: 500;
+    font-style: italic;
+    color: #DFFF00;
+    margin-bottom: 60px;
+  }
+
+  .d1-interno .section-title {
+    font-size: 38px;
+    font-weight: 500;
+    color: #71717a;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .d1-interno .bubbles-col {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-bottom: 60px;
+  }
+
+  .d1-interno .bubble-sm {
+    padding: 28px 40px;
+    border-radius: 36px;
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 1.3;
+    max-width: 860px;
+  }
+
+  .d1-interno .bubble-bad {
+    background: #1c1c1e;
+    color: #71717a;
+    border-bottom-left-radius: 10px;
+  }
+
+  .d1-interno .bubble-good {
+    background: #DFFF00;
+    color: #09090b;
+    border-bottom-right-radius: 10px;
+    align-self: flex-end;
+  }
+
+  .d1-interno .label-bad {
+    font-size: 28px;
+    color: #52525b;
+    margin-bottom: 12px;
+  }
+
+  .d1-interno .label-good {
+    font-size: 28px;
+    color: #52525b;
+    margin-bottom: 12px;
+    text-align: right;
+  }
+
+  .d1-interno .footer-h {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .d1-interno .footer-h span {
+    font-size: 26px;
+    color: #3f3f46;
+    font-weight: 500;
+  }
+
+  /* ════════════════════════════════
+     DIREÇÃO 2 — DARK EDITORIAL
+  ════════════════════════════════ */
+
+  .d2-capa {
+    background: #09090b;
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .d2-capa .eyebrow {
+    font-size: 28px;
+    font-weight: 500;
+    color: #3f3f46;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .d2-capa .headline {
+    font-size: 112px;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 0.95;
+    color: #fff;
+  }
+
+  .d2-capa .headline .highlight {
+    background: #DFFF00;
+    color: #09090b;
+    padding: 0 16px;
+    display: inline;
+    line-height: 1.1;
+  }
+
+  .d2-capa .sub {
+    font-size: 38px;
+    font-weight: 400;
+    color: #52525b;
+    line-height: 1.4;
+    margin-top: 40px;
+    max-width: 800px;
+  }
+
+  .d2-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .d2-footer span {
+    font-size: 28px;
+    font-weight: 500;
+    color: #3f3f46;
+  }
+
+  .d2-footer .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #DFFF00;
+    display: inline-block;
+    margin-right: 12px;
+  }
+
+  /* Slide interno 2 */
+  .d2-interno {
+    background: #09090b;
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .d2-interno .big-number {
+    font-size: 200px;
+    font-weight: 900;
+    font-style: italic;
+    color: #DFFF00;
+    line-height: 1.0;
+    margin-bottom: 0;
+  }
+
+  .d2-interno .big-label {
+    font-size: 72px;
+    font-weight: 900;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.0;
+    margin-bottom: 48px;
+  }
+
+  .d2-interno .rule {
+    width: 120px;
+    height: 4px;
+    background: #DFFF00;
+    margin-bottom: 48px;
+  }
+
+  .d2-interno .body-text {
+    font-size: 46px;
+    font-weight: 400;
+    color: #a1a1aa;
+    line-height: 1.5;
+    max-width: 860px;
+  }
+
+  .d2-interno .body-text strong {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .d2-interno .footer-h {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .d2-interno .footer-h span {
+    font-size: 26px;
+    color: #3f3f46;
+    font-weight: 500;
+  }
+
+  /* ════════════════════════════════
+     DIREÇÃO 3 — TERMINAL / OS
+  ════════════════════════════════ */
+
+  .d3-capa {
+    background: #09090b;
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .d3-capa .terminal-win {
+    background: #0d1117;
+    border: 2px solid #DFFF00;
+    border-radius: 16px;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .terminal-topbar {
+    background: #161b22;
+    padding: 24px 36px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid #21262d;
+  }
+
+  .terminal-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
+
+  .terminal-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px;
+    color: #58a6ff;
+    margin-left: 16px;
+  }
+
+  .terminal-body {
+    padding: 48px 52px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 38px;
+    line-height: 1.8;
+  }
+
+  .t-comment { color: #3d4450; }
+  .t-key { color: #DFFF00; }
+  .t-string { color: #79c0ff; }
+  .t-number { color: #f78166; }
+  .t-green { color: #3fb950; }
+  .t-muted { color: #484f58; }
+  .t-white { color: #e6edf3; }
+
+  .d3-capa .headline {
+    font-size: 76px;
+    font-weight: 900;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.05;
+    margin-top: 52px;
+    margin-bottom: 0;
+  }
+
+  .d3-capa .headline .lime { color: #DFFF00; }
+
+  .d3-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 52px;
+  }
+
+  .d3-footer span {
+    font-size: 28px;
+    font-weight: 500;
+    color: #3f3f46;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Slide interno 3 */
+  .d3-interno {
+    background: #09090b;
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .d3-interno .slide-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    color: #DFFF00;
+    margin-bottom: 60px;
+  }
+
+  .d3-interno .def-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    color: #3d4450;
+    margin-bottom: 16px;
+  }
+
+  .d3-interno .def-title {
+    font-size: 80px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.0;
+    margin-bottom: 8px;
+  }
+
+  .d3-interno .def-title-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 56px;
+    font-weight: 700;
+    color: #DFFF00;
+    margin-bottom: 52px;
+  }
+
+  .d3-interno .term-block {
+    background: #0d1117;
+    border-left: 4px solid #DFFF00;
+    padding: 36px 44px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 36px;
+    line-height: 1.7;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 48px;
+  }
+
+  .d3-interno .body-text {
+    font-size: 44px;
+    font-weight: 400;
+    color: #71717a;
+    line-height: 1.5;
+  }
+
+  .d3-interno .body-text strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .d3-interno .footer-h {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .d3-interno .footer-h span {
+    font-size: 26px;
+    color: #3f3f46;
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<h1>CitraChat</h1>
+<div class="page-title">Direções visuais — Social</div>
+<div class="page-sub">3 propostas de linguagem. Capa + slide interno de cada uma.</div>
+
+<!-- ══════════════════════════════════════
+     DIREÇÃO 1 — CHAT-NATIVE
+══════════════════════════════════════ -->
+<div class="direction">
+  <div class="direction-header">
+    <div class="direction-tag">Direção 01</div>
+    <div class="direction-name">Chat-Native</div>
+    <div class="direction-desc">A linguagem visual vem da própria interface do produto. Bolhas de conversa, ticks de status, chat como design system. Ensina e mostra o produto ao mesmo tempo.</div>
+  </div>
+
+  <div class="slides-row">
+
+    <!-- CAPA -->
+    <div class="slide-wrap">
+      <div class="slide-label">Capa</div>
+      <div class="slide">
+        <div class="slide-inner">
+          <div class="d1-capa">
+            <div class="top-logo">citrachat</div>
+
+            <div class="chat-area">
+              <div>
+                <div class="d1-capa pre-title">Seu lead chegou às 23h.</div>
+                <div class="bubble-row-left">
+                  <div class="avatar">👤</div>
+                  <div>
+                    <div class="bubble bubble-user">Oi, quero saber o preço.</div>
+                    <div class="bubble-meta">
+                      <span>23:47</span>
+                      <span>visto</span>
+                      <span class="ticks-blue">✓✓</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="bubble-row-right">
+                  <div>
+                    <div class="bubble bubble-agent">Oi! O plano que combina com seu perfil é o Pro — R$ 197/mês. Quer que eu te explique o que inclui?</div>
+                    <div class="bubble-meta" style="justify-content:flex-end">
+                      <span style="color:#3f3f46">agente · agora</span>
+                      <span>●</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d1-footer">
+              <span class="handle">@citrachat</span>
+              <span class="slogan">Agentes que convertem.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE INTERNO -->
+    <div class="slide-wrap">
+      <div class="slide-label">Slide interno</div>
+      <div class="slide">
+        <div class="slide-inner">
+          <div class="d1-interno">
+            <div class="slide-num">02</div>
+
+            <div class="section-title">Chatbot</div>
+            <div class="bubbles-col">
+              <div>
+                <div class="label-bad">responde a pergunta</div>
+                <div class="bubble-sm bubble-bad">Olá! Para saber o preço, clique aqui: [link]</div>
+              </div>
+            </div>
+
+            <div class="section-title" style="text-align:right">Agente IA</div>
+            <div class="bubbles-col">
+              <div>
+                <div class="label-good">entende, qualifica e converte</div>
+                <div class="bubble-sm bubble-good">Oi! Vi que você veio do anúncio do plano mensal. Sua empresa tem quantos atendentes? Consigo te indicar o plano certo agora.</div>
+              </div>
+            </div>
+
+            <div class="footer-h">
+              <span>@citrachat</span>
+              <span>02 / 07</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════
+     DIREÇÃO 2 — DARK EDITORIAL
+══════════════════════════════════════ -->
+<div class="direction">
+  <div class="direction-header">
+    <div class="direction-tag">Direção 02</div>
+    <div class="direction-name">Dark Editorial</div>
+    <div class="direction-desc">Tipografia é tudo. Texto gigante, hierarquia brutal, lime como marcador em palavras-chave. Sem decoração — a palavra carrega o peso visual. Pensa Raycast, Linear, Vercel.</div>
+  </div>
+
+  <div class="slides-row">
+
+    <!-- CAPA -->
+    <div class="slide-wrap">
+      <div class="slide-label">Capa</div>
+      <div class="slide">
+        <div class="slide-inner">
+          <div class="d2-capa">
+            <div class="eyebrow">CitraChat</div>
+
+            <div>
+              <div class="headline">
+                Seu lead<br>chegou.<br>
+                O agente<br>
+                <span class="highlight">já está</span><br>
+                trabalhando.
+              </div>
+              <div class="sub">Sem você precisar estar acordado.</div>
+            </div>
+
+            <div class="d2-footer">
+              <span><span class="dot"></span>@citrachat</span>
+              <span>Agentes que convertem.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE INTERNO -->
+    <div class="slide-wrap">
+      <div class="slide-label">Slide interno</div>
+      <div class="slide">
+        <div class="slide-inner">
+          <div class="d2-interno">
+            <div class="slide-num" style="font-family:'Rubik',sans-serif; font-size:28px; font-style:italic; font-weight:500; color:#DFFF00; margin-bottom:60px;">02</div>
+
+            <div class="big-number">73%</div>
+            <div class="big-label">dos leads<br>somem em<br>menos de 5min</div>
+            <div class="rule"></div>
+            <div class="body-text">
+              Se ninguém responde nessa janela,<br>
+              o lead vai pro concorrente.<br><br>
+              <strong>O agente responde em segundos.</strong><br>
+              Qualifica. Registra. Dispara o evento.<br>
+              Tudo antes de você abrir o celular.
+            </div>
+
+            <div class="footer-h">
+              <span>@citrachat</span>
+              <span>02 / 07</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════
+     DIREÇÃO 3 — TERMINAL / OS
+══════════════════════════════════════ -->
+<div class="direction">
+  <div class="direction-header">
+    <div class="direction-tag">Direção 03</div>
+    <div class="direction-name">Terminal / OS</div>
+    <div class="direction-desc">Frames de janela, blocos de código e sintaxe de sistema como containers visuais. Estética de produto real, não de chatbot. Fala com gestores que usam ferramentas digitais sérias.</div>
+  </div>
+
+  <div class="slides-row">
+
+    <!-- CAPA -->
+    <div class="slide-wrap">
+      <div class="slide-label">Capa</div>
+      <div class="slide">
+        <div class="slide-inner">
+          <div class="d3-capa">
+
+            <div class="terminal-win">
+              <div class="terminal-topbar">
+                <div class="terminal-dot" style="background:#ff5f57"></div>
+                <div class="terminal-dot" style="background:#ffbd2e"></div>
+                <div class="terminal-dot" style="background:#28c840"></div>
+                <span class="terminal-title">agent.run — citrachat</span>
+              </div>
+              <div class="terminal-body">
+                <div class="t-comment">// lead recebido às 23:47</div>
+                <div><span class="t-key">status</span> <span class="t-muted">=</span> <span class="t-string">"qualificando"</span></div>
+                <div><span class="t-key">intenção</span> <span class="t-muted">=</span> <span class="t-string">"compra"</span></div>
+                <div><span class="t-key">plano_sugerido</span> <span class="t-muted">=</span> <span class="t-string">"Pro"</span></div>
+                <div><span class="t-key">evento_pixel</span> <span class="t-muted">=</span> <span class="t-green">disparado ✓</span></div>
+                <div><span class="t-key">humano_notificado</span> <span class="t-muted">=</span> <span class="t-green">sim ✓</span></div>
+                <div>&nbsp;</div>
+                <div class="t-comment">// você ainda estava dormindo.</div>
+              </div>
+            </div>
+
+            <div class="headline">O agente<br><span class="lime">nunca para.</span></div>
+
+            <div class="d3-footer">
+              <span>@citrachat</span>
+              <span>citra.chat</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE INTERNO -->
+    <div class="slide-wrap">
+      <div class="slide-label">Slide interno</div>
+      <div class="slide">
+        <div class="slide-inner">
+          <div class="d3-interno">
+            <div class="slide-num">// 02</div>
+
+            <div class="def-label">// o que é</div>
+            <div class="def-title">RAG</div>
+            <div class="def-title-mono">retrieval_augmented_generation</div>
+
+            <div class="term-block">
+              <div class="t-comment"># antes de responder, o agente busca</div>
+              <div><span class="t-key">fontes</span> <span class="t-muted">=</span> [<span class="t-string">"site"</span>, <span class="t-string">"docs"</span>, <span class="t-string">"faq"</span>]</div>
+              <div><span class="t-key">resposta</span> <span class="t-muted">=</span> <span class="t-green">baseada em fatos ✓</span></div>
+            </div>
+
+            <div class="body-text">
+              Não chuta. Não alucina.<br>
+              <strong>Responde com o que você ensinou.</strong><br><br>
+              É a diferença entre um agente<br>
+              confiável e um chatbot genérico.
+            </div>
+
+            <div class="footer-h">
+              <span>@citrachat</span>
+              <span>02 / 07</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
