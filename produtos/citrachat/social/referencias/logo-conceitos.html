@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CitraChat — Conceitos de Logo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --lime: #DFFF00;
+    --coral: #FF5533;
+    --cream: #FAF9F5;
+    --cream2: #F0EFE9;
+    --charcoal: #1C1C1E;
+    --muted: #888;
+  }
+
+  body {
+    background: #F5F4F0;
+    color: var(--charcoal);
+    font-family: 'Inter', sans-serif;
+    padding: 48px 36px;
+  }
+
+  .page-label { font-size: 11px; font-weight: 600; color: #aaa; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+  .page-title { font-size: 26px; font-weight: 800; color: #111; margin-bottom: 6px; }
+  .page-sub { font-size: 13px; color: #888; margin-bottom: 56px; max-width: 580px; line-height: 1.65; }
+
+  /* ── SEÇÃO DE CONCEITO ── */
+  .concept { margin-bottom: 80px; }
+
+  .concept-header { margin-bottom: 32px; }
+  .concept-tag {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    background: var(--charcoal); color: #fff;
+    padding: 4px 12px; border-radius: 4px; margin-bottom: 10px;
+  }
+  .concept-name { font-size: 20px; font-weight: 800; color: #111; margin-bottom: 6px; }
+  .concept-story { font-size: 13px; color: #777; max-width: 520px; line-height: 1.65; }
+
+  /* ── GRADES DE APRESENTAÇÃO ── */
+  .concept-body { display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
+
+  /* Bloco de ícone isolado */
+  .icon-sizes { display: flex; flex-direction: column; gap: 20px; }
+
+  .size-row { display: flex; align-items: center; gap: 20px; }
+  .size-label { font-size: 11px; color: #bbb; width: 36px; text-align: right; flex-shrink: 0; }
+
+  /* Wordmarks */
+  .wordmark-block {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    min-width: 280px;
+  }
+
+  .wordmark-row { display: flex; align-items: center; gap: 16px; }
+  .wm-label { font-size: 11px; color: #ccc; width: 60px; flex-shrink: 0; text-align: right; }
+
+  /* Backgrounds */
+  .bg-strip {
+    border-radius: 16px;
+    padding: 28px 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .bg-white { background: #fff; }
+  .bg-cream { background: var(--cream); }
+  .bg-lime { background: var(--lime); }
+  .bg-charcoal { background: var(--charcoal); }
+  .bg-coral { background: var(--coral); }
+
+  .bg-context {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .context-label { font-size: 11px; color: #bbb; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+
+  .divider { height: 1px; background: #e8e7e3; margin: 8px 0 72px; }
+
+  /* ── ÍCONE 01: SPARK BUBBLE ── */
+  /* Speech bubble + faísca de 4 pontas dentro */
+
+  /* ── ÍCONE 02: C-BOLT ── */
+  /* Letra C com bolt integrado */
+
+  /* ── ÍCONE 03: CITRUS MARK ── */
+  /* Abstração de gomo de limão que lê como C */
+
+  /* ── ÍCONE 04: AGENT DOT ── */
+  /* Três pontos em ângulo + halo — o "typing" como forma */
+
+  /* ── ÍCONE 05: DIALOGUE ── */
+  /* Dois arcos formando um símbolo de conversa */
+
+  /* WORDMARK TIPOGRAFIAS */
+  .wm-dm    { font-family: 'DM Sans', sans-serif; font-weight: 700; }
+  .wm-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; }
+  .wm-syne  { font-family: 'Syne', sans-serif; font-weight: 700; }
+  .wm-inter { font-family: 'Inter', sans-serif; font-weight: 800; }
+
+  .note-box {
+    background: #fff8e1;
+    border-left: 4px solid var(--lime);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 20px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-bottom: 32px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-label">CitraChat</div>
+<div class="page-title">Conceitos de logo</div>
+<div class="page-sub">5 direções de ícone + variações de wordmark tipográfico. Cada ícone tem uma história — um significado oculto que conecta com o produto. Paleta: Lime + Coral.</div>
+
+<div class="note-box">
+  Todos os ícones foram criados como SVG puro — escaláveis de 16px (favicon) a 512px (app store) sem perda. As variações de wordmark usam tipografias com licença gratuita disponíveis no Google Fonts.
+</div>
+
+<!-- ═══════════════════════════════════════
+     CONCEITO 01 — SPARK BUBBLE
+     Historia: bolha de chat com faísca interna
+     = conversa + inteligência AI
+═══════════════════════════════════════ -->
+<div class="concept">
+  <div class="concept-header">
+    <div class="concept-tag">Conceito 01</div>
+    <div class="concept-name">Spark Bubble</div>
+    <div class="concept-story">Uma bolha de chat com uma faísca de 4 pontas dentro. A bolha = conversa. A faísca = inteligência AI. Forma simples, leitura instantânea. Similar ao nível de legibilidade do Slack ou Intercom — você reconhece antes de ler o nome.</div>
+  </div>
+  <div class="concept-body">
+
+    <!-- Ícones em tamanhos -->
+    <div>
+      <div class="context-label">Tamanhos</div>
+      <div class="icon-sizes">
+
+        <div class="size-row">
+          <span class="size-label">96</span>
+          <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#1C1C1E"/>
+            <!-- Bolha chat -->
+            <path d="M18 20C18 16.686 20.686 14 24 14H72C75.314 14 78 16.686 78 20V58C78 61.314 75.314 64 72 64H52L38 80V64H24C20.686 64 18 61.314 18 58V20Z" fill="#DFFF00"/>
+            <!-- Faísca -->
+            <path d="M48 28L50.5 37H60L52.5 43L55 52L48 46L41 52L43.5 43L36 37H45.5L48 28Z" fill="#1C1C1E"/>
+          </svg>
+        </div>
+
+        <div class="size-row">
+          <span class="size-label">48</span>
+          <svg width="48" height="48" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#1C1C1E"/>
+            <path d="M18 20C18 16.686 20.686 14 24 14H72C75.314 14 78 16.686 78 20V58C78 61.314 75.314 64 72 64H52L38 80V64H24C20.686 64 18 61.314 18 58V20Z" fill="#DFFF00"/>
+            <path d="M48 28L50.5 37H60L52.5 43L55 52L48 46L41 52L43.5 43L36 37H45.5L48 28Z" fill="#1C1C1E"/>
+          </svg>
+        </div>
+
+        <div class="size-row">
+          <span class="size-label">24</span>
+          <svg width="24" height="24" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#1C1C1E"/>
+            <path d="M18 20C18 16.686 20.686 14 24 14H72C75.314 14 78 16.686 78 20V58C78 61.314 75.314 64 72 64H52L38 80V64H24C20.686 64 18 61.314 18 58V20Z" fill="#DFFF00"/>
+            <path d="M48 28L50.5 37H60L52.5 43L55 52L48 46L41 52L43.5 43L36 37H45.5L48 28Z" fill="#1C1C1E"/>
+          </svg>
+        </div>
+
+        <div class="size-row">
+          <span class="size-label">16</span>
+          <svg width="16" height="16" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#1C1C1E"/>
+            <path d="M18 20C18 16.686 20.686 14 24 14H72C75.314 14 78 16.686 78 20V58C78 61.314 75.314 64 72 64H52L38 80V64H24C20.686 64 18 61.314 18 58V20Z" fill="#DFFF00"/>
+            <path d="M48 28L50.5 37H60L52.5 43L55 52L48 46L41 52L43.5 43L36 37H45.5L48 28Z" fill="#1C1C1E"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Fundo coral -->
+    <div>
+      <div class="context-label">Variações de cor</div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="bg-strip bg-charcoal" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <path d="M18 20C18 16.686 20.686 14 24 14H72C75.314 14 78 16.686 78 20V58C78 61.314 75.314 64 72 64H52L38 80V64H24C20.686 64 18 61.314 18 58V20Z" fill="#DFFF00"/>
+            <path d="M48 28L50.5 37H60L52.5 43L55 52L48 46L41 52L43.5 43L36 37H45.5L48 28Z" fill="#1C1C1E"/>
+          </svg>
+          <span style="font-size:13px; color:#666;">ícone sem fundo — sobre escuro</span>
+        </div>
+        <div class="bg-strip bg-lime" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <path d="M18 20C18 16.686 20.686 14 24 14H72C75.314 14 78 16.686 78 20V58C78 61.314 75.314 64 72 64H52L38 80V64H24C20.686 64 18 61.314 18 58V20Z" fill="#1C1C1E"/>
+            <path d="M48 28L50.5 37H60L52.5 43L55 52L48 46L41 52L43.5 43L36 37H45.5L48 28Z" fill="#DFFF00"/>
+          </svg>
+          <span style="font-size:13px; color:#555;">sobre fundo lime</span>
+        </div>
+        <div class="bg-strip bg-coral" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <path d="M18 20C18 16.686 20.686 14 24 14H72C75.314 14 78 16.686 78 20V58C78 61.314 75.314 64 72 64H52L38 80V64H24C20.686 64 18 61.314 18 58V20Z" fill="#fff"/>
+            <path d="M48 28L50.5 37H60L52.5 43L55 52L48 46L41 52L43.5 43L36 37H45.5L48 28Z" fill="#FF5533"/>
+          </svg>
+          <span style="font-size:13px; color:#ffffffcc;">sobre fundo coral</span>
+        </div>
+        <div class="bg-strip bg-cream" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#1C1C1E"/>
+            <path d="M18 20C18 16.686 20.686 14 24 14H72C75.314 14 78 16.686 78 20V58C78 61.314 75.314 64 72 64H52L38 80V64H24C20.686 64 18 61.314 18 58V20Z" fill="#DFFF00"/>
+            <path d="M48 28L50.5 37H60L52.5 43L55 52L48 46L41 52L43.5 43L36 37H45.5L48 28Z" fill="#1C1C1E"/>
+          </svg>
+          <span style="font-size:13px; color:#999;">sobre fundo creme</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wordmarks -->
+    <div>
+      <div class="context-label">Wordmark + ícone</div>
+      <div class="wordmark-block">
+        <div class="wordmark-row">
+          <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#1C1C1E"/>
+            <path d="M18 20C18 16.686 20.686 14 24 14H72C75.314 14 78 16.686 78 20V58C78 61.314 75.314 64 72 64H52L38 80V64H24C20.686 64 18 61.314 18 58V20Z" fill="#DFFF00"/>
+            <path d="M48 28L50.5 37H60L52.5 43L55 52L48 46L41 52L43.5 43L36 37H45.5L48 28Z" fill="#1C1C1E"/>
+          </svg>
+          <span class="wm-dm" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+          <span class="wm-label">DM Sans</span>
+        </div>
+        <div class="wordmark-row">
+          <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#1C1C1E"/>
+            <path d="M18 20C18 16.686 20.686 14 24 14H72C75.314 14 78 16.686 78 20V58C78 61.314 75.314 64 72 64H52L38 80V64H24C20.686 64 18 61.314 18 58V20Z" fill="#DFFF00"/>
+            <path d="M48 28L50.5 37H60L52.5 43L55 52L48 46L41 52L43.5 43L36 37H45.5L48 28Z" fill="#1C1C1E"/>
+          </svg>
+          <span class="wm-jakarta" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+          <span class="wm-label">Jakarta</span>
+        </div>
+        <div class="wordmark-row">
+          <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#1C1C1E"/>
+            <path d="M18 20C18 16.686 20.686 14 24 14H72C75.314 14 78 16.686 78 20V58C78 61.314 75.314 64 72 64H52L38 80V64H24C20.686 64 18 61.314 18 58V20Z" fill="#DFFF00"/>
+            <path d="M48 28L50.5 37H60L52.5 43L55 52L48 46L41 52L43.5 43L36 37H45.5L48 28Z" fill="#1C1C1E"/>
+          </svg>
+          <span class="wm-syne" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+          <span class="wm-label">Syne</span>
+        </div>
+        <div class="wordmark-row">
+          <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#1C1C1E"/>
+            <path d="M18 20C18 16.686 20.686 14 24 14H72C75.314 14 78 16.686 78 20V58C78 61.314 75.314 64 72 64H52L38 80V64H24C20.686 64 18 61.314 18 58V20Z" fill="#DFFF00"/>
+            <path d="M48 28L50.5 37H60L52.5 43L55 52L48 46L41 52L43.5 43L36 37H45.5L48 28Z" fill="#1C1C1E"/>
+          </svg>
+          <span class="wm-inter" style="font-size:21px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+          <span class="wm-label">Inter</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+     CONCEITO 02 — C-BOLT
+     C que vira raio no ponto de abertura
+═══════════════════════════════════════ -->
+<div class="concept">
+  <div class="concept-header">
+    <div class="concept-tag">Conceito 02</div>
+    <div class="concept-name">C-Bolt</div>
+    <div class="concept-story">O C de Citra(chat) com um raio integrado na abertura. O raio fecha o C e sugere velocidade, energia e AI ao mesmo tempo. Monograma que também é símbolo. Muito limpo — funciona bem em um único traço.</div>
+  </div>
+  <div class="concept-body">
+
+    <div>
+      <div class="context-label">Tamanhos</div>
+      <div class="icon-sizes">
+
+        <div class="size-row">
+          <span class="size-label">96</span>
+          <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#FAF9F5"/>
+            <!-- C bold -->
+            <path d="M70 28C64 20 54 16 45 18C33 20 22 30 22 48C22 66 33 76 45 78C54 80 64 76 70 68" stroke="#1C1C1E" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <!-- Bolt fechando o C -->
+            <path d="M70 28L60 44H70L56 68" stroke="#DFFF00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+        <div class="size-row">
+          <span class="size-label">48</span>
+          <svg width="48" height="48" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#FAF9F5"/>
+            <path d="M70 28C64 20 54 16 45 18C33 20 22 30 22 48C22 66 33 76 45 78C54 80 64 76 70 68" stroke="#1C1C1E" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <path d="M70 28L60 44H70L56 68" stroke="#DFFF00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+        <div class="size-row">
+          <span class="size-label">24</span>
+          <svg width="24" height="24" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#FAF9F5"/>
+            <path d="M70 28C64 20 54 16 45 18C33 20 22 30 22 48C22 66 33 76 45 78C54 80 64 76 70 68" stroke="#1C1C1E" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <path d="M70 28L60 44H70L56 68" stroke="#DFFF00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+        <div class="size-row">
+          <span class="size-label">16</span>
+          <svg width="16" height="16" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#FAF9F5"/>
+            <path d="M70 28C64 20 54 16 45 18C33 20 22 30 22 48C22 66 33 76 45 78C54 80 64 76 70 68" stroke="#1C1C1E" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <path d="M70 28L60 44H70L56 68" stroke="#DFFF00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="context-label">Variações</div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="bg-strip bg-charcoal" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <path d="M70 28C64 20 54 16 45 18C33 20 22 30 22 48C22 66 33 76 45 78C54 80 64 76 70 68" stroke="#fff" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <path d="M70 28L60 44H70L56 68" stroke="#DFFF00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span style="font-size:13px; color:#666;">sobre escuro</span>
+        </div>
+        <div class="bg-strip bg-lime" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <path d="M70 28C64 20 54 16 45 18C33 20 22 30 22 48C22 66 33 76 45 78C54 80 64 76 70 68" stroke="#1C1C1E" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <path d="M70 28L60 44H70L56 68" stroke="#FF5533" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span style="font-size:13px; color:#555;">sobre lime — bolt em coral</span>
+        </div>
+        <div class="bg-strip bg-coral" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <path d="M70 28C64 20 54 16 45 18C33 20 22 30 22 48C22 66 33 76 45 78C54 80 64 76 70 68" stroke="#fff" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <path d="M70 28L60 44H70L56 68" stroke="#DFFF00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span style="font-size:13px; color:#ffffffcc;">sobre coral</span>
+        </div>
+        <div class="bg-strip bg-cream" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <path d="M70 28C64 20 54 16 45 18C33 20 22 30 22 48C22 66 33 76 45 78C54 80 64 76 70 68" stroke="#1C1C1E" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <path d="M70 28L60 44H70L56 68" stroke="#DFFF00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span style="font-size:13px; color:#999;">sobre creme</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="context-label">Wordmark + ícone</div>
+      <div class="wordmark-block">
+        <div class="wordmark-row">
+          <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+            <path d="M70 28C64 20 54 16 45 18C33 20 22 30 22 48C22 66 33 76 45 78C54 80 64 76 70 68" stroke="#1C1C1E" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <path d="M70 28L60 44H70L56 68" stroke="#DFFF00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span class="wm-dm" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+        </div>
+        <div class="wordmark-row">
+          <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+            <path d="M70 28C64 20 54 16 45 18C33 20 22 30 22 48C22 66 33 76 45 78C54 80 64 76 70 68" stroke="#1C1C1E" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <path d="M70 28L60 44H70L56 68" stroke="#DFFF00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span class="wm-jakarta" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+        </div>
+        <div class="wordmark-row">
+          <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+            <path d="M70 28C64 20 54 16 45 18C33 20 22 30 22 48C22 66 33 76 45 78C54 80 64 76 70 68" stroke="#1C1C1E" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <path d="M70 28L60 44H70L56 68" stroke="#DFFF00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span class="wm-syne" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+     CONCEITO 03 — CITRUS MARK
+     Gomo de limão abstrato + chat
+═══════════════════════════════════════ -->
+<div class="concept">
+  <div class="concept-header">
+    <div class="concept-tag">Conceito 03</div>
+    <div class="concept-name">Citrus Mark</div>
+    <div class="concept-story">Uma fatia de limão/cítrico abstrata — o "Citra" do nome visibilizado. Mas os gomos internos formam um C e uma bolha de chat. Três leituras em uma forma: citrus, C, conversa. O tipo de ícone que fica na cabeça.</div>
+  </div>
+  <div class="concept-body">
+
+    <div>
+      <div class="context-label">Tamanhos</div>
+      <div class="icon-sizes">
+
+        <div class="size-row">
+          <span class="size-label">96</span>
+          <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#1C1C1E"/>
+            <!-- Círculo externo -->
+            <circle cx="48" cy="48" r="32" stroke="#DFFF00" stroke-width="5" fill="none"/>
+            <!-- Gomos internos — abstração de fatia de limão -->
+            <path d="M48 16 L48 80" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L16 48" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L69 27" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L69 69" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L27 27" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L27 69" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <!-- Ponto central -->
+            <circle cx="48" cy="48" r="5" fill="#DFFF00"/>
+            <!-- Tail da bolha de chat -->
+            <path d="M16 48 L8 62 L22 54" fill="#DFFF00"/>
+          </svg>
+        </div>
+
+        <div class="size-row">
+          <span class="size-label">48</span>
+          <svg width="48" height="48" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#1C1C1E"/>
+            <circle cx="48" cy="48" r="32" stroke="#DFFF00" stroke-width="5" fill="none"/>
+            <path d="M48 16 L48 80" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L16 48" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L69 27" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L69 69" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L27 27" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L27 69" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <circle cx="48" cy="48" r="5" fill="#DFFF00"/>
+            <path d="M16 48 L8 62 L22 54" fill="#DFFF00"/>
+          </svg>
+        </div>
+
+        <div class="size-row">
+          <span class="size-label">24</span>
+          <svg width="24" height="24" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#1C1C1E"/>
+            <circle cx="48" cy="48" r="32" stroke="#DFFF00" stroke-width="5" fill="none"/>
+            <path d="M48 16 L48 80" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L16 48" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L69 27" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L69 69" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L27 27" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <path d="M48 48 L27 69" stroke="#DFFF00" stroke-width="2.5" opacity="0.3"/>
+            <circle cx="48" cy="48" r="5" fill="#DFFF00"/>
+            <path d="M16 48 L8 62 L22 54" fill="#DFFF00"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="context-label">Variações</div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="bg-strip bg-cream" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <circle cx="48" cy="48" r="32" stroke="#1C1C1E" stroke-width="5" fill="none"/>
+            <path d="M48 16 L48 80" stroke="#1C1C1E" stroke-width="2.5" opacity="0.2"/>
+            <path d="M48 48 L16 48" stroke="#1C1C1E" stroke-width="2.5" opacity="0.2"/>
+            <path d="M48 48 L69 27" stroke="#1C1C1E" stroke-width="2.5" opacity="0.2"/>
+            <path d="M48 48 L69 69" stroke="#1C1C1E" stroke-width="2.5" opacity="0.2"/>
+            <path d="M48 48 L27 27" stroke="#1C1C1E" stroke-width="2.5" opacity="0.2"/>
+            <path d="M48 48 L27 69" stroke="#1C1C1E" stroke-width="2.5" opacity="0.2"/>
+            <circle cx="48" cy="48" r="5" fill="#DFFF00"/>
+            <path d="M16 48 L8 62 L22 54" fill="#1C1C1E"/>
+          </svg>
+          <span style="font-size:13px; color:#999;">sobre creme — carvão</span>
+        </div>
+        <div class="bg-strip bg-lime" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <circle cx="48" cy="48" r="32" stroke="#1C1C1E" stroke-width="5" fill="none"/>
+            <path d="M48 16 L48 80" stroke="#1C1C1E" stroke-width="2.5" opacity="0.2"/>
+            <path d="M48 48 L16 48" stroke="#1C1C1E" stroke-width="2.5" opacity="0.2"/>
+            <path d="M48 48 L69 27" stroke="#1C1C1E" stroke-width="2.5" opacity="0.2"/>
+            <path d="M48 48 L69 69" stroke="#1C1C1E" stroke-width="2.5" opacity="0.2"/>
+            <path d="M48 48 L27 27" stroke="#1C1C1E" stroke-width="2.5" opacity="0.2"/>
+            <path d="M48 48 L27 69" stroke="#1C1C1E" stroke-width="2.5" opacity="0.2"/>
+            <circle cx="48" cy="48" r="5" fill="#FF5533"/>
+            <path d="M16 48 L8 62 L22 54" fill="#1C1C1E"/>
+          </svg>
+          <span style="font-size:13px; color:#555;">sobre lime</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="context-label">Wordmark</div>
+      <div class="wordmark-block">
+        <div class="wordmark-row">
+          <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+            <circle cx="48" cy="48" r="32" stroke="#1C1C1E" stroke-width="5" fill="none"/>
+            <path d="M48 16 L48 80" stroke="#1C1C1E" stroke-width="2" opacity="0.15"/>
+            <path d="M48 48 L16 48" stroke="#1C1C1E" stroke-width="2" opacity="0.15"/>
+            <path d="M48 48 L69 27" stroke="#1C1C1E" stroke-width="2" opacity="0.15"/>
+            <path d="M48 48 L69 69" stroke="#1C1C1E" stroke-width="2" opacity="0.15"/>
+            <path d="M48 48 L27 27" stroke="#1C1C1E" stroke-width="2" opacity="0.15"/>
+            <path d="M48 48 L27 69" stroke="#1C1C1E" stroke-width="2" opacity="0.15"/>
+            <circle cx="48" cy="48" r="5" fill="#DFFF00"/>
+            <path d="M16 48 L8 62 L22 54" fill="#1C1C1E"/>
+          </svg>
+          <span class="wm-dm" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+        </div>
+        <div class="wordmark-row">
+          <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+            <circle cx="48" cy="48" r="32" stroke="#1C1C1E" stroke-width="5" fill="none"/>
+            <path d="M48 16 L48 80" stroke="#1C1C1E" stroke-width="2" opacity="0.15"/>
+            <path d="M48 48 L16 48" stroke="#1C1C1E" stroke-width="2" opacity="0.15"/>
+            <path d="M48 48 L69 27" stroke="#1C1C1E" stroke-width="2" opacity="0.15"/>
+            <path d="M48 48 L69 69" stroke="#1C1C1E" stroke-width="2" opacity="0.15"/>
+            <path d="M48 48 L27 27" stroke="#1C1C1E" stroke-width="2" opacity="0.15"/>
+            <path d="M48 48 L27 69" stroke="#1C1C1E" stroke-width="2" opacity="0.15"/>
+            <circle cx="48" cy="48" r="5" fill="#DFFF00"/>
+            <path d="M16 48 L8 62 L22 54" fill="#1C1C1E"/>
+          </svg>
+          <span class="wm-syne" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+     CONCEITO 04 — AGENT NODE
+     Nó de rede neural + ponto central brilhante
+═══════════════════════════════════════ -->
+<div class="concept">
+  <div class="concept-header">
+    <div class="concept-tag">Conceito 04</div>
+    <div class="concept-name">Agent Node</div>
+    <div class="concept-story">Um nó central conectado a outros — metáfora visual de agente orquestrando múltiplas conexões. Limpo, geométrico, sem referência direta a chat (diferente de todos os outros). Funciona muito bem como app icon no celular.</div>
+  </div>
+  <div class="concept-body">
+
+    <div>
+      <div class="context-label">Tamanhos</div>
+      <div class="icon-sizes">
+
+        <div class="size-row">
+          <span class="size-label">96</span>
+          <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#FAF9F5"/>
+            <!-- Conexões -->
+            <line x1="48" y1="48" x2="48" y2="18" stroke="#E0EFE9" stroke-width="4"/>
+            <line x1="48" y1="48" x2="22" y2="63" stroke="#E0EFE9" stroke-width="4"/>
+            <line x1="48" y1="48" x2="74" y2="63" stroke="#E0EFE9" stroke-width="4"/>
+            <line x1="48" y1="48" x2="22" y2="33" stroke="#DFFF00" stroke-width="4"/>
+            <line x1="48" y1="48" x2="74" y2="33" stroke="#DFFF00" stroke-width="4"/>
+            <line x1="48" y1="48" x2="48" y2="78" stroke="#FF5533" stroke-width="4"/>
+            <!-- Nós externos -->
+            <circle cx="48" cy="18" r="6" fill="#E0EFE9"/>
+            <circle cx="22" cy="63" r="6" fill="#E0EFE9"/>
+            <circle cx="74" cy="63" r="6" fill="#E0EFE9"/>
+            <circle cx="22" cy="33" r="7" fill="#DFFF00"/>
+            <circle cx="74" cy="33" r="7" fill="#DFFF00"/>
+            <circle cx="48" cy="78" r="7" fill="#FF5533"/>
+            <!-- Nó central -->
+            <circle cx="48" cy="48" r="14" fill="#1C1C1E"/>
+            <circle cx="48" cy="48" r="6" fill="#DFFF00"/>
+          </svg>
+        </div>
+
+        <div class="size-row">
+          <span class="size-label">48</span>
+          <svg width="48" height="48" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#FAF9F5"/>
+            <line x1="48" y1="48" x2="48" y2="18" stroke="#E0EFE9" stroke-width="4"/>
+            <line x1="48" y1="48" x2="22" y2="63" stroke="#E0EFE9" stroke-width="4"/>
+            <line x1="48" y1="48" x2="74" y2="63" stroke="#E0EFE9" stroke-width="4"/>
+            <line x1="48" y1="48" x2="22" y2="33" stroke="#DFFF00" stroke-width="4"/>
+            <line x1="48" y1="48" x2="74" y2="33" stroke="#DFFF00" stroke-width="4"/>
+            <line x1="48" y1="48" x2="48" y2="78" stroke="#FF5533" stroke-width="4"/>
+            <circle cx="48" cy="18" r="6" fill="#E0EFE9"/>
+            <circle cx="22" cy="63" r="6" fill="#E0EFE9"/>
+            <circle cx="74" cy="63" r="6" fill="#E0EFE9"/>
+            <circle cx="22" cy="33" r="7" fill="#DFFF00"/>
+            <circle cx="74" cy="33" r="7" fill="#DFFF00"/>
+            <circle cx="48" cy="78" r="7" fill="#FF5533"/>
+            <circle cx="48" cy="48" r="14" fill="#1C1C1E"/>
+            <circle cx="48" cy="48" r="6" fill="#DFFF00"/>
+          </svg>
+        </div>
+
+        <div class="size-row">
+          <span class="size-label">24</span>
+          <svg width="24" height="24" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#FAF9F5"/>
+            <line x1="48" y1="48" x2="48" y2="18" stroke="#E0EFE9" stroke-width="4"/>
+            <line x1="48" y1="48" x2="22" y2="63" stroke="#E0EFE9" stroke-width="4"/>
+            <line x1="48" y1="48" x2="74" y2="63" stroke="#E0EFE9" stroke-width="4"/>
+            <line x1="48" y1="48" x2="22" y2="33" stroke="#DFFF00" stroke-width="4"/>
+            <line x1="48" y1="48" x2="74" y2="33" stroke="#DFFF00" stroke-width="4"/>
+            <line x1="48" y1="48" x2="48" y2="78" stroke="#FF5533" stroke-width="4"/>
+            <circle cx="22" cy="33" r="7" fill="#DFFF00"/>
+            <circle cx="74" cy="33" r="7" fill="#DFFF00"/>
+            <circle cx="48" cy="78" r="7" fill="#FF5533"/>
+            <circle cx="48" cy="48" r="14" fill="#1C1C1E"/>
+            <circle cx="48" cy="48" r="6" fill="#DFFF00"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="context-label">Variações</div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="bg-strip bg-charcoal" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <line x1="48" y1="48" x2="48" y2="18" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+            <line x1="48" y1="48" x2="22" y2="63" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+            <line x1="48" y1="48" x2="74" y2="63" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+            <line x1="48" y1="48" x2="22" y2="33" stroke="#DFFF00" stroke-width="4" opacity="0.8"/>
+            <line x1="48" y1="48" x2="74" y2="33" stroke="#DFFF00" stroke-width="4" opacity="0.8"/>
+            <line x1="48" y1="48" x2="48" y2="78" stroke="#FF5533" stroke-width="4" opacity="0.8"/>
+            <circle cx="22" cy="33" r="7" fill="#DFFF00"/>
+            <circle cx="74" cy="33" r="7" fill="#DFFF00"/>
+            <circle cx="48" cy="78" r="7" fill="#FF5533"/>
+            <circle cx="48" cy="48" r="14" fill="rgba(255,255,255,0.1)"/>
+            <circle cx="48" cy="48" r="6" fill="#DFFF00"/>
+          </svg>
+          <span style="font-size:13px; color:#666;">sobre escuro</span>
+        </div>
+        <div class="bg-strip bg-lime" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <line x1="48" y1="48" x2="22" y2="33" stroke="#1C1C1E" stroke-width="4" opacity="0.4"/>
+            <line x1="48" y1="48" x2="74" y2="33" stroke="#1C1C1E" stroke-width="4" opacity="0.4"/>
+            <line x1="48" y1="48" x2="48" y2="78" stroke="#FF5533" stroke-width="4"/>
+            <line x1="48" y1="48" x2="22" y2="63" stroke="#1C1C1E" stroke-width="4" opacity="0.2"/>
+            <line x1="48" y1="48" x2="74" y2="63" stroke="#1C1C1E" stroke-width="4" opacity="0.2"/>
+            <circle cx="48" cy="78" r="7" fill="#FF5533"/>
+            <circle cx="48" cy="48" r="14" fill="#1C1C1E"/>
+            <circle cx="48" cy="48" r="6" fill="#fff"/>
+          </svg>
+          <span style="font-size:13px; color:#555;">sobre lime</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="context-label">Wordmark</div>
+      <div class="wordmark-block">
+        <div class="wordmark-row">
+          <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+            <line x1="48" y1="48" x2="22" y2="33" stroke="#DFFF00" stroke-width="4"/>
+            <line x1="48" y1="48" x2="74" y2="33" stroke="#DFFF00" stroke-width="4"/>
+            <line x1="48" y1="48" x2="48" y2="78" stroke="#FF5533" stroke-width="4"/>
+            <line x1="48" y1="48" x2="22" y2="63" stroke="#ddd" stroke-width="4"/>
+            <line x1="48" y1="48" x2="74" y2="63" stroke="#ddd" stroke-width="4"/>
+            <line x1="48" y1="48" x2="48" y2="18" stroke="#ddd" stroke-width="4"/>
+            <circle cx="48" cy="48" r="14" fill="#1C1C1E"/>
+            <circle cx="48" cy="48" r="6" fill="#DFFF00"/>
+          </svg>
+          <span class="wm-jakarta" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+        </div>
+        <div class="wordmark-row">
+          <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+            <line x1="48" y1="48" x2="22" y2="33" stroke="#DFFF00" stroke-width="4"/>
+            <line x1="48" y1="48" x2="74" y2="33" stroke="#DFFF00" stroke-width="4"/>
+            <line x1="48" y1="48" x2="48" y2="78" stroke="#FF5533" stroke-width="4"/>
+            <line x1="48" y1="48" x2="22" y2="63" stroke="#ddd" stroke-width="4"/>
+            <line x1="48" y1="48" x2="74" y2="63" stroke="#ddd" stroke-width="4"/>
+            <line x1="48" y1="48" x2="48" y2="18" stroke="#ddd" stroke-width="4"/>
+            <circle cx="48" cy="48" r="14" fill="#1C1C1E"/>
+            <circle cx="48" cy="48" r="6" fill="#DFFF00"/>
+          </svg>
+          <span class="wm-dm" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+     CONCEITO 05 — DIALOGUE ARC
+     Dois arcos sobrepostos formando símbolo de conversa
+═══════════════════════════════════════ -->
+<div class="concept">
+  <div class="concept-header">
+    <div class="concept-tag">Conceito 05</div>
+    <div class="concept-name">Dialogue Arc</div>
+    <div class="concept-story">Dois arcos sobrepostos — um maior (empresa/agente) e um menor (lead/cliente) — formando um símbolo de diálogo abstrato. Limpo, geométrico, sem complexidade. O menor está dentro do maior, sugerindo que o agente "envolve" a conversa do cliente.</div>
+  </div>
+  <div class="concept-body">
+
+    <div>
+      <div class="context-label">Tamanhos</div>
+      <div class="icon-sizes">
+
+        <div class="size-row">
+          <span class="size-label">96</span>
+          <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#FAF9F5"/>
+            <!-- Arco externo — agente -->
+            <path d="M16 58 C16 32 28 18 48 18 C68 18 80 32 80 58" stroke="#1C1C1E" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <!-- Ponto esquerdo -->
+            <circle cx="16" cy="58" r="6" fill="#DFFF00"/>
+            <!-- Ponto direito -->
+            <circle cx="80" cy="58" r="6" fill="#FF5533"/>
+            <!-- Arco interno — cliente -->
+            <path d="M30 66 C30 50 37 40 48 40 C59 40 66 50 66 66" stroke="#1C1C1E" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.25"/>
+            <!-- Ponto centro inferior -->
+            <circle cx="48" cy="74" r="5" fill="#1C1C1E" opacity="0.2"/>
+          </svg>
+        </div>
+
+        <div class="size-row">
+          <span class="size-label">48</span>
+          <svg width="48" height="48" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#FAF9F5"/>
+            <path d="M16 58 C16 32 28 18 48 18 C68 18 80 32 80 58" stroke="#1C1C1E" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <circle cx="16" cy="58" r="6" fill="#DFFF00"/>
+            <circle cx="80" cy="58" r="6" fill="#FF5533"/>
+            <path d="M30 66 C30 50 37 40 48 40 C59 40 66 50 66 66" stroke="#1C1C1E" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.25"/>
+          </svg>
+        </div>
+
+        <div class="size-row">
+          <span class="size-label">24</span>
+          <svg width="24" height="24" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="22" fill="#FAF9F5"/>
+            <path d="M16 58 C16 32 28 18 48 18 C68 18 80 32 80 58" stroke="#1C1C1E" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <circle cx="16" cy="58" r="6" fill="#DFFF00"/>
+            <circle cx="80" cy="58" r="6" fill="#FF5533"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="context-label">Variações</div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="bg-strip bg-charcoal" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <path d="M16 58 C16 32 28 18 48 18 C68 18 80 32 80 58" stroke="#fff" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <circle cx="16" cy="58" r="6" fill="#DFFF00"/>
+            <circle cx="80" cy="58" r="6" fill="#FF5533"/>
+            <path d="M30 66 C30 50 37 40 48 40 C59 40 66 50 66 66" stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.2"/>
+          </svg>
+          <span style="font-size:13px; color:#666;">sobre escuro</span>
+        </div>
+        <div class="bg-strip bg-lime" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <path d="M16 58 C16 32 28 18 48 18 C68 18 80 32 80 58" stroke="#1C1C1E" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <circle cx="16" cy="58" r="6" fill="#1C1C1E"/>
+            <circle cx="80" cy="58" r="6" fill="#FF5533"/>
+          </svg>
+          <span style="font-size:13px; color:#555;">sobre lime</span>
+        </div>
+        <div class="bg-strip bg-coral" style="gap:16px; padding:20px 24px;">
+          <svg width="52" height="52" viewBox="0 0 96 96" fill="none">
+            <path d="M16 58 C16 32 28 18 48 18 C68 18 80 32 80 58" stroke="#fff" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <circle cx="16" cy="58" r="6" fill="#DFFF00"/>
+            <circle cx="80" cy="58" r="6" fill="#fff"/>
+          </svg>
+          <span style="font-size:13px; color:#ffffffcc;">sobre coral</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="context-label">Wordmark</div>
+      <div class="wordmark-block">
+        <div class="wordmark-row">
+          <svg width="36" height="32" viewBox="0 0 96 96" fill="none">
+            <path d="M16 58 C16 32 28 18 48 18 C68 18 80 32 80 58" stroke="#1C1C1E" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <circle cx="16" cy="58" r="6" fill="#DFFF00"/>
+            <circle cx="80" cy="58" r="6" fill="#FF5533"/>
+          </svg>
+          <span class="wm-dm" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+        </div>
+        <div class="wordmark-row">
+          <svg width="36" height="32" viewBox="0 0 96 96" fill="none">
+            <path d="M16 58 C16 32 28 18 48 18 C68 18 80 32 80 58" stroke="#1C1C1E" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <circle cx="16" cy="58" r="6" fill="#DFFF00"/>
+            <circle cx="80" cy="58" r="6" fill="#FF5533"/>
+          </svg>
+          <span class="wm-jakarta" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+        </div>
+        <div class="wordmark-row">
+          <svg width="36" height="32" viewBox="0 0 96 96" fill="none">
+            <path d="M16 58 C16 32 28 18 48 18 C68 18 80 32 80 58" stroke="#1C1C1E" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <circle cx="16" cy="58" r="6" fill="#DFFF00"/>
+            <circle cx="80" cy="58" r="6" fill="#FF5533"/>
+          </svg>
+          <span class="wm-syne" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citrachat</span>
+        </div>
+        <!-- versão só texto, sem ícone -->
+        <div style="border-top:1px solid #f0f0f0; padding-top:20px; display:flex; flex-direction:column; gap:14px;">
+          <div style="font-size:11px; color:#ccc; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px;">só wordmark (sem ícone)</div>
+          <div class="wm-dm" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citra<span style="color:#FF5533;">chat</span></div>
+          <div class="wm-jakarta" style="font-size:22px; color:#111; letter-spacing:-0.5px;">citra<span style="color:#DFFF00; -webkit-text-stroke:1px #888">chat</span></div>
+          <div class="wm-syne" style="font-size:22px; letter-spacing:-0.5px;"><span style="color:#1C1C1E">citra</span><span style="color:#FF5533">chat</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
