@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CitraChat — Agent Face</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --lime: #DFFF00;
+    --coral: #FF5533;
+    --cream: #FAF9F5;
+    --charcoal: #1C1C1E;
+  }
+  body { background: #F2F1ED; font-family: 'DM Sans', sans-serif; padding: 48px 36px; color: var(--charcoal); }
+
+  .page-label { font-size: 11px; font-weight: 600; color: #aaa; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+  h1 { font-size: 26px; font-weight: 800; color: #111; margin-bottom: 6px; }
+  .sub { font-size: 13px; color: #888; margin-bottom: 52px; line-height: 1.6; max-width: 540px; }
+
+  .section { margin-bottom: 68px; }
+  .section-title { font-size: 11px; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 24px; padding-bottom: 10px; border-bottom: 1px solid #e0ded8; }
+
+  .grid { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    width: 168px;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: box-shadow 0.15s;
+  }
+  .card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+  .card.pick { box-shadow: 0 0 0 3px var(--lime), 0 8px 24px rgba(0,0,0,0.1); }
+
+  .card-preview {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-info { padding: 12px 14px 14px; border-top: 1px solid #f5f5f2; }
+  .card-name { font-size: 12px; font-weight: 700; color: #111; margin-bottom: 3px; }
+  .card-desc { font-size: 11px; color: #aaa; line-height: 1.4; }
+
+  .bg-dark { background: var(--charcoal); }
+  .bg-lime { background: var(--lime); }
+  .bg-cream { background: var(--cream); }
+  .bg-coral { background: var(--coral); }
+  .bg-white { background: #fff; }
+  .bg-offwhite { background: #F5F4F0; }
+
+  .divider { height: 1px; background: #e0ded8; margin: 0 0 56px; }
+
+  /* WORDMARKS */
+  .wm-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+  .wm-card { background: #fff; border-radius: 12px; padding: 18px 24px; display: flex; align-items: center; gap: 12px; }
+  .wm-card.dark { background: var(--charcoal); }
+  .wm-card.lime { background: var(--lime); }
+  .wm-card.coral { background: var(--coral); }
+  .wm-card.cream { background: var(--cream); }
+
+  .wm-dm { font-family: 'DM Sans', sans-serif; font-weight: 700; }
+  .wm-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; }
+  .wm-syne { font-family: 'Syne', sans-serif; font-weight: 700; }
+
+  /* TAMANHOS */
+  .sizes-row { display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+  .size-block { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .size-label { font-size: 11px; color: #bbb; }
+
+  /* SLIDE PREVIEW */
+  .slide-row { display: flex; gap: 20px; flex-wrap: wrap; }
+  .slide-wrap { display: flex; flex-direction: column; gap: 8px; }
+  .slide-tag { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 0.08em; }
+  .slide { width: 240px; height: 300px; position: relative; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+  .slide-inner { width: 1080px; height: 1350px; transform-origin: top left; transform: scale(0.2222); position: absolute; top: 0; left: 0; }
+</style>
+</head>
+<body>
+
+<div class="page-label">CitraChat — Agent Face</div>
+<h1>Explorações do ícone</h1>
+<div class="sub">Variações de expressão, forma da bolha, cor e proporção. Partindo do Agent Face como direção escolhida.</div>
+
+<!-- ═══════════════════════════════════
+     BLOCO 1: EXPRESSÕES
+═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Expressões — o rosto do agente</div>
+  <div class="grid">
+
+    <!-- E1: Sorriso suave — original -->
+    <div class="logo-card card">
+      <div class="card-preview bg-lime">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/>
+          <circle cx="30" cy="30" r="6" fill="#DFFF00"/>
+          <circle cx="58" cy="30" r="6" fill="#DFFF00"/>
+          <path d="M24 46 Q44 60 64 46" stroke="#DFFF00" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">E1 — Sorriso suave</div>
+        <div class="card-desc">Original. Olhos redondos, sorriso amplo.</div>
+      </div>
+    </div>
+
+    <!-- E2: Olhos semi-fechados — confiante -->
+    <div class="card">
+      <div class="card-preview bg-dark">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#DFFF00"/>
+          <!-- Olhos semi-fechados — meia-lua -->
+          <path d="M24 28 Q30 22 36 28" stroke="#1C1C1E" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M52 28 Q58 22 64 28" stroke="#1C1C1E" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <!-- Sorriso menor -->
+          <path d="M28 46 Q44 58 60 46" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">E2 — Confiante</div>
+        <div class="card-desc">Olhos semi-fechados. Ar de segurança.</div>
+      </div>
+    </div>
+
+    <!-- E3: Olhos pontinho — minimalista -->
+    <div class="card">
+      <div class="card-preview bg-cream">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/>
+          <!-- Olhos ponto pequeno -->
+          <circle cx="30" cy="30" r="4" fill="#DFFF00"/>
+          <circle cx="58" cy="30" r="4" fill="#DFFF00"/>
+          <!-- Sorriso minimalista -->
+          <path d="M30 47 Q44 57 58 47" stroke="#DFFF00" stroke-width="4" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">E3 — Minimalista</div>
+        <div class="card-desc">Olhos ponto. Expressão limpa, discreta.</div>
+      </div>
+    </div>
+
+    <!-- E4: Olho esquerdo piscando — divertido -->
+    <div class="card">
+      <div class="card-preview bg-dark">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#DFFF00"/>
+          <!-- Olho esquerdo aberto -->
+          <circle cx="30" cy="30" r="6" fill="#1C1C1E"/>
+          <!-- Olho direito piscando — linha -->
+          <path d="M52 30 L64 30" stroke="#1C1C1E" stroke-width="5" stroke-linecap="round"/>
+          <!-- Sorriso -->
+          <path d="M24 46 Q44 60 64 46" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">E4 — Piscada</div>
+        <div class="card-desc">Um olho fechado. Personalidade, humor.</div>
+      </div>
+    </div>
+
+    <!-- E5: Olhos quadrado — robótico/tech -->
+    <div class="card">
+      <div class="card-preview bg-lime">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/>
+          <!-- Olhos quadrados arredondados -->
+          <rect x="23" y="23" width="13" height="13" rx="3" fill="#DFFF00"/>
+          <rect x="52" y="23" width="13" height="13" rx="3" fill="#DFFF00"/>
+          <!-- Sorriso reto — mais tech -->
+          <path d="M28 47 L60 47" stroke="#DFFF00" stroke-width="4" stroke-linecap="round"/>
+          <path d="M28 47 Q28 54 35 54" stroke="#DFFF00" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M60 47 Q60 54 53 54" stroke="#DFFF00" stroke-width="4" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">E5 — Tech Face</div>
+        <div class="card-desc">Olhos quadrados. Robótico, tech, diferente.</div>
+      </div>
+    </div>
+
+    <!-- E6: Olhos estrela -->
+    <div class="card">
+      <div class="card-preview bg-dark">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#DFFF00"/>
+          <!-- Olho estrela esquerdo -->
+          <path d="M30 23 L31.5 28 L37 29.5 L31.5 31 L30 36 L28.5 31 L23 29.5 L28.5 28 Z" fill="#1C1C1E"/>
+          <!-- Olho estrela direito -->
+          <path d="M58 23 L59.5 28 L65 29.5 L59.5 31 L58 36 L56.5 31 L51 29.5 L56.5 28 Z" fill="#1C1C1E"/>
+          <!-- Sorriso -->
+          <path d="M24 46 Q44 60 64 46" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">E6 — Star Eyes</div>
+        <div class="card-desc">Olhos faísca. Une a star do conceito 01 com o rosto.</div>
+      </div>
+    </div>
+
+    <!-- E7: Expressão neutra / sério -->
+    <div class="card">
+      <div class="card-preview bg-cream">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/>
+          <circle cx="30" cy="30" r="6" fill="#DFFF00"/>
+          <circle cx="58" cy="30" r="6" fill="#DFFF00"/>
+          <!-- Boca reta — neutro -->
+          <line x1="30" y1="50" x2="58" y2="50" stroke="#DFFF00" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">E7 — Neutro</div>
+        <div class="card-desc">Boca reta. Focado, profissional, não emocional.</div>
+      </div>
+    </div>
+
+    <!-- E8: Coral nos olhos — usa paleta -->
+    <div class="card">
+      <div class="card-preview bg-cream">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/>
+          <!-- Olhos em coral -->
+          <circle cx="30" cy="30" r="6" fill="#FF5533"/>
+          <circle cx="58" cy="30" r="6" fill="#FF5533"/>
+          <!-- Detalhe lime no centro dos olhos -->
+          <circle cx="30" cy="30" r="2.5" fill="#DFFF00"/>
+          <circle cx="58" cy="30" r="2.5" fill="#DFFF00"/>
+          <!-- Sorriso lime -->
+          <path d="M24 46 Q44 60 64 46" stroke="#DFFF00" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">E8 — Coral Eyes</div>
+        <div class="card-desc">Olhos coral, pupila lime. Usa toda a paleta.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     BLOCO 2: FORMAS DA BOLHA
+═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Forma da bolha — tail e proporção</div>
+  <div class="grid">
+
+    <!-- B1: Tail esquerda embaixo (padrão) -->
+    <div class="card">
+      <div class="card-preview bg-dark">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#DFFF00"/>
+          <circle cx="30" cy="30" r="6" fill="#1C1C1E"/>
+          <circle cx="58" cy="30" r="6" fill="#1C1C1E"/>
+          <path d="M24 46 Q44 60 64 46" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">B1 — Tail esq.</div>
+        <div class="card-desc">Padrão. Tail saindo pra baixo-esquerda.</div>
+      </div>
+    </div>
+
+    <!-- B2: Tail direita embaixo -->
+    <div class="card">
+      <div class="card-preview bg-dark">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#DFFF00" transform="scale(-1,1) translate(-88,0)"/>
+          <circle cx="30" cy="30" r="6" fill="#1C1C1E"/>
+          <circle cx="58" cy="30" r="6" fill="#1C1C1E"/>
+          <path d="M24 46 Q44 60 64 46" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">B2 — Tail dir.</div>
+        <div class="card-desc">Tail saindo pra baixo-direita (espelhado).</div>
+      </div>
+    </div>
+
+    <!-- B3: Bolha circular — sem cantos -->
+    <div class="card">
+      <div class="card-preview bg-dark">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <circle cx="44" cy="36" r="32" fill="#DFFF00"/>
+          <path d="M20 58 L12 80 L36 66" fill="#DFFF00"/>
+          <circle cx="30" cy="30" r="6" fill="#1C1C1E"/>
+          <circle cx="58" cy="30" r="6" fill="#1C1C1E"/>
+          <path d="M24 46 Q44 58 64 46" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">B3 — Circular</div>
+        <div class="card-desc">Bolha redonda. Mais suave e orgânico.</div>
+      </div>
+    </div>
+
+    <!-- B4: Quadrado sem tail — só rosto no container -->
+    <div class="card">
+      <div class="card-preview bg-dark">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <rect x="6" y="6" width="76" height="76" rx="22" fill="#DFFF00"/>
+          <circle cx="30" cy="34" r="7" fill="#1C1C1E"/>
+          <circle cx="58" cy="34" r="7" fill="#1C1C1E"/>
+          <path d="M22 52 Q44 66 66 52" stroke="#1C1C1E" stroke-width="5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">B4 — Square</div>
+        <div class="card-desc">Sem tail. App icon puro, rosto centralizado.</div>
+      </div>
+    </div>
+
+    <!-- B5: Bolha com "orelhas" / antenas -->
+    <div class="card">
+      <div class="card-preview bg-cream">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <path d="M6 12C6 9.239 8.239 7 11 7H77C79.761 7 82 9.239 82 12V58C82 60.761 79.761 63 77 63H50L36 80V63H11C8.239 63 6 60.761 6 58V12Z" fill="#1C1C1E"/>
+          <!-- Antenas -->
+          <line x1="30" y1="7" x2="28" y2="0" stroke="#1C1C1E" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="27" cy="0" r="3" fill="#DFFF00"/>
+          <line x1="58" y1="7" x2="60" y2="0" stroke="#1C1C1E" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="61" cy="0" r="3" fill="#FF5533"/>
+          <!-- Rosto -->
+          <circle cx="30" cy="30" r="6" fill="#DFFF00"/>
+          <circle cx="58" cy="30" r="6" fill="#DFFF00"/>
+          <path d="M24 46 Q44 58 64 46" stroke="#DFFF00" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">B5 — Antenas</div>
+        <div class="card-desc">Antenas lime + coral. Robô amigável e único.</div>
+      </div>
+    </div>
+
+    <!-- B6: Bolha com borda — outline style -->
+    <div class="card">
+      <div class="card-preview bg-cream">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+          <path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#FAF9F5" stroke="#1C1C1E" stroke-width="4"/>
+          <circle cx="30" cy="30" r="6" fill="#1C1C1E"/>
+          <circle cx="58" cy="30" r="6" fill="#DFFF00"/>
+          <path d="M24 46 Q44 60 64 46" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-name">B6 — Outline</div>
+        <div class="card-desc">Bolha traçada. Um olho lime, um escuro.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     BLOCO 3: FAVORITOS EM TODOS OS TAMANHOS
+═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Teste de escala — E1 + B4 em todos os tamanhos</div>
+  <div class="sizes-row">
+
+    <div style="background:#fff; border-radius:12px; padding:20px 24px;">
+      <div style="font-size:11px; color:#aaa; margin-bottom:16px; text-transform:uppercase; letter-spacing:0.08em;">E1 — Sorriso suave (bolha com tail)</div>
+      <div style="display:flex; align-items:flex-end; gap:20px;">
+        <div class="size-block">
+          <svg width="120" height="120" viewBox="0 0 88 88" fill="none"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/><circle cx="30" cy="30" r="6" fill="#DFFF00"/><circle cx="58" cy="30" r="6" fill="#DFFF00"/><path d="M24 46 Q44 60 64 46" stroke="#DFFF00" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>
+          <div class="size-label">120</div>
+        </div>
+        <div class="size-block">
+          <svg width="64" height="64" viewBox="0 0 88 88" fill="none"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/><circle cx="30" cy="30" r="6" fill="#DFFF00"/><circle cx="58" cy="30" r="6" fill="#DFFF00"/><path d="M24 46 Q44 60 64 46" stroke="#DFFF00" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>
+          <div class="size-label">64</div>
+        </div>
+        <div class="size-block">
+          <svg width="40" height="40" viewBox="0 0 88 88" fill="none"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/><circle cx="30" cy="30" r="6" fill="#DFFF00"/><circle cx="58" cy="30" r="6" fill="#DFFF00"/><path d="M24 46 Q44 60 64 46" stroke="#DFFF00" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>
+          <div class="size-label">40</div>
+        </div>
+        <div class="size-block">
+          <svg width="24" height="24" viewBox="0 0 88 88" fill="none"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/><circle cx="30" cy="30" r="6" fill="#DFFF00"/><circle cx="58" cy="30" r="6" fill="#DFFF00"/><path d="M24 46 Q44 60 64 46" stroke="#DFFF00" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>
+          <div class="size-label">24</div>
+        </div>
+        <div class="size-block">
+          <svg width="16" height="16" viewBox="0 0 88 88" fill="none"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/><circle cx="30" cy="30" r="6" fill="#DFFF00"/><circle cx="58" cy="30" r="6" fill="#DFFF00"/></svg>
+          <div class="size-label">16</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#fff; border-radius:12px; padding:20px 24px;">
+      <div style="font-size:11px; color:#aaa; margin-bottom:16px; text-transform:uppercase; letter-spacing:0.08em;">B4 — Square (app icon)</div>
+      <div style="display:flex; align-items:flex-end; gap:20px;">
+        <div class="size-block">
+          <svg width="120" height="120" viewBox="0 0 88 88" fill="none"><rect x="0" y="0" width="88" height="88" rx="20" fill="#DFFF00"/><circle cx="30" cy="34" r="7" fill="#1C1C1E"/><circle cx="58" cy="34" r="7" fill="#1C1C1E"/><path d="M22 52 Q44 66 66 52" stroke="#1C1C1E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+          <div class="size-label">120</div>
+        </div>
+        <div class="size-block">
+          <svg width="64" height="64" viewBox="0 0 88 88" fill="none"><rect x="0" y="0" width="88" height="88" rx="20" fill="#DFFF00"/><circle cx="30" cy="34" r="7" fill="#1C1C1E"/><circle cx="58" cy="34" r="7" fill="#1C1C1E"/><path d="M22 52 Q44 66 66 52" stroke="#1C1C1E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+          <div class="size-label">64</div>
+        </div>
+        <div class="size-block">
+          <svg width="40" height="40" viewBox="0 0 88 88" fill="none"><rect x="0" y="0" width="88" height="88" rx="20" fill="#DFFF00"/><circle cx="30" cy="34" r="7" fill="#1C1C1E"/><circle cx="58" cy="34" r="7" fill="#1C1C1E"/><path d="M22 52 Q44 66 66 52" stroke="#1C1C1E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+          <div class="size-label">40</div>
+        </div>
+        <div class="size-block">
+          <svg width="24" height="24" viewBox="0 0 88 88" fill="none"><rect x="0" y="0" width="88" height="88" rx="20" fill="#DFFF00"/><circle cx="30" cy="34" r="7" fill="#1C1C1E"/><circle cx="58" cy="34" r="7" fill="#1C1C1E"/><path d="M22 52 Q44 66 52 52" stroke="#1C1C1E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+          <div class="size-label">24</div>
+        </div>
+        <div class="size-block">
+          <svg width="16" height="16" viewBox="0 0 88 88" fill="none"><rect x="0" y="0" width="88" height="88" rx="20" fill="#DFFF00"/><circle cx="30" cy="34" r="7" fill="#1C1C1E"/><circle cx="58" cy="34" r="7" fill="#1C1C1E"/></svg>
+          <div class="size-label">16</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     BLOCO 4: WORDMARKS
+═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Wordmark — combinações finais</div>
+  <div class="wm-grid">
+
+    <div class="wm-card cream">
+      <svg width="32" height="32" viewBox="0 0 88 88" fill="none"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/><circle cx="30" cy="30" r="6" fill="#DFFF00"/><circle cx="58" cy="30" r="6" fill="#DFFF00"/><path d="M24 46 Q44 60 64 46" stroke="#DFFF00" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>
+      <span class="wm-dm" style="font-size:19px; color:#111; letter-spacing:-0.3px;">citrachat</span>
+    </div>
+
+    <div class="wm-card dark">
+      <svg width="32" height="32" viewBox="0 0 88 88" fill="none"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#DFFF00"/><circle cx="30" cy="30" r="6" fill="#1C1C1E"/><circle cx="58" cy="30" r="6" fill="#1C1C1E"/><path d="M24 46 Q44 60 64 46" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>
+      <span class="wm-dm" style="font-size:19px; color:#fff; letter-spacing:-0.3px;">citrachat</span>
+    </div>
+
+    <div class="wm-card cream">
+      <svg width="32" height="32" viewBox="0 0 88 88" fill="none"><rect x="0" y="0" width="88" height="88" rx="20" fill="#DFFF00"/><circle cx="30" cy="34" r="7" fill="#1C1C1E"/><circle cx="58" cy="34" r="7" fill="#1C1C1E"/><path d="M22 52 Q44 66 66 52" stroke="#1C1C1E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+      <span class="wm-jakarta" style="font-size:19px; color:#111; letter-spacing:-0.3px;">citrachat</span>
+    </div>
+
+    <div class="wm-card cream">
+      <svg width="32" height="32" viewBox="0 0 88 88" fill="none"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/><circle cx="30" cy="30" r="6" fill="#FF5533"/><circle cx="58" cy="30" r="6" fill="#FF5533"/><circle cx="30" cy="30" r="2.5" fill="#DFFF00"/><circle cx="58" cy="30" r="2.5" fill="#DFFF00"/><path d="M24 46 Q44 60 64 46" stroke="#DFFF00" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>
+      <span class="wm-dm" style="font-size:19px; color:#111; letter-spacing:-0.3px;">citra<span style="color:#FF5533">chat</span></span>
+    </div>
+
+    <div class="wm-card lime">
+      <svg width="32" height="32" viewBox="0 0 88 88" fill="none"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/><circle cx="30" cy="30" r="6" fill="#DFFF00"/><circle cx="58" cy="30" r="6" fill="#DFFF00"/><path d="M24 46 Q44 60 64 46" stroke="#DFFF00" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>
+      <span class="wm-dm" style="font-size:19px; color:#1C1C1E; letter-spacing:-0.3px;">citrachat</span>
+    </div>
+
+    <div class="wm-card coral">
+      <svg width="32" height="32" viewBox="0 0 88 88" fill="none"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#DFFF00"/><circle cx="30" cy="30" r="6" fill="#1C1C1E"/><circle cx="58" cy="30" r="6" fill="#1C1C1E"/><path d="M24 46 Q44 60 64 46" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>
+      <span class="wm-dm" style="font-size:19px; color:#fff; letter-spacing:-0.3px;">citrachat</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     BLOCO 5: PREVIEW NO SLIDE
+═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Preview — como o logo aparece num post real</div>
+  <div class="slide-row">
+
+    <!-- Slide com logo no canto superior direito — fundo claro -->
+    <div class="slide-wrap">
+      <div class="slide-tag">Fundo creme — logo escuro</div>
+      <div class="slide">
+        <div class="slide-inner">
+          <div style="background:#FAF9F5; width:1080px; height:1350px; padding:70px; display:flex; flex-direction:column; justify-content:space-between; font-family:'DM Sans',sans-serif;">
+            <!-- Header -->
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="font-size:28px; font-weight:600; color:#888;">01 / 07</div>
+              <div style="display:flex; align-items:center; gap:20px;">
+                <svg width="44" height="44" viewBox="0 0 88 88" fill="none"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#1C1C1E"/><circle cx="30" cy="30" r="6" fill="#DFFF00"/><circle cx="58" cy="30" r="6" fill="#DFFF00"/><path d="M24 46 Q44 60 64 46" stroke="#DFFF00" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>
+                <span style="font-size:36px; font-weight:700; color:#1C1C1E;">citrachat</span>
+              </div>
+            </div>
+            <!-- Corpo -->
+            <div>
+              <div style="font-size:32px; font-weight:500; color:#FF5533; text-transform:uppercase; letter-spacing:0.1em; border-left:8px solid #DFFF00; padding-left:24px; margin-bottom:28px;">Agente IA</div>
+              <div style="font-family:'DM Sans',sans-serif; font-size:110px; font-weight:800; font-style:italic; line-height:1.0; color:#1C1C1E; margin-bottom:44px;">
+                Chatbot<br>responde.<br>
+                Agente<br><span style="background:#DFFF00; padding:0 12px;">resolve.</span>
+              </div>
+              <div style="font-size:40px; font-weight:400; color:#888; line-height:1.5; max-width:800px;">Entenda a diferença que muda sua taxa de conversão.</div>
+            </div>
+            <!-- Footer -->
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #e8e8e4; padding-top:32px;">
+              <span style="font-size:28px; color:#bbb;">@citrachat</span>
+              <span style="font-size:28px; color:#bbb;">citra.chat</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide com fundo escuro -->
+    <div class="slide-wrap">
+      <div class="slide-tag">Fundo escuro — logo lime</div>
+      <div class="slide">
+        <div class="slide-inner">
+          <div style="background:#1C1C1E; width:1080px; height:1350px; padding:70px; display:flex; flex-direction:column; justify-content:space-between; font-family:'DM Sans',sans-serif;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="font-size:28px; font-weight:600; color:#444;">01 / 07</div>
+              <div style="display:flex; align-items:center; gap:20px;">
+                <svg width="44" height="44" viewBox="0 0 88 88" fill="none"><path d="M6 10C6 7.239 8.239 5 11 5H77C79.761 5 82 7.239 82 10V60C82 62.761 79.761 65 77 65H50L36 82V65H11C8.239 65 6 62.761 6 60V10Z" fill="#DFFF00"/><circle cx="30" cy="30" r="6" fill="#1C1C1E"/><circle cx="58" cy="30" r="6" fill="#1C1C1E"/><path d="M24 46 Q44 60 64 46" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>
+                <span style="font-size:36px; font-weight:700; color:#fff;">citrachat</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:32px; font-weight:500; color:#FF5533; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:28px;">73% dos leads somem</div>
+              <div style="font-family:'DM Sans',sans-serif; font-size:116px; font-weight:800; font-style:italic; line-height:1.0; color:#fff; margin-bottom:44px;">
+                em menos<br>de <span style="color:#DFFF00">5 min.</span>
+              </div>
+              <div style="font-size:40px; font-weight:400; color:#666; line-height:1.5; max-width:800px;">O agente responde em segundos. Qualifica. Converte. Enquanto você dorme.</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #2a2a2a; padding-top:32px;">
+              <span style="font-size:28px; color:#444;">@citrachat</span>
+              <span style="background:#DFFF00; color:#1C1C1E; font-size:28px; font-weight:700; padding:14px 32px; border-radius:100px;">citra.chat</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide com fundo creme + logo app icon -->
+    <div class="slide-wrap">
+      <div class="slide-tag">App icon — B4 no post</div>
+      <div class="slide">
+        <div class="slide-inner">
+          <div style="background:#FAF9F5; width:1080px; height:1350px; padding:70px; display:flex; flex-direction:column; justify-content:space-between; font-family:'DM Sans',sans-serif;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="font-size:28px; font-weight:600; color:#bbb;">01 / 07</div>
+              <div style="display:flex; align-items:center; gap:20px;">
+                <svg width="52" height="52" viewBox="0 0 88 88" fill="none"><rect x="0" y="0" width="88" height="88" rx="20" fill="#DFFF00"/><circle cx="30" cy="34" r="7" fill="#1C1C1E"/><circle cx="58" cy="34" r="7" fill="#1C1C1E"/><path d="M22 52 Q44 66 66 52" stroke="#1C1C1E" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+                <span style="font-size:36px; font-weight:700; color:#1C1C1E;">citrachat</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:32px; font-weight:600; color:#FF5533; margin-bottom:28px; text-transform:uppercase; letter-spacing:0.1em;">Para de perder lead</div>
+              <div style="font-family:'DM Sans',sans-serif; font-size:108px; font-weight:800; font-style:italic; line-height:1.0; color:#1C1C1E; margin-bottom:44px;">
+                Seu agente<br>já está<br><span style="background:#DFFF00; padding:0 12px">trabalhando.</span>
+              </div>
+              <div style="font-size:40px; color:#999; line-height:1.5;">Enquanto você fecha o laptop.</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #e8e8e4; padding-top:32px;">
+              <span style="font-size:28px; color:#bbb;">@citrachat</span>
+              <span style="background:#FF5533; color:#fff; font-size:28px; font-weight:700; padding:14px 36px; border-radius:100px;">Agentes que convertem</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
