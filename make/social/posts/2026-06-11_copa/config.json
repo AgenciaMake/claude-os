@@ -5,6 +5,7 @@
       "filename": "slide01-copa.png",
       "bg": "lime",
       "isCover": true,
+      "noArrow": true,
       "noLogo": true,
       "hashtagColor": "#000000",
       "footerColor": "#000000",

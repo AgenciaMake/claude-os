@@ -164,9 +164,9 @@ async function renderSlide(browser, template, slide, outPath, slideHeight, safeA
   }
   html = html.replace("{{FOOTER}}", footer);
 
-  // Swipe arrow (feed) ou swipe-up indicator (story). Ausente no CTA.
+  // Swipe arrow (feed) ou swipe-up indicator (story). Ausente no CTA e quando noArrow: true.
   let swipeArrow = "";
-  if (!slide.isCta) {
+  if (!slide.isCta && !slide.noArrow) {
     const color = ARROW_COLOR[slide.bg || 'black'] || '#ffffff';
     if (slideHeight === 1920) {
       // Story: indicador de swipe-up no rodapé
