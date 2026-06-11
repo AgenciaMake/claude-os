@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CitraChat — Explorações de Logo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --lime: #DFFF00;
+    --coral: #FF5533;
+    --cream: #FAF9F5;
+    --charcoal: #1C1C1E;
+  }
+  body { background: #F2F1ED; font-family: 'DM Sans', sans-serif; padding: 48px 36px; color: var(--charcoal); }
+
+  h1 { font-size: 26px; font-weight: 800; color: #111; margin-bottom: 6px; }
+  .sub { font-size: 13px; color: #888; margin-bottom: 52px; line-height: 1.6; max-width: 540px; }
+  .label-top { font-size: 11px; font-weight: 600; color: #aaa; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+
+  /* SEÇÃO */
+  .section { margin-bottom: 72px; }
+  .section-title { font-size: 13px; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 28px; padding-bottom: 12px; border-bottom: 1px solid #e0ded8; }
+
+  /* GRID DE LOGOS */
+  .logo-grid { display: flex; gap: 20px; flex-wrap: wrap; }
+
+  /* CARD DE LOGO */
+  .logo-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 0;
+    overflow: hidden;
+    width: 200px;
+    flex-shrink: 0;
+  }
+
+  .logo-card-preview {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .logo-card-info {
+    padding: 14px 16px 16px;
+    border-top: 1px solid #f5f5f2;
+  }
+
+  .logo-card-name { font-size: 13px; font-weight: 700; color: #111; margin-bottom: 4px; }
+  .logo-card-desc { font-size: 11px; color: #999; line-height: 1.5; }
+
+  /* Fundo do card */
+  .bg-cream-card { background: var(--cream); }
+  .bg-charcoal-card { background: var(--charcoal); }
+  .bg-lime-card { background: var(--lime); }
+  .bg-coral-card { background: var(--coral); }
+  .bg-white-card { background: #fff; }
+  .bg-offwhite-card { background: #F5F4F0; }
+
+  /* WORDMARK ROW */
+  .wordmark-section { margin-top: 64px; }
+  .wm-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+  .wm-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 260px;
+  }
+  .wm-card.dark { background: var(--charcoal); }
+  .wm-card.lime { background: var(--lime); }
+  .wm-card.coral { background: var(--coral); }
+
+  .wm-dm { font-family: 'DM Sans', sans-serif; font-weight: 700; }
+  .wm-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; }
+  .wm-syne { font-family: 'Syne', sans-serif; font-weight: 700; }
+
+  .divider { height: 1px; background: #e0ded8; margin: 16px 0 64px; }
+
+  .fav-row { display: flex; gap: 12px; align-items: flex-end; }
+  .fav-label { font-size: 10px; color: #bbb; text-align: center; margin-top: 6px; }
+  .fav-block { display: flex; flex-direction: column; align-items: center; }
+</style>
+</head>
+<body>
+
+<div class="label-top">CitraChat</div>
+<h1>Explorações de logo</h1>
+<div class="sub">Partindo do Spark Bubble (conceito 01) + novas direções. Variações de forma, símbolo interno, proporção e cor. Foco: ícone memorável que funciona de favicon a app store.</div>
+
+<!-- ══════════════════════════════════════
+     GRUPO 1: VARIAÇÕES DO SPARK BUBBLE
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Variações — Spark Bubble (base do conceito 01)</div>
+  <div class="logo-grid">
+
+    <!-- 1A: Original com tail mais limpo -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-charcoal-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <!-- Bolha quadrada arredondada + tail esquerdo embaixo -->
+          <path d="M10 12C10 8.686 12.686 6 16 6H64C67.314 6 70 8.686 70 12V50C70 53.314 67.314 56 64 56H36L24 70V56H16C12.686 56 10 53.314 10 50V12Z" fill="#DFFF00"/>
+          <!-- Faísca de 4 pontas -->
+          <path d="M40 18L42.5 28H52L44.5 34.5L47 44L40 38.5L33 44L35.5 34.5L28 28H37.5L40 18Z" fill="#1C1C1E"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">1A — Original</div>
+        <div class="logo-card-desc">Spark clássica de 5 pontas. Tail embaixo-esquerda.</div>
+      </div>
+    </div>
+
+    <!-- 1B: Bolha circular -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-charcoal-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <!-- Círculo + tail -->
+          <circle cx="38" cy="34" r="28" fill="#DFFF00"/>
+          <path d="M18 54 L10 72 L30 60" fill="#DFFF00"/>
+          <!-- Raio/bolt simples -->
+          <path d="M42 16L34 34H42L30 52" stroke="#1C1C1E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">1B — Round Bolt</div>
+        <div class="logo-card-desc">Bolha circular. Raio interno em vez de estrela.</div>
+      </div>
+    </div>
+
+    <!-- 1C: Bolha com 4-point star grande -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-charcoal-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/>
+          <!-- Estrela de 4 pontas — mais limpa e geométrica -->
+          <path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#1C1C1E"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">1C — Star 4pts</div>
+        <div class="logo-card-desc">Estrela de 4 pontas. Mais geométrica e limpa.</div>
+      </div>
+    </div>
+
+    <!-- 1D: Inversão de cor — fundo creme, bolha carvão, spark lime -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-cream-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#1C1C1E"/>
+          <path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#DFFF00"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">1D — Light Mode</div>
+        <div class="logo-card-desc">Bolha escura, spark lime. Pra fundo claro.</div>
+      </div>
+    </div>
+
+    <!-- 1E: Bolha lime + spark coral — usa a paleta completa -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-charcoal-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/>
+          <!-- Spark em coral -->
+          <path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#FF5533"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">1E — Spark Coral</div>
+        <div class="logo-card-desc">Bolha lime, spark em coral. Usa a paleta completa.</div>
+      </div>
+    </div>
+
+    <!-- 1F: Bolha mínima — só contorno, sem fill -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-cream-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" stroke="#1C1C1E" stroke-width="4.5" fill="none"/>
+          <!-- Spark lime sólida dentro -->
+          <path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#DFFF00"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">1F — Outline</div>
+        <div class="logo-card-desc">Bolha contorno, spark sólida. Estilo linha.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     GRUPO 2: NOVAS DIREÇÕES
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Novas direções — mesma energia</div>
+  <div class="logo-grid">
+
+    <!-- 2A: Bolha de chat com gomo de limão interno (citrus slice) -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-charcoal-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/>
+          <!-- Fatia de limão — círculo com gomos -->
+          <circle cx="40" cy="29" r="14" fill="none" stroke="#1C1C1E" stroke-width="3"/>
+          <line x1="40" y1="15" x2="40" y2="43" stroke="#1C1C1E" stroke-width="2"/>
+          <line x1="26" y1="29" x2="54" y2="29" stroke="#1C1C1E" stroke-width="2"/>
+          <line x1="30" y1="19" x2="50" y2="39" stroke="#1C1C1E" stroke-width="2"/>
+          <line x1="30" y1="39" x2="50" y2="19" stroke="#1C1C1E" stroke-width="2"/>
+          <circle cx="40" cy="29" r="3.5" fill="#1C1C1E"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">2A — Citrus Bubble</div>
+        <div class="logo-card-desc">Fatia de limão dentro da bolha. Une Citra + chat numa forma.</div>
+      </div>
+    </div>
+
+    <!-- 2B: Letra C estilizada como bolha de chat -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-cream-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <!-- C que é bolha: a abertura do C tem um tail de chat -->
+          <path d="M64 22C58 12 48 7 36 9C20 12 10 24 10 40C10 56 20 68 36 71C48 73 58 68 64 58" stroke="#1C1C1E" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <!-- Tail saindo da abertura superior do C -->
+          <path d="M64 22 L72 10 L58 16" fill="#DFFF00"/>
+          <!-- Pontos dentro do C sugerindo mensagem -->
+          <circle cx="30" cy="40" r="4" fill="#DFFF00"/>
+          <circle cx="40" cy="40" r="4" fill="#DFFF00"/>
+          <circle cx="50" cy="40" r="4" fill="#FF5533"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">2B — C Chat</div>
+        <div class="logo-card-desc">C com tail de chat na abertura. Typing dots internos.</div>
+      </div>
+    </div>
+
+    <!-- 2C: Bolha com face abstrata / agente humanizado -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-lime-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#1C1C1E"/>
+          <!-- Face minimalista: dois olhos + sorriso -->
+          <circle cx="31" cy="26" r="5" fill="#DFFF00"/>
+          <circle cx="49" cy="26" r="5" fill="#DFFF00"/>
+          <!-- Sorriso -->
+          <path d="M26 38 Q40 50 54 38" stroke="#DFFF00" stroke-width="4" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">2C — Agent Face</div>
+        <div class="logo-card-desc">Agente humanizado. Olhos + sorriso. Quente e memorável.</div>
+      </div>
+    </div>
+
+    <!-- 2D: Dois raios — conversa em alta velocidade -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-charcoal-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <rect width="80" height="80" rx="18" fill="#1C1C1E"/>
+          <!-- Raio 1 — lime (agente) -->
+          <path d="M34 8L24 38H36L20 72" stroke="#DFFF00" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Raio 2 — coral (usuário/lead), espelhado -->
+          <path d="M50 8L60 38H48L64 72" stroke="#FF5533" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">2D — Twin Bolts</div>
+        <div class="logo-card-desc">Dois raios: agente (lime) e lead (coral). Conversa em velocidade.</div>
+      </div>
+    </div>
+
+    <!-- 2E: Spark solta — sem bolha, apenas a forma da faísca -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-cream-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <!-- Estrela de 4 pontas grande + coral no centro -->
+          <path d="M40 4 L46 32 L74 38 L46 44 L40 72 L34 44 L6 38 L34 32 Z" fill="#1C1C1E"/>
+          <!-- Ponto central coral -->
+          <circle cx="40" cy="38" r="8" fill="#FF5533"/>
+          <!-- Brilho central lime -->
+          <circle cx="40" cy="38" r="3" fill="#DFFF00"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">2E — Pure Spark</div>
+        <div class="logo-card-desc">Sem bolha. A faísca como símbolo solo. Direto e geométrico.</div>
+      </div>
+    </div>
+
+    <!-- 2F: Bolha + símbolo AI (três linhas de ondas) -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-charcoal-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/>
+          <!-- Ondas de AI / sound waves -->
+          <path d="M20 29 Q25 22 30 29 Q35 36 40 29 Q45 22 50 29 Q55 36 60 29" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+          <path d="M26 40 Q31 34 36 40 Q41 46 46 40 Q51 34 56 40" stroke="#1C1C1E" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">2F — Wave Bubble</div>
+        <div class="logo-card-desc">Ondas de voz/AI dentro da bolha. Sugere linguagem natural.</div>
+      </div>
+    </div>
+
+    <!-- 2G: Bolha com ponto central brilhante + corona -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-cream-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#1C1C1E"/>
+          <!-- Linhas irradiando do centro -->
+          <line x1="40" y1="12" x2="40" y2="20" stroke="#DFFF00" stroke-width="3" stroke-linecap="round"/>
+          <line x1="40" y1="38" x2="40" y2="46" stroke="#DFFF00" stroke-width="3" stroke-linecap="round"/>
+          <line x1="22" y1="29" x2="30" y2="29" stroke="#DFFF00" stroke-width="3" stroke-linecap="round"/>
+          <line x1="50" y1="29" x2="58" y2="29" stroke="#DFFF00" stroke-width="3" stroke-linecap="round"/>
+          <line x1="26" y1="16" x2="32" y2="22" stroke="#DFFF00" stroke-width="3" stroke-linecap="round"/>
+          <line x1="48" y1="36" x2="54" y2="42" stroke="#DFFF00" stroke-width="3" stroke-linecap="round"/>
+          <line x1="54" y1="16" x2="48" y2="22" stroke="#DFFF00" stroke-width="3" stroke-linecap="round"/>
+          <line x1="32" y1="36" x2="26" y2="42" stroke="#DFFF00" stroke-width="3" stroke-linecap="round"/>
+          <!-- Centro -->
+          <circle cx="40" cy="29" r="9" fill="#DFFF00"/>
+          <circle cx="40" cy="29" r="4" fill="#1C1C1E"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">2G — Radiant</div>
+        <div class="logo-card-desc">Ponto brilhante irradiando dentro da bolha. Ideia de inteligência ativa.</div>
+      </div>
+    </div>
+
+    <!-- 2H: Bolha com tipografia — letras CC -->
+    <div class="logo-card">
+      <div class="logo-card-preview bg-charcoal-card">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/>
+          <!-- CC estilizado -->
+          <!-- C esquerdo -->
+          <path d="M34 18C30 18 22 22 22 30C22 38 30 42 34 42" stroke="#1C1C1E" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+          <!-- C direito -->
+          <path d="M50 18C54 18 58 22 58 30C58 38 54 42 50 42" stroke="#1C1C1E" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-name">2H — CC Mark</div>
+        <div class="logo-card-desc">Dois C espelhados. CitraChat como monograma duplo.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     ESCALA: FAVICON TEST
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Teste de favicon — os favoritos em 16px e 32px</div>
+  <div style="display:flex; gap:40px; flex-wrap:wrap; align-items:flex-end;">
+
+    <div>
+      <div style="font-size:11px; color:#aaa; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.08em;">1A Original</div>
+      <div class="fav-row">
+        <div class="fav-block">
+          <svg width="32" height="32" viewBox="0 0 80 80" fill="none"><path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/><path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#1C1C1E"/></svg>
+          <div class="fav-label">32</div>
+        </div>
+        <div class="fav-block">
+          <svg width="16" height="16" viewBox="0 0 80 80" fill="none"><path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/><path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#1C1C1E"/></svg>
+          <div class="fav-label">16</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px; color:#aaa; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.08em;">1C Star 4pts</div>
+      <div class="fav-row">
+        <div class="fav-block">
+          <svg width="32" height="32" viewBox="0 0 80 80" fill="none"><path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/><path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#1C1C1E"/></svg>
+          <div class="fav-label">32</div>
+        </div>
+        <div class="fav-block">
+          <svg width="16" height="16" viewBox="0 0 80 80" fill="none"><path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/><path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#1C1C1E"/></svg>
+          <div class="fav-label">16</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px; color:#aaa; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.08em;">1E Spark Coral</div>
+      <div class="fav-row">
+        <div class="fav-block">
+          <svg width="32" height="32" viewBox="0 0 80 80" fill="none"><path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/><path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#FF5533"/></svg>
+          <div class="fav-label">32</div>
+        </div>
+        <div class="fav-block">
+          <svg width="16" height="16" viewBox="0 0 80 80" fill="none"><path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/><path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#FF5533"/></svg>
+          <div class="fav-label">16</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px; color:#aaa; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.08em;">2E Pure Spark</div>
+      <div class="fav-row">
+        <div class="fav-block">
+          <svg width="32" height="32" viewBox="0 0 80 80" fill="none"><path d="M40 4 L46 32 L74 38 L46 44 L40 72 L34 44 L6 38 L34 32 Z" fill="#1C1C1E"/><circle cx="40" cy="38" r="8" fill="#FF5533"/><circle cx="40" cy="38" r="3" fill="#DFFF00"/></svg>
+          <div class="fav-label">32</div>
+        </div>
+        <div class="fav-block">
+          <svg width="16" height="16" viewBox="0 0 80 80" fill="none"><path d="M40 4 L46 32 L74 38 L46 44 L40 72 L34 44 L6 38 L34 32 Z" fill="#1C1C1E"/><circle cx="40" cy="38" r="8" fill="#FF5533"/><circle cx="40" cy="38" r="3" fill="#DFFF00"/></svg>
+          <div class="fav-label">16</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px; color:#aaa; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.08em;">2F Wave Bubble</div>
+      <div class="fav-row">
+        <div class="fav-block">
+          <svg width="32" height="32" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="#DFFF00"/><path d="M20 29 Q25 22 30 29 Q35 36 40 29 Q45 22 50 29 Q55 36 60 29" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M26 40 Q31 34 36 40 Q41 46 46 40 Q51 34 56 40" stroke="#1C1C1E" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.4"/></svg>
+          <div class="fav-label">32</div>
+        </div>
+        <div class="fav-block">
+          <svg width="16" height="16" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="#DFFF00"/><path d="M20 29 Q25 22 30 29 Q35 36 40 29 Q45 22 50 29 Q55 36 60 29" stroke="#1C1C1E" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>
+          <div class="fav-label">16</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     WORDMARKS — FAVORITOS COM TIPOGRAFIA
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Combinações wordmark — ícone 1C + 1E com tipografias</div>
+  <div class="wm-grid">
+
+    <div class="wm-card">
+      <svg width="28" height="28" viewBox="0 0 80 80" fill="none"><path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#1C1C1E"/><path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#DFFF00"/></svg>
+      <span class="wm-dm" style="font-size:20px; color:#111; letter-spacing:-0.3px;">citrachat</span>
+    </div>
+
+    <div class="wm-card">
+      <svg width="28" height="28" viewBox="0 0 80 80" fill="none"><path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#1C1C1E"/><path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#DFFF00"/></svg>
+      <span class="wm-jakarta" style="font-size:19px; color:#111; letter-spacing:-0.3px;">citrachat</span>
+    </div>
+
+    <div class="wm-card">
+      <svg width="28" height="28" viewBox="0 0 80 80" fill="none"><path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/><path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#FF5533"/></svg>
+      <span class="wm-dm" style="font-size:20px; color:#111; letter-spacing:-0.3px;">citrachat</span>
+    </div>
+
+    <div class="wm-card dark">
+      <svg width="28" height="28" viewBox="0 0 80 80" fill="none"><path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#DFFF00"/><path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#1C1C1E"/></svg>
+      <span class="wm-dm" style="font-size:20px; color:#fff; letter-spacing:-0.3px;">citrachat</span>
+    </div>
+
+    <div class="wm-card lime">
+      <svg width="28" height="28" viewBox="0 0 80 80" fill="none"><path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#1C1C1E"/><path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#DFFF00"/></svg>
+      <span class="wm-dm" style="font-size:20px; color:#1C1C1E; letter-spacing:-0.3px;">citrachat</span>
+    </div>
+
+    <div class="wm-card coral">
+      <svg width="28" height="28" viewBox="0 0 80 80" fill="none"><path d="M8 10C8 7.239 10.239 5 13 5H67C69.761 5 72 7.239 72 10V52C72 54.761 69.761 57 67 57H44L32 73V57H13C10.239 57 8 54.761 8 52V10Z" fill="#fff"/><path d="M40 14 L43 26 L55 29 L43 32 L40 44 L37 32 L25 29 L37 26 Z" fill="#DFFF00"/></svg>
+      <span class="wm-dm" style="font-size:20px; color:#fff; letter-spacing:-0.3px;">citrachat</span>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
