@@ -10,7 +10,8 @@ Baseado no Brand Guide v3 (Claude Design) + logos oficiais aprovados.
 | Arquivo | Uso |
 |---|---|
 | `produtos/citrachat/logo/Logo_citrachat-01.png` | Ícone isolado — app, favicon, posts, avatar |
-| `produtos/citrachat/logo/Logo_citrachat-02.png` | Logo completo (ícone + wordmark) — materiais, site, docs |
+| `produtos/citrachat/logo/Logo_citrachat-02.png` | Logo completo — wordmark em cor escura, para fundos claros |
+| `produtos/citrachat/logo/Logo_citrachat-03.png` | Logo completo — wordmark em branco, para fundos escuros (Void, dark mode) |
 
 **Ícone:** C-arc lettermark em quadrado lime (`#C8FF2E`) com bordas arredondadas.
 **Wordmark:** "Citra•Chat" em Bricolage Grotesque ExtraBold com separador circular lime.
