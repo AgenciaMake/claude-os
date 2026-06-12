@@ -11,7 +11,7 @@
       "bg": "void",
       "noLogo": true,
       "noArrow": true,
-      "content": "<div style='display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;gap:56px;'><span class='label' style='opacity:0.35;'>vem aí.</span><img src='../../../logo/Logo_citrachat-03.png' style='height:120px;width:auto;'><div style='width:56px;height:1px;background:#C8FF2E;opacity:0.55;'></div><div class='h2' style='max-width:780px;color:rgba(248,244,235,0.92);'>Agentes de IA conversacionais<br>com <span style='color:#C8FF2E;'>mensuração nativa.</span></div></div>"
+      "content": "<div style='display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;gap:56px;'><span class='label' style='opacity:0.35;'>vem aí.</span><img src='../../../logo/Logo_citrachat-03.png' style='height:120px;width:auto;'><div style='width:56px;height:1px;background:#C8FF2E;opacity:0.55;'></div><div class='h2' style='max-width:780px;color:rgba(248,244,235,0.92);'>Agentes de IA<br>conversacionais com <span style='color:#C8FF2E;'>mensuração nativa.</span></div></div>"
     }
   ]
 }
