@@ -173,18 +173,18 @@ Quando um post precisar de **foto real** — alguém mexendo no celular, um escr
 
 ## 5. Template do slide CTA final (fixo)
 
-**Sempre o último slide do carrossel.** Não criar variações — é o fechamento reconhecível da Make.
+**Sempre o último slide do carrossel.** Fechamento reconhecível da Make.
 
-**Layout:**
-- Fundo: verde limão `#C8D82D` cheio
-- Título superior em itálico + bold caixa alta (ex: `SE ESSE POST FEZ SENTIDO PRA VOCÊ...`)
-- 3 pílulas pretas empilhadas com texto branco:
-  - `❤ DÁ UM LIKE`
-  - `✈ COMPARTILHA COM QUEM PRECISA SABER DISSO!`
-  - `🔖 SALVA PRA NÃO PERDER`
-- Logo `MAKE LEMON AD` circular preta centralizada no inferior
+**Layout atual:**
+- Fundo: preto `#000000`
+- Sem número, sem chevron, sem rodapé (`isCta: true` no config)
+- Bloco de texto centralizado verticalmente, composto por:
+  - **Headline bold italic grande** — conecta com o tema do post e traz o posicionamento da Make (ex: *"Menos ruído. Mais resultado. É assim que a Make trabalha."*)
+  - **Corpo menor** — 1-2 frases que reforçam o serviço e o convite a seguir
+  - **CTA de seguir** — frase direta pedindo o follow (ex: *"Segue a Make. Toda semana tem conteúdo assim."*)
+- Logo `MAKE LEMON AD` circular centralizado no inferior da área de conteúdo
 
-**Regra do CTA:** a ordem de importância das ações é **compartilhar > comentar > salvar > seguir > curtir** (alinhado às métricas primárias do [MAKESOCIAL.md](MAKESOCIAL.md)). Se quiser variar a copy do CTA, manter as 3 ações principais — pode trocar verbos, mas não mexer no visual.
+**Regra de copy do CTA:** a headline muda a cada post — conecta com o tema abordado. A estrutura (headline → corpo → follow CTA → logo) é fixa. Prioridade das ações: **seguir > compartilhar > comentar > salvar**.
 
 ---
 
