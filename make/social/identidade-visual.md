@@ -53,101 +53,78 @@ Funciona em Figma, Google Slides, CapCut, Canva e todos os editores. Disponível
 Todo slide respeita essa grade. Elementos posicionados sempre nos mesmos cantos.
 
 ```
-┌─────────────────────────────────────┐
-│ #performance...          ⭕ LOGO   ┃ ← topo (margem 50px)
-│                                    ┃
-│                                    ┃
-│        CONTEÚDO CENTRAL            ┃ ← miolo livre
-│        (texto, mockup, etc)        ┃   (faixa lateral
-│                                    ┃    direita = cor
-│                                 ▶  ┃    do próximo slide)
-│                                    ┃
-│ @make.lemonad  Strategy + ...      ┃ ← rodapé (margem 50px)
-└─────────────────────────────────────┘
-  ^                             ^   ^
-  50px                       110px  faixa 40px
+┌──────────────────────────────────────────┐
+│ #performance...   ≫  ⭕ LOGO            │ ← topo (margem 70px)
+│                                          │
+│                                          │
+│           CONTEÚDO CENTRAL              │ ← miolo livre
+│           (texto, mockup, etc)          │
+│                                          │
+│ @make.lemonad        Strategy + ...     │ ← rodapé (margem 70px)
+└──────────────────────────────────────────┘
+  ^                                    ^
+  70px                               70px
 ```
 
 ### Grade e margens (canvas 1080x1350 — IG carrossel 4:5)
 
-- **Margem superior:** 50px (topo do logo, topo da hashtag/numeração)
-- **Margem inferior:** 50px (linha de base do rodapé)
-- **Margem esquerda:** 50px (alinha hashtag, numeração e `@make.lemonad`)
-- **Margem direita:** 110px (alinha logo e fim do slogan — recuo da faixa lateral)
-- **Faixa lateral direita:** 40px de largura, do topo ao bottom
+- **Margem em todos os lados:** 70px (topo, inferior, esquerda, direita)
 
 ### Área útil pro conteúdo central
 
-- **Largura útil:** 920px (1080 − 50 esquerda − 110 direita)
-- **Altura útil aproximada:** 1000px (entre topo do logo/hashtag e topo do rodapé)
+- **Largura útil:** 940px (1080 − 70 esquerda − 70 direita)
+- **Altura útil:** 1100px (1350 − 70 topo − 70 rodapé − espaço dos elementos fixos)
 
 ### Auto-fit (proteção automática contra overflow)
 
-O script `compose-slides.js` mede o tamanho **natural** do conteúdo central (clonando num test zone sem constraint de largura) e aplica `transform: scale` automaticamente se algum elemento ultrapassar 920×1000px.
+O script `compose-slides.js` mede o tamanho **natural** do conteúdo central e aplica `transform: scale` automaticamente se algum elemento ultrapassar a área útil.
 
-Isso significa que pode-se especificar `font-size` agressivos no `config.json` sem se preocupar com palavras estourando margem — o script reduz proporcionalmente até caber. Origem do scale: `left top` (mantém alinhamento à grade).
+Isso significa que pode-se especificar `font-size` agressivos no `config.json` sem se preocupar com overflow — o script reduz proporcionalmente até caber. Origem do scale: `left top`.
 
 ### Elementos fixos
 
-**Canto superior esquerdo (top: 50px, left: 50px)**
+**Canto superior esquerdo (top: 70px, left: 70px)**
 
-*Nas capas* → hashtag `#performanceestratégica360`:
-- Tamanho: **16px** (mesmo do rodapé)
-- `#performance` → Rubik **Light italic (300)**
-- `estratégica` → Rubik **Medium italic (500)**
-- `360` → Rubik **Light italic (300)**
+*Nas capas* → label "Agência Boutique 360":
+- Tamanho: **16px**, Rubik Light italic (300)
+- Cor: currentColor (branco em fundos escuros, escuro em fundos claros)
 
 *Nos slides internos* → numeração em caixa retangular:
 - Ex: `[ 02 ]`, `[ 03 ]`
 - Tamanho: **16px**, Rubik Regular italic (400)
 - Border: 1.2px da cor do texto
 - Padding: 4px 14px
+- Override de cor via `numColor` no config (ex: `"numColor": "#000000"` pra fundos claros)
 
-**Canto superior direito (top: 50px, right: 110px) — SÓ NAS CAPAS**
+**Canto superior direito (top: 70px, right: 70px)**
 
-Selo circular `MAKE LEMON AD`:
-- Diâmetro: **90px**
-- A borda direita do logo alinha exatamente com o fim do texto do rodapé (`Conversão` / `forever`)
-- O logo só aparece na **capa**. Slides internos não levam logo.
+*Nas capas* → Selo circular `MAKE LEMON AD` (90px). Só nas capas — slides internos não levam logo.
+*Nos slides internos* → duplo chevron de continuidade (≫) indicando próximo slide.
+- Cor automática: branco em fundos escuros, preto/cinza em fundos claros
+- **Não aparece em posts de slide único** (`"noArrow": true` no config) nem no slide de CTA
 
-**Versão a usar conforme o fundo do slide:**
+**Versão do logo conforme fundo:**
 
 | Fundo da capa | Versão do logo | Cor |
 |---|---|---|
 | Preto `#000000` | PNG oficial | Selo verde limão com texto preto cheio |
 | Cinza escuro `#434244` | PNG oficial | Selo verde limão com texto preto cheio |
-| **Verde limão `#D6DE23`** | **SVG vazado** | `fill: #000000` (círculo preto, texto vazado mostra verde limão atrás) |
-| **Cinza claro `#DEDEDE`** | **SVG vazado** | `fill: #434244` (círculo cinza escuro, mesmo tom da tipografia) |
+| **Verde limão `#D6DE23`** | **SVG vazado** | `fill: #000000` |
+| **Cinza claro `#DEDEDE`** | **SVG vazado** | `fill: #434244` |
 | Verde 02 `#00A652` | SVG vazado | `fill: #000000` |
 
-**Regra de leitura:** quando o fundo é claro (verde limão, cinza claro), o logo PNG oficial fica camuflado porque o círculo verde se mistura com o fundo. Por isso usar o SVG vazado com a mesma cor da tipografia principal — fica discreto e harmônico, sem competir com o título.
+No `config.json`: `"logoStyle": "png-oficial"` (default) ou `"logoStyle": "svg-#XXXXXX"`.
 
-**Como o script aplica:** no `config.json` de cada slide, definir `"logoStyle": "png-oficial"` (default) ou `"svg-#XXXXXX"` (com hex desejado pro fill).
+**Rodapé (bottom: 70px, left: 70px, right: 70px)**
 
-**Rodapé (bottom: 50px, left: 50px, right: 110px)**
+Tamanho **16px**:
 
-Tamanho **16px**, todos os elementos:
+*Esquerda:* `@make.lemonad` — Rubik Medium italic (500)
 
-*Esquerda:* `@make.lemonad`
-- Rubik **Medium italic (500)**
-
-*Direita:* `Strategy + Branding + Performance = <slogan>`
-- Prefixo "Strategy + Branding + Performance =" em Rubik **Regular (400)**, não-italic
-- Slogan final em Rubik **Semibold italic (600)**
-- Variantes do slogan em uso:
-  - `Conexão que Gera Conversão` (padrão atual)
-  - `Growth and scale forever` (alternativa histórica)
-
-**Faixa lateral direita (cor = próximo slide)**
-- Largura: **40px**, do topo ao bottom
-- Cor: igual ao fundo do slide seguinte — cria continuidade visual no feed
-
-**Seta de transição (cor = slide atual)**
-- Triângulo apontando pra direita, posicionado na linha `bottom: 180px`
-- Sai do slide atual invadindo a faixa lateral
-- Cor preenchida = cor do fundo do slide atual (contrasta com a faixa)
-- Proporção: 58px de largura × 84px de altura
-- Não aparece no slide de CTA final
+*Direita:* slogan — Rubik Semibold italic (600)
+- Padrão atual: `Menos Ruído. Mais Resultado.`
+- Override via `footerSlogan` no config
+- Override de cor via `footerColor` (ex: `"footerColor": "#000000"` em fundos claros)
 
 ---
 
@@ -254,10 +231,12 @@ Posts anteriores como referência estética. Usar pra calibrar o padrão antes d
 
 - [ ] Usa Rubik?
 - [ ] Paleta respeitada (preto + verde limão como base)?
-- [ ] Numeração do slide no canto superior esquerdo nos slides internos?
-- [ ] Hashtag `#performanceestratégica360` ou selo circular na capa?
+- [ ] Margens 70px em todos os lados?
+- [ ] Numeração no canto superior esquerdo nos slides internos?
+- [ ] Label "Agência Boutique 360" ou selo circular na capa?
 - [ ] `@make.lemonad` no rodapé?
-- [ ] Assinatura `Strategy + Branding + Performance = ...` no rodapé direito?
-- [ ] Seta "próximo slide" nos slides internos (não no último)?
+- [ ] Slogan `Menos Ruído. Mais Resultado.` no rodapé direito?
+- [ ] Duplo chevron (≫) nos slides internos de carrossel — **ausente em slide único** (`noArrow: true`)?
 - [ ] Último slide segue o template de CTA?
+- [ ] Legenda tem `#performanceestrategica360`, `#agenciaboutique360` e `#makelemonad`?
 - [ ] Estilo visual bate com o pilar do post?
