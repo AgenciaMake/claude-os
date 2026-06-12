@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CitraChat — Teaser 01</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .wrapper {
+      position: relative;
+    }
+    .scale-hint {
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 11px;
+      margin-bottom: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── POST 1080×1350 ── */
+    .post {
+      width: 1080px;
+      height: 1350px;
+      background: #13111E;
+      position: relative;
+      overflow: hidden;
+      transform-origin: top left;
+    }
+
+    /* Glow sutil atrás do logo */
+    .glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,255,46,0.10) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -52%);
+      pointer-events: none;
+    }
+
+    /* Linha decorativa topo */
+    .top-line {
+      position: absolute;
+      top: 0;
+      left: 90px;
+      right: 90px;
+      height: 2px;
+      background: #C8FF2E;
+      opacity: 0.6;
+    }
+
+    /* Conteúdo principal */
+    .content {
+      position: absolute;
+      inset: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      text-align: center;
+    }
+
+    /* Eyebrow */
+    .eyebrow {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(248,244,235,0.40);
+      margin-bottom: 80px;
+    }
+
+    /* Logo */
+    .logo-wrap {
+      margin-bottom: 72px;
+    }
+    .logo-wrap img {
+      height: 96px;
+      width: auto;
+      display: block;
+    }
+
+    /* Separador */
+    .sep {
+      width: 48px;
+      height: 2px;
+      background: #C8FF2E;
+      opacity: 0.5;
+      margin: 0 auto 64px;
+    }
+
+    /* Tagline */
+    .tagline {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 52px;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: rgba(248,244,235,0.88);
+      max-width: 760px;
+    }
+    .tagline em {
+      font-style: normal;
+      color: #C8FF2E;
+    }
+
+    /* Rodapé */
+    .footer {
+      position: absolute;
+      bottom: 90px;
+      left: 90px;
+      right: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .handle {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: rgba(248,244,235,0.25);
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="scale-hint">Preview — 1080 × 1350 px</div>
+
+  <div class="post" id="post">
+    <div class="glow"></div>
+    <div class="top-line"></div>
+
+    <div class="content">
+      <div class="eyebrow">vem aí.</div>
+
+      <div class="logo-wrap">
+        <img src="../../../logo/Logo_citrachat-02.png" alt="CitraChat">
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="tagline">
+        Agentes de IA conversacionais<br>com <em>mensuração nativa.</em>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span class="handle">@citra.chat</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Escala o post pra caber na tela sem perder as proporções reais
+  function scale() {
+    const post = document.getElementById('post');
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const s = Math.min((vw - 40) / 1080, (vh - 80) / 1350);
+    post.style.transform = `scale(${s})`;
+    post.parentElement.style.width = (1080 * s) + 'px';
+    post.parentElement.style.height = (1350 * s) + 'px';
+  }
+  scale();
+  window.addEventListener('resize', scale);
+</script>
+
+</body>
+</html>
