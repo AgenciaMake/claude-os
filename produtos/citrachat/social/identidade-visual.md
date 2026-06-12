@@ -1,7 +1,7 @@
 # Identidade Visual — CitraChat
 
 Guia de marca para Instagram, LinkedIn e qualquer produção criativa do CitraChat.
-Baseado no Brand Guide v3 (Claude Design) + logos oficiais aprovados.
+Baseado no Instagram Brand Guide oficial (Claude Design, Junho 2026).
 
 ---
 
@@ -9,61 +9,93 @@ Baseado no Brand Guide v3 (Claude Design) + logos oficiais aprovados.
 
 | Arquivo | Uso |
 |---|---|
-| `produtos/citrachat/logo/Logo_citrachat-01.png` | Ícone isolado — app, favicon, posts, avatar |
-| `produtos/citrachat/logo/Logo_citrachat-02.png` | Logo completo — wordmark em cor escura, para fundos claros |
-| `produtos/citrachat/logo/Logo_citrachat-03.png` | Logo completo — wordmark em branco, para fundos escuros (Void, dark mode) |
+| `produtos/citrachat/logo/Logo_citrachat-01.png` | Ícone isolado — app, favicon, avatar |
+| `produtos/citrachat/logo/Logo_citrachat-02.png` | Logo completo — wordmark escuro, para fundos claros |
+| `produtos/citrachat/logo/Logo_citrachat-03.png` | Logo completo — wordmark branco, para fundos escuros (Void) |
 
 **Ícone:** C-arc lettermark em quadrado lime (`#C8FF2E`) com bordas arredondadas.
 **Wordmark:** "Citra•Chat" em Bricolage Grotesque ExtraBold com separador circular lime.
 
+### Regras de posicionamento (4 posições válidas)
+
+| Posição | Fundo | Quando usar |
+|---|---|---|
+| **Topo esquerda** | Void (padrão) | Posts informativos, educativos, séries. Padrão. |
+| **Base esquerda** | Cream (editorial) | Posts editoriais e light mode — logo como rodapé discreto |
+| **Topo direita** | Lime pop | Posts com fundo lime — logo no canto oposto ao dado |
+| **Base centralizada** | Void (CTA) | Slides de encerramento e CTA — ancora o post |
+
 ### Regras de uso do logo
-- Mínimo 32px para o ícone; mínimo 28px para o wordmark
-- Área de respiro: mínimo 50% da altura do ícone em todos os lados
-- Fundos válidos: Void (`#13111E`), Cream (`#F8F4EB`), branco
-- Nunca comprimir, girar ou alterar as cores do logo
-- Em posts: usar apenas o ícone (`-01`) no canto — não o logo completo
+
+- Sempre usar o lockup horizontal (ícone + wordmark) — nunca ícone sozinho como única assinatura
+- Mínimo: ícone 32px + wordmark 28px
+- Sempre dentro da margem de segurança de 90px
+- Ponto do wordmark: **Lime** (`#C8FF2E`) em fundo escuro · **Lime Dark** (`#2F6B10`) em fundo claro
+- Nunca recolorizar o ícone (sempre lime em qualquer fundo)
+- Nunca sombra, efeito ou distorção
+- Nunca logo cortado pela borda do post
 
 ---
 
 ## Paleta
 
-### Acentos (usar um dominante por peça)
+### Acentos — usar **um dominante por post**
 
 | Nome | Hex | OKLCH | Quando usar |
 |---|---|---|---|
-| **Pulse** (lime) | `#C8FF2E` | `oklch(88% 0.22 130)` | CTA, dado ao vivo, destaque primário, primeiro slide, lançamento |
-| **Warmth** (coral) | `#E05C3E` | `oklch(65% 0.18 28)` | Performance, conversão, depoimento, urgência, conteúdo humano |
-| **Clarity** (sky) | `#3E88D4` | `oklch(62% 0.17 242)` | White-label, features técnicas, precisão, conteúdo de tecnologia |
-| **Ember** (amber) | `#E8A040` | `oklch(76% 0.15 52)` | Alertas em dados, queda de métrica — nunca dominante |
-
-> Regra: nunca dois acentos com mesmo peso visual. Um domina, o outro aparece como detalhe ou não aparece.
+| **Pulse** (lime) | `#C8FF2E` | `oklch(88% 0.22 130)` | CTA, dado ao vivo, destaque primário, primeiro slide, lançamento, fundo de alto impacto |
+| **Warmth** (coral) | `#E05C3E` | `oklch(65% 0.18 28)` | Performance, conversão, tracking (GTM/Meta/Ads), depoimento, urgência, conteúdo humano |
+| **Clarity** (sky) | `#3E88D4` | `oklch(62% 0.17 242)` | White-label, features técnicas (RAG, API, integrações), conteúdo educativo de IA |
+| **Ember** (amber) | `#E8A040` | `oklch(76% 0.15 52)` | Seta de queda em dados, alerta, métrica negativa — **nunca dominante, nunca como fundo** |
 
 ### Neutros
 
 | Nome | Hex | OKLCH | Uso |
 |---|---|---|---|
 | **Void** | `#13111E` | `oklch(9% 0.015 260)` | Background dark mode |
-| **Cream** | `#F8F4EB` | `oklch(97.5% 0.010 85)` | Background light mode |
+| **Cream** | `#F8F4EB` | `oklch(97.5% 0.010 85)` | Background light/editorial |
 | **Ink** | `#13111E` | `oklch(12% 0.018 260)` | Texto primário, botões dark |
+| **Lime Dark** | `#2F6B10` | `oklch(38% 0.20 130)` | Lime sobre fundo claro (contraste garantido) |
+
+### Combinações válidas
+
+| Combinação | Quando usar |
+|---|---|
+| **Lime + Void** | Primária. Alto contraste, máximo impacto. Lançamentos, dados principais. |
+| **Lime Dark + Cream** | Editorial. Mais respirável. Séries, conteúdo educativo. |
+| **Coral + Cream** | Resultados, depoimentos. Cream como fundo, coral só como acento/número. |
+| **Sky + Void** | Conteúdo técnico/B2B. Sky como cor do número ou headline principal. |
+| **Lime como fundo** | Alto impacto. Logo e texto sempre em Void (`#13111E`). Nunca branco sobre lime. |
+| **Ember** | Só em detalhe (seta, indicador). Nunca como fundo ou cor dominante. |
+
+### Contraste mínimo
+
+| Fundo | Primário | Secundário mín. | Muted mín. | Proibido |
+|---|---|---|---|---|
+| **Void** | `oklch(97%...)` branco | `oklch(72%...)` | `oklch(62%...)` | Nunca abaixo de oklch(55%) |
+| **Cream** | `oklch(12%...)` ink | `oklch(40%...)` | `oklch(50%...)` | Nunca abaixo de oklch(45%) |
+| **Lime** | `oklch(12%...)` ink | `oklch(22%...)` | — | Nunca branco, nunca cinza claro |
 
 ---
 
 ## Tipografia
 
-| Papel | Família | Pesos | Observação |
-|---|---|---|---|
-| Display / Headings | **Bricolage Grotesque** | 800, 700, 600, 400 | Variable · opsz 12–96 · Google Fonts |
-| UI / Body | **Plus Jakarta Sans** | 700, 600, 500, 400 | Variable · Google Fonts |
+| Estilo | Família | Peso | Mín. | Ideal | Quando usar |
+|---|---|---|---|---|---|
+| **Número Hero** | Bricolage Grotesque | 800 | 180px | 220–280px | Dado único como herói do post. Um por slide, máximo. |
+| **Headline** | Bricolage Grotesque | 800 | 72px | 88–120px | Frase principal. Máx. 2–4 linhas. |
+| **Sub-headline** | Bricolage Grotesque | 600 | 52px | 60–72px | Apoio à headline. Sempre menor. |
+| **Body** | Plus Jakarta Sans | 400–500 | 34px | 38–44px | Texto explicativo. Máx. 3 linhas por bloco. |
+| **Label / Tag** | Plus Jakarta Sans | 600–700 | 26px | 28–32px | Série, categoria, data. Uppercase + tracking positivo. Discreto. |
+| **Assinatura** | Bricolage Grotesque | 700 | 28px | 30–36px | Sempre com ícone. Fora da área de conteúdo principal. |
 
-**Escala de tamanhos (posts 1080×1350):**
+### Regras tipográficas
 
-| Nível | Família | Tamanho | Peso | Uso |
-|---|---|---|---|---|
-| Hero / Dado principal | Bricolage | 180–300px | 800 | Número de impacto, hook principal |
-| Título H1 | Bricolage | 96–140px | 800 | Título de slide |
-| Subtítulo H2 | Bricolage | 56–72px | 700 | Complemento do título |
-| Corpo | Jakarta Sans | 42–54px | 500 | Texto corrido, explicação |
-| Caption / Rodapé | Jakarta Sans | 30–36px | 600 | Assinatura, handle, crédito |
+- **Letter-spacing headlines:** -4% a -5% (nunca positivo em headlines grandes)
+- **Letter-spacing labels uppercase:** positivo (0.10–0.14em)
+- **Line-height headlines:** 0.90–1.0 (compacto)
+- **Line-height body:** 1.4–1.55 (com respiro)
+- Máx. 2–4 linhas em headline · máx. 3 linhas por bloco de body
 
 ---
 
@@ -75,50 +107,78 @@ Baseado no Brand Guide v3 (Claude Design) + logos oficiais aprovados.
 | Canvas story / Reels cover | 1080 × 1920 px |
 | **Margem de segurança (feed)** | **90 px em todos os lados** |
 | Área de conteúdo segura (feed) | 900 × 1170 px |
-| Margem de segurança (story) | 80 px |
-| Zona central segura (story) | 920 × 1060 px |
+| Margem stories | 80 px · zona central segura 920 × 1060 px |
 
-> Todo texto, dado e elemento visual deve estar dentro da área de conteúdo segura.
+---
+
+## Sistema de dados
+
+### Anatomia de um slide de dados (ordem visual)
+
+1. **Label / Série** — categoria, período ou contexto. Uppercase, tracking positivo, cor muted.
+2. **Dado Hero** — o número principal. Bricolage 800, mín. 180px. Lime em dark, Lime Dark em cream. **Um único dado por slide.**
+3. **Contexto** — o que o número significa. Máx. 2 linhas. Nunca deixar dado sem explicação.
+4. **Fonte / Período** — de onde vem e quando foi coletado. Cor muted. Obrigatório para credibilidade B2B.
+
+### Indicadores de variação
+
+- Seta **↑ + Lime** para crescimento
+- Seta **↓ + Ember** para queda
+- Nunca verde/vermelho genéricos — usar sempre Pulse e Ember
+
+### Regras gerais de dados
+
+- Máximo 2 dados por slide
+- Todo dado precisa de: número + contexto + fonte/período
 
 ---
 
 ## Modos de fundo (posts)
 
-| Modo | Fundo | Acento | Quando usar |
+| Modo | Fundo | Acento | Template |
 |---|---|---|---|
-| **Dark** (padrão) | Void `#13111E` | Pulse `#C8FF2E` | Conteúdo técnico, educação, dados, produto |
-| **Cream** | `#F8F4EB` | Warmth `#E05C3E` | Depoimento, resultado humano, suavidade |
-| **Lime** | Pulse `#C8FF2E` | Ink `#13111E` | Hook forte, afirmação de impacto, CTA |
-| **Dark + Sky** | Void `#13111E` | Clarity `#3E88D4` | White-label, features avançadas |
+| **Dark** (padrão) | Void `#13111E` | Pulse `#C8FF2E` | `bg-void` |
+| **Cream** (editorial) | `#F8F4EB` | Warmth `#E05C3E` ou Lime Dark | `bg-cream` |
+| **Lime** (alto impacto) | Pulse `#C8FF2E` | Ink `#13111E` | `bg-pulse` |
+| **Dark + Sky** (técnico) | Void `#13111E` | Clarity `#3E88D4` | `bg-void` com `.clarity` |
 
 ---
 
-## Assinatura em posts
+## Do's & Don'ts
 
-- **Ícone:** `Logo_citrachat-01.svg` — canto superior esquerdo ou inferior esquerdo, dentro da margem de 90px
-- **Handle:** `@citrachat` em Jakarta Sans 600, 30–36px
-- **Wordmark:** apenas em slides de capa ou CTA final
+### Fazer sempre
+- Dado + contexto + fonte no mesmo slide
+- Um acento dominante por post
+- Logo dentro da margem de 90px
+- Lime pop: logo topo direita, texto e ícone em Void
 
----
-
-## Elementos fixos dos slides
-
-### Numeração (slides internos de carrossel)
-- Canto superior esquerdo
-- Plus Jakarta Sans 600, 28px, itálico
-- Cor: Pulse `#C8FF2E` nos fundos escuros; Ink `#13111E` nos fundos claros
-
-### Rodapé de post
-- Handle `@citrachat` + ícone
-- Posição: 90px do fundo (dentro da margem)
+### Nunca fazer
+- 4 cores de acento no mesmo post (Lime + Coral + Sky + Ember juntos)
+- Dado isolado sem contexto nem fonte
+- Logo cortado pela borda ou fora da margem de 90px
+- Branco sobre fundo lime
+- Ícone sozinho sem wordmark como assinatura do post
+- Sombra, efeito ou distorção no logo
 
 ---
 
-## Regras de copy (não de design, mas complementares)
+## Template e renderer
 
-- Nunca usar "chatbot" — sempre **agentes conversacionais** ou **agente**
-- O argumento central: o agente tem **comportamento humano**
-- Copy público nunca usa travessão (—), markdown, clichês de IA
+| Arquivo | Descrição |
+|---|---|
+| `scripts/templates/slide-citrachat.html` | Template HTML do renderer — CSS da identidade CitraChat |
+| `scripts/compose-slides.js` | Script que gera PNGs a partir de config.json |
+
+**Parâmetros do config.json para CitraChat:**
+```json
+{
+  "templateFile": "slide-citrachat.html",
+  "margin": 90,
+  "logoPng": "../../../logo/Logo_citrachat-03.png",
+  "footerHandle": "@citra.chat",
+  "footerSlogan": "Agentes que convertem."
+}
+```
 
 ---
 
@@ -126,6 +186,6 @@ Baseado no Brand Guide v3 (Claude Design) + logos oficiais aprovados.
 
 | Arquivo | Conteúdo |
 |---|---|
-| `referencias/brand-guide-v3-claudedesign.html` | Brand Guidelines v3 oficial — logo, cores, tipografia, templates |
-| `referencias/instagram-guide-claudedesign.html` | Instagram Brand Guide — grid, regras de cor, Do's & Don'ts |
+| `referencias/instagram-guide-claudedesign.html` | Instagram Brand Guide oficial completo |
+| `referencias/brand-guide-v3-claudedesign.html` | Brand Guidelines v3 — logo, cores, tipografia |
 | `referencias/logo-comparativo-final.html` | Comparativo C-arc vs Agent Face (decisão: C-arc) |

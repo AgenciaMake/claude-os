@@ -91,17 +91,19 @@ Assets (logo, mockups, screenshots do produto): [identidade-visual/](identidade-
 
 Referências estéticas: [referencias/](referencias/)
 
-**Resumo da paleta:**
-- Destaque: `#DFFF00` (lime elétrico — cor principal do produto)
-- Fundo primário: `#09090b` (preto profundo — dark mode do produto)
-- Fundo secundário: `#18181b` (zinc-900)
-- Texto claro: `#FFFFFF`
-- Texto muted: `#71717a` (zinc-500)
-- Acento alternativo: `#ffffff` com bordas ou opacidade
+**Paleta oficial (Instagram Brand Guide, Jun 2026):**
+- **Pulse** `#C8FF2E` — acento primário, lime. Dado hero, CTAs, destaque
+- **Warmth** `#E05C3E` — coral. Performance, resultados, urgência
+- **Clarity** `#3E88D4` — sky. Conteúdo técnico/IA, white-label
+- **Ember** `#E8A040` — amber. Só indicador negativo em dados, nunca dominante
+- **Void** `#13111E` — fundo dark mode (padrão)
+- **Cream** `#F8F4EB` — fundo editorial light
 
-**Tipografia:** Rubik (mesma base técnica dos slides Make)
+**Regra de cor:** um acento dominante por post. Nunca 4 acentos juntos.
 
-**Grid:** 70px em todos os lados (mesmo sistema da Make)
+**Tipografia:** Bricolage Grotesque 800 (headlines e dados) + Plus Jakarta Sans 400-700 (body e labels)
+
+**Grid:** 90px em todos os lados · área segura 900×1170px
 
 ---
 
