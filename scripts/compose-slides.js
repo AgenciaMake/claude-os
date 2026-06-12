@@ -15,6 +15,10 @@ const LOGO_SVG_PATH = path.resolve(__dirname, "../make/social/identidade-visual/
 const SAFE_AREA_FEED  = { width: 940, height: 1100 };
 const SAFE_AREA_STORY = { width: 940, height: 1480 };
 
+// Safe areas alternativas (CitraChat usa 90px → área útil 900×1170)
+const SAFE_AREA_FEED_90  = { width: 900, height: 1170 };
+const SAFE_AREA_STORY_90 = { width: 900, height: 1740 };
+
 // Cor do duplo chevron de continuidade, contrastando com o fundo do slide.
 const ARROW_COLOR = {
   'black':        '#ffffff',
@@ -67,7 +71,7 @@ async function fitContent(page, safeArea) {
   }, safeArea);
 }
 
-async function renderSlide(browser, template, slide, outPath, slideHeight, safeArea, configFlags) {
+async function renderSlide(browser, template, slide, outPath, slideHeight, safeArea, configFlags, configLogoPng) {
   let html = template;
 
   // Background. Se tem coverImage (TV4) ou fullBleedImage, adiciona a div da imagem + ajusta classes.
@@ -114,13 +118,15 @@ async function renderSlide(browser, template, slide, outPath, slideHeight, safeA
   }
   html = html.replace("{{TOP_LEFT}}", topLeft);
 
-  // Top-right (selo Make nas capas). slide.noLogo = true omite o logo.
-  // logoStyle: "png-oficial" (default) | "svg-{cor}" — ex: "svg-#000000", "svg-#434244", "svg-#FFFFFF"
+  // Top-right (selo nas capas). slide.noLogo = true omite o logo.
+  // logoStyle: "png-oficial" (default) | "svg-{cor}" — ex: "svg-#000000"
+  // configLogoPng: override do logo via config (ex: CitraChat)
   let topRight = "";
   if (!noTopElements && slide.isCover && !slide.noLogo) {
     const style = slide.logoStyle || "png-oficial";
-    if (style === "png-oficial") {
-      const logoData = fs.readFileSync(LOGO_PNG_PATH).toString("base64");
+    const activeLogo = configLogoPng || LOGO_PNG_PATH;
+    if (style === "png-oficial" || configLogoPng) {
+      const logoData = fs.readFileSync(activeLogo).toString("base64");
       topRight = `<div class="logo-top"><img src="data:image/png;base64,${logoData}" alt=""></div>`;
     } else if (style.startsWith("svg-")) {
       const fill = style.slice(4);
@@ -155,10 +161,11 @@ async function renderSlide(browser, template, slide, outPath, slideHeight, safeA
   // Footer (não no CTA, não quando noFooter). Override de cor: slide.footerColor
   let footer = "";
   if (!slide.isCta && !noFooter) {
-    const slogan = slide.footerSlogan || "Menos Ruído. Mais Resultado.";
+    const slogan = slide.footerSlogan || configFlags.footerSlogan || "Menos Ruído. Mais Resultado.";
+    const handle = slide.footerHandle || configFlags.footerHandle || "@make.lemonad";
     const colorStyle = slide.footerColor ? ` style="color:${slide.footerColor};"` : "";
     footer = `<div class="footer"${colorStyle}>
-      <span class="handle">@make.lemonad</span>
+      <span class="handle">${handle}</span>
       <span class="signature"><em>${slogan}</em></span>
     </div>`;
   }
@@ -209,12 +216,20 @@ async function main() {
   fs.mkdirSync(outDir, { recursive: true });
 
   const slideHeight = config.height || 1350;
-  const safeArea = slideHeight === 1920 ? SAFE_AREA_STORY : SAFE_AREA_FEED;
+  const margin90 = config.margin === 90;
+  const safeArea = slideHeight === 1920
+    ? (margin90 ? SAFE_AREA_STORY_90 : SAFE_AREA_STORY)
+    : (margin90 ? SAFE_AREA_FEED_90  : SAFE_AREA_FEED);
   const templateFile = config.templateFile || "slide.html";
   const template = fs.readFileSync(path.resolve(__dirname, "templates", templateFile), "utf8");
+  const configLogoPng = config.logoPng
+    ? path.resolve(path.dirname(configPath), config.logoPng)
+    : null;
   const configFlags = {
-    noTopElements: config.noTopElements || false,
-    noFooter: config.noFooter || false,
+    noTopElements:  config.noTopElements  || false,
+    noFooter:       config.noFooter       || false,
+    footerHandle:   config.footerHandle   || null,
+    footerSlogan:   config.footerSlogan   || null,
   };
 
   const slides = filterFilename
@@ -226,7 +241,7 @@ async function main() {
   const browser = await chromium.launch();
   for (const slide of slides) {
     const outPath = path.join(outDir, slide.filename);
-    await renderSlide(browser, template, slide, outPath, slideHeight, safeArea, configFlags);
+    await renderSlide(browser, template, slide, outPath, slideHeight, safeArea, configFlags, configLogoPng);
     console.log(`  OK: ${slide.filename}`);
   }
   await browser.close();
