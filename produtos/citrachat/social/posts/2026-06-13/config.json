@@ -1,0 +1,17 @@
+{
+  "outDir": ".",
+  "templateFile": "slide-citrachat.html",
+  "margin": 90,
+  "logoPng": "../../../logo/Logo_citrachat-02.png",
+  "footerHandle": "@citra.chat",
+  "footerSlogan": "Agentes que convertem.",
+  "slides": [
+    {
+      "filename": "teaser-chatbot.png",
+      "bg": "cream",
+      "noLogo": true,
+      "noArrow": true,
+      "content": "<div style='display:flex;flex-direction:column;gap:28px;width:100%;'><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:52px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;color:#13111E;'>O cliente fez uma pergunta simples.</p><div style='display:flex;justify-content:flex-end;'><div style='background:#DCF8C6;border-radius:18px 18px 4px 18px;padding:20px 28px;max-width:78%;box-shadow:0 1px 3px rgba(0,0,0,0.08);'><p style='font-family:\"Plus Jakarta Sans\",sans-serif;font-size:36px;font-weight:400;line-height:1.45;color:#13111E;'>Olá, tudo bem?<br>Quanto custa o serviço?</p></div></div><p style='font-family:\"Plus Jakarta Sans\",sans-serif;font-size:36px;font-weight:400;line-height:1.45;color:rgba(19,17,30,0.55);'>O chatbot pediu para ele <em style=\"font-style:normal;font-weight:600;color:#13111E;\">&ldquo;escolher uma opção&rdquo;.</em></p><div style='display:flex;justify-content:flex-start;'><div style='background:#FFFFFF;border-radius:18px 18px 18px 4px;padding:20px 28px;max-width:78%;box-shadow:0 1px 3px rgba(0,0,0,0.10);border:1px solid rgba(0,0,0,0.06);'><p style='font-family:\"Plus Jakarta Sans\",sans-serif;font-size:30px;font-weight:400;line-height:1.6;color:#13111E;'>1. Financeiro<br>2. Suporte técnico<br>3. Comercial<br>4. SAC<br>5. Outros assuntos</p></div></div><div style='display:flex;align-items:center;gap:16px;'><div style='flex:1;height:1px;background:rgba(224,92,62,0.3);'></div><p style='font-family:\"Plus Jakarta Sans\",sans-serif;font-size:28px;font-weight:600;letter-spacing:0.04em;color:#E05C3E;white-space:nowrap;'>Lead saiu da conversa.</p><div style='flex:1;height:1px;background:rgba(224,92,62,0.3);'></div></div></div>"
+    }
+  ]
+}
