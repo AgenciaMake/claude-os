@@ -56,11 +56,11 @@ O print do painel de billing confirma:
 
 ### Limite de gastos estava em US$ 200.000
 
-Ao investigar o incidente, Bruno verificou o limite de gastos configurado na conta e encontrou o valor de **US$ 200.000** — não US$ 100. O limite de $100 foi definido por Bruno *após* a descoberta do problema, como medida de contenção emergencial.
+Ao investigar o incidente, Bruno verificou o limite de gastos configurado na conta e encontrou o valor de **US$ 200.000** — não US$ 100. A reação imediata, por medo de que o consumo continuasse, foi alterar o limite para $100 sem registrar o print. **Não há captura de tela desse estado**, pois a alteração foi feita de forma instintiva sob o impacto da descoberta — o que é compreensível dado o pânico financeiro do momento.
 
-O limite de US$ 200.000 **nunca foi configurado conscientemente pelo usuário**. Esse valor só pode ter sido definido como padrão da plataforma ou durante o processo de configuração inicial do Claude Code — sem que Bruno tivesse ciência ou tivesse autorizado explicitamente esse teto. Um limite de $200.000 em uma conta de desenvolvimento individual não tem qualquer justificativa e representa um risco financeiro absurdo imposto silenciosamente ao usuário.
+O limite de US$ 200.000 **nunca foi configurado conscientemente pelo usuário**. Bruno não tem memória de ter definido esse valor em nenhum momento, e não faria sentido algum configurar um teto dessa magnitude para uma conta de desenvolvimento individual. Esse valor só pode ter sido imposto como padrão da plataforma ou definido automaticamente durante o processo de setup do Claude Code — sem que Bruno tivesse sido informado ou tivesse dado consentimento explícito.
 
-Isso é agravante direto: a Anthropic operou a conta com um limite que permitia cobranças de até $200.000, sem comunicar esse valor ao usuário e sem obter consentimento explícito para um teto dessa magnitude.
+Isso é agravante direto: a Anthropic operou a conta com um limite que permitia cobranças de até $200.000 sem comunicar ao usuário qual era o teto ativo, criando a condição para que os consumos autônomos de madrugada atingissem os valores registrados sem qualquer bloqueio automático.
 
 ### Admissão de erro pelo próprio Claude Code
 
