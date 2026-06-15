@@ -50,9 +50,17 @@ Durante sessões de desenvolvimento do produto CitraChat/CitraDesk via **Claude 
 O print do painel de billing confirma:
 - Saldo: **-US$ 2.216,41** (saldo não pago)
 - Gasto total: **US$ 2.226,99**
-- Limite configurado: **US$ 100** (ultrapassado em 22x)
+- Limite configurado no momento da descoberta: **US$ 100** (ultrapassado em 22x)
 - Recarga automática: **desativada**
 - Status: **"Saldo não pago"**
+
+### Limite de gastos estava em US$ 200.000
+
+Ao investigar o incidente, Bruno verificou o limite de gastos configurado na conta e encontrou o valor de **US$ 200.000** — não US$ 100. O limite de $100 foi definido por Bruno *após* a descoberta do problema, como medida de contenção emergencial.
+
+O limite de US$ 200.000 **nunca foi configurado conscientemente pelo usuário**. Esse valor só pode ter sido definido como padrão da plataforma ou durante o processo de configuração inicial do Claude Code — sem que Bruno tivesse ciência ou tivesse autorizado explicitamente esse teto. Um limite de $200.000 em uma conta de desenvolvimento individual não tem qualquer justificativa e representa um risco financeiro absurdo imposto silenciosamente ao usuário.
+
+Isso é agravante direto: a Anthropic operou a conta com um limite que permitia cobranças de até $200.000, sem comunicar esse valor ao usuário e sem obter consentimento explícito para um teto dessa magnitude.
 
 ### Admissão de erro pelo próprio Claude Code
 
@@ -188,7 +196,10 @@ A Anthropic não documenta adequadamente que subagentes de Workflows e a presen�
 **2. A presença de uma API key no ambiente sobrepôs silenciosamente o plano MAX, sem qualquer aviso.**  
 O Claude Code deveria alertar o usuário quando detecta uma chave de API no ambiente e o usuário tem uma assinatura MAX ativa. Isso nunca ocorreu.
 
-**3. Workflows que disparam subagentes em paralelo de madrugada representam risco financeiro não comunicado.**  
+**3. O limite de gastos estava configurado em US$ 200.000 sem conhecimento ou consentimento do usuário.**  
+Bruno jamais definiria conscientemente um teto de $200.000 para uma conta pessoal de desenvolvimento. Esse valor foi encontrado na conta no momento da investigação e alterado para $100 como contenção de emergência. A Anthropic não comunicou ao usuário qual era o limite ativo na conta, nem obteve consentimento explícito para operá-la com esse teto. Isso criou a condição para que o consumo autônomo de madrugada atingisse valores tão elevados sem qualquer bloqueio.
+
+**4. Workflows que disparam subagentes em paralelo de madrugada representam risco financeiro não comunicado.**  
 O usuário não autorizou explicitamente uso de Opus em horários onde estava dormindo. O sistema operou de forma autônoma gerando custos em 28/05, 05/06 e 06/06 — sempre de madrugada.
 
 **4. O modelo Opus foi utilizado repetidamente mesmo após instrução explícita do usuário de não usá-lo.**  
