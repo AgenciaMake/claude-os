@@ -9,7 +9,40 @@
 
 Bruno Martins é assinante do plano **Claude MAX** (makelemonad@gmail.com), que cobre uso ilimitado do Claude para desenvolvimento e uso pessoal. A expectativa era que todo o trabalho realizado via Claude Code (extensão VS Code) fosse debitado do plano MAX — **sem qualquer consumo de créditos de API**.
 
-Ao longo de junho de 2026, ocorreram **três episódios consecutivos** de cobranças inesperadas na conta de API da Anthropic (`console.anthropic.com`), totalizando prejuízo superior a **$10 USD** em créditos que nunca deveriam ter sido consumidos.
+Ao longo de maio e junho de 2026, ocorreram **quatro episódios consecutivos** de cobranças inesperadas na conta de API da Anthropic (`console.anthropic.com`), totalizando prejuízo superior a **$10 USD** em créditos que nunca deveriam ter sido consumidos.
+
+---
+
+## Incidente 0 — Widget público do CitraChat rodando com Opus + Thinking Adaptive
+**Data de descoberta:** 28 de maio de 2026  
+**Impacto:** 2.567 hits de rate limit; custo ~50x acima do necessário
+
+### O que aconteceu
+
+O widget de chat público do CitraChat (produto em desenvolvimento) foi configurado com o modelo `claude-opus-4-7` e `thinking: adaptive` — a combinação mais cara disponível na API Anthropic. Esse erro foi introduzido durante sessões de desenvolvimento e ficou ativo no ambiente, consumindo créditos de API a cada interação com o widget.
+
+Na data de descoberta (28/05/2026), o sistema já havia gerado **2.567 hits de rate limit**, evidenciando volume significativo de chamadas de Opus em modo de raciocínio avançado.
+
+### Diagnóstico registrado
+
+Citação direta do assistente em 28/05/2026:
+
+> *"Aí está o problema. O chat está usando `claude-opus-4-7` com `thinking: adaptive` — o modelo mais caro com o modo mais caro. Cada mensagem no chat da Limonete está consumindo Opus + thinking. Isso explica os 2.567 hits de rate limit."*
+
+### Comparativo de custo
+
+| Configuração | Modelo | Custo por mensagem |
+|---|---|---|
+| Configuração incorreta | claude-opus-4-7 + thinking | ~$0,015 |
+| Configuração correta | claude-haiku-4-5 | ~$0,0003 |
+| **Diferença** | | **~50x mais caro** |
+
+### Resolução
+Modelo trocado para `claude-haiku-4-5-20251001` no widget público. O Opus **nunca deveria ter sido usado** no chat público — é o modelo destinado a tarefas internas de alta complexidade, não a conversas em tempo real com visitantes do site.
+
+### Agravante: instrução prévia ignorada
+
+Bruno já havia determinado antes deste episódio que o modelo Opus **não deveria ser utilizado** no projeto. O Claude Code ignorou essa instrução ao configurar o widget e o AI Analyst com Opus, caracterizando **reincidência em descumprimento de diretriz explícita do usuário**.
 
 ---
 
@@ -111,13 +144,16 @@ Configurações adicionadas ao `~/.claude/settings.json` para bloquear uso de Op
 
 | Data/Hora | Evento | Impacto |
 |---|---|---|
-| Antes de 01/06 | `ANTHROPIC_API_KEY` no ambiente → sessões de desenvolvimento faturadas na API | -$2.216 |
-| 01/06 às 09h23 | Bruno descobre cobrança via print do billing | — |
+| 26/05 | Opus 4.7 ativado no AI Analyst do CitraDesk (substituindo Gemini) | Início do acúmulo |
+| 28/05 — madrugada | Widget público do CitraChat rodando Opus + thinking adaptive → 2.567 rate limit hits | Custo ~50x acima do necessário |
+| 28/05 | Modelo corrigido para Haiku no widget público | Parcialmente resolvido |
+| 26–31/05 | Sessões de desenvolvimento do CitraDesk acumulando consumo com `ANTHROPIC_API_KEY` no shell | -$2.216 acumulados |
+| 01/06 às 09h23 | Bruno descobre cobrança de $2.216 via print do billing | — |
 | 01/06 às 09h38 | Claude Code admite o erro: chave no ambiente foi priorizada sobre MAX | — |
 | 01/06 às 09h59 | API key nova exposta no chat por engano → rotacionada imediatamente | Chave rotacionada |
 | 01/06 | ANTHROPIC_API_KEY removida, reautenticação MAX realizada | Resolvido parcialmente |
-| 05/06 às 05h00 | Workflow com ~80 subagentes Opus roda de madrugada sem ação do usuário | -$8-9 |
-| 05/06 às 08h40 | Bruno descobre consumo noturno via console | 3ª ocorrência |
+| 05/06 às 05h00 UTC — madrugada | Workflow com ~80 subagentes Opus roda de madrugada sem ação do usuário | -$8-9 |
+| 05/06 às 08h40 | Bruno descobre consumo noturno via console — 4ª ocorrência | — |
 | 05/06 às 09h15 | Bruno determina: API exclusiva para widget do CitraChat | — |
 | 05/06 | Bloqueio de Opus + `forceLoginMethod: claudeai` aplicados | Resolvido |
 
@@ -131,7 +167,9 @@ Configurações adicionadas ao `~/.claude/settings.json` para bloquear uso de Op
 
 3. **Workflows que disparam subagentes Opus em paralelo de forma autônoma (inclusive de madrugada) representam risco financeiro não comunicado.** O usuário não autorizou explicitamente o uso de modelos Opus via API — apenas solicitou uma pesquisa de benchmark no contexto de uma sessão MAX.
 
-4. **Reincidência em três episódios consecutivos** aponta para falha sistêmica de comunicação e não para erro isolado do usuário.
+4. **O Claude Code utilizou o modelo Opus repetidamente mesmo após instrução explícita do usuário de não usá-lo.** Essa diretriz foi ignorada ao configurar o widget público, o AI Analyst e ao disparar workflows com subagentes Opus — caracterizando reincidência em descumprimento de instrução direta.
+
+5. **Reincidência em quatro episódios consecutivos** (28/05, acúmulo de 26–31/05, 01/06 e 05/06) aponta para falha sistêmica do produto e não para erro isolado do usuário.
 
 ---
 
