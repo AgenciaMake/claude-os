@@ -1,0 +1,70 @@
+{
+  "outDir": ".",
+  "slides": [
+    {
+      "filename": "slide01-capa.png",
+      "bg": "black",
+      "isCover": true,
+      "noLogo": true,
+      "content": "<div style='display:flex;flex-direction:column;gap:20px;'><div style='font-size:100px;font-weight:800;font-style:italic;line-height:0.9;letter-spacing:-3px;color:#fff;text-shadow:0 2px 24px rgba(0,0,0,0.8);'>Você usa o Claude todo dia.</div><div style='font-size:48px;font-weight:600;font-style:italic;line-height:1.1;letter-spacing:-1px;color:var(--lime);text-shadow:0 2px 16px rgba(0,0,0,0.9);margin-top:8px;'>Mas provavelmente não usa nem 10% do que ele consegue fazer.</div></div>"
+    },
+    {
+      "filename": "slide02-agenda.png",
+      "bg": "black",
+      "number": 1,
+      "content": "<div style='display:flex;flex-direction:column;gap:20px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(255,255,255,0.35);text-transform:uppercase;'>Skill de agenda</div><div style='font-size:72px;font-weight:900;font-style:italic;line-height:0.88;letter-spacing:-2px;color:#fff;text-transform:uppercase;'>Trabalha<br>enquanto<br>você dorme.</div><div style='width:48px;height:3px;background:var(--lime);'></div><div style='font-size:28px;font-weight:400;line-height:1.55;color:rgba(255,255,255,0.8);'>Você define a tarefa e o horário. O Claude executa sozinho, sem precisar da sua tela aberta.</div><div style='display:inline-block;background:rgba(214,222,35,0.12);border:1px solid rgba(214,222,35,0.3);padding:8px 16px;'><span style='font-size:20px;font-weight:600;color:var(--lime);font-style:italic;'>Relatórios, análises, posts agendados. No horário certo.</span></div></div>"
+    },
+    {
+      "filename": "slide03-socialmedia.png",
+      "bg": "lime",
+      "number": 2,
+      "numColor": "#000",
+      "footerColor": "#000",
+      "content": "<div style='display:flex;flex-direction:column;gap:20px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(0,0,0,0.4);text-transform:uppercase;'>Skill de social media</div><div style='font-size:72px;font-weight:900;font-style:italic;line-height:0.88;letter-spacing:-2px;color:#000;text-transform:uppercase;'>Um conteúdo.<br>Todas<br>as redes.</div><div style='width:48px;height:3px;background:#000;'></div><div style='font-size:28px;font-weight:400;line-height:1.55;color:rgba(0,0,0,0.8);'>Você cria uma vez. O Claude adapta pra Instagram, LinkedIn e TikTok com formato, tom e tamanho certos pra cada plataforma.</div><div style='display:inline-block;background:rgba(0,0,0,0.1);border:1px solid rgba(0,0,0,0.2);padding:8px 16px;'><span style='font-size:20px;font-weight:600;color:#000;font-style:italic;'>Zero retrabalho. Zero post genérico.</span></div></div>"
+    },
+    {
+      "filename": "slide04-video.png",
+      "bg": "black",
+      "number": 3,
+      "content": "<div style='display:flex;flex-direction:column;gap:20px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(255,255,255,0.35);text-transform:uppercase;'>Skill de vídeo</div><div style='font-size:72px;font-weight:900;font-style:italic;line-height:0.88;letter-spacing:-2px;color:#fff;text-transform:uppercase;'>Vídeo<br>virou<br>tudo.</div><div style='width:48px;height:3px;background:var(--lime);'></div><div style='font-size:28px;font-weight:400;line-height:1.55;color:rgba(255,255,255,0.8);'>Transcreve, resume, cria roteiro, gera legenda e transforma qualquer vídeo em artigo, post ou e-mail.</div><div style='display:inline-block;background:rgba(214,222,35,0.12);border:1px solid rgba(214,222,35,0.3);padding:8px 16px;'><span style='font-size:20px;font-weight:600;color:var(--lime);font-style:italic;'>Um vídeo vira 10 conteúdos em minutos.</span></div></div>"
+    },
+    {
+      "filename": "slide05-memoria.png",
+      "bg": "dark-gray",
+      "number": 4,
+      "content": "<div style='display:flex;flex-direction:column;gap:20px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(255,255,255,0.35);text-transform:uppercase;'>Skill de memória</div><div style='font-size:72px;font-weight:900;font-style:italic;line-height:0.88;letter-spacing:-2px;color:#fff;text-transform:uppercase;'>Claude<br>nunca<br>esquece.</div><div style='width:48px;height:3px;background:var(--lime);'></div><div style='font-size:28px;font-weight:400;line-height:1.55;color:rgba(255,255,255,0.8);'>Fecha o chat, abre no dia seguinte. O Claude lembra exatamente quem você é, onde parou e o contexto do seu negócio.</div><div style='display:inline-block;background:rgba(214,222,35,0.12);border:1px solid rgba(214,222,35,0.3);padding:8px 16px;'><span style='font-size:20px;font-weight:600;color:var(--lime);font-style:italic;'>Acabou o &ldquo;me explica tudo de novo&rdquo;.</span></div></div>"
+    },
+    {
+      "filename": "slide06-revisao.png",
+      "bg": "black",
+      "number": 5,
+      "content": "<div style='display:flex;flex-direction:column;gap:20px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(255,255,255,0.35);text-transform:uppercase;'>Skill de revisão</div><div style='font-size:72px;font-weight:900;font-style:italic;line-height:0.88;letter-spacing:-2px;color:#fff;text-transform:uppercase;'>Antes<br>de enviar,<br>ele revisa.</div><div style='width:48px;height:3px;background:var(--lime);'></div><div style='font-size:28px;font-weight:400;line-height:1.55;color:rgba(255,255,255,0.8);'>E-mail pra cliente, proposta, contrato, post. O Claude lê, aponta o que pode melhorar e reescreve se pedir.</div><div style='display:inline-block;background:rgba(214,222,35,0.12);border:1px solid rgba(214,222,35,0.3);padding:8px 16px;'><span style='font-size:20px;font-weight:600;color:var(--lime);font-style:italic;'>Seu segundo par de olhos. Disponível 24h.</span></div></div>"
+    },
+    {
+      "filename": "slide07-design.png",
+      "bg": "lime",
+      "number": 6,
+      "numColor": "#000",
+      "footerColor": "#000",
+      "content": "<div style='display:flex;flex-direction:column;gap:20px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(0,0,0,0.4);text-transform:uppercase;'>Skill de design</div><div style='font-size:72px;font-weight:900;font-style:italic;line-height:0.88;letter-spacing:-2px;color:#000;text-transform:uppercase;'>Cria sites<br>sem saber<br>programar.</div><div style='width:48px;height:3px;background:#000;'></div><div style='font-size:28px;font-weight:400;line-height:1.55;color:rgba(0,0,0,0.8);'>Landing page, portfólio, página de vendas. Você descreve o que quer, o Claude entrega o código pronto pra publicar.</div><div style='display:inline-block;background:rgba(0,0,0,0.1);border:1px solid rgba(0,0,0,0.2);padding:8px 16px;'><span style='font-size:20px;font-weight:600;color:#000;font-style:italic;'>277 mil downloads. A mais usada da comunidade.</span></div></div>"
+    },
+    {
+      "filename": "slide08-pesquisa.png",
+      "bg": "black",
+      "number": 7,
+      "content": "<div style='display:flex;flex-direction:column;gap:20px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(255,255,255,0.35);text-transform:uppercase;'>Skill de pesquisa</div><div style='font-size:72px;font-weight:900;font-style:italic;line-height:0.88;letter-spacing:-2px;color:#fff;text-transform:uppercase;'>Horas de<br>pesquisa<br>em minutos.</div><div style='width:48px;height:3px;background:var(--lime);'></div><div style='font-size:28px;font-weight:400;line-height:1.55;color:rgba(255,255,255,0.8);'>Concorrente, mercado, tendência, case. O Claude pesquisa, organiza e entrega um resumo estruturado pronto pra usar.</div><div style='display:inline-block;background:rgba(214,222,35,0.12);border:1px solid rgba(214,222,35,0.3);padding:8px 16px;'><span style='font-size:20px;font-weight:600;color:var(--lime);font-style:italic;'>Briefing completo. Sem abrir dez abas.</span></div></div>"
+    },
+    {
+      "filename": "slide09-automacao.png",
+      "bg": "dark-gray",
+      "number": 8,
+      "content": "<div style='display:flex;flex-direction:column;gap:20px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(255,255,255,0.35);text-transform:uppercase;'>Skill de automação</div><div style='font-size:72px;font-weight:900;font-style:italic;line-height:0.88;letter-spacing:-2px;color:#fff;text-transform:uppercase;'>Conecta<br>tudo que<br>você usa.</div><div style='width:48px;height:3px;background:var(--lime);'></div><div style='font-size:28px;font-weight:400;line-height:1.55;color:rgba(255,255,255,0.8);'>Notion, Gmail, Slack, Planilhas, CRM. O Claude entra nos seus sistemas e executa tarefas repetitivas no lugar de você.</div><div style='display:inline-block;background:rgba(214,222,35,0.12);border:1px solid rgba(214,222,35,0.3);padding:8px 16px;'><span style='font-size:20px;font-weight:600;color:var(--lime);font-style:italic;'>+500 ferramentas conectáveis. Hoje.</span></div></div>"
+    },
+    {
+      "filename": "slide10-cta.png",
+      "bg": "black",
+      "isCta": true,
+      "content": "<div style='display:flex;flex-direction:column;align-items:center;gap:28px;text-align:center;'><div style='font-size:52px;font-weight:900;font-style:italic;line-height:1.1;letter-spacing:-1.5px;color:#fff;text-transform:uppercase;'>IA não é sobre<br>usar o Claude.<br><span style='color:var(--lime);'>É sobre saber<br>o que pedir pra ele.</span></div><div style='font-size:24px;font-weight:400;line-height:1.6;color:rgba(255,255,255,0.75);'>A Make usa IA no dia a dia da operação.<br>Toda semana a gente compartilha o que funciona de verdade.</div><div style='font-size:24px;font-weight:700;color:#fff;'>Segue a Make. Salva esse post.</div><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;margin-top:12px;'></div>"
+    }
+  ]
+}
