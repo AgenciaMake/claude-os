@@ -12,7 +12,7 @@
       "noLogo": true,
       "noArrow": true,
       "noFooter": true,
-      "content": "<div style='display:flex;flex-direction:column;justify-content:space-between;height:1170px;'><div style='display:flex;flex-direction:column;gap:36px;padding-top:8px;'><p class='h1 ink' style='line-height:0.95;font-weight:700;opacity:0.70;'>Seu atendimento<br>fecha às 18h.</p><div style='width:64px;height:3px;background:rgba(224,92,62,0.30);'></div><p class='h1 warmth' style='line-height:0.95;font-weight:800;'>A dúvida do<br>cliente não.</p></div><div style='display:flex;justify-content:center;'><img src='../../../logo/Logo_citrachat-02.png' style='height:52px;width:auto;'></div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:64px;'><div style='display:flex;flex-direction:column;gap:36px;'><p class='h1 ink' style='line-height:0.95;font-weight:700;opacity:0.70;'>Seu atendimento<br>fecha às 18h.</p><div style='width:64px;height:3px;background:rgba(224,92,62,0.30);'></div><p class='h1 warmth' style='line-height:0.95;font-weight:800;'>A dúvida do<br>cliente não.</p></div><img src='../../../logo/Logo_citrachat-02.png' style='height:48px;width:auto;display:block;'></div>"
     }
   ]
 }
