@@ -8,11 +8,10 @@
   "slides": [
     {
       "filename": "teaser-18h.png",
-      "bg": "pulse",
+      "bg": "cream",
       "noLogo": true,
       "noArrow": true,
-      "footerColor": "rgba(19,17,30,0.55)",
-      "content": "<div style='display:flex;flex-direction:column;gap:48px;'><div style='display:flex;justify-content:flex-end;'><img src='../../../logo/Logo_citrachat-02.png' style='height:38px;width:auto;'></div><div style='display:flex;flex-direction:column;gap:36px;margin-top:40px;'><p class='h2 ink' style='line-height:1.0;font-weight:700;opacity:0.75;'>Seu atendimento<br>fecha às 18h.</p><div style='width:64px;height:3px;background:rgba(19,17,30,0.20);'></div><p class='h1 ink' style='line-height:0.95;font-weight:800;'>A dúvida do<br>cliente não.</p></div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;'><div style='display:flex;justify-content:flex-end;'><img src='../../../logo/Logo_citrachat-02.png' style='height:38px;width:auto;'></div><div style='display:flex;flex-direction:column;gap:36px;margin-top:40px;'><p class='h1 ink' style='line-height:0.95;font-weight:700;opacity:0.70;'>Seu atendimento<br>fecha às 18h.</p><div style='width:64px;height:3px;background:rgba(224,92,62,0.30);'></div><p class='h1 warmth' style='line-height:0.95;font-weight:800;'>A dúvida do<br>cliente não.</p></div></div>"
     }
   ]
 }

@@ -65,6 +65,7 @@ Baseado no Instagram Brand Guide oficial (Claude Design, Junho 2026).
 | **Lime Dark + Cream** | Editorial. Mais respirável. Séries, conteúdo educativo. |
 | **Coral + Cream** | Resultados, depoimentos. Cream como fundo, coral só como acento/número. |
 | **Sky + Void** | Conteúdo técnico/B2B. Sky como cor do número ou headline principal. |
+| **Sky + Cream** | Conteúdo técnico em tom mais acessível. Sky como acento em headline, fundo cream. |
 | **Lime como fundo** | Alto impacto. Logo e texto sempre em Void (`#13111E`). Nunca branco sobre lime. |
 | **Ember** | Só em detalhe (seta, indicador). Nunca como fundo ou cor dominante. |
 
