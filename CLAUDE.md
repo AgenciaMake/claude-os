@@ -1,5 +1,11 @@
 # MakeLemonAd — Claude Code OS
 
+## Restrições de modelo — OBRIGATÓRIO
+
+**Claude Opus está PROIBIDO neste workspace.** Nunca usar Opus em nenhuma chamada, skill, subagente ou ferramenta — incluindo deep-research, workflows e qualquer agent tool. Usar sempre Sonnet (padrão) ou Haiku (operações simples). Se alguma ferramenta ou skill tentar usar Opus, interromper e perguntar ao Bruno antes de prosseguir.
+
+---
+
 ## O que é esse workspace
 
 Esse é o escritório digital da MakeLemonAd — agência de marketing digital focada em performance estratégica 360º. Aqui ficam os arquivos que o Claude usa pra trabalhar contextualizado com o negócio, os clientes e a equipe.
