@@ -11,7 +11,7 @@
       "bg": "cream",
       "noLogo": true,
       "noArrow": true,
-      "content": "<div style='display:flex;flex-direction:column;gap:32px;width:100%;'><span class='label ink' style='opacity:0.40;'>percepção de marca</span><div style='line-height:0.88;'><span class='hero-num clarity'>88</span><span class='hero-num clarity' style='font-size:130px;'>%</span></div><div style='width:64px;height:2px;background:#3E88D4;opacity:0.35;'></div><p class='dado-ctx ink' style='max-width:820px;'>dos clientes dizem que a experiência de compra importa tanto quanto o produto.</p><p class='dado-ctx clarity' style='max-width:820px;font-weight:600;'>O atendimento não é suporte. É parte do produto.</p><p class='dado-fonte' style='margin-top:4px;'>Salesforce · State of the Connected Customer, 2024</p></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:32px;width:100%;'><span class='label ink' style='opacity:0.40;'>percepção de marca</span><div style='line-height:0.88;'><span class='hero-num clarity'>88</span><span class='hero-num clarity' style='font-size:130px;'>%</span></div><div style='width:64px;height:2px;background:#3E88D4;opacity:0.35;'></div><p class='dado-ctx ink' style='max-width:820px;'>dos clientes dizem que a experiência de compra importa tanto quanto o produto.</p><p class='dado-ctx clarity' style='max-width:820px;font-weight:600;'>O atendimento não é suporte.<br>É parte do produto.</p><p class='dado-fonte' style='margin-top:4px;'>Salesforce · State of the Connected Customer, 2024</p></div>"
     }
   ]
 }
