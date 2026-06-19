@@ -7,25 +7,18 @@
   "footerSlogan": "Agentes que convertem.",
   "slides": [
     {
-      "filename": "dado-5x-a.png",
+      "filename": "dado-5x-d.png",
       "bg": "void",
       "noLogo": true,
       "noArrow": true,
-      "content": "<div style='position:relative;width:100%;'><div style='position:absolute;top:-80px;left:-50px;font-family:\"Bricolage Grotesque\",sans-serif;font-size:480px;font-weight:800;color:#C8FF2E;opacity:0.06;line-height:1;letter-spacing:-0.05em;'>5×</div><div style='position:relative;z-index:1;display:flex;flex-direction:column;gap:400px;'><div style='display:flex;flex-direction:column;gap:16px;'><span class='label' style='opacity:0.35;'>retenção de clientes</span><div style='line-height:0.88;'><span class='hero-num pulse' style='font-size:320px;'>5</span><span class='hero-num pulse' style='font-size:160px;'>×</span></div></div><div style='display:flex;flex-direction:column;gap:12px;'><p class='dado-ctx' style='color:rgba(248,244,235,0.80);max-width:820px;'>mais barato reter do que conquistar.</p><p class='dado-fonte'>Harvard Business Review</p></div></div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><div style='display:flex;flex-direction:column;gap:0;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:280px;font-weight:800;color:#C8FF2E;line-height:0.85;letter-spacing:-0.05em;'>5×</span><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#C8FF2E;line-height:0.95;letter-spacing:-0.04em;'>mais barato</span></div><div style='display:flex;flex-direction:column;gap:16px;'><p class='dado-ctx' style='color:rgba(248,244,235,0.75);max-width:820px;'>reter um cliente do que conquistar um novo.</p><p class='dado-ctx' style='color:rgba(248,244,235,0.45);max-width:820px;font-size:32px;line-height:1.5;'>Mas a maioria das empresas investe exatamente ao contrário.</p><p class='dado-fonte' style='margin-top:4px;'>Harvard Business Review</p></div></div>"
     },
     {
-      "filename": "dado-5x-b.png",
+      "filename": "dado-5x-e.png",
       "bg": "void",
       "noLogo": true,
       "noArrow": true,
-      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><p class='h2' style='color:rgba(248,244,235,0.90);max-width:800px;line-height:1.05;'>Você paga muito mais pra conquistar um cliente do que pra manter um.</p><div style='width:64px;height:2px;background:#C8FF2E;opacity:0.40;'></div><div style='display:flex;align-items:baseline;gap:4px;line-height:0.88;'><span class='hero-num pulse'>5</span><span class='hero-num pulse' style='font-size:130px;'>×</span></div><p class='dado-fonte'>Harvard Business Review</p></div>"
-    },
-    {
-      "filename": "dado-5x-c.png",
-      "bg": "void",
-      "noLogo": true,
-      "noArrow": true,
-      "content": "<div style='display:flex;flex-direction:row;gap:56px;align-items:center;width:100%;min-height:900px;'><div style='flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;line-height:0.88;'><span class='hero-num pulse'>5</span><span class='hero-num pulse' style='font-size:160px;margin-top:-16px;'>×</span></div><div style='display:flex;flex-direction:column;gap:24px;flex:1;border-left:2px solid rgba(200,255,46,0.20);padding-left:48px;'><span class='label' style='opacity:0.35;'>retenção</span><p class='dado-ctx' style='color:rgba(248,244,235,0.80);'>mais barato reter um cliente do que conquistar um novo.</p><p class='dado-ctx pulse' style='font-weight:600;'>Mas a maioria<br>investe ao contrário.</p><p class='dado-fonte'>Harvard Business Review</p></div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><div style='display:flex;flex-direction:column;gap:0;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:280px;font-weight:800;color:#C8FF2E;line-height:0.85;letter-spacing:-0.05em;'>5×</span><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:rgba(248,244,235,0.90);line-height:0.95;letter-spacing:-0.04em;'>mais barato</span></div><div style='display:flex;flex-direction:column;gap:16px;'><p class='dado-ctx' style='color:rgba(248,244,235,0.65);max-width:820px;'>reter um cliente do que conquistar um novo.</p><p class='dado-ctx pulse' style='max-width:820px;font-weight:600;'>Mas a maioria investe<br>exatamente ao contrário.</p><p class='dado-fonte' style='margin-top:4px;'>Harvard Business Review</p></div></div>"
     }
   ]
 }
