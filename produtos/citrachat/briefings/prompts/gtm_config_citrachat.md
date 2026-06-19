@@ -24,6 +24,7 @@ Para cada evento abaixo, crie um acionador do tipo **Evento personalizado (Custo
 | CitraChat - Lead Qualificado | `citrachat_lead_qualified` |
 | CitraChat - Engajamento Profundo | `citrachat_chat_deep_engaged` |
 | CitraChat - Humano Solicitado | `citrachat_human_requested` |
+| CitraChat - Problema Resolvido | `citrachat_issue_resolved` |
 
 **Passos para cada acionador:**
 1. Menu lateral → **Acionadores** → botão **Novo**
@@ -34,7 +35,7 @@ Para cada evento abaixo, crie um acionador do tipo **Evento personalizado (Custo
 6. Nomeie o acionador conforme a coluna "Nome do acionador"
 7. **Salvar**
 
-Repita para todos os 6 eventos.
+Repita para todos os 7 eventos.
 
 ---
 
@@ -86,6 +87,20 @@ O GA4 do CitraChat é: **G-8PCHNQ40G4**
 6. Acionador: **CitraChat - Humano Solicitado**
 7. Salvar
 
+### Tag 5: GA4 — Problema Resolvido (Conversão SAC)
+
+1. **Tags** → **Novo**
+2. Nome: `GA4 - CitraChat Problema Resolvido`
+3. Tipo: **Google Analytics: Evento do GA4**
+4. ID de medição: `G-8PCHNQ40G4`
+5. Nome do evento: `citrachat_issue_resolved`
+6. Parâmetros do evento → adicionar linha:
+   - Nome: `source` | Valor: `citrachat`
+7. Acionador: **CitraChat - Problema Resolvido**
+8. Salvar
+
+> Depois de publicar, marcar esse evento como **Conversão** dentro do GA4 (Admin → Eventos → marcar `citrachat_issue_resolved` como conversão). Este é o evento principal para agentes de SAC e FAQ — dispara quando o agente resolveu o problema sem precisar passar para humano.
+
 ---
 
 ## Parte 3 — Verificar no GTM Preview Mode
@@ -98,6 +113,7 @@ O GA4 do CitraChat é: **G-8PCHNQ40G4**
    - `citrachat_chat_opened` aparece → Tag GA4 Chat Aberto disparou ✓
    - `citrachat_chat_started` aparece → Tag GA4 Chat Iniciado disparou ✓
    - `citrachat_lead_captured` aparece → Tag GA4 Lead Capturado disparou ✓
+   - Para testar `citrachat_issue_resolved`: converse com o agente SAC até ele confirmar que resolveu o problema (sem pedir humano) → o evento deve aparecer
 6. Feche o preview
 
 ---
@@ -105,8 +121,8 @@ O GA4 do CitraChat é: **G-8PCHNQ40G4**
 ## Parte 4 — Publicar
 
 1. Botão **Enviar** no canto superior direito
-2. Versão: `v2 - Eventos CitraChat configurados`
-3. Descrição: `Acionadores e tags GA4 para os 6 eventos do CitraChat`
+2. Versão: `v3 - Evento issue_resolved adicionado`
+3. Descrição: `Acionador e tag GA4 para citrachat_issue_resolved (conversão SAC/FAQ)`
 4. **Publicar**
 
 ---
@@ -115,8 +131,8 @@ O GA4 do CitraChat é: **G-8PCHNQ40G4**
 
 1. Acesse: https://analytics.google.com → propriedade G-8PCHNQ40G4
 2. Menu Admin (engrenagem) → **Eventos**
-3. Encontre `generate_lead` (pode levar até 24h para aparecer após o primeiro disparo)
-4. Toggle "Marcar como conversão" → ativar
+3. Encontre `generate_lead` e `citrachat_issue_resolved` (podem levar até 24h para aparecer após o primeiro disparo)
+4. Toggle "Marcar como conversão" → ativar nos dois
 
 ---
 
@@ -125,7 +141,8 @@ O GA4 do CitraChat é: **G-8PCHNQ40G4**
 Após a configuração, o painel de desempenho do CitraChat vai mostrar quantos visitantes do site:
 - Abriram o chat
 - Iniciaram conversa
-- Deixaram contato (conversão)
+- Deixaram contato (conversão para lead capture)
+- Tiveram problema resolvido pelo agente (conversão para SAC/FAQ)
 - Pediram atendimento humano
 
 Esses dados ficam visíveis em GA4 → Relatórios → Engajamento → Eventos.
