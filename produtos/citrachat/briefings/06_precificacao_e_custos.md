@@ -280,16 +280,18 @@ Posição: automatizador de WhatsApp/Instagram. Não é concorrente direto.
 
 ## 10. Decisão — 2026-06-22
 
-**Fase inicial (primeiros clientes):** manter Starter e Pro nos preços atuais e monitorar consumo real antes de qualquer reajuste. Objetivo é mapear utilização média real por plano.
+**Fase inicial (primeiros clientes):** manter Starter nos preços atuais e monitorar consumo real antes de qualquer reajuste adicional.
 
-**Ajuste imediato — Business:** elevado de R$1.497 para **R$1.997/mês** — margem de 68,4% garantida mesmo a 100% de utilização das 7.000 conversas. Volumes e recargas sem alteração por enquanto.
+**Ajuste Business (2026-06-22):** elevado de R$1.497 para **R$1.997/mês** — margem de 68,4% garantida mesmo a 100% de utilização.
 
-**Preços vigentes após ajuste:**
+**Ajuste Pro (2026-06-22):** elevado de R$297 para **R$397/mês** — margem de 72,3% garantida mesmo a 100% de utilização.
+
+**Preços vigentes:**
 
 | Plano | Preço | Conversas | Agentes | Margem (100% util) |
 |---|---|---|---|---|
 | Starter | R$ 147/mês | 300/mês | 1 | 70% ✅ |
-| Pro | R$ 297/mês | 1.000/mês | 3 | 63% ⚠️ (monitorar) |
+| Pro | **R$ 397/mês** | 1.000/mês | 3 | **72% ✅** |
 | Business | **R$ 1.997/mês** | 7.000/mês | 10 | **68% ✅** |
 | Agência | Lista de espera | — | — | — |
 
@@ -303,10 +305,10 @@ Posição: automatizador de WhatsApp/Instagram. Não é concorrente direto.
 
 **Próximos passos:**
 - [x] Documentar decisão neste arquivo
-- [x] Atualizar base de conhecimento do agente de suporte (TXT)
-- [ ] Atualizar página `/planos` no site (`src/app/planos/page.tsx`)
-- [ ] Atualizar produto Business no Stripe (R$1.997)
-- [ ] Após primeiros 2–3 meses: revisar Pro e recarga Business com dados reais de uso
+- [x] Atualizar página `/planos` no site
+- [x] Atualizar base de conhecimento do agente de suporte (TXT v3 — pendente)
+- [ ] Criar novo price_id Pro R$397 no Stripe e atualizar no código/Vercel
+- [ ] Após primeiros 2–3 meses: revisar recarga Business com dados reais de uso
 
 ---
 
