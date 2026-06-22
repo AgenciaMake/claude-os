@@ -1,0 +1,310 @@
+# CitraChat — Base de Conhecimento do Agente de Suporte
+Versão: 1.0 | Data: 2026-06-22 | Atualizar toda sexta-feira
+
+
+
+## O QUE É O CITRACHAT
+
+CitraChat é uma plataforma de agentes conversacionais com inteligência artificial. Diferente de chatbots tradicionais com botões e menus, os agentes do CitraChat conversam de verdade: entendem contexto, respondem perguntas, lidam com objeções, qualificam leads e encaminham para humano quando necessário.
+
+O produto é desenvolvido pela MakeLemonAd, agência de marketing digital de performance. Nasceu como ferramenta interna para clientes da agência e evoluiu para um SaaS independente voltado para o mercado brasileiro.
+
+Site: citrachat.com
+Links públicos dos agentes: citra.chat/nome-do-agente
+
+
+
+## PARA QUEM É O CITRACHAT
+
+O CitraChat serve qualquer empresa que usa o site ou redes sociais como canal de atendimento, geração de leads ou vendas. Os segmentos com maior adesão são:
+
+- Clínicas médicas, odontológicas e de estética (agendamento e triagem)
+- E-commerce (dúvidas pré-venda, acompanhamento de pedido)
+- Educação: escolas, cursos, faculdades (qualificação de alunos)
+- Imobiliárias e construtoras (qualificação de compradores)
+- Agências de marketing que querem oferecer o produto aos clientes
+- SaaS e empresas de tecnologia (suporte e onboarding)
+- Negócios de serviços B2B com ciclo de venda mais longo
+
+Funciona bem para MEIs, PMEs e empresas médias. O requisito mínimo é ter um site, landing page ou algum canal digital onde o chat pode ser instalado.
+
+
+
+## O QUE O CITRACHAT FAZ
+
+### Conversa humanizada
+
+O agente lê o que o visitante escreveu, entende o contexto e responde com naturalidade. Não é um menu de opções nem um script fixo. É uma conversa real conduzida por IA treinada com o conteúdo do negócio do cliente.
+
+### Treinamento por documentos
+
+O dono do negócio pode subir PDFs, arquivos de texto ou documentos Word com catálogo de produtos, FAQ, política de atendimento, informações da empresa. O agente absorve esse conteúdo e passa a responder com base nele.
+
+### Entrevista com a Limonete
+
+Dentro do painel existe a Limonete-treinadora, um agente interno que entrevista o responsável pelo negócio e vai montando o contexto do agente de forma conversacional. O processo leva em média 10 a 15 minutos.
+
+### Customização visual completa
+
+Cores, logo, avatar, nome do agente, mensagem de boas-vindas. O chat pode ter a cara da empresa do cliente sem aparecer nenhuma referência ao CitraChat (white-label).
+
+### Instalação em qualquer site
+
+O agente pode ser acessado via link direto (citra.chat/seu-negocio) ou embutido no site via código HTML. Funciona em WordPress, Shopify, Nuvemshop, Wix, HTML puro e qualquer outra plataforma que aceite código.
+
+### Reengajamento automático
+
+Se o visitante ficar inativo no chat, o agente envia uma mensagem de reengajamento após um tempo configurável (5 a 30 minutos). O objetivo é recuperar conversas antes que o visitante abandone o site.
+
+### Número de protocolo
+
+Para agentes de suporte, o sistema pode gerar automaticamente um número de protocolo único por atendimento. O agente informa o número ao visitante, que pode usar para acompanhar o chamado.
+
+### Handoff para humano
+
+Quando a situação exige um atendente, o agente reconhece isso e faz a transição. O histórico completo da conversa fica disponível para quem assumir o atendimento.
+
+### Integração de rastreamento
+
+Esse é o principal diferencial do CitraChat frente a outros sistemas. Qualquer evento que acontece no chat pode ser enviado para as plataformas de mídia paga e analytics sem precisar de programador. Mais detalhes na seção de integrações abaixo.
+
+
+
+## PLANOS E PREÇOS
+
+### Plano Starter
+Para quem está começando. Um agente ativo, chat público via link e widget para o site, métricas básicas de conversas. Ideal para MEIs e profissionais liberais com volume baixo de atendimento.
+Preço: R$ 297 por mês.
+
+### Plano Pro
+Para negócios em crescimento que precisam de mais de um agente e querem conectar o chat com as ferramentas de mídia paga. Até 3 agentes ativos, todas as integrações (GTM, Meta Pixel, Google Ads, TikTok, LinkedIn), métricas avançadas, mensagens por página específica do site, reengajamento automático.
+Preço: R$ 597 por mês.
+
+### Plano Business
+Para empresas que precisam de escala. Até 10 agentes ativos, tudo do plano Pro, suporte prioritário e onboarding dedicado com a equipe do CitraChat.
+Preço: R$ 997 por mês.
+
+### Plano Agência (white-label)
+Para agências de marketing que querem revender o CitraChat para seus clientes. Agentes ilimitados, white-label completo, até 5.000 conversas por mês. O cliente da agência vê a plataforma com a marca da agência.
+Preço: R$ 1.997 por mês.
+
+Todos os planos têm período de teste gratuito. Não exige cartão de crédito para começar.
+
+
+
+## INTEGRAÇÕES — O DIFERENCIAL DE RASTREAMENTO
+
+### Por que isso importa
+
+Empresas que investem em Google Ads, Meta Ads, TikTok Ads ou LinkedIn precisam ensinar as plataformas quais visitantes são valiosos. Sem dados de conversão, os algoritmos trabalham no escuro e o custo por lead sobe.
+
+O CitraChat resolve isso: cada ação relevante que acontece no chat vira um evento de conversão, que é enviado diretamente para as ferramentas de mídia paga. O algoritmo do Google aprende com os leads qualificados do chat. O Meta faz retargeting de quem demonstrou interesse. O resultado é uma campanha que melhora sozinha com o tempo.
+
+### Os 7 eventos padrão
+
+O CitraChat dispara automaticamente 7 eventos rastreáveis:
+
+CHAT INICIADO: quando o visitante manda a primeira mensagem.
+
+CHAT ENGAJADO: quando o visitante troca 3 ou mais mensagens. Indica interesse real.
+
+LEAD CAPTURADO: quando o agente coleta nome e email ou telefone do visitante.
+
+LEAD QUALIFICADO: quando o agente avalia que o lead se encaixa no perfil ideal do negócio (configurável).
+
+CTA CLICADO: quando o visitante clica no botão de ação configurado no chat.
+
+CHAT COMPLETO: quando a conversa chega ao fim com o objetivo cumprido.
+
+HUMANO SOLICITADO: quando o visitante pede para falar com um atendente.
+
+### Plataformas integradas
+
+Google Tag Manager (modo recomendado para agências): o chat dispara os eventos para o dataLayer do GTM, e o GTM gerencia o envio para todas as outras plataformas. Uma configuração central que alimenta tudo.
+
+Google Analytics 4: rastreamento de conversas, leads e conversões diretamente no GA4.
+
+Google Ads: eventos de conversão para otimização de campanhas.
+
+Meta Pixel (Facebook e Instagram): retargeting e lookalike audiences com base em quem interagiu com o chat.
+
+TikTok Pixel: mesma lógica para campanhas no TikTok.
+
+LinkedIn Insight Tag: para campanhas B2B no LinkedIn.
+
+Webhook customizado: envia os dados de cada conversa em JSON para qualquer CRM, Zapier, Make.com ou sistema próprio.
+
+### Como configurar
+
+O responsável cola os IDs de cada plataforma direto no painel do CitraChat, na aba Integrações. Não exige programador. O painel tem um guia passo a passo com capturas de tela de cada plataforma.
+
+
+
+## COMO INSTALAR NO SITE
+
+### Opção 1 — Link direto
+
+Cada agente tem um link público no formato citra.chat/seu-negocio. Esse link pode ser usado na bio do Instagram, em anúncios, em QR codes, em botões de WhatsApp. Ao clicar, o visitante vai direto para uma página com o chat aberto.
+
+### Opção 2 — Widget flutuante no site
+
+No painel, na aba Integrações, o responsável copia um código HTML de uma linha e cola antes do fechamento do body no site. O chat aparece como um botão flutuante no canto inferior direito de todas as páginas.
+
+### Suporte por plataforma
+
+WordPress: instalar via plugin de custom HTML ou no functions.php do tema.
+Google Tag Manager: colar o código como tag de HTML personalizado.
+Shopify: adicionar no arquivo theme.liquid.
+Wix e Squarespace: usar o campo de código personalizado nas configurações do site.
+HTML puro: colar diretamente no arquivo .html.
+
+Se o cliente não souber instalar, a equipe de suporte do CitraChat ajuda no processo.
+
+
+
+## BENCHMARK — COMO O CITRACHAT SE COMPARA AOS CONCORRENTES
+
+### Typebot
+
+O Typebot é uma ferramenta de criação de fluxos de conversa baseados em lógica condicional. O usuário define cada caminho possível da conversa antes de publicar. Funciona bem para formulários conversacionais com fluxo previsível, mas não tem inteligência real: se o visitante sair do script, o bot não sabe o que fazer.
+
+O CitraChat é o oposto: o agente não tem script fixo. Ele lê o que o visitante escreveu e responde com base no conteúdo do negócio, no objetivo do agente e no contexto da conversa. Consegue lidar com perguntas que nunca foram previstas.
+
+### Leadster
+
+A Leadster é focada em qualificação de leads via fluxos de perguntas e respostas. Tem uma interface bem desenvolvida e boa reputação no mercado brasileiro. O ponto fraco é que o modelo de conversa é engessado: o visitante sente que está preenchendo um formulário disfarçado de chat.
+
+O CitraChat tem conversação mais fluida, usa IA real para entender intenção e contexto, e tem um sistema de tracking mais robusto voltado para agências de performance.
+
+### ManyChat
+
+O ManyChat é orientado para automação de WhatsApp e Instagram. Muito bom para sequências de mensagens, recuperação de carrinho e fluxos pós-venda. Não é um agente IA, é um automatizador de fluxos.
+
+O CitraChat resolve um problema diferente: atendimento em tempo real no site, com inteligência conversacional e rastreamento de conversão.
+
+### Octadesk e similares
+
+Focados em helpdesk e gestão de tickets. Têm inbox unificado, time de suporte com múltiplos atendentes, SLA. São sistemas de atendimento, não de conversão. O CitraChat pode trabalhar junto com essas ferramentas: o agente faz a triagem inicial e, quando necessário, entrega o chamado para o sistema de helpdesk via webhook.
+
+### Resumo comparativo
+
+|  | CitraChat | Typebot | Leadster | ManyChat |
+|---|---|---|---|---|
+| Conversa com IA real | Sim | Não | Parcial | Não |
+| Treinamento por PDF | Sim | Não | Não | Não |
+| GTM + 7 eventos padrão | Sim | Não | Limitado | Não |
+| White-label completo | Sim | Sim | Não | Não |
+| Foco em performance | Sim | Não | Parcial | Não |
+| Português nativo | Sim | Sim | Sim | Parcial |
+| Criado por agência de marketing | Sim | Não | Não | Não |
+
+
+
+## PERGUNTAS FREQUENTES
+
+### O CitraChat substitui o atendimento humano?
+
+Não substitui, complementa. O agente resolve as perguntas que se repetem, qualifica os leads e filtra o que é urgente. A equipe humana só entra quando realmente precisa. O resultado é menos tempo gasto em atendimento repetitivo e mais foco nos casos que precisam de atenção.
+
+### Precisa saber programar para instalar?
+
+Não. A instalação é copiar e colar um código de uma linha no site. Para quem usa WordPress, existe um campo específico sem precisar editar código. Para casos mais complexos, o suporte ajuda na instalação.
+
+### Em quanto tempo o agente fica pronto para uso?
+
+Entre 15 e 30 minutos para um agente básico: criar a conta, conversar com a Limonete-treinadora, personalizar as cores e nome, instalar no site. Para um agente mais completo com documentos de treinamento e integrações configuradas, conta com 1 a 2 horas.
+
+### O agente responde fora do horário comercial?
+
+Sim, 24 horas por dia, 7 dias por semana. É um dos benefícios mais valorizados pelos clientes: leads que chegam à madrugada são atendidos na hora, sem perda.
+
+### Quantas conversas estão incluídas no plano?
+
+O plano Starter inclui 100 conversas por mês. O plano Pro inclui 500. O plano Business inclui 2.000. O plano Agência inclui 5.000. Uma conversa conta a partir do primeiro contato do visitante.
+
+### O que acontece se ultrapassar o limite de conversas?
+
+As conversas extras são cobradas individualmente. O responsável recebe um aviso antes de atingir o limite para avaliar se quer fazer upgrade do plano.
+
+### O visitante sabe que está falando com uma IA?
+
+O CitraChat não engana o visitante, mas também não abre o painel para dizer "sou um robô". O agente conversa de forma humanizada. Se o visitante perguntar diretamente, o agente responde com honestidade. Essa é uma decisão do próprio cliente ao configurar o agente.
+
+### O chat funciona no celular?
+
+Sim. O widget e o link direto são responsivos e funcionam em qualquer dispositivo: desktop, tablet e mobile.
+
+### Os dados das conversas ficam salvos?
+
+Sim. O histórico de todas as conversas fica disponível no painel do CitraChat, com filtros por data, por agente e por status. O cliente tem acesso a toda conversa que aconteceu.
+
+### O CitraChat está em conformidade com a LGPD?
+
+Sim. Toda conversa trafega por conexão criptografada (HTTPS). Os dados ficam em infraestrutura segura com isolamento por cliente: cada empresa acessa somente os próprios dados. Nenhuma conversa é usada para treinar modelos de terceiros sem autorização.
+
+### Posso ter mais de um agente com objetivos diferentes?
+
+Sim. O plano Pro permite até 3 agentes e o Business permite até 10. É possível ter um agente para captação de leads, outro para suporte e outro para vendas, cada um com personalidade, treinamento e integrações independentes.
+
+### O CitraChat funciona com WhatsApp?
+
+Atualmente o CitraChat funciona em sites e landing pages via link direto ou widget. A integração com WhatsApp Business está no roadmap.
+
+### Posso personalizar o visual do chat com a marca da minha empresa?
+
+Sim. É possível configurar cores, logo, foto do agente, nome do agente e mensagem de boas-vindas. No plano Agência, é possível remover completamente qualquer referência ao CitraChat (white-label total).
+
+### Como cancelo a assinatura?
+
+O cancelamento pode ser feito diretamente no painel, na área de Assinatura e Pagamento, pelo portal do Stripe. Não há multa por cancelamento. O acesso continua até o fim do período pago.
+
+### Como funciona o suporte do CitraChat?
+
+O suporte é feito por email e chat para todos os planos. O plano Business tem suporte prioritário com tempo de resposta reduzido e onboarding dedicado. Para dúvidas rápidas, existe uma central de ajuda com guias e tutoriais.
+
+### O CitraChat tem versão gratuita?
+
+Tem período de teste gratuito, sem necessidade de cartão de crédito. Depois do período de teste, é necessário escolher um plano pago para continuar usando.
+
+### O agente pode agendar reuniões ou consultas automaticamente?
+
+O agente pode coletar as informações necessárias para o agendamento e avisar a equipe via email ou webhook. A integração direta com Google Calendar ou sistemas de agendamento está no roadmap.
+
+
+
+## PROCESSO DE VENDA — COMO AJUDAR UM INTERESSADO
+
+### Passo 1 — Entender o negócio
+
+Perguntas para fazer: o que a empresa vende, qual o canal principal de aquisição de clientes, como o atendimento é feito hoje, quantos leads chegam por mês, qual a dor principal (perda de leads fora do horário, atendimento repetitivo, falta de qualificação).
+
+### Passo 2 — Identificar o caso de uso principal
+
+Captação de leads: agente que qualifica visitantes e coleta contato.
+Suporte e SAC: agente que responde dúvidas e reduz volume de atendimento humano.
+Agendamento: agente que coleta informações e direciona para a agenda.
+Intenção de compra: agente que auxilia a decisão e captura o momento de compra.
+
+### Passo 3 — Mostrar o rastreamento como diferencial
+
+Para clientes que já investem em mídia paga, o rastreamento de eventos é o argumento mais forte. Explicar que o chat passa a ser um canal de conversão rastreável, que alimenta diretamente as campanhas.
+
+### Passo 4 — Indicar o plano adequado
+
+Um agente e sem necessidade de integrações: Starter (R$ 297).
+Mais de um agente ou precisa de integrações com mídia paga: Pro (R$ 597).
+Escala maior ou precisa de suporte dedicado: Business (R$ 997).
+Agência que quer revender: Agência (R$ 1.997).
+
+### Passo 5 — Encaminhar para o time
+
+Quando o lead demonstrar interesse real, coletar nome, email e o melhor horário para contato. O time da MakeLemonAd entra em contato para conduzir o processo de assinatura e a configuração inicial.
+
+
+
+## INFORMAÇÕES DE CONTATO E ACESSO
+
+Site: citrachat.com
+Email de suporte: suporte@citrachat.com
+Email comercial: makelemonad@gmail.com
+Link para criar conta: citrachat.com/admin/login
