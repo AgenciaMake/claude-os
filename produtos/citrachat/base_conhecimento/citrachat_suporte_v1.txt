@@ -1,0 +1,511 @@
+# CitraChat — Base de Conhecimento do Agente de Suporte
+Versão: 1.0 | Data: 2026-06-22
+Uso: Agente de suporte técnico. Arquivo complementar ao conhecimento do agente de recepção.
+Público: lido pelo agente que atende chamados de suporte técnico, configuração e dúvidas operacionais.
+
+
+
+## VISÃO GERAL DA PLATAFORMA
+
+O CitraChat é uma plataforma SaaS de agentes conversacionais com inteligência artificial. O usuário cria agentes que conversam em tempo real no site da empresa. Os agentes são treinados com conteúdo do negócio (documentos, site, entrevista guiada) e respondem com naturalidade, sem fluxos fixos.
+
+Domínios:
+- citrachat.com — site comercial, planos, login, cadastro
+- citra.chat — URL pública dos agentes (ex: citra.chat/nome-do-agente)
+- citrachat.com.br — redireciona para citrachat.com
+
+Acesso ao painel: citrachat.com/admin/login
+Suporte por email: suporte@citrachat.com
+
+
+
+## ESTRUTURA DO PAINEL ADMINISTRATIVO
+
+Depois de fazer login, o usuário chega ao painel principal. O menu lateral tem as seguintes seções:
+
+PAINEL — visão geral de métricas consolidadas de todos os agentes.
+MEUS AGENTES — lista de todos os agentes criados. Cada agente tem um submenu próprio.
+PUBLICAR — configurações do widget (do agente padrão ou selecionado).
+INTEGRAÇÕES — GTM, pixels de mídia paga, webhook (do agente padrão ou selecionado).
+MÉTRICAS — histórico detalhado de conversas e eventos.
+ASSINATURA — plano ativo, limite de conversas, faturamento.
+CONTA — dados do usuário (nome, email, senha).
+
+Dentro de cada agente (em MEUS AGENTES → selecionar agente) existem abas:
+- AGENTE — nome, objetivo, tom, reengajamento, protocolo
+- TREINAR — base de conhecimento, site, entrevista com a Limonete
+- IDENTIDADE — visual do chat (avatar, cores)
+- INTEGRAÇÕES — pixels e webhooks específicos desse agente
+- PUBLICAR — configuração do widget e instalação
+- MÉTRICAS — dados de conversas desse agente
+- TRANSFERÊNCIAS — quais outros agentes esse agente pode transferir conversas
+
+
+
+## CRIANDO UM AGENTE DO ZERO
+
+### Passo 1 — Criar o agente
+
+Em MEUS AGENTES, clicar em "Novo agente". O sistema cria o agente e abre a aba AGENTE.
+
+### Passo 2 — Configurar o agente (aba AGENTE)
+
+Nome do chat (campo "Label"):
+Identificação interna. Não aparece no chat. Serve para o usuário se organizar dentro do painel. Exemplo: "Chat do SAC", "Vendas", "Parcerias". Campo obrigatório.
+
+Nome do agente:
+Nome que aparece no cabeçalho do chat para o visitante. Pode ser um nome fictício (ex: "Ana", "Carlos", "Equipe Make"). Campo obrigatório.
+
+Sexo do atendente:
+Define como o agente se refere a si mesmo (neutro, feminino, masculino). Influencia concordância verbal nas respostas.
+
+Tom de voz:
+Opções: Informal, Técnico, Formal, Espontâneo / Divertido, Casual.
+
+Mensagem de boas-vindas:
+Primeira mensagem que o visitante vê ao abrir o chat. Campo opcional — se deixado em branco, o chat abre sem mensagem inicial e espera o visitante escrever primeiro.
+
+Objetivo do agente:
+Define o propósito da conversa e o que conta como conversão nas métricas.
+- Captação de Lead: qualifica e coleta contato
+- Agendamento: agenda consultas ou reuniões
+- Suporte / SAC: resolve dúvidas e chamados
+- FAQ / Autoatendimento: responde perguntas frequentes
+- Intenção de Compra: guia o cliente até a decisão
+
+Reengajamento:
+Quando ativado, o agente envia uma mensagem proativa se o visitante ficar inativo. Configurações:
+- Toggle para ativar/desativar
+- Tempo de espera: slider de 5 a 30 minutos (increments de 1 minuto)
+- Mensagem de reengajamento: máximo 200 caracteres. Exemplo: "Oi! Ainda por aqui? Quer continuar nosso papo ou posso encerrar?"
+
+Número de protocolo:
+Quando ativado, o agente gera e comunica ao visitante um número único por atendimento. Útil para agentes de suporte.
+- Toggle para ativar/desativar
+- Prefixo: até 10 caracteres alfanuméricos maiúsculos. Exemplo: "SAC" gera SAC-20240616-482931.
+
+Salvar: botão "Salvar" no final da página.
+
+### Passo 3 — Treinar o agente (aba TREINAR)
+
+Existem três formas de alimentar o agente com conhecimento:
+
+SITE DA EMPRESA:
+Campo para colar a URL do site. O sistema acessa e lê o conteúdo das páginas. Opcional, mas recomendado — a Limonete usa esse conteúdo antes de começar a entrevista. Se o site bloquear acesso automático (sites com proteção ou paywall), o sistema informa e a entrevista cobre o conteúdo pela conversa.
+
+DOCUMENTOS DE APOIO:
+Upload de arquivos PDF, Word (.docx) ou texto (.txt). Exemplos de conteúdo útil: catálogo de produtos, FAQ, política comercial, tabela de preços, script de atendimento, política de devolução. Após o upload, o sistema extrai e processa o conteúdo automaticamente. Pode fazer upload de vários arquivos.
+
+ENTREVISTA COM A LIMONETE:
+A Limonete é o agente treinador interno do CitraChat. O responsável conversa com ela de forma natural e ela vai montando o contexto do agente. O processo leva de 10 a 15 minutos para um agente básico. Pode voltar à entrevista a qualquer momento para atualizar informações. Quanto mais detalhe o usuário fornecer — diferenciais, objeções comuns, preços, restrições — melhor o agente responde.
+
+Dica importante: o agente usa os três tipos de conhecimento em conjunto. Um agente bem treinado tem: site analisado + documentos subidos + entrevista completa.
+
+### Passo 4 — Personalizar identidade visual (aba IDENTIDADE)
+
+Configurações de aparência do chat:
+- Foto ou avatar do agente
+- Cor principal do chat
+- Logo da empresa
+
+Essas configurações fazem o chat parecer com a marca do cliente (white-label).
+
+### Passo 5 — Configurar integrações (aba INTEGRAÇÕES)
+
+Ver seção completa de integrações abaixo.
+
+### Passo 6 — Publicar e instalar (aba PUBLICAR)
+
+Ver seção completa de publicação e instalação abaixo.
+
+
+
+## TREINAMENTO — DETALHES E SITUAÇÕES COMUNS
+
+### O agente não sabe responder uma pergunta
+
+O agente responde com base no conhecimento que foi fornecido. Se uma informação não foi incluída (na entrevista, nos documentos ou no site), o agente não vai inventar — ele informa que não tem essa informação ou pede para o visitante entrar em contato diretamente.
+
+Solução: voltar à aba TREINAR e atualizar a entrevista com a informação que está faltando.
+
+### O site não foi lido
+
+Possíveis causas:
+- Site com Cloudflare ou proteção anti-bot: sistema sinaliza "bloqueado" e a entrevista segue pela conversa.
+- Site em construção ou em manutenção no momento do scraping.
+- URL digitada errada.
+
+Solução: colar a URL novamente ou complementar as informações pela entrevista.
+
+### Como atualizar o treinamento
+
+O treinamento pode ser atualizado a qualquer momento. Basta abrir a aba TREINAR, subir novos documentos ou voltar à entrevista e adicionar novas informações. Não é necessário desativar ou recriar o agente.
+
+### Limite de documentos
+
+Não há limite declarado de documentos. Se o usuário tiver muitos arquivos, o ideal é consolidar em um ou poucos documentos bem estruturados.
+
+
+
+## INTEGRAÇÕES — GUIA COMPLETO
+
+Acesso: aba INTEGRAÇÕES dentro do agente, ou menu INTEGRAÇÕES no painel.
+
+### Notificação de lead (Essencial)
+
+Envia um email toda vez que um lead for qualificado.
+
+Campos:
+- Email de notificação: endereço que recebe o aviso. Pode ser qualquer email válido.
+- Identificador no assunto: texto curto que aparece no assunto para identificar de qual agente veio o lead. Exemplo: "leads_sac" gera assunto: 🔔 [leads_sac] — Nome do Lead. Espaços viram underscores, tudo minúsculo.
+
+### Google Tag Manager (Recomendado)
+
+Modo de integração recomendado para quem usa múltiplas plataformas de mídia paga. O CitraChat envia os eventos para o dataLayer do GTM, e o GTM distribui para cada ferramenta.
+
+Campo: Container ID. Formato: GTM-XXXXXXX. Onde encontrar: tagmanager.google.com → abrir o container → ID no canto superior.
+
+Como configurar triggers no GTM (guia passo a passo disponível dentro do painel):
+1. Acessar tagmanager.google.com e abrir o container
+2. Copiar o Container ID (GTM-XXXXXXX) e colar no CitraChat
+3. No GTM: Triggers → Novo → Evento personalizado
+4. Criar um trigger para cada evento do CitraChat (nomes exatos na seção "Referência de eventos" abaixo)
+5. Associar os triggers às tags existentes (Meta Pixel, Google Ads, GA4)
+6. Clicar em "Enviar" no GTM para publicar
+7. Testar com GTM Preview Mode: colar o link do agente, interagir e confirmar que os eventos aparecem no painel esquerdo
+
+Quando GTM está configurado: os campos individuais de GA4, Google Ads, TikTok e LinkedIn ficam opcionais — o GTM centraliza tudo. O Meta com Conversions API (server-side) ainda requer configuração direta mesmo com GTM.
+
+### Google Analytics 4
+
+Campo: Measurement ID. Formato: G-XXXXXXXXXX. Onde encontrar: GA4 → Admin → Data Streams → abrir stream → Measurement ID.
+
+### Google Ads
+
+Campos:
+- Conversion ID: formato AW-XXXXXXXXXX. Onde encontrar: Google Ads → Ferramentas → Conversões → selecionar conversão → ID da ação de conversão.
+- Conversion Label: sequência alfanumérica. Fica na mesma tela do Conversion ID.
+
+### Meta Ads (Pixel + Conversions API)
+
+O CitraChat usa dois sistemas ao mesmo tempo: Pixel do browser e Conversions API (server-side). O Conversions API funciona mesmo quando o visitante tem ad blocker — os eventos são enviados direto do servidor CitraChat para a Meta, sem depender do browser.
+
+Campos:
+- Pixel ID: número de 15-16 dígitos. Onde encontrar: Meta Business Suite → Events Manager → selecionar o pixel → ID.
+- Access Token da Conversions API: token gerado na Meta para autenticar o envio server-side. Onde gerar: Events Manager → Configurações → Conversions API → Gerar token de acesso. Ficará salvo de forma criptografada no CitraChat.
+
+Para o Meta Ads funcionar em nível máximo, os dois campos precisam estar preenchidos.
+
+### TikTok Ads
+
+Campo: Pixel ID. Onde encontrar: TikTok Ads Manager → Assets → Events → selecionar o pixel → ID.
+
+### LinkedIn Ads
+
+Campo: Partner ID. Onde encontrar: LinkedIn Campaign Manager → Insight Tag → Partner ID (número na URL ou na tela de configuração da tag).
+
+### Webhook
+
+Envia um POST JSON para uma URL externa toda vez que ocorre uma conversão. Usar para integrar com Zapier, Make.com, HubSpot, Salesforce, CRMs próprios ou qualquer sistema com endpoint HTTP.
+
+Campo: URL do endpoint. Formato: https://... Exemplo: https://hooks.zapier.com/hooks/catch/XXXXX/XXXXX/
+
+O JSON enviado contém: dados do lead (nome, email, telefone quando capturados), evento que disparou, agente, timestamp.
+
+### Referência de eventos
+
+Esses são os nomes exatos dos eventos no dataLayer. Usar para criar triggers no GTM.
+
+citrachat_chat_opened — quando a página do chat é carregada (widget ou link direto)
+citrachat_chat_started — quando o usuário envia a primeira mensagem
+citrachat_chat_engaged — quando o usuário envia a terceira mensagem
+citrachat_lead_captured — quando o agente detecta email ou telefone na conversa
+citrachat_lead_qualified — disparado após o lead ser capturado e qualificado
+citrachat_chat_deep_engaged — quando o usuário envia a décima mensagem
+citrachat_human_requested — quando o usuário pede para falar com um humano
+
+O evento mais importante para configurar como conversão é citrachat_lead_captured.
+
+
+
+## PUBLICAÇÃO E INSTALAÇÃO DO WIDGET
+
+Acesso: aba PUBLICAR dentro do agente.
+
+### Slug (endereço do agente)
+
+O slug é o identificador único do agente na URL pública.
+- Link direto: citra.chat/SLUG
+- Script do widget: usa o slug como parâmetro
+
+Regras do slug: mínimo 3 caracteres, apenas letras minúsculas, números e hifens. Não pode repetir para agentes do mesmo usuário.
+
+### Publicar e despublicar
+
+Um agente precisa ter slug definido para ser publicado. Ao publicar, o agente fica acessível pelo link público e pelo widget. Ao despublicar, o widget para de funcionar no site do cliente e o link direto retorna erro.
+
+### Configurações do widget (aba Publicar)
+
+Posição: direita ou esquerda da tela.
+
+Abertura automática: quando ativo, o mini card com mensagem de boas-vindas aparece automaticamente após um tempo configurável (em segundos). O visitante pode fechar o card sem abrir o chat.
+
+Animação: efeito de bounce (pulsação) no botão flutuante para chamar atenção.
+
+Ícone do botão:
+- Presets disponíveis: Chat, WhatsApp, Telefone, Headset, Ajuda, Suporte
+- Upload personalizado: qualquer imagem PNG, JPG ou SVG
+- Tamanho do ícone: controle de porcentagem do tamanho dentro do botão
+
+Cores:
+- Cor do botão: cor de fundo do botão flutuante (hex). Padrão: #DFFF00 (verde limão CitraChat)
+- Cor do ícone: cor do ícone dentro do botão (hex). Padrão: #111111
+
+Quando um preset é selecionado e a cor do ícone é alterada, o preset é recolorizado em tempo real no preview.
+
+Mensagens de boas-vindas:
+Pode configurar várias mensagens. Cada mensagem tem:
+- Texto da mensagem
+- Escopo: "Todas as páginas" ou "Página específica" (aparece só quando a URL contém o texto definido)
+
+Quando há múltiplas mensagens ativas para a página, uma é escolhida aleatoriamente. Isso permite testes A/B simples de mensagens.
+
+Visibilidade por página:
+- Todas as páginas: widget aparece em todo o site
+- Excluir páginas: widget aparece em todo o site, exceto nos caminhos listados. Adicionar o caminho relativo (ex: /contato, /obrigado, /checkout). O widget não aparece em nenhuma URL que comece com esses caminhos.
+
+### Script de instalação
+
+O script gerado é:
+<script src="https://citra.chat/widget.js?agent=SLUG" defer></script>
+
+Colar antes do fechamento da tag </body> no site. Apenas uma linha necessária. Não precisa atualizar o script quando as configurações mudam — o arquivo widget.js busca as configurações do banco de dados a cada carregamento.
+
+### Instalação por plataforma
+
+WordPress:
+Opção 1 (recomendada): instalar plugin "Insert Headers and Footers" e colar o script no campo Footer.
+Opção 2: no tema, editar o arquivo footer.php e colar antes de </body>.
+Opção 3: via Google Tag Manager, como tag HTML personalizada.
+
+Shopify:
+Acessar Loja Online → Temas → Editar código → arquivo theme.liquid → colar antes de </body>.
+
+Nuvemshop e Tray:
+Painel da loja → Configurações → Códigos de acompanhamento → colar o script.
+
+Wix:
+Configurações do site → Código personalizado → Adicionar código → seção "Rodapé do corpo" → colar.
+
+Squarespace:
+Configurações → Avançado → Injeção de código → Rodapé → colar.
+
+HTML puro:
+Colar diretamente no arquivo .html antes de </body>.
+
+Google Tag Manager:
+Tags → Nova tag → HTML personalizado → colar o script → trigger: All Pages.
+
+### Link direto (sem instalação)
+
+Para quem não tem site ou quer compartilhar o chat em outros canais:
+- Link: citra.chat/SLUG
+- Usar na bio do Instagram, links de WhatsApp, anúncios, QR codes, emails, assinatura de email
+
+### Transferências entre agentes
+
+Se o cliente tem mais de um agente, é possível configurar que um agente pode transferir a conversa para outro. Exemplo: um agente de FAQ que, ao detectar um problema técnico, transfere para o agente de suporte.
+
+Configuração: aba TRANSFERÊNCIAS dentro do agente → selecionar quais agentes podem receber transferências desse agente.
+
+
+
+## IDENTIDADE VISUAL — O QUE É POSSÍVEL PERSONALIZAR
+
+- Foto ou avatar do agente (aparece no header do chat e no mini card)
+- Cor de destaque do chat (bolhas de mensagem, botão de envio)
+- Logo da empresa
+- Cor do botão flutuante (configurado na aba PUBLICAR)
+- Cor do ícone do botão (configurado na aba PUBLICAR)
+- Ícone do botão (preset ou upload personalizado)
+- Nome do agente (aparece no header)
+
+White-label completo está disponível para o Plano Agência. Para os demais planos, pode haver referência discreta ao CitraChat.
+
+
+
+## MÉTRICAS E HISTÓRICO
+
+Acesso: menu MÉTRICAS ou aba MÉTRICAS dentro do agente.
+
+O que está disponível:
+- Total de conversas no período
+- Leads capturados
+- Leads qualificados
+- Taxa de engajamento
+- Histórico de conversas: pode filtrar por agente, data, status
+- Conteúdo de cada conversa (mensagem por mensagem)
+- Resumo IA de cada conversa (lead score, dados coletados)
+
+
+
+## PLANOS E LIMITES
+
+### Plano Starter — R$ 147/mês
+- 1 agente ativo
+- 300 conversas por mês
+- Chat público via link e widget
+- Métricas básicas
+- Sem integrações de mídia paga
+
+### Plano Pro — R$ 397/mês
+- Até 3 agentes ativos
+- 1.000 conversas por mês
+- Todas as integrações (GTM, Meta Pixel, Google Ads, TikTok, LinkedIn)
+- Mensagens por página específica
+- Reengajamento automático
+- Métricas avançadas
+
+### Plano Business — R$ 1.997/mês
+- Até 10 agentes ativos
+- 7.000 conversas por mês
+- Tudo do plano Pro
+- Suporte prioritário
+- Onboarding dedicado com a equipe CitraChat
+
+### Plano Agência (white-label)
+- Agentes ilimitados
+- White-label completo (sem referência ao CitraChat para o cliente final)
+- Preço sob consulta — lista de espera
+
+### O que conta como uma conversa
+Uma conversa começa quando o visitante envia a primeira mensagem. Cada sessão iniciada conta como uma conversa, independente de quantas mensagens trocar depois.
+
+### O que acontece quando o limite é atingido
+O agente para de responder novos visitantes. Visitantes que tentem iniciar uma conversa ficam sem resposta até o início do próximo ciclo ou até o responsável contratar uma recarga.
+
+O responsável recebe aviso antes de atingir o limite.
+
+### Recargas
+Podem ser adquiridas a qualquer momento na aba ASSINATURA. Valem pelo ciclo em vigência e não acumulam para o próximo.
+
+### Ciclo de faturamento
+Mensal, começa na data de contratação, renova automaticamente. Conversas não utilizadas não passam para o ciclo seguinte.
+
+### Cancelamento
+Feito diretamente no painel em ASSINATURA → Portal do Stripe. Sem multa. Acesso mantido até o fim do período pago. Dados disponíveis para exportação por 30 dias após cancelamento.
+
+
+
+## CONTA E ACESSO
+
+### Criar conta
+Acessar citrachat.com/admin/login → criar conta com email e senha. Não exige cartão de crédito para o período de teste.
+
+### Recuperar senha
+Na tela de login, link "Esqueceu a senha?". Um email com link de redefinição é enviado. Link válido por tempo limitado.
+
+### Alterar email ou senha
+Menu CONTA no painel administrativo.
+
+### Dados da conta
+Nome, email, senha. Também é onde ficam os dados de empresa quando aplicável.
+
+
+
+## SITUAÇÕES COMUNS DE SUPORTE
+
+### Agente não responde no site
+
+Verificar em ordem:
+1. O agente está publicado? (aba PUBLICAR → botão verde "Publicado")
+2. O script foi instalado corretamente? Colar na página e verificar se aparece o script antes de </body>
+3. O slug no script bate com o slug configurado no painel?
+4. O limite de conversas foi atingido? Verificar em ASSINATURA
+5. O agente está sendo carregado em uma página excluída? Verificar configuração de visibilidade
+
+### Widget aparece duas vezes
+
+Isso acontece quando o script está instalado mais de uma vez no mesmo site (ex: via GTM E direto no código). Verificar se há duplicidade e remover uma das instâncias.
+
+### Preciso atualizar o script no meu site depois de mudar configurações?
+
+Não. O widget.js busca as configurações diretamente do banco de dados a cada carregamento. Mudar cores, ícone, mensagens, posição, tudo reflete automaticamente sem precisar atualizar o script.
+
+### Integração com GTM não dispara
+
+Verificar:
+1. O Container ID foi salvo corretamente no CitraChat? (formato GTM-XXXXXXX)
+2. O GTM foi publicado depois de criar os triggers? (clicar em "Enviar" no GTM)
+3. Os nomes dos eventos no GTM batem exatamente com os da referência? (sensível a maiúsculas/minúsculas)
+4. Testar com GTM Preview Mode
+
+### Meta Ads não recebe eventos
+
+Com Pixel ID preenchido mas sem Access Token: apenas o pixel browser funciona (sujeito a ad blockers).
+Com ambos preenchidos: pixel browser + Conversions API server-side.
+
+Verificar se o Pixel ID é o número de 15-16 dígitos (não confundir com o nome da conta).
+Verificar se o Access Token foi gerado corretamente no Events Manager e não foi revogado.
+
+### Webhook não está chegando no destino
+
+Verificar:
+- URL começa com https:// e é acessível publicamente
+- O endpoint aceita POST com Content-Type: application/json
+- Testar a URL manualmente com um POST de teste (ferramentas como webhook.site ou Postman)
+
+### Conversa chegou mas dados do lead estão incompletos
+
+O agente captura dados quando o visitante fornece durante a conversa (nome, email, telefone). Se o visitante não forneceu essas informações, os campos ficam em branco. Não é possível capturar dados que o visitante não digitou.
+
+### Agente respondeu algo errado
+
+Abrir o histórico da conversa em MÉTRICAS, identificar o que foi perguntado e a resposta incorreta, voltar ao TREINAR e corrigir ou adicionar a informação certa na entrevista ou nos documentos.
+
+### Não consigo fazer login
+
+Verificar: email digitado corretamente, caps lock, senha correta. Usar "Esqueceu a senha?" para redefinir. Se o email não for reconhecido, a conta pode não existir ainda.
+
+### Erro ao salvar integrações
+
+Se aparecer erro sobre coluna não encontrada, pode ser um problema de cache do banco de dados. Tentar salvar novamente. Se persistir, escalar para a equipe técnica.
+
+### Como instalar em site WordPress sem mexer no código
+
+Opção mais simples: instalar o plugin "Insert Headers and Footers" (gratuito) → Configurações → Rodapé → colar o script.
+
+Alternativa sem plugin: via Google Tag Manager (se já estiver instalado no site).
+
+### Diferença entre o link público e o widget
+
+Link público (citra.chat/SLUG): abre o chat em página cheia. Para usar em bio de Instagram, botões de WhatsApp, QR codes, anúncios.
+
+Widget (script no site): botão flutuante que abre o chat em uma janela sobreposta, sem sair do site do cliente.
+
+Os dois usam o mesmo agente e mesmas configurações. Podem ser usados ao mesmo tempo.
+
+
+
+## O QUE AINDA NÃO ESTÁ DISPONÍVEL
+
+Funcionalidades planejadas mas não implementadas até esta versão:
+
+- Integração direta com WhatsApp Business
+- Integração direta com Instagram Direct Messages
+- Integração direta com Google Calendar para agendamento automático
+- Múltiplos usuários na mesma conta (equipes)
+- Domínio personalizado para o chat público (ex: chat.suaempresa.com.br)
+- Export de conversas em CSV ou PDF
+- App mobile para o painel
+
+Se o usuário perguntar sobre essas funcionalidades, informar que estão no roadmap sem prazo definido e recomendar acompanhar atualizações em citrachat.com.
+
+
+
+## INFORMAÇÕES DE CONTATO
+
+Suporte técnico: suporte@citrachat.com
+Comercial / parcerias: makelemonad@gmail.com
+Painel: citrachat.com/admin/login
+Site: citrachat.com
