@@ -1,5 +1,5 @@
 # CitraChat — Base de Conhecimento do Agente de Suporte
-Versão: 1.0 | Data: 2026-06-22 | Atualizar toda sexta-feira
+Versão: 1.1 | Data: 2026-06-22 | Atualizar toda sexta-feira
 
 
 
@@ -72,21 +72,18 @@ Esse é o principal diferencial do CitraChat frente a outros sistemas. Qualquer 
 
 ## PLANOS E PREÇOS
 
-### Plano Starter
-Para quem está começando. Um agente ativo, chat público via link e widget para o site, métricas básicas de conversas. Ideal para MEIs e profissionais liberais com volume baixo de atendimento.
-Preço: R$ 297 por mês.
+### Plano Starter — R$ 147/mês
+Para quem está começando. Um agente ativo, 300 conversas por mês, chat público via link e widget para o site, métricas básicas. Ideal para MEIs e profissionais liberais com volume baixo de atendimento.
 
-### Plano Pro
-Para negócios em crescimento que precisam de mais de um agente e querem conectar o chat com as ferramentas de mídia paga. Até 3 agentes ativos, todas as integrações (GTM, Meta Pixel, Google Ads, TikTok, LinkedIn), métricas avançadas, mensagens por página específica do site, reengajamento automático.
-Preço: R$ 597 por mês.
+### Plano Pro — R$ 297/mês
+Para negócios em crescimento que precisam de mais de um agente e querem conectar o chat com as ferramentas de mídia paga. Até 3 agentes ativos, 1.000 conversas por mês, todas as integrações (GTM, Meta Pixel, Google Ads, TikTok, LinkedIn), métricas avançadas, mensagens por página específica do site, reengajamento automático.
 
-### Plano Business
-Para empresas que precisam de escala. Até 10 agentes ativos, tudo do plano Pro, suporte prioritário e onboarding dedicado com a equipe do CitraChat.
-Preço: R$ 997 por mês.
+### Plano Business — R$ 1.997/mês
+Para empresas que precisam de escala. Até 10 agentes ativos, 7.000 conversas por mês, tudo do plano Pro, suporte prioritário e onboarding dedicado com a equipe do CitraChat.
 
 ### Plano Agência (white-label)
-Para agências de marketing que querem revender o CitraChat para seus clientes. Agentes ilimitados, white-label completo, até 5.000 conversas por mês. O cliente da agência vê a plataforma com a marca da agência.
-Preço: R$ 1.997 por mês.
+Para agências de marketing que querem revender o CitraChat para seus clientes com a própria marca. Agentes ilimitados, white-label completo, sem referência ao CitraChat para o cliente final.
+Preço: lista de espera — entrar em contato para mais informações.
 
 Todos os planos têm período de teste gratuito. Não exige cartão de crédito para começar.
 
@@ -220,7 +217,7 @@ Sim, 24 horas por dia, 7 dias por semana. É um dos benefícios mais valorizados
 
 ### Quantas conversas estão incluídas no plano?
 
-O plano Starter inclui 100 conversas por mês. O plano Pro inclui 500. O plano Business inclui 2.000. O plano Agência inclui 5.000. Uma conversa conta a partir do primeiro contato do visitante.
+O plano Starter inclui 300 conversas por mês. O plano Pro inclui 1.000. O plano Business inclui 7.000. Uma conversa conta a partir do primeiro contato do visitante.
 
 ### O que acontece se ultrapassar o limite de conversas?
 
@@ -291,10 +288,10 @@ Para clientes que já investem em mídia paga, o rastreamento de eventos é o ar
 
 ### Passo 4 — Indicar o plano adequado
 
-Um agente e sem necessidade de integrações: Starter (R$ 297).
-Mais de um agente ou precisa de integrações com mídia paga: Pro (R$ 597).
-Escala maior ou precisa de suporte dedicado: Business (R$ 997).
-Agência que quer revender: Agência (R$ 1.997).
+Um agente, volume baixo, sem necessidade de integrações: Starter (R$ 147/mês, 300 conversas).
+Mais de um agente ou precisa de integrações com mídia paga: Pro (R$ 297/mês, 1.000 conversas, até 3 agentes).
+Escala maior ou precisa de suporte dedicado: Business (R$ 1.997/mês, 7.000 conversas, até 10 agentes).
+Agência que quer revender com marca própria: Plano Agência — entrar em contato para condições.
 
 ### Passo 5 — Encaminhar para o time
 
