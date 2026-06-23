@@ -154,6 +154,63 @@
     z-index: 3;
   }
 
+  /* Side image — foto à direita, fade para o fundo à esquerda */
+  .side-image-area {
+    position: absolute;
+    top: 0; right: 0;
+    width: 52%;
+    height: 100%;
+    background-size: cover;
+    background-position: center top;
+    z-index: 1;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 30%, black 100%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 30%, black 100%);
+  }
+  .has-side-image .content {
+    position: absolute;
+    top: 90px; left: 90px; right: 90px; bottom: 120px;
+    width: 52%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+  }
+
+  /* Cover image — foto no topo, texto embaixo */
+  .cover-image-area {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 55%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+  }
+  .cover-image-area::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent 0%, var(--void) 100%);
+    pointer-events: none;
+  }
+  .cover-text-area {
+    position: absolute;
+    top: 55%; left: 90px; right: 90px; bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+  }
+  .has-cover-image .content {
+    position: absolute;
+    top: 57%; left: 90px; right: 90px; bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+    width: auto;
+  }
+
   /* Tipografia CitraChat — baseado no Instagram Brand Guide (Claude Design, Jun 2026)
      Mínimos: Número Hero 180px · Headline 72px · Sub-headline 52px · Body 34px · Label 26px · Assinatura 28px */
 
