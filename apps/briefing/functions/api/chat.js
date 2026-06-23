@@ -1,5 +1,5 @@
 import { getGoogleAccessToken } from '../_lib/google-auth.js';
-import { getClientByBriefingCode } from '../_lib/firestore-client.js';
+import { getClientByBriefingCode, markBriefingCompleteLookup } from '../_lib/firestore-client.js';
 import { buildSystemPrompt } from '../_lib/prompt.js';
 import { saveBriefingDoc } from '../_lib/save-doc.js';
 import { analyzeUrls } from '../_lib/site-fetch.js';
@@ -12,7 +12,7 @@ export async function onRequestPost({ request, env }) {
 
     const token = await getGoogleAccessToken(env.GOOGLE_SERVICE_ACCOUNT);
     const client = await getClientByBriefingCode(
-      token,
+      null,
       env.FIREBASE_PROJECT_ID,
       env.FIREBASE_DB_NAME,
       env.FIREBASE_TENANT_ID,
@@ -27,11 +27,12 @@ export async function onRequestPost({ request, env }) {
     }
 
     // Normaliza client para o formato esperado pelo prompt
+    // services já vem como string no briefing_lookup
     const clientData = {
       name: client.name,
-      services: (client.services || []).join(', '),
-      responsible: client.contacts?.[0]?.name || '',
-      firestoreId: client._id,
+      services: client.services || '',
+      responsible: client.responsible || '',
+      firestoreId: client.clientId || client._id,
       contractSummary: client.contractSummary || null,
       alfredNotes: client.alfredNotes || null,
     };
@@ -85,7 +86,14 @@ export async function onRequestPost({ request, env }) {
       const finalMessages = [...messages, { role: 'assistant', content: cleanReply }];
       const saved = await saveBriefingDoc(token, env, clientData, finalMessages);
       const docUrl = saved?.docId ? `https://docs.google.com/document/d/${saved.docId}/edit` : null;
-      await markBriefingComplete(token, env, client._id, env.FIREBASE_TENANT_ID, docUrl, saved?.briefingText || null);
+      await markBriefingCompleteLookup(
+        env.FIREBASE_PROJECT_ID,
+        env.FIREBASE_DB_NAME,
+        env.FIREBASE_TENANT_ID,
+        code,
+        docUrl,
+        saved?.briefingText || null,
+      );
     }
 
     return json({ message: cleanReply, done });
@@ -95,26 +103,6 @@ export async function onRequestPost({ request, env }) {
   }
 }
 
-async function markBriefingComplete(token, env, clientId, tenantId, docUrl, briefingSummary) {
-  const fields = {
-    briefingStatus: { stringValue: 'concluído' },
-    briefingCompletedAt: { stringValue: new Date().toISOString() },
-  };
-  if (docUrl) fields.briefingDocUrl = { stringValue: docUrl };
-  if (briefingSummary) fields.briefingSummary = { stringValue: briefingSummary };
-
-  const masks = Object.keys(fields).map(f => `updateMask.fieldPaths=${f}`).join('&');
-  const url = `https://firestore.googleapis.com/v1/projects/${env.FIREBASE_PROJECT_ID}/databases/${env.FIREBASE_DB_NAME}/documents/tenants/${tenantId}/clients/${clientId}?${masks}`;
-
-  await fetch(url, {
-    method: 'PATCH',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ fields }),
-  });
-}
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {

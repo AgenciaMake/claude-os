@@ -1,10 +1,9 @@
 // Firestore REST API client para Cloudflare Workers
-// Autentica via Google Service Account (mesmo token usado pra Sheets/Drive)
-// Documentação: https://firebase.google.com/docs/firestore/reference/rest
+// Lê de briefing_lookup (coleção pública, sem auth necessária)
+// Escreve de volta via PATCH público para marcar briefing como concluído
 
 const FIRESTORE_BASE = 'https://firestore.googleapis.com/v1';
 
-// Converte um documento Firestore (formato REST) em objeto JS plano
 function firestoreDocToObject(doc) {
   if (!doc || !doc.fields) return null;
   const obj = { _id: doc.name?.split('/').pop() };
@@ -26,50 +25,40 @@ function parseFirestoreValue(val) {
   return null;
 }
 
-// Busca um cliente pelo campo briefingCode na coleção tenants/{tenantId}/clients
-export async function getClientByBriefingCode(token, projectId, dbName, tenantId, code) {
-  const parent = `projects/${projectId}/databases/${dbName}/documents/tenants/${tenantId}/clients`;
-  const url = `${FIRESTORE_BASE}/projects/${projectId}/databases/${dbName}/documents:runQuery`;
+// Leitura pública: GET direto em briefing_lookup/{code} — sem autenticação
+export async function getClientByBriefingCode(_token, projectId, dbName, tenantId, code) {
+  const url = `${FIRESTORE_BASE}/projects/${projectId}/databases/${dbName}/documents/tenants/${tenantId}/briefing_lookup/${code}`;
 
-  const body = {
-    structuredQuery: {
-      from: [{ collectionId: 'clients' }],
-      where: {
-        compositeFilter: {
-          op: 'AND',
-          filters: [
-            {
-              fieldFilter: {
-                field: { fieldPath: 'briefingCode' },
-                op: 'EQUAL',
-                value: { stringValue: code },
-              },
-            },
-          ],
-        },
-      },
-      limit: 1,
-    },
-    parent: `projects/${projectId}/databases/${dbName}/documents/tenants/${tenantId}`,
-  };
+  const res = await fetch(url);
 
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-
-  const results = await res.json();
+  if (res.status === 404) return null;
 
   if (!res.ok) {
-    throw new Error(`Firestore query error: ${JSON.stringify(results)}`);
+    const body = await res.json().catch(() => ({}));
+    throw new Error(`Firestore query error: ${JSON.stringify(body)}`);
   }
 
-  const match = results.find(r => r.document);
-  if (!match) return null;
+  const doc = await res.json();
+  if (!doc || !doc.fields) return null;
 
-  return firestoreDocToObject(match.document);
+  return firestoreDocToObject(doc);
+}
+
+// Marca briefing como concluído na briefing_lookup (coleção pública)
+export async function markBriefingCompleteLookup(projectId, dbName, tenantId, code, docUrl, briefingSummary) {
+  const fields = {
+    briefingStatus: { stringValue: 'concluído' },
+    briefingCompletedAt: { stringValue: new Date().toISOString() },
+  };
+  if (docUrl) fields.briefingDocUrl = { stringValue: docUrl };
+  if (briefingSummary) fields.briefingSummary = { stringValue: briefingSummary };
+
+  const masks = Object.keys(fields).map(f => `updateMask.fieldPaths=${f}`).join('&');
+  const url = `${FIRESTORE_BASE}/projects/${projectId}/databases/${dbName}/documents/tenants/${tenantId}/briefing_lookup/${code}?${masks}`;
+
+  await fetch(url, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields }),
+  });
 }

@@ -9,9 +9,8 @@ export async function onRequestPost({ request, env }) {
       return json({ valid: false, error: 'Código inválido.' }, 400);
     }
 
-    const token = await getGoogleAccessToken(env.GOOGLE_SERVICE_ACCOUNT);
     const client = await getClientByBriefingCode(
-      token,
+      null,
       env.FIREBASE_PROJECT_ID,
       env.FIREBASE_DB_NAME,
       env.FIREBASE_TENANT_ID,
@@ -29,11 +28,11 @@ export async function onRequestPost({ request, env }) {
     return json({
       valid: true,
       client: {
-        code: client.briefingCode,
+        code: client.briefingCode || code,
         name: client.name,
-        services: (client.services || []).join(', '),
-        responsible: client.contacts?.[0]?.name || '',
-        firestoreId: client._id,
+        services: client.services || '',
+        responsible: client.responsible || '',
+        firestoreId: client.clientId || client._id,
       },
     });
   } catch (err) {
