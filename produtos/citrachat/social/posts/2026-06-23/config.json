@@ -14,27 +14,27 @@
     {
       "filename": "slide-02-momento1.png",
       "bg": "void",
-      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#C8FF2E;line-height:1;letter-spacing:-0.04em;'>01</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Mensagem às 22h.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>O site fica em silêncio. O cliente espera. No dia seguinte já comprou do concorrente.</p></div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#E05C3E;line-height:1;letter-spacing:-0.04em;'>01</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Mensagem às 22h.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>O site fica em silêncio. O cliente espera. No dia seguinte já comprou do concorrente.</p></div></div>"
     },
     {
       "filename": "slide-03-momento2.png",
-      "bg": "void",
-      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#C8FF2E;line-height:1;letter-spacing:-0.04em;'>02</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Menu sem saída.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>Clicou em todas as opções. Nenhuma tinha o que ele precisava. Fechou a aba sem resposta.</p></div></div>"
+      "bg": "cream",
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#E05C3E;line-height:1;letter-spacing:-0.04em;'>02</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(19,17,30,0.90);'>Menu sem saída.</p><p class='body-lg' style='color:rgba(19,17,30,0.55);max-width:820px;'>Clicou em todas as opções. Nenhuma tinha o que ele precisava. Fechou a aba sem resposta.</p></div></div>"
     },
     {
       "filename": "slide-04-momento3.png",
       "bg": "void",
-      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#C8FF2E;line-height:1;letter-spacing:-0.04em;'>03</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Resposta que<br>não resolve.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>Recebeu um FAQ genérico. A dúvida continuou. A vontade de comprar, não.</p></div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#3E88D4;line-height:1;letter-spacing:-0.04em;'>03</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Resposta que<br>não resolve.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>Recebeu um FAQ genérico. A dúvida continuou. A vontade de comprar, não.</p></div></div>"
     },
     {
       "filename": "slide-05-momento4.png",
-      "bg": "void",
-      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#C8FF2E;line-height:1;letter-spacing:-0.04em;'>04</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Interesse sem<br>follow-up.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>Visitou o site, perguntou, ficou em silêncio. Ninguém foi buscar de volta.</p></div></div>"
+      "bg": "cream",
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#2F6B10;line-height:1;letter-spacing:-0.04em;'>04</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(19,17,30,0.90);'>Interesse sem<br>follow-up.</p><p class='body-lg' style='color:rgba(19,17,30,0.55);max-width:820px;'>Visitou o site, perguntou, ficou em silêncio. Ninguém foi buscar de volta.</p></div></div>"
     },
     {
       "filename": "slide-06-momento5.png",
-      "bg": "void",
-      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#C8FF2E;line-height:1;letter-spacing:-0.04em;'>05</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>A última dúvida<br>antes de comprar.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>Uma pergunta simples. Sem resposta na hora. A compra não aconteceu.</p></div></div>"
+      "bg": "warmth",
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:rgba(248,244,235,0.95);line-height:1;letter-spacing:-0.04em;'>05</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>A última dúvida<br>antes de comprar.</p><p class='body-lg' style='color:rgba(248,244,235,0.75);max-width:820px;'>Uma pergunta simples. Sem resposta na hora. A compra não aconteceu.</p></div></div>"
     },
     {
       "filename": "slide-07-cta.png",
