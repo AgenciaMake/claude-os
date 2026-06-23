@@ -10,16 +10,9 @@
       "filename": "capa-logo-wordmark.png",
       "bg": "void",
       "noArrow": true,
+      "isCover": true,
       "coverImage": "../../assets/magnific__foto-fotorrealista-estilo-editorial-pessoa-brasile__71343.png",
       "content": "<div style='display:flex;flex-direction:column;gap:8px;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:320px;font-weight:800;color:#C8FF2E;line-height:0.85;letter-spacing:-0.05em;'>5</span><p class='h3' style='color:rgba(248,244,235,0.80);'>momentos em que o seu<br>cliente decide ir embora.</p></div>"
-    },
-    {
-      "filename": "capa-logo-icone.png",
-      "bg": "void",
-      "noArrow": true,
-      "noLogo": true,
-      "coverImage": "../../assets/magnific__foto-fotorrealista-estilo-editorial-pessoa-brasile__71343.png",
-      "content": "<div style='position:relative;'><img src='file:///Users/brunomartins/Desktop/CCode/ccos-make/produtos/citrachat/logo/Logo_citrachat-01.png' style='position:absolute;top:-630px;left:0;height:72px;width:auto;' /><div style='display:flex;flex-direction:column;gap:8px;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:320px;font-weight:800;color:#C8FF2E;line-height:0.85;letter-spacing:-0.05em;'>5</span><p class='h3' style='color:rgba(248,244,235,0.80);'>momentos em que o seu<br>cliente decide ir embora.</p></div></div>"
     }
   ]
 }
