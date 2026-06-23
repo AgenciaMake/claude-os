@@ -1,0 +1,18 @@
+{
+  "outDir": ".",
+  "templateFile": "slide-citrachat.html",
+  "margin": 90,
+  "logoPng": "../../../logo/Logo_citrachat-01.png",
+  "footerHandle": "@citra.chat",
+  "footerSlogan": "Agentes que convertem.",
+  "slides": [
+    {
+      "filename": "capa-logo-icone.png",
+      "bg": "void",
+      "noArrow": true,
+      "isCover": true,
+      "coverImage": "../../assets/magnific__foto-fotorrealista-estilo-editorial-pessoa-brasile__71343.png",
+      "content": "<div style='display:flex;flex-direction:column;gap:8px;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:320px;font-weight:800;color:#C8FF2E;line-height:0.85;letter-spacing:-0.05em;'>5</span><p class='h3' style='color:rgba(248,244,235,0.80);'>momentos em que o seu<br>cliente decide ir embora.</p></div>"
+    }
+  ]
+}
