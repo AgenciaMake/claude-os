@@ -1,0 +1,48 @@
+{
+  "outDir": ".",
+  "templateFile": "slide-citrachat.html",
+  "margin": 90,
+  "logoPng": "../../../logo/Logo_citrachat-03.png",
+  "footerHandle": "@citra.chat",
+  "footerSlogan": "Agentes que convertem.",
+  "slides": [
+    {
+      "filename": "slide-01-cover.png",
+      "bg": "void",
+      "content": "<div style='display:flex;flex-direction:column;gap:24px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:220px;font-weight:800;color:#C8FF2E;line-height:0.85;letter-spacing:-0.05em;'>5</span><p class='h1' style='color:rgba(248,244,235,0.92);margin-top:-8px;'>momentos em que<br>o seu cliente<br>decide ir embora.</p></div>"
+    },
+    {
+      "filename": "slide-02-momento1.png",
+      "bg": "void",
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#C8FF2E;line-height:1;letter-spacing:-0.04em;'>01</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Mensagem às 22h.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>O site fica em silêncio. O cliente espera. No dia seguinte já comprou do concorrente.</p></div></div>"
+    },
+    {
+      "filename": "slide-03-momento2.png",
+      "bg": "void",
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#C8FF2E;line-height:1;letter-spacing:-0.04em;'>02</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Menu sem saída.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>Clicou em todas as opções. Nenhuma tinha o que ele precisava. Fechou a aba sem resposta.</p></div></div>"
+    },
+    {
+      "filename": "slide-04-momento3.png",
+      "bg": "void",
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#C8FF2E;line-height:1;letter-spacing:-0.04em;'>03</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Resposta que<br>não resolve.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>Recebeu um FAQ genérico. A dúvida continuou. A vontade de comprar, não.</p></div></div>"
+    },
+    {
+      "filename": "slide-05-momento4.png",
+      "bg": "void",
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#C8FF2E;line-height:1;letter-spacing:-0.04em;'>04</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Interesse sem<br>follow-up.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>Visitou o site, perguntou, ficou em silêncio. Ninguém foi buscar de volta.</p></div></div>"
+    },
+    {
+      "filename": "slide-06-momento5.png",
+      "bg": "void",
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#C8FF2E;line-height:1;letter-spacing:-0.04em;'>05</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>A última dúvida<br>antes de comprar.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>Uma pergunta simples. Sem resposta na hora. A compra não aconteceu.</p></div></div>"
+    },
+    {
+      "filename": "slide-07-cta.png",
+      "bg": "pulse",
+      "noLogo": true,
+      "noArrow": true,
+      "noFooter": true,
+      "content": "<div style='display:flex;flex-direction:column;gap:56px;width:100%;'><p class='h1 ink' style='max-width:800px;'>Agentes conversacionais que respondem antes que o cliente desista.</p><div style='display:flex;flex-direction:column;gap:8px;'><p class='body-md ink' style='opacity:0.55;'>Teste grátis. Sem cartão de crédito.</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:64px;font-weight:800;color:#13111E;letter-spacing:-0.04em;line-height:1;'>citra.chat</p></div></div>"
+    }
+  ]
+}
