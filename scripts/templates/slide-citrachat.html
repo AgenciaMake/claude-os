@@ -191,11 +191,20 @@
     background-position: center;
     z-index: 1;
   }
+  .cover-image-area::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 45%;
+    background: linear-gradient(to bottom, rgba(19,17,30,0.75) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
   .cover-image-area::after {
     content: "";
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 50%;
+    height: 55%;
     background: linear-gradient(to bottom, transparent 0%, var(--void) 100%);
     pointer-events: none;
   }
