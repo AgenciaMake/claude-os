@@ -349,10 +349,11 @@ async function startConversation() {
       saveSession();
     } else {
       hideTyping();
+      addMessage('assistant', data.error || 'Erro ao iniciar. Por favor, recarregue a página.');
     }
   } catch (err) {
     hideTyping();
-    addMessage('assistant', 'Ocorreu um erro. Por favor, recarregue a página.');
+    addMessage('assistant', 'Erro de conexão. Por favor, recarregue a página.');
   }
 }
 
