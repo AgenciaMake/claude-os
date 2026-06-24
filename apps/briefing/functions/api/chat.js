@@ -74,8 +74,8 @@ export async function onRequestPost({ request, env }) {
     const apiData = await apiRes.json();
 
     if (!apiRes.ok) {
-      console.error('Claude API error:', apiData);
-      return json({ error: 'Erro ao processar. Tente novamente.' }, 500);
+      const detail = apiData?.error?.message || JSON.stringify(apiData);
+      return json({ error: `Erro ao processar: ${detail}` }, 500);
     }
 
     const reply = apiData.content?.[0]?.text || '';
