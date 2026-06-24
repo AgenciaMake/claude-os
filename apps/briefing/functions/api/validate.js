@@ -33,6 +33,7 @@ export async function onRequestPost({ request, env }) {
         services: client.services || '',
         responsible: client.responsible || '',
         firestoreId: client.clientId || client._id,
+        resetAt: client.briefingResetAt || null,
       },
     });
   } catch (err) {

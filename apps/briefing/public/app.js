@@ -313,12 +313,15 @@ document.getElementById('code-form').addEventListener('submit', async (e) => {
     state.client = data.client;
 
     const stored = loadSession(code);
-    if (stored && stored.messages && stored.messages.length > 0) {
+    const resetAt = data.client?.resetAt;
+    const sessionIsStale = resetAt && stored?.updatedAt && new Date(stored.updatedAt) < new Date(resetAt);
+    if (stored && stored.messages && stored.messages.length > 0 && !sessionIsStale) {
       state.messages = stored.messages;
       showScreen('chat');
       renderStoredMessages(state.messages);
       addMessage('assistant', '(Retomando de onde você parou. Pode continuar respondendo.)');
     } else {
+      clearSession(code);
       state.messages = [];
       showScreen('chat');
       await startConversation();
