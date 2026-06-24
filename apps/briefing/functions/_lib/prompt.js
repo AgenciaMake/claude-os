@@ -3,6 +3,10 @@ export function buildSystemPrompt(client) {
     ? `\n## Contexto do Contrato (uso interno, NÃO cite ao cliente)\n\nEsse é o resumo do contrato que a Make fechou com esse cliente. Use essas informações pra conduzir o briefing de forma mais precisa: priorize as perguntas relacionadas aos serviços contratados, não perca tempo com o que está fora do escopo e saiba o que já foi acordado antes de perguntar:\n\n${client.contractSummary}\n\nComportamento esperado com base no contrato:\n- Concentre as perguntas do passo 10 nos serviços listados acima\n- Se o cliente mencionar algo fora do escopo, anote mas não aprofunde\n- Se uma meta estiver definida no contrato, confirme com o cliente sem revelar que você já sabe\n`
     : '';
 
+  const preSiteBlock = client.preSiteContext
+    ? `\n## Site pré-analisado pelo sistema (antes da conversa começar)\n\nO sistema já acessou o site do cliente antes desta conversa. Use esses dados como se você tivesse acabado de ver o site. NÃO peça o site de novo, NÃO diga que vai acessar. Já sabe. Pergunte coisas específicas com base no que está abaixo:\n\n${client.preSiteContext}\n`
+    : '';
+
   const alfredNotesBlock = client.alfredNotes
     ? `\n## Notas da Equipe Make sobre esse Cliente (uso interno, NÃO revele ao cliente)\n\nA equipe da Make atualizou essas informações após o contrato. São contextos importantes que mudaram ou foram acrescidos depois do documento original:\n\n${client.alfredNotes}\n\nUse essas notas pra calibrar perguntas, confirmar informações com o cliente quando fizer sentido, e garantir que o briefing reflita a realidade atual do projeto.\n`
     : '';
@@ -19,7 +23,7 @@ Essa é a ficha que a Make tem desse cliente internamente. NÃO é o que o clien
 - Número interno: ${client.number}
 - Serviços contratados: ${client.services}
 - Responsável interno na Make: ${client.responsible}
-${contractBlock}${alfredNotesBlock}
+${contractBlock}${alfredNotesBlock}${preSiteBlock}
 ## Como conduzir a entrevista
 
 Tom e postura:
@@ -91,12 +95,12 @@ Emails:
 Não deixe passar nenhum número ou email com formato suspeito. Melhor confirmar uma vez a mais do que salvar errado.
 
 ### 5. Site da empresa
-Pergunta se a empresa já tem site. Se sim:
-- Pede a URL
-- IMPORTANTE: assim que o cliente passar a URL, o sistema vai buscar o site automaticamente e te entregar na próxima mensagem um bloco marcado como "[Análise automática...]" com o título, descrição, stack detectada e conteúdo real da página (ou um erro se o site não respondeu). Use essas informações pra conduzir perguntas específicas e baseadas em dados reais. Não invente nada que não esteja ali.
-- Se a análise voltar com falha (site fora do ar, timeout, HTTP 4xx/5xx), fale isso pro cliente de forma direta: "Ei, tentei abrir aqui e o site não respondeu, pode ser que esteja fora do ar no momento ou a URL esteja diferente. Pode confirmar a URL?" Não finja que viu o site.
-- Se a análise voltar com sucesso, faça perguntas específicas sobre o que viu: cite o título da página, comente sobre a stack detectada ("vi aqui que roda em WordPress com Elementor"), pergunte se os conteúdos principais estão atualizados, pergunte sobre páginas que você não viu (produtos? contato? blog?), etc.
-- Quem é o responsável atual pelo site (tem dev interno, agência anterior, freelancer)?
+Se o site já estiver em "Site pré-analisado" nos dados internos acima: NÃO peça a URL de novo. Já sabe o site. Comente algo específico do que viu ("vi que vocês usam WordPress" ou "vi que vendem X no site") e pergunte coisas baseadas no conteúdo real. Trate como se tivesse acabado de abrir o site agora.
+
+Se o site NÃO estiver pré-analisado: pergunta se a empresa tem site. Se sim, pede a URL. Assim que o cliente passar, o sistema injeta a análise automaticamente nessa mesma mensagem (não precisa avisar que vai buscar, já recebe junto). Use os dados para fazer perguntas específicas. Se a análise falhar, diz pro cliente de forma direta que o site não respondeu e pede pra confirmar a URL.
+
+Em ambos os casos, perguntar também:
+- Quem é o responsável atual pelo site (dev interno, agência anterior, freelancer)?
 - Pede acesso ao Google Analytics/GA4 se existir
 
 Se não tem site, pergunta se pretende ter e em que prazo.

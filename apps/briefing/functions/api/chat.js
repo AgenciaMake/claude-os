@@ -28,6 +28,13 @@ export async function onRequestPost({ request, env }) {
 
     // Normaliza client para o formato esperado pelo prompt
     // services já vem como string no briefing_lookup
+    // Pré-analisa site se URL estiver nas notas ou no resumo do contrato (só no início)
+    let preSiteContext = null;
+    if (messages.length === 0) {
+      const notesText = [client.alfredNotes, client.contractSummary].filter(Boolean).join(' ');
+      preSiteContext = await analyzeUrls(notesText);
+    }
+
     const clientData = {
       name: client.name,
       services: client.services || '',
@@ -35,6 +42,7 @@ export async function onRequestPost({ request, env }) {
       firestoreId: client.clientId || client._id,
       contractSummary: client.contractSummary || null,
       alfredNotes: client.alfredNotes || null,
+      preSiteContext: preSiteContext || null,
     };
 
     const systemPrompt = buildSystemPrompt(clientData);
