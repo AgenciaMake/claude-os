@@ -35,7 +35,7 @@ export async function sendBriefingCompletionEmail(resendApiKey, toEmails, client
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'Alfred MakeLemonAd <leads@citra.chat>',
+      from: 'Alfred MakeLemonAd <alfred@makelemonad.com.br>',
       to: toEmails,
       subject: `Briefing concluído: ${clientName}`,
       html,
