@@ -62,6 +62,17 @@ export async function onRequestPost({ request, env }) {
       }
     }
 
+    // Atalho de teste: conclui o briefing imediatamente sem chamar a API
+    const lastMsg = enrichedMessages.length > 0 ? enrichedMessages[enrichedMessages.length - 1] : null;
+    if (lastMsg?.role === 'user' && lastMsg.content.includes('#make-test-done')) {
+      const fakeReply = 'Perfeito, vou encerrar o briefing por aqui. Obrigado pelo tempo e pelas informações. A equipe da Make vai revisar tudo e entrar em contato com os próximos passos. ' + DONE_MARKER;
+      const finalMessages = [...messages.slice(0, -1), { role: 'user', content: '#make-test-done' }, { role: 'assistant', content: fakeReply.replace(DONE_MARKER, '').trim() }];
+      const saved = await saveBriefingDoc(token, env, clientData, finalMessages);
+      const docUrl = saved?.docId ? `https://docs.google.com/document/d/${saved.docId}/edit` : null;
+      await markBriefingCompleteLookup(env.FIREBASE_PROJECT_ID, env.FIREBASE_DB_NAME, env.FIREBASE_TENANT_ID, code, docUrl, saved?.briefingText || null);
+      return json({ message: fakeReply.replace(DONE_MARKER, '').trim(), done: true });
+    }
+
     const apiRes = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
