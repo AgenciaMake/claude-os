@@ -20,8 +20,11 @@ export async function sendBriefingCompletionEmail(resendApiKey, toEmails, client
         <h1 style="margin:0;font-size:20px;color:#111;">Briefing concluído: ${clientName}</h1>
       </div>
       <div style="background:#fff;padding:24px 32px;border:1px solid #e5e5e5;border-top:none;border-radius:0 0 12px 12px;">
-        <p style="font-size:14px;color:#555;">O Alfred finalizou a entrevista de briefing com o cliente <strong>${clientName}</strong>. O resumo abaixo foi gerado automaticamente ao final da conversa.</p>
-        ${summaryBlock}
+        <p style="font-size:14px;color:#555;">O Alfred finalizou a entrevista de briefing com o cliente <strong>${clientName}</strong>.</p>
+        ${briefingSummary
+          ? `<p style="font-size:13px;color:#555;margin-top:4px;">Resumo gerado automaticamente ao final da conversa:</p>${summaryBlock}`
+          : `<p style="font-size:13px;color:#999;margin-top:4px;">O resumo não foi gerado nesta sessão. Acesse o documento no Drive para ver o conteúdo completo.</p>`
+        }
         ${driveLink}
         <p style="font-size:11px;color:#aaa;margin-top:24px;">MakeLemonAd — CitraDesk Briefing</p>
       </div>
