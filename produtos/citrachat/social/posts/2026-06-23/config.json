@@ -19,7 +19,7 @@
     {
       "filename": "slide-03-momento2.png",
       "bg": "cream",
-      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#E05C3E;line-height:1;letter-spacing:-0.04em;'>02</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(19,17,30,0.90);'>Menu sem saída.</p><p class='body-lg' style='color:rgba(19,17,30,0.55);max-width:820px;'>Clicou em todas as opções.<br>Nenhuma tinha o que ele precisava.<br>Fechou a aba sem resposta.</p></div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#E05C3E;line-height:1;letter-spacing:-0.04em;'>02</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(19,17,30,0.90);'>Menu sem saída.</p><p class='body-lg' style='color:rgba(19,17,30,0.55);max-width:820px;'>Quatro opções.<br>Nenhuma era a resposta.<br>A quinta foi fechar a aba.</p></div></div>"
     },
     {
       "filename": "slide-04-momento3.png",
