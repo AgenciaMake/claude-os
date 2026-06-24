@@ -1,8 +1,9 @@
 import { getGoogleAccessToken } from '../_lib/google-auth.js';
-import { getClientByBriefingCode, markBriefingCompleteLookup } from '../_lib/firestore-client.js';
+import { getClientByBriefingCode, markBriefingCompleteLookup, getBriefingNotificationEmails } from '../_lib/firestore-client.js';
 import { buildSystemPrompt } from '../_lib/prompt.js';
 import { saveBriefingDoc } from '../_lib/save-doc.js';
 import { analyzeUrls } from '../_lib/site-fetch.js';
+import { sendBriefingCompletionEmail } from '../_lib/send-email.js';
 
 const DONE_MARKER = '<<BRIEFING_CONCLUIDO>>';
 
@@ -70,6 +71,10 @@ export async function onRequestPost({ request, env }) {
       const saved = await saveBriefingDoc(token, env, clientData, finalMessages);
       const docUrl = saved?.docId ? `https://docs.google.com/document/d/${saved.docId}/edit` : null;
       await markBriefingCompleteLookup(env.FIREBASE_PROJECT_ID, env.FIREBASE_DB_NAME, env.FIREBASE_TENANT_ID, code, docUrl, saved?.briefingText || null);
+      if (env.RESEND_API_KEY) {
+        const notifEmails = await getBriefingNotificationEmails(env.FIREBASE_PROJECT_ID, env.FIREBASE_DB_NAME, env.FIREBASE_TENANT_ID);
+        await sendBriefingCompletionEmail(env.RESEND_API_KEY, notifEmails, clientData.name, docUrl, saved?.briefingText || null);
+      }
       return json({ message: fakeReply.replace(DONE_MARKER, '').trim(), done: true });
     }
 
@@ -113,6 +118,10 @@ export async function onRequestPost({ request, env }) {
         docUrl,
         saved?.briefingText || null,
       );
+      if (env.RESEND_API_KEY) {
+        const notifEmails = await getBriefingNotificationEmails(env.FIREBASE_PROJECT_ID, env.FIREBASE_DB_NAME, env.FIREBASE_TENANT_ID);
+        await sendBriefingCompletionEmail(env.RESEND_API_KEY, notifEmails, clientData.name, docUrl, saved?.briefingText || null);
+      }
     }
 
     return json({ message: cleanReply, done });

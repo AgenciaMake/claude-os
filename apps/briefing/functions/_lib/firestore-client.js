@@ -62,3 +62,15 @@ export async function markBriefingCompleteLookup(projectId, dbName, tenantId, co
     body: JSON.stringify({ fields }),
   });
 }
+
+// Busca os emails configurados para notificação de briefing concluído
+export async function getBriefingNotificationEmails(projectId, dbName, tenantId) {
+  const url = `${FIRESTORE_BASE}/projects/${projectId}/databases/${dbName}/documents/tenants/${tenantId}/config/general`;
+  const res = await fetch(url);
+  if (!res.ok) return [];
+  const doc = await res.json();
+  if (!doc || !doc.fields) return [];
+  const emailsField = doc.fields.briefingNotificationEmails;
+  if (!emailsField || !emailsField.arrayValue || !emailsField.arrayValue.values) return [];
+  return emailsField.arrayValue.values.map(v => v.stringValue).filter(Boolean);
+}
