@@ -16,7 +16,7 @@
     {
       "filename": "slide-02-momento1.png",
       "bg": "void",
-      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#E05C3E;line-height:1;letter-spacing:-0.04em;'>01</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Mensagem às 22h.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>O site fica em silêncio.<br>O cliente espera.<br>No dia seguinte já comprou do concorrente.</p></div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;color:#E05C3E;line-height:1;letter-spacing:-0.04em;'>01</span><div style='display:flex;flex-direction:column;gap:20px;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Mensagem às 22h.</p><p class='body-lg' style='color:rgba(248,244,235,0.60);max-width:820px;'>O site fica em silêncio.<br>O cliente espera.<br>No dia seguinte já comprou<br>do concorrente.</p></div></div>"
     },
     {
       "filename": "slide-03-momento2.png",
