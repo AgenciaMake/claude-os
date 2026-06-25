@@ -9,6 +9,8 @@
     {
       "filename": "slide-01-cover.png",
       "bg": "void",
+      "isCover": true,
+      "coverImage": "../../assets/magnific__photograph-taken-in-brazil-so-paulo-shot-on-a-dslr__68148.png",
       "content": "<div style='display:flex;flex-direction:column;gap:24px;width:100%;'><span style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:220px;font-weight:800;color:#C8FF2E;line-height:0.85;letter-spacing:-0.05em;'>5</span><p class='h1' style='color:rgba(248,244,235,0.92);margin-top:-8px;'>momentos em que<br>o seu cliente<br>decide ir embora.</p></div>"
     },
     {
