@@ -249,5 +249,23 @@ O usuário **não autoriza o débito do saldo negativo** e **solicita o estorno 
 
 ---
 
+---
+
+## Desfecho — 02 de julho de 2026
+
+Em 01/07/2026, a Anthropic creditou **US$ 2.216,40 em créditos gratuitos** na conta, com validade até 02/07/2027. O valor corresponde exatamente ao saldo negativo em aberto.
+
+| Componente | Resultado |
+|---|---|
+| Faturas pagas em 28/05 (~$500) | Ainda debitadas no cartão — não estornadas |
+| Saldo negativo de $2.216,41 | **Resolvido via créditos gratuitos** |
+| Gasto atual na conta | US$ 0,00 |
+
+O saldo negativo foi absorvido pela Anthropic sem cobrança adicional. A contestação dos ~$500 já pagos permanece em aberto.
+
+*Evidência: print do billing em 02/07/2026 — créditos gratuitos de $2.216,40 emitidos em 01/07/2026.*
+
+---
+
 *Documento elaborado com base no histórico de conversas registrado localmente e nos prints do Claude Console fornecidos pelo usuário.*  
-*Versão: 1.1 — 15/06/2026*
+*Versão: 1.2 — 02/07/2026*
