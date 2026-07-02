@@ -77,6 +77,7 @@ async function renderSlide(browser, template, slide, outPath, slideHeight, safeA
   // Background. Se tem coverImage (TV4) ou fullBleedImage, adiciona a div da imagem + ajusta classes.
   let bgClass = `bg-${slide.bg || "black"}`;
   if (slide.isCta) bgClass += " has-cta";
+  if (slide.alignTop) bgClass += " has-top";
   let coverImageBlock = "";
   if (slide.coverImage) {
     bgClass += " has-cover-image";
