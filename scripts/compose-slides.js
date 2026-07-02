@@ -71,7 +71,7 @@ async function fitContent(page, safeArea) {
   }, safeArea);
 }
 
-async function renderSlide(browser, template, slide, outPath, slideHeight, safeArea, configFlags, configLogoPng) {
+async function renderSlide(browser, template, slide, outPath, slideHeight, safeArea, configFlags, configLogoPng, config = {}) {
   let html = template;
 
   // Background. Se tem coverImage (TV4) ou fullBleedImage, adiciona a div da imagem + ajusta classes.
@@ -110,7 +110,8 @@ async function renderSlide(browser, template, slide, outPath, slideHeight, safeA
   if (!noTopElements) {
     if (slide.isCover) {
       const colorStyle = slide.hashtagColor ? ` style="color:${slide.hashtagColor};"` : "";
-      topLeft = `<div class="hashtag"${colorStyle}>Agência Boutique 360</div>`;
+      const hashtagText = slide.hashtagText ?? config.hashtagText ?? "Agência Boutique 360";
+      if (hashtagText) topLeft = `<div class="hashtag"${colorStyle}>${hashtagText}</div>`;
     } else if (slide.number && !slide.isCta) {
       const colorStyle = slide.numColor ? ` style="color:${slide.numColor};"` : "";
       topLeft = `<div class="slide-num"${colorStyle}>${String(slide.number).padStart(2, "0")}</div>`;
@@ -241,7 +242,7 @@ async function main() {
   const browser = await chromium.launch();
   for (const slide of slides) {
     const outPath = path.join(outDir, slide.filename);
-    await renderSlide(browser, template, slide, outPath, slideHeight, safeArea, configFlags, configLogoPng);
+    await renderSlide(browser, template, slide, outPath, slideHeight, safeArea, configFlags, configLogoPng, config);
     console.log(`  OK: ${slide.filename}`);
   }
   await browser.close();

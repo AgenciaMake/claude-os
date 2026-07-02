@@ -5,6 +5,7 @@
   "logoPng": "../../../logo/Logo_citrachat-03.png",
   "footerHandle": "@citra.chat",
   "footerSlogan": "Agentes que convertem.",
+  "hashtagText": "",
   "slides": [
     {
       "filename": "slide-01-cover.png",
