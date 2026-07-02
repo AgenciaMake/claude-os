@@ -1,0 +1,45 @@
+{
+  "outDir": ".",
+  "templateFile": "slide-citrachat.html",
+  "margin": 90,
+  "logoPng": "../../../logo/Logo_citrachat-03.png",
+  "footerHandle": "@citra.chat",
+  "footerSlogan": "Agentes que convertem.",
+  "slides": [
+    {
+      "filename": "slide-01-cover.png",
+      "bg": "void",
+      "isCover": true,
+      "noArrow": false,
+      "content": "<div style='display:flex;flex-direction:column;gap:16px;width:100%;'><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:116px;font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:#C8FF2E;'>Chatbot<br>não é chat<br>conversacional.</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:52px;font-weight:500;line-height:1.2;letter-spacing:-0.02em;color:rgba(248,244,235,0.65);'>E essa diferença<br>está custando leads.</p></div>"
+    },
+    {
+      "filename": "slide-02-cenario1.png",
+      "bg": "void",
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Pergunta fora<br>do script.</p><div style='display:flex;flex-direction:column;gap:32px;'><div style='display:flex;flex-direction:column;gap:10px;'><span class='label' style='color:#E05C3E;'>Chatbot</span><p class='body-lg' style='color:rgba(248,244,235,0.50);'>&ldquo;Desculpe, não entendi.<br>Por favor escolha<br>uma das opções.&rdquo;</p></div><div style='display:flex;flex-direction:column;gap:10px;'><span class='label' style='color:#C8FF2E;'>Chat Conversacional</span><p class='body-lg' style='color:rgba(248,244,235,0.90);'>Lê o contexto.<br>Responde de verdade.<br>Segue a conversa.</p></div></div></div>"
+    },
+    {
+      "filename": "slide-03-cenario2.png",
+      "bg": "cream",
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><p class='h2' style='color:rgba(19,17,30,0.90);'>Objeção de preço.</p><div style='display:flex;flex-direction:column;gap:32px;'><div style='display:flex;flex-direction:column;gap:10px;'><span class='label' style='color:#E05C3E;'>Chatbot</span><p class='body-lg' style='color:rgba(19,17,30,0.45);'>&ldquo;Para informações<br>sobre valores, fale<br>com nossa equipe.&rdquo;</p></div><div style='display:flex;flex-direction:column;gap:10px;'><span class='label' style='color:#2F6B10;'>Chat Conversacional</span><p class='body-lg' style='color:rgba(19,17,30,0.85);'>Entende a objeção.<br>Apresenta valor.<br>Mantém o lead aquecido.</p></div></div></div>"
+    },
+    {
+      "filename": "slide-04-cenario3.png",
+      "bg": "void",
+      "content": "<div style='display:flex;flex-direction:column;gap:48px;width:100%;'><p class='h2' style='color:rgba(248,244,235,0.95);'>Fora do horário<br>comercial.</p><div style='display:flex;flex-direction:column;gap:32px;'><div style='display:flex;flex-direction:column;gap:10px;'><span class='label' style='color:#E05C3E;'>Chatbot</span><p class='body-lg' style='color:rgba(248,244,235,0.50);'>&ldquo;Nosso horário de atendimento<br>é de 9h às 18h.<br>Tente novamente amanhã.&rdquo;</p></div><div style='display:flex;flex-direction:column;gap:10px;'><span class='label' style='color:#C8FF2E;'>Chat Conversacional</span><p class='body-lg' style='color:rgba(248,244,235,0.90);'>Atende, qualifica<br>e agenda. Sem perder<br>o timing do lead.</p></div></div></div>"
+    },
+    {
+      "filename": "slide-05-diferenca.png",
+      "bg": "cream",
+      "content": "<div style='display:flex;flex-direction:column;gap:56px;width:100%;'><p class='h2' style='color:rgba(19,17,30,0.90);'>No fim,<br>a diferença é simples.</p><div style='display:flex;flex-direction:column;gap:24px;'><div style='display:flex;align-items:baseline;gap:20px;'><span class='label' style='color:#E05C3E;min-width:200px;'>Chatbot</span><p class='body-lg' style='color:rgba(19,17,30,0.55);'>Coleta dado.</p></div><div style='display:flex;align-items:baseline;gap:20px;'><span class='label' style='color:#2F6B10;min-width:200px;'>Chat Conversacional</span><p class='body-lg' style='color:rgba(19,17,30,0.90);font-weight:700;'>Converte.</p></div></div></div>"
+    },
+    {
+      "filename": "slide-06-cta.png",
+      "bg": "pulse",
+      "noLogo": true,
+      "noArrow": true,
+      "noFooter": true,
+      "content": "<div style='display:flex;flex-direction:column;gap:56px;width:100%;'><p class='h1 ink' style='max-width:800px;'>Teste um chat conversacional de verdade.</p><div style='display:flex;flex-direction:column;gap:8px;'><p class='body-md ink' style='opacity:0.55;'>Grátis. Sem cartão de crédito.</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:64px;font-weight:800;color:#13111E;letter-spacing:-0.04em;line-height:1;'>citra.chat</p></div></div>"
+    }
+  ]
+}
