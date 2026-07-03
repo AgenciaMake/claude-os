@@ -127,14 +127,15 @@ async function renderSlide(browser, template, slide, outPath, slideHeight, safeA
   if (!noTopElements && slide.isCover && !slide.noLogo) {
     const style = slide.logoStyle || "png-oficial";
     const activeLogo = configLogoPng || LOGO_PNG_PATH;
+    const logoPos = slide.logoLeft ? ' style="left:90px;right:auto;"' : '';
     if (style === "png-oficial" || configLogoPng) {
       const logoData = fs.readFileSync(activeLogo).toString("base64");
-      topRight = `<div class="logo-top"><img src="data:image/png;base64,${logoData}" alt=""></div>`;
+      topRight = `<div class="logo-top"${logoPos}><img src="data:image/png;base64,${logoData}" alt=""></div>`;
     } else if (style.startsWith("svg-")) {
       const fill = style.slice(4);
       const svgRaw = getLogoSvg(fill);
       const svgB64 = Buffer.from(svgRaw).toString("base64");
-      topRight = `<div class="logo-top"><img src="data:image/svg+xml;base64,${svgB64}" alt=""></div>`;
+      topRight = `<div class="logo-top"${logoPos}><img src="data:image/svg+xml;base64,${svgB64}" alt=""></div>`;
     }
   }
   html = html.replace("{{TOP_RIGHT}}", topRight);

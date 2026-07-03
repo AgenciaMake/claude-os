@@ -11,7 +11,8 @@
       "filename": "slide-01-cover.png",
       "bg": "void",
       "isCover": true,
-      "content": "<div style='display:flex;flex-direction:column;gap:16px;width:100%;'><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:116px;font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:#C8FF2E;'>Chatbot<br>não é chat<br>conversacional.</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:52px;font-weight:500;line-height:1.2;letter-spacing:-0.02em;color:rgba(248,244,235,0.65);'>E essa diferença<br>está custando leads.</p></div>"
+      "logoLeft": true,
+      "content": "<div style='display:flex;flex-direction:column;gap:36px;width:100%;'><div style='display:flex;gap:12px;align-items:center;'><div style='height:5px;flex:1;background:#E05C3E;border-radius:3px;opacity:0.8;'></div><span style='font-family:\"Plus Jakarta Sans\",sans-serif;font-size:18px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(248,244,235,0.25);'>vs</span><div style='height:5px;flex:1;background:#C8FF2E;border-radius:3px;'></div></div><div style='display:flex;flex-direction:column;gap:0px;'><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:108px;font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:#E05C3E;'>Chatbot</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:72px;font-weight:500;line-height:1.05;letter-spacing:-0.03em;color:rgba(248,244,235,0.30);'>não é</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:108px;font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:#C8FF2E;'>chat<br>conversacional.</p></div><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:46px;font-weight:500;line-height:1.2;letter-spacing:-0.02em;color:rgba(248,244,235,0.50);'>E essa diferença<br>está custando leads.</p></div>"
     },
     {
       "filename": "slide-02-cenario1.png",
