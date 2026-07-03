@@ -1,0 +1,5 @@
+- [Bruno — CEO MakeLemonAd](user_bruno.md) — perfil, comunicação direta em pt-BR, não-dev, valoriza continuidade
+- [App de briefing conversacional](project_briefing_app.md) — skill /novo-cliente + Cloudflare Pages app que conversa com Claude e gera Doc
+- [Preservar estado entre sessões](feedback_session_state.md) — sempre atualizar tarefas.md "Onde paramos" antes de fechar sessão
+- [IDs e caminhos do ecossistema](reference_ids_paths.md) — Drive IDs, Sheet, paths, Cloudflare project, API key
+- [Política GCP de chave SA](reference_gcp_policy.md) — org policy foi desativada só no projeto makelemonad-drive-mcp

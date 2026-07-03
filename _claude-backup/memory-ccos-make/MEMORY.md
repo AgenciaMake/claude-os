@@ -1,0 +1,28 @@
+- [Ferramentas de publicação social da MakeLemonAd](makelemonad_social_tooling.md) — Post for Me Pro é o método oficial; usar skill publicar-instagram, não Graph API
+- [Geração de imagem nunca contém texto](feedback_image_generation_no_text.md) — IA gera só o visual; textos são sempre compostos depois como camada separada
+- [Script mestre de realismo brasileiro](feedback_realismo_brasileiro.md) — imagens fotorrealistas seguem 15 regras em marca/direcao-de-arte.md; mockups 3D caricatos usam estética própria
+- [Fluxo de redes sociais em andamento](project_ig_make_em_andamento.md) — sistema de templates TV+TI consolidado (10 peças); primeiro post quase pronto, falta atualizar skill DA + refinos finais. Retomar quando Bruno pedir
+- [Linha de produtos SaaS Citra](project_produtos_citra.md) — CitraDesk e CitraChat vivem em produtos/, separados de make/ e clientes/; ler o briefing do produto antes de mexer
+- [Linha Citra — visão SaaS modular](citra_visao_saas.md) — CitraDesk = suíte modular em citradesk.com; CitraChat = produto irmão em citrachat.com; pricing e módulos definidos
+- [Citra — decisões de arquitetura SaaS](citra_decisoes_arquitetura.md) — Firebase unificado, multi-tenant via path, banco fica em US por enquanto, Make = primeira agência cliente
+- [CitraDesk pausado em 2026-04-27](citradesk_pausado_2026-04-27.md) — Fase 0 e 1.1/1.4/1.5 concluídas; Fase 1.2-1.8 (multi-tenancy + Cloud Function) pendentes. Bruno priorizou CitraChat. Como retomar.
+- [Agentes CitraChat jamais citam nome de pessoa](feedback_citrachat_jamais_cita_nomes.md) — regra absoluta: usar "o time", "pessoa responsável", nunca individualizar membros do cliente
+- [CitraChat — estado atual e próximos passos](citrachat_estado_atual.md) — snapshot vivo (atualizado diariamente). Onde paramos, o que tá no ar, o que vem a seguir. LER PRIMEIRO em qualquer sessão de CitraChat
+- [CitraChat — benchmark vs Leadster e Octadesk](citrachat_benchmark_concorrentes.md) — preços reais, gaps de feature, vantagens do CitraChat, roadmap priorizado e copies de comparação
+- [Posts e copies não podem ter marcas de IA](feedback_posts_sem_marcas_ia.md) — proibido travessão, markdown, clichês de IA em qualquer copy público da Make ou de cliente
+- [Hashtags obrigatórias da Make](feedback_hashtags_obrigatorias.md) — #performanceestrategica360 e #makelemonad são obrigatórias em TODOS os posts, sem exceção
+- [Descrições de posts não recontar o conteúdo](feedback_descricao_post.md) — legenda cria curiosidade e convida pro post; não reconta os slides
+- [Sugestão de pautas sempre com fonte](feedback_sugestao_pautas.md) — todo tópico sugerido precisa de fonte primária confiável (Exame, eMarketer, Kantar, IAB Brasil, etc); nunca blogs de nicho sem autoridade
+- [CitraChat Social — setup completo](citrachat_social_setup.md) — redes em produtos/citrachat/social/, identidade própria (#DFFF00), briefing em CITRACHATSOCIAL.md; retomar quando Bruno disser "vamos voltar a falar de social citrachat"
+- [Slide único não tem seta de navegação](feedback_slide_unico_sem_seta.md) — post de 1 só slide sempre usa noArrow:true no config; seta só aparece em carrosséis com 2+ slides
+- ["Chatbot" é palavra proibida no CitraChat](feedback_citrachat_chatbot_proibido.md) — usar sempre "agentes conversacionais"; comportamento humano é o argumento central
+- [Responsividade mobile obrigatória no site](feedback_responsividade_obrigatoria.md) — toda alteração no site CitraChat deve incluir mobile no mesmo commit, sem exceção
+- [CitraChat LinkedIn — aguardando aprovação API](citrachat_linkedin_pendente.md) — app citrachat-org verificado, Community Management API solicitada; quando aprovado, conectar como organization no PostForMe
+- [Deep-research proibido sem pedido explícito](feedback_deep_research_custo.md) — consumiu 37% dos tokens numa sessão; só usar se Bruno pedir diretamente
+- [CitraChat — nunca usar Opus](feedback_citrachat_no_opus.md) — regra absoluta: apenas Haiku (chat/operações) e Sonnet (extração/análise); Opus proibido em qualquer chamada
+- [Sempre fazer push após commit](feedback_sempre_push.md) — commit → push imediato, sem pedir aprovação; Cloudflare só rebuilda quando o push chega ao GitHub
+- [Base de conhecimento CitraChat — versionamento](feedback_citrachat_knowledge_versioning.md) — cada atualização cria novo arquivo (v1, v2, v3…), nunca sobrescreve o anterior
+- [CitraChat — infraestrutura e contas](citrachat_infra.md) — Vercel (bruno@makelemonad.com.br) + Supabase; Cloudflare só para apps/ simples, não para Citra
+- [Alfred — menção de serviço na abertura](feedback_alfred_mencao_servico.md) — usar nome do produto Make (Make Performance, Social, Dev, 360º) na abertura, não listar serviços individuais; se tiver fases, citá-las brevemente
+- [CitraChat — modelos de IA fixos](feedback_citrachat_modelos_fixos.md) — Haiku 4.5 (chat) e Sonnet 4.6 (análise) são fixos; não atualizar para versões mais novas sem aprovação explícita de Bruno
+- [Incidente Anthropic API 2026](incidente_anthropic_api_2026.md) — ~$2.716 USD em cobranças indevidas; Opus de madrugada + chave vazada via bundle VITE_; docs em dados/ e operacoes/

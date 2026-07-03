@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'git rev-parse --git-dir >/dev/null 2>&1 || exit 0; git remote get-url origin >/dev/null 2>&1 || exit 0; git add -A >/dev/null 2>&1; git diff --staged --quiet && exit 0; git commit -m \"auto-sync: $(date +\"%Y-%m-%d %H:%M\")\" >/dev/null 2>&1; git push --quiet >/dev/null 2>&1; true'"
+            "command": "bash -c '\n  REPO=~/Desktop/CCode/ccos-make\n  BACKUP=$REPO/_claude-backup\n\n  # Copiar memórias de todos os projetos\n  cp -r ~/.claude/projects/-Users-brunomartins-Desktop-CCode-ccos-make/memory/. $BACKUP/memory-ccos-make/ 2>/dev/null\n  cp -r ~/.claude/projects/-Users-brunomartins-Desktop-CCode/memory/. $BACKUP/memory-ccode/ 2>/dev/null\n\n  # Copiar settings globais\n  cp ~/.claude/settings.json $BACKUP/settings/settings-global.json 2>/dev/null\n  cp ~/.claude/settings.local.json $BACKUP/settings/settings-local.json 2>/dev/null\n\n  # Auto-sync pro GitHub\n  cd $REPO\n  git rev-parse --git-dir >/dev/null 2>&1 || exit 0\n  git remote get-url origin >/dev/null 2>&1 || exit 0\n  git add -A >/dev/null 2>&1\n  git diff --staged --quiet && exit 0\n  git commit -m \"auto-sync: $(date +\"%Y-%m-%d %H:%M\")\" >/dev/null 2>&1\n  git push --quiet >/dev/null 2>&1\n  true\n'"
           }
         ]
       }

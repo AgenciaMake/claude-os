@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//private/tmp/**)",
+      "Bash(python3 flores_v6.py)",
+      "Bash(npx wrangler *)",
+      "Bash(pmset -g log)",
+      "Bash(pmset -g assertions)",
+      "Bash(pmset -g)",
+      "Bash(log show *)",
+      "WebSearch",
+      "Bash(python3 -c ' *)",
+      "mcp__google-drive__downloadFile",
+      "Bash(unzip -o catalog.docx -d catalog_extracted)",
+      "mcp__google-drive__readGoogleDoc",
+      "mcp__google-drive__findAndReplaceInDoc"
+    ]
+  }
+}
