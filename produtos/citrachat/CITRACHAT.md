@@ -205,22 +205,28 @@ Total: **8 semanas** pra MVP utilizável.
 
 ### WhatsApp Business API — decisão de modelo (2026-07-07)
 
-**CitraChat gerencia o WABA** (WhatsApp Business Account) centralizado sob a MakeLemonAd. O cliente não precisa ter conta Meta Business nem configurar nada na Meta.
+**Canal base (widget CitraChat) está incluso em todos os planos.** WhatsApp é um **canal adicional pago** — o cliente escolhe se quer ou não.
 
-- Cliente conecta o número via **Embedded Signup** (popup no painel do CitraChat)
-- O número fica sob o WABA da Make — Make paga a Meta
-- Custo Meta é absorvido no plano — **não existe add-on separado de WhatsApp**
-- WhatsApp é um **canal incluso** no plano, como o widget de site
+**Lógica comercial:**
+- Plano padrão → widget no site (já construído, funcional)
+- Add-on WhatsApp → habilita o canal WhatsApp Business no mesmo agente, paga um plus mensal
 
-**Impacto de custo por plano (estimativa):**
+**CitraChat gerencia o WABA** centralizado sob a MakeLemonAd. O cliente não precisa ter conta Meta Business nem configurar nada na Meta. Conecta o número via **Embedded Signup** (popup no painel) e pronto.
 
-| Plano | Conversas WA estimadas | Custo Meta/mês | Absorção |
-|---|---|---|---|
-| Starter (R$147) | até 300 | R$0 (dentro do free tier) | Zero |
-| Pro (R$297) | até 1.000 | R$0 (dentro do free tier) | Zero |
-| Business (R$1.997) | até 7.000 | ~R$300 | ~15% da receita |
+**Pricing do add-on WhatsApp (sugestão):**
 
-Acima de 1.000 conversas WA/mês por cliente: custo médio R$0,05/conversa. Para o Business com 7.000 conversas = ~R$300/mês de custo Meta contra R$1.997 de receita — margem mantida acima de 70%.
+| Plano base | Add-on WhatsApp | Justificativa |
+|---|---|---|
+| Starter R$147 | +R$50/mês = R$197 total | Até 300 conv WA — custo Meta zero |
+| Pro R$297 | +R$100/mês = R$397 total | Até 1.000 conv WA — custo Meta zero |
+| Business R$1.997 | +R$200/mês = R$2.197 total | Até 7.000 conv WA — custo Meta ~R$300 |
+
+**Margem sobre o add-on:**
+- Starter WA: R$50 receita, R$0 custo Meta → margem ~100%
+- Pro WA: R$100 receita, R$0 custo Meta → margem ~100%
+- Business WA: R$200 receita, ~R$300 custo Meta → ⚠️ deficitário em volume alto
+
+> Para o Business, o add-on precisa ser reprecificado ou ter limite de conversas WA com cobrança por excedente (+R$0,15/conversa acima de 1.000/mês).
 
 ### Desenvolvimento
 
