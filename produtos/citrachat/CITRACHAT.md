@@ -201,6 +201,26 @@ Total: **8 semanas** pra MVP utilizável.
 |---|---|---|
 | Anthropic API | Claude Haiku (chat) + Sonnet (treino/resumo) | Por token — ~US$ 0 agora (testes) |
 | Domínios | `citra.chat`, `citrachat.com`, `citrachat.com.br` | ~US$ 70/ano total |
+| **Meta WhatsApp API** | Conversas via WhatsApp Business | Primeiras 1.000/mês **grátis**; acima disso ~R$0,05/conversa de serviço |
+
+### WhatsApp Business API — decisão de modelo (2026-07-07)
+
+**CitraChat gerencia o WABA** (WhatsApp Business Account) centralizado sob a MakeLemonAd. O cliente não precisa ter conta Meta Business nem configurar nada na Meta.
+
+- Cliente conecta o número via **Embedded Signup** (popup no painel do CitraChat)
+- O número fica sob o WABA da Make — Make paga a Meta
+- Custo Meta é absorvido no plano — **não existe add-on separado de WhatsApp**
+- WhatsApp é um **canal incluso** no plano, como o widget de site
+
+**Impacto de custo por plano (estimativa):**
+
+| Plano | Conversas WA estimadas | Custo Meta/mês | Absorção |
+|---|---|---|---|
+| Starter (R$147) | até 300 | R$0 (dentro do free tier) | Zero |
+| Pro (R$297) | até 1.000 | R$0 (dentro do free tier) | Zero |
+| Business (R$1.997) | até 7.000 | ~R$300 | ~15% da receita |
+
+Acima de 1.000 conversas WA/mês por cliente: custo médio R$0,05/conversa. Para o Business com 7.000 conversas = ~R$300/mês de custo Meta contra R$1.997 de receita — margem mantida acima de 70%.
 
 ### Desenvolvimento
 
