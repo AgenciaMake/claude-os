@@ -213,20 +213,23 @@ Total: **8 semanas** pra MVP utilizável.
 
 **CitraChat gerencia o WABA** centralizado sob a MakeLemonAd. O cliente não precisa ter conta Meta Business nem configurar nada na Meta. Conecta o número via **Embedded Signup** (popup no painel) e pronto.
 
+**Lógica de conversas:** o add-on WhatsApp **não adiciona conversas** — usa o pool que já está no plano. Um cliente Pro com 1.000 conversas/mês pode usá-las via widget, via WhatsApp, ou nos dois canais combinados. O limite é do plano.
+
 **Pricing do add-on WhatsApp (sugestão):**
 
-| Plano base | Add-on WhatsApp | Justificativa |
+| Plano base | Add-on WhatsApp | Conv incluídas no plano |
 |---|---|---|
-| Starter R$147 | +R$50/mês = R$197 total | Até 300 conv WA — custo Meta zero |
-| Pro R$297 | +R$100/mês = R$397 total | Até 1.000 conv WA — custo Meta zero |
-| Business R$1.997 | +R$200/mês = R$2.197 total | Até 7.000 conv WA — custo Meta ~R$300 |
+| Starter R$147 | +R$50/mês | 300/mês (compartilhadas entre canais) |
+| Pro R$297 | +R$100/mês | 1.000/mês |
+| Business R$1.997 | +R$200/mês | 7.000/mês |
 
-**Margem sobre o add-on:**
-- Starter WA: R$50 receita, R$0 custo Meta → margem ~100%
-- Pro WA: R$100 receita, R$0 custo Meta → margem ~100%
-- Business WA: R$200 receita, ~R$300 custo Meta → ⚠️ deficitário em volume alto
+**Custo Meta (WABA centralizado da Make):**
+- Meta dá 1.000 conversas WA gratuitas/mês por WABA — compartilhadas entre todos os clientes
+- Acima disso: ~R$0,05/conversa de serviço (cliente inicia)
+- Com poucos clientes WA ativos: custo Meta próximo de zero
+- Com escala (ex: 20 clientes Pro): ~20.000 conv/mês → ~R$950/mês custo Meta vs ~R$2.000/mês receita add-on → margem ~52%
 
-> Para o Business, o add-on precisa ser reprecificado ou ter limite de conversas WA com cobrança por excedente (+R$0,15/conversa acima de 1.000/mês).
+> Monitorar o volume total de conversas WA conforme a base cresce e ajustar o pricing do add-on se necessário.
 
 ### Desenvolvimento
 
