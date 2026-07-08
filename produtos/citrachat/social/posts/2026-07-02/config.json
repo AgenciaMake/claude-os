@@ -13,8 +13,8 @@
       "bg": "void",
       "isCover": true,
       "logoLeft": true,
-      "coverImage": "../../assets/magnific_photograph-taken-in-brazi_xgqLSnvjfW.png",
-      "content": "<div style='display:flex;flex-direction:column;gap:4px;'><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:104px;font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:#E05C3E;'>Chatbot</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:68px;font-weight:500;line-height:1.05;letter-spacing:-0.03em;color:rgba(248,244,235,0.40);'>não é</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:104px;font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:#C8FF2E;'>chat<br>conversacional.</p></div>"
+      "coverImage": "../../assets/magnific_photograph-taken-in-brazi_WMZ0DaJcXe.png",
+      "content": "<div style='display:flex;flex-direction:column;gap:8px;'><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:#E05C3E;'>Chatbot não é</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:96px;font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:#C8FF2E;'>chat<br>conversacional.</p></div>"
     },
     {
       "filename": "slide-02-cenario1.png",
