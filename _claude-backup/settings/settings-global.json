@@ -7,8 +7,11 @@
       }
     }
   },
-  "effortLevel": "medium",
+  "effortLevel": "xhigh",
   "model": "sonnet",
-  "availableModels": ["sonnet", "haiku"],
+  "availableModels": [
+    "sonnet",
+    "haiku"
+  ],
   "forceLoginMethod": "claudeai"
 }
