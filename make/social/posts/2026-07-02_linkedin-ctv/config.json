@@ -6,6 +6,7 @@
       "bg": "black",
       "isCover": true,
       "noLogo": true,
+      "fullBleedImage": "../../assets/fotos/magnific_text-ultrarealistic-first_wPjJXcL7EI.png",
       "content": "<div style='display:flex;flex-direction:column;gap:16px;'><div style='font-size:28px;font-weight:400;font-style:italic;letter-spacing:4px;color:var(--lime);text-transform:uppercase;'>LinkedIn Ads</div><div style='font-size:96px;font-weight:900;font-style:italic;line-height:1.05;letter-spacing:-3px;color:#fff;text-transform:uppercase;'>B2B<br>mudou<br>de canal.</div><div style='font-size:52px;font-weight:900;font-style:italic;line-height:0.9;letter-spacing:-2px;color:var(--lime);text-transform:uppercase;'>Literalmente.</div><div style='font-size:28px;font-weight:400;font-style:italic;color:rgba(255,255,255,0.5);margin-top:8px;'>Salva esse carrossel.</div></div>"
     },
     {
