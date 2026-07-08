@@ -7,7 +7,7 @@
       }
     }
   },
-  "effortLevel": "xhigh",
+  "effortLevel": "medium",
   "model": "sonnet",
   "availableModels": [
     "sonnet",

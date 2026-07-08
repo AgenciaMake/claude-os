@@ -44,7 +44,7 @@
       "noLogo": true,
       "noArrow": true,
       "noFooter": true,
-      "content": "<div style='display:flex;flex-direction:column;gap:56px;width:100%;'><p class='h1 ink' style='max-width:800px;'>Teste um chat conversacional de verdade.</p><div style='display:flex;flex-direction:column;gap:8px;'><p class='body-md ink' style='opacity:0.55;'>14 dias grátis. Sem cartão de crédito.</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:64px;font-weight:800;color:#13111E;letter-spacing:-0.04em;line-height:1;'>citra.chat</p></div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:56px;width:100%;'><p class='h1 ink' style='max-width:800px;'>Teste um chat conversacional de verdade.</p><div style='display:flex;flex-direction:column;gap:16px;'><div style='display:inline-flex;align-self:flex-start;background:#13111E;border-radius:14px;padding:14px 28px;'><span style='font-family:\"Plus Jakarta Sans\",sans-serif;font-size:32px;font-weight:700;color:#C8FF2E;letter-spacing:-0.01em;'>14 dias grátis</span></div><p class='body-md ink' style='opacity:0.45;'>Sem cartão de crédito.</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:64px;font-weight:800;color:#13111E;letter-spacing:-0.04em;line-height:1;'>citra.chat</p></div></div>"
     }
   ]
 }
