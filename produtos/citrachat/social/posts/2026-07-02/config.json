@@ -6,6 +6,7 @@
   "footerHandle": "@citra.chat",
   "footerSlogan": "Agentes que convertem.",
   "hashtagText": "",
+  "noArrow": true,
   "slides": [
     {
       "filename": "slide-01-cover.png",
