@@ -40,6 +40,7 @@ export async function onRequestPost({ request, env }) {
       name: client.name,
       services: client.services || '',
       responsible: client.responsible || '',
+      contacts: client.contacts || '',
       firestoreId: client.clientId || client._id,
       contractSummary: client.contractSummary || null,
       alfredNotes: client.alfredNotes || null,
