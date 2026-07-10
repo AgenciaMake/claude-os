@@ -1,17 +1,23 @@
 {
+  "model": "sonnet",
+  "availableModels": [
+    "sonnet",
+    "haiku"
+  ],
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
       "source": {
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
       }
+    },
+    "ui-ux-pro-max-skill": {
+      "source": {
+        "source": "github",
+        "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
+      }
     }
   },
-  "effortLevel": "medium",
-  "model": "sonnet",
-  "availableModels": [
-    "sonnet",
-    "haiku"
-  ],
-  "forceLoginMethod": "claudeai"
+  "forceLoginMethod": "claudeai",
+  "effortLevel": "medium"
 }
