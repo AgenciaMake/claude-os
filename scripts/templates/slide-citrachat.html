@@ -7,15 +7,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --pulse:       #C8FF2E;
-    --pulse-dark:  #2F6B10;
-    --warmth:      #E05C3E;
-    --clarity:     #3E88D4;
-    --ember:       #E8A040;
-    --void:        #13111E;
-    --cream:       #F8F4EB;
-    --ink:         #13111E;
-    --white:       #FFFFFF;
+    /* Acentos */
+    --pulse:        #C8FF2E;
+    --pulse-dark:   #2F6B10;
+    --pulse-bg:     oklch(95% 0.07 130);
+    --warmth:       #E05C3E;
+    --warmth-mid:   oklch(78% 0.14 28);
+    --warmth-bg:    oklch(97% 0.04 28);
+    --clarity:      #3E88D4;
+    --clarity-mid:  oklch(76% 0.13 242);
+    --clarity-bg:   oklch(96% 0.04 242);
+    --ember:        #E8A040;
+
+    /* Neutros */
+    --void:         #13111E;
+    --cream:        #F8F4EB;
+    --cream2:       oklch(94% 0.012 85);
+    --cream3:       oklch(90% 0.014 85);
+    --border:       oklch(88% 0.010 85);
+    --border2:      oklch(80% 0.012 85);
+    --ink:          #13111E;
+    --ink2:         oklch(40% 0.018 260);
+    --ink3:         oklch(60% 0.016 260);
+    --white:        #FFFFFF;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -268,19 +282,68 @@
   .dado-fonte { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 400; letter-spacing: 0.04em; opacity: 0.45; }
 
   /* Color helpers */
-  .pulse    { color: var(--pulse); }
+  .pulse      { color: var(--pulse); }
   .pulse-dark { color: var(--pulse-dark); }
-  .warmth   { color: var(--warmth); }
-  .clarity  { color: var(--clarity); }
-  .ember    { color: var(--ember); }
-  .white    { color: var(--white); }
-  .ink      { color: var(--ink); }
-  .muted    { opacity: 0.45; }
-  .outline  { -webkit-text-stroke: 2px currentColor; color: transparent; }
+  .warmth     { color: var(--warmth); }
+  .clarity    { color: var(--clarity); }
+  .ember      { color: var(--ember); }
+  .white      { color: var(--white); }
+  .ink        { color: var(--ink); }
+  .ink2       { color: var(--ink2); }
+  .ink3       { color: var(--ink3); }
+  .muted      { opacity: 0.45; }
+  .outline    { -webkit-text-stroke: 2px currentColor; color: transparent; }
 
   /* Indicadores de variação em dados */
   .up   { color: var(--pulse); }
   .down { color: var(--ember); }
+
+  /* ── Label Pill — alinhado ao estilo V3 do site ── */
+  /* Uso: <span class="label-pill lime">Tag</span>    */
+  /* Em fundo cream: .lime .coral .sky               */
+  /* Em fundo void:  .on-dark .coral-dark .sky-dark  */
+  .label-pill {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 8px 22px;
+    border-radius: 100px;
+    align-self: flex-start;
+    line-height: 1.2;
+  }
+  /* Em fundos claros (cream) */
+  .label-pill.lime    { color: var(--pulse-dark);  background: var(--pulse-bg); }
+  .label-pill.coral   { color: var(--warmth);      background: var(--warmth-bg); }
+  .label-pill.sky     { color: var(--clarity);     background: var(--clarity-bg); }
+  /* Em fundos escuros (void) */
+  .label-pill.on-dark       { color: var(--pulse);   background: rgba(200,255,46,0.10); border: 1px solid rgba(200,255,46,0.20); }
+  .label-pill.coral-dark    { color: var(--warmth);  background: rgba(224,92,62,0.12);  border: 1px solid rgba(224,92,62,0.22); }
+  .label-pill.sky-dark      { color: var(--clarity); background: rgba(62,136,212,0.12); border: 1px solid rgba(62,136,212,0.22); }
+
+  /* Badge de status (ponto pulsante + texto) — padrão hero V3 */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px;
+    padding: 8px 22px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.70);
+    letter-spacing: 0.04em;
+  }
+  .status-badge .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--pulse);
+    flex-shrink: 0;
+  }
 </style>
 </head>
 <body>

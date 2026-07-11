@@ -50,12 +50,28 @@ Baseado no Instagram Brand Guide oficial (Claude Design, Junho 2026).
 
 ### Neutros
 
-| Nome | Hex | OKLCH | Uso |
+| Nome | Hex / OKLCH | Uso |
+|---|---|---|
+| **Void** | `#13111E` | Background dark mode (padrão posts de impacto) |
+| **Cream** | `#F8F4EB` `oklch(97.5% 0.010 85)` | Background light/editorial (padrão site e posts de feature) |
+| **Cream 2** | `oklch(94% 0.012 85)` | Superfície levemente mais escura (cards, separadores) |
+| **Cream 3** | `oklch(90% 0.014 85)` | Borda de seção, hover state claro |
+| **Border** | `oklch(88% 0.010 85)` | Bordas e divisores em fundo cream |
+| **Border 2** | `oklch(80% 0.012 85)` | Bordas mais densas, separadores de seção |
+| **Ink** | `#13111E` `oklch(12% 0.018 260)` | Texto primário, botões dark |
+| **Ink 2** | `oklch(40% 0.018 260)` | Texto secundário em fundos claros |
+| **Ink 3** | `oklch(60% 0.016 260)` | Texto terciário, placeholders, muted |
+| **Lime Dark** | `#2F6B10` `oklch(38% 0.20 130)` | Lime sobre fundo claro (contraste garantido) |
+
+### Tints de acento (fundos suaves)
+
+Usados como background de tags/pills — nunca como fundo dominante de slide.
+
+| Nome | OKLCH | Texto | Quando usar |
 |---|---|---|---|
-| **Void** | `#13111E` | `oklch(9% 0.015 260)` | Background dark mode |
-| **Cream** | `#F8F4EB` | `oklch(97.5% 0.010 85)` | Background light/editorial |
-| **Ink** | `#13111E` | `oklch(12% 0.018 260)` | Texto primário, botões dark |
-| **Lime Dark** | `#2F6B10` | `oklch(38% 0.20 130)` | Lime sobre fundo claro (contraste garantido) |
+| **Pulse Bg** | `oklch(95% 0.07 130)` | Lime Dark | Tag de feature em fundo cream |
+| **Warmth Bg** | `oklch(97% 0.04 28)` | Warmth | Tag de conversão/performance em fundo cream |
+| **Clarity Bg** | `oklch(96% 0.04 242)` | Clarity | Tag técnica/IA em fundo cream |
 
 ### Combinações válidas
 
@@ -160,6 +176,47 @@ Baseado no Instagram Brand Guide oficial (Claude Design, Junho 2026).
 - Branco sobre fundo lime
 - Ícone sozinho sem wordmark como assinatura do post
 - Sombra, efeito ou distorção no logo
+
+---
+
+## Sistema de labels e tags
+
+Dois estilos disponíveis — escolher pelo contexto do slide:
+
+### Label retangular (`.label`)
+Texto uppercase sem background. Usado como subtítulo de série ou categoria discreta sobre qualquer fundo.
+```html
+<span class="label pulse">Série 01</span>
+```
+
+### Label pill (`.label-pill`) — padrão V3 do site
+Pílula com tint de cor, alinhada ao estilo das feature tags do site `citra.chat`. Usar quando o slide apresenta features ou categorias funcionais.
+
+| Classe | Fundo | Texto | Contexto |
+|---|---|---|---|
+| `.label-pill.lime` | Pulse Bg (suave) | Lime Dark | Feature em fundo cream |
+| `.label-pill.coral` | Warmth Bg (suave) | Warmth | Conversão/performance em cream |
+| `.label-pill.sky` | Clarity Bg (suave) | Clarity | Técnico/IA em cream |
+| `.label-pill.on-dark` | Pulse 10% + borda | Pulse | Feature em fundo void |
+| `.label-pill.coral-dark` | Warmth 12% + borda | Warmth | Conversão em fundo void |
+| `.label-pill.sky-dark` | Clarity 12% + borda | Clarity | Técnico em fundo void |
+
+### Status badge (`.status-badge`) — padrão hero V3
+Pílula com borda sutil + ponto pulsante. Exclusivo para slides de capa com fundo escuro — comunica "ao vivo" ou novidade.
+```html
+<div class="status-badge"><span class="dot"></span>Novo: WhatsApp integrado</div>
+```
+
+---
+
+## Modo de fundo por contexto de conteúdo
+
+| Contexto | Fundo recomendado | Justificativa |
+|---|---|---|
+| Lançamento, dado de impacto, CTA | Void ou Pulse | Máximo contraste, atenção imediata |
+| Feature de produto, explicação de como funciona | **Cream** | Alinha com a estética do site |
+| Comparativo (chatbot vs agente) | Alternar Void/Cream | Contraste visual entre os lados |
+| Slide de encerramento/CTA | Pulse | Alto impacto, memorável |
 
 ---
 
