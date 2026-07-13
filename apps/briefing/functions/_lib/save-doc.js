@@ -63,7 +63,7 @@ export async function saveBriefingDoc(token, env, client, messages) {
   return { docId, briefingText };
 }
 
-async function findClientMaterialsFolder(token, client) {
+export async function findClientMaterialsFolder(token, client) {
   // Busca pelo nome "NUMERO. NOME" dentro de 02. CLIENTES
   const clientesFolder = '1R6NWb_YjeiMryxSS_a4U-ye5a0F2Wh4q';
   const expectedName = `${String(client.number).padStart(2, '0')}. ${client.name}`;

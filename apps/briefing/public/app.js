@@ -431,3 +431,86 @@ function autoResizeInput() {
 }
 
 chatInput.addEventListener('input', autoResizeInput);
+
+const MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
+const attachButton = document.getElementById('attach-button');
+const fileInput = document.getElementById('file-input');
+const uploadStatus = document.getElementById('upload-status');
+
+function setUploadStatus(text, isError) {
+  uploadStatus.textContent = text;
+  uploadStatus.classList.toggle('visible', Boolean(text));
+  uploadStatus.classList.toggle('error', Boolean(isError));
+}
+
+attachButton.addEventListener('click', () => {
+  fileInput.click();
+});
+
+fileInput.addEventListener('change', async () => {
+  const file = fileInput.files[0];
+  fileInput.value = '';
+  if (!file) return;
+
+  if (file.size > MAX_UPLOAD_BYTES) {
+    setUploadStatus('Arquivo maior que 20MB. Envie um arquivo menor.', true);
+    return;
+  }
+
+  attachButton.disabled = true;
+  setUploadStatus(`Enviando ${file.name}...`, false);
+
+  try {
+    const formData = new FormData();
+    formData.append('code', state.code);
+    formData.append('file', file);
+
+    const res = await fetch('/api/upload', { method: 'POST', body: formData });
+    const data = await res.json();
+
+    if (!res.ok || !data.ok) {
+      setUploadStatus(data.error || 'Erro ao enviar arquivo.', true);
+      return;
+    }
+
+    setUploadStatus('', false);
+
+    const noteText = `[Anexei o arquivo "${file.name}", já enviado automaticamente pra pasta de materiais do cliente.]`;
+    addMessage('user', noteText);
+    state.messages.push({ role: 'user', content: noteText });
+    saveSession();
+    setTimeout(() => markLastUserAsRead(), 900);
+
+    const apiPromise = fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: state.code, messages: state.messages }),
+    }).then(r => r.json());
+
+    await sleep(randomReadDelay());
+    showTyping();
+
+    const chatData = await apiPromise;
+
+    if (chatData.done) {
+      const finalMsg = chatData.message || 'Briefing concluído. Obrigado!';
+      await humanizeReveal(finalMsg.length);
+      addMessage('assistant', finalMsg);
+      clearSession(state.code);
+      setTimeout(() => showScreen('done'), 2500);
+      return;
+    }
+
+    if (chatData.message) {
+      await humanizeReveal(chatData.message.length);
+      addMessage('assistant', chatData.message);
+      state.messages.push({ role: 'assistant', content: chatData.message });
+      saveSession();
+    }
+  } catch (err) {
+    hideTyping();
+    setUploadStatus('Erro de conexão ao enviar arquivo.', true);
+  } finally {
+    attachButton.disabled = false;
+  }
+});
