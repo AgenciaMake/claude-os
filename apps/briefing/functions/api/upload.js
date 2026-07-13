@@ -1,6 +1,6 @@
 import { getGoogleAccessToken } from '../_lib/google-auth.js';
 import { getClientByBriefingCode } from '../_lib/firestore-client.js';
-import { findClientMaterialsFolder } from '../_lib/save-doc.js';
+import { resolveMaterialsFolderId } from '../_lib/save-doc.js';
 
 const MAX_BYTES = 20 * 1024 * 1024; // 20MB
 const BOUNDARY = 'make_briefing_upload_boundary';
@@ -32,7 +32,7 @@ export async function onRequestPost({ request, env }) {
     }
 
     const token = await getGoogleAccessToken(env.GOOGLE_SERVICE_ACCOUNT);
-    const folderId = await findClientMaterialsFolder(token, client);
+    const folderId = await resolveMaterialsFolderId(token, client);
 
     if (!folderId) {
       return json({ error: 'Pasta do cliente não encontrada no Drive.' }, 500);

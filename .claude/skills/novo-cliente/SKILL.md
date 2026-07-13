@@ -70,6 +70,21 @@ Após o briefing, quando o cliente informar o(s) email(s) (disponíveis no Citra
 
 Usar `mcp__google-drive__addPermission` na pasta USER com o email fornecido.
 
+### Permissão obrigatória do Alfred na pasta "03. Materiais do Cliente"
+
+O Alfred (app de briefing) sobe anexos e salva o Doc do briefing nessa pasta usando uma service account própria (`briefing-app@makelemonad-drive-mcp.iam.gserviceaccount.com`). A permissão herdada do Shared Drive **não propaga de forma confiável** pras subpastas de cada cliente novo (já causou "Pasta do cliente não encontrada no Drive" em produção). Por isso, é obrigatório, logo após criar a pasta "03. Materiais do Cliente":
+
+1. Rodar `mcp__google-drive__addPermission` nessa pasta com `emailAddress: "briefing-app@makelemonad-drive-mcp.iam.gserviceaccount.com"`, `role: "writer"`, `type: "user"`, `sendNotificationEmail: false`.
+2. Gravar o ID dessa pasta no Firestore, direto no doc público `tenants/makelemonad/briefing_lookup/{briefingCode}` (já existe nesse ponto, criado pelo CitraDesk ao salvar o cliente com o código de briefing), via PATCH REST sem autenticação:
+
+```
+curl -X PATCH "https://firestore.googleapis.com/v1/projects/gen-lang-client-0548502624/databases/bdmakegestorpro/documents/tenants/makelemonad/briefing_lookup/{briefingCode}?updateMask.fieldPaths=materialsFolderId" \
+  -H "Content-Type: application/json" \
+  -d '{"fields": {"materialsFolderId": {"stringValue": "{ID_DA_PASTA_03_MATERIAIS}"}}}'
+```
+
+Sem esses dois passos, o Alfred não consegue salvar nada na pasta do cliente (nem anexos, nem o Doc final do briefing).
+
 ---
 
 ## Passo 3 — Criar pasta no Drive (área de criação)

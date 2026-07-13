@@ -46,6 +46,7 @@ export async function onRequestPost({ request, env }) {
       contractSummary: client.contractSummary || null,
       alfredNotes: client.alfredNotes || null,
       preSiteContext: preSiteContext || null,
+      materialsFolderId: client.materialsFolderId || null,
     };
 
     const systemPrompt = buildSystemPrompt(clientData);

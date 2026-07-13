@@ -1,10 +1,9 @@
 // Gera e salva o Google Doc do briefing na pasta do cliente
 
 export async function saveBriefingDoc(token, env, client, messages) {
-  // Busca a pasta 03. Materiais do Cliente do cliente
-  const folderId = await findClientMaterialsFolder(token, client);
+  const folderId = await resolveMaterialsFolderId(token, client);
   if (!folderId) {
-    console.error(`Pasta do cliente ${client.name} (n° ${client.number}) não encontrada.`);
+    console.error(`Pasta do cliente ${client.name} não encontrada.`);
     return null;
   }
 
@@ -63,11 +62,22 @@ export async function saveBriefingDoc(token, env, client, messages) {
   return { docId, briefingText };
 }
 
+// Resolve a pasta "03. Materiais do Cliente". Prioriza o ID salvo em
+// client.materialsFolderId (gravado uma vez no onboarding via skill
+// novo-cliente) porque a busca por nome dentro do Shared Drive não é
+// confiável para essa service account: a permissão herdada do Drive não
+// propaga de forma consistente pras subpastas de cada cliente, então
+// files.list frequentemente retorna vazio mesmo quando o acesso existe.
+export async function resolveMaterialsFolderId(token, client) {
+  if (client.materialsFolderId) return client.materialsFolderId;
+  return findClientMaterialsFolder(token, client);
+}
+
 export async function findClientMaterialsFolder(token, client) {
-  // Busca a pasta do cliente dentro de 02. CLIENTES. O padrão é "NUMERO. NOME",
-  // mas o número da pasta é uma convenção manual (não existe como campo no
-  // cadastro do cliente no CitraDesk), então casamos só pelo nome, ignorando
-  // um eventual prefixo numérico ("33. Springway" -> "springway").
+  // Fallback: busca a pasta do cliente dentro de 02. CLIENTES. O padrão é
+  // "NUMERO. NOME", mas o número da pasta é uma convenção manual (não existe
+  // como campo no cadastro do cliente no CitraDesk), então casamos só pelo
+  // nome, ignorando um eventual prefixo numérico ("33. Springway" -> "springway").
   const clientesFolder = '1R6NWb_YjeiMryxSS_a4U-ye5a0F2Wh4q';
   const expectedName = (client.name || '').toLowerCase().trim();
 
