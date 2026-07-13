@@ -32,7 +32,7 @@
       "noLogo": true,
       "noArrow": true,
       "noFooter": true,
-      "content": "<div style='display:flex;flex-direction:column;gap:56px;width:100%;'><p class='h1 ink' style='max-width:820px;'>Seu atendimento no WhatsApp começa agora.</p><div style='display:flex;flex-direction:column;gap:16px;'><p class='body-md ink' style='opacity:0.45;'>Integração nativa. API Oficial da Meta.</p><div style='display:flex;flex-direction:column;gap:4px;'><p style='font-family:\"Plus Jakarta Sans\",sans-serif;font-size:26px;font-weight:600;color:#13111E;opacity:0.55;letter-spacing:0.04em;'>Saiba mais em:</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:52px;font-weight:800;color:#13111E;letter-spacing:-0.04em;line-height:1;'>citra.chat/whatsapp</p></div></div></div>"
+      "content": "<div style='display:flex;flex-direction:column;gap:56px;width:100%;'><p class='h1 ink' style='max-width:820px;'>Seu atendimento no WhatsApp começa AGORA.</p><div style='display:flex;flex-direction:column;gap:16px;'><p class='body-md ink' style='opacity:0.45;'>Integração nativa. API Oficial da Meta.</p><div style='display:flex;flex-direction:column;gap:4px;'><p style='font-family:\"Plus Jakarta Sans\",sans-serif;font-size:26px;font-weight:600;color:#13111E;opacity:0.55;letter-spacing:0.04em;'>Saiba mais em:</p><p style='font-family:\"Bricolage Grotesque\",sans-serif;font-size:52px;font-weight:800;color:#13111E;letter-spacing:-0.04em;line-height:1;'>citra.chat/whatsapp</p></div></div></div>"
     }
   ]
 }
