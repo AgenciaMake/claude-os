@@ -7,7 +7,7 @@ metadata:
   originSessionId: 16f3a8cf-6c02-498f-adc5-4abc80036d4c
 ---
 
-**Última atualização: 2026-06-06**
+**Última atualização: 2026-07-13**
 
 ## O que está no ar (produção)
 
@@ -41,8 +41,7 @@ Stack: Next.js + Anthropic SDK + Supabase (sa-east-1, `lkcwykalylphhngjivva`) + 
 ### Email de leads qualificados
 - Remetente: `leads@citra.chat`
 - Domínio `citra.chat` adicionado no Resend, DNS configurado no Namecheap em 2026-06-03
-- **⚠️ PENDENTE: verificação DNS `citra.chat` no Resend** — registos adicionados mas propagação ainda pendente
-- Para verificar: `curl -X POST "https://api.resend.com/domains/79cc275d-89e2-42e6-b465-a7a2103d2374/verify" -H "Authorization: Bearer re_Z7ETxFoQ_F1wtLCKDwkj6hgKSv4WVBgRh"` e depois GET para ver status
+- DNS verificado no Resend, domínio ativo — email de lead qualificado saindo normalmente (confirmado por Bruno em 2026-07-13)
 - Email configurado para agentes AbyaraGraf (Tiago e Joana): `bruno@makelemonad.com.br`
 - Template HTML: header preto/limão, dados do lead, resumo IA, conversa completa, imagens inline
 
@@ -62,7 +61,7 @@ Stack: Next.js + Anthropic SDK + Supabase (sa-east-1, `lkcwykalylphhngjivva`) + 
   - NUNCA carrega GTM/pixels dentro do iframe — causava conflito com GTM Preview
   - Check de segurança no widget.js usa `e.origin === 'https://citra.chat'` (não mais `e.source`)
 - **Make configurada:** GTM-5R5ZM77 + G-3026YN424E. 6 triggers + 6 tags GA4 publicadas (GTM v33, 05/06/2026)
-- **⚠️ PENDENTE: validar no GTM Preview** — após fix de 06/06, testar se eventos aparecem em "Tags disparadas"
+- Eventos validados no GTM Preview e disparando certo (confirmado por Bruno em 2026-07-13)
 - `citrachat_lead_qualified` deve ser marcado como conversão no GA4 após primeiro disparo
 - Documentação completa: `clientes/make/citrachat-gtm-setup.md`
 
@@ -91,6 +90,5 @@ Stack: Next.js + Anthropic SDK + Supabase (sa-east-1, `lkcwykalylphhngjivva`) + 
 1. Ler essa memória + `produtos/citrachat/CITRACHAT.md`
 2. Conferir `_memoria_pendente/` — aplicar e apagar se houver snapshot
 3. `cd produtos/citrachat/codigo && git log --oneline -5` — branch ativa é `plataforma`
-4. Se voltar para email: verificar DNS `citra.chat` no Resend (ver instrução acima)
 
 **How to apply:** quando Bruno disser "vamos falar do CitraChat", ler essa memória primeiro.
