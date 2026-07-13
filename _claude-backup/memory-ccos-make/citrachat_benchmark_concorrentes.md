@@ -7,7 +7,7 @@ metadata:
   originSessionId: 6400d359-e0a7-4d72-ab64-50d6227379e3
 ---
 
-**Última atualização: 2026-06-09**
+**Última atualização: 2026-07-13**
 
 ## Leadster — concorrente direto mais próximo
 
@@ -47,6 +47,22 @@ metadata:
 | TikTok + LinkedIn nativos | Só Meta + Google | Não tem |
 | White-label completo | Personalização básica | Não é white-label |
 | Preço PME | Similar, mas IA real por menos | 5x mais caro |
+
+---
+
+## Meta (WhatsApp Business AI Agent) — concorrente nativo de plataforma
+
+**Fonte:** whatsappbusiness.com/pt-br/products/business-app-ai-agent/ (checado 2026-07-13)
+
+**O que é:** agente de IA nativo do próprio WhatsApp Business App — responde no WhatsApp, Messenger e anúncios Meta 24/7. Aprende sozinho a partir da Página do Facebook, site e catálogo de produtos. Controles: conhecimento, personalidade, público-alvo, transferência pra humano. Setup "em minutos", sem código. Público: PMEs, começando em mercados selecionados (Brasil não confirmado ainda).
+
+**Por que é diferente dos outros concorrentes:** não é uma startup de SaaS — é a própria Meta comoditizando "IA que responde no WhatsApp" dentro do produto que todo PME já usa. Ameaça de distribuição, não de profundidade de produto.
+
+**Onde ataca o CitraChat:** o add-on de WhatsApp (R$50-200/mês) fica mais difícil de vender se a Meta oferecer isso nativo/grátis dentro do WhatsApp Business Premium.
+
+**Onde o CitraChat continua ganhando:** tracking unificado GTM/GA4/Ads/TikTok/LinkedIn, lead scoring cross-channel, dashboard de performance, white-label pra revenda por agência. A Meta resolve "responder no WhatsApp" — não resolve "transformar isso em dado de mídia paga que otimiza campanha". Isso não é o negócio da Meta.
+
+**Implicação estratégica:** não vender o CitraChat como "IA que conversa no WhatsApp" (isso vai ser comoditizado pela Meta). Vender como "IA que conversa em qualquer canal E alimenta suas campanhas com dado de conversão real" — a camada de performance marketing é o fosso que a Meta não vai construir. Reforça urgência de lançar logo, antes da Meta expandir esse recurso pro Brasil.
 
 ---
 
