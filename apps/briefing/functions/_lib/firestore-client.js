@@ -45,13 +45,14 @@ export async function getClientByBriefingCode(_token, projectId, dbName, tenantI
 }
 
 // Marca briefing como concluído na briefing_lookup (coleção pública)
-export async function markBriefingCompleteLookup(projectId, dbName, tenantId, code, docUrl, briefingSummary) {
+export async function markBriefingCompleteLookup(projectId, dbName, tenantId, code, docUrl, briefingSummary, briefingTranscript) {
   const fields = {
     briefingStatus: { stringValue: 'concluído' },
     briefingCompletedAt: { stringValue: new Date().toISOString() },
   };
   if (docUrl) fields.briefingDocUrl = { stringValue: docUrl };
   if (briefingSummary) fields.briefingSummary = { stringValue: briefingSummary };
+  if (briefingTranscript) fields.briefingTranscript = { stringValue: briefingTranscript };
 
   const masks = Object.keys(fields).map(f => `updateMask.fieldPaths=${f}`).join('&');
   const url = `${FIRESTORE_BASE}/projects/${projectId}/databases/${dbName}/documents/tenants/${tenantId}/briefing_lookup/${code}?${masks}`;

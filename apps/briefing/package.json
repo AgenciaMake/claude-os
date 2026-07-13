@@ -9,5 +9,8 @@
   },
   "devDependencies": {
     "wrangler": "^3.80.0"
+  },
+  "dependencies": {
+    "docx": "^9.7.1"
   }
 }

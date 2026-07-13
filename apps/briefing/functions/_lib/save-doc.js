@@ -106,10 +106,14 @@ export async function findClientMaterialsFolder(token, client) {
   return materiais?.id || null;
 }
 
-async function generateBriefingContent(apiKey, client, messages) {
-  const conversationText = messages
+export function formatTranscript(client, messages) {
+  return messages
     .map(m => `${m.role === 'user' ? client.name : 'Alfred'}: ${m.content}`)
     .join('\n\n');
+}
+
+async function generateBriefingContent(apiKey, client, messages) {
+  const conversationText = formatTranscript(client, messages);
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',

@@ -1,7 +1,7 @@
 import { getGoogleAccessToken } from '../_lib/google-auth.js';
 import { getClientByBriefingCode, markBriefingCompleteLookup, getBriefingNotificationEmails } from '../_lib/firestore-client.js';
 import { buildSystemPrompt } from '../_lib/prompt.js';
-import { saveBriefingDoc } from '../_lib/save-doc.js';
+import { saveBriefingDoc, formatTranscript } from '../_lib/save-doc.js';
 import { analyzeUrls } from '../_lib/site-fetch.js';
 import { validatePhoneNumbers } from '../_lib/phone-validate.js';
 import { sendBriefingCompletionEmail } from '../_lib/send-email.js';
@@ -75,7 +75,8 @@ export async function onRequestPost({ request, env }) {
       const finalMessages = [...messages.slice(0, -1), { role: 'user', content: '#make-test-done' }, { role: 'assistant', content: fakeReply.replace(DONE_MARKER, '').trim() }];
       const saved = await saveBriefingDoc(token, env, clientData, finalMessages);
       const docUrl = saved?.docId ? `https://docs.google.com/document/d/${saved.docId}/edit` : null;
-      await markBriefingCompleteLookup(env.FIREBASE_PROJECT_ID, env.FIREBASE_DB_NAME, env.FIREBASE_TENANT_ID, code, docUrl, saved?.briefingText || null);
+      const transcriptText = formatTranscript(clientData, finalMessages);
+      await markBriefingCompleteLookup(env.FIREBASE_PROJECT_ID, env.FIREBASE_DB_NAME, env.FIREBASE_TENANT_ID, code, docUrl, saved?.briefingText || null, transcriptText);
       if (env.RESEND_API_KEY) {
         const notifEmails = await getBriefingNotificationEmails(env.FIREBASE_PROJECT_ID, env.FIREBASE_DB_NAME, env.FIREBASE_TENANT_ID);
         await sendBriefingCompletionEmail(env.RESEND_API_KEY, notifEmails, clientData.name, docUrl, saved?.briefingText || null);
@@ -115,6 +116,7 @@ export async function onRequestPost({ request, env }) {
       const finalMessages = [...messages, { role: 'assistant', content: cleanReply }];
       const saved = await saveBriefingDoc(token, env, clientData, finalMessages);
       const docUrl = saved?.docId ? `https://docs.google.com/document/d/${saved.docId}/edit` : null;
+      const transcriptText = formatTranscript(clientData, finalMessages);
       await markBriefingCompleteLookup(
         env.FIREBASE_PROJECT_ID,
         env.FIREBASE_DB_NAME,
@@ -122,6 +124,7 @@ export async function onRequestPost({ request, env }) {
         code,
         docUrl,
         saved?.briefingText || null,
+        transcriptText,
       );
       if (env.RESEND_API_KEY) {
         const notifEmails = await getBriefingNotificationEmails(env.FIREBASE_PROJECT_ID, env.FIREBASE_DB_NAME, env.FIREBASE_TENANT_ID);
