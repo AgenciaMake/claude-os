@@ -1,0 +1,49 @@
+{
+  "outDir": ".",
+  "slides": [
+    {
+      "filename": "slide01-capa.png",
+      "bg": "black",
+      "isCover": true,
+      "content": "<div style='display:flex;flex-direction:column;gap:20px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(255,255,255,0.4);text-transform:uppercase;'>Mídia paga</div><div style='font-size:88px;font-weight:900;font-style:italic;line-height:1.0;letter-spacing:-3px;color:#fff;text-transform:uppercase;'>Seu<br>relatório<br>tá ótimo.</div><div style='font-size:68px;font-weight:900;font-style:italic;line-height:1.0;letter-spacing:-2px;color:var(--lime);text-transform:uppercase;'>Seu negócio,<br>não.</div><div style='font-size:30px;font-weight:400;line-height:1.5;color:rgba(255,255,255,0.5);margin-top:8px;'>3 métricas que enganam até quem entende.</div></div>"
+    },
+    {
+      "filename": "slide02-setup.png",
+      "bg": "dark-gray",
+      "number": 2,
+      "content": "<div style='display:flex;flex-direction:column;gap:22px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(255,255,255,0.35);text-transform:uppercase;'>O problema</div><div style='font-size:66px;font-weight:900;font-style:italic;line-height:1.05;letter-spacing:-2px;color:#fff;text-transform:uppercase;'>Número<br>bonito não<br>é resultado.</div><div style='width:48px;height:3px;background:var(--lime);'></div><div style='font-size:34px;font-weight:400;line-height:1.5;color:rgba(255,255,255,0.8);'>Agência manda relatório. Tudo verde. Tudo crescendo. Mas o caixa não reflete nada disso.</div><div style='font-size:34px;font-weight:700;font-style:italic;color:var(--lime);line-height:1.3;'>Isso não é coincidência. É escolha de métrica.</div></div>"
+    },
+    {
+      "filename": "slide03-ctr.png",
+      "bg": "black",
+      "number": 3,
+      "content": "<div style='display:flex;flex-direction:column;gap:22px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(255,255,255,0.35);text-transform:uppercase;'>Métrica 1</div><div style='font-size:80px;font-weight:900;font-style:italic;line-height:1.0;letter-spacing:-2px;color:var(--lime);text-transform:uppercase;'>CTR alto.</div><div style='width:48px;height:3px;background:var(--lime);'></div><div style='font-size:34px;font-weight:400;line-height:1.5;color:rgba(255,255,255,0.8);'>CTR de 5% parece ótimo. Mas se cada clique custa R$1,50 e nenhum vira cliente, o que você tem é tráfego, não negócio.</div><div style='background:rgba(214,222,35,0.08);border-left:4px solid var(--lime);padding:18px 22px;'><div style='font-size:30px;font-weight:700;color:var(--lime);line-height:1.35;'>CTR mede atenção. Não mede intenção. São coisas diferentes.</div></div></div>"
+    },
+    {
+      "filename": "slide04-alcance.png",
+      "bg": "lime",
+      "number": 4,
+      "numColor": "#000",
+      "footerColor": "#000",
+      "content": "<div style='display:flex;flex-direction:column;gap:22px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(0,0,0,0.4);text-transform:uppercase;'>Métrica 2</div><div style='font-size:72px;font-weight:900;font-style:italic;line-height:1.05;letter-spacing:-2px;color:#000;text-transform:uppercase;'>50 mil<br>pessoas<br>alcançadas.</div><div style='width:48px;height:3px;background:#000;'></div><div style='font-size:34px;font-weight:400;line-height:1.5;color:rgba(0,0,0,0.8);'>Se nenhuma dessas 50 mil pessoas tem perfil de comprador, você pagou pra existir na timeline de gente que nunca vai te contratar.</div><div style='font-size:34px;font-weight:700;font-style:italic;color:#000;line-height:1.3;'>Alcance sem segmentação é outdoor na estrada errada.</div></div>"
+    },
+    {
+      "filename": "slide05-cpc.png",
+      "bg": "black",
+      "number": 5,
+      "content": "<div style='display:flex;flex-direction:column;gap:22px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(255,255,255,0.35);text-transform:uppercase;'>Métrica 3</div><div style='font-size:72px;font-weight:900;font-style:italic;line-height:1.05;letter-spacing:-2px;color:var(--lime);text-transform:uppercase;'>CPC de<br>R$0,30.</div><div style='width:48px;height:3px;background:var(--lime);'></div><div style='font-size:34px;font-weight:400;line-height:1.5;color:rgba(255,255,255,0.8);'>Clique barato parece eficiência. Mas se o site não converte, cada R$0,30 é só mais um visitante que foi embora.</div><div style='background:rgba(214,222,35,0.08);border-left:4px solid var(--lime);padding:18px 22px;'><div style='font-size:30px;font-weight:700;color:var(--lime);line-height:1.35;'>O que importa é o custo por lead. Não o custo por clique.</div></div></div>"
+    },
+    {
+      "filename": "slide06-solucao.png",
+      "bg": "dark-gray",
+      "number": 6,
+      "content": "<div style='display:flex;flex-direction:column;gap:22px;'><div style='font-size:22px;font-weight:400;font-style:italic;letter-spacing:4px;color:rgba(255,255,255,0.35);text-transform:uppercase;'>O que olhar de verdade</div><div style='font-size:62px;font-weight:900;font-style:italic;line-height:1.05;letter-spacing:-2px;color:#fff;text-transform:uppercase;'>Três<br>perguntas<br>certas.</div><div style='width:48px;height:3px;background:var(--lime);'></div><div style='display:flex;flex-direction:column;gap:16px;'><div style='display:flex;align-items:flex-start;gap:16px;'><div style='width:10px;height:10px;background:var(--lime);border-radius:50%;flex-shrink:0;margin-top:12px;'></div><div style='font-size:32px;font-weight:400;color:rgba(255,255,255,0.85);line-height:1.4;'>Quanto custou cada lead gerado?</div></div><div style='display:flex;align-items:flex-start;gap:16px;'><div style='width:10px;height:10px;background:var(--lime);border-radius:50%;flex-shrink:0;margin-top:12px;'></div><div style='font-size:32px;font-weight:400;color:rgba(255,255,255,0.85);line-height:1.4;'>Quantos leads viraram clientes?</div></div><div style='display:flex;align-items:flex-start;gap:16px;'><div style='width:10px;height:10px;background:var(--lime);border-radius:50%;flex-shrink:0;margin-top:12px;'></div><div style='font-size:32px;font-weight:400;color:rgba(255,255,255,0.85);line-height:1.4;'>O quanto cada cliente gerou de receita?</div></div></div><div style='font-size:28px;font-weight:700;font-style:italic;color:var(--lime);'>Isso é relatório. O resto é vaidade.</div></div>"
+    },
+    {
+      "filename": "slide07-cta.png",
+      "bg": "black",
+      "isCta": true,
+      "content": "<div style='display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center;'><div style='font-size:64px;font-weight:900;font-style:italic;line-height:1.05;letter-spacing:-2px;color:#fff;text-transform:uppercase;'>Relatório<br>que não<br>mostra isso<br><span style='color:var(--lime);'>não tá<br>te ajudando.</span></div><div style='font-size:32px;font-weight:400;line-height:1.5;color:rgba(255,255,255,0.75);max-width:820px;'>A Make trabalha com métricas que têm relação direta com o crescimento do seu negócio. Nada de vaidade.</div><div style='font-size:34px;font-weight:700;color:#fff;'>Segue a Make. Salva esse post.</div><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;margin-top:8px;'></div>"
+    }
+  ]
+}
