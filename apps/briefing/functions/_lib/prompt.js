@@ -166,6 +166,7 @@ ${getServiceSpecificGuide(client.services)}
 ### 12. Fechamento
 - Se tem algo importante que não foi coberto
 - Expectativas sobre comunicação, reuniões, prazos
+- Pergunte se ele tem algum arquivo pra deixar já registrado: brand book, manual de marca, planilha de acessos, apresentação, qualquer documento de referência. Explique que pode anexar direto ali no clipe ao lado da caixa de mensagem, que já vai automaticamente pra pasta da Make. Se ele disser que não tem nada, segue em frente sem insistir. Se ele for anexar, espere ele confirmar que terminou antes de encerrar o briefing.
 
 ---
 
