@@ -64,9 +64,12 @@ export async function saveBriefingDoc(token, env, client, messages) {
 }
 
 export async function findClientMaterialsFolder(token, client) {
-  // Busca pelo nome "NUMERO. NOME" dentro de 02. CLIENTES
+  // Busca a pasta do cliente dentro de 02. CLIENTES. O padrão é "NUMERO. NOME",
+  // mas o número da pasta é uma convenção manual (não existe como campo no
+  // cadastro do cliente no CitraDesk), então casamos só pelo nome, ignorando
+  // um eventual prefixo numérico ("33. Springway" -> "springway").
   const clientesFolder = '1R6NWb_YjeiMryxSS_a4U-ye5a0F2Wh4q';
-  const expectedName = `${String(client.number).padStart(2, '0')}. ${client.name}`;
+  const expectedName = (client.name || '').toLowerCase().trim();
 
   const q = `'${clientesFolder}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false`;
   const res = await fetch(
@@ -74,10 +77,11 @@ export async function findClientMaterialsFolder(token, client) {
     { headers: { Authorization: `Bearer ${token}` } }
   );
   const data = await res.json();
-  const clientFolder = (data.files || []).find(f =>
-    f.name === expectedName ||
-    f.name.toLowerCase() === expectedName.toLowerCase()
-  );
+  const clientFolder = (data.files || []).find(f => {
+    const name = f.name.toLowerCase().trim();
+    const withoutPrefix = name.replace(/^\d+\.\s*/, '');
+    return name === expectedName || withoutPrefix === expectedName;
+  });
 
   if (!clientFolder) return null;
 

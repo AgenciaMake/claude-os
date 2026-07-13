@@ -447,40 +447,69 @@ attachButton.addEventListener('click', () => {
   fileInput.click();
 });
 
-fileInput.addEventListener('change', async () => {
-  const file = fileInput.files[0];
-  fileInput.value = '';
-  if (!file) return;
+async function uploadOneFile(file) {
+  const formData = new FormData();
+  formData.append('code', state.code);
+  formData.append('file', file);
 
-  if (file.size > MAX_UPLOAD_BYTES) {
-    setUploadStatus('Arquivo maior que 20MB. Envie um arquivo menor.', true);
+  try {
+    const res = await fetch('/api/upload', { method: 'POST', body: formData });
+    const data = await res.json();
+    if (!res.ok || !data.ok) {
+      return { ok: false, name: file.name, error: data.error || 'Erro ao enviar arquivo.' };
+    }
+    return { ok: true, name: file.name };
+  } catch (err) {
+    return { ok: false, name: file.name, error: 'Erro de conexão.' };
+  }
+}
+
+fileInput.addEventListener('change', async () => {
+  const files = Array.from(fileInput.files);
+  fileInput.value = '';
+  if (!files.length) return;
+
+  const oversized = files.filter(f => f.size > MAX_UPLOAD_BYTES);
+  if (oversized.length) {
+    setUploadStatus(`Arquivo(s) maior(es) que 20MB: ${oversized.map(f => f.name).join(', ')}.`, true);
     return;
   }
 
   attachButton.disabled = true;
-  setUploadStatus(`Enviando ${file.name}...`, false);
+
+  const succeeded = [];
+  const failed = [];
+
+  for (let i = 0; i < files.length; i++) {
+    setUploadStatus(files.length > 1 ? `Enviando ${files[i].name} (${i + 1}/${files.length})...` : `Enviando ${files[i].name}...`, false);
+    const result = await uploadOneFile(files[i]);
+    if (result.ok) {
+      succeeded.push(result.name);
+    } else {
+      failed.push(result);
+    }
+  }
+
+  attachButton.disabled = false;
+
+  if (succeeded.length === 0) {
+    setUploadStatus(failed.map(f => `${f.name}: ${f.error}`).join(' | '), true);
+    return;
+  }
+
+  setUploadStatus(failed.length ? `${failed.length} arquivo(s) falharam ao enviar.` : '', failed.length > 0);
+
+  const fileList = succeeded.map(n => `"${n}"`).join(', ');
+  const noteText = succeeded.length === 1
+    ? `[Anexei o arquivo ${fileList}, já enviado automaticamente pra pasta de materiais do cliente.]`
+    : `[Anexei ${succeeded.length} arquivos: ${fileList}, já enviados automaticamente pra pasta de materiais do cliente.]`;
+
+  addMessage('user', noteText);
+  state.messages.push({ role: 'user', content: noteText });
+  saveSession();
+  setTimeout(() => markLastUserAsRead(), 900);
 
   try {
-    const formData = new FormData();
-    formData.append('code', state.code);
-    formData.append('file', file);
-
-    const res = await fetch('/api/upload', { method: 'POST', body: formData });
-    const data = await res.json();
-
-    if (!res.ok || !data.ok) {
-      setUploadStatus(data.error || 'Erro ao enviar arquivo.', true);
-      return;
-    }
-
-    setUploadStatus('', false);
-
-    const noteText = `[Anexei o arquivo "${file.name}", já enviado automaticamente pra pasta de materiais do cliente.]`;
-    addMessage('user', noteText);
-    state.messages.push({ role: 'user', content: noteText });
-    saveSession();
-    setTimeout(() => markLastUserAsRead(), 900);
-
     const apiPromise = fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -509,8 +538,5 @@ fileInput.addEventListener('change', async () => {
     }
   } catch (err) {
     hideTyping();
-    setUploadStatus('Erro de conexão ao enviar arquivo.', true);
-  } finally {
-    attachButton.disabled = false;
   }
 });
