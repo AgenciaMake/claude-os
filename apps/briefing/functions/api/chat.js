@@ -3,6 +3,7 @@ import { getClientByBriefingCode, markBriefingCompleteLookup, getBriefingNotific
 import { buildSystemPrompt } from '../_lib/prompt.js';
 import { saveBriefingDoc } from '../_lib/save-doc.js';
 import { analyzeUrls } from '../_lib/site-fetch.js';
+import { validatePhoneNumbers } from '../_lib/phone-validate.js';
 import { sendBriefingCompletionEmail } from '../_lib/send-email.js';
 
 const DONE_MARKER = '<<BRIEFING_CONCLUIDO>>';
@@ -55,10 +56,12 @@ export async function onRequestPost({ request, env }) {
       const last = messages[messages.length - 1];
       if (last.role === 'user') {
         const siteContext = await analyzeUrls(last.content);
-        if (siteContext) {
+        const phoneContext = validatePhoneNumbers(last.content);
+        const extra = [siteContext, phoneContext].filter(Boolean).join('\n');
+        if (extra) {
           enrichedMessages = [
             ...messages.slice(0, -1),
-            { ...last, content: last.content + '\n\n' + siteContext },
+            { ...last, content: last.content + '\n\n' + extra },
           ];
         }
       }
