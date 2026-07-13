@@ -26,3 +26,4 @@
 - [Alfred — menção de serviço na abertura](feedback_alfred_mencao_servico.md) — usar nome do produto Make (Make Performance, Social, Dev, 360º) na abertura, não listar serviços individuais; se tiver fases, citá-las brevemente
 - [CitraChat — modelos de IA fixos](feedback_citrachat_modelos_fixos.md) — Haiku 4.5 (chat) e Sonnet 4.6 (análise) são fixos; não atualizar para versões mais novas sem aprovação explícita de Bruno
 - [Incidente Anthropic API 2026](incidente_anthropic_api_2026.md) — ~$2.716 USD em cobranças indevidas; Opus de madrugada + chave vazada via bundle VITE_; docs em dados/ e operacoes/
+- [Alfred — privacidade na abertura](feedback_alfred_privacidade_abertura.md) — obrigatório explicar criptografia/armazenamento/exclusão de dados antes de qualquer pergunta, sempre
