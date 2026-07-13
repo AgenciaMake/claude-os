@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Acentos */
+    --pulse:        #C8FF2E;
+    --pulse-dark:   #2F6B10;
+    --pulse-bg:     oklch(95% 0.07 130);
+    --warmth:       #E05C3E;
+    --warmth-mid:   oklch(78% 0.14 28);
+    --warmth-bg:    oklch(97% 0.04 28);
+    --clarity:      #3E88D4;
+    --clarity-mid:  oklch(76% 0.13 242);
+    --clarity-bg:   oklch(96% 0.04 242);
+    --ember:        #E8A040;
+
+    /* Neutros */
+    --void:         #13111E;
+    --cream:        #F8F4EB;
+    --cream2:       oklch(94% 0.012 85);
+    --cream3:       oklch(90% 0.014 85);
+    --border:       oklch(88% 0.010 85);
+    --ink:          #13111E;
+    --ink2:         oklch(40% 0.018 260);
+    --ink3:         oklch(60% 0.016 260);
+    --white:        #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 1080px;
+    height: 1920px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .slide {
+    position: relative;
+    width: 1080px;
+    height: 1920px;
+    padding: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Backgrounds */
+  .bg-void    { background: var(--void);  color: var(--white); }
+  .bg-cream   { background: var(--cream); color: var(--ink); }
+  .bg-pulse   { background: var(--pulse); color: var(--ink); }
+  .bg-warmth  { background: var(--warmth); color: var(--white); }
+
+  /* Logo topo — capas */
+  .logo-top {
+    position: absolute;
+    top: 90px;
+    right: 90px;
+    z-index: 5;
+  }
+  .logo-top img { height: 40px; width: auto; display: block; }
+
+  /* Hashtag / Número */
+  .slide-num {
+    position: absolute;
+    top: 90px;
+    left: 90px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    z-index: 5;
+  }
+
+  /* Rodapé */
+  .footer {
+    position: absolute;
+    bottom: 90px;
+    left: 90px;
+    right: 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 5;
+  }
+  .footer .handle {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    opacity: 0.45;
+  }
+  .footer .signature {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    opacity: 0.35;
+    letter-spacing: 0.04em;
+  }
+
+  /* Conteúdo central */
+  .content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  /* CTA story */
+  .has-cta .content {
+    position: absolute;
+    top: 90px; bottom: 90px;
+    left: 90px; right: 90px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+  }
+
+  /* Cover image — foto topo, texto embaixo */
+  .cover-image-area {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 52%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+  }
+  .cover-image-area::before {
+    content: none;
+  }
+  .cover-image-area::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 55%;
+    background: linear-gradient(to bottom, transparent 0%, var(--void) 100%);
+    pointer-events: none;
+  }
+  .has-cover-image .content {
+    position: absolute;
+    top: 54%; left: 90px; right: 90px; bottom: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+    width: auto;
+  }
+  .has-cover-image .logo-top {
+    left: 90px;
+    right: auto;
+  }
+
+  /* Full bleed */
+  .fullbleed-image-area {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+  }
+  .fullbleed-image-area::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom,
+      rgba(19,17,30,0.55) 0%,
+      rgba(19,17,30,0.10) 30%,
+      rgba(19,17,30,0.10) 60%,
+      rgba(19,17,30,0.90) 100%);
+    pointer-events: none;
+  }
+  .has-fullbleed .content {
+    position: absolute;
+    top: 90px; left: 90px; right: 90px; bottom: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    z-index: 3;
+  }
+
+  /* Tipografia */
+  .h1  { font-family: 'Bricolage Grotesque', sans-serif; font-size: 112px; font-weight: 800; line-height: 0.95; letter-spacing: -0.04em; }
+  .h2  { font-family: 'Bricolage Grotesque', sans-serif; font-size: 84px;  font-weight: 800; line-height: 1.0;  letter-spacing: -0.04em; }
+  .h3  { font-family: 'Bricolage Grotesque', sans-serif; font-size: 64px;  font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; }
+  .body-lg { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 40px; font-weight: 400; line-height: 1.5; }
+  .body-md { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 32px; font-weight: 400; line-height: 1.55; }
+  .label   { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* Color helpers */
+  .pulse      { color: var(--pulse); }
+  .pulse-dark { color: var(--pulse-dark); }
+  .warmth     { color: var(--warmth); }
+  .clarity    { color: var(--clarity); }
+  .ink        { color: var(--ink); }
+  .ink2       { color: var(--ink2); }
+  .muted      { opacity: 0.45; }
+
+  /* Label Pill */
+  .label-pill {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 8px 22px;
+    border-radius: 100px;
+    align-self: flex-start;
+    line-height: 1.2;
+  }
+  .label-pill.lime  { color: var(--pulse-dark); background: var(--pulse-bg); }
+  .label-pill.coral { color: var(--warmth);     background: var(--warmth-bg); }
+  .label-pill.sky   { color: var(--clarity);    background: var(--clarity-bg); }
+  .label-pill.on-dark    { color: var(--pulse);   background: rgba(200,255,46,0.10); border: 1px solid rgba(200,255,46,0.20); }
+  .label-pill.coral-dark { color: var(--warmth);  background: rgba(224,92,62,0.12);  border: 1px solid rgba(224,92,62,0.22); }
+
+  /* Status badge */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px;
+    padding: 8px 22px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.70);
+    letter-spacing: 0.04em;
+  }
+  .status-badge .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--pulse);
+    flex-shrink: 0;
+  }
+
+  /* Swipe up */
+  .swipe-up {
+    position: absolute;
+    bottom: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 5;
+    opacity: 0.70;
+  }
+  .swipe-up svg { display: block; }
+  .swipe-up span {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="slide {{BG_CLASS}}">
+    {{COVER_IMAGE}}
+    {{TOP_LEFT}}
+    {{TOP_RIGHT}}
+    <div class="content">
+      {{CONTENT}}
+    </div>
+    {{SWIPE_UP}}
+    {{FOOTER}}
+  </div>
+</body>
+</html>
