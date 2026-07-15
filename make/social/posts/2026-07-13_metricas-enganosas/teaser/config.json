@@ -22,7 +22,7 @@
       "bg": "black",
       "noLogo": true,
       "noArrow": true,
-      "content": "<div style='line-height:1.05;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>No feed agora</div><div style='font-size:110px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:1.05;'>Vai lá<br>no feed<br><span style='color:var(--lime);'>e confere.</span></div><div style='font-size:42px;font-weight:400;color:var(--white);opacity:0.7;line-height:1.5;margin-top:40px;'>A gente explica quais são as 3 métricas e como identificar se estão te enganando.</div></div>"
+      "content": "<div style='line-height:1.05;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>No feed agora</div><div style='font-size:110px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:1.05;'>Vai lá<br>no feed<br><span style='color:var(--lime);'>e confere.</span></div><div style='font-size:42px;font-weight:400;color:var(--white);opacity:0.7;line-height:1.5;margin-top:40px;'>A gente explica quais são as três métricas e te fala quais as perguntas que você realmente deve fazer.</div></div>"
     }
   ]
 }
