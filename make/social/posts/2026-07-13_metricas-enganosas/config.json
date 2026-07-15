@@ -18,7 +18,7 @@
       "filename": "slide03-ctr.png",
       "bg": "black",
       "number": 3,
-      "content": "<div style='line-height:1.0;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;'>Métrica 01</div><div style='font-size:170px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-6px;line-height:0.88;'>CTR</div><div style='font-size:78px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:1.0;'>alto.</div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.55;margin-top:28px;opacity:0.85;'>CTR de 13% parece ótimo. Mas se cada clique não vira cliente, o que você tem é tráfego. <span style='color:var(--lime);font-weight:700;'>CTR mede atenção.<br>Não mede intenção.</span></div></div>"
+      "content": "<div style='line-height:1.0;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;'>Métrica 01</div><div style='font-size:170px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-6px;line-height:0.88;'>CTR</div><div style='font-size:78px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:1.0;'>alto.</div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.55;margin-top:28px;opacity:0.85;'>CTR de 13% parece ótimo. Mas se cada clique não vira cliente, o que você tem é tráfego.<br><span style='color:var(--lime);font-weight:700;'>CTR mede atenção.<br>Não mede intenção.</span></div></div>"
     },
     {
       "filename": "slide04-alcance.png",
