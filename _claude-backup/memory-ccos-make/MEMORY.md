@@ -14,6 +14,7 @@
 - [Descrições de posts não recontar o conteúdo](feedback_descricao_post.md) — legenda cria curiosidade e convida pro post; não reconta os slides
 - [Sugestão de pautas sempre com fonte](feedback_sugestao_pautas.md) — todo tópico sugerido precisa de fonte primária confiável (Exame, eMarketer, Kantar, IAB Brasil, etc); nunca blogs de nicho sem autoridade
 - [CitraChat Social — setup completo](citrachat_social_setup.md) — redes em produtos/citrachat/social/, identidade própria (#DFFF00), briefing em CITRACHATSOCIAL.md; retomar quando Bruno disser "vamos voltar a falar de social citrachat"
+- [Teaser nunca é publicado pelo Claude](feedback_teaser_publicacao.md) — Stories/Teaser são sempre publicados pelo Bruno; Claude publica só os slides do feed
 - [Slide único não tem seta de navegação](feedback_slide_unico_sem_seta.md) — post de 1 só slide sempre usa noArrow:true no config; seta só aparece em carrosséis com 2+ slides
 - ["Chatbot" é palavra proibida no CitraChat](feedback_citrachat_chatbot_proibido.md) — usar sempre "agentes conversacionais"; comportamento humano é o argumento central
 - [Responsividade mobile obrigatória no site](feedback_responsividade_obrigatoria.md) — toda alteração no site CitraChat deve incluir mobile no mesmo commit, sem exceção
