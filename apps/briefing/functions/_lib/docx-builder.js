@@ -22,6 +22,9 @@ function parseInlineRuns(text) {
   return runs;
 }
 
+// Largura útil de uma página A4/Carta com margens padrão do docx, em twips (DXA).
+const PAGE_WIDTH_DXA = 9000;
+
 function buildTable(tableLines) {
   const rows = tableLines
     .map(l => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim()))
@@ -29,11 +32,18 @@ function buildTable(tableLines) {
 
   if (rows.length === 0) return null;
 
+  const numCols = rows[0].length;
+  // A lib docx precisa de columnWidths em DXA no Table pra montar o tblGrid
+  // corretamente. Sem isso, o tblGrid cai num valor default minúsculo e o
+  // Word quebra o texto letra por letra dentro de cada célula.
+  const columnWidths = Array.from({ length: numCols }, () => Math.floor(PAGE_WIDTH_DXA / numCols));
+  const cellWidthDxa = columnWidths[0];
+
   const tableRows = rows.map((cells, rowIndex) =>
     new TableRow({
       children: cells.map(cellText =>
         new TableCell({
-          width: { size: Math.floor(100 / cells.length), type: WidthType.PERCENTAGE },
+          width: { size: cellWidthDxa, type: WidthType.DXA },
           shading: rowIndex === 0 ? { fill: 'EDEDED' } : undefined,
           children: [new Paragraph({ children: parseInlineRuns(cellText) })],
         })
@@ -41,7 +51,11 @@ function buildTable(tableLines) {
     })
   );
 
-  return new Table({ rows: tableRows, width: { size: 100, type: WidthType.PERCENTAGE } });
+  return new Table({
+    rows: tableRows,
+    columnWidths,
+    width: { size: PAGE_WIDTH_DXA, type: WidthType.DXA },
+  });
 }
 
 function markdownToBlocks(markdown) {
