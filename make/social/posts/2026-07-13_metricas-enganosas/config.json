@@ -5,6 +5,7 @@
       "filename": "slide01-capa.png",
       "bg": "black",
       "isCover": true,
+      "noLogo": true,
       "content": "<div style='display:flex;flex-direction:column;gap:0px;'><div style='font-size:118px;font-weight:900;font-style:italic;line-height:0.95;letter-spacing:-4px;color:#fff;text-transform:uppercase;'>Seu<br>relatório<br>tá ótimo.</div><div style='width:100%;height:6px;background:var(--lime);margin:28px 0;'></div><div style='font-size:118px;font-weight:900;font-style:italic;line-height:0.95;letter-spacing:-4px;color:var(--lime);text-transform:uppercase;'>Seu<br>negócio,<br>não.</div><div style='font-size:38px;font-weight:700;color:rgba(255,255,255,0.85);margin-top:32px;line-height:1.3;'>3 métricas que enganam<br>até quem entende.</div></div>"
     },
     {
