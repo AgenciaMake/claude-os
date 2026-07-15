@@ -106,14 +106,28 @@ export async function findClientMaterialsFolder(token, client) {
   return materiais?.id || null;
 }
 
-export function formatTranscript(client, messages) {
+// Formato plano, só usado pra alimentar o prompt do Claude que gera o resumo.
+function formatPlainTranscript(client, messages) {
   return messages
     .map(m => `${m.role === 'user' ? client.name : 'Alfred'}: ${m.content}`)
     .join('\n\n');
 }
 
+// Formato estruturado (JSON), salvo no Firestore e usado tanto pela aba
+// "Conversa" do CitraDesk quanto pelo gerador de docx. Evita ter que adivinhar
+// por heurística de texto onde cada turno começa (quebrava quando uma resposta
+// tinha mais de um parágrafo).
+export function formatTranscriptJSON(client, messages) {
+  return JSON.stringify(
+    messages.map(m => ({
+      speaker: m.role === 'user' ? (client.name || 'Cliente') : 'Alfred',
+      text: m.content,
+    }))
+  );
+}
+
 async function generateBriefingContent(apiKey, client, messages) {
-  const conversationText = formatTranscript(client, messages);
+  const conversationText = formatPlainTranscript(client, messages);
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
