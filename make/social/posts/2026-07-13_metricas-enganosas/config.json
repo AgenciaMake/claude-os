@@ -43,7 +43,7 @@
       "filename": "slide07-cta.png",
       "bg": "black",
       "isCta": true,
-      "content": "<div style='font-size:80px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Relatório bom<br>é o que mostra<br>se seu negócio<br><span style='color:var(--lime);'>está crescendo.</span></div><div style='font-size:34px;font-weight:400;color:var(--white);line-height:1.5;opacity:0.6;margin-top:32px;'>Comenta aqui ou manda uma mensagem.<br>A gente bate um papo sem compromisso<br>e vê se faz sentido pra você.</div><div style='font-size:32px;font-weight:600;color:var(--lime);line-height:1.3;margin-top:36px;'>Agência Boutique 360º.<br><em style='font-weight:800;font-style:italic;'>MakeLemonAd.</em></div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
+      "content": "<div style='font-size:80px;font-weight:800;font-style:italic;color:var(--white);line-height:1.0;letter-spacing:-2px;'>Relatório bom<br>é o que mostra<br>se seu negócio<br><span style='color:var(--lime);'>está crescendo.</span></div><div style='font-size:32px;font-weight:600;color:var(--lime);line-height:1.3;margin-top:36px;'>Agência Boutique 360º.<br><em style='font-weight:800;font-style:italic;'>MakeLemonAd.</em></div><div style='text-align:center;margin-top:48px;'><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;display:inline-block;' alt=''/></div>"
     }
   ]
 }
