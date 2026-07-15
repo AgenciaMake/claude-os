@@ -25,7 +25,7 @@
       "bg": "black",
       "number": 4,
       "fullBleedImage": "../../assets/fotos/magnific_ultrarealistic-firstperso_xg5pkdpjfW.png",
-      "content": "<div style='line-height:1.0;margin-bottom:80px;'><div style='display:inline-block;font-size:22px;font-weight:500;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.6);padding:7px 16px;backdrop-filter:blur(4px);'>Métrica 02</div><div style='font-size:110px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;line-height:0.93;'>50 mil<br>pessoas.</div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.5;margin-top:20px;opacity:0.9;'>Se nenhuma tem perfil de comprador, você pagou pra existir na timeline de quem nunca vai te contratar. <span style='color:var(--lime);font-weight:700;'>Alcance sem segmentação<br>é outdoor na estrada errada.</span></div></div>"
+      "content": "<div style='line-height:1.0;margin-bottom:80px;'><div style='align-self:flex-start;font-size:30px;font-weight:400;color:var(--white);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px;background:rgba(0,0,0,0.7);padding:7px 16px;'>Métrica 02</div><div style='font-size:110px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;line-height:0.93;'>50 mil<br>pessoas.</div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.5;margin-top:20px;opacity:0.9;'>Se nenhuma tem perfil de comprador, você pagou pra existir na timeline de quem nunca vai te contratar. <span style='color:var(--lime);font-weight:700;'>Alcance sem segmentação<br>é outdoor na estrada errada.</span></div></div>"
     },
     {
       "filename": "slide05-cpc.png",
