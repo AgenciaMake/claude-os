@@ -1,0 +1,28 @@
+{
+  "outDir": ".",
+  "height": 1920,
+  "templateFile": "story.html",
+  "slides": [
+    {
+      "filename": "teaser01.png",
+      "bg": "black",
+      "noLogo": true,
+      "noArrow": true,
+      "content": "<div style='line-height:1.05;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.5;text-transform:uppercase;letter-spacing:3px;margin-bottom:40px;'>Mídia paga</div><div style='font-size:140px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;text-transform:uppercase;line-height:1.05;'>Seu<br>relatório<br>tá ótimo.</div><div style='font-size:140px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-4px;text-transform:uppercase;line-height:1.05;'>Seu<br>negócio,<br>não.</div></div>"
+    },
+    {
+      "filename": "teaser02.png",
+      "bg": "dark-gray",
+      "noLogo": true,
+      "noArrow": true,
+      "content": "<div style='line-height:1.05;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>O problema</div><div style='font-size:90px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:1.05;'>Existem 3 métricas que parecem boas.</div><div style='font-size:46px;font-weight:400;color:var(--white);line-height:1.55;margin-top:40px;opacity:0.85;'>E são exatamente essas que aparecem nos relatórios de quem quer parecer que está entregando.<br><span style='color:var(--lime);font-weight:700;'>Mas não está.</span></div></div>"
+    },
+    {
+      "filename": "teaser03.png",
+      "bg": "black",
+      "noLogo": true,
+      "noArrow": true,
+      "content": "<div style='line-height:1.05;'><div style='font-size:46px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-1px;line-height:1.1;'>Quais são essas métricas e como identificar se estão te enganando?</div><div style='font-size:38px;font-weight:400;color:var(--white);opacity:0.6;line-height:1.55;margin-top:40px;'>A gente explica tudo no post que está no feed agora.</div><div style='align-self:flex-start;font-size:42px;font-weight:800;font-style:italic;color:var(--lime);background:#000;padding:14px 24px;margin-top:48px;border:2px solid var(--lime);'>Vai lá ver.</div></div>"
+    }
+  ]
+}
