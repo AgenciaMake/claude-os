@@ -103,14 +103,29 @@ function markdownToBlocks(markdown) {
   return blocks;
 }
 
-// Briefings concluídos antes desse formato JSON existir salvaram a transcrição
-// como texto plano "Speaker: conteúdo" separado por linha em branco.
-function legacyFlatTranscriptToTurns(text) {
-  return text.split('\n\n').filter(Boolean).map(turn => {
-    const sepIndex = turn.indexOf(': ');
-    if (sepIndex === -1) return { speaker: '', text: turn };
-    return { speaker: turn.slice(0, sepIndex), text: turn.slice(sepIndex + 2) };
-  });
+// Briefings concluídos antes desse formato JSON existir salvaram a transcrição como
+// texto plano "Speaker: conteúdo" separado por linha em branco, sem marcar onde cada
+// turno realmente começava — um parágrafo extra de uma mesma fala virava um "turno"
+// órfão. Só abre turno novo quando reconhece "Alfred:" ou o nome do cliente no início;
+// qualquer outro trecho solto é continuação da fala anterior.
+function legacyFlatTranscriptToTurns(text, clientName) {
+  const knownSpeakers = ['Alfred', clientName].filter(Boolean);
+  const turns = [];
+
+  for (const chunk of text.split('\n\n').filter(Boolean)) {
+    const sepIndex = chunk.indexOf(': ');
+    const maybeSpeaker = sepIndex !== -1 ? chunk.slice(0, sepIndex) : null;
+
+    if (maybeSpeaker && knownSpeakers.includes(maybeSpeaker)) {
+      turns.push({ speaker: maybeSpeaker, text: chunk.slice(sepIndex + 2) });
+    } else if (turns.length > 0) {
+      turns[turns.length - 1].text += '\n\n' + chunk;
+    } else {
+      turns.push({ speaker: '', text: chunk });
+    }
+  }
+
+  return turns;
 }
 
 function transcriptBlocks(clientName, transcriptJson) {
@@ -125,7 +140,7 @@ function transcriptBlocks(clientName, transcriptJson) {
   } catch {
     turns = null;
   }
-  if (!turns) turns = legacyFlatTranscriptToTurns(transcriptJson);
+  if (!turns) turns = legacyFlatTranscriptToTurns(transcriptJson, clientName);
   if (turns.length === 0) return [new Paragraph({ text: 'Conversa completa não disponível para este briefing.' })];
 
   const blocks = [];
