@@ -1,0 +1,36 @@
+{
+  "outDir": ".",
+  "slides": [
+    {
+      "filename": "slide01-capa.png",
+      "bg": "black",
+      "isCover": true,
+      "noLogo": true,
+      "content": "<div style='line-height:1.05;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.5;text-transform:uppercase;letter-spacing:3px;margin-bottom:24px;'>Instagram</div><div style='font-size:220px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-8px;line-height:0.88;'>4º</div><div style='font-size:72px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:1.05;text-transform:uppercase;'>lugar<br>no mundo.</div><div style='font-size:36px;font-weight:400;color:var(--white);opacity:0.55;margin-top:32px;line-height:1.4;'>O Brasil e o Instagram.<br>O que isso tem a ver com seu negócio.</div></div>"
+    },
+    {
+      "filename": "slide02-ranking.png",
+      "bg": "dark-gray",
+      "number": 2,
+      "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>O ranking</div><div style='font-size:78px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:1.05;'>Quem está na frente.</div><div style='font-size:38px;font-weight:400;color:var(--white);line-height:1.55;margin-top:32px;'>🥇 Índia<br>🥈 Estados Unidos<br>🥉 Indonésia<br><span style='color:var(--lime);font-weight:700;'>4º Brasil</span></div><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.5;line-height:1.4;margin-top:28px;'>Fonte: DataReportal 2026</div></div>"
+    },
+    {
+      "filename": "slide03-numero.png",
+      "bg": "black",
+      "number": 3,
+      "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;'>O número</div><div style='font-size:170px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-6px;line-height:0.88;'>134<br>mi</div><div style='font-size:64px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:1.05;'>de usuários.</div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.55;margin-top:28px;opacity:0.85;'>134 milhões de brasileiros ativos no Instagram. Isso é mais do que a população inteira da Alemanha, França ou Reino Unido.</div></div>"
+    },
+    {
+      "filename": "slide04-insight.png",
+      "bg": "dark-gray",
+      "number": 4,
+      "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;'>O que isso significa</div><div style='font-size:78px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:1.05;'>Seu cliente está lá.</div><div style='font-size:38px;font-weight:400;color:var(--white);line-height:1.55;margin-top:32px;opacity:0.85;'>Independente do segmento, do tamanho do negócio ou do ticket médio, o consumidor brasileiro passa horas por dia no Instagram.<br><span style='color:var(--lime);font-weight:700;'>A pergunta não é se você deve estar lá. É se você está aparecendo do jeito certo.</span></div></div>"
+    },
+    {
+      "filename": "slide05-cta.png",
+      "bg": "black",
+      "isCta": true,
+      "content": "<div style='display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center;'><div style='font-size:64px;font-weight:900;font-style:italic;line-height:1.05;letter-spacing:-2px;color:#fff;text-transform:uppercase;'>Onde está<br>a atenção,<br><span style='color:var(--lime);'>é onde o seu<br>dinheiro<br>deve estar.</span></div><div style='font-size:32px;font-weight:400;line-height:1.5;color:rgba(255,255,255,0.75);max-width:820px;'>A Make faz a sua marca aparecer pra quem realmente importa. Fala com a gente.</div><div style='font-size:34px;font-weight:700;color:#fff;'>Segue a Make. Salva esse post.</div><img src='LOGO_PLACEHOLDER' style='width:90px;height:90px;object-fit:contain;margin-top:8px;'></div>"
+    }
+  ]
+}
