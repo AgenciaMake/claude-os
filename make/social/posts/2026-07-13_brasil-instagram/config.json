@@ -6,7 +6,8 @@
       "bg": "black",
       "isCover": true,
       "noLogo": true,
-      "content": "<div style='line-height:1.05;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.5;text-transform:uppercase;letter-spacing:3px;margin-bottom:24px;'>Instagram</div><div style='font-size:220px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-8px;line-height:0.88;'>4º</div><div style='font-size:72px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:1.05;text-transform:uppercase;'>lugar<br>no mundo.</div><div style='font-size:36px;font-weight:400;color:var(--white);opacity:0.55;margin-top:32px;line-height:1.4;'>O Brasil e o Instagram.<br>O que isso tem a ver com seu negócio.</div></div>"
+      "fullBleedImage": "../../assets/fotos/magnific_create-an-ultrarealistic-_jSksT5eLD0.png",
+      "content": "<div style='line-height:1.05;margin-bottom:100px;'><div style='align-self:flex-start;font-size:28px;font-weight:400;color:var(--lime);text-transform:uppercase;letter-spacing:3px;margin-bottom:24px;background:rgba(0,0,0,0.7);padding:6px 16px;'>Instagram</div><div style='font-size:200px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-8px;line-height:0.88;'>4º</div><div style='font-size:72px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:1.05;text-transform:uppercase;'>lugar<br>no mundo.</div></div>"
     },
     {
       "filename": "slide02-ranking.png",
