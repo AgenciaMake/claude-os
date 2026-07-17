@@ -8,7 +8,8 @@
       "bg": "black",
       "noLogo": true,
       "noArrow": true,
-      "content": "<div style='line-height:1.05;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.5;text-transform:uppercase;letter-spacing:3px;margin-bottom:40px;'>Dados do mercado</div><div style='font-size:150px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;text-transform:uppercase;line-height:1.05;'>O Brasil<br>é o</div><div style='font-size:220px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-8px;line-height:0.85;'>3º</div><div style='font-size:100px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;text-transform:uppercase;line-height:1.05;'>no mundo<br>no Instagram.</div></div>"
+      "fullBleedImage": "../../../assets/fotos/magnific_create-an-ultrarealistic-_jSksT5eLD0.png",
+      "content": "<div style='line-height:1.05;margin-bottom:80px;'><div style='display:inline-block;font-size:28px;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:3px;margin-bottom:32px;background:rgba(0,0,0,0.75);padding:6px 16px;'>Dados do mercado</div><div style='font-size:110px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;text-transform:uppercase;line-height:1.05;'>O Brasil<br>é o</div><div style='display:flex;flex-direction:row;align-items:center;gap:32px;'><div style='font-size:260px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-10px;line-height:0.85;flex-shrink:0;'>3º</div><div style='font-size:90px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:1.05;text-transform:uppercase;'>no mundo<br>no Instagram.</div></div></div>"
     },
     {
       "filename": "teaser02.png",
