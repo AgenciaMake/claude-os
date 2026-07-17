@@ -1,0 +1,28 @@
+{
+  "outDir": ".",
+  "height": 1920,
+  "templateFile": "story.html",
+  "slides": [
+    {
+      "filename": "teaser01.png",
+      "bg": "black",
+      "noLogo": true,
+      "noArrow": true,
+      "content": "<div style='line-height:1.05;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.5;text-transform:uppercase;letter-spacing:3px;margin-bottom:40px;'>Dados do mercado</div><div style='font-size:150px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-4px;text-transform:uppercase;line-height:1.05;'>O Brasil<br>é o</div><div style='font-size:220px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-8px;line-height:0.85;'>3º</div><div style='font-size:100px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;text-transform:uppercase;line-height:1.05;'>no mundo<br>no Instagram.</div></div>"
+    },
+    {
+      "filename": "teaser02.png",
+      "bg": "dark-gray",
+      "noLogo": true,
+      "noArrow": true,
+      "content": "<div style='line-height:1.05;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>Ponto de atenção</div><div style='font-size:100px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:1.05;'>Quanto do seu público você realmente controla?</div><div style='font-size:46px;font-weight:400;color:var(--white);line-height:1.55;margin-top:48px;opacity:0.85;'>Toda aquela audiência está na plataforma, não no seu negócio.<br><span style='color:var(--lime);font-weight:700;'>Quem só existe numa plataforma não tem marca. Tem um perfil.</span></div></div>"
+    },
+    {
+      "filename": "teaser03.png",
+      "bg": "black",
+      "noLogo": true,
+      "noArrow": true,
+      "content": "<div style='line-height:1.05;'><div style='font-size:32px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px;'>No feed agora</div><div style='font-size:110px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-3px;line-height:1.05;'>Vai lá<br>no feed<br><span style='color:var(--lime);'>e confere.</span></div><div style='font-size:42px;font-weight:400;color:var(--white);opacity:0.7;line-height:1.5;margin-top:40px;'>A gente mostra os números e explica o que eles têm a ver com a estratégia do seu negócio.</div></div>"
+    }
+  ]
+}
