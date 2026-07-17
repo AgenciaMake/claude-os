@@ -19,7 +19,7 @@
       "filename": "slide03-numero.png",
       "bg": "black",
       "number": 3,
-      "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;'>O número</div><div style='font-size:150px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-6px;line-height:0.88;'>164,8 mi</div><div style='font-size:64px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:1.05;'>de usuários.</div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.55;margin-top:28px;opacity:0.85;'>164,8 milhões de brasileiros ativos no Instagram.<br>Isso é mais do que a população inteira da Alemanha, da França ou do Reino Unido, individualmente.</div></div>"
+      "content": "<div style='line-height:1.05;'><div style='font-size:30px;font-weight:400;color:var(--white);opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;'>O número</div><div style='font-size:150px;font-weight:800;font-style:italic;color:var(--lime);letter-spacing:-6px;line-height:0.88;'>164,8 mi</div><div style='font-size:64px;font-weight:800;font-style:italic;color:var(--white);letter-spacing:-2px;line-height:1.05;'>de usuários.</div><div style='font-size:36px;font-weight:400;color:var(--white);line-height:1.55;margin-top:28px;opacity:0.85;'>164,8 milhões de brasileiros ativos no Instagram.<br>Isso é mais do que a população inteira<br>da Alemanha, da França ou do Reino Unido, individualmente.</div></div>"
     },
     {
       "filename": "slide04-insight.png",
