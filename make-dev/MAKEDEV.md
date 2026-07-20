@@ -32,7 +32,13 @@ Motivo: o mesmo código que sobe pro Cloudflare Pages precisa virar seções HTM
 
 Design de qualidade fica por conta da skill `ui-ux-pro-max` (estilos, paletas, tipografia, componentes) — não depende do Figma Make pra isso.
 
-## Fluxo operacional
+## Dois tipos de projeto
+
+**1. Site/protótipo novo** (fluxo padrão abaixo) — nasce do zero aqui, usa a skill `ui-ux-pro-max` pra design, passa por aprovação em Cloudflare Pages.
+
+**2. Migração de site existente** — o site já existe (ex: publicado no Figma Make por urgência) e já foi aprovado pelo cliente. O trabalho é só **replicar fielmente** as seções em HTML pro Elementor: identificar seções, extrair HTML com responsividade e animações fiéis ao original. Não usar `ui-ux-pro-max` pra redesenhar — zero criatividade, zero decisão de design nova. Nesse tipo não existe pasta `prototipo/` (não há CF Pages pra subir); usar `fonte/` pra guardar a referência (link do site publicado, screenshots) e ir direto pra `html-elementor/`.
+
+## Fluxo operacional (projeto novo)
 
 1. **Briefing** — Bruno passa objetivo, referências e prazo. Claude cria `clientes/<cliente>/<projeto>/briefing.md`.
 2. **Protótipo** — Claude constrói o site em `prototipo/` usando a skill `ui-ux-pro-max` como guia de design.
