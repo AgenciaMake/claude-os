@@ -65,10 +65,9 @@ Para criar cada pasta usar `mcp__google-drive__createFolder` com o `driveId: "0A
 
 Após o briefing, quando o cliente informar o(s) email(s) (disponíveis no CitraDesk após o Alfred concluir), configurar a pasta `{NOME} - USER`:
 
-- **Cliente com Gmail**: permissão `writer` (pode adicionar e editar)
-- **Cliente sem Gmail**: permissão `commenter` (só pode adicionar — limitação do Google)
+Sempre usar permissão `writer` (contribuidor) — independente de o e-mail ser Gmail ou corporativo. Testado em produção: o Google aceita `writer` para e-mails sem Conta Google desde que `sendNotificationEmail: true` seja enviado (o convite chega por e-mail e o cliente precisa aceitar).
 
-Usar `mcp__google-drive__addPermission` na pasta USER com o email fornecido.
+Usar `mcp__google-drive__addPermission` na pasta USER com `role: "writer"`, `type: "user"`, `sendNotificationEmail: true`.
 
 ### Permissão obrigatória do Alfred na pasta "03. Materiais do Cliente"
 
