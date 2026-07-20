@@ -22,6 +22,7 @@ Skills em `.claude/skills/` podem ser específicas da Make, específicas de um c
 - `marca/` — identidade visual e guia de design
 - `make/` — trabalho interno da MakeLemonAd (ex: `make/social/` = redes sociais da agência)
 - `clientes/` — uma pasta por cliente com briefing e histórico
+- `make-dev/` — projetos pontuais de site/protótipo/HTML pra clientes (começo, meio e fim). Separado de `clientes/` porque não é histórico contínuo de conta
 - `propostas/` — propostas geradas (modelos Starter, Power, Hyper, 360)
 - `operacoes/` — processos internos, checklists, onboarding de clientes, scripts
 - `dados/` — arquivos de referência, relatórios, prints
@@ -182,6 +183,14 @@ O CitraChat tem identidade visual própria — **não misturar com a identidade 
 - Relatórios de performance → `produtos/citrachat/social/metricas/`
 
 **Fluxo operacional:** idêntico ao da Make — Claude sugere pautas → Bruno aprova → Claude cria → Bruno aprova artes → Claude publica via Post for Me → +2 dias → análise juntos.
+
+---
+
+## MakeDev — sites, protótipos e HTML pra clientes
+
+Em qualquer sessão que envolva criar site, landing page ou protótipo pra um cliente (o que antes ia pro Figma Make), ler [make-dev/MAKEDEV.md](make-dev/MAKEDEV.md) como briefing mestre — estrutura de pastas, stack recomendada e fluxo de aprovação → deploy Cloudflare Pages → export de HTML por seção pro Elementor (quando tem WordPress) ou publicação direta (quando não tem).
+
+Cada projeto vive em `make-dev/clientes/<cliente>/<projeto>/`, isolado, com começo, meio e fim — diferente de `clientes/<cliente>/`, que é o histórico contínuo da conta. Usar `make-dev/clientes/_modelo-projeto/` como base ao criar um projeto novo.
 
 ---
 
