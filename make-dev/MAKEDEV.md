@@ -43,6 +43,38 @@ Design de qualidade fica por conta da skill `ui-ux-pro-max` (estilos, paletas, t
    - **Não tem WordPress** → o próprio deploy do Cloudflare Pages vira o site final (trocar de projeto staging pra produção, domínio próprio se houver).
 6. **Fechamento** — registrar em `historico.md` a versão final, link publicado e data de entrega. Projeto fica arquivado na pasta do cliente pra consulta futura.
 
+## Deploy — sigilo total, sem passar pelo GitHub
+
+**Regra inegociável:** nenhum dado de cliente (briefing, código do protótipo, histórico) pode sair da máquina local via GitHub. `make-dev/clientes/` está no `.gitignore` da raiz por isso — nunca remover essa regra nem versionar essas pastas.
+
+Isso não impede o site de ficar online. Cloudflare Pages aceita **upload direto via Wrangler CLI**, sem nenhuma integração com repositório Git — o deploy sobe os arquivos locais direto pro servidor da Cloudflare, e o código-fonte nunca toca o GitHub. É o mesmo método que `apps/briefing` já usa.
+
+Cada projeto em `prototipo/` deve ter:
+
+**`wrangler.toml`**
+```toml
+name = "makelemonad-<cliente>-<projeto>"
+compatibility_date = "2024-09-01"
+pages_build_output_dir = "."
+```
+
+**`package.json`**
+```json
+{
+  "name": "makelemonad-<cliente>-<projeto>",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev . --compatibility-date=2024-09-01",
+    "deploy": "wrangler pages deploy . --project-name=makelemonad-<cliente>-<projeto>"
+  },
+  "devDependencies": {
+    "wrangler": "^3.80.0"
+  }
+}
+```
+
+Deploy roda com `npm run deploy` dentro da pasta `prototipo/`. **Nunca** conectar o projeto Cloudflare Pages a um repositório GitHub na configuração — sempre upload direto (`wrangler pages deploy`).
+
 ## Regras de identidade (herdadas do CLAUDE.md)
 
 Todo protótipo/site em MakeDev segue as mesmas 4 regras de apps web hospedados definidas no CLAUDE.md raiz:
