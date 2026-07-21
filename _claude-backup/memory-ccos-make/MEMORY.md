@@ -29,3 +29,4 @@
 - [Incidente Anthropic API 2026](incidente_anthropic_api_2026.md) — ~$2.716 USD em cobranças indevidas; Opus de madrugada + chave vazada via bundle VITE_; docs em dados/ e operacoes/
 - [Alfred — privacidade na abertura](feedback_alfred_privacidade_abertura.md) — obrigatório explicar criptografia/armazenamento/exclusão de dados antes de qualquer pergunta, sempre
 - [Alfred — permissão de Drive por cliente](feedback_alfred_drive_permissao_service_account.md) — service account não herda subpasta de cliente; precisa addPermission + materialsFolderId no Firestore, exigido na skill novo-cliente
+- [CitraChat — Mapa de Disparos](citrachat_mapa_disparos.md) — tracking event + e-mail por tipo de agente; encerrar_atendimento é o gatilho universal; human_requested dispara e-mail imediato
