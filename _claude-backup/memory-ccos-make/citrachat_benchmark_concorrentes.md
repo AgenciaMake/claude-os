@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 6400d359-e0a7-4d72-ab64-50d6227379e3
-  modified: 2026-07-31T23:00:58.704Z
+  modified: 2026-07-31T23:29:15.736Z
 ---
 
 **Última atualização: 2026-08-01 (adicionado BotConversa)**
@@ -90,9 +90,15 @@ Referencia completa: [produtos/citrachat/briefings/07_benchmark_botconversa.md](
 - Modelo de cobranca: por conversa (previsivel) vs por creditos de mensagem (opaco).
 - Analise de imagem multimodal (BotConversa so menciona audio).
 
-**Oportunidade central:** BotConversa domina o WhatsApp-first. CitraChat domina o site-first. Sao canais complementares, nao substitutos. Argumento: "use BotConversa no WhatsApp + CitraChat no site e cubra todos os pontos de contato."
+**IMPORTANTE:** CitraChat TEM WhatsApp via API Oficial Meta como add-on (citra.chat/whatsapp). Precos: +R$67 Starter, +R$137 Pro, +R$347 Business. Conversas compartilham o pool do plano.
 
-**Copy:** "BotConversa automatiza o seu WhatsApp. CitraChat automatiza o atendimento no seu site e conecta cada conversa ao resultado das suas campanhas."
+**Comparativo real (com WhatsApp):**
+- BotConversa Pro completo: R$199/mês
+- CitraChat Starter + WA: R$214/mês | Pro + WA: R$534/mês
+
+**Posicionamento correto:** quem precisa SO de WhatsApp paga menos no BotConversa. Quem precisa de WhatsApp + site + tracking unificado + multi-agente tem uma unica opcao: CitraChat.
+
+**Copy:** "BotConversa atende no WhatsApp. CitraChat atende no WhatsApp E no seu site -- com um painel so, um rastreamento so, e sem pagar duas ferramentas."
 
 ---
 
