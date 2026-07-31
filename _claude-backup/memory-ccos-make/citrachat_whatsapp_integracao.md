@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 16f3a8cf-6c02-498f-adc5-4abc80036d4c
-  modified: 2026-07-31T23:34:41.915Z
+  modified: 2026-07-31T23:36:25.014Z
 ---
 
 **Última atualização: 2026-08-01**
@@ -71,5 +71,15 @@ Ambos usam Meta Graph API para envio de mensagens.
 Diferencial: CitraChat faz WhatsApp + site com um unico painel e mesmo pool de conversas.
 BotConversa e 100% WhatsApp, sem canal web proprio.
 
+## Status de testes (2026-08-01)
+
+Testes feitos ate o momento foram com o numero de teste sandbox da propria Meta (limitado a numeros pre-autorizados). Bruno vai comprar um numero de producao para validar o fluxo real.
+
+Quando o numero de producao estiver disponivel, o que precisa ser configurado (sem alteracao de codigo):
+1. Vincular numero ao app Meta Business / WhatsApp Business API
+2. Inserir `phone_number_id` na tabela `user_whatsapp` com o `user_id` correto
+3. Confirmar webhook URL registrada na Meta: `citra.chat/api/whatsapp/webhook`
+4. Verificar `WHATSAPP_ACCESS_TOKEN` no Vercel -- pode mudar com numero de producao
+
 **Why:** Bruno pediu confirmacao da implementacao apos benchmark com BotConversa revelar que o WA estava implementado (contrario do que foi afirmado inicialmente no benchmark).
-**How to apply:** Nao afirmar que CitraChat "nao tem WhatsApp" -- tem, e via API Oficial Meta, como add-on com preco proprio.
+**How to apply:** Nao afirmar que CitraChat "nao tem WhatsApp" -- tem, codigo completo, testado no sandbox Meta. Falta validar com numero de producao.
