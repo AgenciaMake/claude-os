@@ -1,13 +1,14 @@
 ---
 name: citrachat-benchmark-concorrentes
-description: "Análise competitiva do CitraChat vs Leadster e Octadesk — preços reais, gaps de feature, vantagens e roadmap priorizado. Ler antes de qualquer trabalho de estratégia, pricing ou landing page do CitraChat."
+description: "Análise competitiva do CitraChat vs Leadster, Octadesk, BotConversa e Meta WhatsApp AI — preços reais, gaps de feature, vantagens e roadmap priorizado. Ler antes de qualquer trabalho de estratégia, pricing ou landing page do CitraChat."
 metadata: 
   node_type: memory
   type: project
   originSessionId: 6400d359-e0a7-4d72-ab64-50d6227379e3
+  modified: 2026-07-31T23:00:58.704Z
 ---
 
-**Última atualização: 2026-07-13**
+**Última atualização: 2026-08-01 (adicionado BotConversa)**
 
 ## Leadster — concorrente direto mais próximo
 
@@ -63,6 +64,35 @@ metadata:
 **Onde o CitraChat continua ganhando:** tracking unificado GTM/GA4/Ads/TikTok/LinkedIn, lead scoring cross-channel, dashboard de performance, white-label pra revenda por agência. A Meta resolve "responder no WhatsApp" — não resolve "transformar isso em dado de mídia paga que otimiza campanha". Isso não é o negócio da Meta.
 
 **Implicação estratégica:** não vender o CitraChat como "IA que conversa no WhatsApp" (isso vai ser comoditizado pela Meta). Vender como "IA que conversa em qualquer canal E alimenta suas campanhas com dado de conversão real" — a camada de performance marketing é o fosso que a Meta não vai construir. Reforça urgência de lançar logo, antes da Meta expandir esse recurso pro Brasil.
+
+---
+
+## BotConversa — concorrente WhatsApp-first (adicionado 2026-08-01)
+
+**Preco real:** R$ 199/mês Pro (com IA e API Oficial Meta). R$189 Starter (sem IA).
+Referencia completa: [produtos/citrachat/briefings/07_benchmark_botconversa.md](../produtos/citrachat/briefings/07_benchmark_botconversa.md)
+
+**O que eles têm que o CitraChat não tem:**
+- WhatsApp via API Oficial Meta (BSP) — enorme gap, canal dominante no Brasil
+- Broadcasts em massa para base de contatos
+- Flow builder visual (drag-and-drop para quem quer fluxo fixo)
+- CRM Kanban integrado
+- 50+ integracoes nativas (Shopify, Nuvemshop, VTEX, Hotmart, Eduzz...)
+- App mobile (iOS, nota 3.84, v0.9.0)
+- 45.000+ empresas ativas (base estabelecida)
+
+**Onde o CitraChat ganha do BotConversa:**
+- Canal web: BotConversa e 100% WhatsApp -- zero chat no site. CitraChat cobre o site.
+- Multi-agente com roteamento: BotConversa tem 1 assistente unico por empresa.
+- Tracking de midia paga nativo: TikTok, LinkedIn, GA4, Meta -- BotConversa conecta Ads mas nao fecha o loop de conversao.
+- IA no plano de entrada: CitraChat Starter R$147 tem IA. BotConversa Starter R$189 nao tem.
+- IA mais sofisticada: Claude nativo vs conectar ChatGPT/Gemini como add-on externo.
+- Modelo de cobranca: por conversa (previsivel) vs por creditos de mensagem (opaco).
+- Analise de imagem multimodal (BotConversa so menciona audio).
+
+**Oportunidade central:** BotConversa domina o WhatsApp-first. CitraChat domina o site-first. Sao canais complementares, nao substitutos. Argumento: "use BotConversa no WhatsApp + CitraChat no site e cubra todos os pontos de contato."
+
+**Copy:** "BotConversa automatiza o seu WhatsApp. CitraChat automatiza o atendimento no seu site e conecta cada conversa ao resultado das suas campanhas."
 
 ---
 
