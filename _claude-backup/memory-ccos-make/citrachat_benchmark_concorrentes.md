@@ -1,14 +1,14 @@
 ---
 name: citrachat-benchmark-concorrentes
-description: "Análise competitiva do CitraChat vs Leadster, Octadesk, BotConversa e Meta WhatsApp AI — preços reais, gaps de feature, vantagens e roadmap priorizado. Ler antes de qualquer trabalho de estratégia, pricing ou landing page do CitraChat."
+description: "Análise competitiva do CitraChat vs Leadster, Octadesk, BotConversa, ChátSuite e Meta WhatsApp AI — preços reais, gaps de feature, vantagens e roadmap priorizado. Ler antes de qualquer trabalho de estratégia, pricing ou landing page do CitraChat."
 metadata: 
   node_type: memory
   type: project
   originSessionId: 6400d359-e0a7-4d72-ab64-50d6227379e3
-  modified: 2026-07-31T23:29:15.736Z
+  modified: 2026-08-03T16:50:58.874Z
 ---
 
-**Última atualização: 2026-08-01 (adicionado BotConversa)**
+**Última atualização: 2026-08-01 (adicionado BotConversa e ChátSuite)**
 
 ## Leadster — concorrente direto mais próximo
 
@@ -99,6 +99,37 @@ Referencia completa: [produtos/citrachat/briefings/07_benchmark_botconversa.md](
 **Posicionamento correto:** quem precisa SO de WhatsApp paga menos no BotConversa. Quem precisa de WhatsApp + site + tracking unificado + multi-agente tem uma unica opcao: CitraChat.
 
 **Copy:** "BotConversa atende no WhatsApp. CitraChat atende no WhatsApp E no seu site -- com um painel so, um rastreamento so, e sem pagar duas ferramentas."
+
+---
+
+## ChátSuite — suíte omnichannel (adicionado 2026-08-01)
+
+**Preco real:** R$297/mes por apenas 2 usuários. Time de 5 pessoas = R$522+/mes. IA por texto inclusa; IA por voz = R$1/minuto. Modulos extras (campanhas, video, marketing) = R$47/mes cada.
+Referencia completa: [produtos/citrachat/briefings/08_benchmark_chatsuite.md](../produtos/citrachat/briefings/08_benchmark_chatsuite.md)
+
+**Posicionamento:** suíte omnichannel all-in-one (atendimento + CRM + campanhas + prospecção + video). Meta Business Partner + AWS Partner. Baseado em Florianópolis. Early stage -- métricas "0+" no site.
+
+**O que eles têm que o CitraChat não tem:**
+- Amplitude de canais: WhatsApp (oficial + nao oficial), Instagram DM, Facebook, Telegram, SMS, Email, Slack, voz
+- IA por voz: liga e atende chamadas em português (raro no mercado BR)
+- Social selling automático: responde comentarios e DMs do Instagram/Facebook
+- CRM Kanban completo com lead scoring e forecast
+- Campanhas em massa com anti-bloqueio
+- Prospecção ativa de leads (R$1/lead)
+- Reunioes por video com transcrição e IA que atualiza o funil (R$47/mes)
+- ERPs brasileiros: IXC, Mycore, Hubsoft, SGP, MKSolutions
+- White-label disponivel agora
+
+**Onde o CitraChat ganha:**
+- Preco para times maiores: CitraChat Pro R$397 (usuarios inclusos) vs ChátSuite R$522+ (5 usuarios)
+- Tracking de midia paga: GA4, Google Ads, Meta, TikTok, LinkedIn nativos -- ChátSuite so tem Meta CAPI
+- Modelo de IA declarado: Claude Haiku 4.5 vs "Lia" (caixa preta sem modelo informado)
+- Multi-agente com roteamento: ChátSuite tem Lia unica por empresa
+- Simplicidade: produto focado vs suíte complexa de 9+ canais + CRM + prospecção + video
+
+**Posicionamento correto:** ChátSuite compete com Octadesk, JivoChat e Movidesk -- nao com o CitraChat diretamente. A sobreposição existe (chat no site + WhatsApp), mas o argumento é diferente: ChátSuite = centralizar atendimento omnichannel; CitraChat = converter trafego pago com rastreamento fechando o loop.
+
+**Vulnerabilidade principal para explorar:** custo por usuário (calculadora de preco fecha o argumento), IA sem transparência, zero tracking cross-channel para agencias de performance.
 
 ---
 
