@@ -14,19 +14,24 @@ Você vai configurar o deploy de um novo projeto no Vercel. O código já está 
 4. Framework preset: deve detectar "Next.js" automaticamente. Root Directory: deixe como `./` (raiz).
 5. Nome do projeto: `citraform`.
 
-## Passo 2 — Variáveis de ambiente
+## Passo 2 — Integrações Supabase e Resend via Vercel Marketplace
 
-Antes de dar deploy, adicione estas variáveis de ambiente (Settings → Environment Variables), com estes valores PLACEHOLDER por enquanto (o projeto Supabase real ainda não foi criado — isso vem depois):
+O Vercel tem integrações nativas que provisionam Supabase e Resend direto pela aba "Integrations" (ou "Storage") do projeto, já injetando as variáveis de ambiente automaticamente — sem precisar copiar/colar chave nenhuma.
+
+**Resend**: pode conectar direto, sem restrição — adicione a integração Resend do Marketplace, conecte (ou crie) a conta Resend já usada pelo CitraChat, e adicione `citraform.com` como domínio verificado dentro do Resend (Settings → Domains → Add Domain, vai pedir registros DNS de SPF/DKIM — anote também).
+
+**Supabase — PARE ANTES DE CONFIRMAR**: a integração Supabase do Marketplace vai oferecer criar um projeto novo. **Antes de clicar em "Create" no projeto Supabase, pare e me avise** — criar um projeto novo tem custo mensal recorrente (mesmo dentro da organização Pro que já paga o CitraChat, cada projeto adicional é cobrado à parte) e essa decisão ainda não foi fechada com o Bruno. Chegue até a tela de confirmação, tire nota do que ela mostra (nome sugerido, região, tier de preço oferecido), e reporte antes de prosseguir.
+
+Enquanto isso não é resolvido, adicione estas variáveis de ambiente PLACEHOLDER manualmente (Settings → Environment Variables), pra não travar o deploy:
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://placeholder.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=placeholder
 SUPABASE_SERVICE_ROLE_KEY=placeholder
-RESEND_API_KEY=placeholder
 SUPER_ADMIN_EMAIL=bruno@makelemonad.com.br
 ```
 
-Aplique essas variáveis para os ambientes Production, Preview e Development.
+Aplique essas variáveis (e a `RESEND_API_KEY` real, se a integração Resend já tiver injetado) para os ambientes Production, Preview e Development.
 
 ## Passo 3 — Deploy
 
