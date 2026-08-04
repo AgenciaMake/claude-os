@@ -41,7 +41,7 @@ Faça o deploy (deve buildar com Next.js sem erro — já testamos localmente e 
 
 Em Settings → Domains do projeto:
 1. Adicione `citraform.com` como domínio principal.
-2. Adicione `citraforms.com.br` também, e configure como **redirect** para `citraform.com` (o Vercel tem uma opção de "Redirect to" ao adicionar o segundo domínio — use isso em vez de servir os dois como sites separados).
+2. Adicione `citraform.com.br` também, e configure como **redirect** para `citraform.com` (o Vercel tem uma opção de "Redirect to" ao adicionar o segundo domínio — use isso em vez de servir os dois como sites separados).
 3. O Vercel vai mostrar os registros DNS necessários (CNAME ou nameservers) para cada domínio. Anote exatamente o que ele pedir para cada um — eu preciso saber pra configurar no registrador onde esses domínios foram comprados.
 
 ## Relatório final
@@ -49,5 +49,5 @@ Em Settings → Domains do projeto:
 Ao terminar, me diga:
 - Se a importação do repo funcionou de primeira ou precisou de alguma autorização extra
 - A URL temporária do projeto (`.vercel.app`) e se o deploy passou
-- Os registros DNS exatos que o Vercel pediu para `citraform.com` e para `citraforms.com.br`
+- Os registros DNS exatos que o Vercel pediu para `citraform.com` e para `citraform.com.br`
 - Qualquer erro ou tela inesperada que apareceu
