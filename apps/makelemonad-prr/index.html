@@ -139,7 +139,11 @@ tbody tr:hover td{background:var(--surface2)}
 .date-input{width:96px}
 .name-input{min-width:220px}
 .euro-input{width:70px}
-select.status-select{border:none;background:transparent;font-size:11px;font-weight:700;cursor:pointer;outline:none;border-radius:4px;padding:2px 6px}
+select.status-select,select.plat-select{border:none;background:transparent;font-size:11px;font-weight:700;cursor:pointer;outline:none;border-radius:4px;padding:2px 6px}
+.plat-meta{background:#EBF3FF;color:#1877F2}
+.plat-linkedin{background:#E8F1FB;color:#0A66C2}
+.plat-google{background:#E8F5E9;color:#1B5E20}
+.plat-tiktok{background:#F3E5F5;color:#6A1B9A}
 select.status-select[disabled]{cursor:default;opacity:.7}
 .status-ativo{background:var(--green-bg);color:var(--green)}
 .status-reprovado{background:var(--red-bg);color:var(--red)}
@@ -489,21 +493,15 @@ function renderContent() {
           <div class="budget-middle">
             <div class="bm-cell">
               <div class="bm-label">Valor Total Projeto (12 meses)</div>
-              ${configEditing && isEditor
-                ? `<input id="cfg-total_projeto" class="config-input" type="number" step="0.01" value="${configGlobal.total_projeto}">`
-                : `<div class="bm-value">${fmtEur(configGlobal.total_projeto)}</div>`}
+              ${fTotal}
             </div>
             <div class="bm-cell">
               <div class="bm-label">Valor Mês</div>
-              ${configEditing && isEditor
-                ? `<input id="cfg-valor_mes" class="config-input" type="number" step="0.01" value="${configGlobal.valor_mes}">`
-                : `<div class="bm-value">${fmtEur(configGlobal.valor_mes)}</div>`}
+              ${fMes}
             </div>
             <div class="bm-cell">
               <div class="bm-label">Verba de Segurança (mês)</div>
-              ${configEditing && isEditor
-                ? `<input id="cfg-verba_seguranca" class="config-input" type="number" step="0.01" value="${configGlobal.verba_seguranca}">`
-                : `<div class="bm-value">${fmtEur(configGlobal.verba_seguranca)}</div>`}
+              ${fVerba}
             </div>
             <div class="bm-cell">
               <div class="bm-label">Sobra Mês Anterior</div>
@@ -571,6 +569,7 @@ function renderContent() {
         <table id="camp-table">
           <thead>
             <tr>
+              <th>Plataforma</th>
               <th>Início</th>
               <th>Final</th>
               <th>Últ. Atualização</th>
@@ -603,7 +602,16 @@ function renderRows(campanhas, isEditor) {
   tbody.innerHTML = ''
   campanhas.forEach((c, i) => {
     const tr = document.createElement('tr')
+    const plat = c.plataforma || 'meta'
     tr.innerHTML = `
+      <td>
+        <select class="plat-select plat-${plat}" data-idx="${i}" data-field="plataforma" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>
+          <option value="meta" ${plat==='meta'?'selected':''}>Meta</option>
+          <option value="google" ${plat==='google'?'selected':''}>Google</option>
+          <option value="linkedin" ${plat==='linkedin'?'selected':''}>LinkedIn</option>
+          <option value="tiktok" ${plat==='tiktok'?'selected':''}>TikTok</option>
+        </select>
+      </td>
       <td><input class="cell-input date-input" type="date" value="${c.inicio||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="inicio" onchange="onCellChange(this)"></td>
       <td><input class="cell-input date-input" type="date" value="${c.fim||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="fim" onchange="onCellChange(this)"></td>
       <td><input class="cell-input date-input" type="date" value="${c.ultima_atualizacao||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="ultima_atualizacao" onchange="onCellChange(this)"></td>
@@ -638,9 +646,11 @@ function onCellChange(el) {
 
 function onStatusChange(el) {
   const idx = +el.dataset.idx
+  const field = el.dataset.field
   const d = mesData[currentMes]
-  d.campanhas[idx].status = el.value
-  el.className = `status-select status-${el.value}`
+  d.campanhas[idx][field] = el.value
+  if (field === 'status') el.className = `status-select status-${el.value}`
+  if (field === 'plataforma') el.className = `plat-select plat-${el.value}`
   calcCampanhas(d.campanhas)
   markDirty()
   renderContent()
@@ -648,7 +658,7 @@ function onStatusChange(el) {
 
 function addCampanha() {
   if (!mesData[currentMes]) mesData[currentMes] = { campanhas: [] }
-  mesData[currentMes].campanhas.push({ nome:'', inicio:'', fim:'', euro_dia:'', status:'ativo' })
+  mesData[currentMes].campanhas.push({ plataforma:'meta', nome:'', inicio:'', fim:'', euro_dia:'', status:'ativo' })
   markDirty()
   renderContent()
 }
