@@ -436,6 +436,15 @@ function renderContent() {
   const [y, m] = currentMes.split('-')
   const nomeMes = NOMES_MESES[parseInt(m) - 1] + ' ' + y
   const isEditor = currentRole === 'editor'
+  const ce = configEditing && isEditor
+
+  const fTotal    = ce ? `<input id="cfg-total_projeto"    class="config-input" type="number" step="0.01" value="${configGlobal.total_projeto}">` : `<div class="bm-value">${fmtEur(configGlobal.total_projeto)}</div>`
+  const fMes      = ce ? `<input id="cfg-valor_mes"        class="config-input" type="number" step="0.01" value="${configGlobal.valor_mes}">` : `<div class="bm-value">${fmtEur(configGlobal.valor_mes)}</div>`
+  const fVerba    = ce ? `<input id="cfg-verba_seguranca"  class="config-input" type="number" step="0.01" value="${configGlobal.verba_seguranca}">` : `<div class="bm-value">${fmtEur(configGlobal.verba_seguranca)}</div>`
+  const fProduto  = ce ? `<div class="config-field"><label>Produto</label><input id="cfg-produto" class="config-input" value="${configGlobal.produto}"></div>` : ''
+  const fPeriodo  = ce ? `<div class="config-field"><label>Período do Projeto</label><input id="cfg-periodo" class="config-input" value="${configGlobal.periodo}"></div>` : ''
+  const fAcoes    = ce ? `<div class="config-actions"><button class="btn-cfg-save" onclick="saveConfig()">Guardar</button><button class="btn-cfg-cancel" onclick="cancelConfigEdit()">Cancelar</button></div>` : ''
+  const fPencil   = (!ce && isEditor) ? `<button class="btn-pencil" onclick="toggleConfigEdit()" title="Editar configurações">✏️</button>` : ''
 
   document.getElementById('main-content').innerHTML = `
     <!-- BUDGET HEADER -->
@@ -443,14 +452,8 @@ function renderContent() {
       <div class="budget-grid">
         <!-- Col 1: Projeto -->
         <div class="budget-col">
-          ${configEditing && isEditor ? `
-          <div class="config-field"><label>Produto</label><input id="cfg-produto" class="config-input" value="${configGlobal.produto}"></div>
-          <div class="config-field"><label>Período do Projeto</label><input id="cfg-periodo" class="config-input" value="${configGlobal.periodo}"></div>
-          <div class="config-actions">
-            <button class="btn-cfg-save" onclick="saveConfig()">Guardar</button>
-            <button class="btn-cfg-cancel" onclick="cancelConfigEdit()">Cancelar</button>
-          </div>
-          ` : `
+          ${fProduto}${fPeriodo}${fAcoes}
+          ${!ce ? `
           <div class="budget-col-header">
             <div class="budget-project">
               <div class="project-field">
@@ -462,10 +465,10 @@ function renderContent() {
                 <div class="project-field-value">${configGlobal.periodo}</div>
               </div>
             </div>
-            ${isEditor ? `<button class="btn-pencil" onclick="toggleConfigEdit()" title="Editar configurações">✏️</button>` : ''}
+            ${fPencil}
           </div>
-          `}
-          <div style="margin-top:${configEditing ? 0 : 8}px">
+          ` : ''}
+          <div style="margin-top:${ce ? 0 : 8}px">
             <div class="budget-row">
               <span class="budget-row-label">Orçamento Total Mês (s/ mrg. seg.) + Sobra Anterior</span>
               <span class="budget-row-value highlight">${fmtEur(orcamentoComSobra)}</span>
