@@ -1,0 +1,61 @@
+{
+  "routes": [
+    {
+      "routePath": "/api/data/:mes",
+      "mountPath": "/api/data",
+      "method": "GET",
+      "module": [
+        "api/data/[mes].js:onRequestGet"
+      ]
+    },
+    {
+      "routePath": "/api/data/:mes",
+      "mountPath": "/api/data",
+      "method": "OPTIONS",
+      "module": [
+        "api/data/[mes].js:onRequestOptions"
+      ]
+    },
+    {
+      "routePath": "/api/data/:mes",
+      "mountPath": "/api/data",
+      "method": "PUT",
+      "module": [
+        "api/data/[mes].js:onRequestPut"
+      ]
+    },
+    {
+      "routePath": "/api/auth",
+      "mountPath": "/api",
+      "method": "OPTIONS",
+      "module": [
+        "api/auth.js:onRequestOptions"
+      ]
+    },
+    {
+      "routePath": "/api/auth",
+      "mountPath": "/api",
+      "method": "POST",
+      "module": [
+        "api/auth.js:onRequestPost"
+      ]
+    },
+    {
+      "routePath": "/api/realtime",
+      "mountPath": "/api",
+      "method": "GET",
+      "module": [
+        "api/realtime.js:onRequestGet"
+      ]
+    },
+    {
+      "routePath": "/api/realtime",
+      "mountPath": "/api",
+      "method": "OPTIONS",
+      "module": [
+        "api/realtime.js:onRequestOptions"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}

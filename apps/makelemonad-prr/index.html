@@ -157,7 +157,17 @@ select.status-select[disabled]{cursor:default;opacity:.7}
 /* REALTIME BADGE */
 .live-dot{display:inline-block;width:6px;height:6px;background:#2E7D32;border-radius:50%;animation:blink 2s ease-in-out infinite;margin-right:4px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-
+.budget-col-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.budget-col-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
+.btn-pencil{background:none;border:none;cursor:pointer;color:var(--faint);font-size:13px;padding:2px 6px;border-radius:4px;line-height:1;transition:color .15s,background .15s}
+.btn-pencil:hover{color:var(--accent);background:var(--accent-bg)}
+.config-field{margin-bottom:8px}
+.config-field label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);margin-bottom:3px}
+.config-input{width:100%;border:1px solid var(--border);border-radius:6px;padding:5px 9px;font-size:12px;color:var(--text);background:var(--surface);outline:none;font-family:inherit;transition:border-color .15s}
+.config-input:focus{border-color:var(--accent)}
+.config-actions{display:flex;gap:6px;margin-top:10px}
+.btn-cfg-save{padding:5px 14px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer}
+.btn-cfg-cancel{padding:5px 12px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer}
 @media(max-width:900px){
   .budget-grid{grid-template-columns:1fr}
   .budget-col{border-right:none;border-bottom:1px solid var(--border)}
@@ -232,7 +242,8 @@ const MESES = [
   {key:'2027-07',label:'Jul 2027'},
 ]
 
-const BUDGET_GLOBAL = { total_projeto: 51000, valor_mes: 4250, verba_seguranca: 100 }
+let configGlobal = { produto: 'PRR', periodo: 'Jul 2026 – Jun 2027', total_projeto: 51000, valor_mes: 4250, verba_seguranca: 100 }
+let configEditing = false
 const NOMES_MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
 
 let currentToken = null
@@ -255,6 +266,39 @@ function daysBetween(start, end) {
   const d = (new Date(end) - new Date(start)) / 86400000
   return d > 0 ? Math.round(d) : 0
 }
+
+// CONFIG
+async function loadConfig() {
+  try {
+    const r = await fetch('/api/data/config', { headers: { 'Authorization': `Bearer ${currentToken}` } })
+    if (r.ok) {
+      const d = await r.json()
+      if (d && d.produto) Object.assign(configGlobal, d)
+    }
+  } catch {}
+}
+
+async function saveConfig() {
+  const fields = ['produto','periodo','total_projeto','valor_mes','verba_seguranca']
+  fields.forEach(f => {
+    const el = document.getElementById('cfg-' + f)
+    if (!el) return
+    const v = el.value
+    configGlobal[f] = (f === 'produto' || f === 'periodo') ? v : (parseFloat(v) || 0)
+  })
+  try {
+    await fetch('/api/data/config', {
+      method: 'PUT',
+      headers: { 'Authorization': `Bearer ${currentToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(configGlobal)
+    })
+  } catch {}
+  configEditing = false
+  renderContent()
+}
+
+function toggleConfigEdit() { configEditing = true; renderContent() }
+function cancelConfigEdit() { configEditing = false; renderContent() }
 
 // AUTH
 async function doLogin() {
@@ -290,13 +334,14 @@ function doLogout() {
   document.getElementById('login-screen').style.display = 'flex'
 }
 
-function showApp() {
+async function showApp() {
   document.getElementById('login-screen').style.display = 'none'
   document.getElementById('app').classList.remove('hidden')
   const badge = document.getElementById('role-badge')
   badge.textContent = currentRole === 'editor' ? 'Editor' : 'Leitura'
   badge.className = 'role-badge ' + (currentRole === 'editor' ? 'role-editor' : 'role-viewer')
   buildTabs()
+  await loadConfig()
   selectMes(currentMes)
 }
 
@@ -343,7 +388,7 @@ async function loadRealtime(key) {
 
 // CALC
 function calcCampanhas(campanhas) {
-  const orçamento_mes = BUDGET_GLOBAL.valor_mes - BUDGET_GLOBAL.verba_seguranca
+  const orçamento_mes = configGlobal.valor_mes - configGlobal.verba_seguranca
   let totalPrevisto = 0
   campanhas.forEach(c => {
     c.dias = daysBetween(c.inicio, c.fim)
@@ -386,7 +431,7 @@ function renderContent() {
   const sobraMes = orcamentoComSobra - totalPrevisto
   const { metaTotal, linkedinTotal, googleTotal } = getRealtimeTotals(currentMes)
   const totalPlataformas = metaTotal + linkedinTotal + googleTotal
-  const sobraPlataformas = BUDGET_GLOBAL.valor_mes - totalPlataformas
+  const sobraPlataformas = configGlobal.valor_mes - totalPlataformas
 
   const [y, m] = currentMes.split('-')
   const nomeMes = NOMES_MESES[parseInt(m) - 1] + ' ' + y
@@ -398,17 +443,29 @@ function renderContent() {
       <div class="budget-grid">
         <!-- Col 1: Projeto -->
         <div class="budget-col">
-          <div class="budget-project">
-            <div class="project-field">
-              <div class="project-field-label">Produto</div>
-              <div class="project-field-value">PRR</div>
-            </div>
-            <div class="project-field">
-              <div class="project-field-label">Período</div>
-              <div class="project-field-value">${nomeMes}</div>
-            </div>
+          ${configEditing && isEditor ? `
+          <div class="config-field"><label>Produto</label><input id="cfg-produto" class="config-input" value="${configGlobal.produto}"></div>
+          <div class="config-field"><label>Período do Projeto</label><input id="cfg-periodo" class="config-input" value="${configGlobal.periodo}"></div>
+          <div class="config-actions">
+            <button class="btn-cfg-save" onclick="saveConfig()">Guardar</button>
+            <button class="btn-cfg-cancel" onclick="cancelConfigEdit()">Cancelar</button>
           </div>
-          <div style="margin-top:12px">
+          ` : `
+          <div class="budget-col-header">
+            <div class="budget-project">
+              <div class="project-field">
+                <div class="project-field-label">Produto</div>
+                <div class="project-field-value">${configGlobal.produto}</div>
+              </div>
+              <div class="project-field">
+                <div class="project-field-label">Período</div>
+                <div class="project-field-value">${configGlobal.periodo}</div>
+              </div>
+            </div>
+            ${isEditor ? `<button class="btn-pencil" onclick="toggleConfigEdit()" title="Editar configurações">✏️</button>` : ''}
+          </div>
+          `}
+          <div style="margin-top:${configEditing ? 0 : 8}px">
             <div class="budget-row">
               <span class="budget-row-label">Orçamento Total Mês (s/ mrg. seg.) + Sobra Anterior</span>
               <span class="budget-row-value highlight">${fmtEur(orcamentoComSobra)}</span>
@@ -429,15 +486,21 @@ function renderContent() {
           <div class="budget-middle">
             <div class="bm-cell">
               <div class="bm-label">Valor Total Projeto (12 meses)</div>
-              <div class="bm-value">${fmtEur(BUDGET_GLOBAL.total_projeto)}</div>
+              ${configEditing && isEditor
+                ? `<input id="cfg-total_projeto" class="config-input" type="number" step="0.01" value="${configGlobal.total_projeto}">`
+                : `<div class="bm-value">${fmtEur(configGlobal.total_projeto)}</div>`}
             </div>
             <div class="bm-cell">
               <div class="bm-label">Valor Mês</div>
-              <div class="bm-value">${fmtEur(BUDGET_GLOBAL.valor_mes)}</div>
+              ${configEditing && isEditor
+                ? `<input id="cfg-valor_mes" class="config-input" type="number" step="0.01" value="${configGlobal.valor_mes}">`
+                : `<div class="bm-value">${fmtEur(configGlobal.valor_mes)}</div>`}
             </div>
             <div class="bm-cell">
               <div class="bm-label">Verba de Segurança (mês)</div>
-              <div class="bm-value">${fmtEur(BUDGET_GLOBAL.verba_seguranca * 12)}</div>
+              ${configEditing && isEditor
+                ? `<input id="cfg-verba_seguranca" class="config-input" type="number" step="0.01" value="${configGlobal.verba_seguranca}">`
+                : `<div class="bm-value">${fmtEur(configGlobal.verba_seguranca)}</div>`}
             </div>
             <div class="bm-cell">
               <div class="bm-label">Sobra Mês Anterior</div>
