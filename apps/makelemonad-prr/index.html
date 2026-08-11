@@ -1,811 +1,631 @@
-<title>PRR — Painel de Mídia</title>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MakeLemonAd — PRR Painel de Mídia</title>
+<link rel="icon" type="image/png" href="/logo.png">
 <style>
-  :root {
-    --bg: #F2F6FC;
-    --surface: #FFFFFF;
-    --surface-2: #E8EEF8;
-    --border: #D1DCF0;
-    --text: #0C1A2E;
-    --text-muted: #536282;
-    --text-faint: #8A9AB8;
-    --accent: #1C4ED8;
-    --meta: #1877F2;
-    --meta-bg: #EBF3FF;
-    --linkedin: #0A66C2;
-    --linkedin-bg: #E8F1FB;
-    --success: #047857;
-    --success-bg: #ECFDF5;
-    --warning: #92400E;
-    --warning-bg: #FFFBEB;
-    --danger: #991B1B;
-    --danger-bg: #FEF2F2;
-    --danger-border: #FECACA;
-    --row-alt: #F7FAFF;
-    --shadow: 0 1px 4px rgba(12,26,46,.07), 0 4px 16px rgba(12,26,46,.04);
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F0F4FA;--surface:#fff;--surface2:#E8EEF8;--border:#D1DCF0;
+  --text:#0C1A2E;--muted:#536282;--faint:#8A9AB8;
+  --accent:#1C4ED8;--accent-bg:#EBF4FF;
+  --green:#155724;--green-bg:#D4EDDA;--green-border:#C3E6CB;
+  --red:#721C24;--red-bg:#F8D7DA;--red-border:#F5C6CB;
+  --orange:#856404;--orange-bg:#FFF3CD;--orange-border:#FFEEBA;
+  --blue:#004085;--blue-bg:#CCE5FF;--blue-border:#B8DAFF;
+  --yellow:#D6DE23;
+  --meta:#1877F2;--meta-bg:#EBF3FF;
+  --linkedin:#0A66C2;--linkedin-bg:#E8F1FB;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);
+  --radius:10px;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;font-size:13px;line-height:1.5;min-height:100vh}
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #0A1628;
-      --surface: #112040;
-      --surface-2: #172A50;
-      --border: #1E3560;
-      --text: #E4EAF8;
-      --text-muted: #7A90B8;
-      --text-faint: #4A5F88;
-      --accent: #4F87F5;
-      --meta: #5BA3F5;
-      --meta-bg: rgba(91,163,245,.10);
-      --linkedin: #5BA3F5;
-      --linkedin-bg: rgba(10,102,194,.15);
-      --success: #34D399;
-      --success-bg: rgba(52,211,153,.10);
-      --warning: #FCD34D;
-      --warning-bg: rgba(252,211,77,.10);
-      --danger: #FCA5A5;
-      --danger-bg: rgba(252,165,165,.10);
-      --danger-border: rgba(252,165,165,.25);
-      --row-alt: rgba(255,255,255,.02);
-      --shadow: 0 1px 4px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.2);
-    }
-  }
+/* LOGIN */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 36px;width:100%;max-width:360px;box-shadow:var(--shadow)}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.login-logo-icon{width:36px;height:36px;background:var(--yellow);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#000}
+.login-title{font-size:15px;font-weight:700;color:var(--text)}
+.login-sub{font-size:11px;color:var(--muted)}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.form-group input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s}
+.form-group input:focus{border-color:var(--accent)}
+.btn-login{width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;margin-top:6px;transition:opacity .15s}
+.btn-login:hover{opacity:.9}
+.login-error{font-size:12px;color:var(--red);margin-top:10px;display:none}
 
-  :root[data-theme="dark"] {
-    --bg: #0A1628;
-    --surface: #112040;
-    --surface-2: #172A50;
-    --border: #1E3560;
-    --text: #E4EAF8;
-    --text-muted: #7A90B8;
-    --text-faint: #4A5F88;
-    --accent: #4F87F5;
-    --meta: #5BA3F5;
-    --meta-bg: rgba(91,163,245,.10);
-    --linkedin: #5BA3F5;
-    --linkedin-bg: rgba(10,102,194,.15);
-    --success: #34D399;
-    --success-bg: rgba(52,211,153,.10);
-    --warning: #FCD34D;
-    --warning-bg: rgba(252,211,77,.10);
-    --danger: #FCA5A5;
-    --danger-bg: rgba(252,165,165,.10);
-    --danger-border: rgba(252,165,165,.25);
-    --row-alt: rgba(255,255,255,.02);
-    --shadow: 0 1px 4px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.2);
-  }
+/* HIDDEN */
+.hidden{display:none!important}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* APP */
+#app{display:flex;flex-direction:column;min-height:100vh}
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    min-height: 100vh;
-  }
+/* TOP BAR */
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-logo{width:28px;height:28px;background:var(--yellow);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#000;flex-shrink:0}
+.topbar-title{font-size:14px;font-weight:700;color:var(--text)}
+.topbar-sub{font-size:11px;color:var(--muted)}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.role-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:4px}
+.role-editor{background:var(--green-bg);color:var(--green)}
+.role-viewer{background:var(--blue-bg);color:var(--blue)}
+.btn-logout{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:5px}
+.btn-logout:hover{background:var(--surface2)}
 
-  /* ── HEADER ── */
-  .header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .project-badge {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .flag {
-    width: 28px;
-    height: 20px;
-    border-radius: 3px;
-    overflow: hidden;
-    display: flex;
-    flex-shrink: 0;
-  }
-  .flag-green { background: #006600; flex: 2; }
-  .flag-red { background: #CC0000; flex: 1; }
-  .project-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -.01em;
-  }
-  .project-sub {
-    font-size: 11px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    font-weight: 500;
-  }
-  .divider-v {
-    width: 1px;
-    height: 32px;
-    background: var(--border);
-  }
-  .header-meta {
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-  .header-meta strong {
-    color: var(--text);
-    font-weight: 600;
-  }
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .live-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--success);
-    text-transform: uppercase;
-    letter-spacing: .05em;
-  }
-  .live-dot {
-    width: 7px;
-    height: 7px;
-    background: var(--success);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: .35; }
-  }
-  .provider-tag {
-    font-size: 11px;
-    color: var(--text-faint);
-    font-weight: 500;
-  }
+/* TABS */
+.tabs-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:flex-end;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs-bar::-webkit-scrollbar{display:none}
+.tab{padding:10px 14px;font-size:12px;font-weight:600;color:var(--muted);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 
-  /* ── MAIN CONTAINER ── */
-  .main {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+/* MAIN CONTENT */
+.content{padding:20px;flex:1;max-width:1400px;margin:0 auto;width:100%}
 
-  /* ── BUDGET ALERT ── */
-  .budget-alert {
-    background: var(--danger-bg);
-    border: 1px solid var(--danger-border);
-    border-radius: 10px;
-    padding: 16px 20px;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-  }
-  .alert-icon {
-    font-size: 18px;
-    flex-shrink: 0;
-    line-height: 1.4;
-  }
-  .alert-body { flex: 1; }
-  .alert-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--danger);
-    text-transform: uppercase;
-    letter-spacing: .05em;
-    margin-bottom: 4px;
-  }
-  .alert-desc {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.5;
-  }
-  .alert-desc strong { color: var(--text); }
-  .alert-bar-wrap {
-    margin-top: 10px;
-    background: var(--surface-2);
-    border-radius: 4px;
-    height: 6px;
-    overflow: visible;
-    position: relative;
-  }
-  .alert-bar {
-    height: 100%;
-    border-radius: 4px;
-    background: var(--danger);
-    position: relative;
-    max-width: 100%;
-  }
-  .alert-bar::after {
-    content: '';
-    position: absolute;
-    right: -1px;
-    top: -4px;
-    width: 2px;
-    height: 14px;
-    background: var(--danger);
-    border-radius: 1px;
-  }
-  .alert-labels {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 6px;
-    font-size: 11px;
-    font-variant-numeric: tabular-nums;
-  }
-  .alert-labels span { color: var(--text-muted); }
-  .alert-labels .over { color: var(--danger); font-weight: 600; }
-  .budget-nums {
-    display: flex;
-    gap: 24px;
-    flex-shrink: 0;
-    flex-wrap: wrap;
-  }
-  .budget-num {
-    text-align: right;
-  }
-  .budget-num-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    color: var(--text-faint);
-    font-weight: 600;
-    display: block;
-  }
-  .budget-num-value {
-    font-size: 18px;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    display: block;
-    line-height: 1.2;
-  }
-  .budget-num-value.danger { color: var(--danger); }
-  .budget-num-value.neutral { color: var(--text); }
+/* BUDGET HEADER */
+.budget-header{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow)}
+.budget-grid{display:grid;grid-template-columns:220px 1fr auto;min-height:110px}
+.budget-col{padding:14px 18px;border-right:1px solid var(--border)}
+.budget-col:last-child{border-right:none}
+.budget-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)}
+.budget-row:last-child{border-bottom:none}
+.budget-row-label{font-size:11px;color:var(--muted);font-weight:500}
+.budget-row-value{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--text)}
+.budget-row-value.highlight{color:var(--accent)}
+.a-utilizar-row{background:#D6DE23;padding:6px 18px;display:flex;align-items:center;justify-content:space-between}
+.a-utilizar-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#000}
+.a-utilizar-value{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;color:#000}
+.budget-project{display:flex;flex-direction:column;gap:6px}
+.project-field{display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:center}
+.project-field-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--faint)}
+.project-field-value{font-size:13px;font-weight:600;color:var(--text)}
+.budget-middle{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.bm-cell{padding:10px 16px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.bm-cell:nth-child(2n){border-right:none}
+.bm-cell:nth-last-child(-n+2){border-bottom:none}
+.bm-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);font-weight:600;margin-bottom:3px}
+.bm-value{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--text)}
+.platform-totals{padding:14px 18px;min-width:240px}
+.platform-totals-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:10px;text-align:center}
+.platform-row{display:flex;align-items:center;justify-content:space-between;padding:5px 8px;border-radius:6px;margin-bottom:4px}
+.platform-row.meta-row{background:var(--meta-bg)}
+.platform-row.google-row{background:var(--surface2)}
+.platform-row.linkedin-row{background:var(--linkedin-bg)}
+.platform-name{font-size:12px;font-weight:600}
+.platform-name.meta{color:var(--meta)}
+.platform-name.linkedin{color:var(--linkedin)}
+.platform-name.google{color:#34A853}
+.platform-value{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.platform-check{font-size:14px;margin-left:6px}
+.platform-total-row{display:flex;align-items:center;justify-content:space-between;padding:7px 8px;border-top:1px solid var(--border);margin-top:6px}
+.platform-total-label{font-size:11px;font-weight:700;color:var(--text)}
+.platform-total-value{font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text)}
+.platform-sobra{display:flex;align-items:center;justify-content:space-between;padding:5px 8px;background:var(--green-bg);border-radius:6px;margin-top:4px}
+.platform-sobra-label{font-size:11px;font-weight:700;color:var(--green)}
+.platform-sobra-value{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--green)}
 
-  /* ── GLOBAL KPIs ── */
-  .kpi-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-  }
-  .kpi-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
-    box-shadow: var(--shadow);
-  }
-  .kpi-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: .07em;
-    color: var(--text-faint);
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-  .kpi-value {
-    font-size: 24px;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    color: var(--text);
-    letter-spacing: -.02em;
-    line-height: 1.1;
-  }
-  .kpi-sub {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 3px;
-  }
-  .kpi-split {
-    display: flex;
-    gap: 8px;
-    margin-top: 6px;
-    font-size: 11px;
-    font-variant-numeric: tabular-nums;
-  }
-  .kpi-split span { color: var(--text-muted); }
-  .kpi-split .tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 1px 6px;
-    border-radius: 3px;
-    font-weight: 600;
-  }
-  .tag-meta { background: var(--meta-bg); color: var(--meta); }
-  .tag-li { background: var(--linkedin-bg); color: var(--linkedin); }
+/* SUMMARY BAND */
+.summary-band{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.summary-card{border-radius:var(--radius);padding:14px 18px;text-align:center}
+.summary-card.previsto{background:#2E7D32;color:#fff}
+.summary-card.sobra{background:#1B5E20;color:#fff}
+.summary-card.anterior{background:#33691E;color:#fff}
+.summary-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;opacity:.8;margin-bottom:4px}
+.summary-value{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
 
-  /* ── CHANNELS ── */
-  .channels {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  .channel-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-  }
-  .channel-header {
-    padding: 16px 20px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-  }
-  .channel-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .channel-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 7px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 800;
-    color: #fff;
-    flex-shrink: 0;
-  }
-  .channel-icon.meta { background: #1877F2; }
-  .channel-icon.li { background: #0A66C2; }
-  .channel-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-  }
-  .channel-account {
-    font-size: 11px;
-    color: var(--text-muted);
-  }
-  .channel-count {
-    font-size: 11px;
-    color: var(--text-faint);
-    font-weight: 600;
-  }
+/* CAMPAIGN TABLE */
+.table-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.table-header{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.table-title{font-size:13px;font-weight:700;color:var(--text)}
+.btn-add{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.btn-add:hover{opacity:.88}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead{background:var(--surface2)}
+th{padding:8px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--faint);white-space:nowrap;border-bottom:1px solid var(--border)}
+th.num{text-align:right}
+td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:middle;color:var(--text)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+td.num strong{color:var(--text);font-weight:700}
+tbody tr:hover td{background:var(--surface2)}
+.cell-input{width:100%;border:none;background:transparent;font-size:12px;color:var(--text);font-family:inherit;padding:0;outline:none}
+.cell-input[readonly]{cursor:default}
+.cell-input.num-input{text-align:right;font-variant-numeric:tabular-nums}
+.date-input{width:96px}
+.name-input{min-width:220px}
+.euro-input{width:70px}
+select.status-select{border:none;background:transparent;font-size:11px;font-weight:700;cursor:pointer;outline:none;border-radius:4px;padding:2px 6px}
+select.status-select[disabled]{cursor:default;opacity:.7}
+.status-ativo{background:var(--green-bg);color:var(--green)}
+.status-reprovado{background:var(--red-bg);color:var(--red)}
+.status-pausado{background:var(--orange-bg);color:var(--orange)}
+.status-aprovacao{background:var(--blue-bg);color:var(--blue)}
+.btn-del{background:none;border:none;cursor:pointer;color:var(--faint);font-size:14px;padding:2px 6px;border-radius:4px;line-height:1}
+.btn-del:hover{color:var(--red);background:var(--red-bg)}
+.pct-cell{font-variant-numeric:tabular-nums}
+.save-bar{display:none;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--orange-bg);border-top:1px solid var(--orange-border)}
+.save-bar.visible{display:flex}
+.save-msg{font-size:12px;color:var(--orange);font-weight:600}
+.btn-save{padding:6px 16px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer}
+.btn-save:hover{opacity:.88}
 
-  .channel-kpis {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-bottom: 1px solid var(--border);
-  }
-  .ckpi {
-    padding: 14px 16px;
-    border-right: 1px solid var(--border);
-  }
-  .ckpi:last-child { border-right: none; }
-  .ckpi-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    color: var(--text-faint);
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .ckpi-value {
-    font-size: 16px;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    color: var(--text);
-    letter-spacing: -.01em;
-  }
+/* REALTIME BADGE */
+.live-dot{display:inline-block;width:6px;height:6px;background:#2E7D32;border-radius:50%;animation:blink 2s ease-in-out infinite;margin-right:4px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-  /* ── TABLE ── */
-  .table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-    font-variant-numeric: tabular-nums;
-  }
-  thead tr {
-    background: var(--surface-2);
-  }
-  th {
-    padding: 8px 12px;
-    text-align: left;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    font-weight: 700;
-    color: var(--text-faint);
-    white-space: nowrap;
-  }
-  th.num { text-align: right; }
-  td {
-    padding: 9px 12px;
-    border-top: 1px solid var(--border);
-    color: var(--text);
-    vertical-align: middle;
-  }
-  td.num { text-align: right; color: var(--text-muted); }
-  td.num strong { color: var(--text); font-weight: 600; }
-  tbody tr:nth-child(even) td { background: var(--row-alt); }
-  .campaign-name {
-    font-weight: 500;
-    color: var(--text);
-    max-width: 200px;
-  }
-  .cname-main { display: block; }
-  .cname-date {
-    font-size: 10.5px;
-    color: var(--text-faint);
-    margin-top: 1px;
-    display: block;
-  }
-  .ctr-pill {
-    display: inline-block;
-    padding: 1px 6px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 600;
-  }
-  .ctr-good { background: var(--success-bg); color: var(--success); }
-  .ctr-mid { background: var(--warning-bg); color: var(--warning); }
-  .ctr-low { color: var(--text-muted); }
-
-  /* ── FOOTER ── */
-  .footer {
-    text-align: center;
-    padding: 12px;
-    font-size: 11px;
-    color: var(--text-faint);
-  }
-  .footer a { color: var(--accent); text-decoration: none; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .channels { grid-template-columns: 1fr; }
-    .kpi-row { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 600px) {
-    .main { padding: 16px; }
-    .header { padding: 12px 16px; }
-    .budget-nums { display: none; }
-    .kpi-row { grid-template-columns: repeat(2, 1fr); }
-    .channel-kpis { grid-template-columns: repeat(2, 1fr); }
-    .ckpi:nth-child(2) { border-right: none; }
-    .ckpi:nth-child(3) { border-top: 1px solid var(--border); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .live-dot { animation: none; }
-  }
+@media(max-width:900px){
+  .budget-grid{grid-template-columns:1fr}
+  .budget-col{border-right:none;border-bottom:1px solid var(--border)}
+  .summary-band{grid-template-columns:1fr}
+}
 </style>
+</head>
+<body>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="header-left">
-    <div class="project-badge">
-      <div class="flag">
-        <div class="flag-green"></div>
-        <div class="flag-red"></div>
-      </div>
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-icon">M</div>
       <div>
-        <div class="project-name">PRR — Recuperar Portugal</div>
-        <div class="project-sub">Painel de Mídia Paga · ON Partners</div>
+        <div class="login-title">MakeLemonAd</div>
+        <div class="login-sub">PRR — Painel de Mídia</div>
       </div>
     </div>
-    <div class="divider-v"></div>
-    <div class="header-meta">
-      Período: <strong>1 – 11 ago 2026</strong><br>
-      Orçamento anual: <strong>€51.000 · 12 meses</strong>
+    <div class="form-group">
+      <label>Usuário</label>
+      <input type="text" id="login-user" placeholder="usuario" autocomplete="username">
     </div>
+    <div class="form-group">
+      <label>Senha</label>
+      <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="btn-login" onclick="doLogin()">Entrar</button>
+    <div class="login-error" id="login-error">Credenciais incorretas. Tente novamente.</div>
   </div>
-  <div class="header-right">
-    <div class="live-badge">
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo">M</div>
+      <div>
+        <div class="topbar-title">PRR — Recuperar Portugal</div>
+        <div class="topbar-sub">Painel de Mídia Paga · ON Partners</div>
+      </div>
+    </div>
+    <div class="topbar-right">
       <span class="live-dot"></span>
-      Ao vivo
-    </div>
-    <span class="provider-tag">via Report Ninja</span>
-  </div>
-</header>
-
-<main class="main">
-
-  <!-- BUDGET ALERT -->
-  <div class="budget-alert">
-    <div class="alert-icon">⚠️</div>
-    <div class="alert-body">
-      <div class="alert-title">Orçamento mensal excedido</div>
-      <div class="alert-desc">
-        Gasto acumulado de <strong>€4.454,38</strong> em 11 dias supera o limite mensal de <strong>€4.250,00</strong>.
-        Excesso de <strong style="color:var(--danger)">+€204,38</strong> (104,8% do orçamento).
-        Ritmo projetado para o mês: <strong style="color:var(--danger)">~€12.543</strong>.
-      </div>
-      <div class="alert-bar-wrap" style="max-width:480px">
-        <div class="alert-bar" style="width:100%"></div>
-      </div>
-      <div class="alert-labels" style="max-width:480px">
-        <span>€0</span>
-        <span>€2.125 (50%)</span>
-        <span class="over">€4.454 (104,8%)</span>
-      </div>
-    </div>
-    <div class="budget-nums">
-      <div class="budget-num">
-        <span class="budget-num-label">Gasto Agosto</span>
-        <span class="budget-num-value danger">€4.454</span>
-      </div>
-      <div class="budget-num">
-        <span class="budget-num-label">Limite Mensal</span>
-        <span class="budget-num-value neutral">€4.250</span>
-      </div>
-      <div class="budget-num">
-        <span class="budget-num-label">Dias Decorridos</span>
-        <span class="budget-num-value neutral">11 / 31</span>
-      </div>
+      <span style="font-size:11px;color:var(--muted);margin-right:8px">Ao vivo via Report Ninja</span>
+      <span class="role-badge" id="role-badge"></span>
+      <button class="btn-logout" onclick="doLogout()">Sair</button>
     </div>
   </div>
 
-  <!-- GLOBAL KPIs -->
-  <div class="kpi-row">
-    <div class="kpi-card">
-      <div class="kpi-label">Total Gasto</div>
-      <div class="kpi-value" style="color:var(--danger)">€4.454</div>
-      <div class="kpi-split">
-        <span class="tag tag-meta">Meta €2.869</span>
-        <span class="tag tag-li">LI €1.585</span>
-      </div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Impressões</div>
-      <div class="kpi-value">1,53M</div>
-      <div class="kpi-split">
-        <span class="tag tag-meta">Meta 1,21M</span>
-        <span class="tag tag-li">LI 321K</span>
-      </div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Cliques Totais</div>
-      <div class="kpi-value">2.677</div>
-      <div class="kpi-split">
-        <span class="tag tag-meta">Meta 2.027</span>
-        <span class="tag tag-li">LI 650</span>
-      </div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Alcance (Meta)</div>
-      <div class="kpi-value">654K</div>
-      <div class="kpi-sub">Pessoas únicas alcançadas</div>
-    </div>
+  <div class="tabs-bar" id="tabs-bar"></div>
+
+  <div class="content" id="main-content">
+    <div style="padding:40px;text-align:center;color:var(--muted)">A carregar...</div>
   </div>
+</div>
 
-  <!-- CHANNELS -->
-  <div class="channels">
+<script>
+const MESES = [
+  {key:'2026-07',label:'Jul 2026'},
+  {key:'2026-08',label:'Ago 2026'},
+  {key:'2026-09',label:'Set 2026'},
+  {key:'2026-10',label:'Out 2026'},
+  {key:'2026-11',label:'Nov 2026'},
+  {key:'2026-12',label:'Dez 2026'},
+  {key:'2027-01',label:'Jan 2027'},
+  {key:'2027-02',label:'Fev 2027'},
+  {key:'2027-03',label:'Mar 2027'},
+  {key:'2027-04',label:'Abr 2027'},
+  {key:'2027-05',label:'Mai 2027'},
+  {key:'2027-06',label:'Jun 2027'},
+  {key:'2027-07',label:'Jul 2027'},
+]
 
-    <!-- META ADS -->
-    <div class="channel-card">
-      <div class="channel-header">
-        <div class="channel-title">
-          <div class="channel-icon meta">f</div>
-          <div>
-            <div class="channel-name">Meta Ads</div>
-            <div class="channel-account">CA - PRR Portugal · #2364073693796998</div>
+const BUDGET_GLOBAL = { total_projeto: 51000, valor_mes: 4250, verba_seguranca: 100 }
+const NOMES_MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
+
+let currentToken = null
+let currentRole = null
+let currentMes = '2026-07'
+let mesData = {}
+let realtimeData = {}
+let dirty = false
+
+function fmtEur(v) {
+  if (v == null || isNaN(v)) return '—'
+  return '€' + Number(v).toLocaleString('pt-PT', {minimumFractionDigits:2,maximumFractionDigits:2})
+}
+function fmtPct(v) {
+  if (v == null || isNaN(v) || v === 0) return ''
+  return Number(v).toLocaleString('pt-PT', {minimumFractionDigits:2,maximumFractionDigits:2}) + '%'
+}
+function daysBetween(start, end) {
+  if (!start || !end) return 0
+  const d = (new Date(end) - new Date(start)) / 86400000
+  return d > 0 ? Math.round(d) : 0
+}
+
+// AUTH
+async function doLogin() {
+  const usuario = document.getElementById('login-user').value.trim()
+  const senha = document.getElementById('login-pass').value
+  const err = document.getElementById('login-error')
+  err.style.display = 'none'
+  try {
+    const r = await fetch('/api/auth', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({usuario, senha})
+    })
+    const data = await r.json()
+    if (!r.ok) { err.style.display = 'block'; return }
+    currentToken = data.token
+    currentRole = data.role
+    sessionStorage.setItem('prr_token', data.token)
+    sessionStorage.setItem('prr_role', data.role)
+    showApp()
+  } catch(e) {
+    err.style.display = 'block'
+  }
+}
+
+document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin() })
+
+function doLogout() {
+  sessionStorage.removeItem('prr_token')
+  sessionStorage.removeItem('prr_role')
+  currentToken = null; currentRole = null
+  document.getElementById('app').classList.add('hidden')
+  document.getElementById('login-screen').style.display = 'flex'
+}
+
+function showApp() {
+  document.getElementById('login-screen').style.display = 'none'
+  document.getElementById('app').classList.remove('hidden')
+  const badge = document.getElementById('role-badge')
+  badge.textContent = currentRole === 'editor' ? 'Editor' : 'Leitura'
+  badge.className = 'role-badge ' + (currentRole === 'editor' ? 'role-editor' : 'role-viewer')
+  buildTabs()
+  selectMes(currentMes)
+}
+
+// TABS
+function buildTabs() {
+  const bar = document.getElementById('tabs-bar')
+  bar.innerHTML = ''
+  MESES.forEach(m => {
+    const btn = document.createElement('button')
+    btn.className = 'tab' + (m.key === currentMes ? ' active' : '')
+    btn.textContent = m.label
+    btn.onclick = () => { if(dirty && !confirm('Tens alterações não guardadas. Continuar?')) return; selectMes(m.key) }
+    bar.appendChild(btn)
+  })
+}
+
+async function selectMes(key) {
+  currentMes = key
+  dirty = false
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', MESES[i].key === key))
+  await loadMes(key)
+  await loadRealtime(key)
+  renderContent()
+}
+
+async function loadMes(key) {
+  try {
+    const r = await fetch(`/api/data/${key}`, { headers: { 'Authorization': `Bearer ${currentToken}` } })
+    mesData[key] = r.ok ? await r.json() : { campanhas: [] }
+  } catch { mesData[key] = { campanhas: [] } }
+  if (!mesData[key].campanhas) mesData[key].campanhas = []
+}
+
+async function loadRealtime(key) {
+  try {
+    const [y, m] = key.split('-')
+    const start = `${y}-${m}-01`
+    const lastDay = new Date(+y, +m, 0).getDate()
+    const end = `${y}-${m}-${lastDay}`
+    const r = await fetch(`/api/realtime?start=${start}&end=${end}`, { headers: { 'Authorization': `Bearer ${currentToken}` } })
+    realtimeData[key] = r.ok ? await r.json() : {}
+  } catch { realtimeData[key] = {} }
+}
+
+// CALC
+function calcCampanhas(campanhas) {
+  const orçamento_mes = BUDGET_GLOBAL.valor_mes - BUDGET_GLOBAL.verba_seguranca
+  let totalPrevisto = 0
+  campanhas.forEach(c => {
+    c.dias = daysBetween(c.inicio, c.fim)
+    c.total = c.dias * (parseFloat(c.euro_dia) || 0)
+    if (c.status === 'ativo') totalPrevisto += c.total
+  })
+  campanhas.forEach(c => {
+    c.pct = (c.status === 'ativo' && totalPrevisto > 0) ? (c.total / totalPrevisto * 100) : 0
+  })
+  return { totalPrevisto, orçamento_mes }
+}
+
+function getSobraAnterior() {
+  const idx = MESES.findIndex(m => m.key === currentMes)
+  if (idx <= 0) return 0
+  const prevKey = MESES[idx - 1].key
+  const prev = mesData[prevKey]
+  if (!prev || !prev.campanhas) return 0
+  const { totalPrevisto, orçamento_mes } = calcCampanhas(prev.campanhas)
+  return Math.max(0, orçamento_mes - totalPrevisto)
+}
+
+function getRealtimeTotals(key) {
+  const rd = realtimeData[key] || {}
+  let metaTotal = 0, linkedinTotal = 0
+  if (rd.meta && rd.meta.rows) rd.meta.rows.forEach(r => metaTotal += (r.spend || 0))
+  if (rd.linkedin && rd.linkedin.rows) rd.linkedin.rows.forEach(r => linkedinTotal += (r.costInLocalCurrency || 0))
+  return { metaTotal, linkedinTotal, googleTotal: 0 }
+}
+
+// RENDER
+function renderContent() {
+  const d = mesData[currentMes] || { campanhas: [] }
+  const campanhas = d.campanhas
+  const { totalPrevisto, orçamento_mes } = calcCampanhas(campanhas)
+  const sobraAnterior = getSobraAnterior()
+  const orcamentoComSobra = orçamento_mes + sobraAnterior
+  const totalUtilizado = campanhas.reduce((s, c) => s + c.total, 0)
+  const aUtilizar = orcamentoComSobra - totalUtilizado
+  const sobraMes = orcamentoComSobra - totalPrevisto
+  const { metaTotal, linkedinTotal, googleTotal } = getRealtimeTotals(currentMes)
+  const totalPlataformas = metaTotal + linkedinTotal + googleTotal
+  const sobraPlataformas = BUDGET_GLOBAL.valor_mes - totalPlataformas
+
+  const [y, m] = currentMes.split('-')
+  const nomeMes = NOMES_MESES[parseInt(m) - 1] + ' ' + y
+  const isEditor = currentRole === 'editor'
+
+  document.getElementById('main-content').innerHTML = `
+    <!-- BUDGET HEADER -->
+    <div class="budget-header">
+      <div class="budget-grid">
+        <!-- Col 1: Projeto -->
+        <div class="budget-col">
+          <div class="budget-project">
+            <div class="project-field">
+              <div class="project-field-label">Produto</div>
+              <div class="project-field-value">PRR</div>
+            </div>
+            <div class="project-field">
+              <div class="project-field-label">Período</div>
+              <div class="project-field-value">${nomeMes}</div>
+            </div>
+          </div>
+          <div style="margin-top:12px">
+            <div class="budget-row">
+              <span class="budget-row-label">Orçamento Total Mês (s/ mrg. seg.) + Sobra Anterior</span>
+              <span class="budget-row-value highlight">${fmtEur(orcamentoComSobra)}</span>
+            </div>
+            <div class="budget-row">
+              <span class="budget-row-label">Valor utilizado em planilha</span>
+              <span class="budget-row-value">${fmtEur(totalUtilizado)}</span>
+            </div>
+          </div>
+          <div class="a-utilizar-row">
+            <span class="a-utilizar-label">A utilizar</span>
+            <span class="a-utilizar-value">${fmtEur(aUtilizar)}</span>
           </div>
         </div>
-        <div class="channel-count">7 campanhas</div>
+
+        <!-- Col 2: Budget numbers -->
+        <div class="budget-col">
+          <div class="budget-middle">
+            <div class="bm-cell">
+              <div class="bm-label">Valor Total Projeto (12 meses)</div>
+              <div class="bm-value">${fmtEur(BUDGET_GLOBAL.total_projeto)}</div>
+            </div>
+            <div class="bm-cell">
+              <div class="bm-label">Valor Mês</div>
+              <div class="bm-value">${fmtEur(BUDGET_GLOBAL.valor_mes)}</div>
+            </div>
+            <div class="bm-cell">
+              <div class="bm-label">Verba de Segurança (mês)</div>
+              <div class="bm-value">${fmtEur(BUDGET_GLOBAL.verba_seguranca * 12)}</div>
+            </div>
+            <div class="bm-cell">
+              <div class="bm-label">Sobra Mês Anterior</div>
+              <div class="bm-value" style="color:${sobraAnterior > 0 ? 'var(--green)' : 'var(--muted)'}">${fmtEur(sobraAnterior)}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Col 3: Platform totals -->
+        <div class="budget-col platform-totals">
+          <div class="platform-totals-title">Total Gasto Mês em Faturas</div>
+          <div class="platform-row meta-row">
+            <span class="platform-name meta">Meta</span>
+            <span style="display:flex;align-items:center;gap:4px">
+              <span class="platform-value">${fmtEur(metaTotal)}</span>
+              ${metaTotal > 0 ? '<span class="platform-check">✅</span>' : ''}
+            </span>
+          </div>
+          <div class="platform-row google-row">
+            <span class="platform-name google">Google</span>
+            <span class="platform-value">${googleTotal > 0 ? fmtEur(googleTotal) : '—'}</span>
+          </div>
+          <div class="platform-row linkedin-row">
+            <span class="platform-name linkedin">LinkedIn</span>
+            <span style="display:flex;align-items:center;gap:4px">
+              <span class="platform-value">${fmtEur(linkedinTotal)}</span>
+              ${linkedinTotal > 0 ? '<span class="platform-check">✅</span>' : ''}
+            </span>
+          </div>
+          <div class="platform-total-row">
+            <span class="platform-total-label">Valor Total Usado</span>
+            <span class="platform-total-value">${fmtEur(totalPlataformas)}</span>
+          </div>
+          <div class="platform-sobra">
+            <span class="platform-sobra-label">Sobra do Mês Plataforma</span>
+            <span class="platform-sobra-value" style="color:${sobraPlataformas < 0 ? 'var(--red)' : ''}">${fmtEur(sobraPlataformas)}</span>
+          </div>
+        </div>
       </div>
-      <div class="channel-kpis">
-        <div class="ckpi">
-          <div class="ckpi-label">Gasto</div>
-          <div class="ckpi-value">€2.869</div>
-        </div>
-        <div class="ckpi">
-          <div class="ckpi-label">Impressões</div>
-          <div class="ckpi-value">1,21M</div>
-        </div>
-        <div class="ckpi">
-          <div class="ckpi-label">Alcance</div>
-          <div class="ckpi-value">654K</div>
-        </div>
-        <div class="ckpi">
-          <div class="ckpi-label">Cliques</div>
-          <div class="ckpi-value">2.027</div>
-        </div>
+    </div>
+
+    <!-- SUMMARY BAND -->
+    <div class="summary-band">
+      <div class="summary-card previsto">
+        <div class="summary-label">Valor PREVISTO de GASTO Mês</div>
+        <div class="summary-value">${fmtEur(totalPrevisto)}</div>
+      </div>
+      <div class="summary-card sobra">
+        <div class="summary-label">Sobra do Mês</div>
+        <div class="summary-value">${fmtEur(sobraMes)}</div>
+      </div>
+      <div class="summary-card anterior">
+        <div class="summary-label">Sobra do Mês Anterior</div>
+        <div class="summary-value">${fmtEur(sobraAnterior)}</div>
+      </div>
+    </div>
+
+    <!-- CAMPAIGN TABLE -->
+    <div class="table-card">
+      <div class="table-header">
+        <div class="table-title">Campanhas — ${nomeMes}</div>
+        ${isEditor ? `<button class="btn-add" onclick="addCampanha()">+ Adicionar campanha</button>` : ''}
       </div>
       <div class="table-wrap">
-        <table>
+        <table id="camp-table">
           <thead>
             <tr>
+              <th>Início</th>
+              <th>Final</th>
+              <th>Últ. Atualização</th>
               <th>Campanha</th>
-              <th class="num">Gasto</th>
-              <th class="num">Impressões</th>
-              <th class="num">Alcance</th>
-              <th class="num">Cliques</th>
-              <th class="num">CTR</th>
-              <th class="num">CPM</th>
+              <th class="num">Dias Ativos</th>
+              <th class="num">€/Dia</th>
+              <th class="num">€ Total</th>
+              <th class="num">%</th>
+              <th>Status</th>
+              ${isEditor ? '<th></th>' : ''}
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - Na fase decisiva de execução do PRR 06/08/2026</td>
-              <td class="num"><strong>€1.874,23</strong></td>
-              <td class="num">711.518</td>
-              <td class="num">313.220</td>
-              <td class="num">815</td>
-              <td class="num"><span class="ctr-low">0,11%</span></td>
-              <td class="num">€2,63</td>
-            </tr>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - Recebido o 9º Pedido de Pagamento 07/08/2026</td>
-              <td class="num"><strong>€395,14</strong></td>
-              <td class="num">191.896</td>
-              <td class="num">148.570</td>
-              <td class="num">802</td>
-              <td class="num"><span class="ctr-good">0,42%</span></td>
-              <td class="num">€2,06</td>
-            </tr>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - O sentimento de dever cumprido 04/08/2026</td>
-              <td class="num"><strong>€304,50</strong></td>
-              <td class="num">103.541</td>
-              <td class="num">70.684</td>
-              <td class="num">130</td>
-              <td class="num"><span class="ctr-low">0,13%</span></td>
-              <td class="num">€2,94</td>
-            </tr>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - Cinco anos de execução - 29/07/2026</td>
-              <td class="num"><strong>€128,98</strong></td>
-              <td class="num">106.398</td>
-              <td class="num">60.699</td>
-              <td class="num">122</td>
-              <td class="num"><span class="ctr-low">0,11%</span></td>
-              <td class="num">€1,21</td>
-            </tr>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - Loading - 30/07/2026</td>
-              <td class="num"><strong>€117,54</strong></td>
-              <td class="num">86.399</td>
-              <td class="num">54.916</td>
-              <td class="num">109</td>
-              <td class="num"><span class="ctr-low">0,13%</span></td>
-              <td class="num">€1,36</td>
-            </tr>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - Drones na costa - 29/07/2026</td>
-              <td class="num"><strong>€45,97</strong></td>
-              <td class="num">7.316</td>
-              <td class="num">6.046</td>
-              <td class="num">48</td>
-              <td class="num"><span class="ctr-good">0,66%</span></td>
-              <td class="num">€6,28</td>
-            </tr>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - OVERBOOST - O sentimento de dever cumprido 11/08/2026</td>
-              <td class="num"><strong>€2,92</strong></td>
-              <td class="num">899</td>
-              <td class="num">587</td>
-              <td class="num">1</td>
-              <td class="num"><span class="ctr-low">0,11%</span></td>
-              <td class="num">€3,25</td>
-            </tr>
+          <tbody id="camp-tbody">
           </tbody>
         </table>
       </div>
-    </div>
-
-    <!-- LINKEDIN ADS -->
-    <div class="channel-card">
-      <div class="channel-header">
-        <div class="channel-title">
-          <div class="channel-icon li">in</div>
-          <div>
-            <div class="channel-name">LinkedIn Ads</div>
-            <div class="channel-account">PRR - Recuperar Portugal · #514458905</div>
-          </div>
-        </div>
-        <div class="channel-count">6 campanhas</div>
-      </div>
-      <div class="channel-kpis">
-        <div class="ckpi">
-          <div class="ckpi-label">Gasto</div>
-          <div class="ckpi-value">€1.585</div>
-        </div>
-        <div class="ckpi">
-          <div class="ckpi-label">Impressões</div>
-          <div class="ckpi-value">321K</div>
-        </div>
-        <div class="ckpi">
-          <div class="ckpi-label">Cliques</div>
-          <div class="ckpi-value">650</div>
-        </div>
-        <div class="ckpi">
-          <div class="ckpi-label">CPM Médio</div>
-          <div class="ckpi-value">€4,84</div>
-        </div>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Campanha</th>
-              <th class="num">Gasto</th>
-              <th class="num">Impressões</th>
-              <th class="num">Cliques</th>
-              <th class="num">CTR</th>
-              <th class="num">CPM</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - Recebido o 9º Pedido de Pagamento 07/08/2026</td>
-              <td class="num"><strong>€437,26</strong></td>
-              <td class="num">95.812</td>
-              <td class="num">162</td>
-              <td class="num"><span class="ctr-low">0,17%</span></td>
-              <td class="num">€4,56</td>
-            </tr>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - Na fase decisiva de execução do PRR 05/08/2026</td>
-              <td class="num"><strong>€419,87</strong></td>
-              <td class="num">75.497</td>
-              <td class="num">169</td>
-              <td class="num"><span class="ctr-mid">0,22%</span></td>
-              <td class="num">€5,56</td>
-            </tr>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - O sentimento de dever cumprido 04/08/2026</td>
-              <td class="num"><strong>€419,60</strong></td>
-              <td class="num">77.259</td>
-              <td class="num">182</td>
-              <td class="num"><span class="ctr-mid">0,24%</span></td>
-              <td class="num">€5,43</td>
-            </tr>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - Loading - 30/07/2026</td>
-              <td class="num"><strong>€149,34</strong></td>
-              <td class="num">40.906</td>
-              <td class="num">78</td>
-              <td class="num"><span class="ctr-low">0,19%</span></td>
-              <td class="num">€3,65</td>
-            </tr>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - O sentimento de dever cumprido 03/08/2026</td>
-              <td class="num"><strong>€106,32</strong></td>
-              <td class="num">17.873</td>
-              <td class="num">35</td>
-              <td class="num"><span class="ctr-low">0,20%</span></td>
-              <td class="num">€5,95</td>
-            </tr>
-            <tr>
-              <td class="campaign-name">MAKE - Boost - Drones na costa - 29/07/2026</td>
-              <td class="num"><strong>€52,71</strong></td>
-              <td class="num">13.555</td>
-              <td class="num">24</td>
-              <td class="num"><span class="ctr-low">0,18%</span></td>
-              <td class="num">€3,89</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="save-bar" id="save-bar">
+        <span class="save-msg">⚠️ Tens alterações não guardadas</span>
+        <button class="btn-save" onclick="saveData()">Guardar alterações</button>
       </div>
     </div>
+  `
 
-  </div><!-- /channels -->
+  renderRows(campanhas, isEditor)
+}
 
-  <div class="footer">
-    Dados via <strong>Report Ninja</strong> · MakeLemonAd × PRR · Prova de conceito
-  </div>
+function renderRows(campanhas, isEditor) {
+  const tbody = document.getElementById('camp-tbody')
+  if (!tbody) return
+  tbody.innerHTML = ''
+  campanhas.forEach((c, i) => {
+    const tr = document.createElement('tr')
+    tr.innerHTML = `
+      <td><input class="cell-input date-input" type="date" value="${c.inicio||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="inicio" onchange="onCellChange(this)"></td>
+      <td><input class="cell-input date-input" type="date" value="${c.fim||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="fim" onchange="onCellChange(this)"></td>
+      <td><input class="cell-input date-input" type="date" value="${c.ultima_atualizacao||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="ultima_atualizacao" onchange="onCellChange(this)"></td>
+      <td><input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" ${!isEditor?'readonly':''} data-idx="${i}" data-field="nome" oninput="onCellChange(this)"></td>
+      <td class="num"><strong>${c.dias||0}</strong></td>
+      <td class="num"><input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" ${!isEditor?'readonly':''} data-idx="${i}" data-field="euro_dia" oninput="onCellChange(this)"></td>
+      <td class="num"><strong>${fmtEur(c.total)}</strong></td>
+      <td class="num pct-cell">${c.status==='ativo' ? fmtPct(c.pct) : ''}</td>
+      <td>
+        <select class="status-select status-${c.status||'ativo'}" data-idx="${i}" data-field="status" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>
+          <option value="ativo" ${c.status==='ativo'?'selected':''}>ATIVO</option>
+          <option value="reprovado" ${c.status==='reprovado'?'selected':''}>REPROVADO</option>
+          <option value="pausado" ${c.status==='pausado'?'selected':''}>PAUSADO</option>
+          <option value="aprovacao" ${c.status==='aprovacao'?'selected':''}>EM APROVAÇÃO</option>
+        </select>
+      </td>
+      ${isEditor ? `<td><button class="btn-del" onclick="delCampanha(${i})" title="Remover">×</button></td>` : ''}
+    `
+    tbody.appendChild(tr)
+  })
+}
 
-</main>
+function onCellChange(el) {
+  const idx = +el.dataset.idx
+  const field = el.dataset.field
+  const d = mesData[currentMes]
+  d.campanhas[idx][field] = el.value
+  const { totalPrevisto } = calcCampanhas(d.campanhas)
+  markDirty()
+  renderContent()
+}
+
+function onStatusChange(el) {
+  const idx = +el.dataset.idx
+  const d = mesData[currentMes]
+  d.campanhas[idx].status = el.value
+  el.className = `status-select status-${el.value}`
+  calcCampanhas(d.campanhas)
+  markDirty()
+  renderContent()
+}
+
+function addCampanha() {
+  if (!mesData[currentMes]) mesData[currentMes] = { campanhas: [] }
+  mesData[currentMes].campanhas.push({ nome:'', inicio:'', fim:'', euro_dia:'', status:'ativo' })
+  markDirty()
+  renderContent()
+}
+
+function delCampanha(idx) {
+  if (!confirm('Remover esta campanha?')) return
+  mesData[currentMes].campanhas.splice(idx, 1)
+  markDirty()
+  renderContent()
+}
+
+function markDirty() {
+  dirty = true
+  const bar = document.getElementById('save-bar')
+  if (bar) bar.classList.add('visible')
+}
+
+async function saveData() {
+  try {
+    const r = await fetch(`/api/data/${currentMes}`, {
+      method: 'PUT',
+      headers: { 'Authorization': `Bearer ${currentToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(mesData[currentMes])
+    })
+    if (r.ok) {
+      dirty = false
+      const bar = document.getElementById('save-bar')
+      if (bar) { bar.classList.remove('visible'); }
+    } else {
+      alert('Erro ao guardar. Tenta novamente.')
+    }
+  } catch { alert('Sem ligação. Tenta novamente.') }
+}
+
+// INIT
+;(async () => {
+  const t = sessionStorage.getItem('prr_token')
+  const role = sessionStorage.getItem('prr_role')
+  if (t && role) {
+    currentToken = t; currentRole = role
+    showApp()
+  }
+})()
+</script>
+</body>
+</html>
