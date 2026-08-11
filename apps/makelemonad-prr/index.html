@@ -1,0 +1,811 @@
+<title>PRR — Painel de Mídia</title>
+<style>
+  :root {
+    --bg: #F2F6FC;
+    --surface: #FFFFFF;
+    --surface-2: #E8EEF8;
+    --border: #D1DCF0;
+    --text: #0C1A2E;
+    --text-muted: #536282;
+    --text-faint: #8A9AB8;
+    --accent: #1C4ED8;
+    --meta: #1877F2;
+    --meta-bg: #EBF3FF;
+    --linkedin: #0A66C2;
+    --linkedin-bg: #E8F1FB;
+    --success: #047857;
+    --success-bg: #ECFDF5;
+    --warning: #92400E;
+    --warning-bg: #FFFBEB;
+    --danger: #991B1B;
+    --danger-bg: #FEF2F2;
+    --danger-border: #FECACA;
+    --row-alt: #F7FAFF;
+    --shadow: 0 1px 4px rgba(12,26,46,.07), 0 4px 16px rgba(12,26,46,.04);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0A1628;
+      --surface: #112040;
+      --surface-2: #172A50;
+      --border: #1E3560;
+      --text: #E4EAF8;
+      --text-muted: #7A90B8;
+      --text-faint: #4A5F88;
+      --accent: #4F87F5;
+      --meta: #5BA3F5;
+      --meta-bg: rgba(91,163,245,.10);
+      --linkedin: #5BA3F5;
+      --linkedin-bg: rgba(10,102,194,.15);
+      --success: #34D399;
+      --success-bg: rgba(52,211,153,.10);
+      --warning: #FCD34D;
+      --warning-bg: rgba(252,211,77,.10);
+      --danger: #FCA5A5;
+      --danger-bg: rgba(252,165,165,.10);
+      --danger-border: rgba(252,165,165,.25);
+      --row-alt: rgba(255,255,255,.02);
+      --shadow: 0 1px 4px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.2);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0A1628;
+    --surface: #112040;
+    --surface-2: #172A50;
+    --border: #1E3560;
+    --text: #E4EAF8;
+    --text-muted: #7A90B8;
+    --text-faint: #4A5F88;
+    --accent: #4F87F5;
+    --meta: #5BA3F5;
+    --meta-bg: rgba(91,163,245,.10);
+    --linkedin: #5BA3F5;
+    --linkedin-bg: rgba(10,102,194,.15);
+    --success: #34D399;
+    --success-bg: rgba(52,211,153,.10);
+    --warning: #FCD34D;
+    --warning-bg: rgba(252,211,77,.10);
+    --danger: #FCA5A5;
+    --danger-bg: rgba(252,165,165,.10);
+    --danger-border: rgba(252,165,165,.25);
+    --row-alt: rgba(255,255,255,.02);
+    --shadow: 0 1px 4px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .project-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .flag {
+    width: 28px;
+    height: 20px;
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+    flex-shrink: 0;
+  }
+  .flag-green { background: #006600; flex: 2; }
+  .flag-red { background: #CC0000; flex: 1; }
+  .project-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -.01em;
+  }
+  .project-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-weight: 500;
+  }
+  .divider-v {
+    width: 1px;
+    height: 32px;
+    background: var(--border);
+  }
+  .header-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .header-meta strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .live-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--success);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--success);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .35; }
+  }
+  .provider-tag {
+    font-size: 11px;
+    color: var(--text-faint);
+    font-weight: 500;
+  }
+
+  /* ── MAIN CONTAINER ── */
+  .main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ── BUDGET ALERT ── */
+  .budget-alert {
+    background: var(--danger-bg);
+    border: 1px solid var(--danger-border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .alert-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+  .alert-body { flex: 1; }
+  .alert-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--danger);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 4px;
+  }
+  .alert-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .alert-desc strong { color: var(--text); }
+  .alert-bar-wrap {
+    margin-top: 10px;
+    background: var(--surface-2);
+    border-radius: 4px;
+    height: 6px;
+    overflow: visible;
+    position: relative;
+  }
+  .alert-bar {
+    height: 100%;
+    border-radius: 4px;
+    background: var(--danger);
+    position: relative;
+    max-width: 100%;
+  }
+  .alert-bar::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: -4px;
+    width: 2px;
+    height: 14px;
+    background: var(--danger);
+    border-radius: 1px;
+  }
+  .alert-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+  }
+  .alert-labels span { color: var(--text-muted); }
+  .alert-labels .over { color: var(--danger); font-weight: 600; }
+  .budget-nums {
+    display: flex;
+    gap: 24px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+  .budget-num {
+    text-align: right;
+  }
+  .budget-num-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--text-faint);
+    font-weight: 600;
+    display: block;
+  }
+  .budget-num-value {
+    font-size: 18px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    display: block;
+    line-height: 1.2;
+  }
+  .budget-num-value.danger { color: var(--danger); }
+  .budget-num-value.neutral { color: var(--text); }
+
+  /* ── GLOBAL KPIs ── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+  }
+  .kpi-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--text-faint);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .kpi-value {
+    font-size: 24px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+    letter-spacing: -.02em;
+    line-height: 1.1;
+  }
+  .kpi-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+  .kpi-split {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+  }
+  .kpi-split span { color: var(--text-muted); }
+  .kpi-split .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .tag-meta { background: var(--meta-bg); color: var(--meta); }
+  .tag-li { background: var(--linkedin-bg); color: var(--linkedin); }
+
+  /* ── CHANNELS ── */
+  .channels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .channel-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .channel-header {
+    padding: 16px 20px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .channel-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .channel-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .channel-icon.meta { background: #1877F2; }
+  .channel-icon.li { background: #0A66C2; }
+  .channel-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .channel-account {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .channel-count {
+    font-size: 11px;
+    color: var(--text-faint);
+    font-weight: 600;
+  }
+
+  .channel-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--border);
+  }
+  .ckpi {
+    padding: 14px 16px;
+    border-right: 1px solid var(--border);
+  }
+  .ckpi:last-child { border-right: none; }
+  .ckpi-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--text-faint);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .ckpi-value {
+    font-size: 16px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+    letter-spacing: -.01em;
+  }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  thead tr {
+    background: var(--surface-2);
+  }
+  th {
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-weight: 700;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+  th.num { text-align: right; }
+  td {
+    padding: 9px 12px;
+    border-top: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: middle;
+  }
+  td.num { text-align: right; color: var(--text-muted); }
+  td.num strong { color: var(--text); font-weight: 600; }
+  tbody tr:nth-child(even) td { background: var(--row-alt); }
+  .campaign-name {
+    font-weight: 500;
+    color: var(--text);
+    max-width: 200px;
+  }
+  .cname-main { display: block; }
+  .cname-date {
+    font-size: 10.5px;
+    color: var(--text-faint);
+    margin-top: 1px;
+    display: block;
+  }
+  .ctr-pill {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .ctr-good { background: var(--success-bg); color: var(--success); }
+  .ctr-mid { background: var(--warning-bg); color: var(--warning); }
+  .ctr-low { color: var(--text-muted); }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 12px;
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .channels { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .main { padding: 16px; }
+    .header { padding: 12px 16px; }
+    .budget-nums { display: none; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .channel-kpis { grid-template-columns: repeat(2, 1fr); }
+    .ckpi:nth-child(2) { border-right: none; }
+    .ckpi:nth-child(3) { border-top: 1px solid var(--border); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .live-dot { animation: none; }
+  }
+</style>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-left">
+    <div class="project-badge">
+      <div class="flag">
+        <div class="flag-green"></div>
+        <div class="flag-red"></div>
+      </div>
+      <div>
+        <div class="project-name">PRR — Recuperar Portugal</div>
+        <div class="project-sub">Painel de Mídia Paga · ON Partners</div>
+      </div>
+    </div>
+    <div class="divider-v"></div>
+    <div class="header-meta">
+      Período: <strong>1 – 11 ago 2026</strong><br>
+      Orçamento anual: <strong>€51.000 · 12 meses</strong>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      Ao vivo
+    </div>
+    <span class="provider-tag">via Report Ninja</span>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- BUDGET ALERT -->
+  <div class="budget-alert">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-body">
+      <div class="alert-title">Orçamento mensal excedido</div>
+      <div class="alert-desc">
+        Gasto acumulado de <strong>€4.454,38</strong> em 11 dias supera o limite mensal de <strong>€4.250,00</strong>.
+        Excesso de <strong style="color:var(--danger)">+€204,38</strong> (104,8% do orçamento).
+        Ritmo projetado para o mês: <strong style="color:var(--danger)">~€12.543</strong>.
+      </div>
+      <div class="alert-bar-wrap" style="max-width:480px">
+        <div class="alert-bar" style="width:100%"></div>
+      </div>
+      <div class="alert-labels" style="max-width:480px">
+        <span>€0</span>
+        <span>€2.125 (50%)</span>
+        <span class="over">€4.454 (104,8%)</span>
+      </div>
+    </div>
+    <div class="budget-nums">
+      <div class="budget-num">
+        <span class="budget-num-label">Gasto Agosto</span>
+        <span class="budget-num-value danger">€4.454</span>
+      </div>
+      <div class="budget-num">
+        <span class="budget-num-label">Limite Mensal</span>
+        <span class="budget-num-value neutral">€4.250</span>
+      </div>
+      <div class="budget-num">
+        <span class="budget-num-label">Dias Decorridos</span>
+        <span class="budget-num-value neutral">11 / 31</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOBAL KPIs -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-label">Total Gasto</div>
+      <div class="kpi-value" style="color:var(--danger)">€4.454</div>
+      <div class="kpi-split">
+        <span class="tag tag-meta">Meta €2.869</span>
+        <span class="tag tag-li">LI €1.585</span>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Impressões</div>
+      <div class="kpi-value">1,53M</div>
+      <div class="kpi-split">
+        <span class="tag tag-meta">Meta 1,21M</span>
+        <span class="tag tag-li">LI 321K</span>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Cliques Totais</div>
+      <div class="kpi-value">2.677</div>
+      <div class="kpi-split">
+        <span class="tag tag-meta">Meta 2.027</span>
+        <span class="tag tag-li">LI 650</span>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Alcance (Meta)</div>
+      <div class="kpi-value">654K</div>
+      <div class="kpi-sub">Pessoas únicas alcançadas</div>
+    </div>
+  </div>
+
+  <!-- CHANNELS -->
+  <div class="channels">
+
+    <!-- META ADS -->
+    <div class="channel-card">
+      <div class="channel-header">
+        <div class="channel-title">
+          <div class="channel-icon meta">f</div>
+          <div>
+            <div class="channel-name">Meta Ads</div>
+            <div class="channel-account">CA - PRR Portugal · #2364073693796998</div>
+          </div>
+        </div>
+        <div class="channel-count">7 campanhas</div>
+      </div>
+      <div class="channel-kpis">
+        <div class="ckpi">
+          <div class="ckpi-label">Gasto</div>
+          <div class="ckpi-value">€2.869</div>
+        </div>
+        <div class="ckpi">
+          <div class="ckpi-label">Impressões</div>
+          <div class="ckpi-value">1,21M</div>
+        </div>
+        <div class="ckpi">
+          <div class="ckpi-label">Alcance</div>
+          <div class="ckpi-value">654K</div>
+        </div>
+        <div class="ckpi">
+          <div class="ckpi-label">Cliques</div>
+          <div class="ckpi-value">2.027</div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Campanha</th>
+              <th class="num">Gasto</th>
+              <th class="num">Impressões</th>
+              <th class="num">Alcance</th>
+              <th class="num">Cliques</th>
+              <th class="num">CTR</th>
+              <th class="num">CPM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - Na fase decisiva de execução do PRR 06/08/2026</td>
+              <td class="num"><strong>€1.874,23</strong></td>
+              <td class="num">711.518</td>
+              <td class="num">313.220</td>
+              <td class="num">815</td>
+              <td class="num"><span class="ctr-low">0,11%</span></td>
+              <td class="num">€2,63</td>
+            </tr>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - Recebido o 9º Pedido de Pagamento 07/08/2026</td>
+              <td class="num"><strong>€395,14</strong></td>
+              <td class="num">191.896</td>
+              <td class="num">148.570</td>
+              <td class="num">802</td>
+              <td class="num"><span class="ctr-good">0,42%</span></td>
+              <td class="num">€2,06</td>
+            </tr>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - O sentimento de dever cumprido 04/08/2026</td>
+              <td class="num"><strong>€304,50</strong></td>
+              <td class="num">103.541</td>
+              <td class="num">70.684</td>
+              <td class="num">130</td>
+              <td class="num"><span class="ctr-low">0,13%</span></td>
+              <td class="num">€2,94</td>
+            </tr>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - Cinco anos de execução - 29/07/2026</td>
+              <td class="num"><strong>€128,98</strong></td>
+              <td class="num">106.398</td>
+              <td class="num">60.699</td>
+              <td class="num">122</td>
+              <td class="num"><span class="ctr-low">0,11%</span></td>
+              <td class="num">€1,21</td>
+            </tr>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - Loading - 30/07/2026</td>
+              <td class="num"><strong>€117,54</strong></td>
+              <td class="num">86.399</td>
+              <td class="num">54.916</td>
+              <td class="num">109</td>
+              <td class="num"><span class="ctr-low">0,13%</span></td>
+              <td class="num">€1,36</td>
+            </tr>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - Drones na costa - 29/07/2026</td>
+              <td class="num"><strong>€45,97</strong></td>
+              <td class="num">7.316</td>
+              <td class="num">6.046</td>
+              <td class="num">48</td>
+              <td class="num"><span class="ctr-good">0,66%</span></td>
+              <td class="num">€6,28</td>
+            </tr>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - OVERBOOST - O sentimento de dever cumprido 11/08/2026</td>
+              <td class="num"><strong>€2,92</strong></td>
+              <td class="num">899</td>
+              <td class="num">587</td>
+              <td class="num">1</td>
+              <td class="num"><span class="ctr-low">0,11%</span></td>
+              <td class="num">€3,25</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- LINKEDIN ADS -->
+    <div class="channel-card">
+      <div class="channel-header">
+        <div class="channel-title">
+          <div class="channel-icon li">in</div>
+          <div>
+            <div class="channel-name">LinkedIn Ads</div>
+            <div class="channel-account">PRR - Recuperar Portugal · #514458905</div>
+          </div>
+        </div>
+        <div class="channel-count">6 campanhas</div>
+      </div>
+      <div class="channel-kpis">
+        <div class="ckpi">
+          <div class="ckpi-label">Gasto</div>
+          <div class="ckpi-value">€1.585</div>
+        </div>
+        <div class="ckpi">
+          <div class="ckpi-label">Impressões</div>
+          <div class="ckpi-value">321K</div>
+        </div>
+        <div class="ckpi">
+          <div class="ckpi-label">Cliques</div>
+          <div class="ckpi-value">650</div>
+        </div>
+        <div class="ckpi">
+          <div class="ckpi-label">CPM Médio</div>
+          <div class="ckpi-value">€4,84</div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Campanha</th>
+              <th class="num">Gasto</th>
+              <th class="num">Impressões</th>
+              <th class="num">Cliques</th>
+              <th class="num">CTR</th>
+              <th class="num">CPM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - Recebido o 9º Pedido de Pagamento 07/08/2026</td>
+              <td class="num"><strong>€437,26</strong></td>
+              <td class="num">95.812</td>
+              <td class="num">162</td>
+              <td class="num"><span class="ctr-low">0,17%</span></td>
+              <td class="num">€4,56</td>
+            </tr>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - Na fase decisiva de execução do PRR 05/08/2026</td>
+              <td class="num"><strong>€419,87</strong></td>
+              <td class="num">75.497</td>
+              <td class="num">169</td>
+              <td class="num"><span class="ctr-mid">0,22%</span></td>
+              <td class="num">€5,56</td>
+            </tr>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - O sentimento de dever cumprido 04/08/2026</td>
+              <td class="num"><strong>€419,60</strong></td>
+              <td class="num">77.259</td>
+              <td class="num">182</td>
+              <td class="num"><span class="ctr-mid">0,24%</span></td>
+              <td class="num">€5,43</td>
+            </tr>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - Loading - 30/07/2026</td>
+              <td class="num"><strong>€149,34</strong></td>
+              <td class="num">40.906</td>
+              <td class="num">78</td>
+              <td class="num"><span class="ctr-low">0,19%</span></td>
+              <td class="num">€3,65</td>
+            </tr>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - O sentimento de dever cumprido 03/08/2026</td>
+              <td class="num"><strong>€106,32</strong></td>
+              <td class="num">17.873</td>
+              <td class="num">35</td>
+              <td class="num"><span class="ctr-low">0,20%</span></td>
+              <td class="num">€5,95</td>
+            </tr>
+            <tr>
+              <td class="campaign-name">MAKE - Boost - Drones na costa - 29/07/2026</td>
+              <td class="num"><strong>€52,71</strong></td>
+              <td class="num">13.555</td>
+              <td class="num">24</td>
+              <td class="num"><span class="ctr-low">0,18%</span></td>
+              <td class="num">€3,89</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /channels -->
+
+  <div class="footer">
+    Dados via <strong>Report Ninja</strong> · MakeLemonAd × PRR · Prova de conceito
+  </div>
+
+</main>
