@@ -133,6 +133,14 @@ td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:middle;
 td.num{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
 td.num strong{color:var(--text);font-weight:700}
 tbody tr:hover td{background:var(--surface2)}
+tr.row-meta td{background:#EEF4FF}
+tr.row-linkedin td{background:#EAF0F8}
+tr.row-google td{background:#EEF8F0}
+tr.row-tiktok td{background:#F5EEF9}
+tr.row-meta:hover td{background:#D8E8FF}
+tr.row-linkedin:hover td{background:#D2E0F0}
+tr.row-google:hover td{background:#D4EDDA}
+tr.row-tiktok:hover td{background:#E8D5F2}
 .cell-input{width:100%;border:none;background:transparent;font-size:12px;color:var(--text);font-family:inherit;padding:0;outline:none}
 .cell-input[readonly]{cursor:default}
 .cell-input.num-input{text-align:right;font-variant-numeric:tabular-nums}
@@ -158,6 +166,16 @@ select.status-select[disabled]{cursor:default;opacity:.7}
 .btn-save{padding:6px 16px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer}
 .btn-save:hover{opacity:.88}
 
+.plat-block-header td{padding:6px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
+.plat-block-header.ph-meta td{background:#D6E8FF;color:#1877F2}
+.plat-block-header.ph-linkedin td{background:#C8D9EF;color:#0A66C2}
+.plat-block-header.ph-google td{background:#C8E6CB;color:#1B5E20}
+.plat-block-header.ph-tiktok td{background:#E1C5F0;color:#6A1B9A}
+.plat-subtotal td{padding:7px 10px;font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;border-top:2px solid var(--border);border-bottom:1px solid var(--border)}
+.plat-subtotal.ps-meta td{background:#D6E8FF;color:#1877F2}
+.plat-subtotal.ps-linkedin td{background:#C8D9EF;color:#0A66C2}
+.plat-subtotal.ps-google td{background:#C8E6CB;color:#1B5E20}
+.plat-subtotal.ps-tiktok td{background:#E1C5F0;color:#6A1B9A}
 /* REALTIME BADGE */
 .live-dot{display:inline-block;width:6px;height:6px;background:#2E7D32;border-radius:50%;animation:blink 2s ease-in-out infinite;margin-right:4px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
@@ -596,14 +614,40 @@ function renderContent() {
   renderRows(campanhas, isEditor)
 }
 
+const PLAT_LABELS = { meta: 'Meta Ads', linkedin: 'LinkedIn Ads', google: 'Google Ads', tiktok: 'TikTok Ads' }
+const PLAT_ORDER = ['meta', 'google', 'linkedin', 'tiktok']
+
 function renderRows(campanhas, isEditor) {
   const tbody = document.getElementById('camp-tbody')
   if (!tbody) return
   tbody.innerHTML = ''
+  const cols = isEditor ? 11 : 10
+
+  // Group by platform preserving original indices
+  const groups = {}
+  PLAT_ORDER.forEach(p => { groups[p] = [] })
   campanhas.forEach((c, i) => {
-    const tr = document.createElement('tr')
-    const plat = c.plataforma || 'meta'
-    tr.innerHTML = `
+    const p = c.plataforma || 'meta'
+    if (!groups[p]) groups[p] = []
+    groups[p].push({ c, i })
+  })
+
+  PLAT_ORDER.forEach(plat => {
+    const items = groups[plat]
+    if (!items || items.length === 0) return
+
+    // Block header
+    const htr = document.createElement('tr')
+    htr.className = `plat-block-header ph-${plat}`
+    htr.innerHTML = `<td colspan="${cols}">${PLAT_LABELS[plat] || plat}</td>`
+    tbody.appendChild(htr)
+
+    let platTotal = 0
+    items.forEach(({ c, i }) => {
+      platTotal += c.total || 0
+      const tr = document.createElement('tr')
+      tr.className = 'row-' + plat
+      tr.innerHTML = `
       <td>
         <select class="plat-select plat-${plat}" data-idx="${i}" data-field="plataforma" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>
           <option value="meta" ${plat==='meta'?'selected':''}>Meta</option>
@@ -630,7 +674,18 @@ function renderRows(campanhas, isEditor) {
       </td>
       ${isEditor ? `<td><button class="btn-del" onclick="delCampanha(${i})" title="Remover">×</button></td>` : ''}
     `
-    tbody.appendChild(tr)
+      tbody.appendChild(tr)
+    })
+
+    // Subtotal row
+    const str = document.createElement('tr')
+    str.className = `plat-subtotal ps-${plat}`
+    str.innerHTML = `
+      <td colspan="7" style="text-align:right;padding-right:12px">Total ${PLAT_LABELS[plat] || plat}</td>
+      <td class="num">${fmtEur(platTotal)}</td>
+      <td colspan="${isEditor ? 3 : 2}"></td>
+    `
+    tbody.appendChild(str)
   })
 }
 
