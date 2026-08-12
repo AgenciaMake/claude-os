@@ -3,7 +3,7 @@ import { verifyToken } from './auth.js'
 const INTEGRATION_IDS = {
   meta:     { id: 'facebook_ads',  fields: ['spend'],                   dataView: null },
   linkedin: { id: 'linkedin_ads',  fields: ['costInLocalCurrency'],      dataView: 'campaign' },
-  google:   { id: 'google_ads',    fields: ['cost'],                     dataView: null },
+  google:   { id: 'google_ads',    fields: ['metrics.cost_micros'],      dataView: 'campaign' },
   tiktok:   { id: 'tiktok_ads',   fields: ['spend'],                    dataView: null },
 }
 
