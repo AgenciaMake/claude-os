@@ -25,3 +25,4 @@ jobs:
           directory: apps/makelemonad-prr
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           branch: main
+          wranglerVersion: '3'
