@@ -17,7 +17,7 @@ jobs:
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_MAKE }}
-          accountId: 8978598388ccc2513f2f23b68b9eed8c
+          accountId: 57d45d762c6f977abb1f0e311da3ae9a
           projectName: makelemonad-prr
           directory: apps/makelemonad-prr
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
