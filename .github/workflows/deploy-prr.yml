@@ -22,9 +22,50 @@ jobs:
       - name: Install wrangler
         run: npm install -g wrangler@3
 
-      - name: Deploy to Cloudflare Pages (production)
+      - name: Deploy to Cloudflare Pages
+        id: deploy
         run: |
-          wrangler pages deploy apps/makelemonad-prr \
+          OUTPUT=$(cd apps/makelemonad-prr && wrangler pages deploy . \
             --project-name makelemonad-prr \
             --branch main \
-            --commit-message "${{ github.event.head_commit.message }}"
+            --commit-message "${{ github.event.head_commit.message }}" 2>&1)
+          echo "$OUTPUT"
+          PREVIEW_URL=$(echo "$OUTPUT" | grep -oP 'https://[a-f0-9]+\.makelemonad-prr\.pages\.dev' | head -1)
+          DEPLOY_HASH=$(echo "$PREVIEW_URL" | grep -oP '^https://\K[a-f0-9]+')
+          echo "preview_url=$PREVIEW_URL" >> $GITHUB_OUTPUT
+          echo "deploy_hash=$DEPLOY_HASH" >> $GITHUB_OUTPUT
+          echo "Deployed: $PREVIEW_URL"
+
+      - name: Promote to production
+        run: |
+          HASH="${{ steps.deploy.outputs.deploy_hash }}"
+          echo "Procurando deployment com hash: $HASH"
+
+          # Lista deployments e acha o ID pelo URL hash
+          DEPLOY_ID=$(curl -s \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/makelemonad-prr/deployments?page=1&per_page=5" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" | \
+            python3 -c "
+          import sys, json
+          data = json.load(sys.stdin)
+          for d in data.get('result', []):
+              if '$HASH' in d.get('url', ''):
+                  print(d['id'])
+                  break
+          ")
+
+          if [ -z "$DEPLOY_ID" ]; then
+            echo "Deployment ID não encontrado para hash $HASH"
+            exit 1
+          fi
+
+          echo "Promovendo deployment $DEPLOY_ID para produção..."
+          curl -s -X POST \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/makelemonad-prr/deployments/$DEPLOY_ID/retry" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -H "Content-Type: application/json" | python3 -c "
+          import sys, json
+          d = json.load(sys.stdin)
+          print('Success:', d.get('success'))
+          if d.get('errors'): print('Errors:', d['errors'])
+          "
