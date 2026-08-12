@@ -242,10 +242,10 @@ select[disabled]{cursor:default;opacity:.7}
 .status-reprovado{background:var(--red-bg);color:var(--red)}
 .status-pausado{background:var(--orange-bg);color:var(--orange)}
 .status-aprovacao{background:var(--blue-bg);color:var(--blue)}
-.plat-meta{background:#EBF3FF;color:#1877F2}
-.plat-linkedin{background:#E8F1FB;color:#0A66C2}
-.plat-google{background:#E8F5E9;color:#1B5E20}
-.plat-tiktok{background:#F3E5F5;color:#6A1B9A}
+.plat-meta{background:#e8f0ff;color:#1877F2}
+.plat-linkedin{background:#e3edf8;color:#0A66C2}
+.plat-google{background:#e8f0fe;color:#4285F4}
+.plat-tiktok{background:#fff0f3;color:#FF0050}
 .btn-del{background:none;border:none;cursor:pointer;color:var(--faint);font-size:16px;padding:2px 6px;border-radius:4px;line-height:1}
 .btn-del:hover{color:var(--red);background:var(--red-bg)}
 
@@ -255,19 +255,19 @@ tr.row-linkedin td{background:#EAF0F8}
 tr.row-google td{background:#EEF8F0}
 tr.row-tiktok td{background:#F5EEF9}
 tr.row-meta:hover td{background:#D8E8FF}
-tr.row-linkedin:hover td{background:#D2E0F0}
-tr.row-google:hover td{background:#D4EDDA}
-tr.row-tiktok:hover td{background:#E8D5F2}
+tr.row-linkedin:hover td{background:#e8f0fb}
+tr.row-google:hover td{background:#e8f1ff}
+tr.row-tiktok:hover td{background:#fff0f3}
 .plat-block-header td{padding:6px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
-.ph-meta td{background:#D6E8FF;color:#1877F2}
-.ph-linkedin td{background:#C8D9EF;color:#0A66C2}
-.ph-google td{background:#C8E6CB;color:#1B5E20}
-.ph-tiktok td{background:#E1C5F0;color:#6A1B9A}
+.ph-meta td{background:#e8f0ff;color:#1877F2;border-left:3px solid #1877F2}
+.ph-linkedin td{background:#e3edf8;color:#0A66C2;border-left:3px solid #0A66C2}
+.ph-google td{background:#e8f0fe;color:#4285F4;border-left:3px solid #4285F4}
+.ph-tiktok td{background:#fff0f3;color:#FF0050;border-left:3px solid #FF0050}
 .plat-subtotal td{padding:7px 10px;font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;border-top:2px solid var(--border);border-bottom:1px solid var(--border)}
-.ps-meta td{background:#D6E8FF;color:#1877F2}
-.ps-linkedin td{background:#C8D9EF;color:#0A66C2}
-.ps-google td{background:#C8E6CB;color:#1B5E20}
-.ps-tiktok td{background:#E1C5F0;color:#6A1B9A}
+.ps-meta td{background:#e8f0ff;color:#1877F2}
+.ps-linkedin td{background:#e3edf8;color:#0A66C2}
+.ps-google td{background:#e8f0fe;color:#4285F4}
+.ps-tiktok td{background:#fff0f3;color:#FF0050}
 
 /* Resize handle */
 .col-resize-handle{position:absolute;right:0;top:0;width:5px;height:100%;cursor:col-resize;z-index:10;background:transparent}
@@ -809,6 +809,7 @@ function getRtTotals(key) {
 
 // ══ RENDER ══
 function renderContent() {
+  const _sy=window.scrollY
   const d=mesData[currentMes]||{campanhas:[]}
   const campanhas=d.campanhas
   const{totalPrevisto,orcamento_mes,valorMes,verba}=calcCampanhas(campanhas)
@@ -927,6 +928,7 @@ function renderContent() {
   `
   renderRows(campanhas,isEditor)
   initColResize()
+  requestAnimationFrame(()=>window.scrollTo(0,_sy))
 }
 
 // ══ CONFIG EDIT (inline) ══
@@ -958,6 +960,22 @@ async function saveVerbaMes(){
 }
 
 // ══ TABLE ROWS ══
+const PLAT_BRAND={meta:'#1877F2',linkedin:'#0A66C2',google:'#4285F4',tiktok:'#FF0050'}
+
+function getRtStatus(plat,r){
+  let raw=''
+  if(plat==='meta') raw=(r.effective_status||'').toUpperCase()
+  else if(plat==='linkedin') raw=(r.status||'').toUpperCase()
+  else if(plat==='google') raw=(r['campaign.status']||'').toUpperCase()
+  else if(plat==='tiktok') raw=(r.campaign_status||'').toUpperCase()
+  if(!raw) return null
+  if(raw.includes('ACTIVE')||raw==='ENABLED'||raw.includes('ENABLE')) return 'ativo'
+  if(raw.includes('PAUSE')) return 'pausado'
+  if(raw.includes('COMPLET')||raw.includes('ENDED')||raw.includes('FINISH')) return 'encerrado'
+  if(raw.includes('DELETE')||raw.includes('REMOV')||raw.includes('ARCHIV')) return 'arquivado'
+  return raw.toLowerCase()
+}
+
 function getRtCampName(plat,r){
   if(plat==='meta') return r.campaign_name||''
   if(plat==='linkedin') return r.campaignName||''
@@ -993,21 +1011,24 @@ function findRtCampaign(plat,nome){
   if(!hit) hit=rows.find(r=>{const rn=norm(getRtCampName(plat,r));return rn&&(rn.includes(pn)||pn.includes(rn))})
   return hit||null
 }
-function renderVerifyRow(plat,campNome,cols){
+function renderVerifyRow(plat,campNome,plannedDaily,cols){
+  const brand=PLAT_BRAND[plat]||'#D6DE23'
   const vr=document.createElement('tr'); vr.className='row-verify'
+  vr.style.borderLeft=`3px solid ${brand}`
   const rd=realtimeData[currentMes]
   if(!rd){
-    vr.innerHTML=`<td><span class="rv-badge">Fonte</span></td><td colspan="${cols-1}" style="color:var(--faint);font-style:italic">Dados em tempo real não carregados</td>`
+    vr.innerHTML=`<td><span class="rv-badge" style="background:${brand}22;color:${brand}">Fonte</span></td><td colspan="${cols-1}" style="color:var(--faint);font-style:italic">Dados em tempo real não carregados</td>`
     return vr
   }
   const match=findRtCampaign(plat,campNome)
   const today=new Date().toISOString().slice(0,10)
   const fmtD=s=>s?s.slice(0,10).split('-').reverse().join('/'):'—'
-  const fmtV=v=>v?`€${v.toFixed(2)}`:'—'
+  const fmtV=v=>(v!=null&&v>0)?`€${v.toFixed(2)}`:'—'
 
   const startDate=match?getRtStartDate(plat,match):''
   const spend=match?getRtSpend(plat,match):null
   const budget=match?getRtDailyBudget(plat,match):null
+  const status=match?getRtStatus(plat,match):null
 
   let diasAtivos='—'
   if(startDate){
@@ -1019,14 +1040,32 @@ function renderVerifyRow(plat,campNome,cols){
     ?`<span class="rv-match">${getRtCampName(plat,match)}</span>`
     :`<span class="rv-nomatch">${campNome?'Não encontrada na fonte':'Sem nome para busca'}</span>`
 
+  const STATUS_PILL={
+    ativo:`<span style="display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:#d4edda;color:#155724">● ATIVO</span>`,
+    pausado:`<span style="display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:#fff3cd;color:#856404">⏸ PAUSADO</span>`,
+    encerrado:`<span style="display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:#f8d7da;color:#721c24">■ ENCERRADO</span>`,
+    arquivado:`<span style="display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:#e2e3e5;color:#383d41">▪ ARQUIVADO</span>`,
+  }
+  const statusPill=status?(STATUS_PILL[status]||`<span style="font-size:9px;color:var(--muted)">${status}</span>`):`<span style="color:var(--faint)">—</span>`
+
+  // Budget match check: within 5% of planned daily
+  let budgetCheck=''
+  if(budget!=null&&budget>0&&plannedDaily>0){
+    const diff=Math.abs(budget-plannedDaily)/plannedDaily
+    if(diff<=0.05) budgetCheck=`<span style="color:#155724;font-size:12px;font-weight:800" title="Orçamento diário confirmado na fonte">✔</span> `
+    else budgetCheck=`<span style="color:#856404;font-size:11px" title="Orçamento diverge do plano (plano: €${plannedDaily.toFixed(2)} / fonte: €${budget.toFixed(2)})">⚠</span> `
+  }
+
+  const badge=`<span class="rv-badge" style="background:${brand}22;color:${brand}">Fonte</span>`
+
   vr.innerHTML=`
-    <td><span class="rv-badge">Fonte</span></td>
+    <td>${badge}<br>${statusPill}</td>
     <td><span class="rv-label">Início</span><span class="rv-val">${fmtD(startDate)}</span></td>
     <td></td>
     <td><span class="rv-label">Atualizado</span><span class="rv-val">${fmtD(today)}</span></td>
     <td>${nomeCell}</td>
     <td class="num"><span class="rv-label">Dias ativos</span><span class="rv-val">${diasAtivos}</span></td>
-    <td class="num"><span class="rv-label">€/dia real</span><span class="rv-val">${fmtV(budget)}</span></td>
+    <td class="num"><span class="rv-label">€/dia real</span><span class="rv-val">${budgetCheck}${fmtV(budget)}</span></td>
     <td class="num"><span class="rv-label">Gasto</span><span class="rv-val ${match?(spend>0?'rv-ok':'rv-warn'):'rv-nomatch'}">${match?fmtV(spend):'—'}</span></td>
     <td></td><td></td>${cols>10?'<td></td>':''}
   `
@@ -1054,12 +1093,13 @@ function renderRows(campanhas,isEditor){
         <td><input class="cell-input date-input" type="date" value="${c.inicio||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="inicio" onchange="onCellChange(this)"></td>
         <td><input class="cell-input date-input" type="date" value="${c.fim||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="fim" onchange="onCellChange(this)"></td>
         <td><input class="cell-input date-input" type="date" value="${c.ultima_atualizacao||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="ultima_atualizacao" onchange="onCellChange(this)"></td>
-        <td><input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" ${!isEditor?'readonly':''} data-idx="${i}" data-field="nome" oninput="onCellChange(this)"></td>
+        <td><input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" ${!isEditor?'readonly':''} data-idx="${i}" data-field="nome" onchange="onCellChange(this)"></td>
         <td class="num"><strong>${c.dias||0}</strong></td>
-        <td class="num"><input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" ${!isEditor?'readonly':''} data-idx="${i}" data-field="euro_dia" oninput="onCellChange(this)"></td>
+        <td class="num"><input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" ${!isEditor?'readonly':''} data-idx="${i}" data-field="euro_dia" onchange="onCellChange(this)"></td>
         <td class="num"><strong>${fmtEur(c.total)}</strong></td>
         <td class="num">${c.status==='ativo'?fmtPct(c.pct):''}</td>
-        <td><select class="status-select status-${c.status||'ativo'}" data-idx="${i}" data-field="status" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>
+        <td><select class="status-select status-${c.status||''}" data-idx="${i}" data-field="status" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>
+          <option value="" ${!c.status?'selected':''}>—</option>
           <option value="ativo" ${c.status==='ativo'?'selected':''}>ATIVO</option>
           <option value="reprovado" ${c.status==='reprovado'?'selected':''}>REPROVADO</option>
           <option value="pausado" ${c.status==='pausado'?'selected':''}>PAUSADO</option>
@@ -1068,7 +1108,7 @@ function renderRows(campanhas,isEditor){
         ${isEditor?`<td><button class="btn-del" onclick="delCampanha(${i})" title="Remover">×</button></td>`:''}
       `
       tbody.appendChild(tr)
-      tbody.appendChild(renderVerifyRow(plat, c.nome||'', cols))
+      tbody.appendChild(renderVerifyRow(plat, c.nome||'', parseFloat(c.euro_dia)||0, cols))
     })
     const str=document.createElement('tr'); str.className=`plat-subtotal ps-${plat}`
     str.innerHTML=`<td colspan="7" style="text-align:right;padding-right:12px">Total ${PLAT_LABELS[plat]||plat}</td><td class="num">${fmtEur(platTotal)}</td><td colspan="${isEditor?3:2}"></td>`
