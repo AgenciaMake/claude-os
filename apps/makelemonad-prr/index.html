@@ -61,22 +61,27 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .plat-row{border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden;transition:border-color .15s}
 .plat-row.selected{border-color:var(--accent)}
 .plat-row-head{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;user-select:none}
-.plat-toggle{width:18px;height:18px;border-radius:4px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
-.plat-toggle.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.plat-toggle{width:18px;height:18px;border-radius:4px;border:2px solid var(--border);flex-shrink:0;transition:all .15s;position:relative}
+.plat-toggle.on{background:var(--accent);border-color:var(--accent)}
+.plat-toggle.on::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700}
 .plat-icon{font-size:16px}
 .plat-label{font-size:13px;font-weight:600;flex:1}
 .plat-label .plat-name{display:block}
 .plat-label .plat-status{font-size:10px;font-weight:400;color:var(--faint)}
 .plat-config{padding:10px 14px 14px;border-top:1px solid var(--border);background:var(--surface2);display:none}
 .plat-row.selected .plat-config{display:block}
-.plat-config-row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end}
-.plat-config-row .form-group{margin-bottom:0}
-.plat-config-row .form-group input{padding:6px 10px;font-size:12px}
-.btn-test{padding:6px 12px;background:var(--surface);border:1px solid var(--border);border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .15s;height:32px;align-self:end}
+/* Account selector */
+.acc-select-wrap{display:flex;align-items:center;gap:8px}
+.acc-select{flex:1;padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text);background:var(--surface);outline:none;font-family:inherit}
+.acc-select:focus{border-color:var(--accent)}
+.btn-load-accs{padding:6px 12px;background:var(--surface);border:1px solid var(--border);border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.btn-load-accs:hover{border-color:var(--accent);color:var(--accent)}
+.btn-test{padding:6px 12px;background:var(--surface);border:1px solid var(--border);border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
 .btn-test:hover{border-color:var(--accent);color:var(--accent)}
 .test-result{margin-top:6px;font-size:11px;padding:4px 8px;border-radius:5px}
 .test-ok{background:var(--green-bg);color:var(--green)}
 .test-fail{background:var(--red-bg);color:var(--red)}
+.acc-info{font-size:10px;color:var(--faint);margin-top:4px}
 
 /* Budget type cards */
 .budget-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
@@ -481,7 +486,7 @@ const WIZARD_STEPS = [
         return `
         <div class="plat-row ${sel?'selected':''}" id="platrow-${p.id}">
           <div class="plat-row-head" onclick="togglePlatRow('${p.id}')">
-            <div class="plat-toggle ${sel?'on':''}">✓</div>
+            <div class="plat-toggle ${sel?'on':''}"></div>
             <span class="plat-icon">${p.icon}</span>
             <div class="plat-label">
               <span class="plat-name">${p.label}</span>
@@ -489,11 +494,16 @@ const WIZARD_STEPS = [
             </div>
           </div>
           <div class="plat-config">
-            <div class="plat-config-row">
-              <div class="form-group"><label>Connection Key</label><input id="w-ck-${p.id}" value="${pc.connection_key||''}" placeholder="${p.placeholder_key}" oninput="updatePlatStatus('${p.id}')"></div>
-              <div class="form-group"><label>Account ID</label><input id="w-ai-${p.id}" value="${pc.account_id||''}" placeholder="${p.placeholder_acc}" oninput="updatePlatStatus('${p.id}')"></div>
+            <div class="acc-select-wrap">
+              <select class="acc-select" id="w-acc-${p.id}" onchange="onAccSelect('${p.id}')">
+                ${pc.account_id
+                  ? `<option value="${pc.connection_key}|${pc.account_id}" selected>${pc.account_name||pc.account_id}</option>`
+                  : `<option value="">— Selecionar conta —</option>`}
+              </select>
+              <button class="btn-load-accs" onclick="loadAccounts('${p.id}')">⟳ Carregar</button>
               <button class="btn-test" onclick="testPlatConn('${p.id}')">Testar</button>
             </div>
+            <div class="acc-info" id="acc-info-${p.id}">${pc.connection_key?`Conta: ${pc.connection_key} · ID: ${pc.account_id}`:''}</div>
             <div id="test-result-${p.id}"></div>
           </div>
         </div>`
@@ -573,26 +583,62 @@ function togglePlatRow(id) {
   else{cfg.plataformas.splice(idx,1);row.classList.remove('selected');toggle.classList.remove('on')}
 }
 
-function updatePlatStatus(id) {
-  const ck=document.getElementById('w-ck-'+id)?.value.trim()
-  const ai=document.getElementById('w-ai-'+id)?.value.trim()
-  const s=document.getElementById('plat-status-'+id)
-  if(s) s.textContent=ck&&ai?'Conta configurada':'Não configurado'
+async function loadAccounts(id) {
+  const sel=document.getElementById('w-acc-'+id)
+  const btn=document.querySelector(`[onclick="loadAccounts('${id}')"]`)
+  if(btn){btn.textContent='...';btn.disabled=true}
+  try {
+    const r=await fetch(`/api/connections?platform=${id}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+    const d=await r.json()
+    if(d.error&&!d.accounts?.length){
+      const res=document.getElementById('test-result-'+id)
+      if(res)res.innerHTML=`<div class="test-result test-fail">❌ ${d.error}</div>`
+      return
+    }
+    const pc=cfg.plataformas_config[id]||{}
+    const currentVal=pc.connection_key&&pc.account_id?`${pc.connection_key}|${pc.account_id}`:''
+    sel.innerHTML=`<option value="">— Selecionar conta —</option>`+
+      d.accounts.map(a=>`<option value="${a.connection_key}|${a.account_id}" ${currentVal===`${a.connection_key}|${a.account_id}`?'selected':''}>${a.label}</option>`).join('')
+    if(currentVal) onAccSelect(id)
+  } catch(e){
+    const res=document.getElementById('test-result-'+id)
+    if(res)res.innerHTML=`<div class="test-result test-fail">❌ ${e.message}</div>`
+  }
+  if(btn){btn.textContent='⟳ Carregar';btn.disabled=false}
+}
+
+function onAccSelect(id) {
+  const sel=document.getElementById('w-acc-'+id)
+  const val=sel?.value||''
+  const info=document.getElementById('acc-info-'+id)
+  const status=document.getElementById('plat-status-'+id)
+  if(!val){
+    if(info)info.textContent=''
+    if(status)status.textContent='Não configurado'
+    delete cfg.plataformas_config[id]
+    return
+  }
+  const [ck,ai]=val.split('|')
+  const label=sel.options[sel.selectedIndex]?.text||ai
+  if(!cfg.plataformas_config)cfg.plataformas_config={}
+  cfg.plataformas_config[id]={connection_key:ck,account_id:ai,account_name:label}
+  if(info)info.textContent=`Conta: ${ck} · ID: ${ai}`
+  if(status)status.textContent='Conta vinculada'
 }
 
 async function testPlatConn(id) {
-  const ck=document.getElementById('w-ck-'+id)?.value.trim()
-  const ai=document.getElementById('w-ai-'+id)?.value.trim()
+  const pc=cfg.plataformas_config[id]||{}
+  const ck=pc.connection_key; const ai=pc.account_id
   const btn=document.querySelector(`[onclick="testPlatConn('${id}')"]`)
   const res=document.getElementById('test-result-'+id)
-  if(!ck||!ai){if(res)res.innerHTML='<div class="test-result test-fail">Preenche connection key e account ID primeiro.</div>';return}
-  if(btn){btn.textContent='A testar...';btn.disabled=true}
+  if(!ck||!ai){if(res)res.innerHTML='<div class="test-result test-fail">Seleciona uma conta primeiro.</div>';return}
+  if(btn){btn.textContent='...';btn.disabled=true}
   try {
     const r=await fetch(`/api/test-platform?platform=${id}&connection_key=${encodeURIComponent(ck)}&account_id=${encodeURIComponent(ai)}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
     const d=await r.json()
-    if(res) res.innerHTML=`<div class="test-result ${d.ok?'test-ok':'test-fail'}">${d.ok?'✅':'❌'} ${d.message||d.error}</div>`
+    if(res)res.innerHTML=`<div class="test-result ${d.ok?'test-ok':'test-fail'}">${d.ok?'✅':'❌'} ${d.message||d.error}</div>`
   } catch(e){
-    if(res) res.innerHTML=`<div class="test-result test-fail">❌ Erro de rede: ${e.message}</div>`
+    if(res)res.innerHTML=`<div class="test-result test-fail">❌ ${e.message}</div>`
   }
   if(btn){btn.textContent='Testar';btn.disabled=false}
 }
@@ -626,12 +672,7 @@ async function wizardNext() {
     cfg.cliente=c; cfg.agencia=document.getElementById('w-agencia')?.value.trim()||''
     wizardStep=2; renderWizardStep()
   } else if(wizardStep===2) {
-    // Save plataformas_config for each selected platform
-    cfg.plataformas.forEach(id=>{
-      const ck=document.getElementById('w-ck-'+id)?.value.trim()
-      const ai=document.getElementById('w-ai-'+id)?.value.trim()
-      if(ck||ai) cfg.plataformas_config[id]={connection_key:ck||'',account_id:ai||''}
-    })
+    // plataformas_config already updated live via onAccSelect — just advance
     wizardStep=3; renderWizardStep()
   } else if(wizardStep===3) {
     const ini=document.getElementById('w-inicio')?.value
