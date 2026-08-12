@@ -783,10 +783,14 @@ function getSobraAnterior() {
 function getRtTotals(key) {
   const rd=realtimeData[key]||{}
   let meta=0,linkedin=0,google=0,tiktok=0
-  if(rd.meta?.rows) rd.meta.rows.forEach(r=>meta+=r.spend||0)
-  if(rd.linkedin?.rows) rd.linkedin.rows.forEach(r=>linkedin+=r.costInLocalCurrency||0)
-  if(rd.google?.rows) rd.google.rows.forEach(r=>google+=(r['metrics.cost_micros']||0)/1e6)
-  if(rd.tiktok?.rows) rd.tiktok.rows.forEach(r=>tiktok+=r.spend||0)
+  const metaRows=rd.meta?.data?.rows||rd.meta?.rows||[]
+  metaRows.forEach(r=>meta+=r.spend||0)
+  const liRows=rd.linkedin?.data?.rows||rd.linkedin?.rows||[]
+  liRows.forEach(r=>linkedin+=r.costInLocalCurrency||0)
+  const gRows=rd.google?.data?.rows||rd.google?.rows||[]
+  gRows.forEach(r=>google+=(r['metrics.cost_micros']||0)/1e6)
+  const ttRows=rd.tiktok?.data?.rows||rd.tiktok?.rows||[]
+  ttRows.forEach(r=>tiktok+=r.spend||0)
   return{meta,linkedin,google,tiktok}
 }
 
