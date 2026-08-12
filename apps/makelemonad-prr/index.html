@@ -658,6 +658,9 @@ function renderWizardStep() {
     document.getElementById('wbtn-back').textContent='← Cancelar'
     document.getElementById('wbtn-back').classList.remove('hidden')
   }
+  if(wizardStep===2) {
+    cfg.plataformas.forEach(p=>loadAccounts(p))
+  }
 }
 
 function wizardBack() {
