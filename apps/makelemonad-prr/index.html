@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MakeLemonAd — PRR Painel de Mídia</title>
+<title>MakeLemonAd — Plano de Mídia</title>
 <link rel="icon" type="image/png" href="/logo.png">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#F0F4FA;--surface:#fff;--surface2:#E8EEF8;--border:#D1DCF0;
   --text:#0C1A2E;--muted:#536282;--faint:#8A9AB8;
-  --accent:#1C4ED8;--accent-bg:#EBF4FF;
+  --accent:#1C4ED8;--accent-bg:#EBF4FF;--accent-hover:#1741B8;
   --green:#155724;--green-bg:#D4EDDA;--green-border:#C3E6CB;
   --red:#721C24;--red-bg:#F8D7DA;--red-border:#F5C6CB;
   --orange:#856404;--orange-bg:#FFF3CD;--orange-border:#FFEEBA;
@@ -22,29 +22,62 @@
   --radius:10px;
 }
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;font-size:13px;line-height:1.5;min-height:100vh}
-
-/* LOGIN */
-#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
-.login-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 36px;width:100%;max-width:360px;box-shadow:var(--shadow)}
-.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
-.login-logo-icon{width:36px;height:36px;background:var(--yellow);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#000}
-.login-title{font-size:15px;font-weight:700;color:var(--text)}
-.login-sub{font-size:11px;color:var(--muted)}
-.form-group{margin-bottom:14px}
-.form-group label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
-.form-group input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s}
-.form-group input:focus{border-color:var(--accent)}
-.btn-login{width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;margin-top:6px;transition:opacity .15s}
-.btn-login:hover{opacity:.9}
-.login-error{font-size:12px;color:var(--red);margin-top:10px;display:none}
-
-/* HIDDEN */
 .hidden{display:none!important}
 
-/* APP */
-#app{display:flex;flex-direction:column;min-height:100vh}
+/* ── LOGIN ── */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+.auth-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 36px;width:100%;max-width:360px;box-shadow:var(--shadow)}
+.auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.auth-logo-icon{width:36px;height:36px;background:var(--yellow);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#000}
+.auth-title{font-size:15px;font-weight:700;color:var(--text)}
+.auth-sub{font-size:11px;color:var(--muted)}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s;font-family:inherit}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn-primary{width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-secondary{width:100%;padding:10px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
+.auth-error{font-size:12px;color:var(--red);margin-top:10px;display:none}
 
-/* TOP BAR */
+/* ── WIZARD ── */
+#wizard-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+.wizard-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:540px;box-shadow:var(--shadow);overflow:hidden}
+.wizard-head{padding:24px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.wizard-head-icon{width:32px;height:32px;background:var(--yellow);border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#000;flex-shrink:0}
+.wizard-head-title{font-size:14px;font-weight:700;color:var(--text)}
+.wizard-head-sub{font-size:11px;color:var(--muted)}
+.wizard-progress{padding:20px 32px 0;display:flex;gap:6px}
+.wp-step{flex:1;height:3px;border-radius:2px;background:var(--border);transition:background .3s}
+.wp-step.done{background:var(--accent)}
+.wp-step.active{background:var(--accent)}
+.wizard-body{padding:24px 32px}
+.wizard-section{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);margin:16px 0 10px}
+.wizard-section:first-child{margin-top:0}
+.budget-type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:0}
+.bt-card{border:2px solid var(--border);border-radius:10px;padding:12px 10px;cursor:pointer;text-align:center;transition:border-color .15s,background .15s}
+.bt-card:hover{border-color:var(--accent)}
+.bt-card.selected{border-color:var(--accent);background:var(--accent-bg)}
+.bt-card-icon{font-size:20px;margin-bottom:4px}
+.bt-card-label{font-size:11px;font-weight:700;color:var(--text)}
+.bt-card-desc{font-size:10px;color:var(--muted);margin-top:2px}
+.plat-chips{display:flex;flex-wrap:wrap;gap:8px}
+.plat-chip{display:flex;align-items:center;gap:6px;padding:6px 12px;border:2px solid var(--border);border-radius:20px;cursor:pointer;font-size:11px;font-weight:700;transition:all .15s}
+.plat-chip.sel-meta{border-color:#1877F2;background:#EBF3FF;color:#1877F2}
+.plat-chip.sel-linkedin{border-color:#0A66C2;background:#E8F1FB;color:#0A66C2}
+.plat-chip.sel-google{border-color:#34A853;background:#E8F5E9;color:#1B5E20}
+.plat-chip.sel-tiktok{border-color:#6A1B9A;background:#F3E5F5;color:#6A1B9A}
+.wizard-foot{padding:16px 32px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface)}
+.wizard-step-label{font-size:11px;color:var(--muted)}
+.wizard-nav{display:flex;gap:8px}
+.wizard-nav button{padding:8px 18px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:background .15s}
+.wbtn-back{background:var(--surface2);color:var(--muted)}
+.wbtn-next{background:var(--accent);color:#fff}
+.wbtn-next:hover{background:var(--accent-hover)}
+
+/* ── APP ── */
+#app{display:flex;flex-direction:column;min-height:100vh}
 .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100}
 .topbar-left{display:flex;align-items:center;gap:12px}
 .topbar-logo{width:28px;height:28px;background:var(--yellow);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#000;flex-shrink:0}
@@ -54,24 +87,24 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .role-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:4px}
 .role-editor{background:var(--green-bg);color:var(--green)}
 .role-viewer{background:var(--blue-bg);color:var(--blue)}
-.btn-logout{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:5px}
-.btn-logout:hover{background:var(--surface2)}
-
-/* TABS */
+.btn-icon{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:5px}
+.btn-icon:hover{background:var(--surface2)}
 .tabs-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:flex-end;gap:2px;overflow-x:auto;scrollbar-width:none}
 .tabs-bar::-webkit-scrollbar{display:none}
 .tab{padding:10px 14px;font-size:12px;font-weight:600;color:var(--muted);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s}
 .tab:hover{color:var(--text)}
 .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-
-/* MAIN CONTENT */
 .content{padding:20px;flex:1;max-width:1400px;margin:0 auto;width:100%}
 
-/* BUDGET HEADER */
+/* ── BUDGET HEADER ── */
 .budget-header{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow)}
 .budget-grid{display:grid;grid-template-columns:220px 1fr auto;min-height:110px}
 .budget-col{padding:14px 18px;border-right:1px solid var(--border)}
 .budget-col:last-child{border-right:none}
+.budget-col-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.budget-col-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
+.btn-pencil{background:none;border:none;cursor:pointer;color:var(--faint);font-size:13px;padding:2px 6px;border-radius:4px;line-height:1;transition:color .15s,background .15s}
+.btn-pencil:hover{color:var(--accent);background:var(--accent-bg)}
 .budget-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)}
 .budget-row:last-child{border-bottom:none}
 .budget-row-label{font-size:11px;color:var(--muted);font-weight:500}
@@ -109,7 +142,23 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .platform-sobra-label{font-size:11px;font-weight:700;color:var(--green)}
 .platform-sobra-value{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--green)}
 
-/* SUMMARY BAND */
+/* ── CONFIG EDIT ── */
+.config-field{margin-bottom:8px}
+.config-field label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);margin-bottom:3px}
+.config-input{width:100%;border:1px solid var(--border);border-radius:6px;padding:5px 9px;font-size:12px;color:var(--text);background:var(--surface);outline:none;font-family:inherit;transition:border-color .15s}
+.config-input:focus{border-color:var(--accent)}
+.config-actions{display:flex;gap:6px;margin-top:10px}
+.btn-cfg-save{padding:5px 14px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer}
+.btn-cfg-cancel{padding:5px 12px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer}
+
+/* ── MONTHLY BUDGET OVERRIDE (mensal_variavel) ── */
+.mes-budget-bar{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:16px}
+.mes-budget-label{font-size:11px;color:var(--muted);font-weight:600}
+.mes-budget-input{border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;width:120px;text-align:right;outline:none}
+.mes-budget-input:focus{border-color:var(--accent)}
+.btn-mes-save{padding:5px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer}
+
+/* ── SUMMARY ── */
 .summary-band{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
 .summary-card{border-radius:var(--radius);padding:14px 18px;text-align:center}
 .summary-card.previsto{background:#2E7D32;color:#fff}
@@ -118,7 +167,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .summary-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;opacity:.8;margin-bottom:4px}
 .summary-value{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
 
-/* CAMPAIGN TABLE */
+/* ── TABLE ── */
 .table-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
 .table-header{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
 .table-title{font-size:13px;font-weight:700;color:var(--text)}
@@ -132,7 +181,31 @@ th.num{text-align:right}
 td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:middle;color:var(--text)}
 td.num{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
 td.num strong{color:var(--text);font-weight:700}
-tbody tr:hover td{background:var(--surface2)}
+.cell-input{width:100%;border:none;background:transparent;font-size:12px;color:var(--text);font-family:inherit;padding:0;outline:none}
+.cell-input[readonly]{cursor:default}
+.cell-input.num-input{text-align:right;font-variant-numeric:tabular-nums}
+.date-input{width:96px}
+.name-input{min-width:220px}
+.euro-input{width:70px}
+select.status-select,select.plat-select{border:none;background:transparent;font-size:11px;font-weight:700;cursor:pointer;outline:none;border-radius:4px;padding:2px 6px}
+select.status-select[disabled],select.plat-select[disabled]{cursor:default;opacity:.7}
+.status-ativo{background:var(--green-bg);color:var(--green)}
+.status-reprovado{background:var(--red-bg);color:var(--red)}
+.status-pausado{background:var(--orange-bg);color:var(--orange)}
+.status-aprovacao{background:var(--blue-bg);color:var(--blue)}
+.plat-meta{background:#EBF3FF;color:#1877F2}
+.plat-linkedin{background:#E8F1FB;color:#0A66C2}
+.plat-google{background:#E8F5E9;color:#1B5E20}
+.plat-tiktok{background:#F3E5F5;color:#6A1B9A}
+.btn-del{background:none;border:none;cursor:pointer;color:var(--faint);font-size:14px;padding:2px 6px;border-radius:4px;line-height:1}
+.btn-del:hover{color:var(--red);background:var(--red-bg)}
+.pct-cell{font-variant-numeric:tabular-nums}
+.save-bar{display:none;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--orange-bg);border-top:1px solid var(--orange-border)}
+.save-bar.visible{display:flex}
+.save-msg{font-size:12px;color:var(--orange);font-weight:600}
+.btn-save{padding:6px 16px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer}
+
+/* ── PLATFORM BLOCK ROWS ── */
 tr.row-meta td{background:#EEF4FF}
 tr.row-linkedin td{background:#EAF0F8}
 tr.row-google td{background:#EEF8F0}
@@ -141,31 +214,6 @@ tr.row-meta:hover td{background:#D8E8FF}
 tr.row-linkedin:hover td{background:#D2E0F0}
 tr.row-google:hover td{background:#D4EDDA}
 tr.row-tiktok:hover td{background:#E8D5F2}
-.cell-input{width:100%;border:none;background:transparent;font-size:12px;color:var(--text);font-family:inherit;padding:0;outline:none}
-.cell-input[readonly]{cursor:default}
-.cell-input.num-input{text-align:right;font-variant-numeric:tabular-nums}
-.date-input{width:96px}
-.name-input{min-width:220px}
-.euro-input{width:70px}
-select.status-select,select.plat-select{border:none;background:transparent;font-size:11px;font-weight:700;cursor:pointer;outline:none;border-radius:4px;padding:2px 6px}
-.plat-meta{background:#EBF3FF;color:#1877F2}
-.plat-linkedin{background:#E8F1FB;color:#0A66C2}
-.plat-google{background:#E8F5E9;color:#1B5E20}
-.plat-tiktok{background:#F3E5F5;color:#6A1B9A}
-select.status-select[disabled]{cursor:default;opacity:.7}
-.status-ativo{background:var(--green-bg);color:var(--green)}
-.status-reprovado{background:var(--red-bg);color:var(--red)}
-.status-pausado{background:var(--orange-bg);color:var(--orange)}
-.status-aprovacao{background:var(--blue-bg);color:var(--blue)}
-.btn-del{background:none;border:none;cursor:pointer;color:var(--faint);font-size:14px;padding:2px 6px;border-radius:4px;line-height:1}
-.btn-del:hover{color:var(--red);background:var(--red-bg)}
-.pct-cell{font-variant-numeric:tabular-nums}
-.save-bar{display:none;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--orange-bg);border-top:1px solid var(--orange-border)}
-.save-bar.visible{display:flex}
-.save-msg{font-size:12px;color:var(--orange);font-weight:600}
-.btn-save{padding:6px 16px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer}
-.btn-save:hover{opacity:.88}
-
 .plat-block-header td{padding:6px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
 .plat-block-header.ph-meta td{background:#D6E8FF;color:#1877F2}
 .plat-block-header.ph-linkedin td{background:#C8D9EF;color:#0A66C2}
@@ -176,37 +224,29 @@ select.status-select[disabled]{cursor:default;opacity:.7}
 .plat-subtotal.ps-linkedin td{background:#C8D9EF;color:#0A66C2}
 .plat-subtotal.ps-google td{background:#C8E6CB;color:#1B5E20}
 .plat-subtotal.ps-tiktok td{background:#E1C5F0;color:#6A1B9A}
-/* REALTIME BADGE */
+
+/* ── LIVE DOT ── */
 .live-dot{display:inline-block;width:6px;height:6px;background:#2E7D32;border-radius:50%;animation:blink 2s ease-in-out infinite;margin-right:4px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.budget-col-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.budget-col-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
-.btn-pencil{background:none;border:none;cursor:pointer;color:var(--faint);font-size:13px;padding:2px 6px;border-radius:4px;line-height:1;transition:color .15s,background .15s}
-.btn-pencil:hover{color:var(--accent);background:var(--accent-bg)}
-.config-field{margin-bottom:8px}
-.config-field label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);margin-bottom:3px}
-.config-input{width:100%;border:1px solid var(--border);border-radius:6px;padding:5px 9px;font-size:12px;color:var(--text);background:var(--surface);outline:none;font-family:inherit;transition:border-color .15s}
-.config-input:focus{border-color:var(--accent)}
-.config-actions{display:flex;gap:6px;margin-top:10px}
-.btn-cfg-save{padding:5px 14px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer}
-.btn-cfg-cancel{padding:5px 12px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer}
+
 @media(max-width:900px){
   .budget-grid{grid-template-columns:1fr}
   .budget-col{border-right:none;border-bottom:1px solid var(--border)}
   .summary-band{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
+<!-- ══ LOGIN ══ -->
 <div id="login-screen">
-  <div class="login-box">
-    <div class="login-logo">
-      <div class="login-logo-icon">M</div>
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="auth-logo-icon">M</div>
       <div>
-        <div class="login-title">MakeLemonAd</div>
-        <div class="login-sub">PRR — Painel de Mídia</div>
+        <div class="auth-title">MakeLemonAd</div>
+        <div class="auth-sub">Plano de Mídia</div>
       </div>
     </div>
     <div class="form-group">
@@ -217,64 +257,91 @@ select.status-select[disabled]{cursor:default;opacity:.7}
       <label>Senha</label>
       <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
     </div>
-    <button class="btn-login" onclick="doLogin()">Entrar</button>
-    <div class="login-error" id="login-error">Credenciais incorretas. Tente novamente.</div>
+    <button class="btn-primary" onclick="doLogin()">Entrar</button>
+    <div class="auth-error" id="login-error">Credenciais incorretas. Tente novamente.</div>
   </div>
 </div>
 
-<!-- APP -->
+<!-- ══ WIZARD ══ -->
+<div id="wizard-screen" class="hidden">
+  <div class="wizard-box">
+    <div class="wizard-head">
+      <div class="wizard-head-icon">M</div>
+      <div>
+        <div class="wizard-head-title">Novo Plano de Mídia</div>
+        <div class="wizard-head-sub" id="wizard-step-title">Passo 1 de 3 — Identificação</div>
+      </div>
+    </div>
+    <div class="wizard-progress">
+      <div class="wp-step active" id="wp1"></div>
+      <div class="wp-step" id="wp2"></div>
+      <div class="wp-step" id="wp3"></div>
+    </div>
+    <div class="wizard-body" id="wizard-body"></div>
+    <div class="wizard-foot">
+      <span class="wizard-step-label" id="wizard-foot-label"></span>
+      <div class="wizard-nav">
+        <button class="wizard-nav wbtn-back hidden" id="wbtn-back" onclick="wizardBack()">Voltar</button>
+        <button class="wizard-nav wbtn-next" id="wbtn-next" onclick="wizardNext()">Continuar →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ APP ══ -->
 <div id="app" class="hidden">
   <div class="topbar">
     <div class="topbar-left">
       <div class="topbar-logo">M</div>
       <div>
-        <div class="topbar-title">PRR — Recuperar Portugal</div>
-        <div class="topbar-sub">Painel de Mídia Paga · ON Partners</div>
+        <div class="topbar-title" id="topbar-title">Plano de Mídia</div>
+        <div class="topbar-sub" id="topbar-sub">MakeLemonAd</div>
       </div>
     </div>
     <div class="topbar-right">
       <span class="live-dot"></span>
-      <span style="font-size:11px;color:var(--muted);margin-right:8px">Ao vivo via Report Ninja</span>
+      <span style="font-size:11px;color:var(--muted);margin-right:8px">Report Ninja</span>
       <span class="role-badge" id="role-badge"></span>
-      <button class="btn-logout" onclick="doLogout()">Sair</button>
+      <button class="btn-icon" id="btn-new-plan" onclick="showWizard()" title="Novo plano / reconfigurar">⚙️</button>
+      <button class="btn-icon" onclick="doLogout()">Sair</button>
     </div>
   </div>
-
   <div class="tabs-bar" id="tabs-bar"></div>
-
   <div class="content" id="main-content">
     <div style="padding:40px;text-align:center;color:var(--muted)">A carregar...</div>
   </div>
 </div>
 
 <script>
-const MESES = [
-  {key:'2026-07',label:'Jul 2026'},
-  {key:'2026-08',label:'Ago 2026'},
-  {key:'2026-09',label:'Set 2026'},
-  {key:'2026-10',label:'Out 2026'},
-  {key:'2026-11',label:'Nov 2026'},
-  {key:'2026-12',label:'Dez 2026'},
-  {key:'2027-01',label:'Jan 2027'},
-  {key:'2027-02',label:'Fev 2027'},
-  {key:'2027-03',label:'Mar 2027'},
-  {key:'2027-04',label:'Abr 2027'},
-  {key:'2027-05',label:'Mai 2027'},
-  {key:'2027-06',label:'Jun 2027'},
-  {key:'2027-07',label:'Jul 2027'},
-]
-
-let configGlobal = { produto: 'PRR', periodo: 'Jul 2026 – Jun 2027', total_projeto: 51000, valor_mes: 4250, verba_seguranca: 100 }
-let configEditing = false
-const NOMES_MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
-
+// ══ STATE ══
 let currentToken = null
 let currentRole = null
-let currentMes = '2026-07'
+let currentMes = null
 let mesData = {}
 let realtimeData = {}
 let dirty = false
+let configEditing = false
+let wizardStep = 1
 
+let cfg = {
+  cliente: '',
+  agencia: '',
+  tipo_orcamento: 'mensal_fixo', // anual | mensal_fixo | mensal_variavel
+  orcamento_anual: 0,
+  orcamento_mensal_base: 0,
+  verba_seguranca: 0,
+  periodo_inicio: '',
+  periodo_fim: '',
+  plataformas: ['meta', 'linkedin'],
+  orcamentos_mensais: {}
+}
+
+let MESES = []
+const NOMES_MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
+const PLAT_LABELS = { meta:'Meta Ads', linkedin:'LinkedIn Ads', google:'Google Ads', tiktok:'TikTok Ads' }
+const PLAT_ORDER = ['meta', 'google', 'linkedin', 'tiktok']
+
+// ══ UTILS ══
 function fmtEur(v) {
   if (v == null || isNaN(v)) return '—'
   return '€' + Number(v).toLocaleString('pt-PT', {minimumFractionDigits:2,maximumFractionDigits:2})
@@ -283,117 +350,262 @@ function fmtPct(v) {
   if (v == null || isNaN(v) || v === 0) return ''
   return Number(v).toLocaleString('pt-PT', {minimumFractionDigits:2,maximumFractionDigits:2}) + '%'
 }
-function daysBetween(start, end) {
-  if (!start || !end) return 0
-  const d = (new Date(end) - new Date(start)) / 86400000
-  return d > 0 ? Math.round(d) : 0
+function monthLabel(key) {
+  const [y, m] = key.split('-')
+  return NOMES_MESES[parseInt(m)-1].substring(0,3) + ' ' + y
+}
+function monthLabelFull(key) {
+  const [y, m] = key.split('-')
+  return NOMES_MESES[parseInt(m)-1] + ' ' + y
+}
+function generateMeses(inicio, fim) {
+  const meses = []
+  let [y, m] = inicio.split('-').map(Number)
+  const [fy, fm] = fim.split('-').map(Number)
+  while (y < fy || (y === fy && m <= fm)) {
+    meses.push(`${y}-${String(m).padStart(2,'0')}`)
+    m++
+    if (m > 12) { m = 1; y++ }
+  }
+  return meses
+}
+function budgetForMes(key) {
+  if (cfg.tipo_orcamento === 'mensal_variavel') {
+    return cfg.orcamentos_mensais[key] ?? cfg.orcamento_mensal_base
+  }
+  if (cfg.tipo_orcamento === 'anual') {
+    return MESES.length > 0 ? cfg.orcamento_anual / MESES.length : cfg.orcamento_mensal_base
+  }
+  return cfg.orcamento_mensal_base
 }
 
-// CONFIG
-async function loadConfig() {
-  try {
-    const r = await fetch('/api/data/config', { headers: { 'Authorization': `Bearer ${currentToken}` } })
-    if (r.ok) {
-      const d = await r.json()
-      if (d && d.produto) Object.assign(configGlobal, d)
-    }
-  } catch {}
-}
-
-async function saveConfig() {
-  const fields = ['produto','periodo','total_projeto','valor_mes','verba_seguranca']
-  fields.forEach(f => {
-    const el = document.getElementById('cfg-' + f)
-    if (!el) return
-    const v = el.value
-    configGlobal[f] = (f === 'produto' || f === 'periodo') ? v : (parseFloat(v) || 0)
-  })
-  try {
-    await fetch('/api/data/config', {
-      method: 'PUT',
-      headers: { 'Authorization': `Bearer ${currentToken}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify(configGlobal)
-    })
-  } catch {}
-  configEditing = false
-  renderContent()
-}
-
-function toggleConfigEdit() { configEditing = true; renderContent() }
-function cancelConfigEdit() { configEditing = false; renderContent() }
-
-// AUTH
+// ══ AUTH ══
 async function doLogin() {
   const usuario = document.getElementById('login-user').value.trim()
   const senha = document.getElementById('login-pass').value
   const err = document.getElementById('login-error')
   err.style.display = 'none'
   try {
-    const r = await fetch('/api/auth', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({usuario, senha})
-    })
+    const r = await fetch('/api/auth', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({usuario, senha}) })
     const data = await r.json()
-    if (!r.ok) { err.style.display = 'block'; return }
-    currentToken = data.token
-    currentRole = data.role
+    if (!r.ok) { err.style.display='block'; return }
+    currentToken = data.token; currentRole = data.role
     sessionStorage.setItem('prr_token', data.token)
     sessionStorage.setItem('prr_role', data.role)
-    showApp()
-  } catch(e) {
-    err.style.display = 'block'
-  }
+    await initApp()
+  } catch { err.style.display='block' }
 }
-
 document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin() })
-
 function doLogout() {
-  sessionStorage.removeItem('prr_token')
-  sessionStorage.removeItem('prr_role')
+  sessionStorage.removeItem('prr_token'); sessionStorage.removeItem('prr_role')
   currentToken = null; currentRole = null
   document.getElementById('app').classList.add('hidden')
+  document.getElementById('wizard-screen').classList.add('hidden')
   document.getElementById('login-screen').style.display = 'flex'
 }
 
-async function showApp() {
+// ══ INIT ══
+async function initApp() {
   document.getElementById('login-screen').style.display = 'none'
+  await loadConfig()
+  if (!cfg.periodo_inicio || !cfg.periodo_fim) {
+    showWizard()
+  } else {
+    MESES = generateMeses(cfg.periodo_inicio, cfg.periodo_fim)
+    showApp()
+  }
+}
+
+async function loadConfig() {
+  try {
+    const r = await fetch('/api/data/config', { headers:{'Authorization':`Bearer ${currentToken}`} })
+    if (r.ok) {
+      const d = await r.json()
+      if (d && d.cliente !== undefined) Object.assign(cfg, d)
+    }
+  } catch {}
+}
+async function saveConfig() {
+  await fetch('/api/data/config', {
+    method:'PUT',
+    headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},
+    body:JSON.stringify(cfg)
+  })
+}
+
+// ══ WIZARD ══
+const WIZARD_STEPS = [
+  {
+    title: 'Passo 1 de 3 — Identificação',
+    foot: 'Dá um nome ao cliente e agência',
+    render: () => `
+      <div class="wizard-section">Cliente</div>
+      <div class="form-group"><label>Nome do Cliente</label><input id="w-cliente" value="${cfg.cliente}" placeholder="Ex: PRR Recuperar Portugal"></div>
+      <div class="form-group"><label>Agência / Intermediário (opcional)</label><input id="w-agencia" value="${cfg.agencia}" placeholder="Ex: ON Partners"></div>
+    `
+  },
+  {
+    title: 'Passo 2 de 3 — Período',
+    foot: 'Define o período de vigência do plano',
+    render: () => `
+      <div class="wizard-section">Período do Plano</div>
+      <div class="form-row">
+        <div class="form-group"><label>Mês de Início</label><input type="month" id="w-inicio" value="${cfg.periodo_inicio}" placeholder="YYYY-MM"></div>
+        <div class="form-group"><label>Mês de Fim</label><input type="month" id="w-fim" value="${cfg.periodo_fim}" placeholder="YYYY-MM"></div>
+      </div>
+      <div class="wizard-section">Plataformas activas</div>
+      <div class="plat-chips">
+        ${['meta','linkedin','google','tiktok'].map(p => {
+          const sel = cfg.plataformas.includes(p)
+          return `<div class="plat-chip ${sel ? 'sel-'+p : ''}" onclick="togglePlat('${p}',this)" data-plat="${p}">
+            ${p==='meta'?'📘 Meta':p==='linkedin'?'💼 LinkedIn':p==='google'?'🟢 Google':'🎵 TikTok'}
+          </div>`
+        }).join('')}
+      </div>
+    `
+  },
+  {
+    title: 'Passo 3 de 3 — Orçamento',
+    foot: 'Define como o orçamento é gerido',
+    render: () => `
+      <div class="wizard-section">Tipo de Orçamento</div>
+      <div class="budget-type-grid">
+        <div class="bt-card ${cfg.tipo_orcamento==='anual'?'selected':''}" onclick="selectTipo('anual',this)">
+          <div class="bt-card-icon">📅</div>
+          <div class="bt-card-label">Anual</div>
+          <div class="bt-card-desc">Valor total ÷ meses</div>
+        </div>
+        <div class="bt-card ${cfg.tipo_orcamento==='mensal_fixo'?'selected':''}" onclick="selectTipo('mensal_fixo',this)">
+          <div class="bt-card-icon">📌</div>
+          <div class="bt-card-label">Mensal Fixo</div>
+          <div class="bt-card-desc">Mesmo valor todos os meses</div>
+        </div>
+        <div class="bt-card ${cfg.tipo_orcamento==='mensal_variavel'?'selected':''}" onclick="selectTipo('mensal_variavel',this)">
+          <div class="bt-card-icon">📊</div>
+          <div class="bt-card-label">Mensal Variável</div>
+          <div class="bt-card-desc">Ajuste mês a mês</div>
+        </div>
+      </div>
+      <div id="orcamento-fields" style="margin-top:16px">
+        ${renderOrcamentoFields()}
+      </div>
+      <div class="form-row" style="margin-top:12px">
+        <div class="form-group"><label>Verba de Segurança (mês)</label><input type="number" id="w-seguranca" value="${cfg.verba_seguranca||100}" step="0.01" min="0"></div>
+      </div>
+    `
+  }
+]
+
+function renderOrcamentoFields() {
+  if (cfg.tipo_orcamento === 'anual') {
+    return `<div class="form-group"><label>Orçamento Total Anual (€)</label><input type="number" id="w-orcamento" value="${cfg.orcamento_anual||''}" step="0.01" min="0" placeholder="Ex: 51000"></div>`
+  }
+  return `<div class="form-group"><label>Orçamento Mensal (€)</label><input type="number" id="w-orcamento" value="${cfg.orcamento_mensal_base||''}" step="0.01" min="0" placeholder="Ex: 4250"></div>`
+}
+
+function selectTipo(tipo, el) {
+  cfg.tipo_orcamento = tipo
+  document.querySelectorAll('.bt-card').forEach(c => c.classList.remove('selected'))
+  el.classList.add('selected')
+  document.getElementById('orcamento-fields').innerHTML = renderOrcamentoFields()
+}
+
+function togglePlat(p, el) {
+  const idx = cfg.plataformas.indexOf(p)
+  if (idx === -1) { cfg.plataformas.push(p); el.classList.add('sel-'+p) }
+  else { cfg.plataformas.splice(idx, 1); el.className = 'plat-chip' }
+}
+
+function renderWizardStep() {
+  const s = WIZARD_STEPS[wizardStep - 1]
+  document.getElementById('wizard-step-title').textContent = s.title
+  document.getElementById('wizard-foot-label').textContent = s.foot
+  document.getElementById('wizard-body').innerHTML = s.render()
+  document.querySelectorAll('.wp-step').forEach((el, i) => {
+    el.classList.toggle('done', i < wizardStep - 1)
+    el.classList.toggle('active', i === wizardStep - 1)
+  })
+  document.getElementById('wbtn-back').classList.toggle('hidden', wizardStep === 1)
+  document.getElementById('wbtn-next').textContent = wizardStep === 3 ? 'Criar Plano ✓' : 'Continuar →'
+}
+
+function wizardBack() { if(wizardStep > 1) { wizardStep--; renderWizardStep() } }
+
+async function wizardNext() {
+  if (wizardStep === 1) {
+    const c = document.getElementById('w-cliente')?.value.trim()
+    const a = document.getElementById('w-agencia')?.value.trim()
+    if (!c) { alert('Indica o nome do cliente.'); return }
+    cfg.cliente = c; cfg.agencia = a || ''
+    wizardStep = 2; renderWizardStep()
+  } else if (wizardStep === 2) {
+    const ini = document.getElementById('w-inicio')?.value
+    const fim = document.getElementById('w-fim')?.value
+    if (!ini || !fim || ini > fim) { alert('Indica um período válido.'); return }
+    cfg.periodo_inicio = ini; cfg.periodo_fim = fim
+    wizardStep = 3; renderWizardStep()
+  } else if (wizardStep === 3) {
+    const orc = parseFloat(document.getElementById('w-orcamento')?.value) || 0
+    const seg = parseFloat(document.getElementById('w-seguranca')?.value) || 100
+    if (!orc) { alert('Indica o valor do orçamento.'); return }
+    if (cfg.tipo_orcamento === 'anual') cfg.orcamento_anual = orc
+    else cfg.orcamento_mensal_base = orc
+    cfg.verba_seguranca = seg
+    MESES = generateMeses(cfg.periodo_inicio, cfg.periodo_fim)
+    if (currentRole === 'editor') await saveConfig()
+    document.getElementById('wizard-screen').classList.add('hidden')
+    showApp()
+  }
+}
+
+function showWizard() {
+  wizardStep = 1
+  document.getElementById('app').classList.add('hidden')
+  document.getElementById('wizard-screen').classList.remove('hidden')
+  renderWizardStep()
+}
+
+// ══ APP ══
+function showApp() {
+  document.getElementById('wizard-screen').classList.add('hidden')
   document.getElementById('app').classList.remove('hidden')
   const badge = document.getElementById('role-badge')
   badge.textContent = currentRole === 'editor' ? 'Editor' : 'Leitura'
   badge.className = 'role-badge ' + (currentRole === 'editor' ? 'role-editor' : 'role-viewer')
+  const sub = cfg.agencia ? `${cfg.agencia} · MakeLemonAd` : 'MakeLemonAd'
+  document.getElementById('topbar-title').textContent = cfg.cliente || 'Plano de Mídia'
+  document.getElementById('topbar-sub').textContent = sub
+  document.getElementById('btn-new-plan').style.display = currentRole === 'editor' ? '' : 'none'
   buildTabs()
-  await loadConfig()
-  selectMes(currentMes)
+  currentMes = MESES[0] || ''
+  if (currentMes) selectMes(currentMes)
 }
 
-// TABS
+// ══ TABS ══
 function buildTabs() {
   const bar = document.getElementById('tabs-bar')
   bar.innerHTML = ''
   MESES.forEach(m => {
     const btn = document.createElement('button')
-    btn.className = 'tab' + (m.key === currentMes ? ' active' : '')
-    btn.textContent = m.label
-    btn.onclick = () => { if(dirty && !confirm('Tens alterações não guardadas. Continuar?')) return; selectMes(m.key) }
+    btn.className = 'tab' + (m === currentMes ? ' active' : '')
+    btn.textContent = monthLabel(m)
+    btn.onclick = () => { if(dirty && !confirm('Tens alterações não guardadas. Continuar?')) return; selectMes(m) }
     bar.appendChild(btn)
   })
 }
 
 async function selectMes(key) {
-  currentMes = key
-  dirty = false
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', MESES[i].key === key))
-  await loadMes(key)
-  await loadRealtime(key)
+  currentMes = key; dirty = false
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', MESES[i] === key))
+  await Promise.all([loadMes(key), loadRealtime(key)])
   renderContent()
 }
 
 async function loadMes(key) {
   try {
-    const r = await fetch(`/api/data/${key}`, { headers: { 'Authorization': `Bearer ${currentToken}` } })
-    mesData[key] = r.ok ? await r.json() : { campanhas: [] }
-  } catch { mesData[key] = { campanhas: [] } }
+    const r = await fetch(`/api/data/${key}`, {headers:{'Authorization':`Bearer ${currentToken}`}})
+    mesData[key] = r.ok ? await r.json() : {campanhas:[]}
+  } catch { mesData[key] = {campanhas:[]} }
   if (!mesData[key].campanhas) mesData[key].campanhas = []
 }
 
@@ -403,16 +615,17 @@ async function loadRealtime(key) {
     const start = `${y}-${m}-01`
     const lastDay = new Date(+y, +m, 0).getDate()
     const end = `${y}-${m}-${lastDay}`
-    const r = await fetch(`/api/realtime?start=${start}&end=${end}`, { headers: { 'Authorization': `Bearer ${currentToken}` } })
+    const r = await fetch(`/api/realtime?start=${start}&end=${end}`, {headers:{'Authorization':`Bearer ${currentToken}`}})
     realtimeData[key] = r.ok ? await r.json() : {}
   } catch { realtimeData[key] = {} }
 }
 
-// CALC
+// ══ CALC ══
 function calcCampanhas(campanhas) {
   const [y, m] = currentMes.split('-')
-  const mesEnd = new Date(+y, +m, 1) // primeiro dia do mês seguinte = limite de clip
-  const orçamento_mes = configGlobal.valor_mes - configGlobal.verba_seguranca
+  const mesEnd = new Date(+y, +m, 1)
+  const valorMes = budgetForMes(currentMes)
+  const orcamento_mes = valorMes - cfg.verba_seguranca
   let totalPrevisto = 0
   campanhas.forEach(c => {
     if (c.inicio && c.fim) {
@@ -430,17 +643,20 @@ function calcCampanhas(campanhas) {
   campanhas.forEach(c => {
     c.pct = (c.status === 'ativo' && totalPrevisto > 0) ? (c.total / totalPrevisto * 100) : 0
   })
-  return { totalPrevisto, orçamento_mes }
+  return { totalPrevisto, orcamento_mes, valorMes }
 }
 
 function getSobraAnterior() {
-  const idx = MESES.findIndex(m => m.key === currentMes)
+  const idx = MESES.findIndex(m => m === currentMes)
   if (idx <= 0) return 0
-  const prevKey = MESES[idx - 1].key
+  const prevKey = MESES[idx - 1]
   const prev = mesData[prevKey]
   if (!prev || !prev.campanhas) return 0
-  const { totalPrevisto, orçamento_mes } = calcCampanhas(prev.campanhas)
-  return Math.max(0, orçamento_mes - totalPrevisto)
+  const save_mes = currentMes
+  currentMes = prevKey
+  const { totalPrevisto, orcamento_mes } = calcCampanhas(prev.campanhas)
+  currentMes = save_mes
+  return Math.max(0, orcamento_mes - totalPrevisto)
 }
 
 function getRealtimeTotals(key) {
@@ -451,81 +667,85 @@ function getRealtimeTotals(key) {
   return { metaTotal, linkedinTotal, googleTotal: 0 }
 }
 
-// RENDER
+// ══ RENDER ══
 function renderContent() {
-  const d = mesData[currentMes] || { campanhas: [] }
+  const d = mesData[currentMes] || {campanhas:[]}
   const campanhas = d.campanhas
-  const { totalPrevisto, orçamento_mes } = calcCampanhas(campanhas)
+  const { totalPrevisto, orcamento_mes, valorMes } = calcCampanhas(campanhas)
   const sobraAnterior = getSobraAnterior()
-  const orcamentoComSobra = orçamento_mes + sobraAnterior
-  const totalUtilizado = campanhas.reduce((s, c) => s + c.total, 0)
+  const orcamentoComSobra = orcamento_mes + sobraAnterior
+  const totalUtilizado = campanhas.reduce((s,c) => s + c.total, 0)
   const aUtilizar = orcamentoComSobra - totalUtilizado
   const sobraMes = orcamentoComSobra - totalPrevisto
   const { metaTotal, linkedinTotal, googleTotal } = getRealtimeTotals(currentMes)
   const totalPlataformas = metaTotal + linkedinTotal + googleTotal
-  const sobraPlataformas = configGlobal.valor_mes - totalPlataformas
-
-  const [y, m] = currentMes.split('-')
-  const nomeMes = NOMES_MESES[parseInt(m) - 1] + ' ' + y
+  const sobraPlataformas = valorMes - totalPlataformas
+  const nomeMes = monthLabelFull(currentMes)
   const isEditor = currentRole === 'editor'
   const ce = configEditing && isEditor
 
-  const fTotal    = ce ? `<input id="cfg-total_projeto"    class="config-input" type="number" step="0.01" value="${configGlobal.total_projeto}">` : `<div class="bm-value">${fmtEur(configGlobal.total_projeto)}</div>`
-  const fMes      = ce ? `<input id="cfg-valor_mes"        class="config-input" type="number" step="0.01" value="${configGlobal.valor_mes}">` : `<div class="bm-value">${fmtEur(configGlobal.valor_mes)}</div>`
-  const fVerba    = ce ? `<input id="cfg-verba_seguranca"  class="config-input" type="number" step="0.01" value="${configGlobal.verba_seguranca}">` : `<div class="bm-value">${fmtEur(configGlobal.verba_seguranca)}</div>`
-  const fProduto  = ce ? `<div class="config-field"><label>Produto</label><input id="cfg-produto" class="config-input" value="${configGlobal.produto}"></div>` : ''
-  const fPeriodo  = ce ? `<div class="config-field"><label>Período do Projeto</label><input id="cfg-periodo" class="config-input" value="${configGlobal.periodo}"></div>` : ''
-  const fAcoes    = ce ? `<div class="config-actions"><button class="btn-cfg-save" onclick="saveConfig()">Guardar</button><button class="btn-cfg-cancel" onclick="cancelConfigEdit()">Cancelar</button></div>` : ''
-  const fPencil   = (!ce && isEditor) ? `<button class="btn-pencil" onclick="toggleConfigEdit()" title="Editar configurações">✏️</button>` : ''
+  const fTotal  = ce ? `<input id="cfg-orcamento_anual" class="config-input" type="number" step="0.01" value="${cfg.tipo_orcamento==='anual'?cfg.orcamento_anual:cfg.orcamento_mensal_base}">` : `<div class="bm-value">${cfg.tipo_orcamento==='anual'?fmtEur(cfg.orcamento_anual):fmtEur(cfg.orcamento_mensal_base)}</div>`
+  const fVerba  = ce ? `<input id="cfg-verba_seguranca" class="config-input" type="number" step="0.01" value="${cfg.verba_seguranca}">` : `<div class="bm-value">${fmtEur(cfg.verba_seguranca)}</div>`
+  const fPencil = (!ce && isEditor) ? `<button class="btn-pencil" onclick="toggleConfigEdit()" title="Editar">✏️</button>` : ''
+
+  // Budget col 1 label for tipo
+  const tipoLabel = cfg.tipo_orcamento === 'anual' ? 'Valor Total Projeto' : cfg.tipo_orcamento === 'mensal_variavel' ? 'Orçamento Variável' : 'Orçamento Mensal'
+
+  // Monthly variable override bar
+  const mesVarBar = (cfg.tipo_orcamento === 'mensal_variavel' && isEditor) ? `
+    <div class="mes-budget-bar">
+      <span class="mes-budget-label">Orçamento de ${nomeMes}:</span>
+      <input class="mes-budget-input" type="number" id="mes-budget-val" value="${valorMes}" step="0.01">
+      <button class="btn-mes-save" onclick="saveMesBudget()">Guardar</button>
+    </div>` : ''
+
+  // Only show platform rows for active platforms
+  const platRows = cfg.plataformas.map(p => {
+    if (p === 'meta') return `<div class="platform-row meta-row"><span class="platform-name meta">Meta</span><span style="display:flex;align-items:center;gap:4px"><span class="platform-value">${fmtEur(metaTotal)}</span>${metaTotal>0?'<span class="platform-check">✅</span>':''}</span></div>`
+    if (p === 'linkedin') return `<div class="platform-row linkedin-row"><span class="platform-name linkedin">LinkedIn</span><span style="display:flex;align-items:center;gap:4px"><span class="platform-value">${fmtEur(linkedinTotal)}</span>${linkedinTotal>0?'<span class="platform-check">✅</span>':''}</span></div>`
+    if (p === 'google') return `<div class="platform-row google-row"><span class="platform-name google">Google</span><span class="platform-value">${googleTotal>0?fmtEur(googleTotal):'—'}</span></div>`
+    return ''
+  }).join('')
 
   document.getElementById('main-content').innerHTML = `
-    <!-- BUDGET HEADER -->
+    ${mesVarBar}
     <div class="budget-header">
       <div class="budget-grid">
-        <!-- Col 1: Projeto -->
+        <!-- Col 1 -->
         <div class="budget-col">
-          ${fProduto}${fPeriodo}${fAcoes}
-          ${!ce ? `
-          <div class="budget-col-header">
-            <div class="budget-project">
-              <div class="project-field">
-                <div class="project-field-label">Produto</div>
-                <div class="project-field-value">${configGlobal.produto}</div>
+          ${ce ? `
+            <div class="config-field"><label>Nome do Cliente</label><input id="cfg-cliente" class="config-input" value="${cfg.cliente}"></div>
+            <div class="config-field"><label>Agência</label><input id="cfg-agencia" class="config-input" value="${cfg.agencia}"></div>
+            <div class="config-actions"><button class="btn-cfg-save" onclick="saveConfigInline()">Guardar</button><button class="btn-cfg-cancel" onclick="cancelConfigEdit()">Cancelar</button></div>
+          ` : `
+            <div class="budget-col-header">
+              <div class="budget-project">
+                <div class="project-field"><div class="project-field-label">Cliente</div><div class="project-field-value">${cfg.cliente}</div></div>
+                ${cfg.agencia ? `<div class="project-field"><div class="project-field-label">Agência</div><div class="project-field-value">${cfg.agencia}</div></div>` : ''}
+                <div class="project-field"><div class="project-field-label">Período</div><div class="project-field-value">${nomeMes}</div></div>
               </div>
-              <div class="project-field">
-                <div class="project-field-label">Período</div>
-                <div class="project-field-value">${configGlobal.periodo}</div>
-              </div>
+              ${fPencil}
             </div>
-            ${fPencil}
-          </div>
-          ` : ''}
-          <div style="margin-top:${ce ? 0 : 8}px">
-            <div class="budget-row">
-              <span class="budget-row-label">Orçamento Total Mês (s/ mrg. seg.) + Sobra Anterior</span>
-              <span class="budget-row-value highlight">${fmtEur(orcamentoComSobra)}</span>
-            </div>
-            <div class="budget-row">
-              <span class="budget-row-label">Valor utilizado em planilha</span>
-              <span class="budget-row-value">${fmtEur(totalUtilizado)}</span>
-            </div>
+          `}
+          <div style="margin-top:${ce?0:8}px">
+            <div class="budget-row"><span class="budget-row-label">Orçamento (s/ mrg. seg.) + Sobra Anterior</span><span class="budget-row-value highlight">${fmtEur(orcamentoComSobra)}</span></div>
+            <div class="budget-row"><span class="budget-row-label">Valor utilizado em planilha</span><span class="budget-row-value">${fmtEur(totalUtilizado)}</span></div>
           </div>
           <div class="a-utilizar-row">
             <span class="a-utilizar-label">A utilizar</span>
             <span class="a-utilizar-value">${fmtEur(aUtilizar)}</span>
           </div>
         </div>
-
-        <!-- Col 2: Budget numbers -->
+        <!-- Col 2 -->
         <div class="budget-col">
           <div class="budget-middle">
             <div class="bm-cell">
-              <div class="bm-label">Valor Total Projeto (12 meses)</div>
+              <div class="bm-label">${tipoLabel}</div>
               ${fTotal}
             </div>
             <div class="bm-cell">
               <div class="bm-label">Valor Mês</div>
-              ${fMes}
+              <div class="bm-value">${fmtEur(valorMes)}</div>
             </div>
             <div class="bm-cell">
               <div class="bm-label">Verba de Segurança (mês)</div>
@@ -533,61 +753,29 @@ function renderContent() {
             </div>
             <div class="bm-cell">
               <div class="bm-label">Sobra Mês Anterior</div>
-              <div class="bm-value" style="color:${sobraAnterior > 0 ? 'var(--green)' : 'var(--muted)'}">${fmtEur(sobraAnterior)}</div>
+              <div class="bm-value" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">${fmtEur(sobraAnterior)}</div>
             </div>
           </div>
         </div>
-
-        <!-- Col 3: Platform totals -->
+        <!-- Col 3 -->
         <div class="budget-col platform-totals">
           <div class="platform-totals-title">Total Gasto Mês em Faturas</div>
-          <div class="platform-row meta-row">
-            <span class="platform-name meta">Meta</span>
-            <span style="display:flex;align-items:center;gap:4px">
-              <span class="platform-value">${fmtEur(metaTotal)}</span>
-              ${metaTotal > 0 ? '<span class="platform-check">✅</span>' : ''}
-            </span>
-          </div>
-          <div class="platform-row google-row">
-            <span class="platform-name google">Google</span>
-            <span class="platform-value">${googleTotal > 0 ? fmtEur(googleTotal) : '—'}</span>
-          </div>
-          <div class="platform-row linkedin-row">
-            <span class="platform-name linkedin">LinkedIn</span>
-            <span style="display:flex;align-items:center;gap:4px">
-              <span class="platform-value">${fmtEur(linkedinTotal)}</span>
-              ${linkedinTotal > 0 ? '<span class="platform-check">✅</span>' : ''}
-            </span>
-          </div>
-          <div class="platform-total-row">
-            <span class="platform-total-label">Valor Total Usado</span>
-            <span class="platform-total-value">${fmtEur(totalPlataformas)}</span>
-          </div>
+          ${platRows}
+          <div class="platform-total-row"><span class="platform-total-label">Valor Total Usado</span><span class="platform-total-value">${fmtEur(totalPlataformas)}</span></div>
           <div class="platform-sobra">
             <span class="platform-sobra-label">Sobra do Mês Plataforma</span>
-            <span class="platform-sobra-value" style="color:${sobraPlataformas < 0 ? 'var(--red)' : ''}">${fmtEur(sobraPlataformas)}</span>
+            <span class="platform-sobra-value" style="color:${sobraPlataformas<0?'var(--red)':''}">${fmtEur(sobraPlataformas)}</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SUMMARY BAND -->
     <div class="summary-band">
-      <div class="summary-card previsto">
-        <div class="summary-label">Valor PREVISTO de GASTO Mês</div>
-        <div class="summary-value">${fmtEur(totalPrevisto)}</div>
-      </div>
-      <div class="summary-card sobra">
-        <div class="summary-label">Sobra do Mês</div>
-        <div class="summary-value">${fmtEur(sobraMes)}</div>
-      </div>
-      <div class="summary-card anterior">
-        <div class="summary-label">Sobra do Mês Anterior</div>
-        <div class="summary-value">${fmtEur(sobraAnterior)}</div>
-      </div>
+      <div class="summary-card previsto"><div class="summary-label">Valor PREVISTO de GASTO Mês</div><div class="summary-value">${fmtEur(totalPrevisto)}</div></div>
+      <div class="summary-card sobra"><div class="summary-label">Sobra do Mês</div><div class="summary-value">${fmtEur(sobraMes)}</div></div>
+      <div class="summary-card anterior"><div class="summary-label">Sobra do Mês Anterior</div><div class="summary-value">${fmtEur(sobraAnterior)}</div></div>
     </div>
 
-    <!-- CAMPAIGN TABLE -->
     <div class="table-card">
       <div class="table-header">
         <div class="table-title">Campanhas — ${nomeMes}</div>
@@ -595,23 +783,13 @@ function renderContent() {
       </div>
       <div class="table-wrap">
         <table id="camp-table">
-          <thead>
-            <tr>
-              <th>Plataforma</th>
-              <th>Início</th>
-              <th>Final</th>
-              <th>Últ. Atualização</th>
-              <th>Campanha</th>
-              <th class="num">Dias Ativos</th>
-              <th class="num">€/Dia</th>
-              <th class="num">€ Total</th>
-              <th class="num">%</th>
-              <th>Status</th>
-              ${isEditor ? '<th></th>' : ''}
-            </tr>
-          </thead>
-          <tbody id="camp-tbody">
-          </tbody>
+          <thead><tr>
+            <th>Plataforma</th><th>Início</th><th>Final</th><th>Últ. Atualização</th>
+            <th>Campanha</th><th class="num">Dias</th><th class="num">€/Dia</th>
+            <th class="num">€ Total</th><th class="num">%</th><th>Status</th>
+            ${isEditor ? '<th></th>' : ''}
+          </tr></thead>
+          <tbody id="camp-tbody"></tbody>
         </table>
       </div>
       <div class="save-bar" id="save-bar">
@@ -620,151 +798,142 @@ function renderContent() {
       </div>
     </div>
   `
-
   renderRows(campanhas, isEditor)
 }
 
-const PLAT_LABELS = { meta: 'Meta Ads', linkedin: 'LinkedIn Ads', google: 'Google Ads', tiktok: 'TikTok Ads' }
-const PLAT_ORDER = ['meta', 'google', 'linkedin', 'tiktok']
+// ══ CONFIG EDIT ══
+function toggleConfigEdit() { configEditing = true; renderContent() }
+function cancelConfigEdit() { configEditing = false; renderContent() }
+async function saveConfigInline() {
+  const c = document.getElementById('cfg-cliente')?.value.trim()
+  const a = document.getElementById('cfg-agencia')?.value.trim()
+  const o = parseFloat(document.getElementById('cfg-orcamento_anual')?.value) || 0
+  const v = parseFloat(document.getElementById('cfg-verba_seguranca')?.value) || 0
+  if (c) cfg.cliente = c
+  if (a !== undefined) cfg.agencia = a
+  if (o) { if(cfg.tipo_orcamento==='anual') cfg.orcamento_anual=o; else cfg.orcamento_mensal_base=o }
+  if (v) cfg.verba_seguranca = v
+  configEditing = false
+  await saveConfig()
+  document.getElementById('topbar-title').textContent = cfg.cliente || 'Plano de Mídia'
+  document.getElementById('topbar-sub').textContent = cfg.agencia ? `${cfg.agencia} · MakeLemonAd` : 'MakeLemonAd'
+  renderContent()
+}
 
+async function saveMesBudget() {
+  const v = parseFloat(document.getElementById('mes-budget-val')?.value)
+  if (isNaN(v)) return
+  if (!cfg.orcamentos_mensais) cfg.orcamentos_mensais = {}
+  cfg.orcamentos_mensais[currentMes] = v
+  await saveConfig()
+  renderContent()
+}
+
+// ══ ROWS ══
 function renderRows(campanhas, isEditor) {
   const tbody = document.getElementById('camp-tbody')
   if (!tbody) return
   tbody.innerHTML = ''
   const cols = isEditor ? 11 : 10
-
-  // Group by platform preserving original indices
+  const activePlats = PLAT_ORDER.filter(p => cfg.plataformas.includes(p))
   const groups = {}
-  PLAT_ORDER.forEach(p => { groups[p] = [] })
+  activePlats.forEach(p => { groups[p] = [] })
   campanhas.forEach((c, i) => {
-    const p = c.plataforma || 'meta'
+    const p = c.plataforma || activePlats[0] || 'meta'
     if (!groups[p]) groups[p] = []
     groups[p].push({ c, i })
   })
-
-  PLAT_ORDER.forEach(plat => {
+  activePlats.forEach(plat => {
     const items = groups[plat]
     if (!items || items.length === 0) return
-
-    // Block header
     const htr = document.createElement('tr')
     htr.className = `plat-block-header ph-${plat}`
     htr.innerHTML = `<td colspan="${cols}">${PLAT_LABELS[plat] || plat}</td>`
     tbody.appendChild(htr)
-
     let platTotal = 0
     items.forEach(({ c, i }) => {
       platTotal += c.total || 0
       const tr = document.createElement('tr')
       tr.className = 'row-' + plat
+      const platOpts = (cfg.plataformas || ['meta','linkedin','google','tiktok']).map(p =>
+        `<option value="${p}" ${(c.plataforma||'meta')===p?'selected':''}>${PLAT_LABELS[p]?.split(' ')[0]||p}</option>`
+      ).join('')
       tr.innerHTML = `
-      <td>
-        <select class="plat-select plat-${plat}" data-idx="${i}" data-field="plataforma" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>
-          <option value="meta" ${plat==='meta'?'selected':''}>Meta</option>
-          <option value="google" ${plat==='google'?'selected':''}>Google</option>
-          <option value="linkedin" ${plat==='linkedin'?'selected':''}>LinkedIn</option>
-          <option value="tiktok" ${plat==='tiktok'?'selected':''}>TikTok</option>
-        </select>
-      </td>
-      <td><input class="cell-input date-input" type="date" value="${c.inicio||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="inicio" onchange="onCellChange(this)"></td>
-      <td><input class="cell-input date-input" type="date" value="${c.fim||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="fim" onchange="onCellChange(this)"></td>
-      <td><input class="cell-input date-input" type="date" value="${c.ultima_atualizacao||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="ultima_atualizacao" onchange="onCellChange(this)"></td>
-      <td><input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" ${!isEditor?'readonly':''} data-idx="${i}" data-field="nome" oninput="onCellChange(this)"></td>
-      <td class="num"><strong>${c.dias||0}</strong></td>
-      <td class="num"><input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" ${!isEditor?'readonly':''} data-idx="${i}" data-field="euro_dia" oninput="onCellChange(this)"></td>
-      <td class="num"><strong>${fmtEur(c.total)}</strong></td>
-      <td class="num pct-cell">${c.status==='ativo' ? fmtPct(c.pct) : ''}</td>
-      <td>
-        <select class="status-select status-${c.status||'ativo'}" data-idx="${i}" data-field="status" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>
+        <td><select class="plat-select plat-${c.plataforma||'meta'}" data-idx="${i}" data-field="plataforma" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>${platOpts}</select></td>
+        <td><input class="cell-input date-input" type="date" value="${c.inicio||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="inicio" onchange="onCellChange(this)"></td>
+        <td><input class="cell-input date-input" type="date" value="${c.fim||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="fim" onchange="onCellChange(this)"></td>
+        <td><input class="cell-input date-input" type="date" value="${c.ultima_atualizacao||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="ultima_atualizacao" onchange="onCellChange(this)"></td>
+        <td><input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" ${!isEditor?'readonly':''} data-idx="${i}" data-field="nome" oninput="onCellChange(this)"></td>
+        <td class="num"><strong>${c.dias||0}</strong></td>
+        <td class="num"><input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" ${!isEditor?'readonly':''} data-idx="${i}" data-field="euro_dia" oninput="onCellChange(this)"></td>
+        <td class="num"><strong>${fmtEur(c.total)}</strong></td>
+        <td class="num pct-cell">${c.status==='ativo'?fmtPct(c.pct):''}</td>
+        <td><select class="status-select status-${c.status||'ativo'}" data-idx="${i}" data-field="status" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>
           <option value="ativo" ${c.status==='ativo'?'selected':''}>ATIVO</option>
           <option value="reprovado" ${c.status==='reprovado'?'selected':''}>REPROVADO</option>
           <option value="pausado" ${c.status==='pausado'?'selected':''}>PAUSADO</option>
           <option value="aprovacao" ${c.status==='aprovacao'?'selected':''}>EM APROVAÇÃO</option>
-        </select>
-      </td>
-      ${isEditor ? `<td><button class="btn-del" onclick="delCampanha(${i})" title="Remover">×</button></td>` : ''}
-    `
+        </select></td>
+        ${isEditor ? `<td><button class="btn-del" onclick="delCampanha(${i})" title="Remover">×</button></td>` : ''}
+      `
       tbody.appendChild(tr)
     })
-
-    // Subtotal row
     const str = document.createElement('tr')
     str.className = `plat-subtotal ps-${plat}`
-    str.innerHTML = `
-      <td colspan="7" style="text-align:right;padding-right:12px">Total ${PLAT_LABELS[plat] || plat}</td>
-      <td class="num">${fmtEur(platTotal)}</td>
-      <td colspan="${isEditor ? 3 : 2}"></td>
-    `
+    str.innerHTML = `<td colspan="7" style="text-align:right;padding-right:12px">Total ${PLAT_LABELS[plat]||plat}</td><td class="num">${fmtEur(platTotal)}</td><td colspan="${isEditor?3:2}"></td>`
     tbody.appendChild(str)
   })
 }
 
 function onCellChange(el) {
-  const idx = +el.dataset.idx
-  const field = el.dataset.field
-  const d = mesData[currentMes]
-  d.campanhas[idx][field] = el.value
-  const { totalPrevisto } = calcCampanhas(d.campanhas)
-  markDirty()
-  renderContent()
+  const idx = +el.dataset.idx; const field = el.dataset.field
+  mesData[currentMes].campanhas[idx][field] = el.value
+  calcCampanhas(mesData[currentMes].campanhas)
+  markDirty(); renderContent()
 }
-
 function onStatusChange(el) {
-  const idx = +el.dataset.idx
-  const field = el.dataset.field
-  const d = mesData[currentMes]
-  d.campanhas[idx][field] = el.value
+  const idx = +el.dataset.idx; const field = el.dataset.field
+  mesData[currentMes].campanhas[idx][field] = el.value
   if (field === 'status') el.className = `status-select status-${el.value}`
   if (field === 'plataforma') el.className = `plat-select plat-${el.value}`
-  calcCampanhas(d.campanhas)
-  markDirty()
-  renderContent()
+  calcCampanhas(mesData[currentMes].campanhas)
+  markDirty(); renderContent()
 }
-
 function addCampanha() {
-  if (!mesData[currentMes]) mesData[currentMes] = { campanhas: [] }
-  mesData[currentMes].campanhas.push({ plataforma:'meta', nome:'', inicio:'', fim:'', euro_dia:'', status:'ativo' })
-  markDirty()
-  renderContent()
+  if (!mesData[currentMes]) mesData[currentMes] = {campanhas:[]}
+  const defaultPlat = cfg.plataformas?.[0] || 'meta'
+  mesData[currentMes].campanhas.push({plataforma:defaultPlat,nome:'',inicio:'',fim:'',euro_dia:'',status:'ativo'})
+  markDirty(); renderContent()
 }
-
 function delCampanha(idx) {
   if (!confirm('Remover esta campanha?')) return
   mesData[currentMes].campanhas.splice(idx, 1)
-  markDirty()
-  renderContent()
+  markDirty(); renderContent()
 }
-
 function markDirty() {
   dirty = true
   const bar = document.getElementById('save-bar')
   if (bar) bar.classList.add('visible')
 }
-
 async function saveData() {
   try {
     const r = await fetch(`/api/data/${currentMes}`, {
-      method: 'PUT',
-      headers: { 'Authorization': `Bearer ${currentToken}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify(mesData[currentMes])
+      method:'PUT',
+      headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},
+      body:JSON.stringify(mesData[currentMes])
     })
-    if (r.ok) {
-      dirty = false
-      const bar = document.getElementById('save-bar')
-      if (bar) { bar.classList.remove('visible'); }
-    } else {
-      alert('Erro ao guardar. Tenta novamente.')
-    }
+    if (r.ok) { dirty = false; const bar = document.getElementById('save-bar'); if(bar) bar.classList.remove('visible') }
+    else alert('Erro ao guardar. Tenta novamente.')
   } catch { alert('Sem ligação. Tenta novamente.') }
 }
 
-// INIT
+// ══ BOOT ══
 ;(async () => {
   const t = sessionStorage.getItem('prr_token')
   const role = sessionStorage.getItem('prr_role')
   if (t && role) {
     currentToken = t; currentRole = role
-    showApp()
+    await initApp()
   }
 })()
 </script>
