@@ -83,6 +83,16 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .test-fail{background:var(--red-bg);color:var(--red)}
 .acc-info{font-size:10px;color:var(--faint);margin-top:4px}
 
+/* Verification row */
+.row-verify td{padding:3px 8px 5px;border-bottom:1px solid var(--border);font-size:11px;color:var(--muted);background:rgba(214,222,35,.06)}
+.row-verify{border-left:3px solid #D6DE23}
+.rv-badge{display:inline-block;font-size:9px;font-weight:700;color:#5a5c00;text-transform:uppercase;letter-spacing:.06em;background:rgba(214,222,35,.3);padding:1px 5px;border-radius:3px}
+.rv-label{font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);display:block;margin-bottom:1px}
+.rv-val{font-size:12px;font-weight:600;color:var(--text)}
+.rv-match{color:var(--text)}
+.rv-nomatch{color:var(--faint);font-style:italic}
+.rv-ok{color:#155724}.rv-warn{color:#856404}
+
 /* Budget type cards */
 .budget-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .bt-card{border:2px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color .15s,background .15s}
@@ -948,6 +958,81 @@ async function saveVerbaMes(){
 }
 
 // ══ TABLE ROWS ══
+function getRtCampName(plat,r){
+  if(plat==='meta') return r.campaign_name||''
+  if(plat==='linkedin') return r.campaignName||''
+  if(plat==='google') return r['campaign.name']||''
+  return r.campaign_name||''
+}
+function getRtSpend(plat,r){
+  if(plat==='meta') return r.spend||0
+  if(plat==='linkedin') return r.costInLocalCurrency||0
+  if(plat==='google') return (r['metrics.cost_micros']||0)/1e6
+  return r.spend||0
+}
+function getRtDailyBudget(plat,r){
+  if(plat==='meta') return parseFloat(r.daily_budget)||0
+  if(plat==='google') return (r['campaign_budget.amount_micros']||0)/1e6
+  return 0
+}
+function getRtStartDate(plat,r){
+  if(plat==='google'){
+    const v=r['campaign.start_date_time']||''
+    return v?v.slice(0,10):''
+  }
+  return ''
+}
+function findRtCampaign(plat,nome){
+  const rd=realtimeData[currentMes]
+  if(!rd||!rd[plat]) return null
+  const rows=(rd[plat].data?.rows)||(rd[plat].rows)||[]
+  const norm=s=>(s||'').toLowerCase().replace(/\s+/g,' ').trim()
+  const pn=norm(nome)
+  if(!pn) return null
+  let hit=rows.find(r=>norm(getRtCampName(plat,r))===pn)
+  if(!hit) hit=rows.find(r=>{const rn=norm(getRtCampName(plat,r));return rn&&(rn.includes(pn)||pn.includes(rn))})
+  return hit||null
+}
+function renderVerifyRow(plat,campNome,cols){
+  const vr=document.createElement('tr'); vr.className='row-verify'
+  const rd=realtimeData[currentMes]
+  if(!rd){
+    vr.innerHTML=`<td><span class="rv-badge">Fonte</span></td><td colspan="${cols-1}" style="color:var(--faint);font-style:italic">Dados em tempo real não carregados</td>`
+    return vr
+  }
+  const match=findRtCampaign(plat,campNome)
+  const today=new Date().toISOString().slice(0,10)
+  const fmtD=s=>s?s.slice(0,10).split('-').reverse().join('/'):'—'
+  const fmtV=v=>v?`€${v.toFixed(2)}`:'—'
+
+  const startDate=match?getRtStartDate(plat,match):''
+  const spend=match?getRtSpend(plat,match):null
+  const budget=match?getRtDailyBudget(plat,match):null
+
+  let diasAtivos='—'
+  if(startDate){
+    const ms=new Date(today)-new Date(startDate)
+    diasAtivos=Math.max(0,Math.round(ms/86400000))
+  }
+
+  const nomeCell=match
+    ?`<span class="rv-match">${getRtCampName(plat,match)}</span>`
+    :`<span class="rv-nomatch">${campNome?'Não encontrada na fonte':'Sem nome para busca'}</span>`
+
+  vr.innerHTML=`
+    <td><span class="rv-badge">Fonte</span></td>
+    <td><span class="rv-label">Início</span><span class="rv-val">${fmtD(startDate)}</span></td>
+    <td></td>
+    <td><span class="rv-label">Atualizado</span><span class="rv-val">${fmtD(today)}</span></td>
+    <td>${nomeCell}</td>
+    <td class="num"><span class="rv-label">Dias ativos</span><span class="rv-val">${diasAtivos}</span></td>
+    <td class="num"><span class="rv-label">€/dia real</span><span class="rv-val">${fmtV(budget)}</span></td>
+    <td class="num"><span class="rv-label">Gasto</span><span class="rv-val ${match?(spend>0?'rv-ok':'rv-warn'):'rv-nomatch'}">${match?fmtV(spend):'—'}</span></td>
+    <td></td><td></td>${cols>10?'<td></td>':''}
+  `
+  return vr
+}
+
 function renderRows(campanhas,isEditor){
   const tbody=document.getElementById('camp-tbody'); if(!tbody)return
   tbody.innerHTML=''
@@ -983,6 +1068,7 @@ function renderRows(campanhas,isEditor){
         ${isEditor?`<td><button class="btn-del" onclick="delCampanha(${i})" title="Remover">×</button></td>`:''}
       `
       tbody.appendChild(tr)
+      tbody.appendChild(renderVerifyRow(plat, c.nome||'', cols))
     })
     const str=document.createElement('tr'); str.className=`plat-subtotal ps-${plat}`
     str.innerHTML=`<td colspan="7" style="text-align:right;padding-right:12px">Total ${PLAT_LABELS[plat]||plat}</td><td class="num">${fmtEur(platTotal)}</td><td colspan="${isEditor?3:2}"></td>`
