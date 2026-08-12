@@ -54,7 +54,8 @@ export async function onRequestGet(context) {
     connection_key,
     account_id,
     fields: integ.fields,
-    date_range: { preset: 'custom', start, end }
+    date_range: { preset: 'custom', start, end },
+    limit: 100
   }
   if (integ.dataView) body.data_view = integ.dataView
 

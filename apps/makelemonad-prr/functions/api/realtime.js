@@ -57,6 +57,7 @@ export async function onRequestGet(context) {
         account_id: mc.account_id,
         fields: ['campaign_name', 'spend', 'impressions', 'clicks', 'ctr', 'cpm', 'reach'],
         date_range: dateRange,
+        limit: 5000,
         settings: { attribution_window: attr }
       })
     }
@@ -71,7 +72,8 @@ export async function onRequestGet(context) {
         account_id: lc.account_id,
         data_view: 'campaign',
         fields: ['campaignName', 'costInLocalCurrency', 'impressions', 'clicks', 'avgCTR', 'avgCPM'],
-        date_range: dateRange
+        date_range: dateRange,
+        limit: 5000
       })
     }
   }
@@ -84,7 +86,8 @@ export async function onRequestGet(context) {
         connection_key: gc.connection_key,
         account_id: gc.account_id,
         fields: ['campaign_name', 'cost', 'impressions', 'clicks', 'ctr', 'average_cpm'],
-        date_range: dateRange
+        date_range: dateRange,
+        limit: 5000
       })
     }
   }
@@ -97,7 +100,8 @@ export async function onRequestGet(context) {
         connection_key: tc.connection_key,
         account_id: tc.account_id,
         fields: ['campaign_name', 'spend', 'impressions', 'clicks', 'ctr', 'cpm'],
-        date_range: dateRange
+        date_range: dateRange,
+        limit: 5000
       })
     }
   }
