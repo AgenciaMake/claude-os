@@ -16,8 +16,6 @@
   --orange:#856404;--orange-bg:#FFF3CD;--orange-border:#FFEEBA;
   --blue:#004085;--blue-bg:#CCE5FF;--blue-border:#B8DAFF;
   --yellow:#D6DE23;
-  --meta:#1877F2;--meta-bg:#EBF3FF;
-  --linkedin:#0A66C2;--linkedin-bg:#E8F1FB;
   --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);
   --radius:10px;
 }
@@ -29,51 +27,84 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .auth-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 36px;width:100%;max-width:360px;box-shadow:var(--shadow)}
 .auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
 .auth-logo-icon{width:36px;height:36px;background:var(--yellow);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#000}
-.auth-title{font-size:15px;font-weight:700;color:var(--text)}
+.auth-title{font-size:15px;font-weight:700}
 .auth-sub{font-size:11px;color:var(--muted)}
 .form-group{margin-bottom:14px}
 .form-group label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s;font-family:inherit}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent)}
+.form-group input,.form-group select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s;font-family:inherit}
+.form-group input:focus,.form-group select:focus{border-color:var(--accent)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .btn-primary{width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
 .btn-primary:hover{background:var(--accent-hover)}
-.btn-secondary{width:100%;padding:10px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
 .auth-error{font-size:12px;color:var(--red);margin-top:10px;display:none}
 
-/* ── WIZARD ── */
-#wizard-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
-.wizard-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:540px;box-shadow:var(--shadow);overflow:hidden}
-.wizard-head{padding:24px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+/* ── WIZARD (fullscreen = new plan, modal = edit existing) ── */
+#wizard-overlay{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px}
+#wizard-overlay.fullscreen{background:var(--bg)}
+#wizard-overlay.modal-mode{background:rgba(12,26,46,.55);backdrop-filter:blur(4px)}
+.wizard-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:580px;box-shadow:0 8px 40px rgba(0,0,0,.18);overflow:hidden;display:flex;flex-direction:column}
+.wizard-head{padding:20px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
 .wizard-head-icon{width:32px;height:32px;background:var(--yellow);border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#000;flex-shrink:0}
-.wizard-head-title{font-size:14px;font-weight:700;color:var(--text)}
-.wizard-head-sub{font-size:11px;color:var(--muted)}
-.wizard-progress{padding:20px 32px 0;display:flex;gap:6px}
+.wizard-head-info{flex:1}
+.wizard-head-title{font-size:14px;font-weight:700}
+.wizard-head-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.wizard-head-close{background:none;border:none;cursor:pointer;font-size:18px;color:var(--faint);padding:4px;border-radius:5px;line-height:1}
+.wizard-head-close:hover{color:var(--red);background:var(--red-bg)}
+.wizard-progress{padding:16px 28px 0;display:flex;gap:6px}
 .wp-step{flex:1;height:3px;border-radius:2px;background:var(--border);transition:background .3s}
-.wp-step.done{background:var(--accent)}
-.wp-step.active{background:var(--accent)}
-.wizard-body{padding:24px 32px}
-.wizard-section{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);margin:16px 0 10px}
+.wp-step.done,.wp-step.active{background:var(--accent)}
+.wizard-body{padding:20px 28px;overflow-y:auto;max-height:60vh}
+.wizard-section{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);margin:14px 0 8px}
 .wizard-section:first-child{margin-top:0}
-.budget-type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:0}
-.bt-card{border:2px solid var(--border);border-radius:10px;padding:12px 10px;cursor:pointer;text-align:center;transition:border-color .15s,background .15s}
+
+/* Platform config rows */
+.plat-row{border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden;transition:border-color .15s}
+.plat-row.selected{border-color:var(--accent)}
+.plat-row-head{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;user-select:none}
+.plat-toggle{width:18px;height:18px;border-radius:4px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.plat-toggle.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.plat-icon{font-size:16px}
+.plat-label{font-size:13px;font-weight:600;flex:1}
+.plat-label .plat-name{display:block}
+.plat-label .plat-status{font-size:10px;font-weight:400;color:var(--faint)}
+.plat-config{padding:10px 14px 14px;border-top:1px solid var(--border);background:var(--surface2);display:none}
+.plat-row.selected .plat-config{display:block}
+.plat-config-row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end}
+.plat-config-row .form-group{margin-bottom:0}
+.plat-config-row .form-group input{padding:6px 10px;font-size:12px}
+.btn-test{padding:6px 12px;background:var(--surface);border:1px solid var(--border);border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .15s;height:32px;align-self:end}
+.btn-test:hover{border-color:var(--accent);color:var(--accent)}
+.test-result{margin-top:6px;font-size:11px;padding:4px 8px;border-radius:5px}
+.test-ok{background:var(--green-bg);color:var(--green)}
+.test-fail{background:var(--red-bg);color:var(--red)}
+
+/* Budget type cards */
+.budget-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.bt-card{border:2px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color .15s,background .15s}
 .bt-card:hover{border-color:var(--accent)}
 .bt-card.selected{border-color:var(--accent);background:var(--accent-bg)}
-.bt-card-icon{font-size:20px;margin-bottom:4px}
-.bt-card-label{font-size:11px;font-weight:700;color:var(--text)}
+.bt-card-icon{font-size:18px;margin-bottom:3px}
+.bt-card-label{font-size:12px;font-weight:700}
 .bt-card-desc{font-size:10px;color:var(--muted);margin-top:2px}
-.plat-chips{display:flex;flex-wrap:wrap;gap:8px}
-.plat-chip{display:flex;align-items:center;gap:6px;padding:6px 12px;border:2px solid var(--border);border-radius:20px;cursor:pointer;font-size:11px;font-weight:700;transition:all .15s}
-.plat-chip.sel-meta{border-color:#1877F2;background:#EBF3FF;color:#1877F2}
-.plat-chip.sel-linkedin{border-color:#0A66C2;background:#E8F1FB;color:#0A66C2}
-.plat-chip.sel-google{border-color:#34A853;background:#E8F5E9;color:#1B5E20}
-.plat-chip.sel-tiktok{border-color:#6A1B9A;background:#F3E5F5;color:#6A1B9A}
-.wizard-foot{padding:16px 32px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface)}
+
+/* Verba toggle */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--border);border-radius:8px;margin-bottom:10px;cursor:pointer}
+.toggle-row-label{font-size:12px;font-weight:600}
+.toggle-row-desc{font-size:10px;color:var(--muted)}
+.toggle-switch{width:36px;height:20px;border-radius:10px;background:var(--border);position:relative;flex-shrink:0;transition:background .2s}
+.toggle-switch.on{background:var(--accent)}
+.toggle-switch::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s}
+.toggle-switch.on::after{left:19px}
+.verba-field-wrap{transition:opacity .2s}
+.verba-field-wrap.disabled{opacity:.4;pointer-events:none}
+.field-note{font-size:11px;color:var(--muted);background:var(--orange-bg);border:1px solid var(--orange-border);border-radius:6px;padding:6px 10px;margin-top:4px}
+
+/* Wizard footer */
+.wizard-foot{padding:14px 28px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface)}
 .wizard-step-label{font-size:11px;color:var(--muted)}
 .wizard-nav{display:flex;gap:8px}
-.wizard-nav button{padding:8px 18px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:background .15s}
-.wbtn-back{background:var(--surface2);color:var(--muted)}
-.wbtn-next{background:var(--accent);color:#fff}
+.wbtn-back{padding:7px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--muted)}
+.wbtn-next{padding:7px 18px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;background:var(--accent);color:#fff}
 .wbtn-next:hover{background:var(--accent-hover)}
 
 /* ── APP ── */
@@ -81,13 +112,13 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100}
 .topbar-left{display:flex;align-items:center;gap:12px}
 .topbar-logo{width:28px;height:28px;background:var(--yellow);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#000;flex-shrink:0}
-.topbar-title{font-size:14px;font-weight:700;color:var(--text)}
+.topbar-title{font-size:14px;font-weight:700}
 .topbar-sub{font-size:11px;color:var(--muted)}
-.topbar-right{display:flex;align-items:center;gap:10px}
+.topbar-right{display:flex;align-items:center;gap:8px}
 .role-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:4px}
 .role-editor{background:var(--green-bg);color:var(--green)}
 .role-viewer{background:var(--blue-bg);color:var(--blue)}
-.btn-icon{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:5px}
+.btn-icon{font-size:13px;color:var(--muted);background:none;border:none;cursor:pointer;padding:5px 8px;border-radius:5px}
 .btn-icon:hover{background:var(--surface2)}
 .tabs-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:flex-end;gap:2px;overflow-x:auto;scrollbar-width:none}
 .tabs-bar::-webkit-scrollbar{display:none}
@@ -98,97 +129,100 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 
 /* ── BUDGET HEADER ── */
 .budget-header{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow)}
-.budget-grid{display:grid;grid-template-columns:220px 1fr auto;min-height:110px}
+.budget-grid{display:grid;grid-template-columns:220px 1fr auto}
 .budget-col{padding:14px 18px;border-right:1px solid var(--border)}
 .budget-col:last-child{border-right:none}
-.budget-col-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.budget-col-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
-.btn-pencil{background:none;border:none;cursor:pointer;color:var(--faint);font-size:13px;padding:2px 6px;border-radius:4px;line-height:1;transition:color .15s,background .15s}
-.btn-pencil:hover{color:var(--accent);background:var(--accent-bg)}
-.budget-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)}
-.budget-row:last-child{border-bottom:none}
-.budget-row-label{font-size:11px;color:var(--muted);font-weight:500}
-.budget-row-value{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--text)}
-.budget-row-value.highlight{color:var(--accent)}
-.a-utilizar-row{background:#D6DE23;padding:6px 18px;display:flex;align-items:center;justify-content:space-between}
-.a-utilizar-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#000}
-.a-utilizar-value{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;color:#000}
-.budget-project{display:flex;flex-direction:column;gap:6px}
-.project-field{display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:center}
-.project-field-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--faint)}
-.project-field-value{font-size:13px;font-weight:600;color:var(--text)}
-.budget-middle{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.bm-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);font-weight:600;margin-bottom:3px}
+.bm-value{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+.budget-middle{display:grid;grid-template-columns:1fr 1fr}
 .bm-cell{padding:10px 16px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
 .bm-cell:nth-child(2n){border-right:none}
 .bm-cell:nth-last-child(-n+2){border-bottom:none}
-.bm-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);font-weight:600;margin-bottom:3px}
-.bm-value{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--text)}
-.platform-totals{padding:14px 18px;min-width:240px}
+.budget-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)}
+.budget-row:last-child{border-bottom:none}
+.budget-row-label{font-size:11px;color:var(--muted)}
+.budget-row-value{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.budget-row-value.hi{color:var(--accent)}
+.a-utilizar-row{background:#D6DE23;padding:6px 18px;display:flex;align-items:center;justify-content:space-between}
+.a-utilizar-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#000}
+.a-utilizar-value{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;color:#000}
+.project-field{display:grid;grid-template-columns:72px 1fr;gap:8px;align-items:center;margin-bottom:5px}
+.pf-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--faint)}
+.pf-value{font-size:12px;font-weight:600}
+.platform-totals{padding:14px 18px;min-width:220px}
 .platform-totals-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:10px;text-align:center}
-.platform-row{display:flex;align-items:center;justify-content:space-between;padding:5px 8px;border-radius:6px;margin-bottom:4px}
-.platform-row.meta-row{background:var(--meta-bg)}
-.platform-row.google-row{background:var(--surface2)}
-.platform-row.linkedin-row{background:var(--linkedin-bg)}
-.platform-name{font-size:12px;font-weight:600}
-.platform-name.meta{color:var(--meta)}
-.platform-name.linkedin{color:var(--linkedin)}
-.platform-name.google{color:#34A853}
-.platform-value{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
-.platform-check{font-size:14px;margin-left:6px}
-.platform-total-row{display:flex;align-items:center;justify-content:space-between;padding:7px 8px;border-top:1px solid var(--border);margin-top:6px}
-.platform-total-label{font-size:11px;font-weight:700;color:var(--text)}
-.platform-total-value{font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text)}
-.platform-sobra{display:flex;align-items:center;justify-content:space-between;padding:5px 8px;background:var(--green-bg);border-radius:6px;margin-top:4px}
-.platform-sobra-label{font-size:11px;font-weight:700;color:var(--green)}
-.platform-sobra-value{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--green)}
+.plat-total-row{display:flex;align-items:center;justify-content:space-between;padding:5px 8px;border-radius:6px;margin-bottom:4px}
+.plat-total-row.meta{background:#EBF3FF}.plat-total-name.meta{color:#1877F2}
+.plat-total-row.linkedin{background:#E8F1FB}.plat-total-name.linkedin{color:#0A66C2}
+.plat-total-row.google{background:#E8F5E9}.plat-total-name.google{color:#1B5E20}
+.plat-total-row.tiktok{background:#F3E5F5}.plat-total-name.tiktok{color:#6A1B9A}
+.plat-total-name{font-size:12px;font-weight:600}
+.plat-total-val{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.plat-grand-row{display:flex;justify-content:space-between;padding:7px 8px;border-top:1px solid var(--border);margin-top:4px}
+.plat-grand-label{font-size:11px;font-weight:700}
+.plat-grand-val{font-size:14px;font-weight:800;font-variant-numeric:tabular-nums}
+.plat-sobra{display:flex;justify-content:space-between;padding:5px 8px;background:var(--green-bg);border-radius:6px;margin-top:4px}
+.plat-sobra-label{font-size:11px;font-weight:700;color:var(--green)}
+.plat-sobra-val{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+.btn-pencil{background:none;border:none;cursor:pointer;color:var(--faint);font-size:13px;padding:2px 6px;border-radius:4px;transition:color .15s,background .15s}
+.btn-pencil:hover{color:var(--accent);background:var(--accent-bg)}
 
-/* ── CONFIG EDIT ── */
+/* Config inline edit */
 .config-field{margin-bottom:8px}
 .config-field label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);margin-bottom:3px}
-.config-input{width:100%;border:1px solid var(--border);border-radius:6px;padding:5px 9px;font-size:12px;color:var(--text);background:var(--surface);outline:none;font-family:inherit;transition:border-color .15s}
+.config-input{width:100%;border:1px solid var(--border);border-radius:6px;padding:5px 9px;font-size:12px;color:var(--text);background:var(--surface);outline:none;font-family:inherit}
 .config-input:focus{border-color:var(--accent)}
-.config-actions{display:flex;gap:6px;margin-top:10px}
+.config-actions{display:flex;gap:6px;margin-top:8px}
 .btn-cfg-save{padding:5px 14px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer}
 .btn-cfg-cancel{padding:5px 12px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer}
 
-/* ── MONTHLY BUDGET OVERRIDE (mensal_variavel) ── */
-.mes-budget-bar{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:16px}
-.mes-budget-label{font-size:11px;color:var(--muted);font-weight:600}
-.mes-budget-input{border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;width:120px;text-align:right;outline:none}
+/* Monthly budget bar */
+.mes-budget-bar{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.mes-budget-label{font-size:11px;font-weight:600;color:var(--muted)}
+.mes-budget-input{border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:13px;font-weight:700;width:110px;text-align:right;outline:none}
 .mes-budget-input:focus{border-color:var(--accent)}
 .btn-mes-save{padding:5px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer}
 
 /* ── SUMMARY ── */
 .summary-band{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
-.summary-card{border-radius:var(--radius);padding:14px 18px;text-align:center}
-.summary-card.previsto{background:#2E7D32;color:#fff}
-.summary-card.sobra{background:#1B5E20;color:#fff}
-.summary-card.anterior{background:#33691E;color:#fff}
-.summary-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;opacity:.8;margin-bottom:4px}
+.summary-card{border-radius:var(--radius);padding:14px 18px;text-align:center;color:#fff}
+.summary-card.previsto{background:#2E7D32}
+.summary-card.sobra{background:#1B5E20}
+.summary-card.anterior{background:#33691E}
+.summary-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;opacity:.85;margin-bottom:4px}
 .summary-value{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
 
 /* ── TABLE ── */
 .table-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
 .table-header{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
-.table-title{font-size:13px;font-weight:700;color:var(--text)}
-.btn-add{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.table-title{font-size:13px;font-weight:700}
+.btn-add{display:flex;align-items:center;gap:5px;padding:6px 12px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer}
 .btn-add:hover{opacity:.88}
+
+/* View toolbar */
+.view-toolbar{display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--surface2);border-bottom:1px solid var(--border)}
+.view-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
+.view-pill{display:flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--muted);white-space:nowrap}
+.view-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.view-pill:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.btn-save-view{margin-left:auto;padding:3px 10px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);border-radius:8px;font-size:11px;font-weight:700;cursor:pointer}
+
 .table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:12px}
+table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
 thead{background:var(--surface2)}
-th{padding:8px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--faint);white-space:nowrap;border-bottom:1px solid var(--border)}
+th{padding:8px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--faint);white-space:nowrap;border-bottom:1px solid var(--border);position:relative}
 th.num{text-align:right}
-td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:middle;color:var(--text)}
+td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
 td.num{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
 td.num strong{color:var(--text);font-weight:700}
 .cell-input{width:100%;border:none;background:transparent;font-size:12px;color:var(--text);font-family:inherit;padding:0;outline:none}
 .cell-input[readonly]{cursor:default}
-.cell-input.num-input{text-align:right;font-variant-numeric:tabular-nums}
+.num-input{text-align:right;font-variant-numeric:tabular-nums}
 .date-input{width:96px}
-.name-input{min-width:220px}
-.euro-input{width:70px}
+.name-input{min-width:200px}
+.euro-input{width:68px}
 select.status-select,select.plat-select{border:none;background:transparent;font-size:11px;font-weight:700;cursor:pointer;outline:none;border-radius:4px;padding:2px 6px}
-select.status-select[disabled],select.plat-select[disabled]{cursor:default;opacity:.7}
+select[disabled]{cursor:default;opacity:.7}
 .status-ativo{background:var(--green-bg);color:var(--green)}
 .status-reprovado{background:var(--red-bg);color:var(--red)}
 .status-pausado{background:var(--orange-bg);color:var(--orange)}
@@ -197,15 +231,10 @@ select.status-select[disabled],select.plat-select[disabled]{cursor:default;opaci
 .plat-linkedin{background:#E8F1FB;color:#0A66C2}
 .plat-google{background:#E8F5E9;color:#1B5E20}
 .plat-tiktok{background:#F3E5F5;color:#6A1B9A}
-.btn-del{background:none;border:none;cursor:pointer;color:var(--faint);font-size:14px;padding:2px 6px;border-radius:4px;line-height:1}
+.btn-del{background:none;border:none;cursor:pointer;color:var(--faint);font-size:16px;padding:2px 6px;border-radius:4px;line-height:1}
 .btn-del:hover{color:var(--red);background:var(--red-bg)}
-.pct-cell{font-variant-numeric:tabular-nums}
-.save-bar{display:none;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--orange-bg);border-top:1px solid var(--orange-border)}
-.save-bar.visible{display:flex}
-.save-msg{font-size:12px;color:var(--orange);font-weight:600}
-.btn-save{padding:6px 16px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer}
 
-/* ── PLATFORM BLOCK ROWS ── */
+/* Platform blocks */
 tr.row-meta td{background:#EEF4FF}
 tr.row-linkedin td{background:#EAF0F8}
 tr.row-google td{background:#EEF8F0}
@@ -215,31 +244,27 @@ tr.row-linkedin:hover td{background:#D2E0F0}
 tr.row-google:hover td{background:#D4EDDA}
 tr.row-tiktok:hover td{background:#E8D5F2}
 .plat-block-header td{padding:6px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
-.plat-block-header.ph-meta td{background:#D6E8FF;color:#1877F2}
-.plat-block-header.ph-linkedin td{background:#C8D9EF;color:#0A66C2}
-.plat-block-header.ph-google td{background:#C8E6CB;color:#1B5E20}
-.plat-block-header.ph-tiktok td{background:#E1C5F0;color:#6A1B9A}
+.ph-meta td{background:#D6E8FF;color:#1877F2}
+.ph-linkedin td{background:#C8D9EF;color:#0A66C2}
+.ph-google td{background:#C8E6CB;color:#1B5E20}
+.ph-tiktok td{background:#E1C5F0;color:#6A1B9A}
 .plat-subtotal td{padding:7px 10px;font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;border-top:2px solid var(--border);border-bottom:1px solid var(--border)}
-.plat-subtotal.ps-meta td{background:#D6E8FF;color:#1877F2}
-.plat-subtotal.ps-linkedin td{background:#C8D9EF;color:#0A66C2}
-.plat-subtotal.ps-google td{background:#C8E6CB;color:#1B5E20}
-.plat-subtotal.ps-tiktok td{background:#E1C5F0;color:#6A1B9A}
+.ps-meta td{background:#D6E8FF;color:#1877F2}
+.ps-linkedin td{background:#C8D9EF;color:#0A66C2}
+.ps-google td{background:#C8E6CB;color:#1B5E20}
+.ps-tiktok td{background:#E1C5F0;color:#6A1B9A}
 
-/* ── RESIZABLE COLUMNS ── */
-th{position:relative}
+/* Resize handle */
 .col-resize-handle{position:absolute;right:0;top:0;width:5px;height:100%;cursor:col-resize;z-index:10;background:transparent}
 .col-resize-handle:hover{background:var(--accent);opacity:.4}
-table{table-layout:fixed}
 
-/* ── VIEW TOOLBAR ── */
-.view-toolbar{display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--surface2);border-bottom:1px solid var(--border)}
-.view-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
-.view-pill{display:flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--muted);white-space:nowrap}
-.view-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.view-pill:hover:not(.active){border-color:var(--accent);color:var(--accent)}
-.btn-save-view{margin-left:auto;padding:3px 10px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);border-radius:8px;font-size:11px;font-weight:700;cursor:pointer}
+/* Save bar */
+.save-bar{display:none;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--orange-bg);border-top:1px solid var(--orange-border)}
+.save-bar.visible{display:flex}
+.save-msg{font-size:12px;color:var(--orange);font-weight:600}
+.btn-save{padding:6px 16px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer}
 
-/* ── LIVE DOT ── */
+/* Live dot */
 .live-dot{display:inline-block;width:6px;height:6px;background:#2E7D32;border-radius:50%;animation:blink 2s ease-in-out infinite;margin-right:4px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
@@ -248,6 +273,7 @@ table{table-layout:fixed}
   .budget-col{border-right:none;border-bottom:1px solid var(--border)}
   .summary-band{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
+  .plat-config-row{grid-template-columns:1fr;grid-template-rows:auto auto auto}
 }
 </style>
 </head>
@@ -258,36 +284,28 @@ table{table-layout:fixed}
   <div class="auth-box">
     <div class="auth-logo">
       <div class="auth-logo-icon">M</div>
-      <div>
-        <div class="auth-title">MakeLemonAd</div>
-        <div class="auth-sub">Plano de Mídia</div>
-      </div>
+      <div><div class="auth-title">MakeLemonAd</div><div class="auth-sub">Plano de Mídia</div></div>
     </div>
-    <div class="form-group">
-      <label>Usuário</label>
-      <input type="text" id="login-user" placeholder="usuario" autocomplete="username">
-    </div>
-    <div class="form-group">
-      <label>Senha</label>
-      <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
-    </div>
+    <div class="form-group"><label>Usuário</label><input type="text" id="login-user" placeholder="usuario" autocomplete="username"></div>
+    <div class="form-group"><label>Senha</label><input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"></div>
     <button class="btn-primary" onclick="doLogin()">Entrar</button>
-    <div class="auth-error" id="login-error">Credenciais incorretas. Tente novamente.</div>
+    <div class="auth-error" id="login-error">Credenciais incorretas.</div>
   </div>
 </div>
 
-<!-- ══ WIZARD ══ -->
-<div id="wizard-screen" class="hidden">
+<!-- ══ WIZARD OVERLAY ══ -->
+<div id="wizard-overlay" class="hidden">
   <div class="wizard-box">
     <div class="wizard-head">
       <div class="wizard-head-icon">M</div>
-      <div>
-        <div class="wizard-head-title">Novo Plano de Mídia</div>
-        <div class="wizard-head-sub" id="wizard-step-title">Passo 1 de 3 — Identificação</div>
+      <div class="wizard-head-info">
+        <div class="wizard-head-title" id="wizard-title">Novo Plano de Mídia</div>
+        <div class="wizard-head-sub" id="wizard-sub"></div>
       </div>
+      <button class="wizard-head-close hidden" id="wizard-close" onclick="closeWizard()" title="Fechar">✕</button>
     </div>
     <div class="wizard-progress">
-      <div class="wp-step active" id="wp1"></div>
+      <div class="wp-step" id="wp1"></div>
       <div class="wp-step" id="wp2"></div>
       <div class="wp-step" id="wp3"></div>
     </div>
@@ -295,8 +313,8 @@ table{table-layout:fixed}
     <div class="wizard-foot">
       <span class="wizard-step-label" id="wizard-foot-label"></span>
       <div class="wizard-nav">
-        <button class="wizard-nav wbtn-back hidden" id="wbtn-back" onclick="wizardBack()">Voltar</button>
-        <button class="wizard-nav wbtn-next" id="wbtn-next" onclick="wizardNext()">Continuar →</button>
+        <button class="wbtn-back hidden" id="wbtn-back" onclick="wizardBack()">← Voltar</button>
+        <button class="wbtn-next" id="wbtn-next" onclick="wizardNext()">Continuar →</button>
       </div>
     </div>
   </div>
@@ -313,10 +331,9 @@ table{table-layout:fixed}
       </div>
     </div>
     <div class="topbar-right">
-      <span class="live-dot"></span>
-      <span style="font-size:11px;color:var(--muted);margin-right:8px">Report Ninja</span>
-      <span class="role-badge" id="role-badge"></span>
-      <button class="btn-icon" id="btn-new-plan" onclick="showWizard()" title="Novo plano / reconfigurar">⚙️</button>
+      <span class="live-dot"></span><span style="font-size:11px;color:var(--muted)">Report Ninja</span>
+      <span class="role-badge" id="role-badge" style="margin-left:8px"></span>
+      <button class="btn-icon" id="btn-settings" onclick="openWizardModal()" title="Configurações do plano">⚙️</button>
       <button class="btn-icon" onclick="doLogout()">Sair</button>
     </div>
   </div>
@@ -328,464 +345,498 @@ table{table-layout:fixed}
 
 <script>
 // ══ STATE ══
-let currentToken = null
-let currentRole = null
-let currentMes = null
-let mesData = {}
-let realtimeData = {}
-let dirty = false
-let configEditing = false
-let wizardStep = 1
+let currentToken = null, currentRole = null, currentMes = null
+let mesData = {}, realtimeData = {}, dirty = false, configEditing = false
+let wizardStep = 1, wizardIsModal = false
 
 let cfg = {
-  cliente: '',
-  agencia: '',
+  cliente:'', agencia:'',
+  plataformas: ['meta','linkedin'],
+  plataformas_config: {},
   tipo_orcamento: 'mensal_fixo', // anual | mensal_fixo | mensal_variavel
   orcamento_anual: 0,
   orcamento_mensal_base: 0,
-  verba_seguranca: 0,
-  periodo_inicio: '',
-  periodo_fim: '',
-  plataformas: ['meta', 'linkedin'],
-  orcamentos_mensais: {}
+  verba_seguranca: 100,
+  verba_seguranca_por_mes: false,
+  periodo_inicio: '', periodo_fim: '',
+  orcamentos_mensais: {}, verbas_mensais: {}
 }
 
 let MESES = []
 const NOMES_MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
 const PLAT_LABELS = { meta:'Meta Ads', linkedin:'LinkedIn Ads', google:'Google Ads', tiktok:'TikTok Ads' }
 const PLAT_ORDER = ['meta', 'google', 'linkedin', 'tiktok']
+const PLAT_DEFS = [
+  { id:'meta',     icon:'📘', label:'Meta Ads',     placeholder_key:'brunomdois@gmail.com', placeholder_acc:'2364073693796998' },
+  { id:'linkedin', icon:'💼', label:'LinkedIn Ads',  placeholder_key:'7YTLMHaQPL',          placeholder_acc:'514458905' },
+  { id:'google',   icon:'🟢', label:'Google Ads',    placeholder_key:'connection_key',       placeholder_acc:'account_id' },
+  { id:'tiktok',   icon:'🎵', label:'TikTok Ads',    placeholder_key:'connection_key',       placeholder_acc:'account_id' },
+]
 
 // ══ UTILS ══
 function fmtEur(v) {
-  if (v == null || isNaN(v)) return '—'
-  return '€' + Number(v).toLocaleString('pt-PT', {minimumFractionDigits:2,maximumFractionDigits:2})
+  if (v==null||isNaN(v)) return '—'
+  return '€'+Number(v).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})
 }
 function fmtPct(v) {
-  if (v == null || isNaN(v) || v === 0) return ''
-  return Number(v).toLocaleString('pt-PT', {minimumFractionDigits:2,maximumFractionDigits:2}) + '%'
+  if (!v||isNaN(v)) return ''
+  return Number(v).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+'%'
 }
-function monthLabel(key) {
-  const [y, m] = key.split('-')
-  return NOMES_MESES[parseInt(m)-1].substring(0,3) + ' ' + y
-}
-function monthLabelFull(key) {
-  const [y, m] = key.split('-')
-  return NOMES_MESES[parseInt(m)-1] + ' ' + y
-}
-function generateMeses(inicio, fim) {
-  const meses = []
-  let [y, m] = inicio.split('-').map(Number)
-  const [fy, fm] = fim.split('-').map(Number)
-  while (y < fy || (y === fy && m <= fm)) {
-    meses.push(`${y}-${String(m).padStart(2,'0')}`)
-    m++
-    if (m > 12) { m = 1; y++ }
-  }
-  return meses
+function monthLabel(k) { const [y,m]=k.split('-'); return NOMES_MESES[+m-1].slice(0,3)+' '+y }
+function monthLabelFull(k) { const [y,m]=k.split('-'); return NOMES_MESES[+m-1]+' '+y }
+function generateMeses(ini,fim) {
+  const r=[]; let [y,m]=ini.split('-').map(Number); const [fy,fm]=fim.split('-').map(Number)
+  while(y<fy||(y===fy&&m<=fm)){r.push(`${y}-${String(m).padStart(2,'0')}`);m++;if(m>12){m=1;y++}}
+  return r
 }
 function budgetForMes(key) {
-  if (cfg.tipo_orcamento === 'mensal_variavel') {
-    return cfg.orcamentos_mensais[key] ?? cfg.orcamento_mensal_base
-  }
-  if (cfg.tipo_orcamento === 'anual') {
-    return MESES.length > 0 ? cfg.orcamento_anual / MESES.length : cfg.orcamento_mensal_base
-  }
+  if (cfg.tipo_orcamento==='mensal_variavel') return cfg.orcamentos_mensais[key]??cfg.orcamento_mensal_base
+  if (cfg.tipo_orcamento==='anual') return MESES.length>0?cfg.orcamento_anual/MESES.length:cfg.orcamento_mensal_base
   return cfg.orcamento_mensal_base
+}
+function verbaForMes(key) {
+  if (cfg.verba_seguranca_por_mes) return cfg.verbas_mensais[key]??0
+  return cfg.verba_seguranca
 }
 
 // ══ AUTH ══
 async function doLogin() {
-  const usuario = document.getElementById('login-user').value.trim()
-  const senha = document.getElementById('login-pass').value
-  const err = document.getElementById('login-error')
-  err.style.display = 'none'
+  const usuario=document.getElementById('login-user').value.trim()
+  const senha=document.getElementById('login-pass').value
+  const err=document.getElementById('login-error'); err.style.display='none'
   try {
-    const r = await fetch('/api/auth', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({usuario, senha}) })
-    const data = await r.json()
-    if (!r.ok) { err.style.display='block'; return }
-    currentToken = data.token; currentRole = data.role
-    sessionStorage.setItem('prr_token', data.token)
-    sessionStorage.setItem('prr_role', data.role)
+    const r=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({usuario,senha})})
+    const d=await r.json()
+    if(!r.ok){err.style.display='block';return}
+    currentToken=d.token; currentRole=d.role
+    sessionStorage.setItem('prr_token',d.token); sessionStorage.setItem('prr_role',d.role)
     await initApp()
-  } catch { err.style.display='block' }
+  } catch{err.style.display='block'}
 }
-document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin() })
-function doLogout() {
-  sessionStorage.removeItem('prr_token'); sessionStorage.removeItem('prr_role')
-  currentToken = null; currentRole = null
+document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()})
+function doLogout(){
+  sessionStorage.removeItem('prr_token');sessionStorage.removeItem('prr_role')
+  currentToken=null;currentRole=null
   document.getElementById('app').classList.add('hidden')
-  document.getElementById('wizard-screen').classList.add('hidden')
-  document.getElementById('login-screen').style.display = 'flex'
+  document.getElementById('wizard-overlay').classList.add('hidden')
+  document.getElementById('login-screen').style.display='flex'
+}
+
+// ══ CONFIG I/O ══
+async function loadConfig() {
+  try {
+    const r=await fetch('/api/data/config',{headers:{'Authorization':`Bearer ${currentToken}`}})
+    if(r.ok){const d=await r.json();if(d&&d.cliente!==undefined)Object.assign(cfg,d)}
+  } catch{}
+}
+async function saveConfig() {
+  try {
+    await fetch('/api/data/config',{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(cfg)})
+  } catch{}
 }
 
 // ══ INIT ══
 async function initApp() {
-  document.getElementById('login-screen').style.display = 'none'
+  document.getElementById('login-screen').style.display='none'
   await loadConfig()
-  if (!cfg.periodo_inicio || !cfg.periodo_fim) {
-    showWizard()
+  if (!cfg.periodo_inicio||!cfg.periodo_fim) {
+    openWizardFullscreen()
   } else {
-    MESES = generateMeses(cfg.periodo_inicio, cfg.periodo_fim)
+    MESES=generateMeses(cfg.periodo_inicio,cfg.periodo_fim)
     showApp()
   }
 }
 
-async function loadConfig() {
-  try {
-    const r = await fetch('/api/data/config', { headers:{'Authorization':`Bearer ${currentToken}`} })
-    if (r.ok) {
-      const d = await r.json()
-      if (d && d.cliente !== undefined) Object.assign(cfg, d)
-    }
-  } catch {}
-}
-async function saveConfig() {
-  await fetch('/api/data/config', {
-    method:'PUT',
-    headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},
-    body:JSON.stringify(cfg)
-  })
+function showApp() {
+  document.getElementById('app').classList.remove('hidden')
+  const badge=document.getElementById('role-badge')
+  badge.textContent=currentRole==='editor'?'Editor':'Leitura'
+  badge.className='role-badge '+(currentRole==='editor'?'role-editor':'role-viewer')
+  document.getElementById('topbar-title').textContent=cfg.cliente||'Plano de Mídia'
+  document.getElementById('topbar-sub').textContent=cfg.agencia?`${cfg.agencia} · MakeLemonAd`:'MakeLemonAd'
+  document.getElementById('btn-settings').style.display=currentRole==='editor'?'':'none'
+  buildTabs()
+  const saved=sessionStorage.getItem('prr_mes')
+  currentMes=(saved&&MESES.includes(saved))?saved:MESES[0]||''
+  if(currentMes) selectMes(currentMes)
 }
 
 // ══ WIZARD ══
 const WIZARD_STEPS = [
   {
-    title: 'Passo 1 de 3 — Identificação',
-    foot: 'Dá um nome ao cliente e agência',
-    render: () => `
+    title:'Passo 1 de 3 — Identificação',foot:'Nome do cliente e agência/intermediário',
+    render:()=>`
       <div class="wizard-section">Cliente</div>
-      <div class="form-group"><label>Nome do Cliente</label><input id="w-cliente" value="${cfg.cliente}" placeholder="Ex: PRR Recuperar Portugal"></div>
+      <div class="form-group"><label>Nome do cliente</label><input id="w-cliente" value="${cfg.cliente}" placeholder="Ex: PRR — Recuperar Portugal"></div>
       <div class="form-group"><label>Agência / Intermediário (opcional)</label><input id="w-agencia" value="${cfg.agencia}" placeholder="Ex: ON Partners"></div>
     `
   },
   {
-    title: 'Passo 2 de 3 — Período',
-    foot: 'Define o período de vigência do plano',
-    render: () => `
-      <div class="wizard-section">Período do Plano</div>
-      <div class="form-row">
-        <div class="form-group"><label>Mês de Início</label><input type="month" id="w-inicio" value="${cfg.periodo_inicio}" placeholder="YYYY-MM"></div>
-        <div class="form-group"><label>Mês de Fim</label><input type="month" id="w-fim" value="${cfg.periodo_fim}" placeholder="YYYY-MM"></div>
-      </div>
-      <div class="wizard-section">Plataformas activas</div>
-      <div class="plat-chips">
-        ${['meta','linkedin','google','tiktok'].map(p => {
-          const sel = cfg.plataformas.includes(p)
-          return `<div class="plat-chip ${sel ? 'sel-'+p : ''}" onclick="togglePlat('${p}',this)" data-plat="${p}">
-            ${p==='meta'?'📘 Meta':p==='linkedin'?'💼 LinkedIn':p==='google'?'🟢 Google':'🎵 TikTok'}
-          </div>`
-        }).join('')}
-      </div>
+    title:'Passo 2 de 3 — Plataformas',foot:'Seleciona as plataformas e vincula as contas do Report Ninja',
+    render:()=>`
+      <div class="wizard-section">Plataformas ativas</div>
+      ${PLAT_DEFS.map(p=>{
+        const sel=cfg.plataformas.includes(p.id)
+        const pc=cfg.plataformas_config[p.id]||{}
+        return `
+        <div class="plat-row ${sel?'selected':''}" id="platrow-${p.id}">
+          <div class="plat-row-head" onclick="togglePlatRow('${p.id}')">
+            <div class="plat-toggle ${sel?'on':''}">✓</div>
+            <span class="plat-icon">${p.icon}</span>
+            <div class="plat-label">
+              <span class="plat-name">${p.label}</span>
+              <span class="plat-status" id="plat-status-${p.id}">${sel&&pc.connection_key?'Conta vinculada':'Não configurado'}</span>
+            </div>
+          </div>
+          <div class="plat-config">
+            <div class="plat-config-row">
+              <div class="form-group"><label>Connection Key</label><input id="w-ck-${p.id}" value="${pc.connection_key||''}" placeholder="${p.placeholder_key}" oninput="updatePlatStatus('${p.id}')"></div>
+              <div class="form-group"><label>Account ID</label><input id="w-ai-${p.id}" value="${pc.account_id||''}" placeholder="${p.placeholder_acc}" oninput="updatePlatStatus('${p.id}')"></div>
+              <button class="btn-test" onclick="testPlatConn('${p.id}')">Testar</button>
+            </div>
+            <div id="test-result-${p.id}"></div>
+          </div>
+        </div>`
+      }).join('')}
     `
   },
   {
-    title: 'Passo 3 de 3 — Orçamento',
-    foot: 'Define como o orçamento é gerido',
-    render: () => `
-      <div class="wizard-section">Tipo de Orçamento</div>
+    title:'Passo 3 de 3 — Período e Orçamento',foot:'Define o período, tipo e valor do orçamento',
+    render:()=>`
+      <div class="wizard-section">Período do plano</div>
+      <div class="form-row">
+        <div class="form-group"><label>Mês de início</label><input type="month" id="w-inicio" value="${cfg.periodo_inicio}"></div>
+        <div class="form-group"><label>Mês de fim</label><input type="month" id="w-fim" value="${cfg.periodo_fim}"></div>
+      </div>
+      <div class="wizard-section">Tipo de orçamento</div>
       <div class="budget-type-grid">
         <div class="bt-card ${cfg.tipo_orcamento==='anual'?'selected':''}" onclick="selectTipo('anual',this)">
           <div class="bt-card-icon">📅</div>
           <div class="bt-card-label">Anual</div>
-          <div class="bt-card-desc">Valor total ÷ meses</div>
+          <div class="bt-card-desc">Valor total ÷ nº meses</div>
         </div>
-        <div class="bt-card ${cfg.tipo_orcamento==='mensal_fixo'?'selected':''}" onclick="selectTipo('mensal_fixo',this)">
-          <div class="bt-card-icon">📌</div>
-          <div class="bt-card-label">Mensal Fixo</div>
-          <div class="bt-card-desc">Mesmo valor todos os meses</div>
-        </div>
-        <div class="bt-card ${cfg.tipo_orcamento==='mensal_variavel'?'selected':''}" onclick="selectTipo('mensal_variavel',this)">
+        <div class="bt-card ${cfg.tipo_orcamento!=='anual'?'selected':''}" onclick="selectTipo('mensal_variavel',this)">
           <div class="bt-card-icon">📊</div>
-          <div class="bt-card-label">Mensal Variável</div>
-          <div class="bt-card-desc">Ajuste mês a mês</div>
+          <div class="bt-card-label">Mensal</div>
+          <div class="bt-card-desc">Define o valor em cada aba do mês</div>
         </div>
       </div>
-      <div id="orcamento-fields" style="margin-top:16px">
-        ${renderOrcamentoFields()}
+      <div id="orcamento-wrap">
+        ${renderOrcFields()}
       </div>
-      <div class="form-row" style="margin-top:12px">
-        <div class="form-group"><label>Verba de Segurança (mês)</label><input type="number" id="w-seguranca" value="${cfg.verba_seguranca||100}" step="0.01" min="0"></div>
+      <div class="wizard-section">Verba de segurança</div>
+      <div class="toggle-row" onclick="toggleVerba()">
+        <div>
+          <div class="toggle-row-label">Definir verba de segurança por mês</div>
+          <div class="toggle-row-desc">Quando ativo, configuras a verba na aba de cada mês</div>
+        </div>
+        <div class="toggle-switch ${cfg.verba_seguranca_por_mes?'on':''}" id="verba-toggle"></div>
+      </div>
+      <div class="verba-field-wrap ${cfg.verba_seguranca_por_mes?'disabled':''}" id="verba-wrap">
+        <div class="form-group"><label>Verba de segurança fixa (€/mês)</label><input type="number" id="w-seguranca" value="${cfg.verba_seguranca||100}" step="0.01" min="0"></div>
       </div>
     `
   }
 ]
 
-function renderOrcamentoFields() {
-  if (cfg.tipo_orcamento === 'anual') {
-    return `<div class="form-group"><label>Orçamento Total Anual (€)</label><input type="number" id="w-orcamento" value="${cfg.orcamento_anual||''}" step="0.01" min="0" placeholder="Ex: 51000"></div>`
+function renderOrcFields() {
+  if (cfg.tipo_orcamento==='anual') {
+    return `<div class="form-group"><label>Orçamento total anual (€)</label><input type="number" id="w-orcamento" value="${cfg.orcamento_anual||''}" step="0.01" placeholder="Ex: 51000"></div>`
   }
-  return `<div class="form-group"><label>Orçamento Mensal (€)</label><input type="number" id="w-orcamento" value="${cfg.orcamento_mensal_base||''}" step="0.01" min="0" placeholder="Ex: 4250"></div>`
+  return `
+    <div class="form-group" style="opacity:.5;pointer-events:none">
+      <label>Orçamento mensal (€)</label>
+      <input type="number" disabled placeholder="Definido na aba de cada mês" style="background:var(--surface2)">
+    </div>
+    <div class="field-note">💡 O valor de cada mês é configurado diretamente na aba do mês, na dashboard.</div>
+  `
 }
 
 function selectTipo(tipo, el) {
   cfg.tipo_orcamento = tipo
-  document.querySelectorAll('.bt-card').forEach(c => c.classList.remove('selected'))
+  document.querySelectorAll('.bt-card').forEach(c=>c.classList.remove('selected'))
   el.classList.add('selected')
-  document.getElementById('orcamento-fields').innerHTML = renderOrcamentoFields()
+  document.getElementById('orcamento-wrap').innerHTML = renderOrcFields()
 }
 
-function togglePlat(p, el) {
-  const idx = cfg.plataformas.indexOf(p)
-  if (idx === -1) { cfg.plataformas.push(p); el.classList.add('sel-'+p) }
-  else { cfg.plataformas.splice(idx, 1); el.className = 'plat-chip' }
+function toggleVerba() {
+  cfg.verba_seguranca_por_mes = !cfg.verba_seguranca_por_mes
+  const t=document.getElementById('verba-toggle'); if(t) t.className='toggle-switch '+(cfg.verba_seguranca_por_mes?'on':'')
+  const w=document.getElementById('verba-wrap'); if(w) w.className='verba-field-wrap '+(cfg.verba_seguranca_por_mes?'disabled':'')
+}
+
+function togglePlatRow(id) {
+  const row=document.getElementById('platrow-'+id)
+  const toggle=row.querySelector('.plat-toggle')
+  const idx=cfg.plataformas.indexOf(id)
+  if(idx===-1){cfg.plataformas.push(id);row.classList.add('selected');toggle.classList.add('on')}
+  else{cfg.plataformas.splice(idx,1);row.classList.remove('selected');toggle.classList.remove('on')}
+}
+
+function updatePlatStatus(id) {
+  const ck=document.getElementById('w-ck-'+id)?.value.trim()
+  const ai=document.getElementById('w-ai-'+id)?.value.trim()
+  const s=document.getElementById('plat-status-'+id)
+  if(s) s.textContent=ck&&ai?'Conta configurada':'Não configurado'
+}
+
+async function testPlatConn(id) {
+  const ck=document.getElementById('w-ck-'+id)?.value.trim()
+  const ai=document.getElementById('w-ai-'+id)?.value.trim()
+  const btn=document.querySelector(`[onclick="testPlatConn('${id}')"]`)
+  const res=document.getElementById('test-result-'+id)
+  if(!ck||!ai){if(res)res.innerHTML='<div class="test-result test-fail">Preenche connection key e account ID primeiro.</div>';return}
+  if(btn){btn.textContent='A testar...';btn.disabled=true}
+  try {
+    const r=await fetch(`/api/test-platform?platform=${id}&connection_key=${encodeURIComponent(ck)}&account_id=${encodeURIComponent(ai)}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+    const d=await r.json()
+    if(res) res.innerHTML=`<div class="test-result ${d.ok?'test-ok':'test-fail'}">${d.ok?'✅':'❌'} ${d.message||d.error}</div>`
+  } catch(e){
+    if(res) res.innerHTML=`<div class="test-result test-fail">❌ Erro de rede: ${e.message}</div>`
+  }
+  if(btn){btn.textContent='Testar';btn.disabled=false}
 }
 
 function renderWizardStep() {
-  const s = WIZARD_STEPS[wizardStep - 1]
-  document.getElementById('wizard-step-title').textContent = s.title
-  document.getElementById('wizard-foot-label').textContent = s.foot
-  document.getElementById('wizard-body').innerHTML = s.render()
-  document.querySelectorAll('.wp-step').forEach((el, i) => {
-    el.classList.toggle('done', i < wizardStep - 1)
-    el.classList.toggle('active', i === wizardStep - 1)
+  const s=WIZARD_STEPS[wizardStep-1]
+  document.getElementById('wizard-sub').textContent=s.title
+  document.getElementById('wizard-foot-label').textContent=s.foot
+  document.getElementById('wizard-body').innerHTML=s.render()
+  document.querySelectorAll('.wp-step').forEach((el,i)=>{
+    el.classList.toggle('done',i<wizardStep-1)
+    el.classList.toggle('active',i===wizardStep-1)
   })
-  document.getElementById('wbtn-back').classList.toggle('hidden', wizardStep === 1)
-  document.getElementById('wbtn-next').textContent = wizardStep === 3 ? 'Criar Plano ✓' : 'Continuar →'
+  document.getElementById('wbtn-back').classList.toggle('hidden',wizardStep===1&&!wizardIsModal)
+  document.getElementById('wbtn-next').textContent=wizardStep===3?'Guardar ✓':'Continuar →'
+  if(wizardStep===1&&wizardIsModal) {
+    document.getElementById('wbtn-back').textContent='← Cancelar'
+    document.getElementById('wbtn-back').classList.remove('hidden')
+  }
 }
 
-function wizardBack() { if(wizardStep > 1) { wizardStep--; renderWizardStep() } }
+function wizardBack() {
+  if(wizardStep===1&&wizardIsModal){closeWizard();return}
+  if(wizardStep>1){wizardStep--;renderWizardStep()}
+}
 
 async function wizardNext() {
-  if (wizardStep === 1) {
-    const c = document.getElementById('w-cliente')?.value.trim()
-    const a = document.getElementById('w-agencia')?.value.trim()
-    if (!c) { alert('Indica o nome do cliente.'); return }
-    cfg.cliente = c; cfg.agencia = a || ''
-    wizardStep = 2; renderWizardStep()
-  } else if (wizardStep === 2) {
-    const ini = document.getElementById('w-inicio')?.value
-    const fim = document.getElementById('w-fim')?.value
-    if (!ini || !fim || ini > fim) { alert('Indica um período válido.'); return }
-    cfg.periodo_inicio = ini; cfg.periodo_fim = fim
-    wizardStep = 3; renderWizardStep()
-  } else if (wizardStep === 3) {
-    const orc = parseFloat(document.getElementById('w-orcamento')?.value) || 0
-    const seg = parseFloat(document.getElementById('w-seguranca')?.value) || 100
-    if (!orc) { alert('Indica o valor do orçamento.'); return }
-    if (cfg.tipo_orcamento === 'anual') cfg.orcamento_anual = orc
-    else cfg.orcamento_mensal_base = orc
-    cfg.verba_seguranca = seg
-    MESES = generateMeses(cfg.periodo_inicio, cfg.periodo_fim)
-    if (currentRole === 'editor') await saveConfig()
-    document.getElementById('wizard-screen').classList.add('hidden')
+  if(wizardStep===1) {
+    const c=document.getElementById('w-cliente')?.value.trim()
+    if(!c){alert('Indica o nome do cliente.');return}
+    cfg.cliente=c; cfg.agencia=document.getElementById('w-agencia')?.value.trim()||''
+    wizardStep=2; renderWizardStep()
+  } else if(wizardStep===2) {
+    // Save plataformas_config for each selected platform
+    cfg.plataformas.forEach(id=>{
+      const ck=document.getElementById('w-ck-'+id)?.value.trim()
+      const ai=document.getElementById('w-ai-'+id)?.value.trim()
+      if(ck||ai) cfg.plataformas_config[id]={connection_key:ck||'',account_id:ai||''}
+    })
+    wizardStep=3; renderWizardStep()
+  } else if(wizardStep===3) {
+    const ini=document.getElementById('w-inicio')?.value
+    const fim=document.getElementById('w-fim')?.value
+    if(!ini||!fim||ini>fim){alert('Indica um período válido.');return}
+    cfg.periodo_inicio=ini; cfg.periodo_fim=fim
+    const orc=parseFloat(document.getElementById('w-orcamento')?.value)||0
+    const seg=parseFloat(document.getElementById('w-seguranca')?.value)||0
+    if(cfg.tipo_orcamento==='anual'&&!orc){alert('Indica o orçamento anual.');return}
+    if(cfg.tipo_orcamento==='anual') cfg.orcamento_anual=orc
+    if(seg) cfg.verba_seguranca=seg
+    MESES=generateMeses(cfg.periodo_inicio,cfg.periodo_fim)
+    if(currentRole==='editor') await saveConfig()
+    closeWizard()
     showApp()
   }
 }
 
-function showWizard() {
-  wizardStep = 1
-  document.getElementById('app').classList.add('hidden')
-  document.getElementById('wizard-screen').classList.remove('hidden')
+function openWizardFullscreen() {
+  wizardIsModal=false; wizardStep=1
+  const ov=document.getElementById('wizard-overlay')
+  ov.className='fullscreen'; ov.classList.remove('hidden')
+  document.getElementById('wizard-title').textContent='Novo Plano de Mídia'
+  document.getElementById('wizard-close').classList.add('hidden')
   renderWizardStep()
 }
 
-// ══ APP ══
-function showApp() {
-  document.getElementById('wizard-screen').classList.add('hidden')
-  document.getElementById('app').classList.remove('hidden')
-  const badge = document.getElementById('role-badge')
-  badge.textContent = currentRole === 'editor' ? 'Editor' : 'Leitura'
-  badge.className = 'role-badge ' + (currentRole === 'editor' ? 'role-editor' : 'role-viewer')
-  const sub = cfg.agencia ? `${cfg.agencia} · MakeLemonAd` : 'MakeLemonAd'
-  document.getElementById('topbar-title').textContent = cfg.cliente || 'Plano de Mídia'
-  document.getElementById('topbar-sub').textContent = sub
-  document.getElementById('btn-new-plan').style.display = currentRole === 'editor' ? '' : 'none'
-  buildTabs()
-  currentMes = MESES[0] || ''
-  if (currentMes) selectMes(currentMes)
+function openWizardModal() {
+  wizardIsModal=true; wizardStep=1
+  const ov=document.getElementById('wizard-overlay')
+  ov.className='modal-mode'; ov.classList.remove('hidden')
+  document.getElementById('wizard-title').textContent='Configurações do Plano'
+  document.getElementById('wizard-close').classList.remove('hidden')
+  renderWizardStep()
+}
+
+function closeWizard() {
+  document.getElementById('wizard-overlay').classList.add('hidden')
+  if(!MESES.length) openWizardFullscreen() // force wizard if no plan
 }
 
 // ══ TABS ══
 function buildTabs() {
-  const bar = document.getElementById('tabs-bar')
-  bar.innerHTML = ''
-  MESES.forEach(m => {
-    const btn = document.createElement('button')
-    btn.className = 'tab' + (m === currentMes ? ' active' : '')
-    btn.textContent = monthLabel(m)
-    btn.onclick = () => { if(dirty && !confirm('Tens alterações não guardadas. Continuar?')) return; selectMes(m) }
+  const bar=document.getElementById('tabs-bar'); bar.innerHTML=''
+  MESES.forEach(m=>{
+    const btn=document.createElement('button')
+    btn.className='tab'+(m===currentMes?' active':'')
+    btn.textContent=monthLabel(m)
+    btn.onclick=()=>{if(dirty&&!confirm('Alterações não guardadas. Continuar?'))return;selectMes(m)}
     bar.appendChild(btn)
   })
 }
 
 async function selectMes(key) {
-  currentMes = key; dirty = false
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', MESES[i] === key))
-  await Promise.all([loadMes(key), loadRealtime(key)])
+  currentMes=key; dirty=false
+  sessionStorage.setItem('prr_mes',key)
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',MESES[i]===key))
+  await Promise.all([loadMes(key),loadRealtime(key)])
   renderContent()
 }
 
 async function loadMes(key) {
-  try {
-    const r = await fetch(`/api/data/${key}`, {headers:{'Authorization':`Bearer ${currentToken}`}})
-    mesData[key] = r.ok ? await r.json() : {campanhas:[]}
-  } catch { mesData[key] = {campanhas:[]} }
-  if (!mesData[key].campanhas) mesData[key].campanhas = []
+  try{const r=await fetch(`/api/data/${key}`,{headers:{'Authorization':`Bearer ${currentToken}`}});mesData[key]=r.ok?await r.json():{campanhas:[]}}
+  catch{mesData[key]={campanhas:[]}}
+  if(!mesData[key].campanhas)mesData[key].campanhas=[]
 }
 
 async function loadRealtime(key) {
-  try {
-    const [y, m] = key.split('-')
-    const start = `${y}-${m}-01`
-    const lastDay = new Date(+y, +m, 0).getDate()
-    const end = `${y}-${m}-${lastDay}`
-    const r = await fetch(`/api/realtime?start=${start}&end=${end}`, {headers:{'Authorization':`Bearer ${currentToken}`}})
-    realtimeData[key] = r.ok ? await r.json() : {}
-  } catch { realtimeData[key] = {} }
+  try{
+    const [y,m]=key.split('-')
+    const ld=new Date(+y,+m,0).getDate()
+    const r=await fetch(`/api/realtime?start=${y}-${m}-01&end=${y}-${m}-${ld}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+    realtimeData[key]=r.ok?await r.json():{}
+  }catch{realtimeData[key]={}}
 }
 
 // ══ CALC ══
 function calcCampanhas(campanhas) {
-  const [y, m] = currentMes.split('-')
-  const mesEnd = new Date(+y, +m, 1)
-  const valorMes = budgetForMes(currentMes)
-  const orcamento_mes = valorMes - cfg.verba_seguranca
-  let totalPrevisto = 0
-  campanhas.forEach(c => {
-    if (c.inicio && c.fim) {
-      const start = new Date(c.inicio)
-      const end = new Date(c.fim)
-      const effectiveEnd = end <= mesEnd ? end : mesEnd
-      const d = (effectiveEnd - start) / 86400000
-      c.dias = d > 0 ? Math.round(d) : 0
-    } else {
-      c.dias = 0
-    }
-    c.total = c.dias * (parseFloat(c.euro_dia) || 0)
-    if (c.status === 'ativo') totalPrevisto += c.total
+  const [y,m]=currentMes.split('-')
+  const mesEnd=new Date(+y,+m,1)
+  const valorMes=budgetForMes(currentMes)
+  const verba=verbaForMes(currentMes)
+  const orcamento_mes=valorMes-verba
+  let totalPrevisto=0
+  campanhas.forEach(c=>{
+    if(c.inicio&&c.fim){
+      const start=new Date(c.inicio),end=new Date(c.fim)
+      const eff=end<=mesEnd?end:mesEnd
+      const d=(eff-start)/86400000
+      c.dias=d>0?Math.round(d):0
+    } else c.dias=0
+    c.total=c.dias*(parseFloat(c.euro_dia)||0)
+    if(c.status==='ativo') totalPrevisto+=c.total
   })
-  campanhas.forEach(c => {
-    c.pct = (c.status === 'ativo' && totalPrevisto > 0) ? (c.total / totalPrevisto * 100) : 0
-  })
-  return { totalPrevisto, orcamento_mes, valorMes }
+  campanhas.forEach(c=>{c.pct=(c.status==='ativo'&&totalPrevisto>0)?(c.total/totalPrevisto*100):0})
+  return{totalPrevisto,orcamento_mes,valorMes,verba}
 }
 
 function getSobraAnterior() {
-  const idx = MESES.findIndex(m => m === currentMes)
-  if (idx <= 0) return 0
-  const prevKey = MESES[idx - 1]
-  const prev = mesData[prevKey]
-  if (!prev || !prev.campanhas) return 0
-  const save_mes = currentMes
-  currentMes = prevKey
-  const { totalPrevisto, orcamento_mes } = calcCampanhas(prev.campanhas)
-  currentMes = save_mes
-  return Math.max(0, orcamento_mes - totalPrevisto)
+  const idx=MESES.indexOf(currentMes); if(idx<=0) return 0
+  const prev=MESES[idx-1]; const pd=mesData[prev]; if(!pd?.campanhas) return 0
+  const saveMes=currentMes; currentMes=prev
+  const{totalPrevisto,orcamento_mes}=calcCampanhas(pd.campanhas)
+  currentMes=saveMes
+  return Math.max(0,orcamento_mes-totalPrevisto)
 }
 
-function getRealtimeTotals(key) {
-  const rd = realtimeData[key] || {}
-  let metaTotal = 0, linkedinTotal = 0
-  if (rd.meta && rd.meta.rows) rd.meta.rows.forEach(r => metaTotal += (r.spend || 0))
-  if (rd.linkedin && rd.linkedin.rows) rd.linkedin.rows.forEach(r => linkedinTotal += (r.costInLocalCurrency || 0))
-  return { metaTotal, linkedinTotal, googleTotal: 0 }
+function getRtTotals(key) {
+  const rd=realtimeData[key]||{}
+  let meta=0,linkedin=0,google=0,tiktok=0
+  if(rd.meta?.rows) rd.meta.rows.forEach(r=>meta+=r.spend||0)
+  if(rd.linkedin?.rows) rd.linkedin.rows.forEach(r=>linkedin+=r.costInLocalCurrency||0)
+  if(rd.google?.rows) rd.google.rows.forEach(r=>google+=r.cost||0)
+  if(rd.tiktok?.rows) rd.tiktok.rows.forEach(r=>tiktok+=r.spend||0)
+  return{meta,linkedin,google,tiktok}
 }
 
 // ══ RENDER ══
 function renderContent() {
-  const d = mesData[currentMes] || {campanhas:[]}
-  const campanhas = d.campanhas
-  const { totalPrevisto, orcamento_mes, valorMes } = calcCampanhas(campanhas)
-  const sobraAnterior = getSobraAnterior()
-  const orcamentoComSobra = orcamento_mes + sobraAnterior
-  const totalUtilizado = campanhas.reduce((s,c) => s + c.total, 0)
-  const aUtilizar = orcamentoComSobra - totalUtilizado
-  const sobraMes = orcamentoComSobra - totalPrevisto
-  const { metaTotal, linkedinTotal, googleTotal } = getRealtimeTotals(currentMes)
-  const totalPlataformas = metaTotal + linkedinTotal + googleTotal
-  const sobraPlataformas = valorMes - totalPlataformas
-  const nomeMes = monthLabelFull(currentMes)
-  const isEditor = currentRole === 'editor'
-  const ce = configEditing && isEditor
+  const d=mesData[currentMes]||{campanhas:[]}
+  const campanhas=d.campanhas
+  const{totalPrevisto,orcamento_mes,valorMes,verba}=calcCampanhas(campanhas)
+  const sobraAnterior=getSobraAnterior()
+  const orcComSobra=orcamento_mes+sobraAnterior
+  const totalUtilizado=campanhas.reduce((s,c)=>s+c.total,0)
+  const aUtilizar=orcComSobra-totalUtilizado
+  const sobraMes=orcComSobra-totalPrevisto
+  const nomeMes=monthLabelFull(currentMes)
+  const isEditor=currentRole==='editor'
+  const ce=configEditing&&isEditor
+  const rt=getRtTotals(currentMes)
+  const activePlats=cfg.plataformas||['meta','linkedin']
+  const totalPlataformas=activePlats.reduce((s,p)=>s+(rt[p]||0),0)
 
-  const fTotal  = ce ? `<input id="cfg-orcamento_anual" class="config-input" type="number" step="0.01" value="${cfg.tipo_orcamento==='anual'?cfg.orcamento_anual:cfg.orcamento_mensal_base}">` : `<div class="bm-value">${cfg.tipo_orcamento==='anual'?fmtEur(cfg.orcamento_anual):fmtEur(cfg.orcamento_mensal_base)}</div>`
-  const fVerba  = ce ? `<input id="cfg-verba_seguranca" class="config-input" type="number" step="0.01" value="${cfg.verba_seguranca}">` : `<div class="bm-value">${fmtEur(cfg.verba_seguranca)}</div>`
-  const fPencil = (!ce && isEditor) ? `<button class="btn-pencil" onclick="toggleConfigEdit()" title="Editar">✏️</button>` : ''
-
-  // Budget col 1 label for tipo
-  const tipoLabel = cfg.tipo_orcamento === 'anual' ? 'Valor Total Projeto' : cfg.tipo_orcamento === 'mensal_variavel' ? 'Orçamento Variável' : 'Orçamento Mensal'
-
-  // Monthly variable override bar
-  const mesVarBar = (cfg.tipo_orcamento === 'mensal_variavel' && isEditor) ? `
-    <div class="mes-budget-bar">
+  // Monthly budget/verba override bars
+  const needsBudgetBar=cfg.tipo_orcamento==='mensal_variavel'&&isEditor
+  const needsVerbaBar=cfg.verba_seguranca_por_mes&&isEditor
+  const mesBars=`
+    ${needsBudgetBar?`<div class="mes-budget-bar">
       <span class="mes-budget-label">Orçamento de ${nomeMes}:</span>
       <input class="mes-budget-input" type="number" id="mes-budget-val" value="${valorMes}" step="0.01">
       <button class="btn-mes-save" onclick="saveMesBudget()">Guardar</button>
-    </div>` : ''
+    </div>`:''}
+    ${needsVerbaBar?`<div class="mes-budget-bar" style="background:var(--orange-bg)">
+      <span class="mes-budget-label">Verba de segurança de ${nomeMes}:</span>
+      <input class="mes-budget-input" type="number" id="mes-verba-val" value="${verba}" step="0.01">
+      <button class="btn-mes-save" onclick="saveVerbaMes()">Guardar</button>
+    </div>`:''}
+  `
 
-  // Only show platform rows for active platforms
-  const platRows = cfg.plataformas.map(p => {
-    if (p === 'meta') return `<div class="platform-row meta-row"><span class="platform-name meta">Meta</span><span style="display:flex;align-items:center;gap:4px"><span class="platform-value">${fmtEur(metaTotal)}</span>${metaTotal>0?'<span class="platform-check">✅</span>':''}</span></div>`
-    if (p === 'linkedin') return `<div class="platform-row linkedin-row"><span class="platform-name linkedin">LinkedIn</span><span style="display:flex;align-items:center;gap:4px"><span class="platform-value">${fmtEur(linkedinTotal)}</span>${linkedinTotal>0?'<span class="platform-check">✅</span>':''}</span></div>`
-    if (p === 'google') return `<div class="platform-row google-row"><span class="platform-name google">Google</span><span class="platform-value">${googleTotal>0?fmtEur(googleTotal):'—'}</span></div>`
-    return ''
-  }).join('')
+  // Platform totals col
+  const platRows=activePlats.map(p=>`
+    <div class="plat-total-row ${p}">
+      <span class="plat-total-name ${p}">${PLAT_LABELS[p]?.split(' ')[0]||p}</span>
+      <span style="display:flex;align-items:center;gap:4px">
+        <span class="plat-total-val">${(rt[p]||0)>0?fmtEur(rt[p]):'—'}</span>
+        ${(rt[p]||0)>0?'<span style="font-size:13px">✅</span>':''}
+      </span>
+    </div>`).join('')
 
-  document.getElementById('main-content').innerHTML = `
-    ${mesVarBar}
+  // Orçamento label for col 2
+  const orcLabel=cfg.tipo_orcamento==='anual'?'Valor Total Anual':'Orçamento'
+
+  document.getElementById('main-content').innerHTML=`
+    ${mesBars}
     <div class="budget-header">
       <div class="budget-grid">
-        <!-- Col 1 -->
         <div class="budget-col">
-          ${ce ? `
-            <div class="config-field"><label>Nome do Cliente</label><input id="cfg-cliente" class="config-input" value="${cfg.cliente}"></div>
-            <div class="config-field"><label>Agência</label><input id="cfg-agencia" class="config-input" value="${cfg.agencia}"></div>
-            <div class="config-actions"><button class="btn-cfg-save" onclick="saveConfigInline()">Guardar</button><button class="btn-cfg-cancel" onclick="cancelConfigEdit()">Cancelar</button></div>
-          ` : `
-            <div class="budget-col-header">
-              <div class="budget-project">
-                <div class="project-field"><div class="project-field-label">Cliente</div><div class="project-field-value">${cfg.cliente}</div></div>
-                ${cfg.agencia ? `<div class="project-field"><div class="project-field-label">Agência</div><div class="project-field-value">${cfg.agencia}</div></div>` : ''}
-                <div class="project-field"><div class="project-field-label">Período</div><div class="project-field-value">${nomeMes}</div></div>
-              </div>
-              ${fPencil}
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
+            <div>
+              ${ce?`
+                <div class="config-field"><label>Cliente</label><input id="cfg-cliente" class="config-input" value="${cfg.cliente}"></div>
+                <div class="config-field"><label>Agência</label><input id="cfg-agencia" class="config-input" value="${cfg.agencia}"></div>
+                <div class="config-actions"><button class="btn-cfg-save" onclick="saveConfigInline()">Guardar</button><button class="btn-cfg-cancel" onclick="cancelConfigEdit()">Cancelar</button></div>
+              `:`
+                <div class="project-field"><div class="pf-label">Cliente</div><div class="pf-value">${cfg.cliente}</div></div>
+                ${cfg.agencia?`<div class="project-field"><div class="pf-label">Agência</div><div class="pf-value">${cfg.agencia}</div></div>`:''}
+                <div class="project-field"><div class="pf-label">Mês</div><div class="pf-value">${nomeMes}</div></div>
+              `}
             </div>
-          `}
-          <div style="margin-top:${ce?0:8}px">
-            <div class="budget-row"><span class="budget-row-label">Orçamento (s/ mrg. seg.) + Sobra Anterior</span><span class="budget-row-value highlight">${fmtEur(orcamentoComSobra)}</span></div>
-            <div class="budget-row"><span class="budget-row-label">Valor utilizado em planilha</span><span class="budget-row-value">${fmtEur(totalUtilizado)}</span></div>
+            ${!ce&&isEditor?`<button class="btn-pencil" onclick="toggleConfigEdit()" title="Editar">✏️</button>`:''}
           </div>
-          <div class="a-utilizar-row">
-            <span class="a-utilizar-label">A utilizar</span>
-            <span class="a-utilizar-value">${fmtEur(aUtilizar)}</span>
-          </div>
+          <div class="budget-row"><span class="budget-row-label">Orçamento + Sobra Anterior</span><span class="budget-row-value hi">${fmtEur(orcComSobra)}</span></div>
+          <div class="budget-row"><span class="budget-row-label">Valor utilizado em planilha</span><span class="budget-row-value">${fmtEur(totalUtilizado)}</span></div>
+          <div class="a-utilizar-row"><span class="a-utilizar-label">A utilizar</span><span class="a-utilizar-value">${fmtEur(aUtilizar)}</span></div>
         </div>
-        <!-- Col 2 -->
         <div class="budget-col">
           <div class="budget-middle">
-            <div class="bm-cell">
-              <div class="bm-label">${tipoLabel}</div>
-              ${fTotal}
-            </div>
-            <div class="bm-cell">
-              <div class="bm-label">Valor Mês</div>
-              <div class="bm-value">${fmtEur(valorMes)}</div>
-            </div>
-            <div class="bm-cell">
-              <div class="bm-label">Verba de Segurança (mês)</div>
-              ${fVerba}
-            </div>
-            <div class="bm-cell">
-              <div class="bm-label">Sobra Mês Anterior</div>
-              <div class="bm-value" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">${fmtEur(sobraAnterior)}</div>
-            </div>
+            <div class="bm-cell"><div class="bm-label">${orcLabel}</div><div class="bm-value">${cfg.tipo_orcamento==='anual'?fmtEur(cfg.orcamento_anual):fmtEur(valorMes)}</div></div>
+            <div class="bm-cell"><div class="bm-label">Valor do Mês</div><div class="bm-value">${fmtEur(valorMes)}</div></div>
+            <div class="bm-cell"><div class="bm-label">Verba de Segurança</div><div class="bm-value">${fmtEur(verba)}</div></div>
+            <div class="bm-cell"><div class="bm-label">Sobra Mês Anterior</div><div class="bm-value" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">${fmtEur(sobraAnterior)}</div></div>
           </div>
         </div>
-        <!-- Col 3 -->
         <div class="budget-col platform-totals">
-          <div class="platform-totals-title">Total Gasto Mês em Faturas</div>
+          <div class="platform-totals-title">Gasto Real (Report Ninja)</div>
           ${platRows}
-          <div class="platform-total-row"><span class="platform-total-label">Valor Total Usado</span><span class="platform-total-value">${fmtEur(totalPlataformas)}</span></div>
-          <div class="platform-sobra">
-            <span class="platform-sobra-label">Sobra do Mês Plataforma</span>
-            <span class="platform-sobra-value" style="color:${sobraPlataformas<0?'var(--red)':''}">${fmtEur(sobraPlataformas)}</span>
-          </div>
+          <div class="plat-grand-row"><span class="plat-grand-label">Total Usado</span><span class="plat-grand-val">${fmtEur(totalPlataformas)}</span></div>
+          <div class="plat-sobra"><span class="plat-sobra-label">Sobra da Plataforma</span><span class="plat-sobra-val" style="color:${valorMes-totalPlataformas<0?'var(--red)':''}">${fmtEur(valorMes-totalPlataformas)}</span></div>
         </div>
       </div>
     </div>
 
     <div class="summary-band">
-      <div class="summary-card previsto"><div class="summary-label">Valor PREVISTO de GASTO Mês</div><div class="summary-value">${fmtEur(totalPrevisto)}</div></div>
+      <div class="summary-card previsto"><div class="summary-label">Previsto de Gasto</div><div class="summary-value">${fmtEur(totalPrevisto)}</div></div>
       <div class="summary-card sobra"><div class="summary-label">Sobra do Mês</div><div class="summary-value">${fmtEur(sobraMes)}</div></div>
       <div class="summary-card anterior"><div class="summary-label">Sobra do Mês Anterior</div><div class="summary-value">${fmtEur(sobraAnterior)}</div></div>
     </div>
@@ -793,7 +844,7 @@ function renderContent() {
     <div class="table-card">
       <div class="table-header">
         <div class="table-title">Campanhas — ${nomeMes}</div>
-        ${isEditor ? `<button class="btn-add" onclick="addCampanha()">+ Adicionar campanha</button>` : ''}
+        ${isEditor?`<button class="btn-add" onclick="addCampanha()">+ Adicionar</button>`:''}
       </div>
       <div id="view-toolbar" class="view-toolbar"></div>
       <div class="table-wrap">
@@ -805,79 +856,67 @@ function renderContent() {
             <th>Plataforma</th><th>Início</th><th>Final</th><th>Últ. Atualização</th>
             <th>Campanha</th><th class="num">Dias</th><th class="num">€/Dia</th>
             <th class="num">€ Total</th><th class="num">%</th><th>Status</th>
-            ${isEditor ? '<th></th>' : ''}
+            ${isEditor?'<th></th>':''}
           </tr></thead>
           <tbody id="camp-tbody"></tbody>
         </table>
       </div>
       <div class="save-bar" id="save-bar">
-        <span class="save-msg">⚠️ Tens alterações não guardadas</span>
-        <button class="btn-save" onclick="saveData()">Guardar alterações</button>
+        <span class="save-msg">⚠️ Alterações não guardadas</span>
+        <button class="btn-save" onclick="saveData()">Guardar</button>
       </div>
     </div>
   `
-  renderRows(campanhas, isEditor)
+  renderRows(campanhas,isEditor)
   initColResize()
 }
 
-// ══ CONFIG EDIT ══
-function toggleConfigEdit() { configEditing = true; renderContent() }
-function cancelConfigEdit() { configEditing = false; renderContent() }
-async function saveConfigInline() {
-  const c = document.getElementById('cfg-cliente')?.value.trim()
-  const a = document.getElementById('cfg-agencia')?.value.trim()
-  const o = parseFloat(document.getElementById('cfg-orcamento_anual')?.value) || 0
-  const v = parseFloat(document.getElementById('cfg-verba_seguranca')?.value) || 0
-  if (c) cfg.cliente = c
-  if (a !== undefined) cfg.agencia = a
-  if (o) { if(cfg.tipo_orcamento==='anual') cfg.orcamento_anual=o; else cfg.orcamento_mensal_base=o }
-  if (v) cfg.verba_seguranca = v
-  configEditing = false
+// ══ CONFIG EDIT (inline) ══
+function toggleConfigEdit(){configEditing=true;renderContent()}
+function cancelConfigEdit(){configEditing=false;renderContent()}
+async function saveConfigInline(){
+  const c=document.getElementById('cfg-cliente')?.value.trim()
+  const a=document.getElementById('cfg-agencia')?.value.trim()
+  if(c)cfg.cliente=c; if(a!==undefined)cfg.agencia=a
+  configEditing=false
   await saveConfig()
-  document.getElementById('topbar-title').textContent = cfg.cliente || 'Plano de Mídia'
-  document.getElementById('topbar-sub').textContent = cfg.agencia ? `${cfg.agencia} · MakeLemonAd` : 'MakeLemonAd'
+  document.getElementById('topbar-title').textContent=cfg.cliente||'Plano de Mídia'
+  document.getElementById('topbar-sub').textContent=cfg.agencia?`${cfg.agencia} · MakeLemonAd`:'MakeLemonAd'
   renderContent()
 }
 
-async function saveMesBudget() {
-  const v = parseFloat(document.getElementById('mes-budget-val')?.value)
-  if (isNaN(v)) return
-  if (!cfg.orcamentos_mensais) cfg.orcamentos_mensais = {}
-  cfg.orcamentos_mensais[currentMes] = v
-  await saveConfig()
-  renderContent()
+async function saveMesBudget(){
+  const v=parseFloat(document.getElementById('mes-budget-val')?.value); if(isNaN(v))return
+  if(!cfg.orcamentos_mensais)cfg.orcamentos_mensais={}
+  cfg.orcamentos_mensais[currentMes]=v
+  await saveConfig(); renderContent()
 }
 
-// ══ ROWS ══
-function renderRows(campanhas, isEditor) {
-  const tbody = document.getElementById('camp-tbody')
-  if (!tbody) return
-  tbody.innerHTML = ''
-  const cols = isEditor ? 11 : 10
-  const activePlats = PLAT_ORDER.filter(p => cfg.plataformas.includes(p))
-  const groups = {}
-  activePlats.forEach(p => { groups[p] = [] })
-  campanhas.forEach((c, i) => {
-    const p = c.plataforma || activePlats[0] || 'meta'
-    if (!groups[p]) groups[p] = []
-    groups[p].push({ c, i })
-  })
-  activePlats.forEach(plat => {
-    const items = groups[plat]
-    if (!items || items.length === 0) return
-    const htr = document.createElement('tr')
-    htr.className = `plat-block-header ph-${plat}`
-    htr.innerHTML = `<td colspan="${cols}">${PLAT_LABELS[plat] || plat}</td>`
-    tbody.appendChild(htr)
-    let platTotal = 0
-    items.forEach(({ c, i }) => {
-      platTotal += c.total || 0
-      const tr = document.createElement('tr')
-      tr.className = 'row-' + plat
-      const platOpts = (cfg.plataformas || ['meta','linkedin','google','tiktok']).map(p =>
-        `<option value="${p}" ${(c.plataforma||'meta')===p?'selected':''}>${PLAT_LABELS[p]?.split(' ')[0]||p}</option>`
-      ).join('')
-      tr.innerHTML = `
+async function saveVerbaMes(){
+  const v=parseFloat(document.getElementById('mes-verba-val')?.value); if(isNaN(v))return
+  if(!cfg.verbas_mensais)cfg.verbas_mensais={}
+  cfg.verbas_mensais[currentMes]=v
+  await saveConfig(); renderContent()
+}
+
+// ══ TABLE ROWS ══
+function renderRows(campanhas,isEditor){
+  const tbody=document.getElementById('camp-tbody'); if(!tbody)return
+  tbody.innerHTML=''
+  const cols=isEditor?11:10
+  const activePlats=PLAT_ORDER.filter(p=>cfg.plataformas.includes(p))
+  const groups={}; activePlats.forEach(p=>{groups[p]=[]})
+  campanhas.forEach((c,i)=>{const p=c.plataforma||activePlats[0]||'meta';if(!groups[p])groups[p]=[];groups[p].push({c,i})})
+  activePlats.forEach(plat=>{
+    const items=groups[plat]; if(!items||items.length===0)return
+    const htr=document.createElement('tr'); htr.className=`plat-block-header ph-${plat}`
+    htr.innerHTML=`<td colspan="${cols}">${PLAT_LABELS[plat]||plat}</td>`; tbody.appendChild(htr)
+    let platTotal=0
+    items.forEach(({c,i})=>{
+      platTotal+=c.total||0
+      const tr=document.createElement('tr'); tr.className='row-'+plat
+      const platOpts=activePlats.map(p=>`<option value="${p}" ${(c.plataforma||activePlats[0])===p?'selected':''}>${PLAT_LABELS[p]?.split(' ')[0]||p}</option>`).join('')
+      tr.innerHTML=`
         <td><select class="plat-select plat-${c.plataforma||'meta'}" data-idx="${i}" data-field="plataforma" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>${platOpts}</select></td>
         <td><input class="cell-input date-input" type="date" value="${c.inicio||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="inicio" onchange="onCellChange(this)"></td>
         <td><input class="cell-input date-input" type="date" value="${c.fim||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="fim" onchange="onCellChange(this)"></td>
@@ -886,166 +925,100 @@ function renderRows(campanhas, isEditor) {
         <td class="num"><strong>${c.dias||0}</strong></td>
         <td class="num"><input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" ${!isEditor?'readonly':''} data-idx="${i}" data-field="euro_dia" oninput="onCellChange(this)"></td>
         <td class="num"><strong>${fmtEur(c.total)}</strong></td>
-        <td class="num pct-cell">${c.status==='ativo'?fmtPct(c.pct):''}</td>
+        <td class="num">${c.status==='ativo'?fmtPct(c.pct):''}</td>
         <td><select class="status-select status-${c.status||'ativo'}" data-idx="${i}" data-field="status" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>
           <option value="ativo" ${c.status==='ativo'?'selected':''}>ATIVO</option>
           <option value="reprovado" ${c.status==='reprovado'?'selected':''}>REPROVADO</option>
           <option value="pausado" ${c.status==='pausado'?'selected':''}>PAUSADO</option>
           <option value="aprovacao" ${c.status==='aprovacao'?'selected':''}>EM APROVAÇÃO</option>
         </select></td>
-        ${isEditor ? `<td><button class="btn-del" onclick="delCampanha(${i})" title="Remover">×</button></td>` : ''}
+        ${isEditor?`<td><button class="btn-del" onclick="delCampanha(${i})" title="Remover">×</button></td>`:''}
       `
       tbody.appendChild(tr)
     })
-    const str = document.createElement('tr')
-    str.className = `plat-subtotal ps-${plat}`
-    str.innerHTML = `<td colspan="7" style="text-align:right;padding-right:12px">Total ${PLAT_LABELS[plat]||plat}</td><td class="num">${fmtEur(platTotal)}</td><td colspan="${isEditor?3:2}"></td>`
+    const str=document.createElement('tr'); str.className=`plat-subtotal ps-${plat}`
+    str.innerHTML=`<td colspan="7" style="text-align:right;padding-right:12px">Total ${PLAT_LABELS[plat]||plat}</td><td class="num">${fmtEur(platTotal)}</td><td colspan="${isEditor?3:2}"></td>`
     tbody.appendChild(str)
   })
 }
 
-function onCellChange(el) {
-  const idx = +el.dataset.idx; const field = el.dataset.field
-  mesData[currentMes].campanhas[idx][field] = el.value
+function onCellChange(el){
+  const idx=+el.dataset.idx,field=el.dataset.field
+  mesData[currentMes].campanhas[idx][field]=el.value
   calcCampanhas(mesData[currentMes].campanhas)
-  markDirty(); renderContent()
+  markDirty();renderContent()
 }
-function onStatusChange(el) {
-  const idx = +el.dataset.idx; const field = el.dataset.field
-  mesData[currentMes].campanhas[idx][field] = el.value
-  if (field === 'status') el.className = `status-select status-${el.value}`
-  if (field === 'plataforma') el.className = `plat-select plat-${el.value}`
-  calcCampanhas(mesData[currentMes].campanhas)
-  markDirty(); renderContent()
+function onStatusChange(el){
+  const idx=+el.dataset.idx,field=el.dataset.field
+  mesData[currentMes].campanhas[idx][field]=el.value
+  if(field==='status')el.className=`status-select status-${el.value}`
+  if(field==='plataforma')el.className=`plat-select plat-${el.value}`
+  markDirty();renderContent()
 }
-function addCampanha() {
-  if (!mesData[currentMes]) mesData[currentMes] = {campanhas:[]}
-  const defaultPlat = cfg.plataformas?.[0] || 'meta'
-  mesData[currentMes].campanhas.push({plataforma:defaultPlat,nome:'',inicio:'',fim:'',euro_dia:'',status:'ativo'})
-  markDirty(); renderContent()
+function addCampanha(){
+  if(!mesData[currentMes])mesData[currentMes]={campanhas:[]}
+  const p=cfg.plataformas?.[0]||'meta'
+  mesData[currentMes].campanhas.push({plataforma:p,nome:'',inicio:'',fim:'',euro_dia:'',status:'ativo'})
+  markDirty();renderContent()
 }
-function delCampanha(idx) {
-  if (!confirm('Remover esta campanha?')) return
-  mesData[currentMes].campanhas.splice(idx, 1)
-  markDirty(); renderContent()
+function delCampanha(idx){
+  if(!confirm('Remover esta campanha?'))return
+  mesData[currentMes].campanhas.splice(idx,1)
+  markDirty();renderContent()
 }
-function markDirty() {
-  dirty = true
-  const bar = document.getElementById('save-bar')
-  if (bar) bar.classList.add('visible')
+function markDirty(){
+  dirty=true
+  const bar=document.getElementById('save-bar'); if(bar)bar.classList.add('visible')
 }
-async function saveData() {
-  try {
-    const r = await fetch(`/api/data/${currentMes}`, {
-      method:'PUT',
-      headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},
-      body:JSON.stringify(mesData[currentMes])
-    })
-    if (r.ok) { dirty = false; const bar = document.getElementById('save-bar'); if(bar) bar.classList.remove('visible') }
-    else alert('Erro ao guardar. Tenta novamente.')
-  } catch { alert('Sem ligação. Tenta novamente.') }
+async function saveData(){
+  try{
+    const r=await fetch(`/api/data/${currentMes}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[currentMes])})
+    if(r.ok){dirty=false;const bar=document.getElementById('save-bar');if(bar)bar.classList.remove('visible')}
+    else alert('Erro ao guardar.')
+  }catch{alert('Sem ligação.')}
 }
 
-// ══ VIEWS ══
-const DEFAULT_COL_WIDTHS = [110, 90, 90, 100, 280, 50, 70, 90, 50, 110, 36]
-let colWidths = [...DEFAULT_COL_WIDTHS]
-
-function viewKey() { return `prr_view_${cfg.cliente || 'default'}` }
-
-function saveView(name) {
-  const views = JSON.parse(localStorage.getItem(viewKey()) || '{}')
-  views[name] = { colWidths: [...colWidths] }
-  localStorage.setItem(viewKey(), JSON.stringify(views))
-  renderViewBar()
-}
-
-function loadView(name) {
-  const views = JSON.parse(localStorage.getItem(viewKey()) || '{}')
-  if (views[name]) {
-    colWidths = [...views[name].colWidths]
-    applyColWidths()
-    renderViewBar(name)
-  }
-}
-
-function listViews() {
-  return Object.keys(JSON.parse(localStorage.getItem(viewKey()) || '{}'))
-}
-
-function applyColWidths() {
-  const colgroup = document.getElementById('camp-colgroup')
-  if (!colgroup) return
-  const cols = colgroup.querySelectorAll('col')
-  colWidths.forEach((w, i) => { if (cols[i]) cols[i].style.width = w + 'px' })
-}
-
-function renderViewBar(activeView) {
-  const bar = document.getElementById('view-toolbar')
-  if (!bar) return
-  const isEditor = currentRole === 'editor'
-  const views = listViews()
-  bar.innerHTML = `
+// ══ VIEWS + RESIZE ══
+const DEFAULT_COL_WIDTHS=[110,90,90,100,280,50,70,90,50,110,36]
+let colWidths=[...DEFAULT_COL_WIDTHS]
+function viewKey(){return `prr_view_${cfg.cliente||'default'}`}
+function saveView(name){const v=JSON.parse(localStorage.getItem(viewKey())||'{}');v[name]={colWidths:[...colWidths]};localStorage.setItem(viewKey(),JSON.stringify(v));renderViewBar()}
+function loadView(name){const v=JSON.parse(localStorage.getItem(viewKey())||'{}');if(v[name]){colWidths=[...v[name].colWidths];applyColWidths();renderViewBar(name)}}
+function listViews(){return Object.keys(JSON.parse(localStorage.getItem(viewKey())||'{}'))}
+function applyColWidths(){const cg=document.getElementById('camp-colgroup');if(!cg)return;cg.querySelectorAll('col').forEach((c,i)=>{if(colWidths[i])c.style.width=colWidths[i]+'px'})}
+function resetColWidths(){colWidths=[...DEFAULT_COL_WIDTHS];applyColWidths();renderViewBar()}
+function promptSaveView(){const n=prompt('Nome para esta visualização:');if(n&&n.trim())saveView(n.trim())}
+function renderViewBar(activeView){
+  const bar=document.getElementById('view-toolbar');if(!bar)return
+  const isEditor=currentRole==='editor'
+  bar.innerHTML=`
     <span class="view-label">Visualização:</span>
     <div class="view-pill ${!activeView?'active':''}" onclick="resetColWidths()">Padrão</div>
-    ${views.map(v => `<div class="view-pill ${activeView===v?'active':''}" onclick="loadView('${v}')">${v}</div>`).join('')}
-    ${isEditor ? `<button class="btn-save-view" onclick="promptSaveView()">+ Salvar Vista</button>` : ''}
+    ${listViews().map(v=>`<div class="view-pill ${activeView===v?'active':''}" onclick="loadView('${v}')">${v}</div>`).join('')}
+    ${isEditor?`<button class="btn-save-view" onclick="promptSaveView()">+ Salvar Vista</button>`:''}
   `
 }
-
-function resetColWidths() {
-  colWidths = [...DEFAULT_COL_WIDTHS]
-  applyColWidths()
-  renderViewBar()
-}
-
-function promptSaveView() {
-  const name = prompt('Nome para esta visualização:')
-  if (name && name.trim()) saveView(name.trim())
-}
-
-// ── Column resize ──
-function initColResize() {
-  const table = document.getElementById('camp-table')
-  if (!table) return
-  const ths = table.querySelectorAll('thead th')
-  ths.forEach((th, idx) => {
-    const handle = document.createElement('div')
-    handle.className = 'col-resize-handle'
-    th.appendChild(handle)
-    let startX, startW
-    handle.addEventListener('mousedown', e => {
-      startX = e.clientX
-      startW = colWidths[idx]
-      document.body.style.cursor = 'col-resize'
-      document.body.style.userSelect = 'none'
-      const onMove = e => {
-        const delta = e.clientX - startX
-        colWidths[idx] = Math.max(40, startW + delta)
-        applyColWidths()
-      }
-      const onUp = () => {
-        document.body.style.cursor = ''
-        document.body.style.userSelect = ''
-        document.removeEventListener('mousemove', onMove)
-        document.removeEventListener('mouseup', onUp)
-      }
-      document.addEventListener('mousemove', onMove)
-      document.addEventListener('mouseup', onUp)
+function initColResize(){
+  const table=document.getElementById('camp-table');if(!table)return
+  table.querySelectorAll('thead th').forEach((th,idx)=>{
+    const h=document.createElement('div');h.className='col-resize-handle';th.appendChild(h)
+    let startX,startW
+    h.addEventListener('mousedown',e=>{
+      startX=e.clientX;startW=colWidths[idx]
+      document.body.style.cursor='col-resize';document.body.style.userSelect='none'
+      const mv=e=>{colWidths[idx]=Math.max(40,startW+(e.clientX-startX));applyColWidths()}
+      const up=()=>{document.body.style.cursor='';document.body.style.userSelect='';document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up)}
+      document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up)
       e.preventDefault()
     })
   })
-  applyColWidths()
-  renderViewBar()
+  applyColWidths();renderViewBar()
 }
 
 // ══ BOOT ══
-;(async () => {
-  const t = sessionStorage.getItem('prr_token')
-  const role = sessionStorage.getItem('prr_role')
-  if (t && role) {
-    currentToken = t; currentRole = role
-    await initApp()
-  }
+;(async()=>{
+  const t=sessionStorage.getItem('prr_token'),role=sessionStorage.getItem('prr_role')
+  if(t&&role){currentToken=t;currentRole=role;await initApp()}
 })()
 </script>
 </body>
