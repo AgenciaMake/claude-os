@@ -20,7 +20,7 @@
 ## Passo 2 — Abrir o projeto na Cloudflare
 
 1. Acessa **dash.cloudflare.com**
-2. Faz login com a conta **makelemonad@gmail.com**
+2. Faz login com a conta Cloudflare da Make *(confirmar com o Bruno qual email usar)*
 3. No menu lateral, clica em **Workers & Pages**
 4. Clica no projeto **makelemonad-prr**
 5. Vai na aba **Settings**
