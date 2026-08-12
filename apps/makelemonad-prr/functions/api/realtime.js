@@ -85,7 +85,8 @@ export async function onRequestGet(context) {
         integration_id: 'google_ads',
         connection_key: gc.connection_key,
         account_id: gc.account_id,
-        fields: ['campaign_name', 'cost', 'impressions', 'clicks', 'ctr', 'average_cpm'],
+        data_view: 'campaign',
+        fields: ['campaign.name', 'metrics.cost_micros', 'metrics.impressions', 'metrics.clicks', 'metrics.ctr'],
         date_range: dateRange,
         limit: 5000
       })

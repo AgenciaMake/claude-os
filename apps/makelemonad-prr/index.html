@@ -785,7 +785,7 @@ function getRtTotals(key) {
   let meta=0,linkedin=0,google=0,tiktok=0
   if(rd.meta?.rows) rd.meta.rows.forEach(r=>meta+=r.spend||0)
   if(rd.linkedin?.rows) rd.linkedin.rows.forEach(r=>linkedin+=r.costInLocalCurrency||0)
-  if(rd.google?.rows) rd.google.rows.forEach(r=>google+=r.cost||0)
+  if(rd.google?.rows) rd.google.rows.forEach(r=>google+=(r['metrics.cost_micros']||0)/1e6)
   if(rd.tiktok?.rows) rd.tiktok.rows.forEach(r=>tiktok+=r.spend||0)
   return{meta,linkedin,google,tiktok}
 }
