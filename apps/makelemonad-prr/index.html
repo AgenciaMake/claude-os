@@ -1197,7 +1197,7 @@ function renderVerifyRow(plat,campNome,plannedDaily,cols){
   if(startDate){
     const refEnd=endDate&&endDate<today?endDate:today
     const ms=new Date(refEnd)-new Date(startDate)
-    diasAtivos=Math.max(0,Math.round(ms/86400000))
+    diasAtivos=Math.max(1,Math.round(ms/86400000)+1)
   }
 
   const nomeCell=match
