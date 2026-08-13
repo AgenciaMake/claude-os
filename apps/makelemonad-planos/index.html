@@ -543,7 +543,7 @@ let cfg = {
   tipo_orcamento: 'mensal_fixo', // anual | mensal_fixo | mensal_variavel
   orcamento_anual: 0,
   orcamento_mensal_base: 0,
-  verba_seguranca: 100,
+  verba_seguranca: 0,
   verba_seguranca_por_mes: false,
   periodo_inicio: '', periodo_fim: '',
   orcamentos_mensais: {}, verbas_mensais: {}
@@ -845,7 +845,7 @@ const WIZARD_STEPS = [
         <div class="toggle-switch ${cfg.verba_seguranca_por_mes?'on':''}" id="verba-toggle"></div>
       </div>
       <div class="verba-field-wrap ${cfg.verba_seguranca_por_mes?'disabled':''}" id="verba-wrap">
-        <div class="form-group"><label>Verba de segurança fixa (€/mês)</label><input type="number" id="w-seguranca" value="${cfg.verba_seguranca||100}" step="0.01" min="0"></div>
+        <div class="form-group"><label>Verba de segurança fixa (${moedaSym()}/mês)</label><input type="number" id="w-seguranca" value="${cfg.verba_seguranca||0}" step="0.01" min="0"></div>
       </div>
     `
   }
@@ -853,7 +853,7 @@ const WIZARD_STEPS = [
 
 function renderOrcFields() {
   if (cfg.tipo_orcamento==='anual') {
-    return `<div class="form-group"><label>Orçamento total anual (€)</label><input type="number" id="w-orcamento" value="${cfg.orcamento_anual||''}" step="0.01" placeholder="Ex: 51000"></div>`
+    return `<div class="form-group"><label>Orçamento total anual (${moedaSym()})</label><input type="number" id="w-orcamento" value="${cfg.orcamento_anual||''}" step="0.01" placeholder="Ex: 51000"></div>`
   }
   return `
     <div class="form-group" style="opacity:.5;pointer-events:none">
@@ -989,7 +989,7 @@ async function wizardNext() {
     const seg=parseFloat(document.getElementById('w-seguranca')?.value)||0
     if(cfg.tipo_orcamento==='anual'&&!orc){alert('Indica o orçamento anual.');return}
     if(cfg.tipo_orcamento==='anual') cfg.orcamento_anual=orc
-    if(seg) cfg.verba_seguranca=seg
+    cfg.verba_seguranca=seg
     MESES=generateMeses(cfg.periodo_inicio,cfg.periodo_fim)
     if(currentRole==='editor') await saveConfig()
     closeWizard()
