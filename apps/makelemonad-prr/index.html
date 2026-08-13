@@ -1356,7 +1356,7 @@ function autoSave(){
   const bar=document.getElementById('save-bar')
   if(bar){bar.className='save-bar visible saving';bar.innerHTML='<span>A guardar…</span>'}
   clearTimeout(_autoSaveTimer)
-  _autoSaveTimer=setTimeout(()=>saveData(),800)
+  _autoSaveTimer=setTimeout(()=>saveData(),0)
 }
 async function saveData(){
   const bar=document.getElementById('save-bar')
