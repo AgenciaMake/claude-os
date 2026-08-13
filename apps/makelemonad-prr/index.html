@@ -225,7 +225,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
 thead{background:var(--surface2)}
-th{padding:8px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--faint);white-space:nowrap;border-bottom:1px solid var(--border);position:relative}
+th{padding:8px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--faint);white-space:nowrap;border-bottom:2px solid var(--border);border-right:1px solid var(--border);position:relative}
+th:last-child{border-right:none}
 th.num{text-align:right}
 td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
 td.num{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
@@ -242,36 +243,39 @@ select[disabled]{cursor:default;opacity:.7}
 .status-reprovado{background:var(--red-bg);color:var(--red)}
 .status-pausado{background:var(--orange-bg);color:var(--orange)}
 .status-aprovacao{background:var(--blue-bg);color:var(--blue)}
-.plat-meta{background:#e8f0ff;color:#1877F2}
-.plat-linkedin{background:#e3edf8;color:#0A66C2}
-.plat-google{background:#e8f0fe;color:#4285F4}
+.plat-meta{background:#eef0fd;color:#4169E1}
+.plat-linkedin{background:#ffe4f0;color:#E91E8C}
+.plat-google{background:#fff3e0;color:#F57C00}
 .plat-tiktok{background:#fff0f3;color:#FF0050}
 .btn-del{background:none;border:none;cursor:pointer;color:var(--faint);font-size:16px;padding:2px 6px;border-radius:4px;line-height:1}
 .btn-del:hover{color:var(--red);background:var(--red-bg)}
 
 /* Platform blocks */
-tr.row-meta td{background:#EEF4FF}
-tr.row-linkedin td{background:#EAF0F8}
-tr.row-google td{background:#EEF8F0}
-tr.row-tiktok td{background:#F5EEF9}
-tr.row-meta:hover td{background:#D8E8FF}
-tr.row-linkedin:hover td{background:#e8f0fb}
-tr.row-google:hover td{background:#e8f1ff}
+tr.row-meta td{background:#f0f1fd}
+tr.row-linkedin td{background:#fff0f8}
+tr.row-google td{background:#fff8f0}
+tr.row-tiktok td{background:#fff5f7}
+tr.row-meta:hover td{background:#e3e5fb}
+tr.row-linkedin:hover td{background:#ffe8f4}
+tr.row-google:hover td{background:#fff3e0}
 tr.row-tiktok:hover td{background:#fff0f3}
 .plat-block-header td{padding:6px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
-.ph-meta td{background:#e8f0ff;color:#1877F2;border-left:3px solid #1877F2}
-.ph-linkedin td{background:#e3edf8;color:#0A66C2;border-left:3px solid #0A66C2}
-.ph-google td{background:#e8f0fe;color:#4285F4;border-left:3px solid #4285F4}
+.ph-meta td{background:#eef0fd;color:#4169E1;border-left:3px solid #4169E1}
+.ph-linkedin td{background:#ffe4f0;color:#E91E8C;border-left:3px solid #E91E8C}
+.ph-google td{background:#fff3e0;color:#F57C00;border-left:3px solid #F57C00}
 .ph-tiktok td{background:#fff0f3;color:#FF0050;border-left:3px solid #FF0050}
 .plat-subtotal td{padding:7px 10px;font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;border-top:2px solid var(--border);border-bottom:1px solid var(--border)}
-.ps-meta td{background:#e8f0ff;color:#1877F2}
-.ps-linkedin td{background:#e3edf8;color:#0A66C2}
-.ps-google td{background:#e8f0fe;color:#4285F4}
+.ps-meta td{background:#eef0fd;color:#4169E1}
+.ps-linkedin td{background:#ffe4f0;color:#E91E8C}
+.ps-google td{background:#fff3e0;color:#F57C00}
 .ps-tiktok td{background:#fff0f3;color:#FF0050}
 
 /* Resize handle */
-.col-resize-handle{position:absolute;right:0;top:0;width:5px;height:100%;cursor:col-resize;z-index:10;background:transparent}
-.col-resize-handle:hover{background:var(--accent);opacity:.4}
+.col-resize-handle{position:absolute;right:0;top:0;width:6px;height:100%;cursor:col-resize;z-index:10;background:transparent}
+.col-resize-handle:hover,.col-resize-handle:active{background:var(--accent);opacity:.7}
+tr.drag-over td{border-top:2px solid var(--accent)!important;background:rgba(214,222,35,.12)!important}
+tr[draggable="true"]{cursor:grab}
+tr[draggable="true"]:active{cursor:grabbing}
 
 /* Save bar */
 .save-bar{display:none;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--orange-bg);border-top:1px solid var(--orange-border)}
@@ -305,6 +309,19 @@ tr.row-tiktok:hover td{background:#fff0f3}
     <div class="form-group"><label>Senha</label><input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"></div>
     <button class="btn-primary" onclick="doLogin()">Entrar</button>
     <div class="auth-error" id="login-error">Credenciais incorretas.</div>
+  </div>
+</div>
+
+<!-- ══ CONFIRM MODAL ══ -->
+<div id="confirm-overlay" class="hidden" style="position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;background:rgba(12,26,46,.55);backdrop-filter:blur(4px)">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:360px;width:100%;box-shadow:0 12px 48px rgba(0,0,0,.25);text-align:center">
+    <div style="font-size:24px;margin-bottom:12px">🗑️</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:6px">Remover campanha?</div>
+    <div id="confirm-camp-name" style="font-size:12px;color:var(--muted);margin-bottom:22px;font-style:italic"></div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button onclick="closeConfirm()" style="padding:9px 20px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:13px;font-weight:600;cursor:pointer">Cancelar</button>
+      <button id="confirm-btn-ok" style="padding:9px 20px;border:none;border-radius:8px;background:var(--red,#e53e3e);color:#fff;font-size:13px;font-weight:700;cursor:pointer">Remover</button>
+    </div>
   </div>
 </div>
 
@@ -365,7 +382,7 @@ let mesData = {}, realtimeData = {}, dirty = false, configEditing = false
 let wizardStep = 1, wizardIsModal = false
 
 let cfg = {
-  cliente:'', agencia:'',
+  cliente:'', agencia:'', moeda:'EUR',
   plataformas: ['meta','linkedin'],
   plataformas_config: {},
   tipo_orcamento: 'mensal_fixo', // anual | mensal_fixo | mensal_variavel
@@ -389,9 +406,13 @@ const PLAT_DEFS = [
 ]
 
 // ══ UTILS ══
+const MOEDA_SYM={EUR:'€',BRL:'R$',USD:'$'}
+const MOEDA_LOCALE={EUR:'pt-PT',BRL:'pt-BR',USD:'en-US'}
+function moedaSym(){return MOEDA_SYM[cfg.moeda]||'€'}
 function fmtEur(v) {
   if (v==null||isNaN(v)) return '—'
-  return '€'+Number(v).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})
+  const sym=moedaSym(),loc=MOEDA_LOCALE[cfg.moeda]||'pt-PT'
+  return sym+Number(v).toLocaleString(loc,{minimumFractionDigits:2,maximumFractionDigits:2})
 }
 function fmtPct(v) {
   if (!v||isNaN(v)) return ''
@@ -484,6 +505,11 @@ const WIZARD_STEPS = [
       <div class="wizard-section">Cliente</div>
       <div class="form-group"><label>Nome do cliente</label><input id="w-cliente" value="${cfg.cliente}" placeholder="Ex: PRR — Recuperar Portugal"></div>
       <div class="form-group"><label>Agência / Intermediário (opcional)</label><input id="w-agencia" value="${cfg.agencia}" placeholder="Ex: ON Partners"></div>
+      <div class="form-group"><label>Moeda</label><select id="w-moeda" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:13px">
+        <option value="EUR" ${(cfg.moeda||'EUR')==='EUR'?'selected':''}>EUR — Euro (€)</option>
+        <option value="BRL" ${cfg.moeda==='BRL'?'selected':''}>BRL — Real (R$)</option>
+        <option value="USD" ${cfg.moeda==='USD'?'selected':''}>USD — Dólar ($)</option>
+      </select></div>
     `
   },
   {
@@ -683,6 +709,7 @@ async function wizardNext() {
     const c=document.getElementById('w-cliente')?.value.trim()
     if(!c){alert('Indica o nome do cliente.');return}
     cfg.cliente=c; cfg.agencia=document.getElementById('w-agencia')?.value.trim()||''
+    cfg.moeda=document.getElementById('w-moeda')?.value||'EUR'
     wizardStep=2; renderWizardStep()
   } else if(wizardStep===2) {
     // plataformas_config already updated live via onAccSelect — just advance
@@ -864,11 +891,17 @@ function renderContent() {
               ${ce?`
                 <div class="config-field"><label>Cliente</label><input id="cfg-cliente" class="config-input" value="${cfg.cliente}"></div>
                 <div class="config-field"><label>Agência</label><input id="cfg-agencia" class="config-input" value="${cfg.agencia}"></div>
+                <div class="config-field"><label>Moeda</label><select id="cfg-moeda" class="config-input" style="width:100%">
+                  <option value="EUR" ${(cfg.moeda||'EUR')==='EUR'?'selected':''}>EUR — Euro (€)</option>
+                  <option value="BRL" ${cfg.moeda==='BRL'?'selected':''}>BRL — Real (R$)</option>
+                  <option value="USD" ${cfg.moeda==='USD'?'selected':''}>USD — Dólar ($)</option>
+                </select></div>
                 <div class="config-actions"><button class="btn-cfg-save" onclick="saveConfigInline()">Guardar</button><button class="btn-cfg-cancel" onclick="cancelConfigEdit()">Cancelar</button></div>
               `:`
                 <div class="project-field"><div class="pf-label">Cliente</div><div class="pf-value">${cfg.cliente}</div></div>
                 ${cfg.agencia?`<div class="project-field"><div class="pf-label">Agência</div><div class="pf-value">${cfg.agencia}</div></div>`:''}
                 <div class="project-field"><div class="pf-label">Mês</div><div class="pf-value">${nomeMes}</div></div>
+                <div class="project-field"><div class="pf-label">Moeda</div><div class="pf-value">${moedaSym()} (${cfg.moeda||'EUR'})</div></div>
               `}
             </div>
             ${!ce&&isEditor?`<button class="btn-pencil" onclick="toggleConfigEdit()" title="Editar">✏️</button>`:''}
@@ -913,8 +946,8 @@ function renderContent() {
           </colgroup>
           <thead><tr>
             <th>Plataforma</th><th>Início</th><th>Final</th><th>Últ. Atualização</th>
-            <th>Campanha</th><th class="num">Dias</th><th class="num">€/Dia</th>
-            <th class="num">€ Total</th><th class="num">%</th><th>Status</th>
+            <th>Campanha</th><th class="num">Dias</th><th class="num">${moedaSym()}/Dia</th>
+            <th class="num">${moedaSym()} Total</th><th class="num">%</th><th>Status</th>
             ${isEditor?'<th></th>':''}
           </tr></thead>
           <tbody id="camp-tbody"></tbody>
@@ -937,7 +970,8 @@ function cancelConfigEdit(){configEditing=false;renderContent()}
 async function saveConfigInline(){
   const c=document.getElementById('cfg-cliente')?.value.trim()
   const a=document.getElementById('cfg-agencia')?.value.trim()
-  if(c)cfg.cliente=c; if(a!==undefined)cfg.agencia=a
+  const m=document.getElementById('cfg-moeda')?.value
+  if(c)cfg.cliente=c; if(a!==undefined)cfg.agencia=a; if(m)cfg.moeda=m
   configEditing=false
   await saveConfig()
   document.getElementById('topbar-title').textContent=cfg.cliente||'Plano de Mídia'
@@ -960,7 +994,7 @@ async function saveVerbaMes(){
 }
 
 // ══ TABLE ROWS ══
-const PLAT_BRAND={meta:'#1877F2',linkedin:'#0A66C2',google:'#4285F4',tiktok:'#FF0050'}
+const PLAT_BRAND={meta:'#4169E1',linkedin:'#E91E8C',google:'#F57C00',tiktok:'#FF0050'}
 
 function getRtStatus(plat,r){
   let raw=''
@@ -994,10 +1028,15 @@ function getRtDailyBudget(plat,r){
   return 0
 }
 function getRtStartDate(plat,r){
-  if(plat==='google'){
-    const v=r['campaign.start_date_time']||''
-    return v?v.slice(0,10):''
-  }
+  if(plat==='meta') return r.start_time?r.start_time.slice(0,10):''
+  if(plat==='linkedin'){const v=r['runSchedule.start'];return v?new Date(v).toISOString().slice(0,10):''}
+  if(plat==='google'){const v=r['campaign.start_date_time']||'';return v?v.slice(0,10):''}
+  return ''
+}
+function getRtEndDate(plat,r){
+  if(plat==='meta') return r.stop_time?r.stop_time.slice(0,10):''
+  if(plat==='linkedin'){const v=r['runSchedule.end'];return v?new Date(v).toISOString().slice(0,10):''}
+  if(plat==='google'){const v=r['campaign.end_date_time']||'';return v&&!v.startsWith('2037')?v.slice(0,10):''}
   return ''
 }
 function findRtCampaign(plat,nome){
@@ -1026,13 +1065,15 @@ function renderVerifyRow(plat,campNome,plannedDaily,cols){
   const fmtV=v=>(v!=null&&v>0)?`€${v.toFixed(2)}`:'—'
 
   const startDate=match?getRtStartDate(plat,match):''
+  const endDate=match?getRtEndDate(plat,match):''
   const spend=match?getRtSpend(plat,match):null
   const budget=match?getRtDailyBudget(plat,match):null
   const status=match?getRtStatus(plat,match):null
 
   let diasAtivos='—'
   if(startDate){
-    const ms=new Date(today)-new Date(startDate)
+    const refEnd=endDate&&endDate<today?endDate:today
+    const ms=new Date(refEnd)-new Date(startDate)
     diasAtivos=Math.max(0,Math.round(ms/86400000))
   }
 
@@ -1061,11 +1102,11 @@ function renderVerifyRow(plat,campNome,plannedDaily,cols){
   vr.innerHTML=`
     <td>${badge}<br>${statusPill}</td>
     <td><span class="rv-label">Início</span><span class="rv-val">${fmtD(startDate)}</span></td>
+    <td><span class="rv-label">Final</span><span class="rv-val">${fmtD(endDate)}</span></td>
     <td></td>
-    <td><span class="rv-label">Atualizado</span><span class="rv-val">${fmtD(today)}</span></td>
     <td>${nomeCell}</td>
-    <td class="num"><span class="rv-label">Dias ativos</span><span class="rv-val">${diasAtivos}</span></td>
-    <td class="num"><span class="rv-label">€/dia real</span><span class="rv-val">${budgetCheck}${fmtV(budget)}</span></td>
+    <td class="num"><span class="rv-label">Dias</span><span class="rv-val">${diasAtivos}</span></td>
+    <td class="num"><span class="rv-label">${moedaSym()}/dia</span><span class="rv-val">${budgetCheck}${fmtV(budget)}</span></td>
     <td class="num"><span class="rv-label">Gasto</span><span class="rv-val ${match?(spend>0?'rv-ok':'rv-warn'):'rv-nomatch'}">${match?fmtV(spend):'—'}</span></td>
     <td></td><td></td>${cols>10?'<td></td>':''}
   `
@@ -1087,6 +1128,7 @@ function renderRows(campanhas,isEditor){
     items.forEach(({c,i})=>{
       platTotal+=c.total||0
       const tr=document.createElement('tr'); tr.className='row-'+plat
+      if(isEditor){tr.draggable=true;tr.ondragstart=e=>onRowDragStart(e,i,plat);tr.ondragend=e=>onRowDragEnd(e);tr.ondragover=e=>onRowDragOver(e,i,plat);tr.ondrop=e=>onRowDrop(e,i,plat)}
       const platOpts=activePlats.map(p=>`<option value="${p}" ${(c.plataforma||activePlats[0])===p?'selected':''}>${PLAT_LABELS[p]?.split(' ')[0]||p}</option>`).join('')
       tr.innerHTML=`
         <td><select class="plat-select plat-${c.plataforma||'meta'}" data-idx="${i}" data-field="plataforma" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>${platOpts}</select></td>
@@ -1136,9 +1178,45 @@ function addCampanha(){
   markDirty();renderContent()
 }
 function delCampanha(idx){
-  if(!confirm('Remover esta campanha?'))return
-  mesData[currentMes].campanhas.splice(idx,1)
-  markDirty();renderContent()
+  const camp=mesData[currentMes].campanhas[idx]
+  document.getElementById('confirm-camp-name').textContent=camp?.nome||'(sem nome)'
+  document.getElementById('confirm-overlay').classList.remove('hidden')
+  document.getElementById('confirm-btn-ok').onclick=()=>{
+    closeConfirm()
+    mesData[currentMes].campanhas.splice(idx,1)
+    markDirty();renderContent()
+  }
+}
+function closeConfirm(){
+  document.getElementById('confirm-overlay').classList.add('hidden')
+  document.getElementById('confirm-btn-ok').onclick=null
+}
+
+// ── drag-and-drop reorder ──
+let _dragIdx=null,_dragPlat=null
+function onRowDragStart(e,idx,plat){
+  _dragIdx=idx;_dragPlat=plat
+  e.dataTransfer.effectAllowed='move'
+  e.currentTarget.style.opacity='.4'
+}
+function onRowDragEnd(e){
+  e.currentTarget.style.opacity=''
+  document.querySelectorAll('tr.drag-over').forEach(r=>r.classList.remove('drag-over'))
+}
+function onRowDragOver(e,idx,plat){
+  if(_dragIdx===null||plat!==_dragPlat||idx===_dragIdx)return
+  e.preventDefault(); e.dataTransfer.dropEffect='move'
+  document.querySelectorAll('tr.drag-over').forEach(r=>r.classList.remove('drag-over'))
+  e.currentTarget.classList.add('drag-over')
+}
+function onRowDrop(e,dropIdx,plat){
+  e.preventDefault()
+  document.querySelectorAll('tr.drag-over').forEach(r=>r.classList.remove('drag-over'))
+  if(_dragIdx===null||plat!==_dragPlat||dropIdx===_dragIdx){_dragIdx=null;return}
+  const arr=mesData[currentMes].campanhas
+  const [moved]=arr.splice(_dragIdx,1)
+  arr.splice(dropIdx,0,moved)
+  _dragIdx=null;markDirty();renderContent()
 }
 function markDirty(){
   dirty=true

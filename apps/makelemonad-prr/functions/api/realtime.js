@@ -55,7 +55,7 @@ export async function onRequestGet(context) {
         integration_id: 'facebook_ads',
         connection_key: mc.connection_key,
         account_id: mc.account_id,
-        fields: ['campaign_name', 'spend', 'impressions', 'clicks', 'ctr', 'cpm', 'reach', 'daily_budget', 'effective_status'],
+        fields: ['campaign_name', 'spend', 'impressions', 'clicks', 'ctr', 'cpm', 'reach', 'daily_budget', 'effective_status', 'start_time', 'stop_time'],
         date_range: dateRange,
         limit: 5000,
         settings: { attribution_window: attr }
@@ -71,7 +71,7 @@ export async function onRequestGet(context) {
         connection_key: lc.connection_key,
         account_id: lc.account_id,
         data_view: 'campaign',
-        fields: ['campaignName', 'costInLocalCurrency', 'impressions', 'clicks', 'avgCTR', 'avgCPM', 'status'],
+        fields: ['campaignName', 'costInLocalCurrency', 'impressions', 'clicks', 'avgCTR', 'avgCPM', 'status', 'runSchedule.start', 'runSchedule.end'],
         date_range: dateRange,
         limit: 5000
       })
@@ -86,7 +86,7 @@ export async function onRequestGet(context) {
         connection_key: gc.connection_key,
         account_id: gc.account_id,
         data_view: 'campaign',
-        fields: ['campaign.name', 'metrics.cost_micros', 'metrics.impressions', 'metrics.clicks', 'metrics.ctr', 'campaign.start_date_time', 'campaign_budget.amount_micros', 'campaign.status'],
+        fields: ['campaign.name', 'metrics.cost_micros', 'metrics.impressions', 'metrics.clicks', 'metrics.ctr', 'campaign.start_date_time', 'campaign.end_date_time', 'campaign_budget.amount_micros', 'campaign.status'],
         date_range: dateRange,
         limit: 5000
       })
