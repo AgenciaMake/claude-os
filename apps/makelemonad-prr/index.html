@@ -820,6 +820,7 @@ async function selectMes(key) {
   await Promise.all([loadMes(key),loadRealtime(key)])
   await propagateCampaigns(key)
   await migrateHerdadas(key)
+  await syncFromPrevMonth(key)
   renderContent()
 }
 
@@ -880,12 +881,8 @@ async function propagateCampaigns(key) {
   }catch{}
 }
 
-// Migração retroactiva: marca campanhas já gravadas que vieram do mês anterior
-async function migrateHerdadas(key) {
-  const camps=mesData[key]?.campanhas||[]
-  // Só precisa migrar campanhas sem inicio e sem _propagated
-  const needsMig=camps.filter(c=>!c._propagated&&!c.inicio)
-  if(!needsMig.length)return
+// Carrega o mês anterior em cache (partilhado entre migrate e sync)
+async function loadPrevMes(key) {
   const [y,m]=key.split('-')
   const prevM=+m===1?12:+m-1
   const prevY=+m===1?+y-1:+y
@@ -894,10 +891,19 @@ async function migrateHerdadas(key) {
     try{
       const r=await fetch(`/api/data/${prevKey}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
       if(r.ok)mesData[prevKey]=await r.json()
-      else return
-    }catch{return}
+      else return null
+    }catch{return null}
   }
-  const prevCamps=mesData[prevKey]?.campanhas||[]
+  return mesData[prevKey]
+}
+
+// Migração retroactiva: marca campanhas já gravadas que vieram do mês anterior
+async function migrateHerdadas(key) {
+  const camps=mesData[key]?.campanhas||[]
+  const needsMig=camps.filter(c=>!c._propagated&&!c.inicio)
+  if(!needsMig.length)return
+  const prevData=await loadPrevMes(key)
+  const prevCamps=prevData?.campanhas||[]
   if(!prevCamps.length)return
   let changed=false
   needsMig.forEach(c=>{
@@ -905,9 +911,32 @@ async function migrateHerdadas(key) {
     if(inPrev){c._propagated=true;changed=true}
   })
   if(changed){
-    try{
-      await fetch(`/api/data/${key}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[key])})
-    }catch{}
+    try{await fetch(`/api/data/${key}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[key])})}catch{}
+  }
+}
+
+// Sincronização: campanhas propagadas sem inicio buscam dados actualizados do mês anterior
+async function syncFromPrevMonth(key) {
+  const camps=mesData[key]?.campanhas||[]
+  // Campanhas propagadas sem inicio — podem ter sido propagadas antes de os dados serem preenchidos
+  const toSync=camps.filter(c=>c._propagated&&!c.inicio)
+  if(!toSync.length)return
+  const prevData=await loadPrevMes(key)
+  const prevCamps=prevData?.campanhas||[]
+  if(!prevCamps.length)return
+  let changed=false
+  toSync.forEach(c=>{
+    const src=prevCamps.find(p=>p.nome===c.nome&&(p.plataforma||'')===(c.plataforma||''))
+    if(src&&src.inicio){
+      // Copiar dados de data/duração do mês anterior; manter status e edições locais
+      c.inicio=src.inicio
+      if(src.dias)c.dias=src.dias
+      if(src.euro_dia&&!c.euro_dia)c.euro_dia=src.euro_dia
+      changed=true
+    }
+  })
+  if(changed){
+    try{await fetch(`/api/data/${key}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[key])})}catch{}
   }
 }
 
