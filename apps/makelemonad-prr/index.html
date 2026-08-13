@@ -144,53 +144,66 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 
 /* ── BUDGET HEADER ── */
 .budget-header{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow)}
-.budget-grid{display:grid;grid-template-columns:190px 1fr 1fr 280px;min-height:130px}
+.budget-grid{display:grid;grid-template-columns:25% 1fr 1fr 34%}
 .budget-col{border-right:1px solid var(--border)}
 .budget-col:last-child{border-right:none}
 
 /* Col 1 — Identificação */
-.bc-id{padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between}
-.bc-id-top{flex:1}
-.project-field{display:grid;grid-template-columns:60px 1fr;gap:6px;align-items:center;margin-bottom:5px}
-.pf-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--faint)}
-.pf-value{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bc-id{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.bc-title-row{display:flex;align-items:flex-start;justify-content:space-between}
+.project-field{margin-bottom:4px}
+.pf-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);display:block;margin-bottom:1px}
+.pf-value{font-size:13px;font-weight:700;color:var(--text)}
+.bc-divider{border-top:1px solid var(--border);margin:4px 0}
+.oc-row{display:flex;align-items:center;justify-content:space-between;padding:3px 0}
+.oc-label{font-size:10px;color:var(--muted);font-weight:500}
+.oc-value{font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.oc-value.libre{font-size:14px;font-weight:800;color:var(--accent)}
+.oc-value.deduz{color:var(--muted);text-decoration:line-through;font-weight:500}
 
-/* Col 2 — Dados do Orçamento (2x2 grid) */
-.budget-middle{display:grid;grid-template-columns:1fr 1fr;height:100%}
-.bm-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);font-weight:600;margin-bottom:4px}
-.bm-value{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
-.bm-cell{padding:14px 18px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
-.bm-cell:nth-child(2n){border-right:none}
-.bm-cell:nth-last-child(-n+2){border-bottom:none}
+/* Col 2 — Previsão Planilha */
+.bc-prev{display:flex;flex-direction:column}
+.bc-col-title{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);padding:10px 18px 6px;border-bottom:1px solid var(--border)}
+.bc-metric-row{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid var(--border);flex:1}
+.bc-metric-row:last-child{border-bottom:none}
+.bc-metric-label{font-size:11px;color:var(--muted);font-weight:500}
+.bc-metric-val{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums}
+.bc-alert-row{padding:10px 18px;flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.bc-alert-row.ok{background:rgba(46,125,50,.06)}
+.bc-alert-row.warn{background:#fff3cd}
+.bc-alert-row.alert{background:#fff0f0}
+.bc-disponivel-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
+.bc-disponivel-val{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
+.bc-disponivel-val.ok{color:#2E7D32}
+.bc-disponivel-val.alert{color:#c62828}
+.bc-alert-msg{font-size:10px;font-weight:700;color:#c62828}
 
-/* Col 3 — Balanço do Plano */
-.bc-balanco{display:flex;flex-direction:column}
-.balanco-row{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid var(--border);flex:1}
-.balanco-row:last-child{border-bottom:none}
-.balanco-label{font-size:11px;color:var(--muted);font-weight:500}
-.balanco-value{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
-.balanco-value.hi{color:var(--accent);font-size:15px}
-.balanco-value.neg{color:var(--red,#e53e3e)}
-.a-utilizar-row{background:#D6DE23;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;flex:1}
-.a-utilizar-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#000}
-.a-utilizar-value{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;color:#000}
+/* Col 3 — Orçamento Disponível */
+.bc-sobra{display:flex;flex-direction:column}
+.bc-sobra-row{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid var(--border);flex:1}
+.bc-sobra-row:last-child{border-bottom:none}
+.bc-sobra-label{font-size:11px;color:var(--muted);font-weight:500}
+.bc-sobra-val{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+.bc-sobra-row.total-row{background:rgba(214,222,35,.1)}
+.bc-sobra-val.total{font-size:16px;font-weight:800;color:var(--accent)}
 
-/* Col 4 — Report Ninja RT */
-.platform-totals{padding:14px 18px}
-.platform-totals-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:10px}
-.plat-total-row{display:flex;align-items:center;justify-content:space-between;padding:4px 8px;border-radius:6px;margin-bottom:3px}
-.plat-total-row.meta{background:#E8F5E9}.plat-total-name.meta{color:#2E7D32}
-.plat-total-row.linkedin{background:#F3E5F5}.plat-total-name.linkedin{color:#6A1B9A}
-.plat-total-row.google{background:#FFF3E0}.plat-total-name.google{color:#E65100}
-.plat-total-row.tiktok{background:#E0F2F1}.plat-total-name.tiktok{color:#006064}
-.plat-total-name{font-size:12px;font-weight:600}
-.plat-total-val{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
-.plat-grand-row{display:flex;justify-content:space-between;padding:6px 8px;border-top:1px solid var(--border);margin-top:4px}
-.plat-grand-label{font-size:11px;font-weight:700}
-.plat-grand-val{font-size:14px;font-weight:800;font-variant-numeric:tabular-nums}
-.plat-sobra{display:flex;justify-content:space-between;padding:5px 8px;background:var(--green-bg);border-radius:6px;margin-top:4px}
-.plat-sobra-label{font-size:11px;font-weight:700;color:var(--green)}
-.plat-sobra-val{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+/* Col 4 — Planilha vs Fonte */
+.bc-compare{display:flex;flex-direction:column}
+.cmp-table{width:100%;border-collapse:collapse;flex:1}
+.cmp-table thead th{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);padding:8px 10px;border-bottom:1px solid var(--border);text-align:right}
+.cmp-table thead th:first-child{text-align:left}
+.cmp-table tbody td{padding:5px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right;vertical-align:middle}
+.cmp-table tbody td:first-child{text-align:left}
+.cmp-table tfoot td{padding:7px 10px;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;text-align:right;border-top:2px solid var(--border)}
+.cmp-table tfoot td:first-child{text-align:left}
+.cmp-plat-badge{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px}
+.cmp-plat-badge.meta{background:#E8F5E9;color:#2E7D32}
+.cmp-plat-badge.linkedin{background:#F3E5F5;color:#6A1B9A}
+.cmp-plat-badge.google{background:#FFF3E0;color:#E65100}
+.cmp-plat-badge.tiktok{background:#E0F2F1;color:#006064}
+.diff-ok{color:#2E7D32}
+.diff-under{color:#E65100}
+.diff-over{color:#c62828}
 .btn-pencil{background:none;border:none;cursor:pointer;color:var(--faint);font-size:13px;padding:2px 6px;border-radius:4px;transition:color .15s,background .15s}
 .btn-pencil:hover{color:var(--accent);background:var(--accent-bg)}
 
@@ -299,8 +312,8 @@ tr[draggable="true"]:active{cursor:grabbing}
 .live-dot{display:inline-block;width:6px;height:6px;background:#2E7D32;border-radius:50%;animation:blink 2s ease-in-out infinite;margin-right:4px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-@media(max-width:1100px){
-  .budget-grid{grid-template-columns:190px 1fr 280px}
+@media(max-width:1200px){
+  .budget-grid{grid-template-columns:25% 1fr 34%}
 }
 @media(max-width:900px){
   .budget-grid{grid-template-columns:1fr}
@@ -867,6 +880,17 @@ function renderContent() {
   const activePlats=cfg.plataformas||['meta','linkedin']
   const totalPlataformas=activePlats.reduce((s,p)=>s+(rt[p]||0),0)
 
+  // Per-platform planilha totals (ativo only)
+  const platPlanilha={}
+  activePlats.forEach(p=>{
+    platPlanilha[p]=campanhas
+      .filter(c=>(c.plataforma||activePlats[0])===p&&c.status==='ativo')
+      .reduce((s,c)=>s+(c.total||0),0)
+  })
+
+  // Disponível = orçamento livre do mês - previsto em planilha (sem sobra anterior)
+  const disponivel=orcamento_mes-totalPrevisto
+
   // Monthly budget/verba override bars
   const needsBudgetBar=cfg.tipo_orcamento==='mensal_variavel'&&isEditor
   const needsVerbaBar=cfg.verba_seguranca_por_mes&&isEditor
@@ -883,91 +907,113 @@ function renderContent() {
     </div>`:''}
   `
 
-  // Platform totals col
-  const platRows=activePlats.map(p=>`
-    <div class="plat-total-row ${p}">
-      <span class="plat-total-name ${p}">${PLAT_LABELS[p]?.split(' ')[0]||p}</span>
-      <span style="display:flex;align-items:center;gap:4px">
-        <span class="plat-total-val">${(rt[p]||0)>0?fmtEur(rt[p]):'—'}</span>
-        ${(rt[p]||0)>0?'<span style="font-size:13px">✅</span>':''}
-      </span>
-    </div>`).join('')
-
-  // Orçamento label for col 2
-  const orcLabel=cfg.tipo_orcamento==='anual'?'Valor Total Anual':'Orçamento'
+  // Compare rows: planilha vs fonte per platform
+  const compareRows=activePlats.map(p=>{
+    const plan=platPlanilha[p]||0
+    const fonte=rt[p]||0
+    const diff=fonte-plan
+    const hasDiff=plan>0||fonte>0
+    const diffCls=!hasDiff?'':Math.abs(diff/Math.max(plan,1))<0.05?'diff-ok':diff<0?'diff-under':'diff-over'
+    return `<tr>
+      <td><span class="cmp-plat-badge ${p}">${PLAT_LABELS[p]?.split(' ')[0]||p}</span></td>
+      <td>${plan>0?fmtEur(plan):'—'}</td>
+      <td>${fonte>0?fmtEur(fonte):'—'}</td>
+      <td class="${diffCls}">${hasDiff?(diff>=0?'+':'')+fmtEur(diff):'—'}</td>
+    </tr>`
+  }).join('')
+  const totalDiff=totalPlataformas-totalPrevisto
 
   document.getElementById('main-content').innerHTML=`
     ${mesBars}
     <div class="budget-header">
       <div class="budget-grid">
 
-        <!-- ── Col 1: Identificação ── -->
+        <!-- ── Col 1: Identificação + Orçamento ── -->
         <div class="budget-col bc-id">
-          <div class="bc-id-top">
-            ${ce?`
-              <div class="config-field"><label>Cliente</label><input id="cfg-cliente" class="config-input" value="${cfg.cliente}"></div>
-              <div class="config-field"><label>Agência</label><input id="cfg-agencia" class="config-input" value="${cfg.agencia}"></div>
-              <div class="config-field"><label>Moeda</label><select id="cfg-moeda" class="config-input" style="width:100%">
-                <option value="EUR" ${(cfg.moeda||'EUR')==='EUR'?'selected':''}>EUR — Euro (€)</option>
-                <option value="BRL" ${cfg.moeda==='BRL'?'selected':''}>BRL — Real (R$)</option>
-                <option value="USD" ${cfg.moeda==='USD'?'selected':''}>USD — Dólar ($)</option>
-              </select></div>
-              <div class="config-actions"><button class="btn-cfg-save" onclick="saveConfigInline()">Guardar</button><button class="btn-cfg-cancel" onclick="cancelConfigEdit()">Cancelar</button></div>
-            `:`
-              <div style="display:flex;align-items:flex-start;justify-content:space-between">
-                <div>
-                  <div class="project-field"><div class="pf-label">Cliente</div><div class="pf-value">${cfg.cliente}</div></div>
-                  ${cfg.agencia?`<div class="project-field"><div class="pf-label">Agência</div><div class="pf-value">${cfg.agencia}</div></div>`:''}
-                  <div class="project-field"><div class="pf-label">Mês</div><div class="pf-value">${nomeMes}</div></div>
-                  <div class="project-field"><div class="pf-label">Moeda</div><div class="pf-value">${moedaSym()} (${cfg.moeda||'EUR'})</div></div>
-                </div>
-                ${isEditor?`<button class="btn-pencil" onclick="toggleConfigEdit()" title="Editar">✏️</button>`:''}
+          ${ce?`
+            <div class="config-field"><label>Cliente</label><input id="cfg-cliente" class="config-input" value="${cfg.cliente}"></div>
+            <div class="config-field"><label>Agência</label><input id="cfg-agencia" class="config-input" value="${cfg.agencia}"></div>
+            <div class="config-field"><label>Moeda</label><select id="cfg-moeda" class="config-input" style="width:100%">
+              <option value="EUR" ${(cfg.moeda||'EUR')==='EUR'?'selected':''}>EUR — Euro (€)</option>
+              <option value="BRL" ${cfg.moeda==='BRL'?'selected':''}>BRL — Real (R$)</option>
+              <option value="USD" ${cfg.moeda==='USD'?'selected':''}>USD — Dólar ($)</option>
+            </select></div>
+            <div class="config-actions"><button class="btn-cfg-save" onclick="saveConfigInline()">Guardar</button><button class="btn-cfg-cancel" onclick="cancelConfigEdit()">Cancelar</button></div>
+          `:`
+            <div class="bc-title-row">
+              <div style="flex:1;min-width:0">
+                <div class="project-field"><span class="pf-label">Cliente</span><span class="pf-value">${cfg.cliente}</span></div>
+                ${cfg.agencia?`<div class="project-field"><span class="pf-label">Agência</span><span class="pf-value">${cfg.agencia}</span></div>`:''}
+                <div class="project-field"><span class="pf-label">Mês</span><span class="pf-value">${nomeMes}</span></div>
+                <div class="project-field"><span class="pf-label">Moeda</span><span class="pf-value">${moedaSym()} (${cfg.moeda||'EUR'})</span></div>
               </div>
+            </div>
+            <div class="bc-divider"></div>
+            ${cfg.tipo_orcamento==='anual'?`
+              <div class="oc-row"><span class="oc-label">Orçamento anual</span><span class="oc-value">${fmtEur(cfg.orcamento_anual)}</span></div>
+              <div class="oc-row"><span class="oc-label">Valor por mês (${MESES.length||12}m)</span><span class="oc-value">${fmtEur(valorMes)}</span></div>
+            `:`
+              <div class="oc-row"><span class="oc-label">Orçamento mensal</span><span class="oc-value">${fmtEur(valorMes)}</span></div>
             `}
+            <div class="oc-row"><span class="oc-label">− Margem de segurança</span><span class="oc-value deduz">${fmtEur(verba)}</span></div>
+            <div class="oc-row" style="border-top:1px dashed var(--border);padding-top:5px;margin-top:3px"><span class="oc-label" style="font-weight:700;color:var(--text)">Livre por mês</span><span class="oc-value libre">${fmtEur(orcamento_mes)}</span></div>
+          `}
+        </div>
+
+        <!-- ── Col 2: Previsão Planilha ── -->
+        <div class="budget-col bc-prev">
+          <div class="bc-col-title">Previsão em Planilha</div>
+          <div class="bc-metric-row">
+            <span class="bc-metric-label">Previsto em planilha</span>
+            <span class="bc-metric-val">${fmtEur(totalPrevisto)}</span>
+          </div>
+          <div class="bc-alert-row ${disponivel<0?'alert':disponivel<orcamento_mes*0.1?'warn':'ok'}">
+            <div class="bc-disponivel-label">Disponível no mês</div>
+            <div class="bc-disponivel-val ${disponivel<0?'alert':'ok'}">${fmtEur(disponivel)}</div>
+            ${disponivel<0?`<div class="bc-alert-msg">⚠ Previsto excede o orçamento livre</div>`:''}
           </div>
         </div>
 
-        <!-- ── Col 2: Dados do Orçamento ── -->
-        <div class="budget-col">
-          <div class="budget-middle">
-            <div class="bm-cell"><div class="bm-label">${orcLabel}</div><div class="bm-value">${cfg.tipo_orcamento==='anual'?fmtEur(cfg.orcamento_anual):fmtEur(valorMes)}</div></div>
-            <div class="bm-cell"><div class="bm-label">Valor do Mês</div><div class="bm-value">${fmtEur(valorMes)}</div></div>
-            <div class="bm-cell"><div class="bm-label">Verba de Segurança</div><div class="bm-value">${fmtEur(verba)}</div></div>
-            <div class="bm-cell"><div class="bm-label">Sobra Mês Anterior</div><div class="bm-value" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">${fmtEur(sobraAnterior)}</div></div>
+        <!-- ── Col 3: Orçamento Disponível (c/ sobra) ── -->
+        <div class="budget-col bc-sobra">
+          <div class="bc-col-title">Orçamento Disponível</div>
+          <div class="bc-sobra-row">
+            <span class="bc-sobra-label">Livre este mês</span>
+            <span class="bc-sobra-val">${fmtEur(orcamento_mes)}</span>
+          </div>
+          <div class="bc-sobra-row">
+            <span class="bc-sobra-label" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">+ Sobra mês anterior</span>
+            <span class="bc-sobra-val" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">${fmtEur(sobraAnterior)}</span>
+          </div>
+          <div class="bc-sobra-row total-row">
+            <span class="bc-sobra-label" style="font-weight:700;color:var(--text)">= Total disponível</span>
+            <span class="bc-sobra-val total">${fmtEur(orcComSobra)}</span>
           </div>
         </div>
 
-        <!-- ── Col 3: Balanço do Plano ── -->
-        <div class="budget-col bc-balanco">
-          <div class="balanco-row">
-            <span class="balanco-label">Orçamento + Sobra Anterior</span>
-            <span class="balanco-value hi">${fmtEur(orcComSobra)}</span>
-          </div>
-          <div class="balanco-row">
-            <span class="balanco-label">Valor utilizado em planilha</span>
-            <span class="balanco-value">${fmtEur(totalUtilizado)}</span>
-          </div>
-          <div class="a-utilizar-row">
-            <span class="a-utilizar-label">A utilizar</span>
-            <span class="a-utilizar-value ${aUtilizar<0?'neg':''}">${fmtEur(aUtilizar)}</span>
-          </div>
-        </div>
-
-        <!-- ── Col 4: Gasto Real (Report Ninja) ── -->
-        <div class="budget-col platform-totals">
-          <div class="platform-totals-title">Gasto Real (Report Ninja)</div>
-          ${platRows}
-          <div class="plat-grand-row"><span class="plat-grand-label">Total Usado</span><span class="plat-grand-val">${fmtEur(totalPlataformas)}</span></div>
-          <div class="plat-sobra"><span class="plat-sobra-label">Sobra da Plataforma</span><span class="plat-sobra-val" style="color:${valorMes-totalPlataformas<0?'var(--red,#e53e3e)':''}">${fmtEur(valorMes-totalPlataformas)}</span></div>
+        <!-- ── Col 4: Planilha vs Fonte por plataforma ── -->
+        <div class="budget-col bc-compare">
+          <div class="bc-col-title">Planilha vs Fonte (Report Ninja)</div>
+          <table class="cmp-table">
+            <thead><tr>
+              <th>Plataforma</th>
+              <th>Planilha</th>
+              <th>Fonte</th>
+              <th>Dif.</th>
+            </tr></thead>
+            <tbody>${compareRows}</tbody>
+            <tfoot><tr>
+              <td style="font-weight:700;text-align:left">Total</td>
+              <td>${fmtEur(totalPrevisto)}</td>
+              <td>${totalPlataformas>0?fmtEur(totalPlataformas):'—'}</td>
+              <td class="${totalPlataformas>0?(Math.abs(totalDiff/Math.max(totalPrevisto,1))<0.05?'diff-ok':totalDiff<0?'diff-under':'diff-over'):''}">
+                ${totalPlataformas>0?(totalDiff>=0?'+':'')+fmtEur(totalDiff):'—'}
+              </td>
+            </tr></tfoot>
+          </table>
         </div>
 
       </div>
-    </div>
-
-    <div class="summary-band">
-      <div class="summary-card previsto"><div class="summary-label">Previsto de Gasto</div><div class="summary-value">${fmtEur(totalPrevisto)}</div></div>
-      <div class="summary-card sobra"><div class="summary-label">Sobra do Mês</div><div class="summary-value">${fmtEur(sobraMes)}</div></div>
-      <div class="summary-card anterior"><div class="summary-label">Sobra do Mês Anterior</div><div class="summary-value">${fmtEur(sobraAnterior)}</div></div>
     </div>
 
     <div class="table-card">
