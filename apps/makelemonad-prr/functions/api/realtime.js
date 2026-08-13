@@ -28,17 +28,16 @@ async function fetchMetaCampaignDates(graphToken, accountId) {
     if (!data.data) return {}
     // Build map: lowercase name → {start_time, stop_time}
     const map = {}
-    data.data.forEach(c => {
-      map[c.name.toLowerCase()] = { start_time: c.start_time || '', stop_time: c.stop_time || '' }
-    })
+    const addToMap = c => {
+      map[c.name.toLowerCase()] = { name: c.name, start_time: c.start_time || '', stop_time: c.stop_time || '', status: c.status || '' }
+    }
+    data.data.forEach(addToMap)
     // Handle pagination (up to 1 extra page)
     if (data.paging?.next) {
       const r2 = await fetch(data.paging.next)
       if (r2.ok) {
         const d2 = await r2.json()
-        ;(d2.data || []).forEach(c => {
-          map[c.name.toLowerCase()] = { start_time: c.start_time || '', stop_time: c.stop_time || '' }
-        })
+        ;(d2.data || []).forEach(addToMap)
       }
     }
     return map
@@ -144,15 +143,33 @@ export async function onRequestGet(context) {
   const out = {}
   keys.forEach((k, i) => { out[k] = results[i] })
 
-  // Enrich Meta rows with start_time/stop_time from Graph API
+  // Enrich Meta rows with Graph API data + inject zero-spend campaigns Report Ninja omits
   if (out.meta && env.META_GRAPH_TOKEN) {
     const mc = platCfg.meta || { account_id: '2364073693796998' }
     const dateMap = await fetchMetaCampaignDates(env.META_GRAPH_TOKEN, mc.account_id)
     const rows = out.meta?.data?.rows || out.meta?.rows || []
+    // Inject dates into existing rows
     rows.forEach(row => {
-      const dates = dateMap[(row.campaign_name || '').toLowerCase()]
-      if (dates) { row.start_time = dates.start_time; row.stop_time = dates.stop_time }
+      const info = dateMap[(row.campaign_name || '').toLowerCase()]
+      if (info) { row.start_time = info.start_time; row.stop_time = info.stop_time }
     })
+    // Inject zero-spend campaigns that Report Ninja omitted (spend=0 → not returned)
+    const existing = new Set(rows.map(r => (r.campaign_name || '').toLowerCase()))
+    Object.values(dateMap).forEach(info => {
+      if (!existing.has(info.name.toLowerCase())) {
+        rows.push({
+          campaign_name: info.name,
+          spend: 0, impressions: 0, clicks: 0, daily_budget: 0,
+          effective_status: info.status,
+          start_time: info.start_time,
+          stop_time: info.stop_time,
+          _zero_spend: true
+        })
+      }
+    })
+    // Ensure rows array is referenced in out.meta
+    if (out.meta.data) out.meta.data.rows = rows
+    else out.meta.rows = rows
   }
 
   return cors(Response.json(out))
