@@ -423,6 +423,7 @@ tr[draggable="true"]:active{cursor:grabbing}
 let currentToken = null, currentRole = null, currentMes = null
 let mesData = {}, realtimeData = {}, realtimeTs = {}, dirty = false, configEditing = false
 const RT_TTL = 5 * 60 * 1000 // 5 min cache para evitar HTTP 429
+let _rtCountdownTimer = null, _rtRetryAt = null, _rtRetryKey = null
 let wizardStep = 1, wizardIsModal = false
 let sortField = null, sortDir = 1
 
@@ -932,18 +933,46 @@ async function loadRealtime(key,force=false) {
     const is429=data&&Object.values(data).some(p=>p?._error?.includes('429'))
     realtimeData[key]=data&&!data.error?data:{}
     if(!is429) realtimeTs[key]=now // só cachear respostas sem erro 429
-    const hasData=data&&Object.keys(data).some(p=>data[p]?.data?.rows?.length||data[p]?.rows?.length)
-    setRtStatus(is429?'ratelimit':hasData?'ok':data?.error?'error':'empty')
-  }catch{realtimeData[key]={};setRtStatus('error')}
+    if(is429){
+      // Extrair Retry-After do primeiro platform com _retryAfter
+      const retryAfterSec=Object.values(data||{}).find(p=>p?._retryAfter)?._retryAfter||60
+      startRtCountdown(retryAfterSec, key)
+    } else {
+      stopRtCountdown()
+      const hasData=data&&Object.keys(data).some(p=>data[p]?.data?.rows?.length||data[p]?.rows?.length)
+      setRtStatus(hasData?'ok':data?.error?'error':'empty')
+    }
+  }catch{realtimeData[key]={};stopRtCountdown();setRtStatus('error')}
 }
-function setRtStatus(s){
+function setRtStatus(s,extra){
   const dot=document.getElementById('rt-dot'),lbl=document.getElementById('rt-label')
   if(!dot||!lbl)return
   if(s==='loading'){dot.style.background='#FB8C00';lbl.textContent='A carregar RT…'}
   else if(s==='ok'){dot.style.background='#2E7D32';lbl.textContent='Dados via API ✓'}
   else if(s==='empty'){dot.style.background='#FB8C00';lbl.textContent='RT: sem dados no período'}
-  else if(s==='ratelimit'){dot.style.background='#9E9E9E';lbl.textContent='RT: limite atingido — aguarda 1 min e clica ⟳'}
+  else if(s==='ratelimit'){dot.style.background='#9E9E9E';lbl.textContent=extra||'RT: limite atingido — aguarda e clica ⟳'}
   else{dot.style.background='#c62828';lbl.textContent='RT: erro na ligação'}
+}
+function startRtCountdown(seconds, key) {
+  stopRtCountdown()
+  _rtRetryAt=Date.now()+seconds*1000
+  _rtRetryKey=key
+  const tick=()=>{
+    const rem=Math.max(0,Math.ceil((_rtRetryAt-Date.now())/1000))
+    const m=Math.floor(rem/60),s=rem%60
+    const t=m>0?`${m}m ${String(s).padStart(2,'0')}s`:`${s}s`
+    setRtStatus('ratelimit',`RT: limite atingido — nova tentativa em ${t}`)
+    if(rem<=0){
+      stopRtCountdown()
+      loadRealtime(_rtRetryKey,true).then(()=>renderContent())
+    }
+  }
+  tick()
+  _rtCountdownTimer=setInterval(tick,1000)
+}
+function stopRtCountdown(){
+  if(_rtCountdownTimer){clearInterval(_rtCountdownTimer);_rtCountdownTimer=null}
+  _rtRetryAt=null;_rtRetryKey=null
 }
 async function refreshRt(){
   const btn=document.getElementById('btn-rt-refresh')

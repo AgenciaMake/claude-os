@@ -50,7 +50,10 @@ async function queryNinja(token, body) {
     headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   })
-  if (!r.ok) return { _error: `HTTP ${r.status}` }
+  if (!r.ok) {
+    const retryAfter = r.status === 429 ? (parseInt(r.headers.get('Retry-After')) || null) : null
+    return { _error: `HTTP ${r.status}`, ...(retryAfter ? { _retryAfter: retryAfter } : {}) }
+  }
   const data = await r.json()
   if (data.status === 'error') return { _error: data.message || 'Erro desconhecido' }
   return data
