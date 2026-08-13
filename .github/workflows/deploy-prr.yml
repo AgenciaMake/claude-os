@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'apps/makelemonad-prr/**'
+      - '.github/workflows/deploy-prr.yml'
+  workflow_dispatch:
 
 jobs:
   deploy:
