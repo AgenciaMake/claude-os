@@ -135,12 +135,12 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .role-viewer{background:var(--blue-bg);color:var(--blue)}
 .btn-icon{font-size:13px;color:var(--muted);background:none;border:none;cursor:pointer;padding:5px 8px;border-radius:5px}
 .btn-icon:hover{background:var(--surface2)}
-.tabs-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:flex-end;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--surface);border-top:1px solid var(--border);border-bottom:none;padding:0 20px;display:flex;align-items:flex-start;gap:2px;overflow-x:auto;scrollbar-width:none}
 .tabs-bar::-webkit-scrollbar{display:none}
-.tab{padding:10px 14px;font-size:12px;font-weight:600;color:var(--muted);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s}
+.tab{padding:10px 14px;font-size:12px;font-weight:600;color:var(--muted);border:none;background:none;cursor:pointer;border-top:2px solid transparent;border-bottom:none;white-space:nowrap;transition:color .15s,border-color .15s}
 .tab:hover{color:var(--text)}
-.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.content{padding:20px;flex:1;width:100%}
+.tab.active{color:var(--accent);border-top-color:var(--accent)}
+.content{padding:20px 20px 60px 20px;flex:1;width:100%}
 
 /* ── BUDGET HEADER ── */
 .budget-header{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow)}
@@ -818,6 +818,7 @@ async function selectMes(key) {
   sessionStorage.setItem('prr_mes',key)
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',MESES[i]===key))
   await Promise.all([loadMes(key),loadRealtime(key)])
+  await loadPrevMes(key)
   await propagateCampaigns(key)
   await migrateHerdadas(key)
   await syncFromPrevMonth(key)
