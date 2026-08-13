@@ -910,12 +910,17 @@ async function migrateHerdadas(key) {
 }
 
 async function loadRealtime(key,force=false) {
-  // Cache de 5 min: evita HTTP 429 ao navegar entre meses repetidamente
   const now=Date.now()
+  // Usar cache só se não houver erros 429 guardados
   if(!force&&realtimeData[key]&&realtimeTs[key]&&(now-realtimeTs[key])<RT_TTL){
-    const hasData=Object.keys(realtimeData[key]).some(p=>realtimeData[key][p]?.data?.rows?.length||realtimeData[key][p]?.rows?.length)
-    setRtStatus(hasData?'ok':'empty')
-    return
+    const is429=Object.values(realtimeData[key]).some(p=>p?._error?.includes('429'))
+    if(!is429){
+      const hasData=Object.keys(realtimeData[key]).some(p=>realtimeData[key][p]?.data?.rows?.length||realtimeData[key][p]?.rows?.length)
+      setRtStatus(hasData?'ok':'empty')
+      return
+    }
+    // Cache com 429 → não usar, tentar de novo
+    delete realtimeData[key]; delete realtimeTs[key]
   }
   setRtStatus('loading')
   try{
@@ -924,10 +929,11 @@ async function loadRealtime(key,force=false) {
     const end=`${y}-${m}-${String(ld).padStart(2,'0')}`
     const r=await fetch(`/api/realtime?start=${y}-${m}-01&end=${end}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
     const data=r.ok?await r.json():null
+    const is429=data&&Object.values(data).some(p=>p?._error?.includes('429'))
     realtimeData[key]=data&&!data.error?data:{}
-    realtimeTs[key]=now
+    if(!is429) realtimeTs[key]=now // só cachear respostas sem erro 429
     const hasData=data&&Object.keys(data).some(p=>data[p]?.data?.rows?.length||data[p]?.rows?.length)
-    setRtStatus(hasData?'ok':data?.error?'error':'empty')
+    setRtStatus(is429?'ratelimit':hasData?'ok':data?.error?'error':'empty')
   }catch{realtimeData[key]={};setRtStatus('error')}
 }
 function setRtStatus(s){
@@ -936,6 +942,7 @@ function setRtStatus(s){
   if(s==='loading'){dot.style.background='#FB8C00';lbl.textContent='A carregar RT…'}
   else if(s==='ok'){dot.style.background='#2E7D32';lbl.textContent='Dados via API ✓'}
   else if(s==='empty'){dot.style.background='#FB8C00';lbl.textContent='RT: sem dados no período'}
+  else if(s==='ratelimit'){dot.style.background='#9E9E9E';lbl.textContent='RT: limite atingido — aguarda 1 min e clica ⟳'}
   else{dot.style.background='#c62828';lbl.textContent='RT: erro na ligação'}
 }
 async function refreshRt(){
@@ -1331,8 +1338,12 @@ function renderVerifyRow(plat,campNome,plannedDaily,cols){
   }
   const platRows=(rd[plat].data?.rows)||(rd[plat].rows)||[]
   if(platRows.length===0){
-    const errMsg=rd[plat]._error
-    vr.innerHTML=`<td><span class="rv-badge" style="background:${brand}22;color:${brand}">Fonte</span></td><td colspan="${cols-1}" style="color:var(--faint);font-style:italic">${errMsg?`Erro da fonte: ${errMsg}`:'Sem campanhas no período'}</td>`
+    const errMsg=rd[plat]._error||''
+    const is429=errMsg.includes('429')
+    const msg=is429
+      ?'Aguardando dados — limite de pedidos da API atingido (⟳ para tentar)'
+      :errMsg?`Erro da fonte: ${errMsg}`:'Sem campanhas no período'
+    vr.innerHTML=`<td><span class="rv-badge" style="background:${brand}22;color:${brand}">Fonte</span></td><td colspan="${cols-1}" style="color:var(--faint);font-style:italic">${msg}</td>`
     return vr
   }
   const match=findRtCampaign(plat,campNome)
