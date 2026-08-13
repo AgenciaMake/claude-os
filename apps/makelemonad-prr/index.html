@@ -840,20 +840,23 @@ async function refreshRt(){
 
 // ══ CALC ══
 function calcCampanhas(campanhas) {
-  const [y,m]=currentMes.split('-')
-  const mesEnd=new Date(+y,+m,1)
   const valorMes=budgetForMes(currentMes)
   const verba=verbaForMes(currentMes)
   const orcamento_mes=valorMes-verba
   let totalPrevisto=0
   campanhas.forEach(c=>{
-    if(c.inicio&&c.fim){
-      const start=new Date(c.inicio),end=new Date(c.fim)
-      const eff=end<=mesEnd?end:mesEnd
-      const d=(eff-start)/86400000
+    // Migration: data antiga tem inicio+fim mas não tem dias → calcular
+    if(!c.dias&&c.inicio&&c.fim){
+      const d=(new Date(c.fim)-new Date(c.inicio))/86400000
       c.dias=d>=0?Math.round(d)+1:0
-    } else c.dias=0
-    c.total=c.dias*(parseFloat(c.euro_dia)||0)
+    }
+    // Derivar fim a partir de inicio + dias
+    if(c.inicio&&c.dias){
+      const s=new Date(c.inicio)
+      s.setDate(s.getDate()+(parseInt(c.dias)||0)-1)
+      c.fim=s.toISOString().slice(0,10)
+    }
+    c.total=(parseInt(c.dias)||0)*(parseFloat(c.euro_dia)||0)
     if(c.status==='ativo') totalPrevisto+=c.total
   })
   campanhas.forEach(c=>{c.pct=(c.status==='ativo'&&totalPrevisto>0)?(c.total/totalPrevisto*100):0})
@@ -1049,7 +1052,7 @@ function renderContent() {
             <col><col><col><col><col><col><col><col><col><col>${isEditor?'<col>':''}
           </colgroup>
           <thead><tr>
-            <th>Plataforma</th><th>Início</th><th>Final</th><th>Últ. Atualização</th>
+            <th>Plataforma</th><th>Início</th><th style="color:var(--muted)">Final ↩</th><th>Últ. Atualização</th>
             <th>Campanha</th><th class="num">Dias</th><th class="num">${moedaSym()}/Dia</th>
             <th class="num">${moedaSym()} Total</th><th class="num">%</th><th>Status</th>
             ${isEditor?'<th></th>':''}
@@ -1256,10 +1259,10 @@ function renderRows(campanhas,isEditor){
       tr.innerHTML=`
         <td><select class="plat-select plat-${c.plataforma||'meta'}" data-idx="${i}" data-field="plataforma" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>${platOpts}</select></td>
         <td><input class="cell-input date-input" type="date" value="${c.inicio||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="inicio" onchange="onCellChange(this)"></td>
-        <td><input class="cell-input date-input" type="date" value="${c.fim||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="fim" onchange="onCellChange(this)"></td>
+        <td style="text-align:center;color:var(--muted);font-size:12px;white-space:nowrap">${c.fim?c.fim.slice(5).split('-').reverse().join('/'):'—'}</td>
         <td><input class="cell-input date-input" type="date" value="${c.ultima_atualizacao||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="ultima_atualizacao" onchange="onCellChange(this)"></td>
         <td><input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" ${!isEditor?'readonly':''} data-idx="${i}" data-field="nome" onchange="onCellChange(this)"></td>
-        <td class="num"><strong>${c.dias||0}</strong></td>
+        <td class="num">${isEditor?`<input class="cell-input num-input" type="number" min="1" step="1" value="${c.dias||''}" placeholder="Dias" data-idx="${i}" data-field="dias" onchange="onCellChange(this)">`:`<strong>${c.dias||0}</strong>`}</td>
         <td class="num">${isEditor?`<input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" data-idx="${i}" data-field="euro_dia" onchange="onCellChange(this)">`:`<strong>${c.euro_dia?fmtEur(parseFloat(c.euro_dia)):'—'}</strong>`}</td>
         <td class="num"><strong>${fmtEur(c.total)}</strong></td>
         <td class="num">${c.status==='ativo'?fmtPct(c.pct):''}</td>
