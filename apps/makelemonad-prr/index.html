@@ -1152,7 +1152,7 @@ function findRtCampaign(plat,nome){
   const rows=(rd[plat].data?.rows)||(rd[plat].rows)||[]
   const norm=s=>(s||'').toLowerCase().replace(/\s+/g,' ').trim()
   // Remove trailing date-like suffix: " - 11/08/2026", " - 2026-08-11", " — cópia" etc.
-  const stripDate=s=>s.replace(/[\s\-–—]+(\d{2}[\/\-]\d{2}[\/\-]\d{4}|\d{4}[\/\-]\d{2}[\/\-]\d{2}).*$/i,'').trim()
+  const stripDate=s=>s.replace(/[\s\-–—]+(\d{2}[\/\-]\d{2}([\/\-]\d{4})?|\d{4}[\/\-]\d{2}[\/\-]\d{2})\s*$/i,'').trim()
   const pn=norm(nome)
   if(!pn) return null
   // 1. Exact
@@ -1263,7 +1263,7 @@ function renderRows(campanhas,isEditor){
         <td><input class="cell-input date-input" type="date" value="${c.ultima_atualizacao||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="ultima_atualizacao" onchange="onCellChange(this)"></td>
         <td><input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" ${!isEditor?'readonly':''} data-idx="${i}" data-field="nome" onchange="onCellChange(this)"></td>
         <td class="num">${isEditor?`<input class="cell-input num-input" type="number" min="1" step="1" value="${c.dias||''}" placeholder="Dias" data-idx="${i}" data-field="dias" onchange="onCellChange(this)">`:`<strong>${c.dias||0}</strong>`}</td>
-        <td class="num">${isEditor?`<span style="display:inline-flex;align-items:center;gap:2px"><span style="color:var(--muted);font-size:11px;font-weight:600">${moedaSym()}</span><input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" data-idx="${i}" data-field="euro_dia" onchange="onCellChange(this)"></span>`:`<strong>${c.euro_dia?fmtEur(parseFloat(c.euro_dia)):'—'}</strong>`}</td>
+        <td class="num" style="white-space:nowrap">${isEditor?`<span style="font-size:11px;color:var(--muted);margin-right:2px">${moedaSym()}</span><input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" data-idx="${i}" data-field="euro_dia" onchange="onCellChange(this)">`:`<strong>${c.euro_dia?fmtEur(parseFloat(c.euro_dia)):'—'}</strong>`}</td>
         <td class="num"><strong>${fmtEur(c.total)}</strong></td>
         <td class="num">${c.status==='ativo'?fmtPct(c.pct):''}</td>
         <td><select class="status-select status-${c.status||''}" data-idx="${i}" data-field="status" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>
@@ -1298,10 +1298,12 @@ function onStatusChange(el){
   markDirty();renderContent()
 }
 function addCampanha(){
-  if(!mesData[currentMes])mesData[currentMes]={campanhas:[]}
-  const p=cfg.plataformas?.[0]||'meta'
-  mesData[currentMes].campanhas.push({plataforma:p,nome:'',inicio:'',fim:'',euro_dia:'',status:'ativo'})
-  markDirty();renderContent()
+  try{
+    if(!mesData[currentMes])mesData[currentMes]={campanhas:[]}
+    const p=cfg.plataformas?.[0]||'meta'
+    mesData[currentMes].campanhas.push({plataforma:p,nome:'',inicio:'',fim:'',dias:'',euro_dia:'',status:'ativo'})
+    markDirty();renderContent()
+  }catch(e){console.error('addCampanha error:',e);alert('Erro ao adicionar campanha: '+e.message)}
 }
 function delCampanha(idx){
   const camp=mesData[currentMes].campanhas[idx]
