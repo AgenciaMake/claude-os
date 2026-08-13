@@ -398,8 +398,8 @@ tr[draggable="true"]:active{cursor:grabbing}
       </div>
     </div>
     <div class="topbar-right">
-      <span class="live-dot" id="rt-dot"></span><span id="rt-label" style="font-size:11px;color:var(--muted)">Report Ninja</span>
-      <button class="btn-icon" id="btn-rt-refresh" onclick="refreshRt()" title="Atualizar dados Report Ninja">⟳</button>
+      <span class="live-dot" id="rt-dot"></span><span id="rt-label" style="font-size:11px;color:var(--muted)">Dados via API</span>
+      <button class="btn-icon" id="btn-rt-refresh" onclick="refreshRt()" title="Atualizar dados via API">⟳</button>
       <span class="role-badge" id="role-badge" style="margin-left:8px"></span>
       <button class="btn-icon" id="btn-settings" onclick="openWizardModal()" title="Configurações do plano">⚙️</button>
       <button class="btn-icon" onclick="doLogout()">Sair</button>
@@ -549,7 +549,7 @@ const WIZARD_STEPS = [
     `
   },
   {
-    title:'Passo 2 de 3 — Plataformas',foot:'Seleciona as plataformas e vincula as contas do Report Ninja',
+    title:'Passo 2 de 3 — Plataformas',foot:'Seleciona as plataformas e vincula as contas de API',
     render:()=>`
       <div class="wizard-section">Plataformas ativas</div>
       ${PLAT_DEFS.map(p=>{
@@ -833,7 +833,7 @@ function setRtStatus(s){
   const dot=document.getElementById('rt-dot'),lbl=document.getElementById('rt-label')
   if(!dot||!lbl)return
   if(s==='loading'){dot.style.background='#FB8C00';lbl.textContent='A carregar RT…'}
-  else if(s==='ok'){dot.style.background='#2E7D32';lbl.textContent='Report Ninja ✓'}
+  else if(s==='ok'){dot.style.background='#2E7D32';lbl.textContent='Dados via API ✓'}
   else if(s==='empty'){dot.style.background='#FB8C00';lbl.textContent='RT: sem dados no período'}
   else{dot.style.background='#c62828';lbl.textContent='RT: erro na ligação'}
 }
@@ -915,7 +915,7 @@ function renderContent() {
   const platPlanilha={}
   activePlats.forEach(p=>{
     platPlanilha[p]=campanhas
-      .filter(c=>(c.plataforma||activePlats[0])===p&&c.status==='ativo')
+      .filter(c=>(c.plataforma||activePlats[0])===p)
       .reduce((s,c)=>s+(c.total||0),0)
   })
 
@@ -1024,7 +1024,7 @@ function renderContent() {
 
         <!-- ── Col 4: Planilha vs Fonte por plataforma ── -->
         <div class="budget-col bc-compare">
-          <div class="bc-col-title">Planilha vs Fonte (Report Ninja)</div>
+          <div class="bc-col-title">Planilha vs Fonte (dados via API)</div>
           <table class="cmp-table">
             <thead><tr>
               <th>Plataforma</th>
