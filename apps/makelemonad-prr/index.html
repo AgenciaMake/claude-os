@@ -1259,7 +1259,7 @@ function renderRows(campanhas,isEditor){
       tr.innerHTML=`
         <td><select class="plat-select plat-${c.plataforma||'meta'}" data-idx="${i}" data-field="plataforma" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>${platOpts}</select></td>
         <td><input class="cell-input date-input" type="date" value="${c.inicio||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="inicio" onchange="onCellChange(this)"></td>
-        <td style="text-align:center;color:var(--muted);font-size:12px;white-space:nowrap">${c.fim?c.fim.slice(5).split('-').reverse().join('/'):'—'}</td>
+        <td style="text-align:center;color:var(--muted);font-size:12px;white-space:nowrap">${c.fim?c.fim.split('-').reverse().join('/'):'—'}</td>
         <td><input class="cell-input date-input" type="date" value="${c.ultima_atualizacao||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="ultima_atualizacao" onchange="onCellChange(this)"></td>
         <td><input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" ${!isEditor?'readonly':''} data-idx="${i}" data-field="nome" onchange="onCellChange(this)"></td>
         <td class="num">${isEditor?`<input class="cell-input num-input" type="number" min="1" step="1" value="${c.dias||''}" placeholder="Dias" data-idx="${i}" data-field="dias" onchange="onCellChange(this)">`:`<strong>${c.dias||0}</strong>`}</td>
