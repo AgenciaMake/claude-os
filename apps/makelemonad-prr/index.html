@@ -144,36 +144,48 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 
 /* ── BUDGET HEADER ── */
 .budget-header{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow)}
-.budget-grid{display:grid;grid-template-columns:220px 1fr auto}
-.budget-col{padding:14px 18px;border-right:1px solid var(--border)}
+.budget-grid{display:grid;grid-template-columns:190px 1fr 1fr 280px;min-height:130px}
+.budget-col{border-right:1px solid var(--border)}
 .budget-col:last-child{border-right:none}
-.bm-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);font-weight:600;margin-bottom:3px}
-.bm-value{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
-.budget-middle{display:grid;grid-template-columns:1fr 1fr}
-.bm-cell{padding:10px 16px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+
+/* Col 1 — Identificação */
+.bc-id{padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between}
+.bc-id-top{flex:1}
+.project-field{display:grid;grid-template-columns:60px 1fr;gap:6px;align-items:center;margin-bottom:5px}
+.pf-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--faint)}
+.pf-value{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Col 2 — Dados do Orçamento (2x2 grid) */
+.budget-middle{display:grid;grid-template-columns:1fr 1fr;height:100%}
+.bm-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);font-weight:600;margin-bottom:4px}
+.bm-value{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+.bm-cell{padding:14px 18px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
 .bm-cell:nth-child(2n){border-right:none}
 .bm-cell:nth-last-child(-n+2){border-bottom:none}
-.budget-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)}
-.budget-row:last-child{border-bottom:none}
-.budget-row-label{font-size:11px;color:var(--muted)}
-.budget-row-value{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
-.budget-row-value.hi{color:var(--accent)}
-.a-utilizar-row{background:#D6DE23;padding:6px 18px;display:flex;align-items:center;justify-content:space-between}
-.a-utilizar-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#000}
-.a-utilizar-value{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;color:#000}
-.project-field{display:grid;grid-template-columns:72px 1fr;gap:8px;align-items:center;margin-bottom:5px}
-.pf-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--faint)}
-.pf-value{font-size:12px;font-weight:600}
-.platform-totals{padding:14px 18px;min-width:220px}
-.platform-totals-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:10px;text-align:center}
-.plat-total-row{display:flex;align-items:center;justify-content:space-between;padding:5px 8px;border-radius:6px;margin-bottom:4px}
+
+/* Col 3 — Balanço do Plano */
+.bc-balanco{display:flex;flex-direction:column}
+.balanco-row{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid var(--border);flex:1}
+.balanco-row:last-child{border-bottom:none}
+.balanco-label{font-size:11px;color:var(--muted);font-weight:500}
+.balanco-value{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+.balanco-value.hi{color:var(--accent);font-size:15px}
+.balanco-value.neg{color:var(--red,#e53e3e)}
+.a-utilizar-row{background:#D6DE23;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;flex:1}
+.a-utilizar-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#000}
+.a-utilizar-value{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;color:#000}
+
+/* Col 4 — Report Ninja RT */
+.platform-totals{padding:14px 18px}
+.platform-totals-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:10px}
+.plat-total-row{display:flex;align-items:center;justify-content:space-between;padding:4px 8px;border-radius:6px;margin-bottom:3px}
 .plat-total-row.meta{background:#EBF3FF}.plat-total-name.meta{color:#1877F2}
 .plat-total-row.linkedin{background:#E8F1FB}.plat-total-name.linkedin{color:#0A66C2}
 .plat-total-row.google{background:#E8F5E9}.plat-total-name.google{color:#1B5E20}
 .plat-total-row.tiktok{background:#F3E5F5}.plat-total-name.tiktok{color:#6A1B9A}
 .plat-total-name{font-size:12px;font-weight:600}
 .plat-total-val{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
-.plat-grand-row{display:flex;justify-content:space-between;padding:7px 8px;border-top:1px solid var(--border);margin-top:4px}
+.plat-grand-row{display:flex;justify-content:space-between;padding:6px 8px;border-top:1px solid var(--border);margin-top:4px}
 .plat-grand-label{font-size:11px;font-weight:700}
 .plat-grand-val{font-size:14px;font-weight:800;font-variant-numeric:tabular-nums}
 .plat-sobra{display:flex;justify-content:space-between;padding:5px 8px;background:var(--green-bg);border-radius:6px;margin-top:4px}
@@ -243,32 +255,32 @@ select[disabled]{cursor:default;opacity:.7}
 .status-reprovado{background:var(--red-bg);color:var(--red)}
 .status-pausado{background:var(--orange-bg);color:var(--orange)}
 .status-aprovacao{background:var(--blue-bg);color:var(--blue)}
-.plat-meta{background:#eef0fd;color:#4169E1}
-.plat-linkedin{background:#ffe4f0;color:#E91E8C}
-.plat-google{background:#fff3e0;color:#F57C00}
-.plat-tiktok{background:#fff0f3;color:#FF0050}
+.plat-meta{background:#EBF3FF;color:#1877F2}
+.plat-linkedin{background:#E8F1FB;color:#0A66C2}
+.plat-google{background:#E8F5E9;color:#1B5E20}
+.plat-tiktok{background:#F3E5F5;color:#6A1B9A}
 .btn-del{background:none;border:none;cursor:pointer;color:var(--faint);font-size:16px;padding:2px 6px;border-radius:4px;line-height:1}
 .btn-del:hover{color:var(--red);background:var(--red-bg)}
 
 /* Platform blocks */
-tr.row-meta td{background:#f0f1fd}
-tr.row-linkedin td{background:#fff0f8}
-tr.row-google td{background:#fff8f0}
-tr.row-tiktok td{background:#fff5f7}
-tr.row-meta:hover td{background:#e3e5fb}
-tr.row-linkedin:hover td{background:#ffe8f4}
-tr.row-google:hover td{background:#fff3e0}
-tr.row-tiktok:hover td{background:#fff0f3}
+tr.row-meta td{background:#EEF4FF}
+tr.row-linkedin td{background:#EAF0F8}
+tr.row-google td{background:#EEF8F0}
+tr.row-tiktok td{background:#F5EEF9}
+tr.row-meta:hover td{background:#D8E8FF}
+tr.row-linkedin:hover td{background:#D2E0F0}
+tr.row-google:hover td{background:#D4EDDA}
+tr.row-tiktok:hover td{background:#E8D5F2}
 .plat-block-header td{padding:6px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
-.ph-meta td{background:#eef0fd;color:#4169E1;border-left:3px solid #4169E1}
-.ph-linkedin td{background:#ffe4f0;color:#E91E8C;border-left:3px solid #E91E8C}
-.ph-google td{background:#fff3e0;color:#F57C00;border-left:3px solid #F57C00}
-.ph-tiktok td{background:#fff0f3;color:#FF0050;border-left:3px solid #FF0050}
+.ph-meta td{background:#D6E8FF;color:#1877F2;border-left:3px solid #1877F2}
+.ph-linkedin td{background:#C8D9EF;color:#0A66C2;border-left:3px solid #0A66C2}
+.ph-google td{background:#C8E6CB;color:#1B5E20;border-left:3px solid #1B5E20}
+.ph-tiktok td{background:#E1C5F0;color:#6A1B9A;border-left:3px solid #6A1B9A}
 .plat-subtotal td{padding:7px 10px;font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;border-top:2px solid var(--border);border-bottom:1px solid var(--border)}
-.ps-meta td{background:#eef0fd;color:#4169E1}
-.ps-linkedin td{background:#ffe4f0;color:#E91E8C}
-.ps-google td{background:#fff3e0;color:#F57C00}
-.ps-tiktok td{background:#fff0f3;color:#FF0050}
+.ps-meta td{background:#D6E8FF;color:#1877F2}
+.ps-linkedin td{background:#C8D9EF;color:#0A66C2}
+.ps-google td{background:#C8E6CB;color:#1B5E20}
+.ps-tiktok td{background:#E1C5F0;color:#6A1B9A}
 
 /* Resize handle */
 .col-resize-handle{position:absolute;right:0;top:0;width:6px;height:100%;cursor:col-resize;z-index:10;background:transparent}
@@ -287,9 +299,12 @@ tr[draggable="true"]:active{cursor:grabbing}
 .live-dot{display:inline-block;width:6px;height:6px;background:#2E7D32;border-radius:50%;animation:blink 2s ease-in-out infinite;margin-right:4px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
+@media(max-width:1100px){
+  .budget-grid{grid-template-columns:190px 1fr 280px}
+}
 @media(max-width:900px){
   .budget-grid{grid-template-columns:1fr}
-  .budget-col{border-right:none;border-bottom:1px solid var(--border)}
+  .budget-col,.bc-id{border-right:none;border-bottom:1px solid var(--border)}
   .summary-band{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
   .plat-config-row{grid-template-columns:1fr;grid-template-rows:auto auto auto}
@@ -885,31 +900,34 @@ function renderContent() {
     ${mesBars}
     <div class="budget-header">
       <div class="budget-grid">
-        <div class="budget-col">
-          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
-            <div>
-              ${ce?`
-                <div class="config-field"><label>Cliente</label><input id="cfg-cliente" class="config-input" value="${cfg.cliente}"></div>
-                <div class="config-field"><label>Agência</label><input id="cfg-agencia" class="config-input" value="${cfg.agencia}"></div>
-                <div class="config-field"><label>Moeda</label><select id="cfg-moeda" class="config-input" style="width:100%">
-                  <option value="EUR" ${(cfg.moeda||'EUR')==='EUR'?'selected':''}>EUR — Euro (€)</option>
-                  <option value="BRL" ${cfg.moeda==='BRL'?'selected':''}>BRL — Real (R$)</option>
-                  <option value="USD" ${cfg.moeda==='USD'?'selected':''}>USD — Dólar ($)</option>
-                </select></div>
-                <div class="config-actions"><button class="btn-cfg-save" onclick="saveConfigInline()">Guardar</button><button class="btn-cfg-cancel" onclick="cancelConfigEdit()">Cancelar</button></div>
-              `:`
-                <div class="project-field"><div class="pf-label">Cliente</div><div class="pf-value">${cfg.cliente}</div></div>
-                ${cfg.agencia?`<div class="project-field"><div class="pf-label">Agência</div><div class="pf-value">${cfg.agencia}</div></div>`:''}
-                <div class="project-field"><div class="pf-label">Mês</div><div class="pf-value">${nomeMes}</div></div>
-                <div class="project-field"><div class="pf-label">Moeda</div><div class="pf-value">${moedaSym()} (${cfg.moeda||'EUR'})</div></div>
-              `}
-            </div>
-            ${!ce&&isEditor?`<button class="btn-pencil" onclick="toggleConfigEdit()" title="Editar">✏️</button>`:''}
+
+        <!-- ── Col 1: Identificação ── -->
+        <div class="budget-col bc-id">
+          <div class="bc-id-top">
+            ${ce?`
+              <div class="config-field"><label>Cliente</label><input id="cfg-cliente" class="config-input" value="${cfg.cliente}"></div>
+              <div class="config-field"><label>Agência</label><input id="cfg-agencia" class="config-input" value="${cfg.agencia}"></div>
+              <div class="config-field"><label>Moeda</label><select id="cfg-moeda" class="config-input" style="width:100%">
+                <option value="EUR" ${(cfg.moeda||'EUR')==='EUR'?'selected':''}>EUR — Euro (€)</option>
+                <option value="BRL" ${cfg.moeda==='BRL'?'selected':''}>BRL — Real (R$)</option>
+                <option value="USD" ${cfg.moeda==='USD'?'selected':''}>USD — Dólar ($)</option>
+              </select></div>
+              <div class="config-actions"><button class="btn-cfg-save" onclick="saveConfigInline()">Guardar</button><button class="btn-cfg-cancel" onclick="cancelConfigEdit()">Cancelar</button></div>
+            `:`
+              <div style="display:flex;align-items:flex-start;justify-content:space-between">
+                <div>
+                  <div class="project-field"><div class="pf-label">Cliente</div><div class="pf-value">${cfg.cliente}</div></div>
+                  ${cfg.agencia?`<div class="project-field"><div class="pf-label">Agência</div><div class="pf-value">${cfg.agencia}</div></div>`:''}
+                  <div class="project-field"><div class="pf-label">Mês</div><div class="pf-value">${nomeMes}</div></div>
+                  <div class="project-field"><div class="pf-label">Moeda</div><div class="pf-value">${moedaSym()} (${cfg.moeda||'EUR'})</div></div>
+                </div>
+                ${isEditor?`<button class="btn-pencil" onclick="toggleConfigEdit()" title="Editar">✏️</button>`:''}
+              </div>
+            `}
           </div>
-          <div class="budget-row"><span class="budget-row-label">Orçamento + Sobra Anterior</span><span class="budget-row-value hi">${fmtEur(orcComSobra)}</span></div>
-          <div class="budget-row"><span class="budget-row-label">Valor utilizado em planilha</span><span class="budget-row-value">${fmtEur(totalUtilizado)}</span></div>
-          <div class="a-utilizar-row"><span class="a-utilizar-label">A utilizar</span><span class="a-utilizar-value">${fmtEur(aUtilizar)}</span></div>
         </div>
+
+        <!-- ── Col 2: Dados do Orçamento ── -->
         <div class="budget-col">
           <div class="budget-middle">
             <div class="bm-cell"><div class="bm-label">${orcLabel}</div><div class="bm-value">${cfg.tipo_orcamento==='anual'?fmtEur(cfg.orcamento_anual):fmtEur(valorMes)}</div></div>
@@ -918,12 +936,31 @@ function renderContent() {
             <div class="bm-cell"><div class="bm-label">Sobra Mês Anterior</div><div class="bm-value" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">${fmtEur(sobraAnterior)}</div></div>
           </div>
         </div>
+
+        <!-- ── Col 3: Balanço do Plano ── -->
+        <div class="budget-col bc-balanco">
+          <div class="balanco-row">
+            <span class="balanco-label">Orçamento + Sobra Anterior</span>
+            <span class="balanco-value hi">${fmtEur(orcComSobra)}</span>
+          </div>
+          <div class="balanco-row">
+            <span class="balanco-label">Valor utilizado em planilha</span>
+            <span class="balanco-value">${fmtEur(totalUtilizado)}</span>
+          </div>
+          <div class="a-utilizar-row">
+            <span class="a-utilizar-label">A utilizar</span>
+            <span class="a-utilizar-value ${aUtilizar<0?'neg':''}">${fmtEur(aUtilizar)}</span>
+          </div>
+        </div>
+
+        <!-- ── Col 4: Gasto Real (Report Ninja) ── -->
         <div class="budget-col platform-totals">
           <div class="platform-totals-title">Gasto Real (Report Ninja)</div>
           ${platRows}
           <div class="plat-grand-row"><span class="plat-grand-label">Total Usado</span><span class="plat-grand-val">${fmtEur(totalPlataformas)}</span></div>
-          <div class="plat-sobra"><span class="plat-sobra-label">Sobra da Plataforma</span><span class="plat-sobra-val" style="color:${valorMes-totalPlataformas<0?'var(--red)':''}">${fmtEur(valorMes-totalPlataformas)}</span></div>
+          <div class="plat-sobra"><span class="plat-sobra-label">Sobra da Plataforma</span><span class="plat-sobra-val" style="color:${valorMes-totalPlataformas<0?'var(--red,#e53e3e)':''}">${fmtEur(valorMes-totalPlataformas)}</span></div>
         </div>
+
       </div>
     </div>
 
@@ -994,7 +1031,7 @@ async function saveVerbaMes(){
 }
 
 // ══ TABLE ROWS ══
-const PLAT_BRAND={meta:'#4169E1',linkedin:'#E91E8C',google:'#F57C00',tiktok:'#FF0050'}
+const PLAT_BRAND={meta:'#1877F2',linkedin:'#0A66C2',google:'#1B5E20',tiktok:'#6A1B9A'}
 
 function getRtStatus(plat,r){
   let raw=''
