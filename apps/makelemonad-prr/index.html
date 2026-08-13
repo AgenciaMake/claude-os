@@ -1150,8 +1150,9 @@ function renderContent() {
 
   // Disponível planilha = orçamento livre do mês - previsto em planilha (sem sobra anterior)
   const disponivel=orcamento_mes-totalPrevisto
-  // Disponível real = disponível planilha - gasto real nas plataformas (RT)
-  const hasRtData=Object.keys(realtimeData[currentMes]||{}).length>0
+  // RT tem dados reais apenas se alguma plataforma respondeu sem _error
+  const hasRtData=Object.values(realtimeData[currentMes]||{}).some(p=>p&&!p._error)
+  // Disponível = disponível planilha - gasto real nas plataformas (RT)
   const disponivelReal=disponivel-totalPlataformas
 
   // Monthly budget/verba override bars
@@ -1236,10 +1237,10 @@ function renderContent() {
             ${disponivel<0?`<div class="bc-alert-msg">⚠ Previsto excede o orçamento livre</div>`:''}
           </div>
           <div class="bc-real-row ${!hasRtData?'nodata':disponivelReal<0?'alert':disponivelReal<orcamento_mes*0.1?'warn':'ok'}">
-            <div class="bc-disponivel-label">Disponível real → sobra do mês</div>
+            <div class="bc-disponivel-label">Disponível</div>
             ${hasRtData
               ? `<div class="bc-disponivel-val ${disponivelReal<0?'alert':'ok'}">${fmtEur(disponivelReal)}</div>
-                 ${disponivelReal<0?`<div class="bc-alert-msg">⚠ Gasto ultrapassa o disponível</div>`:''}`
+                 <div class="bc-disponivel-hint">planilha − gasto plataformas${disponivelReal<0?' · ⚠ excede disponível':''}</div>`
               : `<div class="bc-disponivel-val" style="color:var(--muted);font-size:13px">Aguarda dados RT</div>
                  <div class="bc-disponivel-hint">Carrega dados via API para ver</div>`
             }
