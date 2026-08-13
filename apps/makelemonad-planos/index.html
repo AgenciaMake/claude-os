@@ -488,7 +488,11 @@ tr[draggable="true"]:active{cursor:grabbing}
     </div>
     <div class="cp-field">
       <label class="cp-label">Senha</label>
-      <input class="cp-input" id="cp-senha" type="password" placeholder="Senha de acesso do cliente">
+      <div style="position:relative;display:flex;gap:6px">
+        <input class="cp-input" id="cp-senha" type="password" placeholder="Senha de acesso do cliente" style="padding-right:36px;flex:1">
+        <button type="button" title="Mostrar/ocultar senha" onclick="(()=>{const i=document.getElementById('cp-senha');i.type=i.type==='password'?'text':'password';this.textContent=i.type==='password'?'👁':'🙈'})()" style="position:absolute;right:44px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:15px;padding:2px;line-height:1">👁</button>
+        <button type="button" title="Copiar senha" onclick="navigator.clipboard.writeText(document.getElementById('cp-senha').value).then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='⧉',1500)})" style="padding:0 10px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;color:var(--muted);flex-shrink:0">⧉</button>
+      </div>
     </div>
     <div id="cp-error" class="cp-error"></div>
     <div class="cp-actions">
