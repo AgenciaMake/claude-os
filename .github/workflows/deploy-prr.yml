@@ -26,5 +26,4 @@ jobs:
         run: |
           cd apps/makelemonad-prr && wrangler pages deploy . \
             --project-name makelemonad-prr \
-            --branch main \
-            --commit-message "${{ github.event.head_commit.message }}"
+            --branch main
