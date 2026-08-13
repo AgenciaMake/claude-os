@@ -15,6 +15,36 @@ export async function onRequestOptions() {
   }})
 }
 
+// Fetch campaign start/stop times directly from Meta Graph API
+async function fetchMetaCampaignDates(graphToken, accountId) {
+  if (!graphToken) return {}
+  try {
+    const actId = accountId.startsWith('act_') ? accountId : `act_${accountId}`
+    const fields = 'name,start_time,stop_time,status'
+    const url = `https://graph.facebook.com/v21.0/${actId}/campaigns?fields=${fields}&limit=500&access_token=${graphToken}`
+    const r = await fetch(url)
+    if (!r.ok) return {}
+    const data = await r.json()
+    if (!data.data) return {}
+    // Build map: lowercase name → {start_time, stop_time}
+    const map = {}
+    data.data.forEach(c => {
+      map[c.name.toLowerCase()] = { start_time: c.start_time || '', stop_time: c.stop_time || '' }
+    })
+    // Handle pagination (up to 1 extra page)
+    if (data.paging?.next) {
+      const r2 = await fetch(data.paging.next)
+      if (r2.ok) {
+        const d2 = await r2.json()
+        ;(d2.data || []).forEach(c => {
+          map[c.name.toLowerCase()] = { start_time: c.start_time || '', stop_time: c.stop_time || '' }
+        })
+      }
+    }
+    return map
+  } catch { return {} }
+}
+
 async function queryNinja(token, body) {
   const r = await fetch('https://api.reportingninja.com/v1/query', {
     method: 'POST',
@@ -71,7 +101,7 @@ export async function onRequestGet(context) {
         connection_key: lc.connection_key,
         account_id: lc.account_id,
         data_view: 'campaign',
-        fields: ['campaignName', 'costInLocalCurrency', 'impressions', 'clicks', 'avgCTR', 'avgCPM', 'status', 'runSchedule.start', 'runSchedule.end'],
+        fields: ['campaignName', 'costInLocalCurrency', 'impressions', 'clicks', 'avgCTR', 'avgCPM', 'campaignStatus'],
         date_range: dateRange,
         limit: 5000
       })
@@ -111,6 +141,17 @@ export async function onRequestGet(context) {
   const results = await Promise.all(Object.values(queries))
   const out = {}
   keys.forEach((k, i) => { out[k] = results[i] })
+
+  // Enrich Meta rows with start_time/stop_time from Graph API
+  if (out.meta && env.META_GRAPH_TOKEN) {
+    const mc = platCfg.meta || { account_id: '2364073693796998' }
+    const dateMap = await fetchMetaCampaignDates(env.META_GRAPH_TOKEN, mc.account_id)
+    const rows = out.meta?.data?.rows || out.meta?.rows || []
+    rows.forEach(row => {
+      const dates = dateMap[(row.campaign_name || '').toLowerCase()]
+      if (dates) { row.start_time = dates.start_time; row.stop_time = dates.stop_time }
+    })
+  }
 
   return cors(Response.json(out))
 }

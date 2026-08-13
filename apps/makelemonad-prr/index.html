@@ -1105,7 +1105,7 @@ const PLAT_BRAND={meta:'#43A047',linkedin:'#9C27B0',google:'#FB8C00',tiktok:'#00
 function getRtStatus(plat,r){
   let raw=''
   if(plat==='meta') raw=(r.effective_status||'').toUpperCase()
-  else if(plat==='linkedin') raw=(r.status||'').toUpperCase()
+  else if(plat==='linkedin') raw=(r.campaignStatus||r.status||'').toUpperCase()
   else if(plat==='google') raw=(r['campaign.status']||'').toUpperCase()
   else if(plat==='tiktok') raw=(r.campaign_status||'').toUpperCase()
   if(!raw) return null
@@ -1134,14 +1134,14 @@ function getRtDailyBudget(plat,r){
   return 0
 }
 function getRtStartDate(plat,r){
+  // start_time now comes from Meta Graph API (injected by realtime.js)
   if(plat==='meta') return r.start_time?r.start_time.slice(0,10):''
-  if(plat==='linkedin'){const v=r['runSchedule.start'];return v?new Date(v).toISOString().slice(0,10):''}
   if(plat==='google'){const v=r['campaign.start_date_time']||'';return v?v.slice(0,10):''}
   return ''
 }
 function getRtEndDate(plat,r){
+  // stop_time now comes from Meta Graph API (injected by realtime.js)
   if(plat==='meta') return r.stop_time?r.stop_time.slice(0,10):''
-  if(plat==='linkedin'){const v=r['runSchedule.end'];return v?new Date(v).toISOString().slice(0,10):''}
   if(plat==='google'){const v=r['campaign.end_date_time']||'';return v&&!v.startsWith('2037')?v.slice(0,10):''}
   return ''
 }
