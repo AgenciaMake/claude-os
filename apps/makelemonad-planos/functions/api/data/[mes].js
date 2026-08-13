@@ -21,10 +21,11 @@ async function getAuth(request, env) {
   return verifyToken(token, env.JWT_SECRET)
 }
 
-// Lazy migration: se a chave nova não existe, tenta a chave antiga e migra
-async function getWithMigration(env, newKey, oldKey) {
+// Lazy migration: só aplica para o plano PRR (dados legados sem prefixo de slug)
+async function getWithMigration(env, newKey, oldKey, isPrr) {
   let data = await env.PRR_DATA.get(newKey, 'json')
   if (data !== null) return data
+  if (!isPrr) return null
   const legacy = await env.PRR_DATA.get(oldKey, 'json')
   if (legacy !== null) {
     await env.PRR_DATA.put(newKey, JSON.stringify(legacy))
@@ -49,7 +50,8 @@ export async function onRequestGet(context) {
 
   const newKey = `plan:${planSlug}:mes:${mes}`
   const oldKey = mes === 'config' ? 'mes:config' : `mes:${mes}`
-  const data = await getWithMigration(env, newKey, oldKey)
+  const isPrr = planSlug === 'prr'
+  const data = await getWithMigration(env, newKey, oldKey, isPrr)
   return cors(Response.json(data || { campanhas: [], config: {} }))
 }
 
