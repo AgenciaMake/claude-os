@@ -51,8 +51,10 @@ async function queryNinja(token, body) {
     headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   })
-  if (!r.ok) return null
-  return r.json()
+  if (!r.ok) return { _error: `HTTP ${r.status}` }
+  const data = await r.json()
+  if (data.status === 'error') return { _error: data.message || 'Erro desconhecido' }
+  return data
 }
 
 export async function onRequestGet(context) {

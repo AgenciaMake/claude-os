@@ -1172,10 +1172,20 @@ function renderVerifyRow(plat,campNome,plannedDaily,cols){
     vr.innerHTML=`<td><span class="rv-badge" style="background:${brand}22;color:${brand}">Fonte</span></td><td colspan="${cols-1}" style="color:var(--faint);font-style:italic">Dados em tempo real não carregados</td>`
     return vr
   }
+  if(!rd[plat]){
+    vr.innerHTML=`<td><span class="rv-badge" style="background:${brand}22;color:${brand}">Fonte</span></td><td colspan="${cols-1}" style="color:var(--faint);font-style:italic">Plataforma sem dados disponíveis</td>`
+    return vr
+  }
+  const platRows=(rd[plat].data?.rows)||(rd[plat].rows)||[]
+  if(platRows.length===0){
+    const errMsg=rd[plat]._error
+    vr.innerHTML=`<td><span class="rv-badge" style="background:${brand}22;color:${brand}">Fonte</span></td><td colspan="${cols-1}" style="color:var(--faint);font-style:italic">${errMsg?`Erro da fonte: ${errMsg}`:'Sem campanhas no período'}</td>`
+    return vr
+  }
   const match=findRtCampaign(plat,campNome)
   const today=new Date().toISOString().slice(0,10)
   const fmtD=s=>s?s.slice(0,10).split('-').reverse().join('/'):'—'
-  const fmtV=v=>(v!=null&&v>0)?`€${v.toFixed(2)}`:'—'
+  const fmtV=v=>(v!=null&&!isNaN(v)&&v>0)?fmtEur(v):'—'
 
   const startDate=match?getRtStartDate(plat,match):''
   const endDate=match?getRtEndDate(plat,match):''
@@ -1207,7 +1217,7 @@ function renderVerifyRow(plat,campNome,plannedDaily,cols){
   if(budget!=null&&budget>0&&plannedDaily>0){
     const diff=Math.abs(budget-plannedDaily)/plannedDaily
     if(diff<=0.05) budgetCheck=`<span style="color:#155724;font-size:12px;font-weight:800" title="Orçamento diário confirmado na fonte">✔</span> `
-    else budgetCheck=`<span style="color:#856404;font-size:11px" title="Orçamento diverge do plano (plano: €${plannedDaily.toFixed(2)} / fonte: €${budget.toFixed(2)})">⚠</span> `
+    else budgetCheck=`<span style="color:#856404;font-size:11px" title="Orçamento diverge do plano (plano: ${fmtEur(plannedDaily)} / fonte: ${fmtEur(budget)})">⚠</span> `
   }
 
   const badge=`<span class="rv-badge" style="background:${brand}22;color:${brand}">Fonte</span>`
