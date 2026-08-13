@@ -124,6 +124,39 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 
 /* ── APP ── */
 #app{display:flex;flex-direction:column;min-height:100vh}
+/* ── PLANS SCREEN ── */
+#plans-screen{min-height:100vh;background:var(--bg)}
+.plans-topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}
+.plans-topbar-left{display:flex;align-items:center;gap:10px}
+.plans-body{padding:32px 24px;max-width:1000px;margin:0 auto}
+.plans-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.plans-page-title{font-size:20px;font-weight:800;color:var(--text)}
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.plan-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.plan-card:hover{border-color:var(--accent);box-shadow:var(--shadow)}
+.plan-card-client{font-size:15px;font-weight:700;margin-bottom:4px}
+.plan-card-slug{font-size:11px;color:var(--muted);font-family:monospace;margin-bottom:12px}
+.plan-card-meta{display:flex;gap:6px;flex-wrap:wrap}
+.plan-card-tag{font-size:10px;padding:2px 8px;border-radius:10px;background:var(--surface2);color:var(--muted);font-weight:600}
+.btn-new-plan{padding:9px 18px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer}
+.btn-new-plan:hover{background:var(--accent-hover)}
+.plans-empty{text-align:center;padding:60px 20px;color:var(--muted)}
+/* ── CREATE PLAN MODAL ── */
+#create-plan-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:flex;align-items:center;justify-content:center;padding:24px}
+.create-plan-box{background:var(--surface);border-radius:16px;padding:32px;width:100%;max-width:440px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.create-plan-title{font-size:17px;font-weight:800;margin-bottom:20px}
+.cp-field{margin-bottom:14px}
+.cp-label{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.cp-input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text)}
+.cp-input:focus{outline:none;border-color:var(--accent)}
+.cp-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cp-hint{font-size:10px;color:var(--muted);margin-top:3px}
+.cp-section-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.cp-divider{border-top:1px solid var(--border);margin:16px 0 14px}
+.cp-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+.btn-cp-cancel{padding:8px 16px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
+.btn-cp-save{padding:8px 18px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;min-width:110px}
+.cp-error{font-size:12px;color:#c62828;margin-top:8px;display:none}
 .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100}
 .topbar-left{display:flex;align-items:center;gap:12px}
 .topbar-logo{width:28px;height:28px;background:var(--yellow);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#000;flex-shrink:0}
@@ -401,6 +434,70 @@ tr[draggable="true"]:active{cursor:grabbing}
   </div>
 </div>
 
+<!-- ══ PLANS SCREEN ══ -->
+<div id="plans-screen" style="display:none">
+  <div class="plans-topbar">
+    <div class="plans-topbar-left">
+      <div class="topbar-logo">M</div>
+      <div>
+        <span style="font-size:14px;font-weight:700;color:var(--text)">MakeLemonAd</span>
+        <span style="font-size:11px;color:var(--muted);margin-left:8px">Planos de Mídia</span>
+      </div>
+    </div>
+    <button class="btn-icon" onclick="doLogout()" style="font-size:12px;padding:6px 12px">Sair</button>
+  </div>
+  <div class="plans-body">
+    <div class="plans-header">
+      <div class="plans-page-title">Planos de Mídia</div>
+      <button class="btn-new-plan" onclick="openCreatePlan()">+ Novo Plano</button>
+    </div>
+    <div class="plans-grid" id="plans-grid">
+      <div style="color:var(--muted);padding:20px">A carregar…</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CREATE PLAN MODAL ══ -->
+<div id="create-plan-overlay" style="display:none">
+  <div class="create-plan-box">
+    <div class="create-plan-title">Novo Plano de Mídia</div>
+    <div class="cp-field">
+      <label class="cp-label">Cliente</label>
+      <input class="cp-input" id="cp-cliente" placeholder="Ex: Empresa X" oninput="cpAutoSlug()">
+    </div>
+    <div class="cp-field">
+      <label class="cp-label">Slug (URL do plano)</label>
+      <input class="cp-input" id="cp-slug" placeholder="empresa-x" oninput="cpUpdatePreview()">
+      <div class="cp-hint">…/plan/<strong id="cp-slug-preview">…</strong></div>
+    </div>
+    <div class="cp-row">
+      <div class="cp-field">
+        <label class="cp-label">Mês de início</label>
+        <input class="cp-input" id="cp-inicio" type="month">
+      </div>
+      <div class="cp-field">
+        <label class="cp-label">Mês de fim</label>
+        <input class="cp-input" id="cp-fim" type="month">
+      </div>
+    </div>
+    <div class="cp-divider"></div>
+    <div class="cp-section-label">Acesso do cliente (opcional)</div>
+    <div class="cp-field">
+      <label class="cp-label">E-mail do cliente</label>
+      <input class="cp-input" id="cp-email" type="email" placeholder="cliente@empresa.com">
+    </div>
+    <div class="cp-field">
+      <label class="cp-label">Senha</label>
+      <input class="cp-input" id="cp-senha" type="password" placeholder="Senha de acesso do cliente">
+    </div>
+    <div id="cp-error" class="cp-error"></div>
+    <div class="cp-actions">
+      <button class="btn-cp-cancel" onclick="closeCreatePlan()">Cancelar</button>
+      <button class="btn-cp-save" id="btn-cp-save" onclick="submitCreatePlan()">Criar Plano</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ APP ══ -->
 <div id="app" class="hidden">
   <div class="topbar">
@@ -416,6 +513,7 @@ tr[draggable="true"]:active{cursor:grabbing}
       <button class="btn-icon" id="btn-rt-refresh" onclick="refreshRt()" title="Atualizar dados via API">⟳</button>
       <span class="role-badge" id="role-badge" style="margin-left:8px"></span>
       <button class="btn-icon" id="btn-settings" onclick="openWizardModal()" title="Configurações do plano">⚙️</button>
+      <button class="btn-icon" id="btn-back-plans" onclick="backToPlans()" title="Voltar à lista de planos" style="display:none">← Planos</button>
       <button class="btn-icon" onclick="doLogout()">Sair</button>
     </div>
   </div>
@@ -427,7 +525,7 @@ tr[draggable="true"]:active{cursor:grabbing}
 
 <script>
 // ══ STATE ══
-let currentToken = null, currentRole = null, currentMes = null
+let currentToken = null, currentRole = null, currentMes = null, currentPlanSlug = null
 let mesData = {}, realtimeData = {}, realtimeTs = {}, dirty = false, configEditing = false
 const RT_TTL = 5 * 60 * 1000 // 5 min cache para evitar HTTP 429
 let _rtCountdownTimer = null, _rtRetryAt = null, _rtRetryKey = null
@@ -488,6 +586,12 @@ function verbaForMes(key) {
   return cfg.verba_seguranca
 }
 
+// ══ PLAN PARAM HELPER ══
+function planParam(extra='') {
+  const p=currentPlanSlug?`plan=${currentPlanSlug}`:'plan=prr'
+  return extra?`?${p}&${extra}`:`?${p}`
+}
+
 // ══ AUTH ══
 async function doLogin() {
   const usuario=document.getElementById('login-user').value.trim()
@@ -498,43 +602,147 @@ async function doLogin() {
     const d=await r.json()
     if(!r.ok){err.style.display='block';return}
     currentToken=d.token; currentRole=d.role
-    sessionStorage.setItem('prr_token',d.token); sessionStorage.setItem('prr_role',d.role)
-    await initApp()
+    sessionStorage.setItem('mpl_token',d.token)
+    sessionStorage.setItem('mpl_role',d.role)
+    if(d.planSlug) sessionStorage.setItem('mpl_plan',d.planSlug)
+    document.getElementById('login-screen').style.display='none'
+    if(d.role==='editor') {
+      await showPlansScreen()
+    } else {
+      await enterPlan(d.planSlug||'prr')
+    }
   } catch{err.style.display='block'}
 }
 document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()})
+
 function doLogout(){
-  sessionStorage.removeItem('prr_token');sessionStorage.removeItem('prr_role')
-  currentToken=null;currentRole=null
+  sessionStorage.removeItem('mpl_token');sessionStorage.removeItem('mpl_role');sessionStorage.removeItem('mpl_plan')
+  currentToken=null;currentRole=null;currentPlanSlug=null
   document.getElementById('app').classList.add('hidden')
   document.getElementById('wizard-overlay').classList.add('hidden')
+  document.getElementById('plans-screen').style.display='none'
   document.getElementById('login-screen').style.display='flex'
 }
 
-// ══ CONFIG I/O ══
-async function loadConfig() {
-  try {
-    const r=await fetch('/api/data/config',{headers:{'Authorization':`Bearer ${currentToken}`}})
-    if(r.ok){const d=await r.json();if(d&&d.cliente!==undefined)Object.assign(cfg,d)}
-  } catch{}
-}
-async function saveConfig() {
-  try {
-    await fetch('/api/data/config',{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(cfg)})
-  } catch{}
+// ══ PLANS SCREEN ══
+async function showPlansScreen() {
+  document.getElementById('app').classList.add('hidden')
+  document.getElementById('plans-screen').style.display='block'
+  currentPlanSlug=null; mesData={}; realtimeData={}; realtimeTs={}
+  Object.assign(cfg,{cliente:'',agencia:'',moeda:'EUR',periodo_inicio:'',periodo_fim:'',plataformas:['meta','linkedin'],plataformas_config:{},tipo_orcamento:'mensal_variavel',orcamento_mensal_base:0,orcamento_anual:0,verba_seguranca:0,verba_seguranca_por_mes:false,orcamentos_mensais:{},verbas_mensais:{}})
+  await loadPlans()
 }
 
-// ══ INIT ══
-async function initApp() {
-  document.getElementById('login-screen').style.display='none'
+async function loadPlans() {
+  const grid=document.getElementById('plans-grid')
+  try {
+    const r=await fetch('/api/plans',{headers:{'Authorization':`Bearer ${currentToken}`}})
+    if(!r.ok){grid.innerHTML='<div style="color:#c62828;padding:20px">Erro ao carregar planos</div>';return}
+    const d=await r.json()
+    renderPlans(d.plans||[])
+  } catch{grid.innerHTML='<div style="color:#c62828;padding:20px">Sem ligação</div>'}
+}
+
+function renderPlans(plans) {
+  const grid=document.getElementById('plans-grid')
+  if(!plans.length){
+    grid.innerHTML=`<div class="plans-empty"><div style="font-size:32px;margin-bottom:12px">📋</div><div style="font-weight:700;margin-bottom:6px">Nenhum plano criado</div><div style="font-size:12px">Clica em "+ Novo Plano" para começar</div></div>`
+    return
+  }
+  grid.innerHTML=plans.map(p=>`
+    <div class="plan-card" onclick="enterPlan('${p.slug}')">
+      <div class="plan-card-client">${p.cliente||p.slug}</div>
+      <div class="plan-card-slug">/plan/${p.slug}</div>
+      <div class="plan-card-meta">
+        <span class="plan-card-tag">${p.moeda||'EUR'}</span>
+        ${p.email_cliente?`<span class="plan-card-tag">🔒 Cliente</span>`:''}
+        <span class="plan-card-tag">${p.criado_em?p.criado_em.slice(0,10):''}</span>
+      </div>
+    </div>
+  `).join('')
+}
+
+async function enterPlan(slug) {
+  currentPlanSlug=slug
+  sessionStorage.setItem('mpl_plan',slug)
+  document.getElementById('plans-screen').style.display='none'
+  mesData={}; realtimeData={}; realtimeTs={}
+  Object.assign(cfg,{cliente:'',agencia:'',moeda:'EUR',periodo_inicio:'',periodo_fim:'',plataformas:['meta','linkedin'],plataformas_config:{},tipo_orcamento:'mensal_variavel',orcamento_mensal_base:0,orcamento_anual:0,verba_seguranca:0,verba_seguranca_por_mes:false,orcamentos_mensais:{},verbas_mensais:{}})
   await loadConfig()
-  if (!cfg.periodo_inicio||!cfg.periodo_fim) {
+  if(!cfg.periodo_inicio||!cfg.periodo_fim){
     openWizardFullscreen()
   } else {
     MESES=generateMeses(cfg.periodo_inicio,cfg.periodo_fim)
     showApp()
   }
 }
+
+function backToPlans(){
+  document.getElementById('app').classList.add('hidden')
+  showPlansScreen()
+}
+
+// ══ CREATE PLAN ══
+function openCreatePlan(){document.getElementById('create-plan-overlay').style.display='flex'}
+function closeCreatePlan(){document.getElementById('create-plan-overlay').style.display='none'}
+function cpAutoSlug(){
+  const v=document.getElementById('cp-cliente').value
+  const slug=v.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
+  document.getElementById('cp-slug').value=slug
+  cpUpdatePreview()
+}
+function cpUpdatePreview(){document.getElementById('cp-slug-preview').textContent=document.getElementById('cp-slug').value||'…'}
+async function submitCreatePlan(){
+  const btn=document.getElementById('btn-cp-save'); btn.textContent='A criar…'; btn.disabled=true
+  const errEl=document.getElementById('cp-error'); errEl.style.display='none'
+  const body={
+    slug:document.getElementById('cp-slug').value.trim(),
+    cliente:document.getElementById('cp-cliente').value.trim(),
+    email_cliente:document.getElementById('cp-email').value.trim(),
+    senha_cliente:document.getElementById('cp-senha').value,
+    periodo_inicio:document.getElementById('cp-inicio').value,
+    periodo_fim:document.getElementById('cp-fim').value,
+  }
+  try{
+    const r=await fetch('/api/plans',{method:'POST',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(body)})
+    const d=await r.json()
+    if(!r.ok){errEl.textContent=d.error||'Erro ao criar plano';errEl.style.display='block';btn.textContent='Criar Plano';btn.disabled=false;return}
+    closeCreatePlan()
+    await enterPlan(d.slug)
+  }catch{errEl.textContent='Sem ligação';errEl.style.display='block';btn.textContent='Criar Plano';btn.disabled=false}
+}
+
+// ══ CONFIG I/O ══
+async function loadConfig() {
+  try {
+    const r=await fetch(`/api/data/config${planParam()}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+    if(r.ok){const d=await r.json();if(d&&d.cliente!==undefined)Object.assign(cfg,d)}
+  } catch{}
+}
+async function saveConfig() {
+  try {
+    await fetch(`/api/data/config${planParam()}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(cfg)})
+  } catch{}
+}
+
+// ══ INIT ══
+async function initApp() {
+  // Recuperar sessão
+  const token=sessionStorage.getItem('mpl_token')
+  const role=sessionStorage.getItem('mpl_role')
+  const plan=sessionStorage.getItem('mpl_plan')
+  if(token&&role){
+    currentToken=token;currentRole=role
+    document.getElementById('login-screen').style.display='none'
+    if(role==='editor'&&!plan){
+      await showPlansScreen()
+    } else {
+      await enterPlan(plan||'prr')
+    }
+  }
+}
+// Substituir check de sessão antigo
+window.addEventListener('load',initApp)
 
 function showApp() {
   document.getElementById('app').classList.remove('hidden')
@@ -544,8 +752,9 @@ function showApp() {
   document.getElementById('topbar-title').textContent=cfg.cliente||'Plano de Mídia'
   document.getElementById('topbar-sub').textContent=cfg.agencia?`${cfg.agencia} · MakeLemonAd`:'MakeLemonAd'
   document.getElementById('btn-settings').style.display=currentRole==='editor'?'':'none'
+  document.getElementById('btn-back-plans').style.display=currentRole==='editor'?'':'none'
   buildTabs()
-  const saved=sessionStorage.getItem('prr_mes')
+  const saved=sessionStorage.getItem('mpl_mes')
   currentMes=(saved&&MESES.includes(saved))?saved:MESES[0]||''
   if(currentMes) selectMes(currentMes)
 }
@@ -821,7 +1030,7 @@ function buildTabs() {
 
 async function selectMes(key) {
   currentMes=key; dirty=false
-  sessionStorage.setItem('prr_mes',key)
+  sessionStorage.setItem('mpl_mes',key)
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',MESES[i]===key))
   await Promise.all([loadMes(key),loadRealtime(key)])
   await loadPrevMes(key)
@@ -833,7 +1042,7 @@ async function selectMes(key) {
 
 async function loadMes(key) {
   try{
-    const r=await fetch(`/api/data/${key}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+    const r=await fetch(`/api/data/${key}${planParam()}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
     if(r.ok){mesData[key]=await r.json();mesData[key]._existed=true}
     else mesData[key]={campanhas:[]}
   }catch{mesData[key]={campanhas:[]}}
@@ -850,7 +1059,7 @@ async function propagateCampaigns(key) {
   // Carregar mês anterior se necessário
   if(!mesData[prevKey]){
     try{
-      const r=await fetch(`/api/data/${prevKey}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+      const r=await fetch(`/api/data/${prevKey}${planParam()}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
       if(r.ok)mesData[prevKey]=await r.json()
       else return
     }catch{return}
@@ -884,7 +1093,7 @@ async function propagateCampaigns(key) {
   if(!mesData[key])mesData[key]={}
   mesData[key].campanhas=toAdd
   try{
-    await fetch(`/api/data/${key}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[key])})
+    await fetch(`/api/data/${key}${planParam()}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[key])})
   }catch{}
 }
 
@@ -896,7 +1105,7 @@ async function loadPrevMes(key) {
   const prevKey=`${prevY}-${String(prevM).padStart(2,'0')}`
   if(!mesData[prevKey]){
     try{
-      const r=await fetch(`/api/data/${prevKey}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+      const r=await fetch(`/api/data/${prevKey}${planParam()}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
       if(r.ok)mesData[prevKey]=await r.json()
       else return null
     }catch{return null}
@@ -918,7 +1127,7 @@ async function migrateHerdadas(key) {
     if(inPrev){c._propagated=true;changed=true}
   })
   if(changed){
-    try{await fetch(`/api/data/${key}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[key])})}catch{}
+    try{await fetch(`/api/data/${key}${planParam()}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[key])})}catch{}
   }
 }
 
@@ -943,7 +1152,7 @@ async function syncFromPrevMonth(key) {
     }
   })
   if(changed){
-    try{await fetch(`/api/data/${key}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[key])})}catch{}
+    try{await fetch(`/api/data/${key}${planParam()}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[key])})}catch{}
   }
 }
 
@@ -965,7 +1174,7 @@ async function loadRealtime(key,force=false) {
     const [y,m]=key.split('-')
     const ld=new Date(+y,+m,0).getDate()
     const end=`${y}-${m}-${String(ld).padStart(2,'0')}`
-    const r=await fetch(`/api/realtime?start=${y}-${m}-01&end=${end}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+    const r=await fetch(`/api/realtime${planParam(`start=${y}-${m}-01&end=${end}`)}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
     const data=r.ok?await r.json():null
     const is429=data&&Object.values(data).some(p=>p?._error?.includes('429'))
     realtimeData[key]=data&&!data.error?data:{}
@@ -1658,7 +1867,7 @@ async function saveData(){
   const bar=document.getElementById('save-bar')
   if(bar){bar.className='save-bar visible saving';bar.innerHTML='<span>A guardar…</span>'}
   try{
-    const r=await fetch(`/api/data/${currentMes}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[currentMes])})
+    const r=await fetch(`/api/data/${currentMes}${planParam()}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[currentMes])})
     if(r.ok){
       dirty=false
       if(bar){bar.className='save-bar visible saved';bar.innerHTML='<span>✓ Guardado</span>'}
@@ -1674,7 +1883,7 @@ async function saveData(){
 // ══ VIEWS + RESIZE ══
 const DEFAULT_COL_WIDTHS=[110,90,90,100,280,50,70,90,50,110,36]
 let colWidths=[...DEFAULT_COL_WIDTHS]
-function viewKey(){return `prr_view_${cfg.cliente||'default'}`}
+function viewKey(){return `mpl_view_${currentPlanSlug||cfg.cliente||'default'}`}
 function saveView(name){const v=JSON.parse(localStorage.getItem(viewKey())||'{}');v[name]={colWidths:[...colWidths]};localStorage.setItem(viewKey(),JSON.stringify(v));renderViewBar()}
 function loadView(name){const v=JSON.parse(localStorage.getItem(viewKey())||'{}');if(v[name]){colWidths=[...v[name].colWidths];applyColWidths();renderViewBar(name)}}
 function listViews(){return Object.keys(JSON.parse(localStorage.getItem(viewKey())||'{}'))}
@@ -1708,11 +1917,7 @@ function initColResize(){
   applyColWidths();renderViewBar()
 }
 
-// ══ BOOT ══
-;(async()=>{
-  const t=sessionStorage.getItem('prr_token'),role=sessionStorage.getItem('prr_role')
-  if(t&&role){currentToken=t;currentRole=role;await initApp()}
-})()
+// initApp já é chamado via window.addEventListener('load') acima
 </script>
 </body>
 </html>

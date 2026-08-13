@@ -1,0 +1,7 @@
+name = "makelemonad-planos"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "."
+
+[[kv_namespaces]]
+binding = "PRR_DATA"
+id = "363e00698a544b658e0991eb7c9f8170"

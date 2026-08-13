@@ -1,0 +1,31 @@
+name: Deploy makelemonad-planos
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/makelemonad-planos/**'
+      - '.github/workflows/deploy-planos.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Cloudflare Pages
+    permissions:
+      contents: read
+      deployments: write
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_MAKE }}
+      CLOUDFLARE_ACCOUNT_ID: 57d45d762c6f977abb1f0e311da3ae9a
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install wrangler
+        run: npm install -g wrangler@3
+
+      - name: Deploy to Cloudflare Pages
+        run: |
+          cd apps/makelemonad-planos && wrangler pages deploy . \
+            --project-name makelemonad-planos \
+            --branch main
