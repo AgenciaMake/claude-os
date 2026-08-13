@@ -287,6 +287,15 @@ tr.row-tiktok:hover td{background:#B2DFDB}
 .plat-block-header td{padding:6px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
 tr.row-herdada td{border-left:3px solid var(--orange)!important}
 .badge-prev-mes{display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:var(--orange-bg);color:var(--orange);white-space:nowrap;margin-right:4px;vertical-align:middle}
+.group-divider td{padding:0;border:none}
+.group-divider-line{display:flex;align-items:center;gap:8px;padding:6px 10px;border-top:2px solid var(--orange);border-bottom:1px dashed var(--border)}
+.group-divider-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);white-space:nowrap}
+.group-divider-rule{flex:1;height:0;border-top:1px dashed var(--border)}
+th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
+th.sortable:hover{color:var(--accent)}
+th.sort-active{color:var(--accent)}
+th.sortable .sort-arrow{display:inline-block;font-size:9px;margin-left:3px;opacity:.5}
+th.sort-active .sort-arrow{opacity:1}
 .ph-meta td{background:#A5D6A7;color:#1B5E20;border-left:3px solid #43A047}
 .ph-linkedin td{background:#CE93D8;color:#4A148C;border-left:3px solid #9C27B0}
 .ph-google td{background:#FFCC80;color:#E65100;border-left:3px solid #FB8C00}
@@ -414,6 +423,7 @@ tr[draggable="true"]:active{cursor:grabbing}
 let currentToken = null, currentRole = null, currentMes = null
 let mesData = {}, realtimeData = {}, dirty = false, configEditing = false
 let wizardStep = 1, wizardIsModal = false
+let sortField = null, sortDir = 1
 
 let cfg = {
   cliente:'', agencia:'', moeda:'EUR',
@@ -959,6 +969,29 @@ function getRtTotals(key) {
   return{meta,linkedin,google,tiktok}
 }
 
+// ══ SORT ══
+function toggleSort(field){
+  if(sortField===field) sortDir*=-1
+  else{sortField=field;sortDir=1}
+  renderContent()
+}
+function sortKey(c,field){
+  switch(field){
+    case 'inicio': return c.inicio||''
+    case 'nome': return (c.nome||'').toLowerCase()
+    case 'dias': return c._dias_mes||0
+    case 'euro_dia': return parseFloat(c.euro_dia)||0
+    case 'total': return c.total||0
+    case 'status': return c.status||''
+    default: return 0
+  }
+}
+function sTh(field,label,cls='',style=''){
+  const active=sortField===field
+  const arrow=active?(sortDir===1?'↑':'↓'):'↕'
+  return `<th class="sortable${active?' sort-active':''}${cls?' '+cls:''}"${style?` style="${style}"`:''}  onclick="toggleSort('${field}')">${label} <span class="sort-arrow">${arrow}</span></th>`
+}
+
 // ══ RENDER ══
 function renderContent() {
   const _sy=window.scrollY
@@ -1125,9 +1158,9 @@ function renderContent() {
             <col><col><col><col><col><col><col><col><col><col>${isEditor?'<col>':''}
           </colgroup>
           <thead><tr>
-            <th>Plataforma</th><th>Início</th><th style="color:var(--muted)">Final</th><th>Últ. Atualização</th>
-            <th>Campanha</th><th class="num" title="Dias activos neste mês">Dias (mês)</th><th class="num">${moedaSym()}/Dia</th>
-            <th class="num">${moedaSym()} Total</th><th class="num">%</th><th>Status</th>
+            <th>Plataforma</th>${sTh('inicio','Início')}<th style="color:var(--muted)">Final</th><th>Últ. Atualização</th>
+            ${sTh('nome','Campanha')}${sTh('dias','Dias (mês)','num','','')}${sTh('euro_dia',moedaSym()+'/Dia','num')}
+            ${sTh('total',moedaSym()+' Total','num')}<th class="num">%</th>${sTh('status','Status')}
             ${isEditor?'<th></th>':''}
           </tr></thead>
           <tbody id="camp-tbody"></tbody>
@@ -1324,16 +1357,23 @@ function renderRows(campanhas,isEditor,rt){
   campanhas.forEach((c,i)=>{const p=c.plataforma||activePlats[0]||'meta';if(!groups[p])groups[p]=[];groups[p].push({c,i})})
   activePlats.forEach(plat=>{
     const items=groups[plat]; if(!items||items.length===0)return
-    // Campanhas de meses anteriores primeiro
-    items.sort((a,b)=>{
-      const aP=a.c.inicio&&a.c.inicio<mStartStr?1:0
-      const bP=b.c.inicio&&b.c.inicio<mStartStr?1:0
-      return bP-aP
-    })
+    // Separar em dois grupos: campanhas de meses anteriores e do mês actual
+    const prevItems=items.filter(({c})=>c.inicio&&c.inicio<mStartStr)
+    const currItems=items.filter(({c})=>!(c.inicio&&c.inicio<mStartStr))
+    // Ordenar cada grupo independentemente
+    const applySort=arr=>{
+      if(!sortField||!arr.length) return arr
+      return [...arr].sort((a,b)=>{
+        const ka=sortKey(a.c,sortField), kb=sortKey(b.c,sortField)
+        if(ka<kb) return -sortDir; if(ka>kb) return sortDir; return 0
+      })
+    }
+    const sortedPrev=applySort(prevItems)
+    const sortedCurr=applySort(currItems)
     const htr=document.createElement('tr'); htr.className=`plat-block-header ph-${plat}`
     htr.innerHTML=`<td colspan="${cols}">${PLAT_LABELS[plat]||plat}</td>`; tbody.appendChild(htr)
     let platTotal=0
-    items.forEach(({c,i})=>{
+    const renderItem=({c,i})=>{
       platTotal+=(c.total||0)
       // Badge automático: campanha que começou noutro mês
       const fromPrev=c.inicio&&c.inicio<mStartStr
@@ -1367,7 +1407,15 @@ function renderRows(campanhas,isEditor,rt){
       `
       tbody.appendChild(tr)
       tbody.appendChild(renderVerifyRow(plat, c.nome||'', parseFloat(c.euro_dia)||0, cols))
-    })
+    }
+    // Renderizar grupo de meses anteriores, depois separador, depois grupo actual
+    sortedPrev.forEach(renderItem)
+    if(sortedPrev.length>0&&sortedCurr.length>0){
+      const sep=document.createElement('tr'); sep.className='group-divider'
+      sep.innerHTML=`<td colspan="${cols}"><div class="group-divider-line"><span class="group-divider-label">Campanhas deste mês</span><div class="group-divider-rule"></div></div></td>`
+      tbody.appendChild(sep)
+    }
+    sortedCurr.forEach(renderItem)
     const platRt=(rt&&rt[plat])||0
     const str=document.createElement('tr'); str.className=`plat-subtotal ps-${plat}`
     str.innerHTML=`
