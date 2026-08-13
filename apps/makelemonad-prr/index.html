@@ -179,10 +179,10 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .platform-totals{padding:14px 18px}
 .platform-totals-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:10px}
 .plat-total-row{display:flex;align-items:center;justify-content:space-between;padding:4px 8px;border-radius:6px;margin-bottom:3px}
-.plat-total-row.meta{background:#EBF3FF}.plat-total-name.meta{color:#1877F2}
-.plat-total-row.linkedin{background:#E8F1FB}.plat-total-name.linkedin{color:#0A66C2}
-.plat-total-row.google{background:#E8F5E9}.plat-total-name.google{color:#1B5E20}
-.plat-total-row.tiktok{background:#F3E5F5}.plat-total-name.tiktok{color:#6A1B9A}
+.plat-total-row.meta{background:#E8F5E9}.plat-total-name.meta{color:#2E7D32}
+.plat-total-row.linkedin{background:#F3E5F5}.plat-total-name.linkedin{color:#6A1B9A}
+.plat-total-row.google{background:#FFF3E0}.plat-total-name.google{color:#E65100}
+.plat-total-row.tiktok{background:#E0F2F1}.plat-total-name.tiktok{color:#006064}
 .plat-total-name{font-size:12px;font-weight:600}
 .plat-total-val{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
 .plat-grand-row{display:flex;justify-content:space-between;padding:6px 8px;border-top:1px solid var(--border);margin-top:4px}
@@ -255,32 +255,32 @@ select[disabled]{cursor:default;opacity:.7}
 .status-reprovado{background:var(--red-bg);color:var(--red)}
 .status-pausado{background:var(--orange-bg);color:var(--orange)}
 .status-aprovacao{background:var(--blue-bg);color:var(--blue)}
-.plat-meta{background:#EBF3FF;color:#1877F2}
-.plat-linkedin{background:#E8F1FB;color:#0A66C2}
-.plat-google{background:#E8F5E9;color:#1B5E20}
-.plat-tiktok{background:#F3E5F5;color:#6A1B9A}
+.plat-meta{background:#E8F5E9;color:#2E7D32}
+.plat-linkedin{background:#F3E5F5;color:#6A1B9A}
+.plat-google{background:#FFF3E0;color:#E65100}
+.plat-tiktok{background:#E0F2F1;color:#006064}
 .btn-del{background:none;border:none;cursor:pointer;color:var(--faint);font-size:16px;padding:2px 6px;border-radius:4px;line-height:1}
 .btn-del:hover{color:var(--red);background:var(--red-bg)}
 
 /* Platform blocks */
-tr.row-meta td{background:#EEF4FF}
-tr.row-linkedin td{background:#EAF0F8}
-tr.row-google td{background:#EEF8F0}
-tr.row-tiktok td{background:#F5EEF9}
-tr.row-meta:hover td{background:#D8E8FF}
-tr.row-linkedin:hover td{background:#D2E0F0}
-tr.row-google:hover td{background:#D4EDDA}
-tr.row-tiktok:hover td{background:#E8D5F2}
+tr.row-meta td{background:#E8F5E9}
+tr.row-linkedin td{background:#F3E5F5}
+tr.row-google td{background:#FFF3E0}
+tr.row-tiktok td{background:#E0F2F1}
+tr.row-meta:hover td{background:#C8E6C9}
+tr.row-linkedin:hover td{background:#E1BEE7}
+tr.row-google:hover td{background:#FFE0B2}
+tr.row-tiktok:hover td{background:#B2DFDB}
 .plat-block-header td{padding:6px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
-.ph-meta td{background:#D6E8FF;color:#1877F2;border-left:3px solid #1877F2}
-.ph-linkedin td{background:#C8D9EF;color:#0A66C2;border-left:3px solid #0A66C2}
-.ph-google td{background:#C8E6CB;color:#1B5E20;border-left:3px solid #1B5E20}
-.ph-tiktok td{background:#E1C5F0;color:#6A1B9A;border-left:3px solid #6A1B9A}
+.ph-meta td{background:#A5D6A7;color:#1B5E20;border-left:3px solid #43A047}
+.ph-linkedin td{background:#CE93D8;color:#4A148C;border-left:3px solid #9C27B0}
+.ph-google td{background:#FFCC80;color:#E65100;border-left:3px solid #FB8C00}
+.ph-tiktok td{background:#80DEEA;color:#006064;border-left:3px solid #00ACC1}
 .plat-subtotal td{padding:7px 10px;font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;border-top:2px solid var(--border);border-bottom:1px solid var(--border)}
-.ps-meta td{background:#D6E8FF;color:#1877F2}
-.ps-linkedin td{background:#C8D9EF;color:#0A66C2}
-.ps-google td{background:#C8E6CB;color:#1B5E20}
-.ps-tiktok td{background:#E1C5F0;color:#6A1B9A}
+.ps-meta td{background:#C8E6C9;color:#2E7D32}
+.ps-linkedin td{background:#E1BEE7;color:#6A1B9A}
+.ps-google td{background:#FFE0B2;color:#E65100}
+.ps-tiktok td{background:#B2EBF2;color:#00697A}
 
 /* Resize handle */
 .col-resize-handle{position:absolute;right:0;top:0;width:6px;height:100%;cursor:col-resize;z-index:10;background:transparent}
@@ -1031,7 +1031,7 @@ async function saveVerbaMes(){
 }
 
 // ══ TABLE ROWS ══
-const PLAT_BRAND={meta:'#1877F2',linkedin:'#0A66C2',google:'#1B5E20',tiktok:'#6A1B9A'}
+const PLAT_BRAND={meta:'#43A047',linkedin:'#9C27B0',google:'#FB8C00',tiktok:'#00ACC1'}
 
 function getRtStatus(plat,r){
   let raw=''
