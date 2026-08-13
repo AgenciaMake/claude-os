@@ -286,9 +286,7 @@ tr.row-google:hover td{background:#FFE0B2}
 tr.row-tiktok:hover td{background:#B2DFDB}
 .plat-block-header td{padding:6px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
 tr.row-herdada td{border-left:3px solid var(--orange)!important}
-.badge-herdada{display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:var(--orange-bg);color:var(--orange);white-space:nowrap;margin-right:4px;vertical-align:middle}
-.btn-herdada{display:block;margin-top:3px;width:100%;font-size:9px;font-weight:700;padding:1px 4px;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;text-align:center}
-.btn-herdada.active{background:var(--orange-bg);color:var(--orange);border-color:var(--orange)}
+.badge-prev-mes{display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:var(--orange-bg);color:var(--orange);white-space:nowrap;margin-right:4px;vertical-align:middle}
 .ph-meta td{background:#A5D6A7;color:#1B5E20;border-left:3px solid #43A047}
 .ph-linkedin td{background:#CE93D8;color:#4A148C;border-left:3px solid #9C27B0}
 .ph-google td{background:#FFCC80;color:#E65100;border-left:3px solid #FB8C00}
@@ -807,13 +805,62 @@ async function selectMes(key) {
   sessionStorage.setItem('prr_mes',key)
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',MESES[i]===key))
   await Promise.all([loadMes(key),loadRealtime(key)])
+  await propagateCampaigns(key)
   renderContent()
 }
 
 async function loadMes(key) {
-  try{const r=await fetch(`/api/data/${key}`,{headers:{'Authorization':`Bearer ${currentToken}`}});mesData[key]=r.ok?await r.json():{campanhas:[]}}
-  catch{mesData[key]={campanhas:[]}}
+  try{
+    const r=await fetch(`/api/data/${key}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+    if(r.ok){mesData[key]=await r.json();mesData[key]._existed=true}
+    else mesData[key]={campanhas:[]}
+  }catch{mesData[key]={campanhas:[]}}
   if(!mesData[key].campanhas)mesData[key].campanhas=[]
+}
+
+async function propagateCampaigns(key) {
+  // Só propaga pra meses que ainda não têm campanhas (primeira abertura)
+  if(mesData[key]?.campanhas?.length>0) return
+  const [y,m]=key.split('-')
+  const prevM=+m===1?12:+m-1
+  const prevY=+m===1?+y-1:+y
+  const prevKey=`${prevY}-${String(prevM).padStart(2,'0')}`
+  // Carregar mês anterior se necessário
+  if(!mesData[prevKey]){
+    try{
+      const r=await fetch(`/api/data/${prevKey}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+      if(r.ok)mesData[prevKey]=await r.json()
+      else return
+    }catch{return}
+    if(!mesData[prevKey]?.campanhas)return
+  }
+  const prevCamps=mesData[prevKey].campanhas||[]
+  if(!prevCamps.length)return
+  const mStart=new Date(+y,+m-1,1)
+  const toAdd=[]
+  prevCamps.forEach(prev=>{
+    const done=['pausado','encerrado','reprovado'].includes(prev.status)
+    if(done)return
+    const prevInicio=prev.inicio?new Date(prev.inicio):null
+    const prevDias=parseInt(prev.dias)||0
+    let runs=false
+    if(prevInicio&&prevDias>0){
+      const prevFim=new Date(prevInicio); prevFim.setDate(prevFim.getDate()+prevDias-1)
+      runs=prevFim>=mStart
+    } else if(prevInicio&&!prevDias){
+      runs=true // indefinida: corre até pausar
+    }
+    if(!runs)return
+    const copy={...prev}
+    delete copy.herdada; delete copy._existed
+    toAdd.push(copy)
+  })
+  if(!toAdd.length)return
+  if(!mesData[key])mesData[key]={}
+  mesData[key].campanhas=toAdd
+  try{
+    await fetch(`/api/data/${key}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[key])})
+  }catch{}
 }
 
 async function loadRealtime(key) {
@@ -847,23 +894,42 @@ async function refreshRt(){
 
 // ══ CALC ══
 function calcCampanhas(campanhas) {
+  const [y,m]=currentMes.split('-')
+  const mStart=new Date(+y,+m-1,1)
+  const mEnd=new Date(+y,+m,0) // último dia do mês
   const valorMes=budgetForMes(currentMes)
   const verba=verbaForMes(currentMes)
   const orcamento_mes=valorMes-verba
   let totalPrevisto=0
   campanhas.forEach(c=>{
-    // Migration: data antiga tem inicio+fim mas não tem dias → calcular
-    if(!c.dias&&c.inicio&&c.fim){
-      const d=(new Date(c.fim)-new Date(c.inicio))/86400000
-      c.dias=d>=0?Math.round(d)+1:0
+    const inicio=c.inicio?new Date(c.inicio):null
+    const totalDias=parseInt(c.dias)||0
+    let diasMes=0
+    if(inicio&&totalDias>0){
+      // Duração fixa: calcular interseção com o mês atual
+      const fim=new Date(inicio); fim.setDate(fim.getDate()+totalDias-1)
+      c.fim=fim.toISOString().slice(0,10)
+      const effStart=inicio<mStart?mStart:inicio
+      const effEnd=fim>mEnd?mEnd:fim
+      diasMes=effEnd>=effStart?Math.round((effEnd-effStart)/86400000)+1:0
+    } else if(inicio&&!totalDias){
+      // Duração indefinida: roda até pausar/encerrar
+      const done=c.status==='pausado'||c.status==='encerrado'
+      const effStart=inicio<mStart?mStart:inicio
+      if(done&&c.fim){
+        const fimDate=new Date(c.fim)
+        const effEnd=fimDate>mEnd?mEnd:fimDate
+        diasMes=effEnd>=effStart?Math.round((effEnd-effStart)/86400000)+1:0
+      } else if(!done){
+        diasMes=Math.round((mEnd-effStart)/86400000)+1
+      }
+      diasMes=Math.max(0,diasMes)
+    } else {
+      // Sem inicio: fallback legado (usa dias diretamente)
+      diasMes=totalDias
     }
-    // Derivar fim a partir de inicio + dias
-    if(c.inicio&&c.dias){
-      const s=new Date(c.inicio)
-      s.setDate(s.getDate()+(parseInt(c.dias)||0)-1)
-      c.fim=s.toISOString().slice(0,10)
-    }
-    c.total=(parseInt(c.dias)||0)*(parseFloat(c.euro_dia)||0)
+    c._dias_mes=diasMes
+    c.total=diasMes*(parseFloat(c.euro_dia)||0)
     if(c.status==='ativo') totalPrevisto+=c.total
   })
   campanhas.forEach(c=>{c.pct=(c.status==='ativo'&&totalPrevisto>0)?(c.total/totalPrevisto*100):0})
@@ -1059,8 +1125,8 @@ function renderContent() {
             <col><col><col><col><col><col><col><col><col><col>${isEditor?'<col>':''}
           </colgroup>
           <thead><tr>
-            <th>Plataforma</th><th>Início</th><th style="color:var(--muted)">Final ↩</th><th>Últ. Atualização</th>
-            <th>Campanha</th><th class="num">Dias</th><th class="num">${moedaSym()}/Dia</th>
+            <th>Plataforma</th><th>Início</th><th style="color:var(--muted)">Final</th><th>Últ. Atualização</th>
+            <th>Campanha</th><th class="num" title="Dias activos neste mês">Dias (mês)</th><th class="num">${moedaSym()}/Dia</th>
             <th class="num">${moedaSym()} Total</th><th class="num">%</th><th>Status</th>
             ${isEditor?'<th></th>':''}
           </tr></thead>
@@ -1251,27 +1317,42 @@ function renderRows(campanhas,isEditor,rt){
   tbody.innerHTML=''
   const cols=isEditor?11:10
   const activePlats=PLAT_ORDER.filter(p=>cfg.plataformas.includes(p))
+  // Determinar início do mês actual para badge automático
+  const [ry,rm]=currentMes.split('-')
+  const mStartStr=`${ry}-${rm}-01`
   const groups={}; activePlats.forEach(p=>{groups[p]=[]})
   campanhas.forEach((c,i)=>{const p=c.plataforma||activePlats[0]||'meta';if(!groups[p])groups[p]=[];groups[p].push({c,i})})
   activePlats.forEach(plat=>{
     const items=groups[plat]; if(!items||items.length===0)return
-    // Herdadas sempre primeiro dentro do bloco de plataforma
-    items.sort((a,b)=>(b.c.herdada?1:0)-(a.c.herdada?1:0))
+    // Campanhas de meses anteriores primeiro
+    items.sort((a,b)=>{
+      const aP=a.c.inicio&&a.c.inicio<mStartStr?1:0
+      const bP=b.c.inicio&&b.c.inicio<mStartStr?1:0
+      return bP-aP
+    })
     const htr=document.createElement('tr'); htr.className=`plat-block-header ph-${plat}`
     htr.innerHTML=`<td colspan="${cols}">${PLAT_LABELS[plat]||plat}</td>`; tbody.appendChild(htr)
     let platTotal=0
     items.forEach(({c,i})=>{
       platTotal+=(c.total||0)
-      const tr=document.createElement('tr'); tr.className='row-'+plat+(c.herdada?' row-herdada':'')
+      // Badge automático: campanha que começou noutro mês
+      const fromPrev=c.inicio&&c.inicio<mStartStr
+      const tr=document.createElement('tr'); tr.className='row-'+plat+(fromPrev?' row-herdada':'')
       if(isEditor){tr.draggable=true;tr.ondragstart=e=>onRowDragStart(e,i,plat);tr.ondragend=e=>onRowDragEnd(e);tr.ondragover=e=>onRowDragOver(e,i,plat);tr.ondrop=e=>onRowDrop(e,i,plat)}
       const platOpts=activePlats.map(p=>`<option value="${p}" ${(c.plataforma||activePlats[0])===p?'selected':''}>${PLAT_LABELS[p]?.split(' ')[0]||p}</option>`).join('')
+      // Dias: input mostra total (dias), view mostra _dias_mes
+      const totalDias=parseInt(c.dias)||0
+      const diasMes=c._dias_mes||0
+      const diasHint=isEditor&&totalDias&&diasMes!==totalDias?`<div style="font-size:9px;color:var(--orange);text-align:center;margin-top:2px">↳ ${diasMes} neste mês</div>`:''
+      // Final: só mostra quando há fim definido (campanha com dias ou pausada)
+      const fimDisp=c.fim?c.fim.split('-').reverse().join('/'):'—'
       tr.innerHTML=`
-        <td><select class="plat-select plat-${c.plataforma||'meta'}" data-idx="${i}" data-field="plataforma" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>${platOpts}</select>${isEditor?`<button class="btn-herdada${c.herdada?' active':''}" onclick="toggleHerdada(${i})" title="Marcar como herdada de mês anterior">↩ Herdada</button>`:''}</td>
+        <td><select class="plat-select plat-${c.plataforma||'meta'}" data-idx="${i}" data-field="plataforma" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>${platOpts}</select></td>
         <td><input class="cell-input date-input" type="date" value="${c.inicio||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="inicio" onchange="onCellChange(this)"></td>
-        <td style="color:var(--muted);font-size:12px;white-space:nowrap">${c.fim?c.fim.split('-').reverse().join('/'):'—'}</td>
+        <td style="color:var(--muted);font-size:12px;white-space:nowrap">${fimDisp}</td>
         <td><input class="cell-input date-input" type="date" value="${c.ultima_atualizacao||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="ultima_atualizacao" onchange="onCellChange(this)"></td>
-        <td>${c.herdada&&!isEditor?`<span class="badge-herdada">↩ Mês ant.</span>`:''}${isEditor?`<input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" data-idx="${i}" data-field="nome" onchange="onCellChange(this)">`:`<span style="font-size:12px">${c.nome||''}</span>`}</td>
-        <td class="num">${isEditor?`<input class="cell-input num-input" type="number" min="1" step="1" value="${c.dias||''}" placeholder="Dias" data-idx="${i}" data-field="dias" onchange="onCellChange(this)">`:`<strong>${c.dias||0}</strong>`}</td>
+        <td>${fromPrev?`<span class="badge-prev-mes">↩ Mês ant.</span>`:''}${isEditor?`<input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" data-idx="${i}" data-field="nome" onchange="onCellChange(this)">`:`<span style="font-size:12px">${c.nome||''}</span>`}</td>
+        <td class="num">${isEditor?`<input class="cell-input num-input" type="number" min="1" step="1" value="${c.dias||''}" placeholder="Total dias" title="Duração total da campanha (dias)" data-idx="${i}" data-field="dias" onchange="onCellChange(this)">${diasHint}`:`<strong>${diasMes||'—'}</strong>`}</td>
         <td class="num" style="white-space:nowrap">${isEditor?`<span style="font-size:11px;color:var(--muted);margin-right:2px">${moedaSym()}</span><input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" data-idx="${i}" data-field="euro_dia" onchange="onCellChange(this)">`:`<strong>${c.euro_dia?fmtEur(parseFloat(c.euro_dia)):'—'}</strong>`}</td>
         <td class="num"><strong>${fmtEur(c.total)}</strong></td>
         <td class="num">${c.status==='ativo'?fmtPct(c.pct):''}</td>
@@ -1291,7 +1372,7 @@ function renderRows(campanhas,isEditor,rt){
     const str=document.createElement('tr'); str.className=`plat-subtotal ps-${plat}`
     str.innerHTML=`
       <td colspan="7" style="text-align:right;padding-right:12px;line-height:1.8">
-        <span style="display:block">Total ${PLAT_LABELS[plat]?.split(' ')[0]||plat} — Planilha (ativo)</span>
+        <span style="display:block">Total ${PLAT_LABELS[plat]?.split(' ')[0]||plat} — Planilha</span>
         <span style="display:block;color:var(--muted);font-weight:500">Total ${PLAT_LABELS[plat]?.split(' ')[0]||plat} — Fonte</span>
       </td>
       <td class="num" style="line-height:1.8">
@@ -1317,16 +1398,11 @@ function onStatusChange(el){
   if(field==='plataforma')el.className=`plat-select plat-${el.value}`
   renderContent();autoSave()
 }
-function toggleHerdada(idx){
-  const c=mesData[currentMes].campanhas[idx]
-  c.herdada=!c.herdada
-  renderContent();autoSave()
-}
 function addCampanha(){
   try{
     if(!mesData[currentMes])mesData[currentMes]={campanhas:[]}
     const p=cfg.plataformas?.[0]||'meta'
-    mesData[currentMes].campanhas.push({plataforma:p,nome:'',inicio:'',fim:'',dias:'',euro_dia:'',status:'ativo',herdada:false})
+    mesData[currentMes].campanhas.push({plataforma:p,nome:'',inicio:'',fim:'',dias:'',euro_dia:'',status:'ativo'})
     renderContent();autoSave()
   }catch(e){console.error('addCampanha error:',e);alert('Erro ao adicionar campanha: '+e.message)}
 }
