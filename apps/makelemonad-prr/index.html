@@ -1073,7 +1073,7 @@ function renderContent() {
       </div>
     </div>
   `
-  renderRows(campanhas,isEditor)
+  renderRows(campanhas,isEditor,rt)
   initColResize()
   requestAnimationFrame(()=>window.scrollTo(0,_sy))
 }
@@ -1246,7 +1246,7 @@ function renderVerifyRow(plat,campNome,plannedDaily,cols){
   return vr
 }
 
-function renderRows(campanhas,isEditor){
+function renderRows(campanhas,isEditor,rt){
   const tbody=document.getElementById('camp-tbody'); if(!tbody)return
   tbody.innerHTML=''
   const cols=isEditor?11:10
@@ -1259,9 +1259,10 @@ function renderRows(campanhas,isEditor){
     items.sort((a,b)=>(b.c.herdada?1:0)-(a.c.herdada?1:0))
     const htr=document.createElement('tr'); htr.className=`plat-block-header ph-${plat}`
     htr.innerHTML=`<td colspan="${cols}">${PLAT_LABELS[plat]||plat}</td>`; tbody.appendChild(htr)
-    let platTotal=0
+    let platTotal=0,platTotalAll=0
     items.forEach(({c,i})=>{
-      platTotal+=c.total||0
+      platTotalAll+=(c.total||0)
+      if(c.status==='ativo') platTotal+=(c.total||0)
       const tr=document.createElement('tr'); tr.className='row-'+plat+(c.herdada?' row-herdada':'')
       if(isEditor){tr.draggable=true;tr.ondragstart=e=>onRowDragStart(e,i,plat);tr.ondragend=e=>onRowDragEnd(e);tr.ondragover=e=>onRowDragOver(e,i,plat);tr.ondrop=e=>onRowDrop(e,i,plat)}
       const platOpts=activePlats.map(p=>`<option value="${p}" ${(c.plataforma||activePlats[0])===p?'selected':''}>${PLAT_LABELS[p]?.split(' ')[0]||p}</option>`).join('')
@@ -1287,8 +1288,19 @@ function renderRows(campanhas,isEditor){
       tbody.appendChild(tr)
       tbody.appendChild(renderVerifyRow(plat, c.nome||'', parseFloat(c.euro_dia)||0, cols))
     })
+    const platRt=(rt&&rt[plat])||0
     const str=document.createElement('tr'); str.className=`plat-subtotal ps-${plat}`
-    str.innerHTML=`<td colspan="7" style="text-align:right;padding-right:12px">Total ${PLAT_LABELS[plat]||plat}</td><td class="num">${fmtEur(platTotal)}</td><td colspan="${isEditor?3:2}"></td>`
+    str.innerHTML=`
+      <td colspan="7" style="text-align:right;padding-right:12px;line-height:1.8">
+        <span style="display:block">Total ${PLAT_LABELS[plat]?.split(' ')[0]||plat} — Planilha (ativo)</span>
+        <span style="display:block;color:var(--muted);font-weight:500">Total ${PLAT_LABELS[plat]?.split(' ')[0]||plat} — Fonte</span>
+      </td>
+      <td class="num" style="line-height:1.8">
+        <span style="display:block">${fmtEur(platTotal)}</span>
+        <span style="display:block;color:var(--muted);font-weight:500">${platRt>0?fmtEur(platRt):'—'}</span>
+      </td>
+      <td colspan="${isEditor?3:2}"></td>
+    `
     tbody.appendChild(str)
   })
 }
