@@ -285,6 +285,10 @@ tr.row-linkedin:hover td{background:#E1BEE7}
 tr.row-google:hover td{background:#FFE0B2}
 tr.row-tiktok:hover td{background:#B2DFDB}
 .plat-block-header td{padding:6px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
+tr.row-herdada td{border-left:3px solid var(--orange)!important}
+.badge-herdada{display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:var(--orange-bg);color:var(--orange);white-space:nowrap;margin-right:4px;vertical-align:middle}
+.btn-herdada{display:block;margin-top:3px;width:100%;font-size:9px;font-weight:700;padding:1px 4px;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;text-align:center}
+.btn-herdada.active{background:var(--orange-bg);color:var(--orange);border-color:var(--orange)}
 .ph-meta td{background:#A5D6A7;color:#1B5E20;border-left:3px solid #43A047}
 .ph-linkedin td{background:#CE93D8;color:#4A148C;border-left:3px solid #9C27B0}
 .ph-google td{background:#FFCC80;color:#E65100;border-left:3px solid #FB8C00}
@@ -1251,20 +1255,22 @@ function renderRows(campanhas,isEditor){
   campanhas.forEach((c,i)=>{const p=c.plataforma||activePlats[0]||'meta';if(!groups[p])groups[p]=[];groups[p].push({c,i})})
   activePlats.forEach(plat=>{
     const items=groups[plat]; if(!items||items.length===0)return
+    // Herdadas sempre primeiro dentro do bloco de plataforma
+    items.sort((a,b)=>(b.c.herdada?1:0)-(a.c.herdada?1:0))
     const htr=document.createElement('tr'); htr.className=`plat-block-header ph-${plat}`
     htr.innerHTML=`<td colspan="${cols}">${PLAT_LABELS[plat]||plat}</td>`; tbody.appendChild(htr)
     let platTotal=0
     items.forEach(({c,i})=>{
       platTotal+=c.total||0
-      const tr=document.createElement('tr'); tr.className='row-'+plat
+      const tr=document.createElement('tr'); tr.className='row-'+plat+(c.herdada?' row-herdada':'')
       if(isEditor){tr.draggable=true;tr.ondragstart=e=>onRowDragStart(e,i,plat);tr.ondragend=e=>onRowDragEnd(e);tr.ondragover=e=>onRowDragOver(e,i,plat);tr.ondrop=e=>onRowDrop(e,i,plat)}
       const platOpts=activePlats.map(p=>`<option value="${p}" ${(c.plataforma||activePlats[0])===p?'selected':''}>${PLAT_LABELS[p]?.split(' ')[0]||p}</option>`).join('')
       tr.innerHTML=`
-        <td><select class="plat-select plat-${c.plataforma||'meta'}" data-idx="${i}" data-field="plataforma" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>${platOpts}</select></td>
+        <td><select class="plat-select plat-${c.plataforma||'meta'}" data-idx="${i}" data-field="plataforma" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>${platOpts}</select>${isEditor?`<button class="btn-herdada${c.herdada?' active':''}" onclick="toggleHerdada(${i})" title="Marcar como herdada de mês anterior">↩ Herdada</button>`:''}</td>
         <td><input class="cell-input date-input" type="date" value="${c.inicio||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="inicio" onchange="onCellChange(this)"></td>
         <td style="color:var(--muted);font-size:12px;white-space:nowrap">${c.fim?c.fim.split('-').reverse().join('/'):'—'}</td>
         <td><input class="cell-input date-input" type="date" value="${c.ultima_atualizacao||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="ultima_atualizacao" onchange="onCellChange(this)"></td>
-        <td><input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" ${!isEditor?'readonly':''} data-idx="${i}" data-field="nome" onchange="onCellChange(this)"></td>
+        <td>${c.herdada&&!isEditor?`<span class="badge-herdada">↩ Mês ant.</span>`:''}${isEditor?`<input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" data-idx="${i}" data-field="nome" onchange="onCellChange(this)">`:`<span style="font-size:12px">${c.nome||''}</span>`}</td>
         <td class="num">${isEditor?`<input class="cell-input num-input" type="number" min="1" step="1" value="${c.dias||''}" placeholder="Dias" data-idx="${i}" data-field="dias" onchange="onCellChange(this)">`:`<strong>${c.dias||0}</strong>`}</td>
         <td class="num" style="white-space:nowrap">${isEditor?`<span style="font-size:11px;color:var(--muted);margin-right:2px">${moedaSym()}</span><input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" data-idx="${i}" data-field="euro_dia" onchange="onCellChange(this)">`:`<strong>${c.euro_dia?fmtEur(parseFloat(c.euro_dia)):'—'}</strong>`}</td>
         <td class="num"><strong>${fmtEur(c.total)}</strong></td>
@@ -1300,11 +1306,16 @@ function onStatusChange(el){
   if(field==='plataforma')el.className=`plat-select plat-${el.value}`
   renderContent();autoSave()
 }
+function toggleHerdada(idx){
+  const c=mesData[currentMes].campanhas[idx]
+  c.herdada=!c.herdada
+  renderContent();autoSave()
+}
 function addCampanha(){
   try{
     if(!mesData[currentMes])mesData[currentMes]={campanhas:[]}
     const p=cfg.plataformas?.[0]||'meta'
-    mesData[currentMes].campanhas.push({plataforma:p,nome:'',inicio:'',fim:'',dias:'',euro_dia:'',status:'ativo'})
+    mesData[currentMes].campanhas.push({plataforma:p,nome:'',inicio:'',fim:'',dias:'',euro_dia:'',status:'ativo',herdada:false})
     renderContent();autoSave()
   }catch(e){console.error('addCampanha error:',e);alert('Erro ao adicionar campanha: '+e.message)}
 }
