@@ -303,8 +303,11 @@ tr[draggable="true"]{cursor:grab}
 tr[draggable="true"]:active{cursor:grabbing}
 
 /* Save bar */
-.save-bar{display:none;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--orange-bg);border-top:1px solid var(--orange-border)}
+.save-bar{display:none;align-items:center;justify-content:center;gap:8px;padding:8px 16px;font-size:12px;font-weight:600;border-top:1px solid transparent;transition:background .2s}
 .save-bar.visible{display:flex}
+.save-bar.saving{background:#E3F2FD;color:#1565C0;border-color:#90CAF9}
+.save-bar.saved{background:var(--green-bg);color:var(--green);border-color:var(--green-border)}
+.save-bar.error{background:#FFEBEE;color:#C62828;border-color:#EF9A9A}
 .save-msg{font-size:12px;color:var(--orange);font-weight:600}
 .btn-save{padding:6px 16px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer}
 
@@ -1288,21 +1291,21 @@ function onCellChange(el){
   const idx=+el.dataset.idx,field=el.dataset.field
   mesData[currentMes].campanhas[idx][field]=el.value
   calcCampanhas(mesData[currentMes].campanhas)
-  markDirty();renderContent()
+  renderContent();autoSave()
 }
 function onStatusChange(el){
   const idx=+el.dataset.idx,field=el.dataset.field
   mesData[currentMes].campanhas[idx][field]=el.value
   if(field==='status')el.className=`status-select status-${el.value}`
   if(field==='plataforma')el.className=`plat-select plat-${el.value}`
-  markDirty();renderContent()
+  renderContent();autoSave()
 }
 function addCampanha(){
   try{
     if(!mesData[currentMes])mesData[currentMes]={campanhas:[]}
     const p=cfg.plataformas?.[0]||'meta'
     mesData[currentMes].campanhas.push({plataforma:p,nome:'',inicio:'',fim:'',dias:'',euro_dia:'',status:'ativo'})
-    markDirty();renderContent()
+    renderContent();autoSave()
   }catch(e){console.error('addCampanha error:',e);alert('Erro ao adicionar campanha: '+e.message)}
 }
 function delCampanha(idx){
@@ -1312,7 +1315,7 @@ function delCampanha(idx){
   document.getElementById('confirm-btn-ok').onclick=()=>{
     closeConfirm()
     mesData[currentMes].campanhas.splice(idx,1)
-    markDirty();renderContent()
+    renderContent();autoSave()
   }
 }
 function closeConfirm(){
@@ -1346,16 +1349,30 @@ function onRowDrop(e,dropIdx,plat){
   arr.splice(dropIdx,0,moved)
   _dragIdx=null;markDirty();renderContent()
 }
-function markDirty(){
+function markDirty(){dirty=true}
+let _autoSaveTimer=null
+function autoSave(){
   dirty=true
-  const bar=document.getElementById('save-bar'); if(bar)bar.classList.add('visible')
+  const bar=document.getElementById('save-bar')
+  if(bar){bar.className='save-bar visible saving';bar.innerHTML='<span>A guardar…</span>'}
+  clearTimeout(_autoSaveTimer)
+  _autoSaveTimer=setTimeout(()=>saveData(),800)
 }
 async function saveData(){
+  const bar=document.getElementById('save-bar')
+  if(bar){bar.className='save-bar visible saving';bar.innerHTML='<span>A guardar…</span>'}
   try{
     const r=await fetch(`/api/data/${currentMes}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[currentMes])})
-    if(r.ok){dirty=false;const bar=document.getElementById('save-bar');if(bar)bar.classList.remove('visible')}
-    else alert('Erro ao guardar.')
-  }catch{alert('Sem ligação.')}
+    if(r.ok){
+      dirty=false
+      if(bar){bar.className='save-bar visible saved';bar.innerHTML='<span>✓ Guardado</span>'}
+      setTimeout(()=>{const b=document.getElementById('save-bar');if(b)b.className='save-bar'},2000)
+    }else{
+      if(bar){bar.className='save-bar visible error';bar.innerHTML='<span>⚠ Erro ao guardar</span><button class="btn-save" onclick="saveData()">Tentar novamente</button>'}
+    }
+  }catch{
+    if(bar){bar.className='save-bar visible error';bar.innerHTML='<span>⚠ Sem ligação</span><button class="btn-save" onclick="saveData()">Tentar novamente</button>'}
+  }
 }
 
 // ══ VIEWS + RESIZE ══
