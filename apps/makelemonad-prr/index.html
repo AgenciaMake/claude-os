@@ -851,6 +851,8 @@ async function propagateCampaigns(key) {
   prevCamps.forEach(prev=>{
     const done=['pausado','encerrado','reprovado'].includes(prev.status)
     if(done)return
+    // Não propagar campanhas sem dados úteis (sem inicio nem dias)
+    if(!prev.inicio&&!parseInt(prev.dias))return
     const prevInicio=prev.inicio?new Date(prev.inicio):null
     const prevDias=parseInt(prev.dias)||0
     let runs=false
@@ -863,6 +865,7 @@ async function propagateCampaigns(key) {
     if(!runs)return
     const copy={...prev}
     delete copy.herdada; delete copy._existed
+    copy._propagated=true // marca como vinda de mês anterior
     toAdd.push(copy)
   })
   if(!toAdd.length)return
@@ -1358,8 +1361,9 @@ function renderRows(campanhas,isEditor,rt){
   activePlats.forEach(plat=>{
     const items=groups[plat]; if(!items||items.length===0)return
     // Separar em dois grupos: campanhas de meses anteriores e do mês actual
-    const prevItems=items.filter(({c})=>c.inicio&&c.inicio<mStartStr)
-    const currItems=items.filter(({c})=>!(c.inicio&&c.inicio<mStartStr))
+    const isFromPrev=c=>(c.inicio&&c.inicio<mStartStr)||c._propagated
+    const prevItems=items.filter(({c})=>isFromPrev(c))
+    const currItems=items.filter(({c})=>!isFromPrev(c))
     // Ordenar cada grupo independentemente
     const applySort=arr=>{
       if(!sortField||!arr.length) return arr
@@ -1375,8 +1379,8 @@ function renderRows(campanhas,isEditor,rt){
     let platTotal=0
     const renderItem=({c,i})=>{
       platTotal+=(c.total||0)
-      // Badge automático: campanha que começou noutro mês
-      const fromPrev=c.inicio&&c.inicio<mStartStr
+      // Badge automático: campanha de mês anterior (por data ou flag de propagação)
+      const fromPrev=(c.inicio&&c.inicio<mStartStr)||c._propagated
       const tr=document.createElement('tr'); tr.className='row-'+plat+(fromPrev?' row-herdada':'')
       if(isEditor){tr.draggable=true;tr.ondragstart=e=>onRowDragStart(e,i,plat);tr.ondragend=e=>onRowDragEnd(e);tr.ondragover=e=>onRowDragOver(e,i,plat);tr.ondrop=e=>onRowDrop(e,i,plat)}
       const platOpts=activePlats.map(p=>`<option value="${p}" ${(c.plataforma||activePlats[0])===p?'selected':''}>${PLAT_LABELS[p]?.split(' ')[0]||p}</option>`).join('')
