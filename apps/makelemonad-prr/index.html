@@ -797,7 +797,7 @@ function buildTabs() {
     const btn=document.createElement('button')
     btn.className='tab'+(m===currentMes?' active':'')
     btn.textContent=monthLabel(m)
-    btn.onclick=()=>{if(dirty&&!confirm('Alterações não guardadas. Continuar?'))return;selectMes(m)}
+    btn.onclick=()=>selectMes(m)
     bar.appendChild(btn)
   })
 }
@@ -1370,7 +1370,7 @@ function onRowDrop(e,dropIdx,plat){
   const arr=mesData[currentMes].campanhas
   const [moved]=arr.splice(_dragIdx,1)
   arr.splice(dropIdx,0,moved)
-  _dragIdx=null;markDirty();renderContent()
+  _dragIdx=null;renderContent();autoSave()
 }
 function markDirty(){dirty=true}
 let _autoSaveTimer=null
