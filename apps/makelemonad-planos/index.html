@@ -141,6 +141,28 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .btn-new-plan{padding:9px 18px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer}
 .btn-new-plan:hover{background:var(--accent-hover)}
 .plans-empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.plan-card-actions{display:flex;gap:6px;margin-top:12px;border-top:1px solid var(--border);padding-top:10px}
+.btn-plan-share{padding:5px 10px;font-size:11px;font-weight:600;background:var(--accent-bg);color:var(--accent);border:1px solid var(--border);border-radius:6px;cursor:pointer;display:flex;align-items:center;gap:4px}
+.btn-plan-share:hover{background:var(--accent);color:#fff}
+/* ── SHARE MODAL ── */
+#share-plan-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:flex;align-items:center;justify-content:center;padding:24px}
+.share-plan-box{background:var(--surface);border-radius:16px;padding:32px;width:100%;max-width:460px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.share-plan-title{font-size:17px;font-weight:800;margin-bottom:4px}
+.share-plan-sub{font-size:12px;color:var(--muted);margin-bottom:20px}
+.share-link-box{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:20px}
+.share-link-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
+.share-link-row{display:flex;align-items:center;gap:8px}
+.share-link-url{font-size:12px;font-family:monospace;color:var(--accent);flex:1;word-break:break-all}
+.btn-copy-link{padding:5px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.share-divider{border-top:1px solid var(--border);margin:16px 0}
+.share-access-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.share-field{margin-bottom:12px}
+.share-field-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;display:block}
+.share-input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text)}
+.share-input:focus{outline:none;border-color:var(--accent)}
+.share-pass-row{display:flex;gap:6px;position:relative}
+.share-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+.share-save-msg{font-size:12px;color:#2E7D32;margin-top:8px;display:none}
 /* ── CREATE PLAN MODAL ── */
 #create-plan-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:flex;align-items:center;justify-content:center;padding:24px}
 .create-plan-box{background:var(--surface);border-radius:16px;padding:32px;width:100%;max-width:440px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
@@ -502,6 +524,44 @@ tr[draggable="true"]:active{cursor:grabbing}
   </div>
 </div>
 
+<!-- ══ SHARE PLAN MODAL ══ -->
+<div id="share-plan-overlay" style="display:none">
+  <div class="share-plan-box">
+    <div class="share-plan-title" id="share-plan-title">Partilhar acesso</div>
+    <div class="share-plan-sub">O cliente acede com leitura apenas — sem edição</div>
+
+    <div class="share-link-box">
+      <div class="share-link-label">Link de acesso</div>
+      <div class="share-link-row">
+        <div class="share-link-url" id="share-link-url"></div>
+        <button class="btn-copy-link" id="btn-copy-link" onclick="copyShareLink()">Copiar</button>
+      </div>
+    </div>
+
+    <div class="share-divider"></div>
+    <div class="share-access-label">Credenciais do cliente</div>
+
+    <div class="share-field">
+      <label class="share-field-label">E-mail</label>
+      <input class="share-input" id="share-email" type="email" placeholder="email@cliente.com">
+    </div>
+    <div class="share-field">
+      <label class="share-field-label">Senha</label>
+      <div class="share-pass-row">
+        <input class="share-input" id="share-senha" type="password" placeholder="Nova senha (deixa em branco para manter)" style="flex:1;padding-right:36px">
+        <button type="button" onclick="(()=>{const i=document.getElementById('share-senha');i.type=i.type==='password'?'text':'password';this.textContent=i.type==='password'?'👁':'🙈'})()" style="position:absolute;right:52px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:15px;padding:2px">👁</button>
+        <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('share-senha').value).then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='⧉',1500)})" style="padding:0 10px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;color:var(--muted);flex-shrink:0">⧉</button>
+      </div>
+    </div>
+
+    <div id="share-save-msg" class="share-save-msg">✓ Credenciais actualizadas</div>
+    <div class="share-actions">
+      <button class="btn-cp-cancel" onclick="closeSharePlan()">Fechar</button>
+      <button class="btn-cp-save" id="btn-share-save" onclick="saveShareCredentials()">Guardar</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ APP ══ -->
 <div id="app" class="hidden">
   <div class="topbar">
@@ -662,6 +722,9 @@ function renderPlans(plans) {
         ${p.email_cliente?`<span class="plan-card-tag">🔒 Cliente</span>`:''}
         <span class="plan-card-tag">${p.criado_em?p.criado_em.slice(0,10):''}</span>
       </div>
+      <div class="plan-card-actions">
+        <button class="btn-plan-share" onclick="openSharePlan('${p.slug}',event)">🔗 Partilhar</button>
+      </div>
     </div>
   `).join('')
 }
@@ -684,6 +747,63 @@ async function enterPlan(slug) {
 function backToPlans(){
   document.getElementById('app').classList.add('hidden')
   showPlansScreen()
+}
+
+// ══ SHARE PLAN ══
+let _sharePlanSlug = null
+async function openSharePlan(slug, event) {
+  event.stopPropagation()
+  _sharePlanSlug = slug
+  const overlay = document.getElementById('share-plan-overlay')
+  overlay.style.display = 'flex'
+  document.getElementById('share-plan-title').textContent = 'A carregar…'
+  document.getElementById('share-link-url').textContent = `makelemonad-planos.pages.dev/plan/${slug}`
+  document.getElementById('share-email').value = ''
+  document.getElementById('share-senha').value = ''
+  document.getElementById('share-save-msg').style.display = 'none'
+  try {
+    const r = await fetch(`/api/plans/${slug}`, {headers:{'Authorization':`Bearer ${currentToken}`}})
+    const d = await r.json()
+    document.getElementById('share-plan-title').textContent = `Partilhar — ${d.cliente||slug}`
+    document.getElementById('share-email').value = d.email_cliente || ''
+  } catch {
+    document.getElementById('share-plan-title').textContent = 'Partilhar acesso'
+  }
+}
+function closeSharePlan() {
+  document.getElementById('share-plan-overlay').style.display = 'none'
+  _sharePlanSlug = null
+}
+function copyShareLink() {
+  const url = `https://makelemonad-planos.pages.dev/plan/${_sharePlanSlug}`
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('btn-copy-link')
+    btn.textContent = 'Copiado!'
+    setTimeout(() => btn.textContent = 'Copiar', 1800)
+  })
+}
+async function saveShareCredentials() {
+  const btn = document.getElementById('btn-share-save')
+  btn.textContent = 'A guardar…'; btn.disabled = true
+  const body = {}
+  const email = document.getElementById('share-email').value.trim()
+  const senha = document.getElementById('share-senha').value
+  if (email) body.email_cliente = email
+  if (senha) body.senha_cliente = senha
+  try {
+    const r = await fetch(`/api/plans/${_sharePlanSlug}`, {
+      method: 'PUT',
+      headers: {'Authorization': `Bearer ${currentToken}`, 'Content-Type': 'application/json'},
+      body: JSON.stringify(body)
+    })
+    if (r.ok) {
+      document.getElementById('share-save-msg').style.display = 'block'
+      document.getElementById('share-senha').value = ''
+      setTimeout(() => document.getElementById('share-save-msg').style.display = 'none', 2500)
+      await showPlansScreen()
+    }
+  } catch {}
+  btn.textContent = 'Guardar'; btn.disabled = false
 }
 
 // ══ CREATE PLAN ══
