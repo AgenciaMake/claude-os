@@ -55,7 +55,7 @@ export async function onRequestGet(context) {
         integration_id: 'facebook_ads',
         connection_key: mc.connection_key,
         account_id: mc.account_id,
-        fields: ['campaign_name', 'spend', 'impressions', 'clicks', 'ctr', 'cpm', 'reach', 'daily_budget', 'effective_status', 'start_time', 'stop_time'],
+        fields: ['campaign_name', 'spend', 'impressions', 'clicks', 'ctr', 'cpm', 'reach', 'daily_budget', 'effective_status'],
         date_range: dateRange,
         limit: 5000,
         settings: { attribution_window: attr }
