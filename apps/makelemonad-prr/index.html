@@ -1148,10 +1148,19 @@ function findRtCampaign(plat,nome){
   if(!rd||!rd[plat]) return null
   const rows=(rd[plat].data?.rows)||(rd[plat].rows)||[]
   const norm=s=>(s||'').toLowerCase().replace(/\s+/g,' ').trim()
+  // Remove trailing date-like suffix: " - 11/08/2026", " - 2026-08-11", " — cópia" etc.
+  const stripDate=s=>s.replace(/[\s\-–—]+(\d{2}[\/\-]\d{2}[\/\-]\d{4}|\d{4}[\/\-]\d{2}[\/\-]\d{2}).*$/i,'').trim()
   const pn=norm(nome)
   if(!pn) return null
+  // 1. Exact
   let hit=rows.find(r=>norm(getRtCampName(plat,r))===pn)
+  // 2. Substring
   if(!hit) hit=rows.find(r=>{const rn=norm(getRtCampName(plat,r));return rn&&(rn.includes(pn)||pn.includes(rn))})
+  // 3. Match without trailing date on both sides
+  if(!hit){
+    const pnd=stripDate(pn)
+    if(pnd.length>=6) hit=rows.find(r=>{const rnd=stripDate(norm(getRtCampName(plat,r)));return rnd.length>=6&&(rnd===pnd||rnd.includes(pnd)||pnd.includes(rnd))})
+  }
   return hit||null
 }
 function renderVerifyRow(plat,campNome,plannedDaily,cols){
