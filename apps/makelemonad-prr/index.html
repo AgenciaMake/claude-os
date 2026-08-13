@@ -1259,10 +1259,9 @@ function renderRows(campanhas,isEditor,rt){
     items.sort((a,b)=>(b.c.herdada?1:0)-(a.c.herdada?1:0))
     const htr=document.createElement('tr'); htr.className=`plat-block-header ph-${plat}`
     htr.innerHTML=`<td colspan="${cols}">${PLAT_LABELS[plat]||plat}</td>`; tbody.appendChild(htr)
-    let platTotal=0,platTotalAll=0
+    let platTotal=0
     items.forEach(({c,i})=>{
-      platTotalAll+=(c.total||0)
-      if(c.status==='ativo') platTotal+=(c.total||0)
+      platTotal+=(c.total||0)
       const tr=document.createElement('tr'); tr.className='row-'+plat+(c.herdada?' row-herdada':'')
       if(isEditor){tr.draggable=true;tr.ondragstart=e=>onRowDragStart(e,i,plat);tr.ondragend=e=>onRowDragEnd(e);tr.ondragover=e=>onRowDragOver(e,i,plat);tr.ondrop=e=>onRowDrop(e,i,plat)}
       const platOpts=activePlats.map(p=>`<option value="${p}" ${(c.plataforma||activePlats[0])===p?'selected':''}>${PLAT_LABELS[p]?.split(' ')[0]||p}</option>`).join('')
