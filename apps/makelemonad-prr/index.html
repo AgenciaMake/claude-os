@@ -814,7 +814,10 @@ async function loadRealtime(key) {
   try{
     const [y,m]=key.split('-')
     const ld=new Date(+y,+m,0).getDate()
-    const r=await fetch(`/api/realtime?start=${y}-${m}-01&end=${y}-${m}-${ld}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+    const endOfMonth=`${y}-${m}-${String(ld).padStart(2,'0')}`
+    const today=new Date().toISOString().slice(0,10)
+    const end=endOfMonth>today?today:endOfMonth
+    const r=await fetch(`/api/realtime?start=${y}-${m}-01&end=${end}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
     const data=r.ok?await r.json():null
     realtimeData[key]=data&&!data.error?data:{}
     const hasData=data&&Object.keys(data).some(p=>data[p]?.data?.rows?.length||data[p]?.rows?.length)
