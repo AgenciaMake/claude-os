@@ -851,7 +851,7 @@ function calcCampanhas(campanhas) {
       const start=new Date(c.inicio),end=new Date(c.fim)
       const eff=end<=mesEnd?end:mesEnd
       const d=(eff-start)/86400000
-      c.dias=d>0?Math.round(d):0
+      c.dias=d>=0?Math.round(d)+1:0
     } else c.dias=0
     c.total=c.dias*(parseFloat(c.euro_dia)||0)
     if(c.status==='ativo') totalPrevisto+=c.total
