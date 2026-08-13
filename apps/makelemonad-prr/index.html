@@ -989,9 +989,17 @@ function startRtCountdown(seconds, key) {
   _rtRetryKey=key
   const tick=()=>{
     const rem=Math.max(0,Math.ceil((_rtRetryAt-Date.now())/1000))
-    const m=Math.floor(rem/60),s=rem%60
-    const t=m>0?`${m}m ${String(s).padStart(2,'0')}s`:`${s}s`
-    setRtStatus('ratelimit',`RT: limite atingido — nova tentativa em ${t}`)
+    let label
+    if(rem>3600){
+      const h=Math.floor(rem/3600),m=Math.floor((rem%3600)/60)
+      label=`RT: limite diário atingido — disponível em ~${h}h${m>0?` ${m}m`:''}`
+    } else if(rem>60){
+      const m=Math.floor(rem/60),s=rem%60
+      label=`RT: limite atingido — nova tentativa em ${m}m ${String(s).padStart(2,'0')}s`
+    } else {
+      label=`RT: nova tentativa em ${rem}s`
+    }
+    setRtStatus('ratelimit',label)
     if(rem<=0){
       stopRtCountdown()
       loadRealtime(_rtRetryKey,true).then(()=>renderContent())
