@@ -421,7 +421,8 @@ tr[draggable="true"]:active{cursor:grabbing}
 <script>
 // ══ STATE ══
 let currentToken = null, currentRole = null, currentMes = null
-let mesData = {}, realtimeData = {}, dirty = false, configEditing = false
+let mesData = {}, realtimeData = {}, realtimeTs = {}, dirty = false, configEditing = false
+const RT_TTL = 5 * 60 * 1000 // 5 min cache para evitar HTTP 429
 let wizardStep = 1, wizardIsModal = false
 let sortField = null, sortDir = 1
 
@@ -816,6 +817,7 @@ async function selectMes(key) {
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',MESES[i]===key))
   await Promise.all([loadMes(key),loadRealtime(key)])
   await propagateCampaigns(key)
+  await migrateHerdadas(key)
   renderContent()
 }
 
@@ -876,7 +878,45 @@ async function propagateCampaigns(key) {
   }catch{}
 }
 
-async function loadRealtime(key) {
+// Migração retroactiva: marca campanhas já gravadas que vieram do mês anterior
+async function migrateHerdadas(key) {
+  const camps=mesData[key]?.campanhas||[]
+  // Só precisa migrar campanhas sem inicio e sem _propagated
+  const needsMig=camps.filter(c=>!c._propagated&&!c.inicio)
+  if(!needsMig.length)return
+  const [y,m]=key.split('-')
+  const prevM=+m===1?12:+m-1
+  const prevY=+m===1?+y-1:+y
+  const prevKey=`${prevY}-${String(prevM).padStart(2,'0')}`
+  if(!mesData[prevKey]){
+    try{
+      const r=await fetch(`/api/data/${prevKey}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+      if(r.ok)mesData[prevKey]=await r.json()
+      else return
+    }catch{return}
+  }
+  const prevCamps=mesData[prevKey]?.campanhas||[]
+  if(!prevCamps.length)return
+  let changed=false
+  needsMig.forEach(c=>{
+    const inPrev=prevCamps.some(p=>p.nome===c.nome&&(p.plataforma||'')===(c.plataforma||''))
+    if(inPrev){c._propagated=true;changed=true}
+  })
+  if(changed){
+    try{
+      await fetch(`/api/data/${key}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[key])})
+    }catch{}
+  }
+}
+
+async function loadRealtime(key,force=false) {
+  // Cache de 5 min: evita HTTP 429 ao navegar entre meses repetidamente
+  const now=Date.now()
+  if(!force&&realtimeData[key]&&realtimeTs[key]&&(now-realtimeTs[key])<RT_TTL){
+    const hasData=Object.keys(realtimeData[key]).some(p=>realtimeData[key][p]?.data?.rows?.length||realtimeData[key][p]?.rows?.length)
+    setRtStatus(hasData?'ok':'empty')
+    return
+  }
   setRtStatus('loading')
   try{
     const [y,m]=key.split('-')
@@ -885,6 +925,7 @@ async function loadRealtime(key) {
     const r=await fetch(`/api/realtime?start=${y}-${m}-01&end=${end}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
     const data=r.ok?await r.json():null
     realtimeData[key]=data&&!data.error?data:{}
+    realtimeTs[key]=now
     const hasData=data&&Object.keys(data).some(p=>data[p]?.data?.rows?.length||data[p]?.rows?.length)
     setRtStatus(hasData?'ok':data?.error?'error':'empty')
   }catch{realtimeData[key]={};setRtStatus('error')}
@@ -900,7 +941,7 @@ function setRtStatus(s){
 async function refreshRt(){
   const btn=document.getElementById('btn-rt-refresh')
   if(btn){btn.textContent='⏳';btn.disabled=true}
-  await loadRealtime(currentMes)
+  await loadRealtime(currentMes,true) // force=true ignora cache
   renderContent()
   if(btn){btn.textContent='⟳';btn.disabled=false}
 }
