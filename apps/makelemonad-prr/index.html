@@ -1071,18 +1071,24 @@ function calcCampanhas(campanhas) {
   return{totalPrevisto,orcamento_mes,valorMes,verba}
 }
 
-function getSobraAnterior() {
-  const idx=MESES.indexOf(currentMes); if(idx<=0) return 0
-  const prev=MESES[idx-1]; const pd=mesData[prev]; if(!pd?.campanhas) return 0
-  const saveMes=currentMes; currentMes=prev
+// Calcula o que sobrou de verdade num mês (recursivo — encadeia sobras anteriores)
+function getSobraDoMes(mes) {
+  const idx=MESES.indexOf(mes); if(idx<0) return 0
+  const pd=mesData[mes]; if(!pd?.campanhas) return 0
+  const sobraDoPrev=idx>0?getSobraDoMes(MESES[idx-1]):0
+  const saveMes=currentMes; currentMes=mes
   const{totalPrevisto,orcamento_mes}=calcCampanhas(pd.campanhas)
   currentMes=saveMes
-  const dispPrev=orcamento_mes-totalPrevisto
-  // Se RT do mês anterior estiver disponível, usa disponível real (planilha - gasto)
-  const prevActivePlats=cfg.plataformas||['meta','linkedin']
-  const rtPrev=getRtTotals(prev)
-  const totalPlatsPrev=prevActivePlats.reduce((s,p)=>s+(rtPrev[p]||0),0)
-  return Math.max(0,dispPrev-totalPlatsPrev)
+  const orcComSobra=orcamento_mes+sobraDoPrev
+  const activePlats=cfg.plataformas||['meta','linkedin']
+  const rt=getRtTotals(mes)
+  const totalPlats=activePlats.reduce((s,p)=>s+(rt[p]||0),0)
+  const hasRt=Object.values(realtimeData[mes]||{}).some(q=>q&&!q._error)
+  return Math.max(0,hasRt&&totalPlats>0?orcComSobra-totalPlats:orcComSobra-totalPrevisto)
+}
+function getSobraAnterior() {
+  const idx=MESES.indexOf(currentMes); if(idx<=0) return 0
+  return getSobraDoMes(MESES[idx-1])
 }
 
 function getRtTotals(key) {
@@ -1601,7 +1607,11 @@ function addCampanha(){
     if(!mesData[currentMes])mesData[currentMes]={campanhas:[]}
     const p=cfg.plataformas?.[0]||'meta'
     mesData[currentMes].campanhas.push({plataforma:p,nome:'',inicio:'',fim:'',dias:'',euro_dia:'',status:'ativo'})
-    renderContent();autoSave()
+    renderContent()
+    autoSave()
+    const newIdx=mesData[currentMes].campanhas.length-1
+    const newRow=document.querySelector(`[data-idx="${newIdx}"]`)?.closest('tr')
+    if(newRow)newRow.scrollIntoView({behavior:'smooth',block:'nearest'})
   }catch(e){console.error('addCampanha error:',e);alert('Erro ao adicionar campanha: '+e.message)}
 }
 function delCampanha(idx){
