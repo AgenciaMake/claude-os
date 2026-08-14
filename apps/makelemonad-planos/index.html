@@ -1156,8 +1156,15 @@ async function selectMes(key) {
   currentMes=key; dirty=false
   sessionStorage.setItem('mpl_mes',key)
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',MESES[i]===key))
-  await Promise.all([loadMes(key),loadRealtime(key)])
-  await loadPrevMes(key)
+  // Carregar mês actual + todos os anteriores em paralelo (necessários para cadeia de sobra/défice)
+  const idx=MESES.indexOf(key)
+  const prevKeys=MESES.slice(0,idx)
+  const loads=[loadMes(key),loadRealtime(key)]
+  prevKeys.forEach(m=>{
+    if(!mesData[m])loads.push(loadMes(m))
+    if(!realtimeData[m])loads.push(loadRealtime(m))
+  })
+  await Promise.all(loads)
   await propagateCampaigns(key)
   await migrateHerdadas(key)
   await syncFromPrevMonth(key)
