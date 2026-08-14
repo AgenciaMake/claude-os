@@ -1586,18 +1586,18 @@ function renderContent() {
 
         <!-- ── Col 3: Previsão Planilha ── -->
         <div class="budget-col bc-prev">
-          <div class="bc-col-title">Previsão em Planilha</div>
+          <div class="bc-col-title">Gastos em mídia</div>
           <div class="bc-metric-row">
-            <span class="bc-metric-label">Previsto em planilha</span>
+            <span class="bc-metric-label">Gasto previsto em plano de mídia</span>
             <span class="bc-metric-val">${fmtEur(totalPrevisto)}</span>
           </div>
           <div class="bc-alert-row ${disponivel<0?'alert':disponivel<orcComSobra*0.1?'warn':'ok'}">
-            <div class="bc-disponivel-label">Disponível planilha</div>
+            <div class="bc-disponivel-label">Valor ainda disponível em plano</div>
             <div class="bc-disponivel-val ${disponivel<0?'alert':'ok'}">${fmtEur(disponivel)}</div>
             ${disponivel<0?`<div class="bc-alert-msg">⚠ Previsto excede o total disponível</div>`:''}
           </div>
           <div class="bc-real-row ${!hasRtData?'nodata':disponivelReal<0?'alert':disponivelReal<orcamento_mes*0.1?'warn':'ok'}">
-            <div class="bc-disponivel-label">Disponível</div>
+            <div class="bc-disponivel-label">Valor ainda disponível real (via API)</div>
             ${hasRtData
               ? `<div class="bc-disponivel-val ${disponivelReal<0?'alert':'ok'}">${fmtEur(disponivelReal)}</div>
                  <div class="bc-disponivel-hint">planilha − gasto plataformas${disponivelReal<0?' · ⚠ excede disponível':''}</div>`
