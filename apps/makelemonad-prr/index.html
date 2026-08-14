@@ -1084,7 +1084,7 @@ function getSobraDoMes(mes) {
   const rt=getRtTotals(mes)
   const totalPlats=activePlats.reduce((s,p)=>s+(rt[p]||0),0)
   const hasRt=Object.values(realtimeData[mes]||{}).some(q=>q&&!q._error)
-  return Math.max(0,hasRt&&totalPlats>0?orcComSobra-totalPlats:orcComSobra-totalPrevisto)
+  return hasRt&&totalPlats>0?orcComSobra-totalPlats:orcComSobra-totalPrevisto
 }
 function getSobraAnterior() {
   const idx=MESES.indexOf(currentMes); if(idx<=0) return 0
@@ -1238,12 +1238,12 @@ function renderContent() {
             <span class="bc-sobra-val">${fmtEur(orcamento_mes)}</span>
           </div>
           <div class="bc-sobra-row">
-            <span class="bc-sobra-label" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">+ Sobra mês anterior</span>
-            <span class="bc-sobra-val" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">${fmtEur(sobraAnterior)}</span>
+            <span class="bc-sobra-label" style="color:${sobraAnterior>0?'var(--green)':sobraAnterior<0?'var(--orange)':'var(--muted)'}">${sobraAnterior<0?'− Défice mês anterior':'+ Sobra mês anterior'}</span>
+            <span class="bc-sobra-val" style="color:${sobraAnterior>0?'var(--green)':sobraAnterior<0?'var(--orange)':'var(--muted)'}">${fmtEur(sobraAnterior)}</span>
           </div>
           <div class="bc-sobra-row total-row">
             <span class="bc-sobra-label" style="font-weight:700;color:var(--text)">= Total disponível</span>
-            <span class="bc-sobra-val total">${fmtEur(orcComSobra)}</span>
+            <span class="bc-sobra-val total" style="color:${orcComSobra<orcamento_mes?'var(--orange)':'var(--accent)'}">${fmtEur(orcComSobra)}</span>
           </div>
         </div>
 
