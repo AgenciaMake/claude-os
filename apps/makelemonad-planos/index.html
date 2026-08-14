@@ -1567,7 +1567,24 @@ function renderContent() {
           `}
         </div>
 
-        <!-- ── Col 2: Previsão Planilha ── -->
+        <!-- ── Col 2: Orçamento Disponível (c/ sobra) ── -->
+        <div class="budget-col bc-sobra">
+          <div class="bc-col-title">Orçamento Disponível</div>
+          <div class="bc-sobra-row">
+            <span class="bc-sobra-label">Livre este mês</span>
+            <span class="bc-sobra-val">${fmtEur(orcamento_mes)}</span>
+          </div>
+          <div class="bc-sobra-row">
+            <span class="bc-sobra-label" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">+ Sobra mês anterior</span>
+            <span class="bc-sobra-val" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">${fmtEur(sobraAnterior)}</span>
+          </div>
+          <div class="bc-sobra-row total-row">
+            <span class="bc-sobra-label" style="font-weight:700;color:var(--text)">= Total disponível</span>
+            <span class="bc-sobra-val total">${fmtEur(orcComSobra)}</span>
+          </div>
+        </div>
+
+        <!-- ── Col 3: Previsão Planilha ── -->
         <div class="budget-col bc-prev">
           <div class="bc-col-title">Previsão em Planilha</div>
           <div class="bc-metric-row">
@@ -1587,23 +1604,6 @@ function renderContent() {
               : `<div class="bc-disponivel-val" style="color:var(--muted);font-size:13px">Aguarda dados RT</div>
                  <div class="bc-disponivel-hint">Carrega dados via API para ver</div>`
             }
-          </div>
-        </div>
-
-        <!-- ── Col 3: Orçamento Disponível (c/ sobra) ── -->
-        <div class="budget-col bc-sobra">
-          <div class="bc-col-title">Orçamento Disponível</div>
-          <div class="bc-sobra-row">
-            <span class="bc-sobra-label">Livre este mês</span>
-            <span class="bc-sobra-val">${fmtEur(orcamento_mes)}</span>
-          </div>
-          <div class="bc-sobra-row">
-            <span class="bc-sobra-label" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">+ Sobra mês anterior</span>
-            <span class="bc-sobra-val" style="color:${sobraAnterior>0?'var(--green)':'var(--muted)'}">${fmtEur(sobraAnterior)}</span>
-          </div>
-          <div class="bc-sobra-row total-row">
-            <span class="bc-sobra-label" style="font-weight:700;color:var(--text)">= Total disponível</span>
-            <span class="bc-sobra-val total">${fmtEur(orcComSobra)}</span>
           </div>
         </div>
 
