@@ -1495,7 +1495,7 @@ function renderContent() {
   const platPlanilha={}
   activePlats.forEach(p=>{
     platPlanilha[p]=campanhas
-      .filter(c=>(c.plataforma||activePlats[0])===p)
+      .filter(c=>(c.plataforma||activePlats[0])===p&&c.status==='ativo')
       .reduce((s,c)=>s+(c.total||0),0)
   })
 
