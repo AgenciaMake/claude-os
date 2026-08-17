@@ -2024,11 +2024,9 @@ function renderRows(campanhas,isEditor,rt){
         <td class="num">${c.status==='ativo'?fmtPct(c.pct):''}</td>
         <td><select class="status-select status-${c.status||''}" data-idx="${i}" data-field="status" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>
           <option value="" ${!c.status?'selected':''}>—</option>
-          <option value="" ${(!c.status||c.status==='')?'selected':''}>—</option>
           <option value="ativo" ${c.status==='ativo'?'selected':''}>ATIVO</option>
           <option value="reprovado" ${c.status==='reprovado'?'selected':''}>REPROVADO</option>
           <option value="pausado" ${c.status==='pausado'?'selected':''}>PAUSADO</option>
-          <option value="aprovacao" ${c.status==='aprovacao'?'selected':''}>EM APROVAÇÃO</option>
           <option value="aprovacao" ${c.status==='aprovacao'?'selected':''}>EM APROVAÇÃO</option>
         </select></td>
         ${isEditor?`<td><button class="btn-del" onclick="delCampanha(${i})" title="Remover">×</button></td>`:''}
