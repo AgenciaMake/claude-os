@@ -277,6 +277,8 @@ select[disabled]{cursor:default;opacity:.7}
 .status-ativo{background:var(--green-bg);color:var(--green)}
 .status-reprovado{background:var(--red-bg);color:var(--red)}
 .status-pausado{background:var(--orange-bg);color:var(--orange)}
+.status-planejado,.status-{background:var(--surface2);color:var(--muted)}
+.status-aprovacao{background:#E3F2FD;color:#1565C0}
 .status-aprovacao{background:var(--blue-bg);color:var(--blue)}
 .plat-meta{background:#E8F5E9;color:#2E7D32}
 .plat-linkedin{background:#F3E5F5;color:#6A1B9A}
@@ -396,9 +398,11 @@ tr[draggable="true"]:active{cursor:grabbing}
       <label style="display:grid;gap:5px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">
         Status
         <select id="ac-status" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:13px;color:var(--text);min-width:110px">
+          <option value="">—</option>
           <option value="ativo">ATIVO</option>
           <option value="reprovado">REPROVADO</option>
           <option value="pausado">PAUSADO</option>
+          <option value="aprovacao">EM APROVAÇÃO</option>
         </select>
       </label>
     </div>
@@ -1733,7 +1737,7 @@ function addCampanha(){
       ${PLAT_LABELS[p]?.split(' ')[0]||p}
     </label>`).join('')
   document.getElementById('ac-nome').value=''
-  document.getElementById('ac-status').value='ativo'
+  document.getElementById('ac-status').value=''
   document.getElementById('ac-inicio').value=''
   document.getElementById('ac-dias').value=''
   document.getElementById('ac-euro-dia').value=''
