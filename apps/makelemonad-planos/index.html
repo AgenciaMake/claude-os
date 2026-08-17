@@ -1793,7 +1793,29 @@ function renderContent() {
   `
   renderRows(campanhas,isEditor,rt)
   initColResize()
+  if(new URLSearchParams(location.search).get('debug')) renderDebugPanel()
   requestAnimationFrame(()=>window.scrollTo(0,_sy))
+}
+
+function renderDebugPanel(){
+  const rd=realtimeData[currentMes]||{}
+  const plats=cfg?.plataformas||['meta','linkedin']
+  let html=`<div style="margin:24px 0;padding:16px;background:#1a1a2e;color:#00ff88;font-family:monospace;font-size:11px;border-radius:8px;border:1px solid #00ff8844"><b style="font-size:13px">🐞 DEBUG — RT API (${currentMes})</b>`
+  plats.forEach(p=>{
+    const rows=(rd[p]?.data?.rows)||(rd[p]?.rows)||[]
+    html+=`<div style="margin-top:12px"><b style="color:#ffcc00">${p.toUpperCase()} — ${rows.length} campanhas</b><ol style="margin:4px 0 0 16px;padding:0">`
+    if(!rows.length) html+=`<li style="color:#ff6666">Nenhum dado</li>`
+    rows.forEach(r=>{
+      const name=getRtCampName(p,r)
+      const start=getRtStartDate(p,r)||'—'
+      const spend=r.spend??r.costInLocalCurrency??r['metrics.cost_micros']??'?'
+      html+=`<li style="margin:2px 0">${name} <span style="color:#888">| start: ${start} | gasto: ${spend}</span></li>`
+    })
+    html+=`</ol></div>`
+  })
+  html+=`</div>`
+  const mc=document.getElementById('main-content')
+  if(mc){const el=document.createElement('div');el.innerHTML=html;mc.appendChild(el)}
 }
 
 // ══ CONFIG EDIT (inline) ══
@@ -1892,7 +1914,7 @@ function findRtCampaign(plat,nome,inicio){
         hit=candidates[0]
       } else if(candidates.length>1){
         if(inicio) hit=candidates.find(r=>getRtStartDate(plat,r)===inicio)
-        if(!hit) hit=candidates[0]
+        // sem tiebreaker → não chuta; retorna null pra não cruzar dados de campanha errada
       }
     }
   }
