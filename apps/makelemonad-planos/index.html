@@ -263,7 +263,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .cmp-plat-badge.google{background:#FFF3E0;color:#E65100}
 .cmp-plat-badge.tiktok{background:#E0F2F1;color:#006064}
 .diff-ok{color:#2E7D32}
-.diff-under{color:#E65100}
+.diff-under{color:#2E7D32}
 .diff-over{color:#c62828}
 .btn-pencil{background:none;border:none;cursor:pointer;color:var(--faint);font-size:13px;padding:2px 6px;border-radius:4px;transition:color .15s,background .15s}
 .btn-pencil:hover{color:var(--accent);background:var(--accent-bg)}
@@ -1491,13 +1491,15 @@ function renderContent() {
   const activePlats=cfg.plataformas||['meta','linkedin']
   const totalPlataformas=activePlats.reduce((s,p)=>s+(rt[p]||0),0)
 
-  // Per-platform planilha totals (ativo only)
+  // Per-platform planilha totals (todas as campanhas, independente de status)
   const platPlanilha={}
   activePlats.forEach(p=>{
     platPlanilha[p]=campanhas
-      .filter(c=>(c.plataforma||activePlats[0])===p&&c.status==='ativo')
+      .filter(c=>(c.plataforma||activePlats[0])===p)
       .reduce((s,c)=>s+(c.total||0),0)
   })
+  // Total geral planilha (todas campanhas) — usado na tabela comparativa
+  const totalGeral=campanhas.reduce((s,c)=>s+(c.total||0),0)
 
   // Disponível planilha = total disponível (c/ sobra anterior) - previsto em planilha
   const disponivel=orcComSobra-totalPrevisto
@@ -1536,7 +1538,7 @@ function renderContent() {
       <td class="${diffCls}">${hasDiff?(diff>=0?'+':'')+fmtEur(diff):'—'}</td>
     </tr>`
   }).join('')
-  const totalDiff=totalPlataformas-totalPrevisto
+  const totalDiff=totalPlataformas-totalGeral
 
   document.getElementById('main-content').innerHTML=`
     ${mesBars}
@@ -1628,9 +1630,9 @@ function renderContent() {
             <tbody>${compareRows}</tbody>
             <tfoot><tr>
               <td style="font-weight:700;text-align:left">Total</td>
-              <td>${fmtEur(totalPrevisto)}</td>
+              <td>${fmtEur(totalGeral)}</td>
               <td>${totalPlataformas>0?fmtEur(totalPlataformas):'—'}</td>
-              <td class="${totalPlataformas>0?(Math.abs(totalDiff/Math.max(totalPrevisto,1))<0.05?'diff-ok':totalDiff<0?'diff-under':'diff-over'):''}">
+              <td class="${totalPlataformas>0?(Math.abs(totalDiff/Math.max(totalGeral,1))<0.05?'diff-ok':totalDiff<0?'diff-under':'diff-over'):''}">
                 ${totalPlataformas>0?(totalDiff>=0?'+':'')+fmtEur(totalDiff):'—'}
               </td>
             </tr></tfoot>
