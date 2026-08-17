@@ -434,44 +434,73 @@ tr[draggable="true"]:active{cursor:grabbing}
 </div>
 
 <!-- ══ ADD CAMPANHA MODAL ══ -->
-<div id="add-camp-overlay" class="hidden" style="position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;background:rgba(12,26,46,.55);backdrop-filter:blur(4px)">
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:420px;width:100%;box-shadow:0 12px 48px rgba(0,0,0,.25)">
-    <div style="font-size:15px;font-weight:700;margin-bottom:20px">Nova campanha</div>
-    <div style="display:grid;gap:14px">
-      <label style="display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)">
-        Plataforma
-        <select id="ac-plataforma" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;color:var(--text)"></select>
-      </label>
-      <label style="display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)">
+<div id="add-camp-overlay" class="hidden" style="position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;background:rgba(12,26,46,.55);backdrop-filter:blur(4px);padding:16px">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 28px;max-width:560px;width:100%;box-shadow:0 12px 48px rgba(0,0,0,.25);max-height:90vh;overflow-y:auto">
+    <div style="font-size:15px;font-weight:700;margin-bottom:18px">Nova campanha</div>
+
+    <!-- Plataformas (checkboxes) -->
+    <div style="margin-bottom:14px">
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Plataformas</div>
+      <div id="ac-plats-grid" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+    </div>
+
+    <!-- Nome + Status (sempre comuns) -->
+    <div style="display:grid;grid-template-columns:1fr auto;gap:12px;margin-bottom:14px">
+      <label style="display:grid;gap:5px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">
         Nome da campanha
-        <input id="ac-nome" type="text" placeholder="Ex: Campanha Agosto — Topo" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;color:var(--text)">
+        <input id="ac-nome" type="text" placeholder="Ex: Vídeo Agosto — Topo de Funil" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:13px;color:var(--text)">
       </label>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <label style="display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)">
-          Data de início
-          <input id="ac-inicio" type="date" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;color:var(--text)">
+      <label style="display:grid;gap:5px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">
+        Status
+        <select id="ac-status" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:13px;color:var(--text);min-width:110px">
+          <option value="ativo">ATIVO</option>
+          <option value="reprovado">REPROVADO</option>
+          <option value="pausado">PAUSADO</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Campos simples (1 plataforma) -->
+    <div id="ac-single-fields">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+        <label style="display:grid;gap:5px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">
+          Início
+          <input id="ac-inicio" type="date" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:13px;color:var(--text)">
         </label>
-        <label style="display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)">
-          Duração (dias)
-          <input id="ac-dias" type="number" min="1" step="1" placeholder="30" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;color:var(--text)">
+        <label style="display:grid;gap:5px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">
+          Dias
+          <input id="ac-dias" type="number" min="1" step="1" placeholder="—" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:13px;color:var(--text)">
         </label>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <label style="display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)">
+        <label style="display:grid;gap:5px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">
           Valor diário
-          <input id="ac-euro-dia" type="number" min="0" step="0.01" placeholder="0,00" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;color:var(--text)">
-        </label>
-        <label style="display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)">
-          Status inicial
-          <select id="ac-status" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;color:var(--text)">
-            <option value="ativo">ATIVO</option>
-            <option value="reprovado">REPROVADO</option>
-            <option value="pausado">PAUSADO</option>
-          </select>
+          <input id="ac-euro-dia" type="number" min="0" step="0.01" placeholder="0,00" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:13px;color:var(--text)">
         </label>
       </div>
     </div>
-    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:24px">
+
+    <!-- Tabela multi-plataforma (2+ plataformas) -->
+    <div id="ac-multi-fields" style="display:none">
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border)">
+            <th style="text-align:left;padding:6px 4px;font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em">Plataforma</th>
+            <th style="text-align:left;padding:6px 4px;font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em">Início</th>
+            <th style="text-align:left;padding:6px 4px;font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em">Dias</th>
+            <th style="text-align:left;padding:6px 4px;font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em">€/Dia</th>
+          </tr>
+          <!-- Linha "Aplicar a todas" -->
+          <tr style="border-bottom:1px solid var(--border);background:var(--surface2)">
+            <td style="padding:6px 4px;font-size:10px;color:var(--faint);white-space:nowrap">↓ Aplicar a todas</td>
+            <td style="padding:4px"><input type="date" id="ac-fill-inicio" onchange="acFillAll('inicio',this.value)" style="padding:5px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface);font-size:12px;color:var(--text);width:100%"></td>
+            <td style="padding:4px"><input type="number" id="ac-fill-dias" min="1" oninput="acFillAll('dias',this.value)" placeholder="—" style="padding:5px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface);font-size:12px;color:var(--text);width:100%"></td>
+            <td style="padding:4px"><input type="number" id="ac-fill-euro" min="0" step="0.01" oninput="acFillAll('euro_dia',this.value)" placeholder="0,00" style="padding:5px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface);font-size:12px;color:var(--text);width:100%"></td>
+          </tr>
+        </thead>
+        <tbody id="ac-plat-rows"></tbody>
+      </table>
+    </div>
+
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:22px">
       <button onclick="closeAddCamp()" style="padding:9px 20px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:13px;font-weight:600;cursor:pointer;color:var(--text)">Cancelar</button>
       <button onclick="confirmAddCamp()" style="padding:9px 20px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-size:13px;font-weight:700;cursor:pointer">Adicionar</button>
     </div>
@@ -2040,37 +2069,94 @@ function onStatusChange(el){
   renderContent();autoSave()
 }
 function addCampanha(){
-  // Popula o select de plataformas com as ativas do plano
   const activePlats=cfg.plataformas||['meta','linkedin']
-  const sel=document.getElementById('ac-plataforma')
-  sel.innerHTML=activePlats.map(p=>`<option value="${p}">${PLAT_LABELS[p]||p}</option>`).join('')
-  // Limpar campos
+  // Renderizar checkboxes de plataforma
+  document.getElementById('ac-plats-grid').innerHTML=activePlats.map((p,i)=>`
+    <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;user-select:none;background:${i===0?'var(--accent)':'var(--bg)'};color:${i===0?'#fff':'var(--text)'}" id="ac-plat-lbl-${p}">
+      <input type="checkbox" value="${p}" ${i===0?'checked':''} onchange="onAcPlatChange()" style="display:none">
+      ${PLAT_LABELS[p]?.split(' ')[0]||p}
+    </label>`).join('')
+  // Limpar campos comuns
   document.getElementById('ac-nome').value=''
+  document.getElementById('ac-status').value='ativo'
   document.getElementById('ac-inicio').value=''
   document.getElementById('ac-dias').value=''
   document.getElementById('ac-euro-dia').value=''
-  document.getElementById('ac-status').value='ativo'
+  document.getElementById('ac-fill-inicio').value=''
+  document.getElementById('ac-fill-dias').value=''
+  document.getElementById('ac-fill-euro').value=''
+  onAcPlatChange()
   document.getElementById('add-camp-overlay').classList.remove('hidden')
   setTimeout(()=>document.getElementById('ac-nome').focus(),50)
+}
+function onAcPlatChange(){
+  const labels=document.querySelectorAll('#ac-plats-grid label')
+  labels.forEach(lbl=>{
+    const cb=lbl.querySelector('input')
+    lbl.style.background=cb.checked?'var(--accent)':'var(--bg)'
+    lbl.style.color=cb.checked?'#fff':'var(--text)'
+    lbl.style.borderColor=cb.checked?'var(--accent)':'var(--border)'
+  })
+  const selected=getAcSelectedPlats()
+  const isMulti=selected.length>1
+  document.getElementById('ac-single-fields').style.display=isMulti?'none':''
+  document.getElementById('ac-multi-fields').style.display=isMulti?'':'none'
+  if(isMulti){
+    const tbody=document.getElementById('ac-plat-rows')
+    // Preservar valores de linhas já existentes
+    const prev={}
+    tbody.querySelectorAll('tr[data-plat]').forEach(tr=>{
+      prev[tr.dataset.plat]={
+        inicio:tr.querySelector('[data-field=inicio]').value,
+        dias:tr.querySelector('[data-field=dias]').value,
+        euro_dia:tr.querySelector('[data-field=euro_dia]').value
+      }
+    })
+    tbody.innerHTML=selected.map(p=>`
+      <tr data-plat="${p}" style="border-bottom:1px solid var(--border)">
+        <td style="padding:6px 4px"><span class="cmp-plat-badge ${p}">${PLAT_LABELS[p]?.split(' ')[0]||p}</span></td>
+        <td style="padding:4px"><input type="date" data-field="inicio" value="${prev[p]?.inicio||''}" style="padding:5px 7px;border:1px solid var(--border);border-radius:6px;background:var(--bg);font-size:12px;color:var(--text);width:100%"></td>
+        <td style="padding:4px"><input type="number" data-field="dias" min="1" value="${prev[p]?.dias||''}" placeholder="—" style="padding:5px 7px;border:1px solid var(--border);border-radius:6px;background:var(--bg);font-size:12px;color:var(--text);width:100%"></td>
+        <td style="padding:4px"><input type="number" data-field="euro_dia" step="0.01" min="0" value="${prev[p]?.euro_dia||''}" placeholder="0,00" style="padding:5px 7px;border:1px solid var(--border);border-radius:6px;background:var(--bg);font-size:12px;color:var(--text);width:100%"></td>
+      </tr>`).join('')
+  }
+}
+function getAcSelectedPlats(){
+  return [...document.querySelectorAll('#ac-plats-grid input[type=checkbox]:checked')].map(cb=>cb.value)
+}
+function acFillAll(field,value){
+  document.querySelectorAll(`#ac-plat-rows [data-field="${field}"]`).forEach(el=>el.value=value)
 }
 function closeAddCamp(){
   document.getElementById('add-camp-overlay').classList.add('hidden')
 }
 function confirmAddCamp(){
-  const plataforma=document.getElementById('ac-plataforma').value
   const nome=document.getElementById('ac-nome').value.trim()
-  const inicio=document.getElementById('ac-inicio').value
-  const dias=document.getElementById('ac-dias').value
-  const euro_dia=document.getElementById('ac-euro-dia').value
   const status=document.getElementById('ac-status').value
+  const selected=getAcSelectedPlats()
+  if(!selected.length)return
   if(!mesData[currentMes])mesData[currentMes]={campanhas:[]}
-  const newIdx=mesData[currentMes].campanhas.length
-  mesData[currentMes].campanhas.push({plataforma,nome,inicio,fim:'',dias,euro_dia,status})
+  const startIdx=mesData[currentMes].campanhas.length
+  if(selected.length===1){
+    const plataforma=selected[0]
+    const inicio=document.getElementById('ac-inicio').value
+    const dias=document.getElementById('ac-dias').value
+    const euro_dia=document.getElementById('ac-euro-dia').value
+    mesData[currentMes].campanhas.push({plataforma,nome,inicio,fim:'',dias,euro_dia,status})
+  } else {
+    selected.forEach(plat=>{
+      const row=document.querySelector(`#ac-plat-rows tr[data-plat="${plat}"]`)
+      const inicio=row?.querySelector('[data-field=inicio]')?.value||''
+      const dias=row?.querySelector('[data-field=dias]')?.value||''
+      const euro_dia=row?.querySelector('[data-field=euro_dia]')?.value||''
+      mesData[currentMes].campanhas.push({plataforma:plat,nome,inicio,fim:'',dias,euro_dia,status})
+    })
+  }
   closeAddCamp()
   renderContent()
   autoSave()
   requestAnimationFrame(()=>{
-    const newRow=document.querySelector(`[data-idx="${newIdx}"]`)?.closest('tr')
+    const newRow=document.querySelector(`[data-idx="${startIdx}"]`)?.closest('tr')
     if(newRow)newRow.scrollIntoView({behavior:'smooth',block:'nearest'})
   })
 }
