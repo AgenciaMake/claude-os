@@ -378,6 +378,51 @@ tr[draggable="true"]:active{cursor:grabbing}
   </div>
 </div>
 
+<!-- ══ ADD CAMPANHA MODAL ══ -->
+<div id="add-camp-overlay" class="hidden" style="position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;background:rgba(12,26,46,.55);backdrop-filter:blur(4px)">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:420px;width:100%;box-shadow:0 12px 48px rgba(0,0,0,.25)">
+    <div style="font-size:15px;font-weight:700;margin-bottom:20px">Nova campanha</div>
+    <div style="display:grid;gap:14px">
+      <label style="display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)">
+        Plataforma
+        <select id="ac-plataforma" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;color:var(--text)"></select>
+      </label>
+      <label style="display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)">
+        Nome da campanha
+        <input id="ac-nome" type="text" placeholder="Ex: Campanha Agosto — Topo" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;color:var(--text)">
+      </label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <label style="display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)">
+          Data de início
+          <input id="ac-inicio" type="date" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;color:var(--text)">
+        </label>
+        <label style="display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)">
+          Duração (dias)
+          <input id="ac-dias" type="number" min="1" step="1" placeholder="30" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;color:var(--text)">
+        </label>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <label style="display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)">
+          Valor diário
+          <input id="ac-euro-dia" type="number" min="0" step="0.01" placeholder="0,00" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;color:var(--text)">
+        </label>
+        <label style="display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)">
+          Status inicial
+          <select id="ac-status" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;color:var(--text)">
+            <option value="ativo">ATIVO</option>
+            <option value="reprovado">REPROVADO</option>
+            <option value="pausado">PAUSADO</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:24px">
+      <button onclick="closeAddCamp()" style="padding:9px 20px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:13px;font-weight:600;cursor:pointer;color:var(--text)">Cancelar</button>
+      <button onclick="confirmAddCamp()" style="padding:9px 20px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-size:13px;font-weight:700;cursor:pointer">Adicionar</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ WIZARD OVERLAY ══ -->
 <div id="wizard-overlay" class="hidden">
   <div class="wizard-box">
@@ -513,6 +558,14 @@ async function doLogin() {
   } catch{err.style.display='block'}
 }
 document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()})
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(!document.getElementById('add-camp-overlay').classList.contains('hidden'))closeAddCamp()
+  }
+  if(e.key==='Enter'&&!document.getElementById('add-camp-overlay').classList.contains('hidden')){
+    e.preventDefault();confirmAddCamp()
+  }
+})
 function doLogout(){
   sessionStorage.removeItem('prr_token');sessionStorage.removeItem('prr_role')
   currentToken=null;currentRole=null
@@ -1649,19 +1702,37 @@ function onStatusChange(el){
   renderContent();autoSave()
 }
 function addCampanha(){
-  try{
-    if(!mesData[currentMes])mesData[currentMes]={campanhas:[]}
-    const p=cfg.plataformas?.[0]||'meta'
-    const newIdx=mesData[currentMes].campanhas.length
-    mesData[currentMes].campanhas.push({plataforma:p,nome:'',inicio:'',fim:'',dias:'',euro_dia:'',status:'ativo'})
-    renderContent()
-    autoSave()
-    // Agendar APÓS o rAF de renderContent (que restaura scroll) para ganhar a corrida
-    requestAnimationFrame(()=>{
-      const newRow=document.querySelector(`[data-idx="${newIdx}"]`)?.closest('tr')
-      if(newRow)newRow.scrollIntoView({behavior:'smooth',block:'nearest'})
-    })
-  }catch(e){console.error('addCampanha error:',e);alert('Erro ao adicionar campanha: '+e.message)}
+  const activePlats=cfg.plataformas||['meta','linkedin']
+  const sel=document.getElementById('ac-plataforma')
+  sel.innerHTML=activePlats.map(p=>`<option value="${p}">${PLAT_LABELS[p]||p}</option>`).join('')
+  document.getElementById('ac-nome').value=''
+  document.getElementById('ac-inicio').value=''
+  document.getElementById('ac-dias').value=''
+  document.getElementById('ac-euro-dia').value=''
+  document.getElementById('ac-status').value='ativo'
+  document.getElementById('add-camp-overlay').classList.remove('hidden')
+  setTimeout(()=>document.getElementById('ac-nome').focus(),50)
+}
+function closeAddCamp(){
+  document.getElementById('add-camp-overlay').classList.add('hidden')
+}
+function confirmAddCamp(){
+  const plataforma=document.getElementById('ac-plataforma').value
+  const nome=document.getElementById('ac-nome').value.trim()
+  const inicio=document.getElementById('ac-inicio').value
+  const dias=document.getElementById('ac-dias').value
+  const euro_dia=document.getElementById('ac-euro-dia').value
+  const status=document.getElementById('ac-status').value
+  if(!mesData[currentMes])mesData[currentMes]={campanhas:[]}
+  const newIdx=mesData[currentMes].campanhas.length
+  mesData[currentMes].campanhas.push({plataforma,nome,inicio,fim:'',dias,euro_dia,status})
+  closeAddCamp()
+  renderContent()
+  autoSave()
+  requestAnimationFrame(()=>{
+    const newRow=document.querySelector(`[data-idx="${newIdx}"]`)?.closest('tr')
+    if(newRow)newRow.scrollIntoView({behavior:'smooth',block:'nearest'})
+  })
 }
 function delCampanha(idx){
   const camp=mesData[currentMes].campanhas[idx]
