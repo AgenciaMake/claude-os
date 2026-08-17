@@ -1528,7 +1528,7 @@ function getRtEndDate(plat,r){
   if(plat==='google'){const v=r['campaign.end_date_time']||'';return v&&!v.startsWith('2037')?v.slice(0,10):''}
   return ''
 }
-function findRtCampaign(plat,nome){
+function findRtCampaign(plat,nome,inicio){
   const rd=realtimeData[currentMes]
   if(!rd||!rd[plat]) return null
   const rows=(rd[plat].data?.rows)||(rd[plat].rows)||[]
@@ -1537,18 +1537,27 @@ function findRtCampaign(plat,nome){
   const stripDate=s=>s.replace(/[\s\-–—]+(\d{2}[\/\-]\d{2}([\/\-]\d{4})?|\d{4}[\/\-]\d{2}[\/\-]\d{2})\s*$/i,'').trim()
   const pn=norm(nome)
   if(!pn) return null
-  // 1. Exact
+  // 1. Exact match (nome idêntico)
   let hit=rows.find(r=>norm(getRtCampName(plat,r))===pn)
-  // 2. Substring
+  // 2. Substring (um contém o outro)
   if(!hit) hit=rows.find(r=>{const rn=norm(getRtCampName(plat,r));return rn&&(rn.includes(pn)||pn.includes(rn))})
-  // 3. Match without trailing date on both sides
+  // 3. Match após remover sufixo de data — quando há múltiplos candidatos, usa inicio como desempate
   if(!hit){
     const pnd=stripDate(pn)
-    if(pnd.length>=6) hit=rows.find(r=>{const rnd=stripDate(norm(getRtCampName(plat,r)));return rnd.length>=6&&(rnd===pnd||rnd.includes(pnd)||pnd.includes(rnd))})
+    if(pnd.length>=6){
+      const candidates=rows.filter(r=>{const rnd=stripDate(norm(getRtCampName(plat,r)));return rnd.length>=6&&(rnd===pnd||rnd.includes(pnd)||pnd.includes(rnd))})
+      if(candidates.length===1){
+        hit=candidates[0]
+      } else if(candidates.length>1){
+        // Desempate pela data de início: priorizar campanha cuja start_date bate com inicio da linha
+        if(inicio) hit=candidates.find(r=>getRtStartDate(plat,r)===inicio)
+        if(!hit) hit=candidates[0]
+      }
+    }
   }
   return hit||null
 }
-function renderVerifyRow(plat,campNome,plannedDaily,cols){
+function renderVerifyRow(plat,campNome,inicio,plannedDaily,cols){
   const brand=PLAT_BRAND[plat]||'#D6DE23'
   const vr=document.createElement('tr'); vr.className='row-verify'
   vr.style.borderLeft=`3px solid ${brand}`
@@ -1571,7 +1580,7 @@ function renderVerifyRow(plat,campNome,plannedDaily,cols){
     vr.innerHTML=`<td><span class="rv-badge" style="background:${brand}22;color:${brand}">Fonte</span></td><td colspan="${cols-1}" style="color:var(--faint);font-style:italic">${msg}</td>`
     return vr
   }
-  const match=findRtCampaign(plat,campNome)
+  const match=findRtCampaign(plat,campNome,inicio)
   const today=new Date().toISOString().slice(0,10)
   const fmtD=s=>s?s.slice(0,10).split('-').reverse().join('/'):'—'
   const fmtV=v=>(v!=null&&!isNaN(v)&&v>0)?fmtEur(v):'—'
@@ -1689,7 +1698,7 @@ function renderRows(campanhas,isEditor,rt){
         ${isEditor?`<td><button class="btn-del" onclick="delCampanha(${i})" title="Remover">×</button></td>`:''}
       `
       tbody.appendChild(tr)
-      tbody.appendChild(renderVerifyRow(plat, c.nome||'', parseFloat(c.euro_dia)||0, cols))
+      tbody.appendChild(renderVerifyRow(plat, c.nome||'', c.inicio||'', parseFloat(c.euro_dia)||0, cols))
     }
     // Renderizar grupo de meses anteriores, depois separador, depois grupo actual
     sortedPrev.forEach(renderItem)
