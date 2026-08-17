@@ -130,6 +130,10 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .topbar-title{font-size:14px;font-weight:700}
 .topbar-sub{font-size:11px;color:var(--muted)}
 .topbar-right{display:flex;align-items:center;gap:8px}
+.rt-date-picker{display:none;align-items:center;gap:4px;padding:3px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:7px}
+.rt-date-picker input[type=date]{border:none;background:none;font-size:11px;color:var(--text);padding:0;cursor:pointer;width:100px}
+.rt-date-picker .sep{font-size:11px;color:var(--muted)}
+.rt-date-picker.visible{display:flex}
 .role-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:4px}
 .role-editor{background:var(--green-bg);color:var(--green)}
 .role-viewer{background:var(--blue-bg);color:var(--blue)}
@@ -412,6 +416,11 @@ tr[draggable="true"]:active{cursor:grabbing}
       </div>
     </div>
     <div class="topbar-right">
+      <div class="rt-date-picker" id="rt-date-picker">
+        <input type="date" id="rt-start-input" onchange="onRtDateChange()">
+        <span class="sep">→</span>
+        <input type="date" id="rt-end-input" onchange="onRtDateChange()">
+      </div>
       <span class="live-dot" id="rt-dot"></span><span id="rt-label" style="font-size:11px;color:var(--muted)">Dados via API</span>
       <button class="btn-icon" id="btn-rt-refresh" onclick="refreshRt()" title="Atualizar dados via API">⟳</button>
       <span class="role-badge" id="role-badge" style="margin-left:8px"></span>
@@ -430,6 +439,7 @@ tr[draggable="true"]:active{cursor:grabbing}
 let currentToken = null, currentRole = null, currentMes = null
 let mesData = {}, realtimeData = {}, realtimeTs = {}, dirty = false, configEditing = false
 const RT_TTL = 5 * 60 * 1000 // 5 min cache para evitar HTTP 429
+const rtRanges = {} // date range custom por mês (key='YYYY-MM')
 let _rtCountdownTimer = null, _rtRetryAt = null, _rtRetryKey = null
 let wizardStep = 1, wizardIsModal = false
 let sortField = null, sortDir = 1
@@ -835,6 +845,7 @@ async function selectMes(key) {
   await propagateCampaigns(key)
   await migrateHerdadas(key)
   await syncFromPrevMonth(key)
+  updateRtDatePicker(key)
   renderContent()
 }
 
@@ -954,6 +965,30 @@ async function syncFromPrevMonth(key) {
   }
 }
 
+function updateRtDatePicker(key) {
+  const picker=document.getElementById('rt-date-picker')
+  const s=document.getElementById('rt-start-input')
+  const e=document.getElementById('rt-end-input')
+  if(!picker||!s||!e||!key)return
+  const [y,m]=key.split('-')
+  const ld=new Date(+y,+m,0).getDate()
+  const defStart=`${y}-${m}-01`
+  const defEnd=`${y}-${m}-${String(ld).padStart(2,'0')}`
+  const range=rtRanges[key]||{}
+  s.value=range.start||defStart
+  e.value=range.end||defEnd
+  s.min=defStart; s.max=defEnd
+  e.min=defStart; e.max=defEnd
+  picker.classList.add('visible')
+}
+function onRtDateChange() {
+  const s=document.getElementById('rt-start-input')?.value
+  const e=document.getElementById('rt-end-input')?.value
+  if(!s||!e||!currentMes)return
+  rtRanges[currentMes]={start:s,end:e}
+  delete realtimeData[currentMes]; delete realtimeTs[currentMes]
+  loadRealtime(currentMes,true).then(()=>renderContent())
+}
 async function loadRealtime(key,force=false) {
   const now=Date.now()
   // Usar cache só se não houver erros 429 guardados
@@ -971,8 +1006,12 @@ async function loadRealtime(key,force=false) {
   try{
     const [y,m]=key.split('-')
     const ld=new Date(+y,+m,0).getDate()
-    const end=`${y}-${m}-${String(ld).padStart(2,'0')}`
-    const r=await fetch(`/api/realtime?start=${y}-${m}-01&end=${end}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
+    const defStart=`${y}-${m}-01`
+    const defEnd=`${y}-${m}-${String(ld).padStart(2,'0')}`
+    const range=rtRanges[key]||{}
+    const start=range.start||defStart
+    const end=range.end||defEnd
+    const r=await fetch(`/api/realtime?start=${start}&end=${end}`,{headers:{'Authorization':`Bearer ${currentToken}`}})
     const data=r.ok?await r.json():null
     const is429=data&&Object.values(data).some(p=>p?._error?.includes('429'))
     realtimeData[key]=data&&!data.error?data:{}
@@ -1613,12 +1652,15 @@ function addCampanha(){
   try{
     if(!mesData[currentMes])mesData[currentMes]={campanhas:[]}
     const p=cfg.plataformas?.[0]||'meta'
+    const newIdx=mesData[currentMes].campanhas.length
     mesData[currentMes].campanhas.push({plataforma:p,nome:'',inicio:'',fim:'',dias:'',euro_dia:'',status:'ativo'})
     renderContent()
     autoSave()
-    const newIdx=mesData[currentMes].campanhas.length-1
-    const newRow=document.querySelector(`[data-idx="${newIdx}"]`)?.closest('tr')
-    if(newRow)newRow.scrollIntoView({behavior:'smooth',block:'nearest'})
+    // Agendar APÓS o rAF de renderContent (que restaura scroll) para ganhar a corrida
+    requestAnimationFrame(()=>{
+      const newRow=document.querySelector(`[data-idx="${newIdx}"]`)?.closest('tr')
+      if(newRow)newRow.scrollIntoView({behavior:'smooth',block:'nearest'})
+    })
   }catch(e){console.error('addCampanha error:',e);alert('Erro ao adicionar campanha: '+e.message)}
 }
 function delCampanha(idx){
