@@ -15,24 +15,29 @@ export async function onRequestOptions() {
   }})
 }
 
-// Fetch campaign start/stop times directly from Meta Graph API
+// Fetch campaign metadata from Meta Graph API (id, dates, status, CBO budget)
 async function fetchMetaCampaignDates(graphToken, accountId) {
   if (!graphToken) return {}
   try {
     const actId = accountId.startsWith('act_') ? accountId : `act_${accountId}`
-    const fields = 'name,start_time,stop_time,status'
+    const fields = 'id,name,start_time,stop_time,status,daily_budget'
     const url = `https://graph.facebook.com/v21.0/${actId}/campaigns?fields=${fields}&limit=500&access_token=${graphToken}`
     const r = await fetch(url)
     if (!r.ok) return {}
     const data = await r.json()
     if (!data.data) return {}
-    // Build map: lowercase name → {start_time, stop_time}
     const map = {}
     const addToMap = c => {
-      map[c.name.toLowerCase()] = { name: c.name, start_time: c.start_time || '', stop_time: c.stop_time || '', status: c.status || '' }
+      map[c.name.toLowerCase()] = {
+        id: c.id,
+        name: c.name,
+        start_time: c.start_time || '',
+        stop_time: c.stop_time || '',
+        status: c.status || '',
+        daily_budget_cents: parseInt(c.daily_budget) || 0  // >0 = CBO; 0 = ABO
+      }
     }
     data.data.forEach(addToMap)
-    // Handle pagination (up to 1 extra page)
     if (data.paging?.next) {
       const r2 = await fetch(data.paging.next)
       if (r2.ok) {
@@ -40,6 +45,36 @@ async function fetchMetaCampaignDates(graphToken, accountId) {
         ;(d2.data || []).forEach(addToMap)
       }
     }
+    return map
+  } catch { return {} }
+}
+
+// Fetch adset daily budgets → map: campaign_id → total budget in currency units
+// Used for ABO campaigns where campaign-level daily_budget = 0
+async function fetchMetaAdSetBudgets(graphToken, accountId) {
+  if (!graphToken) return {}
+  try {
+    const actId = accountId.startsWith('act_') ? accountId : `act_${accountId}`
+    const url = `https://graph.facebook.com/v21.0/${actId}/adsets?fields=campaign_id,daily_budget&limit=500&access_token=${graphToken}`
+    const r = await fetch(url)
+    if (!r.ok) return {}
+    const data = await r.json()
+    if (!data.data) return {}
+    const map = {}
+    const add = as => {
+      if (!as.campaign_id || !as.daily_budget) return
+      map[as.campaign_id] = (map[as.campaign_id] || 0) + (parseInt(as.daily_budget) || 0)
+    }
+    data.data.forEach(add)
+    if (data.paging?.next) {
+      const r2 = await fetch(data.paging.next)
+      if (r2.ok) {
+        const d2 = await r2.json()
+        ;(d2.data || []).forEach(add)
+      }
+    }
+    // Meta returns budgets in cents → convert to currency units
+    Object.keys(map).forEach(k => { map[k] = map[k] / 100 })
     return map
   } catch { return {} }
 }
@@ -151,20 +186,35 @@ export async function onRequestGet(context) {
   // Enrich Meta rows with Graph API data + inject zero-spend campaigns Report Ninja omits
   if (out.meta && env.META_GRAPH_TOKEN) {
     const mc = platCfg.meta || { account_id: '2364073693796998' }
-    const dateMap = await fetchMetaCampaignDates(env.META_GRAPH_TOKEN, mc.account_id)
+    const [dateMap, adsetBudgets] = await Promise.all([
+      fetchMetaCampaignDates(env.META_GRAPH_TOKEN, mc.account_id),
+      fetchMetaAdSetBudgets(env.META_GRAPH_TOKEN, mc.account_id)
+    ])
+    const effectiveBudget = info => {
+      if (!info) return 0
+      if (info.daily_budget_cents > 0) return info.daily_budget_cents / 100  // CBO
+      if (info.id && adsetBudgets[info.id]) return adsetBudgets[info.id]     // ABO
+      return 0
+    }
     const rows = out.meta?.data?.rows || out.meta?.rows || []
-    // Inject dates into existing rows
     rows.forEach(row => {
       const info = dateMap[(row.campaign_name || '').toLowerCase()]
-      if (info) { row.start_time = info.start_time; row.stop_time = info.stop_time }
+      if (info) {
+        row.start_time = info.start_time
+        row.stop_time = info.stop_time
+        if (!row.daily_budget || row.daily_budget == 0) {
+          const b = effectiveBudget(info)
+          if (b > 0) row.daily_budget = b
+        }
+      }
     })
-    // Inject zero-spend campaigns that Report Ninja omitted (spend=0 → not returned)
     const existing = new Set(rows.map(r => (r.campaign_name || '').toLowerCase()))
     Object.values(dateMap).forEach(info => {
       if (!existing.has(info.name.toLowerCase())) {
         rows.push({
           campaign_name: info.name,
-          spend: 0, impressions: 0, clicks: 0, daily_budget: 0,
+          spend: 0, impressions: 0, clicks: 0,
+          daily_budget: effectiveBudget(info),
           effective_status: info.status,
           start_time: info.start_time,
           stop_time: info.stop_time,
@@ -172,7 +222,6 @@ export async function onRequestGet(context) {
         })
       }
     })
-    // Ensure rows array is referenced in out.meta
     if (out.meta.data) out.meta.data.rows = rows
     else out.meta.rows = rows
   }
