@@ -1466,7 +1466,8 @@ function renderDebugPanel(){
       const name=getRtCampName(p,r)
       const start=getRtStartDate(p,r)||'—'
       const spend=r.spend??r.costInLocalCurrency??r['metrics.cost_micros']??'?'
-      html+=`<li style="margin:2px 0">${name} <span style="color:#888">| start: ${start} | gasto: ${spend}</span></li>`
+      const bud=r.daily_budget??'∅'
+      html+=`<li style="margin:2px 0">${name} <span style="color:#888">| start: ${start} | €/dia: <b style="color:#00ccff">${bud}</b> | gasto: ${spend}</span></li>`
     })
     html+=`</ol></div>`
   })
