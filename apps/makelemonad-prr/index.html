@@ -361,7 +361,7 @@ tr[draggable="true"]:active{cursor:grabbing}
       <div><div class="auth-title">MakeLemonAd</div><div class="auth-sub">Plano de Mídia</div></div>
     </div>
     <div class="form-group"><label>Usuário</label><input type="text" id="login-user" placeholder="usuario" autocomplete="username"></div>
-    <div class="form-group"><label>Senha</label><input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"></div>
+    <div class="form-group"><label>Senha</label><div style="position:relative"><input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password" style="padding-right:36px"><button type="button" onclick="const i=document.getElementById('login-pass');i.type=i.type==='password'?'text':'password';this.textContent=i.type==='password'?'👁':'🙈'" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:14px;padding:0;line-height:1">👁</button></div></div>
     <button class="btn-primary" onclick="doLogin()">Entrar</button>
     <div class="auth-error" id="login-error">Credenciais incorretas.</div>
   </div>
