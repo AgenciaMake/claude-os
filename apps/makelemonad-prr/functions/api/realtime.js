@@ -57,9 +57,10 @@ async function fetchAdSetBudgetsViaNinja(ninjaToken, connectionKey, accountId, d
       integration_id: 'facebook_ads',
       connection_key: connectionKey,
       account_id: accountId,
-      fields: ['campaign_name', 'adset_name', 'daily_budget'],
+      fields: ['campaign_name', 'adset_name', 'daily_budget', 'spend'],
       date_range: dateRange,
-      limit: 5000
+      limit: 5000,
+      settings: { attribution_window: 'ATTRIBUTION_MODEL_VIEW_CLICK###VIEW_ATTRIBUTION_WINDOW_1D###CLICK_ATTRIBUTION_WINDOW_7D' }
     })
     if (data?._error) return {}
     const rows = data?.data?.rows || data?.rows || []
