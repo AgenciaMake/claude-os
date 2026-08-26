@@ -56,8 +56,7 @@ async function fetchAdSetBudgetsViaNinja(ninjaToken, connectionKey, accountId, d
       integration_id: 'facebook_ads',
       connection_key: connectionKey,
       account_id: accountId,
-      data_view: 'adset',
-      fields: ['campaign_name', 'daily_budget'],
+      fields: ['campaign_name', 'adset_name', 'daily_budget'],
       date_range: dateRange,
       limit: 5000
     })
