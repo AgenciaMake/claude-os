@@ -33,3 +33,4 @@
 - [CitraChat — Mapa de Disparos](citrachat_mapa_disparos.md) — tracking event + e-mail por tipo de agente; encerrar_atendimento é o gatilho universal; human_requested dispara e-mail imediato
 - [Skill: frontend-aesthetics](skill_frontend_aesthetics.md) — invocar /frontend-aesthetics antes de criar qualquer interface nova; evita AI slop em tipografia, cor, movimento e fundo
 - [CitraChat — integração WhatsApp completa](citrachat_whatsapp_integracao.md) — WA implementado via Meta Graph API como add-on pago; arquivos: lib/whatsapp.ts + webhook route + ContaForm + conta/actions; DB: user_whatsapp + is_receptionist
+- [Discutir antes de implementar](feedback_discutir_antes_implementar.md) — sempre apresentar a abordagem e aguardar aprovação de Bruno antes de escrever qualquer código
