@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 16f3a8cf-6c02-498f-adc5-4abc80036d4c
+  modified: 2026-08-28T09:50:20.289Z
 ---
 
 **Última atualização: 2026-07-13**
@@ -84,6 +85,26 @@ Stack: Next.js + Anthropic SDK + Supabase (sa-east-1, `lkcwykalylphhngjivva`) + 
 - Anthropic API: por uso (~0 agora)
 - Claude MAX (dev): US$ 100/mês
 - **Total com dev: ~US$ 165/mês (~R$ 950)**
+
+## Features pendentes (aguardando pré-requisito externo)
+
+### Notificações via WhatsApp (aguardando números WABA do CitraChat)
+
+CitraChat enviará notificações de eventos diretamente para o WhatsApp do dono do agente, usando números próprios do CitraChat como remetente:
+- 1 número Brasil, 1 Europa, 1 América (quando houver operação lá)
+- Eventos configuráveis por agente: chat iniciado, chat encerrado, lead qualificado, issue resolvido
+- Configuração: campo `notification_whatsapp` + `notification_whatsapp_events` em `agent_integrations`
+- Templates precisam ser aprovados pela Meta antes do go-live
+
+**Pré-requisitos para implementar:**
+1. Criar número WABA no Meta Business Manager do CitraChat
+2. Obter `phone_number_id` e access token de longa duração
+3. Criar e submeter 4 templates para aprovação Meta (`citrachat_chat_iniciado`, `citrachat_lead_qualificado`, `citrachat_issue_resolvido`, `citrachat_chat_encerrado`)
+4. Adicionar `CITRACHAT_WA_PHONE_NUMBER_ID` e `CITRACHAT_WA_TOKEN` no Vercel
+
+Quando os números estiverem prontos, o código envolve: nova função `sendWhatsAppNotification()`, campos novos na tabela e na UI de configurações, acionamento nos mesmos pontos do email.
+
+---
 
 ## Como retomar
 
