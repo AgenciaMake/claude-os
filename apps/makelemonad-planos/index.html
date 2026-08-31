@@ -1278,8 +1278,6 @@ async function loadMes(key) {
 }
 
 async function propagateCampaigns(key) {
-  // Só propaga pra meses que ainda não têm campanhas (primeira abertura)
-  if(mesData[key]?.campanhas?.length>0) return
   const [y,m]=key.split('-')
   const prevM=+m===1?12:+m-1
   const prevY=+m===1?+y-1:+y
@@ -1296,13 +1294,15 @@ async function propagateCampaigns(key) {
   const prevCamps=mesData[prevKey].campanhas||[]
   if(!prevCamps.length)return
   const mStart=new Date(+y,+m-1,1)
+  // Campanhas já existentes no mês: usar plataforma+nome como chave de deduplicação
+  const existingKeys=new Set((mesData[key]?.campanhas||[]).map(c=>`${c.plataforma||''}::${(c.nome||'').trim().toLowerCase()}`))
   const toAdd=[]
   prevCamps.forEach(prev=>{
     const done=['pausado','encerrado','reprovado'].includes(prev.status)
     if(done)return
     // Não propagar campanhas sem dados úteis (sem inicio nem dias)
     if(!prev.inicio&&!parseInt(prev.dias))return
-    const prevInicio=prev.inicio?new Date(prev.inicio):null
+    const prevInicio=prev.inicio?new Date(prev.inicio+'T00:00:00'):null
     const prevDias=parseInt(prev.dias)||0
     let runs=false
     if(prevInicio&&prevDias>0){
@@ -1312,6 +1312,9 @@ async function propagateCampaigns(key) {
       runs=true // indefinida: corre até pausar
     }
     if(!runs)return
+    // Só adicionar se ainda não existir no mês actual (evita duplicar)
+    const nameKey=`${prev.plataforma||''}::${(prev.nome||'').trim().toLowerCase()}`
+    if(existingKeys.has(nameKey))return
     const copy={...prev}
     delete copy.herdada; delete copy._existed
     copy._propagated=true // marca como vinda de mês anterior
@@ -1319,7 +1322,8 @@ async function propagateCampaigns(key) {
   })
   if(!toAdd.length)return
   if(!mesData[key])mesData[key]={}
-  mesData[key].campanhas=toAdd
+  // Propagação incremental: adiciona ao que já existe em vez de substituir
+  mesData[key].campanhas=[...(mesData[key].campanhas||[]),...toAdd]
   try{
     await fetch(`/api/data/${key}${planParam()}`,{method:'PUT',headers:{'Authorization':`Bearer ${currentToken}`,'Content-Type':'application/json'},body:JSON.stringify(mesData[key])})
   }catch{}
@@ -1502,13 +1506,13 @@ function calcCampanhas(campanhas) {
   const orcamento_mes=valorMes-verba
   let totalPrevisto=0
   campanhas.forEach(c=>{
-    const inicio=c.inicio?new Date(c.inicio):null
+    const inicio=c.inicio?new Date(c.inicio+'T00:00:00'):null
     const totalDias=parseInt(c.dias)||0
     let diasMes=0
     if(inicio&&totalDias>0){
       // Duração fixa: calcular interseção com o mês atual
       const fim=new Date(inicio); fim.setDate(fim.getDate()+totalDias-1)
-      c.fim=fim.toISOString().slice(0,10)
+      c.fim=[fim.getFullYear(),String(fim.getMonth()+1).padStart(2,'0'),String(fim.getDate()).padStart(2,'0')].join('-')
       const effStart=inicio<mStart?mStart:inicio
       const effEnd=fim>mEnd?mEnd:fim
       diasMes=effEnd>=effStart?Math.round((effEnd-effStart)/86400000)+1:0
@@ -1517,7 +1521,7 @@ function calcCampanhas(campanhas) {
       const done=c.status==='pausado'||c.status==='encerrado'
       const effStart=inicio<mStart?mStart:inicio
       if(done&&c.fim){
-        const fimDate=new Date(c.fim)
+        const fimDate=new Date(c.fim+'T00:00:00')
         const effEnd=fimDate>mEnd?mEnd:fimDate
         diasMes=effEnd>=effStart?Math.round((effEnd-effStart)/86400000)+1:0
       } else if(!done){
@@ -2048,8 +2052,8 @@ function renderRows(campanhas,isEditor,rt){
         <td style="color:var(--muted);font-size:12px;white-space:nowrap">${fimDisp}</td>
         <td><input class="cell-input date-input" type="date" value="${c.ultima_atualizacao||''}" ${!isEditor?'readonly':''} data-idx="${i}" data-field="ultima_atualizacao" onchange="onCellChange(this)"></td>
         <td>${fromPrev?`<span class="badge-prev-mes">↩ Mês ant.</span>`:''}${isEditor?`<input class="cell-input name-input" type="text" value="${c.nome||''}" placeholder="Nome da campanha" data-idx="${i}" data-field="nome" onchange="onCellChange(this)">`:`<span style="font-size:12px">${c.nome||''}</span>`}</td>
-        <td class="num">${isEditor?`<input class="cell-input num-input${semDados?' input-warn':''}" type="number" min="1" step="1" value="${c.dias||''}" placeholder="Total dias" title="Duração total da campanha (dias)" data-idx="${i}" data-field="dias" onchange="onCellChange(this)">${diasHint}${semDadosHint}`:`<strong>${diasMes||'—'}</strong>`}</td>
-        <td class="num" style="white-space:nowrap">${isEditor?`<span style="font-size:11px;color:var(--muted);margin-right:2px">${moedaSym()}</span><input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" data-idx="${i}" data-field="euro_dia" onchange="onCellChange(this)">`:`<strong>${c.euro_dia?fmtEur(parseFloat(c.euro_dia)):'—'}</strong>`}</td>
+        <td class="num">${isEditor?`<input class="cell-input num-input${semDados?' input-warn':''}" type="number" min="1" step="1" value="${c.dias||''}" placeholder="Total dias" title="Duração total da campanha (dias)" data-idx="${i}" data-field="dias" onchange="onCellChange(this)" onwheel="this.blur()">${diasHint}${semDadosHint}`:`<strong>${diasMes||'—'}</strong>`}</td>
+        <td class="num" style="white-space:nowrap">${isEditor?`<span style="font-size:11px;color:var(--muted);margin-right:2px">${moedaSym()}</span><input class="cell-input num-input euro-input" type="number" step="0.01" min="0" value="${c.euro_dia||''}" placeholder="0,00" data-idx="${i}" data-field="euro_dia" onchange="onCellChange(this)" onwheel="this.blur()">`:`<strong>${c.euro_dia?fmtEur(parseFloat(c.euro_dia)):'—'}</strong>`}</td>
         <td class="num"><strong>${fmtEur(c.total)}</strong></td>
         <td class="num">${c.status==='ativo'?fmtPct(c.pct):''}</td>
         <td><select class="status-select status-${c.status||''}" data-idx="${i}" data-field="status" onchange="onStatusChange(this)" ${!isEditor?'disabled':''}>
