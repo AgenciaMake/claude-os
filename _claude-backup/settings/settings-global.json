@@ -19,5 +19,6 @@
     }
   },
   "forceLoginMethod": "claudeai",
-  "effortLevel": "medium"
+  "effortLevel": "medium",
+  "agentPushNotifEnabled": true
 }
