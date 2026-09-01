@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 16f3a8cf-6c02-498f-adc5-4abc80036d4c
-  modified: 2026-08-28T09:50:20.289Z
+  modified: 2026-09-01T07:20:43.518Z
 ---
 
 **Última atualização: 2026-07-13**
@@ -103,6 +103,22 @@ CitraChat enviará notificações de eventos diretamente para o WhatsApp do dono
 4. Adicionar `CITRACHAT_WA_PHONE_NUMBER_ID` e `CITRACHAT_WA_TOKEN` no Vercel
 
 Quando os números estiverem prontos, o código envolve: nova função `sendWhatsAppNotification()`, campos novos na tabela e na UI de configurações, acionamento nos mesmos pontos do email.
+
+### Notificações via SMS — Twilio (pausado, retomar quando fatura baixar)
+
+**Status:** conta Twilio criada (MakeLemonAd, Portugal), plano Pay as you go, $20 de crédito depositado. Auto-recharge desabilitado.
+
+**Falta para implementar:**
+1. Entrar no Twilio → Phone Numbers → Buy a number → comprar 1 número para envio (Brasil por enquanto)
+2. Pegar na dashboard: Account SID + Auth Token + número comprado
+3. Me passar os 3 valores — implemento tudo no CitraChat
+
+**O que o código precisa (já planejado):**
+- Migration SQL: campos `notification_sms_phones` (texto, vírgula separado) e `notification_sms_events` (array) em `agent_integrations`
+- UI na aba Configurações do agente: campo de números + checkboxes de eventos
+- Função `sendSmsNotification()` via Twilio REST API
+- Trigger nos mesmos pontos do email: chat iniciado, lead qualificado, issue resolvido, chat encerrado
+- Env vars no Vercel: `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_PHONE_NUMBER`
 
 ---
 
