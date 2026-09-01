@@ -3,6 +3,7 @@ name: Linha Citra — visão SaaS modular
 description: Estratégia de produto da linha Citra — CitraDesk como suíte modular e CitraChat como produto irmão plugável
 type: project
 originSessionId: af7fa1f9-0339-4470-81fe-029080b21e11
+modified: 2026-09-01T07:07:28.769Z
 ---
 A MakeLemonAd tem 2 produtos SaaS comerciais sob a marca **Linha Citra** (cítrico, família do limão).
 
@@ -12,7 +13,7 @@ A MakeLemonAd tem 2 produtos SaaS comerciais sob a marca **Linha Citra** (cítri
 - Combo Suite: R$599
 
 **CitraChat** = produto IRMÃO (não submódulo). SaaS de agentes conversacionais com IA, vendável sozinho em `citrachat.com`. Pode ser plugado no CitraDesk como módulo pra agências. URL pública dos agentes: `citra.chat/{agente-slug}`.
-- Pricing: R$297 (Start) → R$1.997 (Agência white-label)
+- Pricing confirmado (ago/2026): Starter R$147 → Pro R$397 → Business R$1.997. Add-on WhatsApp: R$67/R$137/R$347. EUR pricing pra visitantes da Europa já implementado. Trial: 14 dias grátis.
 - Diferencial central: integração nativa com tracking (GTM, Meta Pixel, GA4, Google Ads, TikTok, LinkedIn) com 7 eventos padronizados
 - Nome anterior: MakeChat (em docs antigos)
 
