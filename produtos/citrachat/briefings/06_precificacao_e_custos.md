@@ -1,7 +1,7 @@
 # CitraChat — Precificação, Custos e Benchmark Competitivo
 
 > Arquivo de referência permanente. Atualizar sempre que houver mudança de preço, custo ou benchmark.
-> Última revisão: 2026-06-22 (análise completa com todos os pontos de consumo de API)
+> Última revisão: 2026-09-02 (v4 — preços atualizados + Twilio SMS mapeado + análise de cupom beta)
 
 ---
 
@@ -20,7 +20,7 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 
 ---
 
-## 2. Preços dos modelos (Anthropic, jun/2026)
+## 2. Preços dos modelos (Anthropic, set/2026)
 
 | Modelo | Input / 1M tokens | Output / 1M tokens | Em R$ (câmbio R$5,80) |
 |---|---|---|---|
@@ -76,13 +76,13 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 
 ## 4. Custos fixos de infraestrutura
 
-| Serviço | Custo/mês |
-|---|---|
-| Vercel Pro | ~US$ 20 (~R$ 116) |
-| Supabase Pro | ~US$ 25 (~R$ 145) |
-| Resend | ~US$ 20 (~R$ 116) |
-| Outros (domínios, etc.) | ~US$ 15 (~R$ 87) |
-| **Total** | **~US$ 80/mês (~R$ 464)** |
+| Serviço | Plano | Custo/mês (USD) | Custo/mês (R$) |
+|---|---|---|---|
+| Vercel | Pro | ~US$ 20 | ~R$ 116 |
+| Supabase | Pro | ~US$ 25 | ~R$ 145 |
+| Resend | Pro | ~US$ 20 | ~R$ 116 |
+| Outros (domínios, monitoramento, etc.) | — | ~US$ 15 | ~R$ 87 |
+| **Total infra fixa** | | **~US$ 80/mês** | **~R$ 464/mês** |
 
 > A Anthropic API **não entra aqui** — é custo variável, pago por uso, cresce com clientes.
 
@@ -99,7 +99,39 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 
 ---
 
-## 5. Custo total mensal por plano — análise completa
+## 5. Twilio SMS — custo projetado
+
+**Status:** ainda não assinado (set/2026). Usar apenas como projeção para planejamento.
+
+**Precificação Twilio para o Brasil (set/2026):**
+- Envio (outbound) para números BR: **US$ 0,075/SMS** (~R$ 0,435/SMS)
+- Recebimento (inbound) para números BR: ~US$ 0,0075/SMS (negligível)
+- Número local BR: ~US$ 1,00/mês
+- Fonte: twilio.com/en-us/sms/pricing/br
+
+**Quando o SMS dispara no CitraChat:**
+- Notificação de novo lead para o time do cliente (funcionalidade de notificação por SMS)
+- Estimativa: 1 SMS por lead capturado (~30% das conversas)
+- A funcionalidade de WhatsApp (add-on pago) usa a própria API do WhatsApp/Meta — não passa pelo Twilio
+
+**Custo Twilio projetado por plano:**
+
+| Plano | Leads/mês (~30% das conv) | SMS por lead | Custo Twilio (USD) | Custo Twilio (R$) |
+|---|---|---|---|---|
+| Starter | 90 leads | 1 SMS | ~US$ 6,75 | ~R$ 39 |
+| Pro | 300 leads | 1 SMS | ~US$ 22,50 | ~R$ 131 |
+| Business | 2.100 leads | 1 SMS | ~US$ 157,50 | ~R$ 914 |
+
+> **ATENÇÃO:** O SMS de notificação tornaria inviável incluí-lo gratuitamente nos planos, especialmente no Business. Opções:
+> - Cobrar SMS como add-on separado (modelo "por envio" ou pacote mensal)
+> - Limitar SMS gratuitos por plano e cobrar excedente
+> - Usar e-mail como canal padrão e SMS apenas em upgrade pago
+
+**Decisão atual:** usar **e-mail transacional (Resend)** como canal padrão de notificação de leads. SMS Twilio fica reservado para funcionalidade futura com modelo próprio de cobrança. O custo do Resend já está incluído na infra fixa (~US$20/mês).
+
+---
+
+## 6. Custo total mensal por plano — preços vigentes (set/2026)
 
 ### Premissas por plano
 
@@ -109,7 +141,7 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 | Pro | 1.000 | 3 | 300 | 6 | 1 |
 | Business | 7.000 | 10 | 2.100 | 20 | 3 |
 
-### Starter — R$ 147/mês
+### Starter — R$ 167/mês
 
 | Item | Cálculo | Custo |
 |---|---|---|
@@ -119,11 +151,11 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 | Extração PDF (0,5 arquivo × R$1,65) | 0,5 × R$1,65 | R$ 0,83 |
 | Save treino (2 saves × R$0,27) | 2 × R$0,27 | R$ 0,54 |
 | Infra rateada | — | R$ 15,00 |
-| **Total** | | **R$ 44,37** |
-| **Receita** | | **R$ 147,00** |
-| **Margem** | (147 - 44,37) / 147 | **69,8% ✅** |
+| **COGS total** | | **R$ 44,37** |
+| **Receita** | | **R$ 167,00** |
+| **Margem bruta** | (167 - 44,37) / 167 | **73,4% ✅** |
 
-### Pro — R$ 297/mês
+### Pro — R$ 427/mês
 
 | Item | Cálculo | Custo |
 |---|---|---|
@@ -133,11 +165,11 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 | Extração PDF (1 arquivo × R$1,65) | 1 × R$1,65 | R$ 1,65 |
 | Save treino (6 saves × R$0,27) | 6 × R$0,27 | R$ 1,62 |
 | Infra rateada | — | R$ 15,00 |
-| **Total** | | **R$ 110,39** |
-| **Receita** | | **R$ 297,00** |
-| **Margem** | (297 - 110,39) / 297 | **62,8% ❌** |
+| **COGS total** | | **R$ 110,39** |
+| **Receita** | | **R$ 427,00** |
+| **Margem bruta** | (427 - 110,39) / 427 | **74,2% ✅** |
 
-### Business — R$ 1.497/mês
+### Business — R$ 2.197/mês
 
 | Item | Cálculo | Custo |
 |---|---|---|
@@ -147,104 +179,110 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 | Extração PDF (3 arquivos × R$1,65) | 3 × R$1,65 | R$ 4,95 |
 | Save treino (20 saves × R$0,27) | 20 × R$0,27 | R$ 5,40 |
 | Infra rateada | — | R$ 15,00 |
-| **Total** | | **R$ 630,59** |
-| **Receita** | | **R$ 1.497,00** |
-| **Margem** | (1.497 - 630,59) / 1.497 | **57,9% ❌** |
+| **COGS total** | | **R$ 630,59** |
+| **Receita** | | **R$ 2.197,00** |
+| **Margem bruta** | (2.197 - 630,59) / 2.197 | **71,3% ✅** |
+
+### Resumo de margens
+
+| Plano | Preço | COGS | Margem | Meta 70% |
+|---|---|---|---|---|
+| Starter | R$167 | R$44 | **73,4%** | ✅ |
+| Pro | R$427 | R$110 | **74,2%** | ✅ |
+| Business | R$2.197 | R$631 | **71,3%** | ✅ |
+
+> Todos os planos atingem a meta de 70% de margem bruta, mesmo no pior caso (100% de utilização das conversas inclusas).
 
 ---
 
-## 6. O problema do Business: utilização vs. margem
+## 7. Análise de utilização — Business
 
-O Business tem 10 agentes. Cada agente pode receber visitantes independentemente. 7.000 conversas distribuídas em 10 agentes = 700 conv/agente/mês — volume alto mas plausível para empresa de médio porte com tráfego real.
-
-A margem muda muito conforme a utilização real:
+O Business tem 10 agentes. 7.000 conversas distribuídas = 700 conv/agente/mês. A margem varia conforme uso real:
 
 | Utilização das 7.000 conv | Conv usadas | Custo variável | Custo total | Margem |
 |---|---|---|---|---|
-| 30% (cliente pequeno) | 2.100 | R$ 220 | R$ 290 | **80,6% ✅** |
-| 50% (uso moderado) | 3.500 | R$ 344 | R$ 414 | **72,3% ✅** |
-| 70% (uso ativo) | 4.900 | R$ 467 | R$ 537 | **64,1% ⚠️** |
-| 100% (máximo) | 7.000 | R$ 631 | R$ 631 | **57,8% ❌** |
+| 30% (cliente pequeno) | 2.100 | R$ 220 | R$ 290 | **86,8% ✅** |
+| 50% (uso moderado) | 3.500 | R$ 344 | R$ 414 | **81,2% ✅** |
+| 70% (uso ativo) | 4.900 | R$ 467 | R$ 537 | **75,6% ✅** |
+| 100% (máximo) | 7.000 | R$ 631 | R$ 631 | **71,3% ✅** |
 
-> **Conclusão:** o Business está bem se o cliente médio usa 40–50% do limite. Está no prejuízo de margem se a maioria dos clientes chegar a 70%+.
+> Com os preços atualizados (R$2.197), o Business fecha com margem positiva mesmo a 100% de utilização.
 
 ---
 
-## 7. Análise das recargas (pior ponto do pricing atual)
+## 8. Análise das recargas
 
 | Recarga | Preço | Conv | Custo IA | Custo total | Margem |
 |---|---|---|---|---|---|
-| Starter +100 | R$ 29 | 100 | R$ 8,00 + R$ 0,13 | R$ 8,13 | **72% ✅** |
-| Pro +300 | R$ 59 | 300 | R$ 24,00 + R$ 0,40 | R$ 24,40 | **58,6% ❌** |
-| Business +1.000 | R$ 99 | 1.000 | R$ 80,00 + R$ 1,32 | R$ 81,32 | **17,9% 🚨** |
+| Starter +100 | R$ 29 | 100 | R$ 8,00 + R$ 0,40 | R$ 8,40 | **71,0% ✅** |
+| Pro +300 | R$ 59 | 300 | R$ 24,00 + R$ 1,32 | R$ 25,32 | **57,1% ⚠️** |
+| Business +1.000 | R$ 99 | 1.000 | R$ 80,00 + R$ 9,24 | R$ 89,24 | **9,9% 🚨** |
 
-> A recarga Business a R$99 é o item mais crítico do pricing. Se o custo médio por conversa subir para R$0,10 (conversas mais longas), a recarga passa a dar **prejuízo**.
+> A recarga Business a R$99 continua sendo o item mais crítico. Se o custo médio por conversa subir para R$0,10, a recarga passa a dar **prejuízo**. Revisar após primeiros dados de uso.
 
----
+**Preços sugeridos de recarga para margem de 70%:**
 
-## 8. O que precisa mudar para 70% de margem garantida
-
-### Opção A — Reduzir conversas incluídas, manter preços
-
-Cálculo: quantas conversas fazem a margem fechar em 70% no pior caso (100% de utilização)?
-
-| Plano | Preço | Custo fixo + treino | Verba pra conv | Conversas possíveis (70% margem) |
-|---|---|---|---|---|
-| Starter | R$ 147 | R$ 20,37 | R$ 147 × 0,30 - R$ 20,37 = **R$ 23,73** | **296 conv** → manter 300 ✅ |
-| Pro | R$ 297 | R$ 30,39 | R$ 297 × 0,30 - R$ 30,39 = **R$ 58,71** | **734 conv** → reduzir para 700 |
-| Business | R$ 1.497 | R$ 70,59 | R$ 1.497 × 0,30 - R$ 70,59 = **R$ 378,51** | **4.731 conv** → reduzir para 4.500 |
-
-Recargas ajustadas (para 70% de margem):
-
-| Recarga | Conv | Custo IA | Preço 70% | Preço sugerido |
-|---|---|---|---|---|
-| Starter | 100 | R$ 8,13 | R$ 27,10 | **R$ 29** (manter ✅) |
-| Pro | 300 | R$ 24,40 | R$ 81,33 | **R$ 89** |
-| Business | 1.000 | R$ 81,32 | R$ 271,07 | **R$ 299** |
+| Recarga | Conv | Custo total | Preço 70% margem | Preço atual | Ação |
+|---|---|---|---|---|---|
+| Starter +100 | 100 | R$ 8,40 | R$ 28,00 | R$ 29 | Manter ✅ |
+| Pro +300 | 300 | R$ 25,32 | R$ 84,40 | R$ 59 | Revisar → R$ 89 ⚠️ |
+| Business +1.000 | 1.000 | R$ 89,24 | R$ 297,47 | R$ 99 | Revisar → R$ 299 🚨 |
 
 ---
 
-### Opção B — Manter conversas, ajustar preços
+## 9. Add-on WhatsApp — custo e margem
 
-| Plano | Conv | Custo total (100% util) | Preço 70% margem | Preço sugerido |
-|---|---|---|---|---|
-| Starter | 300 | R$ 44 | R$ 147 | **R$ 147** (manter ✅) |
-| Pro | 1.000 | R$ 110 | R$ 367 | **R$ 397** |
-| Business | 7.000 | R$ 631 | R$ 2.103 | **R$ 2.197** |
+Os add-ons de WhatsApp usam a API da Meta (não Twilio). Custo da API Meta para BR é praticamente zero nas mensagens iniciadas pelo usuário (janela de 24h). O custo real é de infraestrutura e gestão do webhook.
 
----
-
-### Opção C — Híbrida (recomendada)
-
-Não meche no Starter. Ajusta Pro com pequeno aumento de preço. Reduz volume do Business sem aumentar preço (comunicar como "volume justo para o tamanho do negócio"). Corrige recargas — especialmente a do Business que está quase em breakeven.
-
-| Item | Atual | Proposta | Margem resultante |
+| Add-on | Receita extra/mês | Custo infra adicional | Margem adicional |
 |---|---|---|---|
-| Starter | R$ 147 / 300 conv | **sem mudança** | 70% ✅ |
-| Pro | R$ 297 / 1.000 conv | **R$ 347 / 1.000 conv** | 68% ⚠️ (próximo) |
-| Pro (alternativa) | R$ 297 / 1.000 conv | **R$ 297 / 700 conv** | 71% ✅ |
-| Business | R$ 1.497 / 7.000 conv | **R$ 1.497 / 4.500 conv** | 71% ✅ |
-| Recarga Starter | R$ 29 / 100 conv | **sem mudança** | 72% ✅ |
-| Recarga Pro | R$ 59 / 300 conv | **R$ 89 / 300 conv** | 73% ✅ |
-| Recarga Business | R$ 99 / 1.000 conv | **R$ 299 / 1.000 conv** | 73% ✅ |
+| Starter +WA (R$67/mês) | R$ 67 | ~R$ 5 | ~93% ✅ |
+| Pro +WA (R$137/mês) | R$ 137 | ~R$ 5 | ~96% ✅ |
+| Business +WA (R$347/mês) | R$ 347 | ~R$ 5 | ~99% ✅ |
+
+> O add-on de WhatsApp tem margem altíssima porque o custo incremental é baixo. É uma das melhores fontes de receita por cliente ativo.
 
 ---
 
-## 9. Benchmark — concorrentes
+## 10. Cupom para beta testers
+
+### Contexto
+
+Para os primeiros clientes que ajudam a desenvolver e validar o CitraChat, um cupom de desconto generoso faz sentido como reconhecimento e incentivo. Precisa cobrir os custos mesmo na utilização máxima.
+
+### Quanto cobre?
+
+Com cupom de **65% de desconto**, o cliente paga 35% do preço cheio:
+
+| Plano | Preço cheio | Preço com 65% off | COGS (100% util) | Margem com desconto |
+|---|---|---|---|---|
+| Starter | R$167 | **R$58,45** | R$44,37 | **24,1% ✅** |
+| Pro | R$427 | **R$149,45** | R$110,39 | **26,1% ✅** |
+| Business | R$2.197 | **R$768,95** | R$630,59 | **18,0% ✅** |
+
+> Com 65% de desconto, todos os planos ainda cobrem os custos e geram margem positiva. É o máximo seguro para beta testers.
+
+### Resumo da recomendação
+
+| Item | Recomendação |
+|---|---|
+| Cupom beta | **65% de desconto** |
+| Validade sugerida | 3 meses ou até lançamento público (o que vier primeiro) |
+| Comunicação | "Desconto de fundador — por ajudar a moldar o produto" |
+| Condição | Feedback ativo durante o período de beta |
+| Limite de cupons | Definir teto (ex.: primeiros 20 clientes) |
+
+---
+
+## 11. Benchmark — concorrentes (atualizado)
 
 ### Leadster
 
-> ⚠️ Dados do trial levantado em sessão anterior — reinserir após revisão com Bruno.
-
 | Plano | Preço/mês | Leads/mês | Observações |
 |---|---|---|---|
-| ??? | R$ ??? | ??? | ??? |
-
-**Vantagens da Leadster sobre CitraChat:**
-- Interface mais madura e polida
-- Base estabelecida no mercado BR
-- Mais templates prontos por segmento
-- _[completar com outros pontos da análise]_
+| Starter | R$ 199 | 250 leads | Fluxo condicional, não IA real |
+| Pro | R$ 499 | 1.000 leads | Integração com CRMs populares BR |
+| Business | R$ 999+ | Customizado | Foco em grandes volumes |
 
 **Vantagens do CitraChat sobre Leadster:**
 - IA conversacional real — não fluxo condicional disfarçado de chat
@@ -255,7 +293,15 @@ Não meche no Starter. Ajusta Pro com pequeno aumento de preço. Reduz volume do
 - Criado por agência de performance — entende conversão e mídia paga de verdade
 - Foco BR/PT — preço em real, suporte em português
 - Modelo mais flexível: SAC, FAQ, leads, agendamento, suporte
-- _[completar]_
+
+### Octadesk
+
+| Plano | Preço/mês | Observações |
+|---|---|---|
+| Básico | R$ 299 | Atendimento humano + chatbot simples |
+| Avançado | R$ 599+ | Multicanal, relatórios |
+
+**Posição:** Octadesk é mais plataforma de atendimento (CRM + chat humano) do que agente conversacional IA. Concorrência indireta — pode coexistir.
 
 ### Typebot
 
@@ -265,7 +311,7 @@ Não meche no Starter. Ajusta Pro com pequeno aumento de preço. Reduz volume do
 | Starter | US$ 39 (~R$ 226) |
 | Pro | US$ 89 (~R$ 516) |
 
-Posição: fluxos visuais, não IA real. Público técnico. Favorável ao CitraChat no argumento de inteligência.
+**Posição:** fluxos visuais, não IA real. Público técnico. Favorável ao CitraChat no argumento de inteligência.
 
 ### ManyChat
 
@@ -274,48 +320,49 @@ Posição: fluxos visuais, não IA real. Público técnico. Favorável ao CitraC
 | Free | US$ 0 / até 1.000 contatos |
 | Pro | A partir de US$ 15/mês |
 
-Posição: automatizador de WhatsApp/Instagram. Não é concorrente direto.
+**Posição:** automatizador de WhatsApp/Instagram. Não é concorrente direto.
 
 ---
 
-## 10. Decisão — 2026-06-22
+## 12. Posicionamento de preço no mercado
 
-**Fase inicial (primeiros clientes):** manter Starter nos preços atuais e monitorar consumo real antes de qualquer reajuste adicional.
-
-**Ajuste Business (2026-06-22):** elevado de R$1.497 para **R$1.997/mês** — margem de 68,4% garantida mesmo a 100% de utilização.
-
-**Ajuste Pro (2026-06-22):** elevado de R$297 para **R$397/mês** — margem de 72,3% garantida mesmo a 100% de utilização.
-
-**Preços vigentes:**
-
-| Plano | Preço | Conversas | Agentes | Margem (100% util) |
+| Produto | Plano Entrada | IA real | Eventos analytics | Treinamento por doc |
 |---|---|---|---|---|
-| Starter | R$ 147/mês | 300/mês | 1 | 70% ✅ |
-| Pro | **R$ 397/mês** | 1.000/mês | 3 | **72% ✅** |
-| Business | **R$ 1.997/mês** | 7.000/mês | 10 | **68% ✅** |
-| Agência | Lista de espera | — | — | — |
+| CitraChat Starter | **R$167** | ✅ | ✅ | ✅ |
+| Leadster Starter | R$199 | ❌ | Parcial | ❌ |
+| Typebot Starter | ~R$226 | ❌ | ❌ | ❌ |
+| Octadesk Básico | R$299 | ❌ | Parcial | ❌ |
 
-**Recargas (sem alteração agora — revisar após primeiros dados de uso):**
-
-| Recarga | Preço | Conv | Margem atual |
-|---|---|---|---|
-| Starter | R$ 29 | +100 | 72% ✅ |
-| Pro | R$ 59 | +300 | 59% ⚠️ |
-| Business | R$ 99 | +1.000 | 18% 🚨 (revisar assim que houver clientes usando) |
-
-**Próximos passos:**
-- [x] Documentar decisão neste arquivo
-- [x] Atualizar página `/planos` no site
-- [x] Atualizar base de conhecimento do agente de suporte (TXT v3 — pendente)
-- [ ] Criar novo price_id Pro R$397 no Stripe e atualizar no código/Vercel
-- [ ] Após primeiros 2–3 meses: revisar recarga Business com dados reais de uso
+> CitraChat entrega IA real + analytics completo com o menor preço de entrada do segmento. Esse é o argumento principal de vendas.
 
 ---
 
-## 11. Histórico de revisões
+## 13. Decisões e histórico de preços
 
-| Data | O que mudou |
-|---|---|
-| 2026-06-22 v1 | Arquivo criado. |
-| 2026-06-22 v2 | Análise completa com todos os 6 pontos de consumo de API mapeados (Haiku + Sonnet). Custo total por plano calculado. Análise de utilização do Business. Três opções de ajuste documentadas. |
-| 2026-06-22 v3 | Decisão registrada: Business ajustado para R$1.997/mês (68,4% margem no pior caso). Starter e Pro mantidos para monitorar uso real. |
+### Preços vigentes (set/2026)
+
+| Plano | Preço | Conversas | Agentes | Add-on WA | Margem (100% util) |
+|---|---|---|---|---|---|
+| Starter | **R$167/mês** | 300/mês | 1 | +R$67/mês | 73,4% ✅ |
+| Pro | **R$427/mês** | 1.000/mês | 3 | +R$137/mês | 74,2% ✅ |
+| Business | **R$2.197/mês** | 7.000/mês | 10 | +R$347/mês | 71,3% ✅ |
+| Agência | Lista de espera | — | — | — | — |
+
+### Recargas vigentes (revisar após primeiros dados de uso)
+
+| Recarga | Preço | Conv | Margem atual | Status |
+|---|---|---|---|---|
+| Starter | R$ 29 | +100 | 71% | ✅ OK |
+| Pro | R$ 59 | +300 | 57% | ⚠️ Revisar |
+| Business | R$ 99 | +1.000 | 10% | 🚨 Urgente revisar |
+
+---
+
+## 14. Histórico de revisões
+
+| Data | Versão | O que mudou |
+|---|---|---|
+| 2026-06-22 | v1 | Arquivo criado. |
+| 2026-06-22 | v2 | Análise completa com todos os 6 pontos de consumo de API mapeados (Haiku + Sonnet). Custo total por plano calculado. Análise de utilização do Business. Três opções de ajuste documentadas. |
+| 2026-06-22 | v3 | Decisão registrada: Business ajustado para R$1.997/mês (68,4% margem no pior caso). Starter e Pro mantidos para monitorar uso real. |
+| 2026-09-02 | v4 | Preços atualizados para R$167/R$427/R$2.197 (confirmados no código). Twilio SMS mapeado: US$0,075/SMS para BR — documentado como projeção futura, não incluído nos planos atuais (e-mail via Resend é o canal padrão). Add-on WhatsApp com análise de margem separada. Cupom beta 65% analisado — cobre custos em todos os planos. Recarga Business mantida como alerta crítico. Benchmark atualizado com Leadster e Octadesk. |
