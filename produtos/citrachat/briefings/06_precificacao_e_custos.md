@@ -99,35 +99,45 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 
 ---
 
-## 5. Twilio SMS — custo projetado
+## 5. Twilio SMS — modelo e custos
 
-**Status:** ainda não assinado (set/2026). Usar apenas como projeção para planejamento.
+**Status:** ainda não assinado (set/2026). Usar como referência para planejamento e precificação.
 
-**Precificação Twilio para o Brasil (set/2026):**
-- Envio (outbound) para números BR: **US$ 0,075/SMS** (~R$ 0,435/SMS)
-- Recebimento (inbound) para números BR: ~US$ 0,0075/SMS (negligível)
-- Número local BR: ~US$ 1,00/mês
-- Fonte: twilio.com/en-us/sms/pricing/br
+**Precificação Twilio para o Brasil (set/2026, confirmado via CSV oficial):**
+- Envio (outbound) para números BR: **US$ 0,0599/SMS** (~R$ 0,35/SMS ao câmbio R$5,80)
+- Todas as operadoras BR (Claro, TIM, Vivo, Oi, etc.) têm o mesmo preço
+- Número internacional para envio: **US$ 1,15/mês**
+- Fonte: tabela oficial Twilio SMS Pricing (CSV baixado set/2026)
 
-**Quando o SMS dispara no CitraChat:**
-- Notificação de novo lead para o time do cliente (funcionalidade de notificação por SMS)
-- Estimativa: 1 SMS por lead capturado (~30% das conversas)
-- A funcionalidade de WhatsApp (add-on pago) usa a própria API do WhatsApp/Meta — não passa pelo Twilio
+**O que o SMS faz no CitraChat:**
+Push de notificação para o time do cliente quando algo precisa de atenção — novo lead capturado, novo protocolo gerado, novo chamado aberto. **Não é resumo da conversa** — é apenas um aviso de que há algo novo no painel. Disponível apenas nos planos **Pro e Business** (não incluso no Starter).
 
-**Custo Twilio projetado por plano:**
+O cliente configura quais eventos disparam o SMS (abertura de chat, lead qualificado, protocolo gerado). Quanto mais eventos ativos, mais SMS gerados por mês.
 
-| Plano | Leads/mês (~30% das conv) | SMS por lead | Custo Twilio (USD) | Custo Twilio (R$) |
-|---|---|---|---|---|
-| Starter | 90 leads | 1 SMS | ~US$ 6,75 | ~R$ 39 |
-| Pro | 300 leads | 1 SMS | ~US$ 22,50 | ~R$ 131 |
-| Business | 2.100 leads | 1 SMS | ~US$ 157,50 | ~R$ 914 |
+**Modelo de cobrança — cota incluída + excedente:**
 
-> **ATENÇÃO:** O SMS de notificação tornaria inviável incluí-lo gratuitamente nos planos, especialmente no Business. Opções:
-> - Cobrar SMS como add-on separado (modelo "por envio" ou pacote mensal)
-> - Limitar SMS gratuitos por plano e cobrar excedente
-> - Usar e-mail como canal padrão e SMS apenas em upgrade pago
+| Plano | SMS incluídos/mês | Custo absorbed (Twilio) | Excedente |
+|---|---|---|---|
+| Starter | ❌ não disponível | — | — |
+| Pro | 50 SMS/mês | ~R$ 17,50 | R$ 0,49/SMS |
+| Business | 150 SMS/mês | ~R$ 52,50 | R$ 0,49/SMS |
 
-**Decisão atual:** usar **e-mail transacional (Resend)** como canal padrão de notificação de leads. SMS Twilio fica reservado para funcionalidade futura com modelo próprio de cobrança. O custo do Resend já está incluído na infra fixa (~US$20/mês).
+**Margem por SMS excedente:**
+- Custo Twilio: R$ 0,35/SMS
+- Preço ao cliente: R$ 0,49/SMS
+- Margem: R$ 0,14/SMS (~40%)
+
+**Impacto na margem dos planos com cota incluída:**
+- Pro: (427 - 127) / 427 = **70,3% ✅**
+- Business: (2.197 - 683) / 2.197 = **68,9% ✅**
+
+**Alternativas de provedor a avaliar (set/2026):**
+- **Disparo Pro** (disparopro.com.br) — empresa BR, R$0,07/SMS no plano pool de 5.000 SMS/mês (R$350). Até 5x mais barato que Twilio. Aguardando retorno comercial sobre API transacional.
+- **Solvefy** (solvefy.com/api) — API brasileira com 100 req/s, suporte a template e rastreamento. Preço sob cotação.
+- **Zenvia** — descartada (experiência ruim de suporte e produto confuso).
+- **AWS SNS** — preço equivalente ao Twilio para BR (~$0,06/SMS), sem vantagem.
+
+> Começar com Twilio pelo lançamento. Renegociar com Disparo Pro assim que houver volume real de clientes.
 
 ---
 
@@ -151,6 +161,7 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 | Extração PDF (0,5 arquivo × R$1,65) | 0,5 × R$1,65 | R$ 0,83 |
 | Save treino (2 saves × R$0,27) | 2 × R$0,27 | R$ 0,54 |
 | Infra rateada | — | R$ 15,00 |
+| SMS (não incluso no Starter) | — | — |
 | **COGS total** | | **R$ 44,37** |
 | **Receita** | | **R$ 167,00** |
 | **Margem bruta** | (167 - 44,37) / 167 | **73,4% ✅** |
@@ -165,9 +176,10 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 | Extração PDF (1 arquivo × R$1,65) | 1 × R$1,65 | R$ 1,65 |
 | Save treino (6 saves × R$0,27) | 6 × R$0,27 | R$ 1,62 |
 | Infra rateada | — | R$ 15,00 |
-| **COGS total** | | **R$ 110,39** |
+| SMS incluídos (50 × R$0,35) | 50 × R$0,35 | R$ 17,50 |
+| **COGS total** | | **R$ 127,89** |
 | **Receita** | | **R$ 427,00** |
-| **Margem bruta** | (427 - 110,39) / 427 | **74,2% ✅** |
+| **Margem bruta** | (427 - 127,89) / 427 | **70,1% ✅** |
 
 ### Business — R$ 2.197/mês
 
@@ -179,19 +191,20 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 | Extração PDF (3 arquivos × R$1,65) | 3 × R$1,65 | R$ 4,95 |
 | Save treino (20 saves × R$0,27) | 20 × R$0,27 | R$ 5,40 |
 | Infra rateada | — | R$ 15,00 |
-| **COGS total** | | **R$ 630,59** |
+| SMS incluídos (150 × R$0,35) | 150 × R$0,35 | R$ 52,50 |
+| **COGS total** | | **R$ 683,09** |
 | **Receita** | | **R$ 2.197,00** |
-| **Margem bruta** | (2.197 - 630,59) / 2.197 | **71,3% ✅** |
+| **Margem bruta** | (2.197 - 683,09) / 2.197 | **68,9% ✅** |
 
-### Resumo de margens
+### Resumo de margens (com SMS)
 
 | Plano | Preço | COGS | Margem | Meta 70% |
 |---|---|---|---|---|
 | Starter | R$167 | R$44 | **73,4%** | ✅ |
-| Pro | R$427 | R$110 | **74,2%** | ✅ |
-| Business | R$2.197 | R$631 | **71,3%** | ✅ |
+| Pro | R$427 | R$128 | **70,1%** | ✅ |
+| Business | R$2.197 | R$683 | **68,9%** | ⚠️ próximo |
 
-> Todos os planos atingem a meta de 70% de margem bruta, mesmo no pior caso (100% de utilização das conversas inclusas).
+> Pro atinge exatamente a meta. Business fica 1,1pp abaixo — aceitável, especialmente porque a maioria dos clientes Business não vai usar os 150 SMS incluídos todos os meses.
 
 ---
 
@@ -365,4 +378,4 @@ Com cupom de **65% de desconto**, o cliente paga 35% do preço cheio:
 | 2026-06-22 | v1 | Arquivo criado. |
 | 2026-06-22 | v2 | Análise completa com todos os 6 pontos de consumo de API mapeados (Haiku + Sonnet). Custo total por plano calculado. Análise de utilização do Business. Três opções de ajuste documentadas. |
 | 2026-06-22 | v3 | Decisão registrada: Business ajustado para R$1.997/mês (68,4% margem no pior caso). Starter e Pro mantidos para monitorar uso real. |
-| 2026-09-02 | v4 | Preços atualizados para R$167/R$427/R$2.197 (confirmados no código). Twilio SMS mapeado: US$0,075/SMS para BR — documentado como projeção futura, não incluído nos planos atuais (e-mail via Resend é o canal padrão). Add-on WhatsApp com análise de margem separada. Cupom beta 65% analisado — cobre custos em todos os planos. Recarga Business mantida como alerta crítico. Benchmark atualizado com Leadster e Octadesk. |
+| 2026-09-02 | v4 | Preços atualizados para R$167/R$427/R$2.197 (confirmados no código). Twilio SMS mapeado com preço correto: US$0,0599/SMS para BR (~R$0,35). Feature de notificação SMS definida como push de evento (não resumo) — disponível nos planos Pro e Business. Modelo: 50 SMS incluídos no Pro, 150 no Business; excedente R$0,49/SMS. Add-on WhatsApp com análise de margem separada. Cupom beta 65% no Stripe aprovado por Bruno. Alternativas de provedor SMS pesquisadas: Disparo Pro (R$0,07/SMS, aguardando retorno comercial), Solvefy (cotação pendente); Zenvia descartada; AWS SNS equivalente ao Twilio para BR. Provedor atual: Twilio. |
