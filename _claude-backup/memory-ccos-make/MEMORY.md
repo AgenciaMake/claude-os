@@ -36,3 +36,4 @@
 - [CitraChat — integração WhatsApp completa](citrachat_whatsapp_integracao.md) — WA implementado via Meta Graph API como add-on pago; arquivos: lib/whatsapp.ts + webhook route + ContaForm + conta/actions; DB: user_whatsapp + is_receptionist
 - [Discutir antes de implementar](feedback_discutir_antes_implementar.md) — sempre apresentar a abordagem e aguardar aprovação de Bruno antes de escrever qualquer código
 - [Sessões abertas fora da raiz do workspace](feedback_sessoes_fora_da_raiz.md) — subpasta = projeto Claude Code separado, memória própria vazia; corrigir com CLAUDE.md de ponte apontando pra memória central
+- [CitraChat — Segurança (snapshot 2026-09-04)](citrachat_seguranca.md) — autenticação, RLS, APIs, secrets, headers, webhooks; 3 gaps críticos: WhatsApp sem HMAC, rate limit in-memory, RLS de conversations/protocols não confirmada
