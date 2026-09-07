@@ -161,7 +161,7 @@ RLS estava habilitado nas tabelas, mas a policy `service role full access` usava
 | Item | Ação necessária | Quem |
 |---|---|---|
 | ~~RLS de `conversations` e `protocols`~~ | ✅ Resolvido em 2026-09-07 | — |
-| Rate limit externo | Decidir entre Vercel KV e Upstash; implementar quando priorizar | Bruno/dev |
+| Rate limit externo | Vercel KV descontinuado. Upstash é a opção quando o volume justificar — postergado intencionalmente. Fix parcial (cap 10k entradas) já aplicado em b627c67 | — |
 | CSP completo nas rotas admin | Hardening futuro — script-src, style-src, etc. | Dev |
 
 ---
