@@ -14,7 +14,7 @@
 | 🟠 Alto | 5 | 5 | 0 |
 | 🟡 Médio | 5 | 4 | 1 |
 | ⚪ Baixo | 1 | 1 | 0 |
-| 🔍 Requer Dashboard | 1 | — | 1 |
+| 🔍 Requer Dashboard | 1 | 1 | 0 |
 
 ---
 
@@ -149,10 +149,10 @@ O `Map` não é compartilhado entre instâncias Vercel. Melhoria aplicada: cap e
 
 ---
 
-### 🔍 GAP-3 — RLS de `conversations`, `protocols`, `agent_knowledge_datasets`, `agent_knowledge_rows` não confirmada
-**Status: não verificável via código — requer ação manual no Supabase Dashboard**
+### ✅ GAP-3 — Policy `service role full access` com role `public` em tabelas sem migration
+**Corrigido em:** SQL Editor Supabase + migration `26af5ef` — `supabase/migrations/047_fix_rls_policies_public_role.sql`
 
-Tabelas criadas fora do sistema de migrations. Verificar no Dashboard se RLS está habilitado. Se não estiver, criar migration ativando RLS com policies de owner por `agent_id → agents.user_id`.
+RLS estava habilitado nas tabelas, mas a policy `service role full access` usava role `public` (qualquer autenticado) em vez de `service_role`. Corrigido via DROP + CREATE com `TO service_role` nas tabelas `conversations`, `protocols`, `agent_knowledge_datasets` e `agent_knowledge_rows`. SQL aplicado diretamente no Supabase em 2026-09-07.
 
 ---
 
@@ -160,7 +160,7 @@ Tabelas criadas fora do sistema de migrations. Verificar no Dashboard se RLS est
 
 | Item | Ação necessária | Quem |
 |---|---|---|
-| RLS de `conversations` e `protocols` | Verificar no Supabase Dashboard e criar migration se necessário | Bruno (acesso ao Dashboard) |
+| ~~RLS de `conversations` e `protocols`~~ | ✅ Resolvido em 2026-09-07 | — |
 | Rate limit externo | Decidir entre Vercel KV e Upstash; implementar quando priorizar | Bruno/dev |
 | CSP completo nas rotas admin | Hardening futuro — script-src, style-src, etc. | Dev |
 
