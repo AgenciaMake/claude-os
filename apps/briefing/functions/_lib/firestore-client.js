@@ -72,7 +72,10 @@ export function normalizeBriefingClient(raw) {
   // a pessoa (ver prompt.js). Se não tiver lista de contatos separada, o próprio
   // clientName É o contato — é uma pessoa física ou um projeto pontual com um só
   // interlocutor, então não faz sentido perguntar "com quem estou falando".
-  const firstContactName = contacts ? contacts.split(', ')[0] : (raw.clientName || '');
+  // Usa só o primeiro nome aqui (a confirmação fica mais natural com "Você é o
+  // Fábio, certo?" do que com o nome completo, tipo "Você é o Fabio Sassaki, certo?").
+  const fullContactName = contacts ? contacts.split(', ')[0] : (raw.clientName || '');
+  const firstContactName = fullContactName.trim().split(/\s+/)[0] || '';
 
   return {
     name: raw.clientName || raw.projectName || '',
