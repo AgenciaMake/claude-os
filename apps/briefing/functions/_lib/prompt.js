@@ -20,10 +20,9 @@ Personalidade do Alfred: educado, atento, observador, com bom humor discreto. In
 Essa é a ficha que a Make tem desse cliente internamente. NÃO é o que o cliente te contou. Use só como referência pra não perguntar o óbvio duas vezes, mas confirme tudo durante a conversa:
 
 - Nome cadastrado na Make: ${client.name}
-- Número interno: ${client.number}
 - Serviços contratados: ${client.services}
-- Responsável interno na Make: ${client.responsible}
-${contractBlock}${alfredNotesBlock}${preSiteBlock}
+- Responsável interno na Make: ${client.responsible || 'não informado'}
+${client.projectName ? `- Projeto: ${client.projectName}\n` : ''}${contractBlock}${alfredNotesBlock}${preSiteBlock}
 ## Como conduzir a entrevista
 
 Tom e postura:
@@ -60,6 +59,7 @@ Agradece pela confiança depositada na Make. Menciona o que foi contratado usand
 - Se é só social media: cite "Make Social"
 - Se é só desenvolvimento / site: cite "Make Dev"
 - Se o contrato tem fases explícitas: mencione as fases brevemente (ex: "na fase 1 a construção do site e na fase 2 o Make Performance")
+- Se for um projeto pontual que não se encaixa em nenhum desses produtos recorrentes (branding, naming, identidade visual, um projeto único qualquer), NÃO force o encaixe em "Make X". Em vez disso, cite o nome do projeto (ver "Projeto" nos dados internos, se houver) e descreva em uma frase curta o tipo de trabalho, usando o resumo do contexto acima como base (ex: "vamos trabalhar juntos na criação de nome e identidade visual pra Padaria de Rodovia")
 - Nunca liste cada serviço individual, item a item
 
 Explica que vai ser uma conversa, não um formulário, e que quanto mais o cliente compartilhar sobre os objetivos, mais certeiro vai ser o trabalho da equipe.
@@ -156,7 +156,7 @@ Redes a cobrir (pergunta uma de cada vez, só as relevantes): Instagram, LinkedI
 
 ### 10. Perguntas específicas por serviço contratado
 
-${getServiceSpecificGuide(client.services)}
+${getServiceSpecificGuide(client.services, client.contractSummary, client.projectName)}
 
 ### 11. Objetivo e expectativa
 - Qual resultado específico espera nos próximos 3, 6, 12 meses
@@ -204,9 +204,20 @@ Quando tiver coberto TODAS as etapas obrigatórias acima (1 a 12) com informaç�
 Esse marker é invisível pro usuário e serve pro sistema. Sem ele, o briefing não é salvo.`;
 }
 
-function getServiceSpecificGuide(services) {
-  const s = services.toLowerCase();
+function getServiceSpecificGuide(services, contractSummary, projectName) {
+  const s = (services || '').toLowerCase();
   const blocks = [];
+
+  if (s.includes('brand') || s.includes('naming') || s.includes('identidade visual') || s.includes('logo')) {
+    blocks.push(`
+   Branding / Naming / Identidade Visual:
+   - Personalidade de marca desejada (adjetivos, tom, o que quer evitar)
+   - Público-alvo do produto ou marca
+   - Referências visuais e de nome que admira (concorrentes ou não)
+   - Restrições de marca (o que não pode, parcerias ou acordos que limitam cor/nome/posicionamento)
+   - Onde a marca vai aparecer primeiro (embalagem, site, fachada, redes sociais)
+   - Prazo real de lançamento, se houver um evento ou data amarrada`);
+  }
 
   if (s.includes('360') || s.includes('performance') || s.includes('tráfego') || s.includes('trafego')) {
     blocks.push(`
@@ -255,9 +266,10 @@ function getServiceSpecificGuide(services) {
   }
 
   if (blocks.length === 0) {
+    const label = services || projectName || contractSummary || 'o projeto contratado';
     blocks.push(`
-   Serviço contratado: ${services}
-   Faça perguntas aprofundadas sobre o serviço específico contratado, entendendo objetivos, histórico, restrições e expectativas.`);
+   Serviço/projeto contratado: ${label}
+   Faça perguntas aprofundadas sobre o que foi contratado, entendendo objetivos, histórico, restrições e expectativas. Use o contexto do contrato acima (se houver) como ponto de partida em vez de perguntar do zero o que já está descrito lá.`);
   }
 
   return blocks.join('\n');

@@ -28,26 +28,16 @@ export async function onRequestPost({ request, env }) {
       return json({ error: 'Briefing já concluído.' }, 409);
     }
 
-    // Normaliza client para o formato esperado pelo prompt
-    // services já vem como string no briefing_lookup
+    // Normaliza client (cliente recorrente ou projeto pontual) pro formato esperado pelo prompt
+    const clientData = normalizeBriefingClient(client);
+
     // Pré-analisa site se URL estiver nas notas ou no resumo do contrato (só no início)
     let preSiteContext = null;
     if (messages.length === 0) {
-      const notesText = [client.alfredNotes, client.contractSummary].filter(Boolean).join(' ');
+      const notesText = [clientData.alfredNotes, clientData.contractSummary].filter(Boolean).join(' ');
       preSiteContext = await analyzeUrls(notesText);
     }
-
-    const clientData = {
-      name: client.name,
-      services: client.services || '',
-      responsible: client.responsible || '',
-      contacts: client.contacts || '',
-      firestoreId: client.clientId || client._id,
-      contractSummary: client.contractSummary || null,
-      alfredNotes: client.alfredNotes || null,
-      preSiteContext: preSiteContext || null,
-      materialsFolderId: client.materialsFolderId || null,
-    };
+    clientData.preSiteContext = preSiteContext || null;
 
     const systemPrompt = buildSystemPrompt(clientData);
 

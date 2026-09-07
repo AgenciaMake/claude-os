@@ -165,7 +165,7 @@ Regras:
       messages: [
         {
           role: 'user',
-          content: `Cliente: ${client.name}\nServiços contratados: ${client.services}\nResponsável interno: ${client.responsible}\nNúmero: ${client.number}\n\nTranscrição da entrevista:\n\n${conversationText}\n\nGere o documento de briefing completo seguindo a estrutura indicada.`,
+          content: `Cliente: ${client.name}${client.projectName ? `\nProjeto: ${client.projectName}` : ''}\nServiços contratados: ${client.services || client.contractSummary || 'não especificado'}\nResponsável interno: ${client.responsible || 'não informado'}\n\nTranscrição da entrevista:\n\n${conversationText}\n\nGere o documento de briefing completo seguindo a estrutura indicada.`,
         },
       ],
     }),

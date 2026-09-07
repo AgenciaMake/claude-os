@@ -1,5 +1,5 @@
 import { getGoogleAccessToken } from '../_lib/google-auth.js';
-import { getClientByBriefingCode } from '../_lib/firestore-client.js';
+import { getClientByBriefingCode, normalizeBriefingClient } from '../_lib/firestore-client.js';
 import { resolveMaterialsFolderId } from '../_lib/save-doc.js';
 import { buildBriefingDocx } from '../_lib/docx-builder.js';
 
@@ -29,13 +29,15 @@ export async function onRequestPost({ request, env }) {
     );
     if (!client) return json({ error: 'Código inválido.' }, 404);
 
+    const clientData = normalizeBriefingClient(client);
+
     const token = await getGoogleAccessToken(env.GOOGLE_SERVICE_ACCOUNT);
-    const folderId = await resolveMaterialsFolderId(token, client);
+    const folderId = await resolveMaterialsFolderId(token, clientData);
     if (!folderId) return json({ error: 'Pasta do cliente não encontrada no Drive.' }, 500);
 
     const docxBytes = await buildBriefingDocx({
-      clientName: client.name,
-      services: client.services,
+      clientName: clientData.name,
+      services: clientData.services || clientData.projectName || '',
       summary: client.briefingSummary,
       transcript: client.briefingTranscript,
     });
@@ -44,7 +46,7 @@ export async function onRequestPost({ request, env }) {
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0');
     const yy = String(today.getFullYear()).slice(-2);
-    const slug = (client.name || 'cliente').toUpperCase().replace(/[^A-Z0-9]+/g, '_').replace(/^_|_$/g, '');
+    const slug = (clientData.name || 'cliente').toUpperCase().replace(/[^A-Z0-9]+/g, '_').replace(/^_|_$/g, '');
     const fileName = `MAKE_BRIEFING_${slug}_${dd}.${mm}.${yy}.docx`;
 
     const metadata = { name: fileName, parents: [folderId] };
