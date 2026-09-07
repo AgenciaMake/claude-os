@@ -68,11 +68,17 @@ export function normalizeBriefingClient(raw) {
     ? raw.clientContacts.map(c => c.name).filter(Boolean).join(', ')
     : (raw.clientContact || '');
 
+  // "responsible" é o nome que a etapa de identificação usa pra já cumprimentar
+  // a pessoa (ver prompt.js). Se não tiver lista de contatos separada, o próprio
+  // clientName É o contato — é uma pessoa física ou um projeto pontual com um só
+  // interlocutor, então não faz sentido perguntar "com quem estou falando".
+  const firstContactName = contacts ? contacts.split(', ')[0] : (raw.clientName || '');
+
   return {
     name: raw.clientName || raw.projectName || '',
     projectName: raw.projectName || null,
     services: Array.isArray(raw.clientServices) ? raw.clientServices.join(', ') : '',
-    responsible: '',
+    responsible: firstContactName,
     contacts,
     firestoreId: raw.projectId || raw._id,
     contractSummary: raw.projectContext || raw.briefingContext || null,
