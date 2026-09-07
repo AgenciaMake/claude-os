@@ -44,6 +44,43 @@ export async function getClientByBriefingCode(_token, projectId, dbName, tenantI
   return firestoreDocToObject(doc);
 }
 
+// O briefing_lookup tem dois formatos hoje: cliente recorrente (name, services,
+// responsible, contacts, contractSummary, alfredNotes) e projeto pontual
+// (type: 'project', clientName, projectName, clientServices, clientContacts,
+// projectContext). Essa função normaliza os dois pro mesmo formato que o
+// prompt.js espera, senão o Alfred fica sem saber o nome de quem tá falando.
+export function normalizeBriefingClient(raw) {
+  if (raw.type !== 'project') {
+    return {
+      name: raw.name || '',
+      projectName: null,
+      services: raw.services || '',
+      responsible: raw.responsible || '',
+      contacts: raw.contacts || '',
+      firestoreId: raw.clientId || raw._id,
+      contractSummary: raw.contractSummary || null,
+      alfredNotes: raw.alfredNotes || null,
+      materialsFolderId: raw.materialsFolderId || null,
+    };
+  }
+
+  const contacts = Array.isArray(raw.clientContacts)
+    ? raw.clientContacts.map(c => c.name).filter(Boolean).join(', ')
+    : (raw.clientContact || '');
+
+  return {
+    name: raw.clientName || raw.projectName || '',
+    projectName: raw.projectName || null,
+    services: Array.isArray(raw.clientServices) ? raw.clientServices.join(', ') : '',
+    responsible: '',
+    contacts,
+    firestoreId: raw.projectId || raw._id,
+    contractSummary: raw.projectContext || raw.briefingContext || null,
+    alfredNotes: raw.alfredNotes || null,
+    materialsFolderId: raw.materialsFolderId || null,
+  };
+}
+
 // Marca briefing como concluído na briefing_lookup (coleção pública)
 export async function markBriefingCompleteLookup(projectId, dbName, tenantId, code, docUrl, briefingSummary, briefingTranscript) {
   const fields = {

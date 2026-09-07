@@ -1,5 +1,5 @@
 import { getGoogleAccessToken } from '../_lib/google-auth.js';
-import { getClientByBriefingCode, markBriefingCompleteLookup, getBriefingNotificationEmails } from '../_lib/firestore-client.js';
+import { getClientByBriefingCode, markBriefingCompleteLookup, getBriefingNotificationEmails, normalizeBriefingClient } from '../_lib/firestore-client.js';
 import { buildSystemPrompt } from '../_lib/prompt.js';
 import { saveBriefingDoc, formatTranscriptJSON } from '../_lib/save-doc.js';
 import { analyzeUrls } from '../_lib/site-fetch.js';
