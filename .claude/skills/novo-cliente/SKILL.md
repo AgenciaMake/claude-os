@@ -59,7 +59,15 @@ Usando o MCP `google-drive`, criar a pasta principal e toda a estrutura abaixo:
   └── 11. Logos
 ```
 
-Para criar cada pasta usar `mcp__google-drive__createFolder` com o `driveId: "0ANDNjpfQd7ZmUk9PVA"`.
+**ATENÇÃO — parâmetro correto da ferramenta:** `mcp__google-drive__createFolder` só aceita `name` e `parent` (o ID da pasta-mãe). NÃO existe parâmetro `driveId` nem `parentId` nessa ferramenta — se você passar esses nomes, a chamada não dá erro, ela simplesmente os ignora silenciosamente e cria a pasta solta na raiz do "Meu Drive" pessoal, fora do Shared Drive. Já aconteceu em produção (onboarding do Fábio Sassaki, 2026-09-07) e gerou 18 pastas soltas que precisaram ser apagadas e recriadas.
+
+Pra criar a pasta principal, usar `parent: "1R6NWb_YjeiMryxSS_a4U-ye5a0F2Wh4q"` (ID de "02. CLIENTES" — já está dentro do Shared Drive, então o Drive API resolve o driveId sozinho). Pra cada subpasta, usar `parent: {ID da pasta recém-criada correspondente}`.
+
+**Verificação obrigatória:** depois de criar a pasta principal do cliente, antes de criar qualquer subpasta, confirmar que ela caiu no lugar certo com uma busca raw:
+```
+mcp__google-drive__search com rawQuery=true, query: "'{ID_DA_PASTA_MAE}' in parents and name = '{NOME_DA_PASTA_CRIADA}' and trashed = false"
+```
+Se não aparecer nada, ou aparecer com `path: Meu Drive`, a pasta foi criada no lugar errado — pare e corrija antes de continuar (apagar e recriar com o `parent` certo).
 
 ### Pasta USER — permissões
 
@@ -115,7 +123,7 @@ Criar a pasta principal e toda a estrutura abaixo:
           └── 12. Dezembro
 ```
 
-Para criar cada pasta usar `mcp__google-drive__createFolder` com o `driveId: "0AE-_ZuS1PIchUk9PVA"`.
+Mesmo cuidado do Passo 2: usar só `parent` (nunca `driveId`/`parentId`), e verificar com busca raw que a pasta principal caiu dentro do Shared Drive antes de criar as subpastas. Pra criar a pasta principal, usar `parent: "0AE-_ZuS1PIchUk9PVA"` (a raiz do Shared Drive "02. MAKE - CRIAÇÃO" também funciona como ID de pasta-mãe).
 
 ---
 
