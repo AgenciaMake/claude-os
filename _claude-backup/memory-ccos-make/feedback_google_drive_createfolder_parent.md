@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 206eb368-7a01-4455-90d2-d3c2e272a0e2
-  modified: 2026-09-07T10:33:13.032Z
+  modified: 2026-09-07T13:00:47.621Z
 ---
 
 A ferramenta `mcp__google-drive__createFolder` tem schema `{ name, parent }`. Não existe `driveId` nem `parentId`. Se você passar esses nomes (por hábito de outras APIs do Drive, ou por copiar de doc antigo), a chamada retorna sucesso normalmente, mas ignora o parâmetro desconhecido e cria a pasta solta na raiz do "Meu Drive" pessoal — fora de qualquer Shared Drive, sem erro nenhum pra avisar.
@@ -16,3 +16,5 @@ A ferramenta `mcp__google-drive__createFolder` tem schema `{ name, parent }`. N�
 - Sempre usar só `parent: "{ID da pasta-mãe}"` — o Drive API resolve o Shared Drive sozinho a partir do parent.
 - Depois de criar a primeira pasta de qualquer lote (principal de um cliente, por exemplo), confirmar o local antes de criar as subpastas: `mcp__google-drive__search` com `rawQuery: true`, query `"'{ID_PASTA_MAE}' in parents and name = '{NOME}' and trashed = false"`. Se vier vazio ou com `path: Meu Drive`, parou no lugar errado.
 - Já corrigido em `.claude/skills/novo-cliente/SKILL.md` (Passos 2 e 3) com essa mesma instrução de verificação obrigatória.
+
+**Bônus — numeração diferente entre as duas áreas:** "02. CLIENTES" numera os clientes em sequência única (ex: 33, 34...). "02. MAKE - CRIAÇÃO" organiza por pasta de ano (2022 a 2026) e cada ano tem sua PRÓPRIA sequência numérica, independente de "02. CLIENTES" (ex: Springway é "33. Springway" num lado e "13. Springway" dentro de "2026" no outro). Nunca assumir que o número é o mesmo dos dois lados — sempre criar a pasta de criação dentro do ano corrente e checar o maior número já usado ali antes de nomear.

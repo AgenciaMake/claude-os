@@ -96,7 +96,9 @@ Sem esses dois passos, o Alfred não consegue salvar nada na pasta do cliente (n
 
 ## Passo 3 — Criar pasta no Drive (área de criação)
 
-**Destino**: Shared Drive `02. MAKE - CRIAÇÃO` (ID: `0AE-_ZuS1PIchUk9PVA`)
+**Destino**: dentro da pasta do ANO CORRENTE, dentro do Shared Drive `02. MAKE - CRIAÇÃO` (ID: `0AE-_ZuS1PIchUk9PVA`) — ex: `02. MAKE - CRIAÇÃO/2026/{número}. {Nome}`.
+
+**Atenção — numeração é diferente da de "02. CLIENTES":** essa área organiza por pasta de ano, e cada ano tem sua PRÓPRIA sequência numérica, independente do número usado em "02. CLIENTES". Antes de criar, listar a pasta do ano corrente (`mcp__google-drive__listFolder`) e usar o próximo número disponível NESSA pasta — não reaproveitar o número de "02. CLIENTES". Já aconteceu de criar a pasta certa mas no lugar errado (raiz do Shared Drive em vez de dentro do ano) e com o número errado (copiado de "02. CLIENTES") — precisou mover e renomear depois.
 
 Criar a pasta principal e toda a estrutura abaixo:
 
@@ -123,7 +125,7 @@ Criar a pasta principal e toda a estrutura abaixo:
           └── 12. Dezembro
 ```
 
-Mesmo cuidado do Passo 2: usar só `parent` (nunca `driveId`/`parentId`), e verificar com busca raw que a pasta principal caiu dentro do Shared Drive antes de criar as subpastas. Pra criar a pasta principal, usar `parent: "0AE-_ZuS1PIchUk9PVA"` (a raiz do Shared Drive "02. MAKE - CRIAÇÃO" também funciona como ID de pasta-mãe).
+Mesmo cuidado do Passo 2: usar só `parent` (nunca `driveId`/`parentId`), e verificar com busca raw que a pasta principal caiu dentro da pasta do ano certo antes de criar as subpastas. Pra achar o ID da pasta do ano corrente, buscar `'0AE-_ZuS1PIchUk9PVA' in parents and name = '{ano}' and trashed = false` (rawQuery), e usar o ID retornado como `parent` da pasta principal do cliente.
 
 ---
 
