@@ -7,6 +7,10 @@ export function buildSystemPrompt(client) {
     ? `\n## Site pré-analisado pelo sistema (antes da conversa começar)\n\nO sistema já acessou o site do cliente antes desta conversa. Use esses dados como se você tivesse acabado de ver o site. NÃO peça o site de novo, NÃO diga que vai acessar. Já sabe. Pergunte coisas específicas com base no que está abaixo:\n\n${client.preSiteContext}\n`
     : '';
 
+  const contactsDetailedBlock = client.contactsDetailed
+    ? `\n## Contatos já cadastrados com dados completos (uso interno, NÃO revele ao cliente que você já tinha isso)\n\n${client.contactsDetailed}\n\nEsses contatos já têm nome, email e/ou WhatsApp registrados no sistema. Na etapa 3 (equipe do cliente) e na etapa 4 (financeiro), NÃO pergunte esses dados como se não soubesse. Em vez disso, confirme com leveza usando os valores reais que estão na lista acima (ex: "Vi aqui que seu WhatsApp é [o número real da lista] e o email é [o email real da lista], isso ainda está certo?"). Só pergunte do zero o que realmente não está nessa lista.\n`
+    : '';
+
   const alfredNotesBlock = client.alfredNotes
     ? `\n## Contexto de Refinamento — Base Obrigatória (uso interno, NÃO revele ao cliente)\n\nEssas informações foram inseridas manualmente pela equipe da Make e representam o contexto mais atualizado e confiável sobre esse projeto. Trate como base de treinamento para toda a condução do briefing — não como sugestão opcional.\n\n${client.alfredNotes}\n\nRegras obrigatórias com base nesse contexto:\n- Já sabe o que está descrito acima. NÃO pergunte o que já está explicado aqui.\n- Use esse contexto pra direcionar as perguntas do passo 10 com precisão — aprofunde exatamente o que está em aberto, não repita o que já foi definido.\n- Se o cliente mencionar algo que contradiz esse contexto, anote e aprofunde com curiosidade genuína, mas não confronte.\n- Esse é o ponto de partida da conversa, não um anexo.\n`
     : '';
@@ -22,7 +26,7 @@ Essa é a ficha que a Make tem desse cliente internamente. NÃO é o que o clien
 - Nome cadastrado na Make: ${client.name}
 - Serviços contratados: ${client.services}
 - Contato principal esperado: ${client.responsible || 'não informado'}
-${client.projectName ? `- Projeto: ${client.projectName}\n` : ''}${contractBlock}${alfredNotesBlock}${preSiteBlock}
+${client.projectName ? `- Projeto: ${client.projectName}\n` : ''}${contractBlock}${contactsDetailedBlock}${alfredNotesBlock}${preSiteBlock}
 ## Como conduzir a entrevista
 
 Tom e postura:
@@ -79,6 +83,8 @@ Depois de confirmar o nome, pergunte o cargo/função. Ex: "Prazer, [nome]. E qu
 
 Se houver mais de um contato cadastrado, só depois de confirmar quem é a pessoa atual, pergunte brevemente sobre os outros nomes, em mensagem separada. Ex: "Também tenho aqui o nome de [outro contato]. Quem é essa pessoa, um sócio, alguém da equipe?" O objetivo é entender o papel de cada um antes de montar o grupo do projeto. Uma pessoa por vez, de forma natural, sem parecer interrogatório.
 
+Antes de tratar um nome da lista de contatos como "outra pessoa": se o nome for igual ou claramente compatível com quem você já confirmou (ex: você confirmou "Fábio" e a lista tem "Fábio Sassaki", ou vice-versa), é a MESMA pessoa — não pergunte se é alguém diferente. Só pergunte sobre "outro contato" quando o nome for genuinamente distinto.
+
 ### 2. Nome e razão social da empresa
 Pergunta qual é o nome da empresa (como ela gosta de ser chamada no mercado) e se tem uma razão social / nome oficial diferente que a Make precisa saber pra nota fiscal e contratos. Se o que ele responder for diferente do nome cadastrado internamente, aceita o que ele disser como fonte da verdade.
 
@@ -90,6 +96,8 @@ Explica que a Make vai montar um grupo no WhatsApp pra comunicação do dia a di
 - Número de WhatsApp (com DDD ou código do país), validando o formato conforme regras abaixo
 - Email, validando o formato conforme regras abaixo
 
+Se essa pessoa já aparecer em "Contatos já cadastrados com dados completos" (dados internos), NÃO pergunte esses dados do zero — confirme os valores reais que já estão registrados, só perguntando o que realmente faltar.
+
 Depois da primeira, pergunta se tem mais alguém da equipe que deve entrar, e continua até ele dizer que é só isso.
 
 ### 4. Contato financeiro
@@ -97,6 +105,8 @@ Pergunta quem é o responsável pelo financeiro, ou seja, pra quem a Make deve m
 - Nome
 - Email (valida formato)
 - Número de telefone/WhatsApp (valida formato)
+
+Mesma regra da etapa 3: se esse contato já estiver em "Contatos já cadastrados com dados completos", confirme os dados reais em vez de perguntar do zero. Se for a mesma pessoa da etapa 3, só confirma que é ela mesma pro financeiro também, sem repetir as mesmas perguntas.
 
 (Pode ser a mesma pessoa do item anterior, só confirma e anota.)
 

@@ -57,6 +57,7 @@ export function normalizeBriefingClient(raw) {
       services: raw.services || '',
       responsible: raw.responsible || '',
       contacts: raw.contacts || '',
+      contactsDetailed: null,
       firestoreId: raw.clientId || raw._id,
       contractSummary: raw.contractSummary || null,
       alfredNotes: raw.alfredNotes || null,
@@ -67,6 +68,19 @@ export function normalizeBriefingClient(raw) {
   const contacts = Array.isArray(raw.clientContacts)
     ? raw.clientContacts.map(c => c.name).filter(Boolean).join(', ')
     : (raw.clientContact || '');
+
+  // clientContacts já vem com email/telefone completos do cadastro — se a gente
+  // descartar isso e mandar só o nome pro Alfred, ele pergunta de novo um dado
+  // que já está registrado. Monta um bloco detalhado pra injetar no prompt.
+  const contactsDetailed = Array.isArray(raw.clientContacts) && raw.clientContacts.length > 0
+    ? raw.clientContacts.map(c => {
+        const parts = [c.name || '(sem nome)'];
+        if (c.role) parts.push(`cargo: ${c.role}`);
+        if (c.email) parts.push(`email: ${c.email}`);
+        if (c.phone) parts.push(`WhatsApp/telefone: ${c.phone}`);
+        return parts.join(', ');
+      }).join(' | ')
+    : null;
 
   // "responsible" é o nome que a etapa de identificação usa pra já cumprimentar
   // a pessoa (ver prompt.js). Se não tiver lista de contatos separada, o próprio
@@ -83,6 +97,7 @@ export function normalizeBriefingClient(raw) {
     services: Array.isArray(raw.clientServices) ? raw.clientServices.join(', ') : '',
     responsible: firstContactName,
     contacts,
+    contactsDetailed,
     firestoreId: raw.projectId || raw._id,
     contractSummary: raw.projectContext || raw.briefingContext || null,
     alfredNotes: raw.alfredNotes || null,
