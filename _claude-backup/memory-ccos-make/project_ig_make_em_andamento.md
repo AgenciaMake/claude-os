@@ -1,111 +1,41 @@
 ---
 name: Fluxo de redes sociais da Make em andamento
-description: Estado atual do desenvolvimento do Instagram/LinkedIn/TikTok da MakeLemonAd — sistema de templates TV+TI consolidado, primeiro post quase pronto
+description: Estado atual do Instagram/LinkedIn/TikTok da MakeLemonAd — pautas de 13/07 paradas, post 3 nunca criado, nada publicado nem analisado ainda
 type: project
-originSessionId: b22e2e92-b566-4515-82a4-bce1814924d6
+originSessionId: c4f98cf2-7a75-4832-8297-3e2fe6852e87
+modified: 2026-09-08T12:20:18.769Z
 ---
-Estado do trabalho de redes sociais da MakeLemonAd em **2026-05-05**.
+Estado do trabalho de redes sociais da MakeLemonAd verificado em **2026-09-08** (última atividade real no repo: 2026-07-17).
 
 ## Quando retomar
 
-Quando Bruno disser "vamos continuar a falar do instagram da make" (ou similar — "redes da make", "postagens", "@make.lemonad", "vamos voltar pros posts"), ler este arquivo + [MAKESOCIAL.md](../../../Desktop/CCode/ccos-make/make/social/MAKESOCIAL.md) + [templates/README.md](../../../Desktop/CCode/ccos-make/make/social/templates/README.md) pra retomar o contexto exato.
+Quando Bruno disser "vamos continuar a falar do instagram da make" (ou similar), ler este arquivo + [MAKESOCIAL.md](../../../Desktop/CCode/ccos-make/make/social/MAKESOCIAL.md) + [identidade-visual.md](../../../Desktop/CCode/ccos-make/make/social/identidade-visual.md) pra retomar o contexto exato.
 
-## Sistema consolidado nesta fase
+## Infraestrutura (pronta, testada, sem mudanças)
 
-### Infraestrutura (toda pronta e testada)
+- **Publicação:** skill `publicar-instagram` em [.claude/skills/publicar-instagram/](../../../Desktop/CCode/ccos-make/.claude/skills/publicar-instagram/), método Post for Me Pro. `POSTFORME_API_KEY` + `POSTFORME_INSTAGRAM_ACCOUNT_ID` + `POSTFORME_LINKEDIN_ACCOUNT_ID` + `POSTFORME_TIKTOK_ACCOUNT_ID` no `.env`. TikTok sempre publica como draft (`--draft`) pra Bruno escolher música no app.
+- **Guias:** [MAKESOCIAL.md](../../../Desktop/CCode/ccos-make/make/social/MAKESOCIAL.md) (briefing mestre) + [identidade-visual.md](../../../Desktop/CCode/ccos-make/make/social/identidade-visual.md) (grade, tipografia Rubik, templates).
+- Ritmo alvo: 3 posts/semana (IG + LinkedIn + TikTok a partir da mesma peça).
 
-- **Publicação:** skill `publicar-instagram` em [.claude/skills/publicar-instagram/](../../../Desktop/CCode/ccos-make/.claude/skills/publicar-instagram/). Script `publish-postforme.js` corrigido (URL `api.postforme.dev/v1`, auto-seleciona conta certa via env vars). Contas IG (@make.lemonad), LinkedIn (página MakeLemon/Ad) e TikTok (@MakeLemonAd) configuradas e testadas via dry-run.
-- **Post for Me Pro:** `POSTFORME_API_KEY` + 3 account IDs no `.env`.
-- **Geração de imagem:** Nano Banana (Gemini 2.5 Flash Image) testado e funcionando. `GEMINI_API_KEY` no `.env`. Billing ativado no projeto Google Cloud "MakeLemonAd AI".
-- **Composição de slides:** Playwright + HTML/CSS em [scripts/](../../../Desktop/CCode/ccos-make/scripts/). Template em `templates/slide.html`, script `compose-slides.js`. Gera PNGs 1080x1350 com Rubik do Google Fonts.
-- **Auto-fit refatorado:** preserva largura 100% (920px), reduz só o alto via scale quando o conteúdo passa de ~1140px. SAFE_AREA = `{ width: 920, height: 1140 }`.
-- **Grade oficial implementada:** `padding: 50px 110px 50px 50px` no `.slide` — todos os elementos batem na grade documentada (50px topo/esq/baixo, 110px direita pra faixa lateral).
-- **Suporte completo no script:** `coverImage` (TV4), `fullBleedImage`, `sideImage`, inline `<img>` (auto-converte pra base64), `logoStyle` (PNG oficial vs SVG vazado configurável), `hashtagColor`, `numColor`, `arrowColor`, `footerColor` — todos por config slide.
+## Última pauta aprovada — semana de 13/07/2026
 
-### Família de templates oficial em [make/social/templates/](../../../Desktop/CCode/ccos-make/make/social/templates/)
+Arquivo: [pautas/2026-07-13_semana.md](../../../Desktop/CCode/ccos-make/make/social/pautas/2026-07-13_semana.md). 3 posts aprovados por Bruno em 2026-07-13:
 
-**4 capas (TV)** + **5 internos (TI)** + CTA padrão = **10 peças combináveis**.
+1. **"As 3 métricas que parecem boas mas te enganam"** (CTR, alcance, CPC) — pasta [posts/2026-07-13_metricas-enganosas/](../../../Desktop/CCode/ccos-make/make/social/posts/2026-07-13_metricas-enganosas/). **Completo**: 7 slides renderizados, caption pronta, teaser pronto. Nunca publicado (sem registro de link/publicação em nenhum arquivo).
+2. **"Brasil é o 3º/4º país que mais usa Instagram"** — pasta [posts/2026-07-13_brasil-instagram/](../../../Desktop/CCode/ccos-make/make/social/posts/2026-07-13_brasil-instagram/). Tem duas versões: v1 (5 slides, config.json) e **v2 revisado** (7 slides incluindo "risco" e "ecossistema", config-v2.json, caption-v2.md, teaser). A v2 parece ser a versão final pretendida. Nunca publicado.
+3. **"O anúncio brasileiro que mudou a publicidade digital"** — pasta `posts/2026-07-13_anuncio-icone/` **nunca foi criada**. Esse post não saiu do papel.
 
-**Capas:**
-- TV1 — Bloco dividido (verde/preto)
-- TV2 — Tudo preto (tipográfico com acento verde)
-- TV3 — Bloco dividido invertido (preto/verde)
-- TV4 — Imagem na capa (foto fotorrealista no topo + tipografia embaixo)
+## Onde parou exatamente
 
-**Internos:**
-- TI1 — Editorial com imagem (card retangular + texto editorial estilo @brandsdecoded_)
-- TI2 — Tipográfico repetitivo (paralelismo "Não é X, Não é Y, Não é Z")
-- TI3 — Dado numérico (número GIGANTE em verde 02 sobre cinza claro)
-- TI4 — Lista numerada (01/02/03 em outline preto sobre verde limão)
-- TI5 — Antes/Agora (2 colunas paralelas sobre cinza escuro)
+Trabalho parou em 2026-07-17 (último commit auto-sync tocando `make/social`). Bruno fechou a aba da conversa sem finalizar: faltava decidir/publicar os posts 1 e 2 e criar o post 3 do zero. Pasta [metricas/](../../../Desktop/CCode/ccos-make/make/social/metricas/) está **vazia** — nenhum post chegou a ser publicado e analisado.
 
-Cada template tem `.md` com spec + snippet JSON + preview. README catálogo atualizado com regra de combinação ("não usar 2 TIs com mesmo fundo seguidos").
+## Próximos passos possíveis (perguntar a Bruno o que priorizar)
 
-### Skill `direcao-arte-make`
-
-Em [.claude/skills/direcao-arte-make/SKILL.md](../../../Desktop/CCode/ccos-make/.claude/skills/direcao-arte-make/SKILL.md). Decide template, hierarquia tipográfica, contraste e geração de imagem. **Pendente atualizar** com o catálogo TI completo e regras de seleção dos internos (foi criada antes da família TI estar consolidada).
-
-### Guias de identidade (consolidados)
-
-- [MAKESOCIAL.md](../../../Desktop/CCode/ccos-make/make/social/MAKESOCIAL.md) — briefing mestre
-- [identidade-visual.md](../../../Desktop/CCode/ccos-make/make/social/identidade-visual.md) — grade, tipografia, anatomia do slide
-- [marca/design-guide.md](../../../Desktop/CCode/ccos-make/marca/design-guide.md) — paleta oficial (7 hex)
-- [marca/direcao-de-arte.md](../../../Desktop/CCode/ccos-make/marca/direcao-de-arte.md) — script de realismo brasileiro
-
-## Primeiro post em desenvolvimento
-
-**Pauta:** "Seu tráfego orgânico caiu. E a culpa não é sua."
-**Tema:** zero-click search / tráfego orgânico caindo por causa de ChatGPT, Perplexity, Gemini, AI Overviews
-**Pasta:** [make/social/posts/2026-04-23_trafego-organico/](../../../Desktop/CCode/ccos-make/make/social/posts/2026-04-23_trafego-organico/)
-**Config:** [config.json](../../../Desktop/CCode/ccos-make/make/social/posts/2026-04-23_trafego-organico/config.json) com 7 slides definidos
-
-### Slides do post
-
-| Slide | Template | Status |
-|---|---|---|
-| 1 — Capa | **TV4** (cover-tv4.png — empresário pensativo home-office SP) | ✅ aprovado |
-| 2 — Dado "15% e 64%" | TI3 | gerado, mas auto-fit pode estar deixando muito espaço inferior — talvez ajustar |
-| 3 — "Não é..." | TI2 | gerado, parece OK |
-| 4 — "É o usuário parando de clicar" | **TI1** (slide4-img.png — close cinematográfico do empresário) | ✅ aprovado pelo Bruno como modelo do TI1 |
-| 5 — Antes/Agora | TI5 | gerado, "Ranquear em 1º =" quebra estranho |
-| 6 — 3 ações | TI4 | gerado, parece OK |
-| 7 — CTA | template fixo | ✅ ok |
-
-### Arquivos da pasta (limpa e ordenada)
-
-- `cover-tv4.png` — imagem da capa
-- `slide4-img.png` — imagem do slide 4 (TI1)
-- `slide01-capa-tv1/2/3/4.png` — variações de capa testadas (deletar se for confirmar TV4)
-- `slide02-dado.png` ... `slide07-cta.png` — slides renderizados
-- `config.json` — fonte de verdade
-
-## Onde paramos exatamente (2026-05-05)
-
-Última iteração: terminamos de **documentar a família TI completa** (TI1-TI5) e **limpamos arquivos órfãos** da pasta do post (`slide01-capa.png`, `slide4-phone.png` deletados; `slide4-fullbleed.png` renomeado pra `slide4-img.png` e config atualizado, slide 4 regerado funcionando).
-
-## Próximos passos (em ordem)
-
-1. **Atualizar a skill `direcao-arte-make`** com o catálogo TI completo e regras de seleção/combinação dos templates internos. A skill foi criada antes da família TI estar consolidada.
-2. **Refinar slides 2, 5 e 6** se necessário — alguns podem ter espaço inferior vazio depois do refactor do auto-fit (o conteúdo é menor que o `SAFE_AREA.height = 1140`, então não escala mas fica com o resto da grade vazia).
-3. **Decidir definitivamente qual TV usar** pra capa do post (atualmente está como TV4) e apagar os outros TV1/TV2/TV3 PNGs renderizados que ficaram na pasta.
-4. **Aprovação final** dos 7 slides com Bruno.
-5. **Escrever a legenda** do post (pra IG, LinkedIn e TikTok — LinkedIn pode ter copy ligeiramente ajustada pro tom profissional).
-6. **Publicar** via skill `publicar-instagram` (`@make.lemonad` no IG, página `MakeLemon/Ad` no LinkedIn, `@MakeLemonAd` no TikTok).
-7. **+2 dias após publicação** → análise de métricas juntos (compartilhamentos, comentários, salvamentos, seguidores como primárias).
-
-## Feedbacks importantes do Bruno (já no SKILL.md / templates / memórias)
-
-- Geração de imagem nunca contém texto (Claude compõe depois)
-- Imagens fotorrealistas seguem [direcao-de-arte.md](../../../Desktop/CCode/ccos-make/marca/direcao-de-arte.md)
-- Tipografia da Make não usa Rubik Black 900 — prefere Bold 700 e Medium 500
-- Capas devem preencher bem o slide com tipografia grande + camadas (bold + italic + outline)
-- Texto e imagem **obrigatoriamente** ocupam 100% da largura útil (920px) — auto-fit garante isso
-- Faixa lateral + seta em **todos** os slides (exceto CTA), seta na cor do slide atual invadindo a faixa do próximo
-- Logo só na capa (slides internos têm numeração `[N]` no topo esquerdo)
-- Hashtag/numeração superior e rodapé em **16px** (mesma proporção pequena)
-- Slide internos com imagem precisam ter composição **diferente da capa** (capa = horizontal split, interno = card editorial)
-- Estética inspirada em @brandsdecoded_ pra editorial — texto grande, destaque colorido em palavras-chave
-- Sempre respeitar **regra de ouro da grade** (50/110)
+1. Revisar e aprovar definitivamente os 2 posts prontos (metricas-enganosas e brasil-instagram v2).
+2. Publicar via skill `publicar-instagram`.
+3. Criar do zero o post 3 (anúncio icônico) — ou substituir por pauta mais atual, já que passaram quase 2 meses.
+4. Depois de publicar, rodar análise de métricas (+2 dias) e começar a alimentar `metricas/`.
+5. Considerar gerar pauta nova pra semana atual (13/07 já está bem datada).
 
 ## Métricas primárias
 

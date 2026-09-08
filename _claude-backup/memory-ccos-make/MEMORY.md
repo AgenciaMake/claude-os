@@ -1,7 +1,7 @@
 - [Ferramentas de publicação social da MakeLemonAd](makelemonad_social_tooling.md) — Post for Me Pro é o método oficial; usar skill publicar-instagram, não Graph API
 - [Geração de imagem nunca contém texto](feedback_image_generation_no_text.md) — IA gera só o visual; textos são sempre compostos depois como camada separada
 - [Script mestre de realismo brasileiro](feedback_realismo_brasileiro.md) — imagens fotorrealistas seguem 15 regras em marca/direcao-de-arte.md; mockups 3D caricatos usam estética própria
-- [Fluxo de redes sociais em andamento](project_ig_make_em_andamento.md) — sistema de templates TV+TI consolidado (10 peças); primeiro post quase pronto, falta atualizar skill DA + refinos finais. Retomar quando Bruno pedir
+- [Fluxo de redes sociais em andamento](project_ig_make_em_andamento.md) — parado desde 17/07: 2 posts prontos não publicados (metricas-enganosas, brasil-instagram v2), post 3 nunca criado, metricas/ vazia
 - [Linha de produtos SaaS Citra](project_produtos_citra.md) — CitraDesk e CitraChat vivem em produtos/, separados de make/ e clientes/; ler o briefing do produto antes de mexer
 - [Linha Citra — visão SaaS modular](citra_visao_saas.md) — CitraDesk = suíte modular em citradesk.com; CitraChat = produto irmão em citrachat.com; pricing e módulos definidos
 - [Citra — decisões de arquitetura SaaS](citra_decisoes_arquitetura.md) — Firebase unificado, multi-tenant via path, banco fica em US por enquanto, Make = primeira agência cliente
