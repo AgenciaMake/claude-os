@@ -503,12 +503,12 @@ Uma conversa começa quando o visitante envia a primeira mensagem. Cada sessão 
 Transferência entre agentes não cria uma conversa nova. A triagem na recepção e o atendimento com o especialista são a mesma conversa.
 
 ### O que acontece quando o limite é atingido
-O agente para de responder novos visitantes. Visitantes que tentem iniciar uma conversa ficam sem resposta até o início do próximo ciclo ou até o responsável contratar uma recarga.
+As conversas que passam do limite do plano são cobradas à parte. O atendimento não é interrompido: o agente continua respondendo e o excedente entra na cobrança.
 
-O responsável recebe aviso antes de atingir o limite. Na página ASSINATURA, as barras de consumo mostram quantos agentes e quantas conversas já foram usados no ciclo.
+O responsável recebe aviso antes de atingir o limite, para avaliar se compensa subir de plano em vez de pagar por excedente. Na página ASSINATURA, as barras de consumo mostram quantos agentes e quantas conversas já foram usados no ciclo.
 
 ### Recargas
-Podem ser adquiridas a qualquer momento na aba ASSINATURA. Valem pelo ciclo em vigência e não acumulam para o próximo.
+Pacotes de conversas adicionais podem ser adquiridos a qualquer momento na aba ASSINATURA. Valem pelo ciclo em vigência e não acumulam para o próximo. Sai mais barato que o excedente avulso para quem já sabe que vai passar do limite.
 
 ### Ciclo de faturamento
 Mensal, começa na data de contratação, renova automaticamente. Conversas não utilizadas não passam para o ciclo seguinte.
@@ -581,7 +581,7 @@ Verificar em ordem:
 1. O agente está publicado? (aba PUBLICAR → botão verde "Publicado")
 2. O script foi instalado corretamente? Colar na página e verificar se aparece o script antes de </body>
 3. O slug no script bate com o slug configurado no painel?
-4. O limite de conversas foi atingido? Verificar em ASSINATURA
+4. A assinatura está ativa? Verificar em ASSINATURA — passar do limite de conversas não derruba o agente (o excedente é cobrado à parte), mas assinatura vencida ou cancelada sim
 5. O agente está sendo carregado em uma página excluída? Verificar configuração de visibilidade
 
 ### A recepção não transfere a conversa

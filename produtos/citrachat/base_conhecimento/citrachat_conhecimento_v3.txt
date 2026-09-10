@@ -7,7 +7,6 @@ O que mudou da v2 para a v3:
 - Google Calendar saiu do roadmap: agentes de agendamento marcam direto na agenda
 - Multi-agente com recepcionista virou seção própria — é argumento de venda, não detalhe técnico
 - Upgrade e downgrade de plano com rateio proporcional
-- Excesso de conversas: corrigido para bloqueio até o próximo ciclo ou recarga
 
 
 
@@ -266,7 +265,7 @@ O plano Starter inclui 300 conversas por mês. O plano Pro inclui 1.000. O plano
 
 ### O que acontece se ultrapassar o limite de conversas?
 
-Ao atingir o limite, o agente para de responder novos visitantes até o início do próximo ciclo. O responsável recebe aviso antes de chegar lá, e pode fazer upgrade de plano ou contratar uma recarga, que vale pelo ciclo em vigência.
+As conversas que passam do limite do plano são cobradas à parte. O atendimento não para: o agente continua respondendo normalmente e o excedente entra na cobrança. O responsável recebe um aviso antes de atingir o limite, para avaliar se compensa subir de plano ou contratar um pacote de conversas adicionais, que costuma sair mais barato que o excedente avulso.
 
 ### O visitante sabe que está falando com uma IA?
 
