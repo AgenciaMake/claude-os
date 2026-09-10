@@ -1,9 +1,5 @@
 {
   "model": "sonnet",
-  "availableModels": [
-    "sonnet",
-    "haiku"
-  ],
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
       "source": {
