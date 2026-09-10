@@ -6,7 +6,7 @@
       "bg": "split-hv-inv",
       "isCover": true,
       "nextBg": "dark-gray",
-      "logoStyle": "png-oficial",
+      "noLogo": true,
       "hashtagColor": "#FFFFFF",
       "arrowColor": "#D6DE23",
       "footerColor": "#000000",

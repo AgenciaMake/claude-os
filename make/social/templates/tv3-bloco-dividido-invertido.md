@@ -17,7 +17,7 @@ Versão espelhada do TV1: 50% preto em cima, 50% verde limão embaixo. Tipografi
 | Elemento | Valor |
 |---|---|
 | **Background** | `split-hv-inv` (linear-gradient preto 50% top + verde limão 50% bottom) |
-| **Logo** | PNG oficial (selo verde com texto preto cheio) — sobre preto fica destacado |
+| **Logo** | Removido do design system — capas não levam mais logo no topo (`noLogo: true`) |
 | **Hashtag** | Cor `#FFFFFF` (branco), 16px Light italic + Medium italic em "estratégica" |
 | **Tipografia** | 3 linhas em Rubik italic caixa alta:<br>1. Setup: Bold 700, cor branco sobre preto<br>2. Outline: stroke 3px branco, transparente, cruzando divisão<br>3. Punchline: Bold 800, cor preto `#000000` sobre o verde |
 | **Subtítulo** | Rubik 42px Medium 500, cor `#434244` (preto texto) com destaque em preto puro italic — sobre o verde |
@@ -32,7 +32,7 @@ Versão espelhada do TV1: 50% preto em cima, 50% verde limão embaixo. Tipografi
   "bg": "split-hv-inv",
   "isCover": true,
   "nextBg": "light-gray",
-  "logoStyle": "png-oficial",
+  "noLogo": true,
   "hashtagColor": "#FFFFFF",
   "arrowColor": "#D6DE23",
   "footerColor": "#000000",

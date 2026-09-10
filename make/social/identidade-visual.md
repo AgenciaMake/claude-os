@@ -98,22 +98,12 @@ Isso significa que pode-se especificar `font-size` agressivos no `config.json` s
 
 **Canto superior direito (top: 70px, right: 70px)**
 
-*Nas capas* → Selo circular `MAKE LEMON AD` (90px). Só nas capas — slides internos não levam logo.
+*Nas capas* → **removido do design system.** Capas não levam mais logo no topo — usar `"noLogo": true` no config de todo slide de capa.
 *Nos slides internos* → duplo chevron de continuidade (≫) indicando próximo slide.
 - Cor automática: branco em fundos escuros, preto/cinza em fundos claros
 - **Não aparece em posts de slide único** (`"noArrow": true` no config) nem no slide de CTA
 
-**Versão do logo conforme fundo:**
-
-| Fundo da capa | Versão do logo | Cor |
-|---|---|---|
-| Preto `#000000` | PNG oficial | Selo verde limão com texto preto cheio |
-| Cinza escuro `#434244` | PNG oficial | Selo verde limão com texto preto cheio |
-| **Verde limão `#D6DE23`** | **SVG vazado** | `fill: #000000` |
-| **Cinza claro `#DEDEDE`** | **SVG vazado** | `fill: #434244` |
-| Verde 02 `#00A652` | SVG vazado | `fill: #000000` |
-
-No `config.json`: `"logoStyle": "png-oficial"` (default) ou `"logoStyle": "svg-#XXXXXX"`.
+O logo continua aparecendo só no **slide de CTA** (ver seção 5), centralizado no rodapé do bloco de texto — sempre PNG oficial, já que o CTA é sempre fundo preto.
 
 **Rodapé (bottom: 70px, left: 70px, right: 70px)**
 
@@ -209,7 +199,7 @@ Selo circular `MAKE LEMON AD` em tipografia rústica/stamp (não é Rubik — é
 
 | Arquivo | Característica | Quando usar |
 |---|---|---|
-| [logo_make_oficial.png](identidade-visual/logos/logo_make_oficial.png) | **Preenchido.** Texto `MAKE LEMON AD` em preto sólido sobre círculo verde limão — igual ao logo do site. | **Comunicação oficial/institucional** — capas de carrossel, apresentações, rodapés, cases, anúncios. Quando o logo precisa aparecer exatamente como a marca se apresenta publicamente. |
+| [logo_make_oficial.png](identidade-visual/logos/logo_make_oficial.png) | **Preenchido.** Texto `MAKE LEMON AD` em preto sólido sobre círculo verde limão — igual ao logo do site. | **Comunicação oficial/institucional** — slide de CTA dos carrosséis (único lugar onde o logo aparece hoje), apresentações, cases, anúncios. Capas de carrossel não levam mais logo (`noLogo: true`). |
 | [logo_make.svg](identidade-visual/logos/logo_make.svg) | **Vazado.** Só o círculo verde é preenchido — o nome é espaço negativo (transparente), deixando o fundo atrás aparecer. Cor do círculo editável via `fill` no SVG. | **Arte customizada** — quando quer trocar cor (preto, branco, verde escuro), integrar o logo a um background colorido, sobrepor a fotos, ou criar variações pro post. |
 
 **Como mudar a cor do SVG:** editar a classe `.st0` no topo do arquivo (`fill: #d6de23` → trocar pro hex desejado). Ou aplicar via CSS/Figma.
@@ -233,7 +223,7 @@ Posts anteriores como referência estética. Usar pra calibrar o padrão antes d
 - [ ] Paleta respeitada (preto + verde limão como base)?
 - [ ] Margens 70px em todos os lados?
 - [ ] Numeração no canto superior esquerdo nos slides internos?
-- [ ] Label "Agência Boutique 360" ou selo circular na capa?
+- [ ] Label "Agência Boutique 360" na capa (sem logo — `noLogo: true`)?
 - [ ] `@make.lemonad` no rodapé?
 - [ ] Slogan `Menos Ruído. Mais Resultado.` no rodapé direito?
 - [ ] Duplo chevron (≫) nos slides internos de carrossel — **ausente em slide único** (`noArrow: true`)?

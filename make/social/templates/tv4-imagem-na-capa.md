@@ -23,7 +23,7 @@ Capa de carrossel com **imagem fotorrealista na metade superior** (gerada via Na
 | **Imagem (metade superior)** | `coverImage`: caminho relativo ao `config.json` do post. Ocupa 60% do topo. `background-size: cover; background-position: center` |
 | **Fade gradient inferior da imagem** | 280px de altura, `transparent → var(--black)` — transição suave (não corte seco) |
 | **Fade gradient superior da imagem** | 160px de altura, `rgba(0,0,0,0.45) → transparent` — escurece sutilmente o topo pra contraste do logo/hashtag |
-| **Logo** | PNG oficial (selo verde com texto preto cheio) — sobre a imagem com fade |
+| **Logo** | Removido do design system — capas não levam mais logo no topo (`noLogo: true`) |
 | **Hashtag** | Cor branco (default), 16px Light italic + Medium italic em "estratégica" — sobre a imagem com fade |
 | **Tipografia (metade inferior)** | 3 níveis em Rubik:<br>1. Headline: Bold 700 italic CAIXA ALTA verde limão (~128px, com auto-fit)<br>2. Sustentação: Bold 700 italic CAIXA ALTA branca (~96px, com auto-fit)<br>3. Subtítulo: Medium 500 CAIXA ALTA branca (~30px, regular case-feel) |
 | **Margens do bloco de texto** | `left: 50px`, `right: 110px` (padrão da grade Make) |
@@ -38,7 +38,7 @@ Capa de carrossel com **imagem fotorrealista na metade superior** (gerada via Na
   "bg": "black",
   "isCover": true,
   "nextBg": "light-gray",
-  "logoStyle": "png-oficial",
+  "noLogo": true,
   "coverImage": "cover-tv4.png",
   "content": "<div style='line-height:0.95;'><div style='font-size:128px;font-weight:700;color:var(--lime);letter-spacing:-3px;text-transform:uppercase;font-style:italic;line-height:0.96;'>{{HEADLINE}}</div><div style='font-size:96px;font-weight:700;color:var(--white);letter-spacing:-2px;text-transform:uppercase;font-style:italic;line-height:1.0;margin-top:22px;'>{{SUSTENTACAO}}</div><div style='font-size:30px;font-weight:500;color:var(--white);margin-top:30px;line-height:1.3;text-transform:uppercase;letter-spacing:0.5px;'>{{SUBTITULO}}</div></div>"
 }

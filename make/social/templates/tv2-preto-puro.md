@@ -17,7 +17,7 @@ Capa de carrossel 100% preta, totalmente tipográfica. Mistura **bold + italic r
 | Elemento | Valor |
 |---|---|
 | **Background** | `black` (preto puro `#000000`) |
-| **Logo** | PNG oficial (selo verde com texto preto cheio) — destaca sobre o preto |
+| **Logo** | Removido do design system — capas não levam mais logo no topo (`noLogo: true`) |
 | **Hashtag** | Cor branco (default), 16px Light italic + Medium italic em "estratégica" |
 | **Tipografia** | 3 pesos sobrepostos:<br>1. Setup: Bold 700, branco caixa mista<br>2. Sustentação: Italic Regular 400, branco caixa mista<br>3. Punchline: Bold 700 caixa alta, **outline branco** com stroke 4px<br>4. Acento de marca: 1 caractere ou palavra em **verde limão sólido** (o ponto final, ou um símbolo) |
 | **Subtítulo** | Rubik 44px Medium 500, branco com destaque em verde limão italic |
@@ -32,6 +32,7 @@ Capa de carrossel 100% preta, totalmente tipográfica. Mistura **bold + italic r
   "bg": "black",
   "isCover": true,
   "nextBg": "light-gray",
+  "noLogo": true,
   "content": "<div style='line-height:0.92;'><div style='font-size:150px;font-weight:700;color:var(--white);letter-spacing:-3px;'>{{LINHA_1}}</div><div style='font-size:150px;font-weight:400;font-style:italic;color:var(--white);letter-spacing:-3px;margin-top:6px;'>{{LINHA_2}}</div><div style='display:flex;align-items:baseline;gap:18px;margin-top:6px;'><span style='font-size:240px;font-weight:700;-webkit-text-stroke:4px var(--white);color:transparent;letter-spacing:-6px;text-transform:uppercase;line-height:0.9;font-style:italic;'>{{PUNCHLINE}}</span><span style='font-size:240px;font-weight:700;color:var(--lime);line-height:0.9;font-style:italic;'>{{ACENTO}}</span></div></div><div style='font-size:44px;font-weight:500;color:var(--white);margin-top:70px;line-height:1.2;'>{{SUBTITULO_PRE}} <span style='font-style:italic;font-weight:700;color:var(--lime);'>{{SUBTITULO_DESTAQUE}}</span>{{SUBTITULO_POS}}</div>"
 }
 ```
