@@ -1,7 +1,7 @@
 # CitraChat — Precificação, Custos e Benchmark Competitivo
 
 > Arquivo de referência permanente. Atualizar sempre que houver mudança de preço, custo ou benchmark.
-> Última revisão: 2026-09-02 (v4 — preços atualizados + Twilio SMS mapeado + análise de cupom beta)
+> Última revisão: 2026-09-15 (v5 — trocado Twilio SMS por Solvefy RCS, modelo virou add-on opcional cobrado via Stripe)
 
 ---
 
@@ -99,45 +99,42 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 
 ---
 
-## 5. Twilio SMS — modelo e custos
+## 5. Solvefy RCS — modelo e custos
 
-**Status:** ainda não assinado (set/2026). Usar como referência para planejamento e precificação.
+**Status:** cotação recebida (set/2026). Substitui o plano de usar Twilio SMS — Twilio fica como reserva, conta e crédito de US$20 mantidos parados, sem uso previsto.
 
-**Precificação Twilio para o Brasil (set/2026, confirmado via CSV oficial):**
-- Envio (outbound) para números BR: **US$ 0,0599/SMS** (~R$ 0,35/SMS ao câmbio R$5,80)
-- Todas as operadoras BR (Claro, TIM, Vivo, Oi, etc.) têm o mesmo preço
-- Número internacional para envio: **US$ 1,15/mês**
-- Fonte: tabela oficial Twilio SMS Pricing (CSV baixado set/2026)
+**Por que RCS e não SMS:**
+Cotação Solvefy trouxe os dois: **SMS a R$0,07** e **RCS a R$0,10**. RCS é mais rico (template, rastreamento de leitura, mídia) por só R$0,03 a mais — decisão de Bruno (15/09) foi ir de RCS direto, sem oferecer SMS como opção paralela.
 
-**O que o SMS faz no CitraChat:**
-Push de notificação para o time do cliente quando algo precisa de atenção — novo lead capturado, novo protocolo gerado, novo chamado aberto. **Não é resumo da conversa** — é apenas um aviso de que há algo novo no painel. Disponível apenas nos planos **Pro e Business** (não incluso no Starter).
+**O que a notificação faz no CitraChat:**
+Push para o time do cliente quando algo precisa de atenção — novo lead capturado, novo protocolo gerado, novo chamado aberto. **Não é resumo da conversa**, é só um aviso de que há algo novo no painel.
 
-O cliente configura quais eventos disparam o SMS (abertura de chat, lead qualificado, protocolo gerado). Quanto mais eventos ativos, mais SMS gerados por mês.
+**Mudança de modelo (15/09): de feature do plano para add-on opcional cobrado via Stripe**
 
-**Modelo de cobrança — cota incluída + excedente:**
+Antes o SMS entrava direto na cota do plano (Pro/Business) e o cliente não tinha escolha. Agora é **opt-in**:
 
-| Plano | SMS incluídos/mês | Custo absorbed (Twilio) | Excedente |
-|---|---|---|---|
-| Starter | ❌ não disponível | — | — |
-| Pro | 50 SMS/mês | ~R$ 17,50 | R$ 0,49/SMS |
-| Business | 150 SMS/mês | ~R$ 52,50 | R$ 0,49/SMS |
+1. Notificação por RCS não vem ativada por padrão em nenhum plano.
+2. Cliente ativa no painel (checkbox nas Configurações do agente ou da conta) e precisa aceitar os termos daquela cobrança específica antes de habilitar — mesmo padrão de aceite já usado no cadastro (`terms_accepted_at`/`terms_version`).
+3. Cada plano continua dando uma **cota incluída** sem custo extra ao cliente (mesmos números de antes: Pro 50/mês, Business 150/mês — agora em RCS, não SMS).
+4. **Acima da cota**, cada RCS é cobrado automaticamente via Stripe (add-on/metered), sem o cliente precisar fazer nada — é lançado na fatura dele.
 
-**Margem por SMS excedente:**
-- Custo Twilio: R$ 0,35/SMS
-- Preço ao cliente: R$ 0,49/SMS
-- Margem: R$ 0,14/SMS (~40%)
+**Preço ao cliente pelo excedente: R$ 0,15/RCS.**
 
-**Impacto na margem dos planos com cota incluída:**
-- Pro: (427 - 127) / 427 = **70,3% ✅**
-- Business: (2.197 - 683) / 2.197 = **68,9% ✅**
+**Margem no excedente:**
+- Custo Solvefy: R$ 0,10/RCS
+- Preço ao cliente: R$ 0,15/RCS
+- Margem: R$ 0,05/RCS (**33% — abaixo da meta de 70% usada no resto deste documento**; decisão consciente de Bruno, tratado como conveniência de baixo atrito e não como centro de lucro. Revisar se o volume de excedente crescer muito.)
 
-**Alternativas de provedor a avaliar (set/2026):**
-- **Disparo Pro** (disparopro.com.br) — empresa BR, R$0,07/SMS no plano pool de 5.000 SMS/mês (R$350). Até 5x mais barato que Twilio. Aguardando retorno comercial sobre API transacional.
-- **Solvefy** (solvefy.com/api) — API brasileira com 100 req/s, suporte a template e rastreamento. Preço sob cotação.
-- **Zenvia** — descartada (experiência ruim de suporte e produto confuso).
-- **AWS SNS** — preço equivalente ao Twilio para BR (~$0,06/SMS), sem vantagem.
+**Impacto na margem dos planos com a cota incluída (custo agora em RCS a R$0,10, não SMS a R$0,35):**
+- Pro: cota 50 × R$0,10 = R$5,00 (era R$17,50 com Twilio) → margem sobe pra **73,0%**
+- Business: cota 150 × R$0,10 = R$15,00 (era R$52,50 com Twilio) → margem sobe pra **70,6%** (antes ficava 68,9%, abaixo da meta — agora bate)
 
-> Começar com Twilio pelo lançamento. Renegociar com Disparo Pro assim que houver volume real de clientes.
+**Provedores avaliados (set/2026):**
+- **Solvefy** (solvefy.com/api) — API brasileira, 100 req/s, suporte a template e rastreamento. **Escolhido.** SMS R$0,07, RCS R$0,10.
+- Disparo Pro — R$0,07/SMS em pool de 5.000/mês (R$350). Descartado por não oferecer RCS na mesma cotação.
+- Zenvia — descartada (experiência ruim de suporte e produto confuso).
+- Twilio — descartado como provedor principal por custo (R$0,35/SMS, sem RCS competitivo). Conta mantida como reserva.
+- AWS SNS — preço equivalente ao Twilio para BR, sem vantagem.
 
 ---
 
@@ -161,7 +158,7 @@ O cliente configura quais eventos disparam o SMS (abertura de chat, lead qualifi
 | Extração PDF (0,5 arquivo × R$1,65) | 0,5 × R$1,65 | R$ 0,83 |
 | Save treino (2 saves × R$0,27) | 2 × R$0,27 | R$ 0,54 |
 | Infra rateada | — | R$ 15,00 |
-| SMS (não incluso no Starter) | — | — |
+| RCS (add-on opcional, não incluso no Starter) | — | — |
 | **COGS total** | | **R$ 44,37** |
 | **Receita** | | **R$ 167,00** |
 | **Margem bruta** | (167 - 44,37) / 167 | **73,4% ✅** |
@@ -176,10 +173,10 @@ O cliente configura quais eventos disparam o SMS (abertura de chat, lead qualifi
 | Extração PDF (1 arquivo × R$1,65) | 1 × R$1,65 | R$ 1,65 |
 | Save treino (6 saves × R$0,27) | 6 × R$0,27 | R$ 1,62 |
 | Infra rateada | — | R$ 15,00 |
-| SMS incluídos (50 × R$0,35) | 50 × R$0,35 | R$ 17,50 |
-| **COGS total** | | **R$ 127,89** |
+| RCS incluídos, se cliente ativar o add-on (50 × R$0,10) | 50 × R$0,10 | R$ 5,00 |
+| **COGS total** | | **R$ 115,39** |
 | **Receita** | | **R$ 427,00** |
-| **Margem bruta** | (427 - 127,89) / 427 | **70,1% ✅** |
+| **Margem bruta** | (427 - 115,39) / 427 | **73,0% ✅** |
 
 ### Business — R$ 2.197/mês
 
@@ -191,20 +188,22 @@ O cliente configura quais eventos disparam o SMS (abertura de chat, lead qualifi
 | Extração PDF (3 arquivos × R$1,65) | 3 × R$1,65 | R$ 4,95 |
 | Save treino (20 saves × R$0,27) | 20 × R$0,27 | R$ 5,40 |
 | Infra rateada | — | R$ 15,00 |
-| SMS incluídos (150 × R$0,35) | 150 × R$0,35 | R$ 52,50 |
-| **COGS total** | | **R$ 683,09** |
+| RCS incluídos, se cliente ativar o add-on (150 × R$0,10) | 150 × R$0,10 | R$ 15,00 |
+| **COGS total** | | **R$ 645,59** |
 | **Receita** | | **R$ 2.197,00** |
-| **Margem bruta** | (2.197 - 683,09) / 2.197 | **68,9% ✅** |
+| **Margem bruta** | (2.197 - 645,59) / 2.197 | **70,6% ✅** |
 
-### Resumo de margens (com SMS)
+### Resumo de margens (com RCS, se o cliente ativar o add-on)
 
 | Plano | Preço | COGS | Margem | Meta 70% |
 |---|---|---|---|---|
 | Starter | R$167 | R$44 | **73,4%** | ✅ |
-| Pro | R$427 | R$128 | **70,1%** | ✅ |
-| Business | R$2.197 | R$683 | **68,9%** | ⚠️ próximo |
+| Pro | R$427 | R$115 | **73,0%** | ✅ |
+| Business | R$2.197 | R$646 | **70,6%** | ✅ |
 
-> Pro atinge exatamente a meta. Business fica 1,1pp abaixo — aceitável, especialmente porque a maioria dos clientes Business não vai usar os 150 SMS incluídos todos os meses.
+> Com Solvefy RCS (R$0,10) em vez de Twilio SMS (R$0,35), Pro e Business sobem de margem — Business, que antes ficava 1,1pp abaixo da meta, agora bate os 70%. Como o RCS agora é opt-in, um cliente que não ativa o add-on nem paga esse custo — as margens acima são o piso (cenário em que todo mundo ativa e usa a cota cheia).
+>
+> O excedente (acima da cota) é cobrado automaticamente via Stripe a R$0,15/RCS, com margem de apenas 33% (custo R$0,10) — decisão consciente de tratar isso como conveniência, não como centro de lucro. Ver seção 5.
 
 ---
 
