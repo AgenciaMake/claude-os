@@ -101,19 +101,38 @@ O CitraChat tem 6 tipos de chamada à Anthropic, com modelos diferentes:
 
 ## 5. Solvefy RCS — modelo e custos
 
-**Status:** ⚠️ preço NÃO confirmado (16/09) — ver alerta abaixo. Substitui o plano de usar Twilio SMS — Twilio fica como reserva, conta e crédito de US$20 mantidos parados, sem uso previsto.
+**Status:** preço confirmado por Bruno como R$0,07/SMS e R$0,10/RCS (16/09) — usar esses
+valores nos cálculos de margem abaixo. Substitui o plano de usar Twilio SMS — Twilio
+fica como reserva, conta e crédito de US$20 mantidos parados, sem uso previsto.
 
-**⚠️ ALERTA — preço cotado (R$0,07 SMS / R$0,10 RCS) não bate com o self-service da conta.**
-Ao navegar o painel real da Solvefy (16/09), os preços exibidos em Canais/Créditos são
-outros: **SMS R$0,0780** e **RCS em 3 categorias** — Conversational R$0,2730,
-Non-conversational Basic R$0,0865, Non-conversational Single R$0,1313. Uma notificação
-de evento (lead capturado, protocolo aberto) é mensagem avulsa e provavelmente cai em
-"Non-conversational Single" ou "Basic", não em R$0,10. Bruno vai confirmar direto com o
-comercial da Solvefy se R$0,07/R$0,10 é um preço negociado à parte ou se a cotação
-verbal estava desalinhada com a conta. **Todos os números de margem abaixo usam
-R$0,10/RCS como placeholder e precisam ser recalculados quando o preço real for
-confirmado** — com R$0,1313, por exemplo, a margem do excedente (vendido a R$0,15) cai
-para R$0,02/msg (~13%).
+**Nota — divergência com o self-service, ainda de pé.** O self-service da conta (tela
+Canais/Créditos) mostra preços diferentes: SMS R$0,0780 e RCS em 3 categorias
+(Conversational R$0,2730, Non-conversational Basic R$0,0865, Non-conversational Single
+R$0,1313). R$0,07/R$0,10 provavelmente é um preço negociado à parte, mas vale confirmar
+com o suporte técnico **qual categoria de RCS esse preço negociado corresponde** — isso
+importa tecnicamente porque a categoria pode ser um parâmetro do payload de envio (ex:
+`content.type` ou algo equivalente), não só uma questão de cobrança.
+
+Outros achados do Cowork ao navegar o painel, relevantes para a implementação:
+- **Fallback RCS→SMS não é automático** — é opt-in por mensagem via campo `fallback`
+  no payload de envio. Sem esse campo, uma mensagem que falha simplesmente não chega —
+  vai ter que ser obrigatório em toda chamada. Iphone com iOS 18+ já suporta RCS nativo
+  (Apple adicionou em 2024), então o universo sem cobertura é menor do que parecia —
+  ainda sobra iPhone com iOS <18 e Android/operadora sem suporte a RCS — mas o fallback
+  continua necessário para esses casos.
+- **Cadastro do Agente RCS exige CNPJ real** e trava nas etapas 4/5 (onde provavelmente
+  está o prazo/processo de aprovação) sem ele. Hoje a conta tem 0 agentes RCS
+  provisionados — bloqueante para o lançamento até isso ser feito.
+- Não há API de consumo detalhado da Solvefy (só saldo agregado via
+  `GET /cpaas/v1/billing/credits`) — o CitraChat vai precisar manter sua própria
+  contagem de uso para exibir no painel do cliente.
+- Sem SLA ou cláusula de contrato visível no self-service — só existe fora do painel.
+- **Modelo de cobrança tem duas fases** (confirmado por Bruno 16/09): começa pré-pago
+  (crédito comprado antecipado, consumido pelos disparos) e, depois de validar/testar
+  tudo, migra para pós-pago (cobrado pelo uso real, sem depender de saldo). O painel só
+  documenta a parte pré-paga (`GET /cpaas/v1/billing/credits`, saldo pode ficar
+  negativo); a transição pré→pós-pago (automática por volume? manual, a pedido? tem
+  período híbrido?) não está documentada no self-service — perguntar ao suporte técnico.
 
 Outros achados do Cowork ao navegar o painel, relevantes para a implementação:
 - **Fallback RCS→SMS não é automático** — é opt-in por mensagem via campo `fallback`
