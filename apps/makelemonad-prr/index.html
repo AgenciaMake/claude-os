@@ -515,7 +515,9 @@ const RT_TTL = 5 * 60 * 1000 // 5 min cache para evitar HTTP 429
 const rtRanges = {} // date range custom por mês (key='YYYY-MM')
 let _rtCountdownTimer = null, _rtRetryAt = null, _rtRetryKey = null
 let wizardStep = 1, wizardIsModal = false
-let sortField = null, sortDir = 1
+// Ordenação padrão: data de início crescente. Escolha do utilizador persiste no browser.
+let sortField = 'inicio', sortDir = 1
+try{const _ss=JSON.parse(localStorage.getItem('planos_sort')||'null');if(_ss&&_ss.field){sortField=_ss.field;sortDir=_ss.dir===-1?-1:1}}catch{}
 
 let cfg = {
   cliente:'', agencia:'', moeda:'EUR',
@@ -1240,6 +1242,7 @@ function getRtTotals(key) {
 function toggleSort(field){
   if(sortField===field) sortDir*=-1
   else{sortField=field;sortDir=1}
+  try{localStorage.setItem('planos_sort',JSON.stringify({field:sortField,dir:sortDir}))}catch{}
   renderContent()
 }
 function sortKey(c,field){
