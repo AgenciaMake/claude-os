@@ -5,7 +5,7 @@ metadata:
   type: project
   node_type: memory
   originSessionId: 16f3a8cf-6c02-498f-adc5-4abc80036d4c
-  modified: 2026-09-15T15:35:15.635Z
+  modified: 2026-09-15T16:09:45.943Z
 ---
 
 Bruno pediu suporte a múltiplas pessoas por conta CitraChat (ex: a Diretto quer
@@ -25,8 +25,9 @@ separado de "pessoa logada".
     Assinatura/Conta (dados fiscais e pagamento).
   - **Treinamento** — Agentes, Treinar, Publicar, Integrações. Sem Assinatura,
     sem Conta.
-  - **Atendimento** — só Conversas e Protocolos (acompanhar e assumir
-    atendimento).
+  - **Atendimento** — Conversas, Protocolos e Métricas (Bruno, 15/09: "quem
+    vê o atendimento também consegue ver, são só métricas"). Sem Agentes,
+    Assinatura ou Conta.
 - Fica restrito aos planos **Pro e Business**, com limite de pessoas por
   plano — mesmo padrão que já existe para número de agentes (ver
   `PLAN_LIMITS` em `assinatura/page.tsx` e `admin/planos`). Sugestão inicial:
