@@ -117,8 +117,11 @@ para R$0,02/msg (~13%).
 
 Outros achados do Cowork ao navegar o painel, relevantes para a implementação:
 - **Fallback RCS→SMS não é automático** — é opt-in por mensagem via campo `fallback`
-  no payload de envio. Sem esse campo, uma mensagem que falha (ex: destinatário é
-  iPhone) simplesmente não chega. Vai ter que ser obrigatório em toda chamada.
+  no payload de envio. Sem esse campo, uma mensagem que falha simplesmente não chega —
+  vai ter que ser obrigatório em toda chamada. Iphone com iOS 18+ já suporta RCS nativo
+  (Apple adicionou em 2024), então o universo sem cobertura é menor do que parecia —
+  ainda sobra iPhone com iOS <18 e Android/operadora sem suporte a RCS — mas o fallback
+  continua necessário para esses casos.
 - **Cadastro do Agente RCS exige CNPJ real** e trava nas etapas 4/5 (onde provavelmente
   está o prazo/processo de aprovação) sem ele. Hoje a conta tem 0 agentes RCS
   provisionados — bloqueante para o lançamento até isso ser feito.
