@@ -40,3 +40,4 @@
 - [Google Drive createFolder — só aceita parent](feedback_google_drive_createfolder_parent.md) — driveId/parentId são ignorados silenciosamente, pasta cai em "Meu Drive"; sempre verificar local com search rawQuery depois de criar
 - [CitraDesk — regras de segurança do briefing_lookup](citradesk_briefing_lookup_regras_seguranca.md) — create/delete exigem auth, update é público só em doc existente; não é bug se escrita pública falhar em código inexistente
 - [CitraDesk — Projetos pontuais (Project)](citradesk_projetos_pontuais.md) — schema novo e diferente do Client recorrente no briefing_lookup; Alfred normaliza os dois via normalizeBriefingClient em firestore-client.js
+- [CitraChat — Roadmap Multiusuário](citrachat_roadmap_multiusuario.md) — convite de equipe com 3 papéis (Admin/Treinamento/Atendimento), restrito a Pro/Business; toca auth, ~25 RLS policies e o painel inteiro; nada implementado ainda
