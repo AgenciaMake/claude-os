@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: 16f3a8cf-6c02-498f-adc5-4abc80036d4c
-  modified: 2026-09-17T11:29:44.618Z
+  modified: 2026-09-17T11:30:54.256Z
 ---
 
 CitraChat (Next.js) está hospedado no **Vercel**, não Cloudflare.
@@ -29,7 +29,8 @@ troca de página, a ponto do Bruno clicar duas vezes achando que não tinha regi
 Medido antes/depois no mesmo dia: TTFB de página dinâmica caiu de ~0,81s para ~0,52s
 (medido de Portugal; o ganho para usuários brasileiros é maior, porque as duas pernas
 encurtam). Página estática de controle não mudou, confirmando que o ganho veio da
-proximidade com o banco.
+proximidade com o banco. **Bruno confirmou na prática**, no painel logado, que a troca
+entre as abas ficou rápida — não é só melhora de medição indireta.
 
 **How to apply:** não mover a região das funções para longe de `sa-east-1` sem antes
 medir — compute e banco devem ficar colados. Para verificar em que região uma função está
