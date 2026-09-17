@@ -1,5 +1,5 @@
 {
-  "model": "opus[1m]",
+  "model": "sonnet",
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
       "source": {
