@@ -242,13 +242,36 @@ explicitamente). Um lead que satisfaz as duas faz o modelo escolher uma a esmo, 
 Transformar a condição dominante em pré-requisito, em vez de mais um item de lista, foi o que
 estabilizou. **Medido: 2 de 5 estáveis antes → 8 de 8 depois.**
 
-**Bug do telefone (corrigido junto).** `extractContact` casava a primeira sequência de 11 dígitos do
-texto inteiro, e o agente pede CNPJ antes do telefone — então gravava pedaço de CNPJ como contato e
-descartava o celular que o lead dava depois. **Medido: 44 leads tinham celular real na conversa e
-ficaram sem número utilizável** (o time não conseguia ligar). Agora remove documentos longos primeiro,
-varre todas as ocorrências e valida o formato brasileiro (DDD ≥ 11; em 11 dígitos, o nono na frente).
-O histórico desses 44 **não foi recuperado** — os telefones certos estão nas transcrições salvas, dá
-para rodar um script de recuperação se o Bruno quiser.
+**Bug do telefone — extração passou a ser por CONTEXTO** (`4f68c18`, 2026-09-19).
+
+O problema: `extractContact` garimpava "coisas com cara de telefone" no texto inteiro da conversa.
+CNPJ, CPF e telefone são todos sequências de dígitos, e o agente **pede CNPJ antes do telefone** —
+então gravava pedaço de CNPJ como contato e descartava o celular dado depois. **Medido: 44 leads
+tinham celular real na conversa e ficaram sem número utilizável**; o time não conseguia ligar.
+
+Foi o Bruno quem derrubou a primeira tentativa de conserto: *"é estranho a pessoa dar telefone quando
+o agente pede CNPJ"*. Isso expôs que o erro era de **abordagem**, não da expressão regular. A versão
+intermediária (regex mais rigorosa) ainda produzia, medido nas 212 conversas: CPF gravado como
+telefone, número de 11 dígitos truncado para 10, e número internacional (`+244…`, `+393…`)
+transformado em número brasileiro falso.
+
+Como ficou: acha a pergunta do agente ("qual seu WhatsApp?"), pega a resposta do lead e valida.
+Três detalhes que os dados reais exigiram:
+- **Última** resposta válida da janela, não a primeira — o lead erra e reenvia corrigido na mensagem
+  seguinte (3 casos reais; num deles o próprio agente confirmou o número corrigido em voz alta).
+- Número internacional preservado como veio, em vez de virar brasileiro inventado.
+- Lookarounds de fronteira na regex de reserva, senão ela morde 10 dígitos de um número de 11.
+
+A regex ficou só como **reserva**, para quando o lead informa sem ter sido perguntado. Dos 108
+telefones encontrados na base, **97 vêm do contexto** e 6 da reserva.
+
+**Lição que vale além deste bug:** quando vários tipos de dado têm o mesmo formato (dígitos), validar
+o formato não resolve — é preciso usar o contexto que diz o que aquele dado é. Nenhuma regex ia
+distinguir CNPJ de telefone; a pergunta do agente distingue.
+
+O histórico dos 44 **não foi recuperado** — os telefones certos estão nas transcrições salvas, dá
+para rodar um script de recuperação (agora com a lógica por contexto, que é bem mais precisa) se o
+Bruno quiser.
 
 **Lição de método, repetida três vezes nesta sessão:** inferi o "resultado esperado" a partir do
 resumo de uma linha em vez de ler a transcrição, e errei nas três (Rafaela, Stephanie, rafa). No caso
