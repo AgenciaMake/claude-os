@@ -159,16 +159,61 @@ produção da conta Diretto, não só por leitura de código:
   tinha ido no banco buscar números que não apareciam em lugar nenhum da tela. **Regra de design pra
   esse painel a partir de agora: toda taxa/percentual precisa ter os números que a compõem visíveis
   como cards ao lado, nunca só a explicação por fora.**
-- **Achado de produto ainda sem ação (levar pro roadmap):** o critério de qualificação de lead
-  (prompt compartilhado em `src/lib/send-lead-notification.ts`, usado por TODO agente de
-  captação/vendas de TODOS os clientes, não só Diretto) trata objeção de preço/valor mínimo como
-  "sem intenção de compra" mesmo quando a conversa deixa um follow-up combinado com o time. Validado
-  com 3 casos reais do João (Diretto) marcados "não qualificado" apesar do lead estar "aguardando
-  contato do consultor" — pela régua do próprio Bruno, isso deveria contar como qualificado. Não
-  existe hoje nenhum controle no painel pra ajustar esse critério por agente/cliente — é fixo no
-  prompt, produto inteiro. Proposta pendente de aprovação do Bruno: ajustar o prompt pra "objeção de
-  preço com follow-up combinado conta como qualificado; só desqualificar se descartado de fato (sem
-  perfil, sem contato possível, ou recusa explícita)".
+## Qualificação de lead — reescrita (2026-09-19, no ar em `d89dfc3`)
+
+**O problema que originou:** o evento `lead_qualified` alimenta Google Ads, Meta e GTM — e disparava
+no instante em que a conversa fechava, **sem nenhuma avaliação por trás**. Todo lead que chegava ao
+fim virava "qualificado" para a mídia paga, fosse um comprador ativo ou alguém sem CNPJ que o agente
+já tinha descartado. A análise de qualidade existia, mas rodava 5 minutos depois e só alimentava o
+painel e o filtro do e-mail — nunca chegava a plataforma nenhuma.
+
+**Por que não bastou mover o evento para os 5 minutos:** naquele momento o navegador do visitante já
+fechou, e Google Ads, GTM, OpenAI e os demais pixels **só existem no navegador**. Só Meta CAPI e
+webhook são server-to-server. Por isso a avaliação passou a acontecer **no fechamento**, em paralelo
+à mensagem de despedida, com o navegador ainda aberto.
+
+**O que mudou:**
+- `quickQualify()` em `send-lead-notification.ts`: avaliação enxuta (Sim/Não) no fechamento, separada
+  da análise completa para não atrasar a resposta ao visitante.
+- `/api/qualify-lead` + `/api/qualify-lead-relay` (relay porque o `CRON_SECRET` não pode ir ao
+  navegador — mesmo padrão do `notify-lead-relay`).
+- **A qualificação passa a ler o treinamento do próprio agente** (`training_context` → seções
+  `CLIENTE IDEAL (ICP)`, `ANTI-ICP`, `REGRAS DE COMPORTAMENTO`), em vez de uma regra genérica igual
+  para todos os clientes do produto. Antes, o `send-lead-notification.ts` não lia `training_context`
+  em lugar nenhum: a IA julgava o lead da Diretto sem saber que a Diretto é B2B e tem pedido mínimo
+  por região. Testado contra o treinamento real dos 3 agentes: extrai de 2,3k a 5,1k chars de
+  critério por agente.
+- **Decisão de risco assimétrica, de propósito:** o e-mail **falha em aberto** (se a IA não consegue
+  julgar, o e-mail sai mesmo em conta com filtro "só qualificados" — perder o lead de vista é pior
+  que um e-mail a mais); o evento de mídia **falha em fechado** (um falso "qualificado" suja a
+  otimização de campanha e custa dinheiro).
+- Corrigido bug em que qualquer resposta fora do formato virava `qualificado = true`. E o painel
+  passa a gravar `null` (desconhecido) quando a avaliação é inconclusiva, em vez de mostrar como
+  "não qualificado" um lead que ninguém conseguiu julgar.
+- **Fluxo de e-mail intacto:** 5 min após o encerramento, +5 min a cada mensagem nova, varredura de
+  30 min para conversa abandonada. (O Bruno lembrava "10 ou 20 min" para inatividade — é 30.)
+
+**Onde o critério por empresa é configurado:** no treinamento que já existe por agente, não em campo
+novo. Decisão consciente — o `saveTrainingContext` regenera o documento inteiro passando o anterior
+como base, então guardar o critério numa seção do mesmo documento faz os dois se enxergarem
+automaticamente. Um campo separado é justamente o que quebraria essa conexão.
+
+**Contexto de mídia da Diretto (levantado no caminho, ainda pendente do lado dele):**
+- `google_ads_conversion_id` **não está configurado em nenhum dos 3 agentes** — o Google não recebe
+  conversão do CitraChat hoje, independentemente desse trabalho.
+- Meta (pixel + token de CAPI) só está na **Lara** (recepção). O **João**, que é o agente que
+  realmente capta lead, não tem pixel — então não envia nada para a Meta.
+- `gclid`/`fbclid` **não são capturados em lugar nenhum** do código. Sem isso, conversão offline para
+  o Google Ads (a única via possível depois que o navegador fecha) não é viável — seria projeto
+  próprio: capturar o click ID na abertura do chat, guardar na conversa e integrar a API do Google.
+- Tags de evento por agente configuradas pelo Bruno em 19/09: Eduardo=`sac`, João=`vendas`,
+  Lara=`atendimento`. **Atenção:** isso muda o nome do evento no dataLayer
+  (`citrachat_lead_qualified` → `citrachat_vendas_lead_qualified`), então triggers antigos do GTM
+  param de disparar. O Bruno está reconfigurando o GTM (container `GTM-NWCKHMTH`) por conta própria.
+- **Risco não confirmado:** a ponte do widget chama `gtag('event', ...)` direto para o GA4 sempre que
+  há measurement ID, **sem checar se já existe GTM** (diferente do caminho sem widget, que só faz
+  isso quando não há GTM). Como os 3 agentes têm GA4 **e** GTM, pode haver contagem dobrada no GA4.
+  Não verificado em produção.
 
 ### Performance do painel admin (2026-09-17 — resolvido, Bruno confirmou "mudou super bem")
 Causa da demora de 2-3s trocando entre Agentes/Métricas/Conversas/Protocolos:
