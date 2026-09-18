@@ -196,6 +196,43 @@ webhook são server-to-server. Por isso a avaliação passou a acontecer **no fe
 - **Fluxo de e-mail intacto:** 5 min após o encerramento, +5 min a cada mensagem nova, varredura de
   30 min para conversa abandonada. (O Bruno lembrava "10 ou 20 min" para inatividade — é 30.)
 
+### Correção do veredito instável (2026-09-19, `cac0097`)
+
+Validação contra **9 conversas reais** do João (Diretto) expôs que a primeira versão que subi era
+**instável**: rodando o mesmo lead 3 vezes seguidas, o veredito alternava entre Sim e Não. Só 2 de 5
+casos davam resposta consistente. Como é esse veredito que libera o evento de mídia, o disparo para
+Google Ads/GTM estava virando **sorteio** em qualquer lead sutil. Duas causas, ambas minhas:
+
+1. **Pedir UMA palavra com `max_tokens: 8`** não deixa espaço para avaliar uma conversa longa — o
+   modelo responde por impulso e ancora no último trecho lido. Agora escreve o motivo citando o
+   trecho decisivo e só então o veredito (200 tokens).
+2. **Contradição dentro da própria regra que escrevi:** uma frase dizia que objeção de valor mínimo
+   NÃO desqualifica se ficou combinado retomar contato, e a seguinte mandava desqualificar quem
+   "recusou explicitamente". Um lead que recusa o pedido mínimo satisfaz as duas → o modelo escolhia
+   uma a esmo. Agora está explícito que **recusar condição comercial (preço, pedido mínimo, prazo)
+   não é recusar o atendimento**.
+
+Também entrou instrução anti-alucinação: numa execução o modelo citou como decisiva uma frase que
+**não existe** na conversa, para justificar o veredito.
+
+O mesmo critério passou a valer nos **dois** lugares (avaliação do fechamento e análise completa dos
+5 min), que antes usavam textos diferentes e podiam discordar sobre o mesmo lead.
+
+**Resultado medido** (prompt extraído do próprio código-fonte, 3 execuções por conversa):
+2/5 estáveis antes → **8/8 estáveis e corretos** depois. Os 4 leads já marcados como qualificados
+continuaram qualificados — sem correção em excesso.
+
+**Lição de método, para não repetir:** inferi duas vezes o "resultado esperado" a partir do resumo de
+uma linha em vez de ler a conversa inteira, e errei nas duas (Rafaela e Stephanie). Ao validar
+julgamento de IA, a referência tem que vir da transcrição real — senão o teste calibra em cima de uma
+suposição errada e a conclusão vira ruído.
+
+**Questão de produto em aberto (decisão do Bruno):** lead que **abandona no meio da qualificação**
+(caso Stephanie — deu nome e cidade, ouviu o pedido mínimo e sumiu sem responder) é genuinamente
+ambíguo, e o veredito oscila nele porque não há resposta certa óbvia. Não existe hoje regra explícita
+para essa categoria; o modelo improvisa. Vale decidir se abandono conta como qualificado, não
+qualificado, ou como um terceiro estado.
+
 **Onde o critério por empresa é configurado:** no treinamento que já existe por agente, não em campo
 novo. Decisão consciente — o `saveTrainingContext` regenera o documento inteiro passando o anterior
 como base, então guardar o critério numa seção do mesmo documento faz os dois se enxergarem
