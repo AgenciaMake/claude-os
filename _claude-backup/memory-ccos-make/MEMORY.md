@@ -7,7 +7,7 @@
 - [Citra — decisões de arquitetura SaaS](citra_decisoes_arquitetura.md) — Firebase unificado, multi-tenant via path, banco fica em US por enquanto, Make = primeira agência cliente
 - [CitraDesk pausado em 2026-04-27](citradesk_pausado_2026-04-27.md) — Fase 0 e 1.1/1.4/1.5 concluídas; Fase 1.2-1.8 (multi-tenancy + Cloud Function) pendentes. Bruno priorizou CitraChat. Como retomar.
 - [Agentes CitraChat jamais citam nome de pessoa](feedback_citrachat_jamais_cita_nomes.md) — regra absoluta: usar "o time", "pessoa responsável", nunca individualizar membros do cliente
-- [CitraChat — estado atual e próximos passos](citrachat_estado_atual.md) — snapshot vivo (atualizado diariamente). Onde paramos, o que tá no ar, o que vem a seguir. LER PRIMEIRO em qualquer sessão de CitraChat
+- [CitraChat — estado atual e próximos passos](citrachat_estado_atual.md) — snapshot vivo, reescrito 2026-09-18. Onde paramos, o que tá no ar, o que vem a seguir. LER PRIMEIRO em qualquer sessão de CitraChat
 - [CitraChat — Roadmap Soluções](citrachat_roadmap_solucoes.md) — dropdown "Soluções" no nav com páginas por tipo de agente (SAC, captação, suporte, recepção); home ganha seção cobrindo todos
 - [CitraChat — benchmark vs Leadster e Octadesk](citrachat_benchmark_concorrentes.md) — preços reais, gaps de feature, vantagens do CitraChat, roadmap priorizado e copies de comparação
 - [Posts e copies não podem ter marcas de IA](feedback_posts_sem_marcas_ia.md) — proibido travessão, markdown, clichês de IA em qualquer copy público da Make ou de cliente
@@ -41,3 +41,4 @@
 - [CitraDesk — regras de segurança do briefing_lookup](citradesk_briefing_lookup_regras_seguranca.md) — create/delete exigem auth, update é público só em doc existente; não é bug se escrita pública falhar em código inexistente
 - [CitraDesk — Projetos pontuais (Project)](citradesk_projetos_pontuais.md) — schema novo e diferente do Client recorrente no briefing_lookup; Alfred normaliza os dois via normalizeBriefingClient em firestore-client.js
 - [CitraChat — Roadmap Multiusuário](citrachat_roadmap_multiusuario.md) — convite de equipe com 3 papéis (Admin/Treinamento/Atendimento), restrito a Pro/Business; toca auth, ~25 RLS policies e o painel inteiro; nada implementado ainda
+- [CitraChat — sempre atualizar a memória](feedback_citrachat_memoria_continua.md) — regra permanente: atualizar citrachat_estado_atual.md a cada trabalho relevante, nunca deixar ficar velho como aconteceu por 2 meses
