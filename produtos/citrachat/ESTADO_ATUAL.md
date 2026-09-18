@@ -115,6 +115,28 @@ produção da conta Diretto, não só por leitura de código:
   distinguir teste de caso real automaticamente.
 - **Pendente, não feito ainda:** mais gráficos por agente (pedido explícito do Bruno), deixado pra
   próxima rodada depois dele validar que os números atuais fazem sentido.
+- **Taxa de resolução e autonomia corrigidas de novo (2026-09-18, mesmo dia, rodada seguinte).**
+  Bruno reportou a taxa do funil saltando 100% → 0% → 33,3% ao trocar o período, com "resolvidos"/
+  "fechados" praticamente estáveis (3/3, 1/1, 3/3) ao lado — confirmado no banco: a fórmula dividia
+  "resolvidos dentro do grupo aberto no período" (por `created_at`), população sem relação com o que
+  os cards de resolvidos/fechados mostram (por `resolved_at`). Mesma causa raiz do bug de 275% já
+  corrigido antes, só que também presente no card do funil geral e na autonomia agregada do SAC — só
+  a tabela por agente tinha sido corrigida na rodada anterior. Agora os três (funil, autonomia
+  agregada, autonomia por agente) usam sempre a própria contagem de "fechados" visível ao lado,
+  dividida por ela mesma + o que abriu no período e ainda não foi resolvido. **Lição:** quando a mesma
+  fórmula errada é copiada em mais de um lugar, corrigir um local não basta — procurar todas as
+  ocorrências do padrão antes de considerar resolvido.
+- Cards "Qualificados"/"Não qualificados" ganharam legenda explicando a lacuna (maioria dos leads sem
+  avaliação): `lead_qualified` só existe para conversas fechadas a partir de 15/09 (migration 053), a
+  notificação dispara uma única vez por sessão, e sessões anteriores a essa data já foram notificadas
+  sem essa avaliação — não são reclassificadas retroativamente. Confirmado no banco (não é bug):
+  100% das conversas com o campo preenchido começam em 15/09+; 0% das sem preenchimento estão presas
+  em fila.
+
+### Painel de Agentes
+- Link público do agente (linha 3 do card, embaixo do nome) agora abre em nova aba ao clicar e tem
+  botão de copiar ao lado (2026-09-18) — antes era só texto estático dentro do card inteiro, que era
+  clicável só pra ir pra aba de configuração.
 
 ### Performance do painel admin (2026-09-17 — resolvido, Bruno confirmou "mudou super bem")
 Causa da demora de 2-3s trocando entre Agentes/Métricas/Conversas/Protocolos:
