@@ -183,10 +183,13 @@ webhook são server-to-server. Por isso a avaliação passou a acontecer **no fe
   em lugar nenhum: a IA julgava o lead da Diretto sem saber que a Diretto é B2B e tem pedido mínimo
   por região. Testado contra o treinamento real dos 3 agentes: extrai de 2,3k a 5,1k chars de
   critério por agente.
-- **Decisão de risco assimétrica, de propósito:** o e-mail **falha em aberto** (se a IA não consegue
-  julgar, o e-mail sai mesmo em conta com filtro "só qualificados" — perder o lead de vista é pior
-  que um e-mail a mais); o evento de mídia **falha em fechado** (um falso "qualificado" suja a
-  otimização de campanha e custa dinheiro).
+- **Avaliação inconclusiva não gera e-mail em conta com filtro "só qualificados"** (decisão do Bruno,
+  19/09, corrigindo uma escolha minha anterior de "falhar em aberto"). Raciocínio dele, e está certo:
+  o lead não se perde nisso — a conversa continua no painel; o e-mail é notificação, não registro.
+  Mandar assim mesmo violaria a configuração explícita do cliente. Fica um `console.error` quando a
+  avaliação é inconclusiva, senão uma quebra de formato faria os e-mails sumirem sem alerta nenhum.
+  O evento de mídia também **falha em fechado** (um falso "qualificado" suja a otimização e custa
+  dinheiro de campanha).
 - Corrigido bug em que qualquer resposta fora do formato virava `qualificado = true`. E o painel
   passa a gravar `null` (desconhecido) quando a avaliação é inconclusiva, em vez de mostrar como
   "não qualificado" um lead que ninguém conseguiu julgar.
@@ -199,10 +202,13 @@ como base, então guardar o critério numa seção do mesmo documento faz os doi
 automaticamente. Um campo separado é justamente o que quebraria essa conexão.
 
 **Contexto de mídia da Diretto (levantado no caminho, ainda pendente do lado dele):**
-- `google_ads_conversion_id` **não está configurado em nenhum dos 3 agentes** — o Google não recebe
-  conversão do CitraChat hoje, independentemente desse trabalho.
-- Meta (pixel + token de CAPI) só está na **Lara** (recepção). O **João**, que é o agente que
-  realmente capta lead, não tem pixel — então não envia nada para a Meta.
+- **O Google Ads recebe a conversão via GTM, não pela configuração do CitraChat.** `google_ads_conversion_id`
+  está vazio nos 3 agentes **de propósito**: esse campo só serve para o disparo direto via `gtag`
+  quando NÃO há GTM. Como a Diretto tem GTM lendo o `dataLayer`, é o GTM que alimenta o Google Ads a
+  partir do evento `citrachat_{tag}_lead_qualified`. (Registro de erro meu: cheguei a afirmar que o
+  Google não recebia nada por causa do campo vazio — errado, o Bruno corrigiu.)
+- Meta (pixel + token de CAPI) só está na **Lara** (recepção); o **João**, que é quem capta lead, não
+  tem pixel. Mas **não há campanha de Meta rodando**, então isso não é lacuna ativa hoje.
 - `gclid`/`fbclid` **não são capturados em lugar nenhum** do código. Sem isso, conversão offline para
   o Google Ads (a única via possível depois que o navegador fecha) não é viável — seria projeto
   próprio: capturar o click ID na abertura do chat, guardar na conversa e integrar a API do Google.
