@@ -1,0 +1,192 @@
+# CitraChat — Estado Atual
+
+> Snapshot vivo do produto: onde paramos, o que está no ar, o que vem a seguir.
+> **Ler antes de qualquer trabalho novo no CitraChat.** Atualizar a cada trabalho relevante —
+> bug corrigido, feature nova, decisão de produto, migration aplicada, investigação que mudou o
+> entendimento de como algo funciona. Não deixar ficar velho: este arquivo ficou 2 meses parado
+> (13/07 → 18/09/2026) enquanto sessões inteiras de trabalho aconteciam sem ser registradas — é
+> exatamente o problema que ele existe para evitar.
+
+**Última atualização: 2026-09-18**
+
+---
+
+## O que está no ar (produção)
+
+**Branch `plataforma` → citra.chat** — branch de produção. Todo push vai direto ao Vercel sem promote manual.
+
+Stack: Next.js (App Router) + Anthropic SDK + Supabase + Tailwind. Repo: `AgenciaMake/citrachat`.
+
+**Infraestrutura (região, 2026-09-17):** Supabase em `sa-east-1` (São Paulo, ref
+`lkcwykalylphhngjivva`). Funções Vercel fixadas em **gru1 (São Paulo)** via `vercel.json`
+(`regions: ["gru1"]`) — antes rodavam em `iad1` (Washington), e cada consulta ao banco
+atravessava o Atlântico. Para verificar em produção em que região uma função está rodando:
+olhar o header `x-vercel-id` de uma rota dinâmica — formato `<POP da borda>::<região da
+função>::<id>`, então `cdg1::gru1::...` confirma função em São Paulo.
+
+**Modelo de IA (fixos, não atualizar sem aprovação explícita do Bruno):**
+- Chat público: Claude Haiku 4.5
+- Treino/análise/resumo de lead: Claude Sonnet 4.6
+- Tool use (`browse_url`): Haiku 4.5 com loop até 2 rounds
+- **Opus é proibido em qualquer chamada do CitraChat.**
+
+---
+
+## Funcionalidades no ar
+
+### Chat público
+- Balões estilo WhatsApp, status de mensagem, typing dots, anexos (imagem/PDF até 5MB).
+- Upload de arquivo por visitante (sem login) funciona via `agentId` publicado, não via sessão logada.
+- Agente ativo (pós-transferência) persiste em `localStorage` por sessão — refresh não reseta pra recepção.
+- Transferência entre agentes preserva contexto: `knownVisitorData()` injeta no prompt o que a
+  recepção já coletou, pra o especialista não perguntar de novo.
+- Agente sem destino de transferência configurado avisa isso ao visitante em vez de prometer
+  transferir e não fazer.
+- **Formatação proibida por código, não só por prompt:** `stripEmDash()` em `src/app/api/chat/route.ts`
+  remove qualquer travessão da resposta antes de enviar ao visitante — o prompt já proibia
+  ("nunca, em nenhuma hipótese"), e o modelo (Haiku) quebrava a regra em produção mesmo assim.
+  Termos em inglês seguem só por regra de prompt por decisão do Bruno (2026-09-16): ele reforça no
+  treinamento manualmente, sem camada de código.
+- Extração de dados coletados (nome, telefone, email) é feita pela IA e **verificada pelo servidor**
+  contra as mensagens reais do visitante (`verifiedCollected` em `src/lib/closure-fields.ts`) — o
+  agente não pode inventar que coletou algo que o visitante não escreveu.
+
+### Agente / multi-agente
+- URL pública: `citra.chat/{company_slug}/{agent_slug}`. Limite por plano: Starter=1, Pro=3, Business=10.
+- Bases de dados consultáveis (planilha .xlsx/.csv): upload processa linha a linha, mas **não guarda
+  o arquivo original** — só existe botão de **download** desde 2026-09-16 (reconstrói o .xlsx a partir
+  das linhas salvas no banco). Cuidado ao tocar nesse endpoint: nome de arquivo acentuado quebra
+  `Content-Disposition` com erro 500 se não sanitizar pra ASCII (bug real já corrigido ali).
+
+### Protocolos (SAC)
+- Painel de Protocolos tem paridade com o de Conversas: leitura de imagens, nome do cliente, cadeia
+  de agentes com divisor visual de transferência, hover verde (`#d9fdd3`), reenvio de e-mail,
+  exportação em PDF, "Carregar mais" (paginação além do corte de 100 linhas), badge de número de
+  conversa.
+- **Protocolo e conversa têm exclusão em cascata nos dois sentidos** (2026-09-17): deletar uma
+  conversa com protocolo apaga o protocolo também (antes ficava órfão pra sempre — não existe FK
+  entre as duas tabelas, só `session_id` sem cascade); deletar um protocolo apaga a conversa
+  vinculada. O diálogo de confirmação mostra o status do protocolo antes de confirmar a exclusão.
+- `gerar_protocolo` é **idempotente por sessão** (2026-09-15): antes, um retry de rede ou o modelo
+  chamando a ferramenta duas vezes na mesma conversa gerava dois protocolos pro mesmo caso. Agora
+  devolve o já existente em vez de duplicar.
+- Protocolo tem coluna `resolved_at` (migration 054, 2026-09-17) — a data em que foi de fato
+  resolvido, separada de `created_at` (quando foi aberto). Sem isso, "resolvidos no período"
+  filtrava pela data de abertura e escondia trabalho recente feito em casos antigos (bug real,
+  validado contra produção: 11 protocolos resolvidos apareciam como só 4). Grava só na primeira vez
+  que o status fecha; reabrir o caso limpa a data.
+
+### Painel de Métricas — reescrito e corrigido em profundidade (2026-09-17/18)
+Bateria de bugs reais encontrados e corrigidos nesta janela, todos confirmados contra o banco de
+produção da conta Diretto, não só por leitura de código:
+
+- Blocos por tipo de agente (Recepção / Leads / SAC / Agendamento) — cada bloco só aparece se a
+  conta tem esse tipo de agente.
+- "Precisa de ação" saiu do topo do painel (poluía a leitura antes de qualquer métrica) e foi para
+  dentro da seção SAC, que é o contexto real dessas pendências. Conta sem agente de SAC ainda vê o
+  bloco, em seção própria.
+- Funil do visitante ganhou uma 2ª linha de cards: leads capturados, problemas resolvidos, casos
+  fechados, taxa de resolução — calculados independente de quais grupos de agente a conta tem.
+- **`resolved_at` separou duas perguntas que usavam a mesma data por engano:** "abertos no período"
+  (por `created_at`) vs. "resolvidos no período" (por `resolved_at`). A autonomia por agente tinha
+  um bug de 275% (dividia dois conjuntos diferentes — resolvidos-no-período por abertos-no-período —
+  quando deveria dividir dentro do MESMO conjunto de abertos); corrigido.
+- **`human_requested` era descartado silenciosamente.** O chat disparava o evento corretamente (a
+  regex `HUMAN_RE` em `ChatInterface.tsx` já detectava certo), mas `ChatPage.tsx` só encaminhava 2
+  tipos de evento pro banco (`chat_started`→`conversation_started`, `lead_qualified`→`conversion`) —
+  todo o resto, incluindo `human_requested`, morria ali antes de chegar ao Supabase. Corrigido; o
+  card "Pediram humano" começa do zero a partir de agora, sem histórico pra recuperar (o evento nunca
+  foi salvo desde que o produto existe). A regex `HUMAN_RE` também foi ampliada — deixava passar
+  frases naturais como "me passa pra um humano" e "tem alguém de verdade aí?".
+- **Migration `021_human_takeover.sql` nunca tinha rodado em produção**, apesar de existir no repo
+  desde muito antes. Sem as colunas `human_takeover`/`takeover_at`, o SELECT da página de métricas
+  por agente falhava inteiro com erro 400 — e isso zerava em silêncio qualificados, motivos de
+  contato e mais. Aplicada em produção em 2026-09-18.
+- Qualificação de lead (`lead_qualified`, `contact_reason`) e resumo (`lead_summary`) já são gerados
+  ricos pela IA no fechamento da conversa (`src/lib/send-lead-notification.ts`) — o prompt também
+  gera `qualificationReason` (por que foi/não foi qualificado) e `nextStep` (ação concreta pro
+  time), mas **esses dois campos são descartados hoje**, só vão pro corpo do e-mail de notificação.
+  Se for enriquecer o painel de novo, é natural persistir esses dois também.
+- **Pendente, adiado por decisão do próprio Bruno:** "tempo até resolver" mostra ~29 dias porque
+  vários protocolos de teste antigos (da própria Diretto) foram fechados manualmente numa limpeza em
+  2026-09-17 — a data ficou tecnicamente correta (foi isso que de fato aconteceu), só que distorce a
+  média de atendimento real. Bruno vai apagar os protocolos de teste manualmente, um por um, pelo
+  botão de deletar do painel. Decisão explícita: não fazer isso por código, porque não dá pra
+  distinguir teste de caso real automaticamente.
+- **Pendente, não feito ainda:** mais gráficos por agente (pedido explícito do Bruno), deixado pra
+  próxima rodada depois dele validar que os números atuais fazem sentido.
+
+### Performance do painel admin (2026-09-17 — resolvido, Bruno confirmou "mudou super bem")
+Causa da demora de 2-3s trocando entre Agentes/Métricas/Conversas/Protocolos:
+1. Funções rodando em Washington, banco em São Paulo (ver Infraestrutura acima) — a maior parte do ganho.
+2. `auth.getUser()` era chamado 2x por navegação (layout + página) — cada chamada é uma ida e volta
+   real ao servidor de Auth do Supabase, não é local. Corrigido com `getAuthedUser()` em
+   `src/lib/supabase/get-user.ts`, usando `cache()` do React pra deduplicar por request.
+3. Mesma duplicação na leitura da tabela `profiles` (layout lia a linha inteira, cada página lia de
+   novo só pra pegar o fuso horário). Corrigido com `getCurrentProfile()` /
+   `getTimezoneForCurrentUser()` em `src/lib/supabase/get-profile.ts`.
+4. `loading.tsx` adicionado em Conversas/Protocolos/Métricas/Agentes — sem isso o clique não dava
+   nenhuma resposta visual até o servidor terminar de responder, e parecia que o clique não tinha
+   registrado (chegando a clicar duas vezes).
+
+### Notificações — WhatsApp (no ar) e SMS/RCS (decidido, não implementado)
+- **WhatsApp:** implementado via Meta Graph API como add-on pago. Arquivos: `src/lib/whatsapp.ts` +
+  webhook route + `ContaForm` + `conta/actions`.
+- **RCS/SMS (Solvefy) — decidido, mas ainda não implementado.** Modelo: opt-in (não vem ativado em
+  nenhum plano por padrão), cliente precisa marcar checkbox + aceitar termos específicos no painel,
+  cota incluída por plano (Pro 50/mês, Business 150/mês em RCS), excedente cobrado automaticamente
+  via Stripe a R$0,15/mensagem. Canal escolhido: **RCS**, não SMS puro (RCS já funciona em iPhone com
+  iOS 18+, mas ainda precisa de fallback pra SMS pra quem não tem — esse fallback NÃO é automático na
+  API da Solvefy, é opt-in por mensagem via campo `fallback` no payload de envio).
+  **Bloqueios antes de codar:**
+  - Preço negociado (R$0,07 SMS / R$0,10 RCS) não bate com o self-service da própria conta Solvefy
+    (lá aparece R$0,078 SMS e RCS em 3 categorias: R$0,0865 a R$0,2730). Bruno vai confirmar com o
+    comercial da Solvefy qual categoria corresponde ao preço negociado.
+  - Cadastro do Agente RCS exige CNPJ real e trava sem ele nas etapas 4/5 — não se sabe ainda o
+    prazo nem quem aprova (a própria Solvefy ou Google/operadora).
+  - Transição do modelo pré-pago pro pós-pago não está documentada no self-service.
+  - Detalhe completo, preços exatos e achados técnicos do Cowork:
+    `produtos/citrachat/briefings/06_precificacao_e_custos.md` (v5, seção 5).
+- Twilio (SMS) foi descartado como provedor principal por custo (R$0,35/SMS vs Solvefy R$0,07-0,10);
+  a conta e o crédito de US$20 ficam parados, sem uso previsto.
+
+### Segurança e legal
+- Checkbox de aceite de termos obrigatório no cadastro (migration 052, campo `TERMS_VERSION`).
+- Rascunho de blindagem jurídica (indenização por dano causado por agente de cliente) existe em
+  `produtos/citrachat/briefings/11_blindagem_juridica_responsabilidade.md`, **não publicado**,
+  aguardando revisão de advogado — decisão explícita do Bruno foi construir junto antes de envolver
+  jurídico, não é esquecimento.
+- Snapshot de segurança (auth, RLS, APIs, secrets, webhooks) em `produtos/citrachat/seguranca.md`
+  (2026-09-04) — 3 gaps críticos identificados na época: WhatsApp sem HMAC, rate limit in-memory, RLS
+  de conversations/protocols não confirmada. Conferir se ainda procede antes de assumir como atual.
+
+---
+
+## Feature roadmap — documentada, não implementada
+
+**Multiusuário/papéis** (convite de equipe, 3 papéis: Admin/Treinamento/Atendimento, restrito a
+planos Pro/Business, Atendimento também vê Métricas): decisão explícita do Bruno foi só documentar
+por enquanto, sem escrever nenhum código. Toca auth, ~25 RLS policies e o painel inteiro quando for
+implementada.
+
+---
+
+## Clientes ativos
+
+- **AbyaraGraf** (`company_slug: abyaragraf`) — agentes Joana (SAC) e Tiago (vendas).
+- **Diretto** (`company_slug: diretto`) — agentes Lara (recepção), Eduardo (SAC/suporte), João
+  (vendas/captação). Cliente mais ativo — a maior parte dos bugs reais encontrados nesta janela veio
+  de conversas reais dessa conta (protocolo duplicado, travessão, atribuição de métricas, migration
+  faltante). Base de dados "Revendedores x Marcas" (4.977 linhas) treinada no agente Eduardo.
+
+---
+
+## Como retomar uma sessão
+
+1. Ler este arquivo inteiro primeiro.
+2. Conferir `_memoria_pendente/` na raiz do workspace (`ccos-make/_memoria_pendente/`) — aplicar e
+   apagar se houver snapshot novo pra `citrachat`.
+3. `cd produtos/citrachat/codigo && git log --oneline -10` — branch ativa é `plataforma`.
+4. Se o trabalho envolver preço ou custo, ler também `produtos/citrachat/briefings/06_precificacao_e_custos.md`.
+5. **Ao terminar qualquer trabalho relevante, atualizar este arquivo antes de encerrar a sessão.**
+   Não esperar ser pedido de novo.

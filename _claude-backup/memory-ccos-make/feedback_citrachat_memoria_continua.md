@@ -5,13 +5,20 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 16f3a8cf-6c02-498f-adc5-4abc80036d4c
-  modified: 2026-09-18T10:54:26.406Z
+  modified: 2026-09-18T11:02:50.616Z
 ---
 
 Ao final de qualquer sessão (ou bloco de trabalho relevante dentro de uma sessão longa) que toque o
 CitraChat — bug corrigido, feature nova, decisão de produto, migration aplicada, investigação que mudou
-o entendimento de como algo funciona — atualizar [[citrachat_estado_atual]] antes de considerar o
-trabalho encerrado. Não esperar o usuário pedir de novo.
+o entendimento de como algo funciona — atualizar **`produtos/citrachat/ESTADO_ATUAL.md`** (arquivo no
+workspace, não em memória) antes de considerar o trabalho encerrado. Não esperar o usuário pedir de novo.
+
+**Atualização de 2026-09-18:** Bruno pediu explicitamente que esse registro existisse como arquivo
+normal dentro da pasta do produto, visível e versionado no repo — não só na memória interna do Claude,
+que ele não consegue abrir e ler diretamente. `citrachat_estado_atual.md` (este mesmo nome, em memória)
+virou só um ponteiro curto pra esse arquivo; o conteúdo de verdade mora no workspace. Nunca deixar as
+duas versões divergirem tentando manter conteúdo completo nos dois lugares — o de memória fica
+deliberadamente curto.
 
 **Why:** Bruno pediu isso explicitamente em 2026-09-18, depois de uma sessão gigante (correção de
 duplicidade de protocolo, banimento de travessão por código, migração de região Vercel, cache de
@@ -24,8 +31,9 @@ significa redescobrir os mesmos bugs, refazer o mesmo diagnóstico, ou pior, des
 saber por que ela existe.
 
 **How to apply:**
-- Atualizar o arquivo existente (`citrachat_estado_atual.md`), nunca criar um arquivo de memória novo e
-  paralelo para "o que está acontecendo agora" — isso fragmenta o contexto em vez de centralizá-lo.
+- Atualizar `produtos/citrachat/ESTADO_ATUAL.md` no workspace — é o arquivo canônico. Nunca criar um
+  arquivo novo e paralelo para "o que está acontecendo agora" (nem no workspace, nem em memória) — isso
+  fragmenta o contexto em vez de centralizá-lo.
 - Decisões de produto importantes (preço, modelo de cobrança, arquitetura) que geram um documento
   próprio (ex: `produtos/citrachat/briefings/`) não precisam ser duplicadas por extenso na memória — só
   linkar de lá pra cá com um resumo de 1-2 frases e o que está pendente.

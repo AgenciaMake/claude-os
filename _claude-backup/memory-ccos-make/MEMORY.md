@@ -7,7 +7,7 @@
 - [Citra — decisões de arquitetura SaaS](citra_decisoes_arquitetura.md) — Firebase unificado, multi-tenant via path, banco fica em US por enquanto, Make = primeira agência cliente
 - [CitraDesk pausado em 2026-04-27](citradesk_pausado_2026-04-27.md) — Fase 0 e 1.1/1.4/1.5 concluídas; Fase 1.2-1.8 (multi-tenancy + Cloud Function) pendentes. Bruno priorizou CitraChat. Como retomar.
 - [Agentes CitraChat jamais citam nome de pessoa](feedback_citrachat_jamais_cita_nomes.md) — regra absoluta: usar "o time", "pessoa responsável", nunca individualizar membros do cliente
-- [CitraChat — estado atual e próximos passos](citrachat_estado_atual.md) — snapshot vivo, reescrito 2026-09-18. Onde paramos, o que tá no ar, o que vem a seguir. LER PRIMEIRO em qualquer sessão de CitraChat
+- [CitraChat — estado atual e próximos passos](citrachat_estado_atual.md) — ponteiro; conteúdo completo mora em produtos/citrachat/ESTADO_ATUAL.md no workspace (pedido do Bruno, 2026-09-18). LER PRIMEIRO em qualquer sessão de CitraChat
 - [CitraChat — Roadmap Soluções](citrachat_roadmap_solucoes.md) — dropdown "Soluções" no nav com páginas por tipo de agente (SAC, captação, suporte, recepção); home ganha seção cobrindo todos
 - [CitraChat — benchmark vs Leadster e Octadesk](citrachat_benchmark_concorrentes.md) — preços reais, gaps de feature, vantagens do CitraChat, roadmap priorizado e copies de comparação
 - [Posts e copies não podem ter marcas de IA](feedback_posts_sem_marcas_ia.md) — proibido travessão, markdown, clichês de IA em qualquer copy público da Make ou de cliente
