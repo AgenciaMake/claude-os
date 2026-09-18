@@ -227,11 +227,52 @@ uma linha em vez de ler a conversa inteira, e errei nas duas (Rafaela e Stephani
 julgamento de IA, a referência tem que vir da transcrição real — senão o teste calibra em cima de uma
 suposição errada e a conclusão vira ruído.
 
-**Questão de produto em aberto (decisão do Bruno):** lead que **abandona no meio da qualificação**
-(caso Stephanie — deu nome e cidade, ouviu o pedido mínimo e sumiu sem responder) é genuinamente
-ambíguo, e o veredito oscila nele porque não há resposta certa óbvia. Não existe hoje regra explícita
-para essa categoria; o modelo improvisa. Vale decidir se abandono conta como qualificado, não
-qualificado, ou como um terceiro estado.
+### Critério final e correção do telefone (2026-09-19, `2965502`)
+
+**Regra de qualificação, decidida com o Bruno.** A localizabilidade virou **pré-requisito avaliado
+antes de tudo**: o nome sozinho nunca basta, é preciso nome + pelo menos um identificador (telefone,
+e-mail, nome da empresa, CNPJ ou cidade/região). Só quem passa nessa verificação é avaliado pelos
+outros critérios (perfil do negócio, profundidade da conversa, recusa explícita). Recusar uma
+**condição comercial** (preço, pedido mínimo, prazo) não é recusar o atendimento — mas só continua
+qualificado quem, depois da recusa, seguiu conversando ou **aceitou explicitamente** a retomada.
+
+**Por que a estrutura importa:** duas vezes o critério quebrou porque cláusulas minhas se
+contradiziam entre si (localizável × demonstrou interesse; objeção de preço × recusou
+explicitamente). Um lead que satisfaz as duas faz o modelo escolher uma a esmo, e o veredito oscila.
+Transformar a condição dominante em pré-requisito, em vez de mais um item de lista, foi o que
+estabilizou. **Medido: 2 de 5 estáveis antes → 8 de 8 depois.**
+
+**Bug do telefone (corrigido junto).** `extractContact` casava a primeira sequência de 11 dígitos do
+texto inteiro, e o agente pede CNPJ antes do telefone — então gravava pedaço de CNPJ como contato e
+descartava o celular que o lead dava depois. **Medido: 44 leads tinham celular real na conversa e
+ficaram sem número utilizável** (o time não conseguia ligar). Agora remove documentos longos primeiro,
+varre todas as ocorrências e valida o formato brasileiro (DDD ≥ 11; em 11 dígitos, o nono na frente).
+O histórico desses 44 **não foi recuperado** — os telefones certos estão nas transcrições salvas, dá
+para rodar um script de recuperação se o Bruno quiser.
+
+**Lição de método, repetida três vezes nesta sessão:** inferi o "resultado esperado" a partir do
+resumo de uma linha em vez de ler a transcrição, e errei nas três (Rafaela, Stephanie, rafa). No caso
+da `rafa` o resumo dizia "foi proposto que um consultor entre em contato" — isso descreve a **oferta
+do agente**, não a aceitação dela, que nunca respondeu. Ao validar julgamento de IA, a referência tem
+que vir da conversa inteira, especialmente do **final**; senão o teste calibra em cima de suposição
+errada e a conclusão vira ruído.
+
+**Risco de overfitting, conscientemente interrompido:** foram 6 iterações do prompt contra as mesmas
+9 conversas. Parei ali de propósito — continuar afinando para forçar um caso específico produz prompt
+que funciona nessas 9 e falha no resto.
+
+**Aberto, aguardando decisão do Bruno (2 casos limítrofes):**
+- **Reinaldo** — deu só o primeiro nome e "estamos montando um restaurante, interesse nas farinhas La
+  Molisana", sem empresa, CNPJ, cidade ou contato; sumiu quando o agente pediu o nome da empresa. Pela
+  regra literal é **não qualificado** (nome sozinho), mas o modelo diz qualificado de forma estável,
+  lendo "montando um restaurante" como identificação de negócio. Hoje está marcado como qualificado
+  no banco.
+- **Stephanie** — deu nome, empresa (Brasa & Beef) e cidade, ouviu o pedido mínimo e sumiu sem
+  responder. Passa na verificação de localizabilidade e não recusou nada, então o modelo diz
+  qualificado de forma estável. Hoje está marcado como não qualificado no banco.
+
+**Também parado esperando liberação:** backfill dos 138 leads antigos do João sem avaliação. Agora
+faz mais sentido do que antes, porque o critério está validado.
 
 **Onde o critério por empresa é configurado:** no treinamento que já existe por agente, não em campo
 novo. Decisão consciente — o `saveTrainingContext` regenera o documento inteiro passando o anterior
