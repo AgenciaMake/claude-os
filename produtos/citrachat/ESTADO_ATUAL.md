@@ -137,6 +137,38 @@ produção da conta Diretto, não só por leitura de código:
 - Link público do agente (linha 3 do card, embaixo do nome) agora abre em nova aba ao clicar e tem
   botão de copiar ao lado (2026-09-18) — antes era só texto estático dentro do card inteiro, que era
   clicável só pra ir pra aba de configuração.
+- Card do agente mostra a foto configurada (`avatar_url`, upload ou preset da aba Identidade) no
+  lugar do ícone genérico de robô, quando existe (2026-09-18).
+
+### Métricas — mais uma rodada de ajustes (2026-09-19)
+- **Taxa de resolução e autonomia (agregada e por agente) corrigidas outra vez**, mesma causa raiz
+  do bug de 275% já corrigido: a fórmula dividia "resolvidos por `resolved_at`" por "abertos por
+  `created_at`" — duas populações sem relação. Sintoma que o Bruno reportou: taxa saltando
+  100% → 0% → 33,3% trocando o filtro de período com "resolvidos"/"fechados" praticamente estáveis
+  (3/3, 1/1, 3/3) ao lado. Corrigido pra sempre reconciliar com o próprio número de "fechados"
+  visível ao lado: `taxa = fechados ÷ (fechados + pendentes do período)`. **Lição:** a mesma fórmula
+  errada estava copiada em 3 lugares (funil geral, autonomia agregada do SAC, autonomia por agente na
+  tabela) — corrigir um não bastou, foi preciso caçar as outras ocorrências do mesmo padrão.
+- Cards "Qualificados"/"Não qualificados" ganharam legenda explicando por que a maioria dos leads
+  não tem avaliação: `lead_qualified` só existe para conversas fechadas a partir de 15/09
+  (migration 053), a notificação dispara uma única vez por sessão, sessões antigas não são
+  reclassificadas. Confirmado no banco, não é bug.
+- **Funil do visitante ganhou 2 cards** (Abertos no período com legenda de pendentes; Taxa de
+  conversão com destaque próprio, antes era só uma legenda pequena embaixo de "Leads capturados") —
+  feedback direto do Bruno: minha explicação de uma conta (3÷7=42,9%) só fazia sentido porque eu
+  tinha ido no banco buscar números que não apareciam em lugar nenhum da tela. **Regra de design pra
+  esse painel a partir de agora: toda taxa/percentual precisa ter os números que a compõem visíveis
+  como cards ao lado, nunca só a explicação por fora.**
+- **Achado de produto ainda sem ação (levar pro roadmap):** o critério de qualificação de lead
+  (prompt compartilhado em `src/lib/send-lead-notification.ts`, usado por TODO agente de
+  captação/vendas de TODOS os clientes, não só Diretto) trata objeção de preço/valor mínimo como
+  "sem intenção de compra" mesmo quando a conversa deixa um follow-up combinado com o time. Validado
+  com 3 casos reais do João (Diretto) marcados "não qualificado" apesar do lead estar "aguardando
+  contato do consultor" — pela régua do próprio Bruno, isso deveria contar como qualificado. Não
+  existe hoje nenhum controle no painel pra ajustar esse critério por agente/cliente — é fixo no
+  prompt, produto inteiro. Proposta pendente de aprovação do Bruno: ajustar o prompt pra "objeção de
+  preço com follow-up combinado conta como qualificado; só desqualificar se descartado de fato (sem
+  perfil, sem contato possível, ou recusa explícita)".
 
 ### Performance do painel admin (2026-09-17 — resolvido, Bruno confirmou "mudou super bem")
 Causa da demora de 2-3s trocando entre Agentes/Métricas/Conversas/Protocolos:
