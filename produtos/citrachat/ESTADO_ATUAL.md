@@ -474,8 +474,9 @@ já recebido tinha 4,14 MB, a 8% do teto.
 - Teto de **25 MB**. Não é escolha nossa: Resend aceita 40 MB pós-base64 (~30 MB reais) e o Gmail
   envia no máximo 25 MB. Quem recebe é o gargalo.
 - Sempre **anexar de verdade**, não link. Com isso o link público deixa de ser necessário.
-- Formatos: **PDF, TXT, MD, CSV, JPG, PNG, GIF, WebP e DOCX**. HEIC e PPTX fora, por decisão dele.
-  (XLSX sairia de graça, o conversor já existe na base de conhecimento; ficou para se ele quiser.)
+- Formatos: **PDF, TXT, MD, CSV, JPG, PNG, GIF, WebP, DOCX e XLSX/XLS**. HEIC e PPTX fora, por
+  decisão dele. XLSX entrou depois, no mesmo dia, quando ficou claro que o conversor de planilha já
+  existia pronto na base de conhecimento.
 - Não reenviar e-mail de teste; validar no próximo lead real que chegar.
 
 ### O que foi implementado e está verificado
@@ -546,8 +547,9 @@ a versão do git HEAD.
   contato@makelemonad.com.br.
 - ~~Conferir no painel~~ **CONFIRMADO pelo Bruno em 2026-09-19**: abriu a conversa #235 e o PDF
   do currículo abre normalmente pelo painel, já com o bucket privado e URL assinada.
-- **XLSX** ficou de fora por decisão do Bruno, mas sairia praticamente de graça: o conversor de
-  planilha já existe e roda em produção na base de conhecimento.
+- **Validar a planilha na prática**: XLSX/XLS foi adicionado e a extração foi conferida localmente
+  com planilha real de duas abas (cada aba vira um bloco em CSV prefixado pelo nome). Falta ver
+  acontecer numa conversa de verdade.
 
 ---
 
