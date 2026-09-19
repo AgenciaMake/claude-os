@@ -377,6 +377,76 @@ implementada.
 
 ---
 
+## EM ABERTO — Tagueamento GTM por agente (parado em 2026-09-19, retomar aqui)
+
+Bruno pediu para pausar e voltar depois. Nada foi alterado em código nem no GTM.
+
+**Contexto.** Bruno criou tags por agente na Diretto (`sac`, `vendas`, `atendimento`) e pediu ao
+Claude Cowork uma auditoria do container GTM-NWCKHMTH. O Cowork auditou e devolveu um relatório com
+três perguntas. A resposta a essas perguntas está escrita e pronta para colar, mas ainda NÃO foi
+enviada ao Cowork.
+
+**O que o Cowork acertou.** O container nunca teve tags/triggers do CitraChat (só 2 tags: MAKE Pixel
+FB e Google Tag para GA4 `G-0WJYEFT9ZB`). Buscar "citrachat" não retorna nada. Logo, a renomeação das
+tags não quebrou nada, porque o GTM nunca consumiu esses eventos. Confirmou também que o widget
+injeta no DOM (Shadow DOM), não é iframe cross-origin, então o dataLayer é o da página principal e
+triggers de Evento Personalizado funcionam normalmente.
+
+**Descoberta que invalida o plano proposto pelo Cowork.** A tag do evento congela no agente de
+entrada da página:
+
+- `src/app/[company]/ChatPage.tsx:102-117` monta `trackingConfig` uma única vez a partir do
+  `agent_integrations` da página e passa para `useTracking`. Não é estado, nunca é refeito.
+- `src/lib/tracking/use-tracking.ts:99-100` monta o nome como `citrachat_{config.eventTag}_{evento}`.
+- `src/app/api/widget/route.ts:365` empurra `citrachat_agent` com o parâmetro estático do script.
+
+Consequência: na diretto.com.vc só o widget da Lara está embutido. Quando a Lara transfere para João
+ou Eduardo, os eventos continuam saindo como `citrachat_atendimento_*`. **`citrachat_vendas_*` e
+`citrachat_sac_*` nunca disparam naquele site.** Só disparam se a pessoa cair direto em
+`citra.chat/diretto/atendimento-comercial` ou `/sac-diretto`. E `citrachat_agent` também não muda no
+meio da sessão, ao contrário do que o Cowork supôs.
+
+**Mapa confirmado no banco (tabela `agent_integrations`, não `agents`):**
+
+| Agente | slug | objective_type | tag | evento de fechamento |
+|---|---|---|---|---|
+| Lara | atendimento-diretto | receptionist | `atendimento` | `citrachat_atendimento_lead_qualified` |
+| João | atendimento-comercial | sales | `vendas` | `citrachat_vendas_lead_qualified` |
+| Eduardo | sac-diretto | support | `sac` | `citrachat_sac_issue_resolved` |
+
+Outros: Alex (`makelemonad`, GTM-5R5ZM77), Ana (`limonete`, GTM-KQBZRCHG). Renata, Renato, Sofia e
+Tomás não têm tag nem tracking configurado.
+
+**Respostas às 3 perguntas do Cowork (prontas, não enviadas):**
+
+1. *Criar triggers mesmo sem tags usando?* **Não, ainda não.** Triggers de `vendas` e `sac` no
+   container da Diretto ficariam mortos pelo motivo acima.
+2. *`lead_qualified` pode ocorrer na Lara?* **Sim, definitivamente.** Lara é `receptionist`, e
+   `src/app/api/qualify-lead/route.ts:61` só exclui `support` e `faq`.
+3. *Existem páginas reais onde vendas/sac aparecem?* Os 404 do Cowork foram domínio errado. Ele
+   testou `diretto.com.vc/diretto/sac-diretto`. As URLs reais são em `citra.chat` e foram verificadas
+   retornando 200: `/diretto/atendimento-diretto`, `/diretto/atendimento-comercial`,
+   `/diretto/sac-diretto`.
+
+**Ponto em aberto com o Cowork.** Ele afirmou que o chat chama `gtag()` direto. No código esse
+caminho exige `!gtmContainerId`, e a Lara tem GTM configurado, então o que deveria acontecer é
+`dataLayer.push`. Falta ele confirmar em qual URL exata capturou o `/g/collect` com
+`en=citrachat_atendimento_chat_opened`. Se foi na página do citra.chat, explica-se pelo GTM próprio
+de lá.
+
+**Decisão pendente do Bruno (é o que destrava o resto).** Hoje uma conversa que a Lara passa para o
+João converte como `atendimento`, então não dá para separar no Google Ads o que veio de venda do que
+veio de recepção. Para separar, a tag precisa seguir o agente ativo após a transferência, e isso é
+mudança de código (reler `agent_integrations` na transferência, ou mandar a tag do agente ativo junto
+do evento), não configuração de GTM. Claude perguntou se deve implementar; Bruno pausou antes de
+responder.
+
+**Próximo passo ao retomar:** obter a decisão do Bruno sobre a tag seguir o agente ativo. Só depois
+enviar as respostas ao Cowork e autorizar qualquer criação de trigger. O Cowork declarou que nada
+será publicado sem aprovação.
+
+---
+
 ## Clientes ativos
 
 - **AbyaraGraf** (`company_slug: abyaragraf`) — agentes Joana (SAC) e Tiago (vendas).
