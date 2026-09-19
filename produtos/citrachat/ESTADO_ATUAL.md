@@ -447,6 +447,75 @@ será publicado sem aprovação.
 
 ---
 
+## Anexos de conversa — reescrita completa (2026-09-19)
+
+**Origem.** Bruno mandou o PDF da conversa #235 (Jocemir, agente João): o visitante enviou o
+currículo, o painel mostrava só `[arquivo]` em itálico, e o e-mail não trouxe nada.
+
+### O que estava quebrado (três defeitos independentes)
+
+1. **O painel ignorava documento.** `parseContent` estava duplicado em `ConversasClient.tsx` e
+   `ProtocolosClient.tsx` e só procurava bloco `type === 'image'`. Bloco `document` caía no
+   `[arquivo]` sem link. O arquivo nunca se perdeu: a URL sempre esteve no banco.
+2. **O e-mail perdia o anexo, inclusive imagem.** Existem dois caminhos. O disparo imediato pelo
+   navegador manda `attachment` e funcionava. O disparo normal (cron de 5 min) relê a conversa do
+   banco, e `saveConversation` grava só `role`, `content` e `at`. Aí `normalizeContent` filtrava só
+   blocos de texto e devolvia string vazia.
+3. **Nada ia como anexo de verdade**, só link.
+
+### Limites que se contradiziam
+
+Código dizia 10 MB, bucket recusava acima de 5 MB, e a Vercel recusa corpo de requisição acima de
+**4,5 MB** (erro 413). O limite real era 4,5 MB e não estava escrito em lugar nenhum. O maior anexo
+já recebido tinha 4,14 MB, a 8% do teto.
+
+### Decisões do Bruno
+
+- Teto de **25 MB**. Não é escolha nossa: Resend aceita 40 MB pós-base64 (~30 MB reais) e o Gmail
+  envia no máximo 25 MB. Quem recebe é o gargalo.
+- Sempre **anexar de verdade**, não link. Com isso o link público deixa de ser necessário.
+- Formatos: **PDF, TXT, MD, CSV, JPG, PNG, GIF, WebP e DOCX**. HEIC e PPTX fora, por decisão dele.
+  (XLSX sairia de graça, o conversor já existe na base de conhecimento; ficou para se ele quiser.)
+- Não reenviar e-mail de teste; validar no próximo lead real que chegar.
+
+### O que foi implementado e está verificado
+
+- **`src/lib/attachments.ts` (novo)** — leitor único (`parseContent`) que entende `image` e
+  `document`, recupera o nome original da URL removendo o carimbo `Date.now()_`, mais a allowlist de
+  tipos e o teto de 25 MB. Fonte única de verdade, para não voltar a ter limites divergentes.
+- **`ConversasClient.tsx` e `ProtocolosClient.tsx`** — parser local removido, bolha e exportação em
+  PDF passam a mostrar o anexo com nome e link.
+- **`send-lead-notification.ts`** — `visibleMessages` reconstrói o anexo a partir dos blocos antes de
+  normalizar, e `montarAnexosDoEmail` baixa o arquivo e manda no `attachments` do Resend (nos dois
+  envios: notificação e protocolo resolvido). Teto de 25 MB somados; acima disso vai só o link.
+- **`/api/upload/sign` (novo)** — assina upload direto para o Storage, tirando a Vercel do caminho.
+  Mecanismo testado fora do app: assinatura com service key, envio **sem autenticação** HTTP 200,
+  arquivo legível, limpeza ok.
+- **`/api/upload/extract` (novo)** — converte para texto o que a Anthropic não lê. A API só lê PDF,
+  texto puro e JPEG/PNG/GIF/WebP; a própria documentação manda converter DOCX antes. Usa `mammoth`,
+  já instalado. Extração testada com .docx real.
+- **`ChatInterface.tsx`** — upload assinado com fallback para `/api/upload` se a assinatura falhar
+  (um erro de auth já derrubou todo anexo de cliente uma vez). DOCX/TXT/CSV entram na conversa como
+  bloco de texto; bloco `document` com esses tipos faria a API recusar a requisição inteira.
+- **Bucket `chat-attachments`** — teto 5 MB → 25 MB; lista de MIME removida de lá de propósito.
+
+### Recuperado retroativamente
+
+18 conversas passam a mostrar o anexo assim que isso subir, sem migração (a URL já está no banco):
+documento em **#97, #112, #120, #156, #158, #170, #235**; imagem em **#2, #72, #77, #87, #113,
+#119, #122, #129, #170, #226, #233**.
+
+### PENDENTE
+
+- **Não foi feito deploy.** Build, typecheck e lint passaram (os 2 erros de lint do ChatInterface e
+  o 1 do ConversasClient já existiam antes, conferido contra o git HEAD).
+- **Bucket privado com URL assinada** — aprovado em conceito, não implementado. Quebra o caminho em
+  que a Anthropic busca o arquivo pela URL pública; a saída é URL assinada, que expira. Também exige
+  gerar URL nova no painel e na exportação de PDF.
+- **Validar o e-mail com anexo** no próximo lead real.
+
+---
+
 ## Clientes ativos
 
 - **AbyaraGraf** (`company_slug: abyaragraf`) — agentes Joana (SAC) e Tiago (vendas).
