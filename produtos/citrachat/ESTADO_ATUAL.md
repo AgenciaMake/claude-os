@@ -505,14 +505,48 @@ já recebido tinha 4,14 MB, a 8% do teto.
 documento em **#97, #112, #120, #156, #158, #170, #235**; imagem em **#2, #72, #77, #87, #113,
 #119, #122, #129, #170, #226, #233**.
 
+### Bucket privado — feito no mesmo commit
+
+Decisão do Bruno: fazer tudo junto. Como o anexo agora vai no e-mail, o link público deixou de ser
+necessário, e currículo de candidato não podia continuar aberto para quem tivesse a URL.
+
+- `lib/attachments-server.ts` (novo) — `assinarAnexosNasMensagens` (assina em lote, não faz chamada
+  para conversa sem anexo), `assinarUrlAnexo` e `baixarAnexoPorUrl`.
+- `storagePathFromUrl` aceita URL pública **e** assinada, porque o histórico tem as duas formas. Sem
+  isso, as conversas antigas parariam de abrir no dia da virada.
+- Validades por contexto: 1h para a Anthropic ler durante a conversa, 12h para o painel (fica aberto
+  a sessão toda), 7 dias para o e-mail (é lido muito depois de enviado).
+- Assinatura aplicada em: `/api/chat` (antes de qualquer chamada à Anthropic), `conversas/page.tsx`,
+  `protocolos/page.tsx`, `send-lead-notification.ts` e o reenvio manual.
+- O reenvio manual (`/api/admin/resend-notification`) passou a levar anexo também; antes nunca levou,
+  porque montava o e-mail com `normalizeContent`, que descarta o bloco do arquivo.
+- As páginas do painel assinam com service role de propósito: assinar objeto de bucket privado não
+  passa pela sessão do usuário, e a autorização já foi feita pela consulta, que só traz conversa de
+  agente do próprio usuário.
+
+**Verificado em produção:** URL pública devolve 400, URL assinada devolve 200 sem autenticação
+nenhuma (que é o que a Anthropic precisa para buscar o arquivo).
+
+**Armadilha encontrada na virada:** logo após tornar o bucket privado, a URL pública ainda respondeu
+200. Era cache de CDN de uma busca anterior, não falha de permissão. Confirmado com três sondagens:
+query nova deu 400, arquivo nunca buscado deu 400, e a original passou a dar 400 com
+`cf-cache-status: BYPASS`. Se precisar checar isso de novo, sempre furar o cache com query aleatória
+antes de concluir qualquer coisa.
+
+### Estado
+
+No ar em `501d774` (branch `plataforma`, 14 arquivos). Build, typecheck e lint passaram. Os 2 erros
+de lint do ChatInterface e o 1 do ConversasClient já existiam antes, conferido rodando o lint contra
+a versão do git HEAD.
+
 ### PENDENTE
 
-- **Não foi feito deploy.** Build, typecheck e lint passaram (os 2 erros de lint do ChatInterface e
-  o 1 do ConversasClient já existiam antes, conferido contra o git HEAD).
-- **Bucket privado com URL assinada** — aprovado em conceito, não implementado. Quebra o caminho em
-  que a Anthropic busca o arquivo pela URL pública; a saída é URL assinada, que expira. Também exige
-  gerar URL nova no painel e na exportação de PDF.
-- **Validar o e-mail com anexo** no próximo lead real.
+- **Validar o e-mail com anexo** no próximo lead real que chegar. Bruno decidiu não reenviar a #235
+  de teste, porque o e-mail iria para rafaela.quirino@diretto.com.vc, comercial@diretto.com.vc e
+  contato@makelemonad.com.br.
+- **Conferir no painel** se as 18 conversas antigas voltaram a mostrar o anexo.
+- **XLSX** ficou de fora por decisão do Bruno, mas sairia praticamente de graça: o conversor de
+  planilha já existe e roda em produção na base de conhecimento.
 
 ---
 
