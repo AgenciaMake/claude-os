@@ -544,7 +544,8 @@ a versão do git HEAD.
 - **Validar o e-mail com anexo** no próximo lead real que chegar. Bruno decidiu não reenviar a #235
   de teste, porque o e-mail iria para rafaela.quirino@diretto.com.vc, comercial@diretto.com.vc e
   contato@makelemonad.com.br.
-- **Conferir no painel** se as 18 conversas antigas voltaram a mostrar o anexo.
+- ~~Conferir no painel~~ **CONFIRMADO pelo Bruno em 2026-09-19**: abriu a conversa #235 e o PDF
+  do currículo abre normalmente pelo painel, já com o bucket privado e URL assinada.
 - **XLSX** ficou de fora por decisão do Bruno, mas sairia praticamente de graça: o conversor de
   planilha já existe e roda em produção na base de conhecimento.
 
